@@ -1,0 +1,8 @@
+SQL запрос, получение boost серверов
+SELECT * FROM ga_servers WHERE ban != 1 and boost = 1
+
+SQL запрос для получения серверов.
+ Top, Boost, Vip
+ SELECT CONCAT(ip, ':',port) as address FROM `ga_servers` WHERE `status` = 1 AND `game` = 'cs' AND `ban` != '1' AND (`top_enabled` > '0' OR `boost` > '0' OR `vip_enabled` > '0')
+ 
+ 

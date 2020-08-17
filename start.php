@@ -1,6 +1,6 @@
 <?php
- function __autoload($class_name) 
-    {
+spl_autoload_register(function($class_name) {
+
         $directorys = array(
             'core/',
             'controllers/',
@@ -24,4 +24,4 @@
                    return;
             }          
         }
-    }
+    });

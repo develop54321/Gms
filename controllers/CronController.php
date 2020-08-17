@@ -112,15 +112,15 @@ class CronController extends BaseController{
 	}
 	$Query->Disconnect( );
 	  
-    $time = time();
-    $sql = "UPDATE ga_settings SET last_update_servers = $time";
-    $this->db->query($sql);   
+    
        
     }
        
     }else parent::ShowError(404, "Страница не найдена");
-        
-    echo ($mem_start/100000)."Мегайбайт.";
+    $time = time();
+    $sql = "UPDATE ga_settings SET last_update_servers = $time";
+    $this->db->query($sql);  
+    echo "server information updated successfully";
     }
     
     public function actionTasks(){

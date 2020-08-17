@@ -121,11 +121,17 @@ class ResultController extends BaseController{
     }
     
     public function actionSuccess(){
-        
+        $title = "Оплата успешно прошла";
+        $content = $this->view->renderPartial("pay/success");
+    
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
     
     public function actionFail(){
-        
+        $title = "Ошибка платежа";
+        $content = $this->view->renderPartial("pay/fail");
+    
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
     
     

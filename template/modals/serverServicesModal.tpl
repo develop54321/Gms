@@ -29,6 +29,15 @@ VIP: <a href="/user/serverpay?id=<?php echo $data['id'];?>">Купить</a>
 <?php endif;?>
 </li>
 
+<li>
+
+<?php if($data['boost'] != '0'):?>
+Boost: осталось кругов: <?php echo $data['boost'];?> <a href="/pay/server?id=<?php echo $data['id'];?>">Купить</a>
+<?php else:?>
+Boost: <a href="/pay/server?id=<?php echo $data['id'];?>">Купить</a>
+<?php endif;?>
+</li>
+
       
       </p>
 </div>

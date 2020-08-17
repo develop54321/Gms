@@ -600,7 +600,7 @@ class UserController extends BaseController{
     if(parent::isAjax()){
     $getSettings = $this->db->query('SELECT * FROM ga_settings');
     $settings = $getSettings->fetch();
-    
+    $settings = json_decode($settings['content'], true);
      if(isset($_GET['id_server'])) $id_server = (int)$_GET['id_server']; else $id_server = null;
     
     $getInfoServerRow = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
@@ -620,7 +620,7 @@ class UserController extends BaseController{
     if($getInfoServices['type'] == 'top'){
         
     $data = [];
-    for($i = 1; $i <= $settings['count_servers_top']; $i++){
+    for($i = 1; $i <= $settings['global_settings']['count_servers_top']; $i++){
         $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
     $isPlace->execute(array(':top_enabled' => $i));    
     if($isPlace->rowCount() != '0'){

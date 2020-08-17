@@ -63,6 +63,15 @@ VIP: <a href="/pay/server?id=<?php echo $data['id'];?>">Купить</a>
 Выделение цветом: <a href="/pay/server?id=<?php echo $data['id'];?>">Купить</a>
 <?php endif;?></td>
 </tr>
+
+<tr>
+<td><?php if($data['boost'] != '0'):?>
+Boost: осталось кругов: <?php echo $data['boost'];?> <a href="/pay/server?id=<?php echo $data['id'];?>">Купить</a>
+<?php else:?>
+Boost: <a href="/pay/server?id=<?php echo $data['id'];?>">Купить</a>
+<?php endif;?></td>
+</tr>
+
 </table>
 
 

@@ -73,7 +73,7 @@
 <a style="display: block; color: #fff;" href="/page?id=2">Пользовательское соглашение</a>
        <div class="copyright">
        Copyright © <?php echo $_SERVER['HTTP_HOST']; echo " ".date("Y");?>  Все права защищены<br/>
-              Powered by <a href="http://art-gaisin.ru" target="_blank">GMS</a>
+              Powered by <a href="https://vk.com/web2424" target="_blank">GMS</a>
           
          
         </div>

@@ -75,7 +75,7 @@ class System extends BaseController{
  
 	imagefilledrectangle($im, 0, 0, 200, 35, $black);
   
-	$font = 'public/fonts/captcha.ttf';
+	$font = ROOT_DIR.'public/fonts/captcha.ttf';
  
 	imagettftext($im, 33, 0, 0, 35, $grey, $font, $randomnr);
  

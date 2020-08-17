@@ -171,7 +171,7 @@
                 </div> 
 
                 <footer class="footer text-right">
-                   Powered by <a href="http://art-gaisin.ru" target="_blank">GMS</a>
+                   Powered by <a href="https://vk.com/web2424" target="_blank">GMS</a>
                 </footer>
 
             </div>

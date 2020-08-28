@@ -9,7 +9,7 @@ class ResultController extends BaseController{
     $getSettings = $this->db->query('SELECT * FROM ga_settings');
     $settings = $getSettings->fetch();
     
-    if(isset($_GET['type'])) $type = $_GET['type']; else parent::ShowError(404, "Страница не найдена!");
+    if(isset($_GET['type'])) $type = $_GET['type']; else parent::ShowError(404, "Страница не найдена");
     
     switch($type){
         case "robokassa":
@@ -45,15 +45,15 @@ class ResultController extends BaseController{
         
         case "unitpay":
         $request = $_GET;
-        
+
         if (empty($request['method']) || empty($request['params']) || !is_array($request['params'])){
             exit(json_encode(array(
             "error" => array(
-                "message" => "eror empty query"
+                "message" => "error empty query"
             )
         )));
         }
-        
+
         $method = $request['method'];
         $params = $request['params'];  
         $InvId = $params['account'];
@@ -63,7 +63,7 @@ class ResultController extends BaseController{
         $getInfoPayment->execute(array(':typeCode' => $typeCode));
         $getInfoPayment = $getInfoPayment->fetch();
         $getInfoPayment = json_decode($getInfoPayment['content'], true);
-        
+
         $getInfoPay = $this->db->prepare('SELECT * FROM ga_pay_logs WHERE id = :id');
         $getInfoPay->execute(array(':id' => $InvId));
         $getInfoPay = $getInfoPay->fetch();
@@ -83,37 +83,41 @@ class ResultController extends BaseController{
         {
            exit(json_encode(array(
             "error" => array(
-                "message" => "eror hash"
+                "message" => "error hash"
             )
         )));
         }
-        
-        if($getInfoPay['type_pay'] == 'refill'){
-        $user->refill(['inv_id' => $InvId, 'amout' => $out_summ]);   
-        }else{
-        $services->checkService(['inv_id' => $InvId, 'price' => $out_summ, 'pay_methods' => $typeCode]);
-        }
-        
-        
+
+ 
         if($method == 'pay'){
+            if($getInfoPay['type_pay'] == 'refill'){
+                $user->refill(['inv_id' => $InvId, 'amout' => $out_summ]);
+            }else{
+                $services->checkService(['inv_id' => $InvId, 'price' => $out_summ, 'pay_methods' => $typeCode]);
+            }
+
             exit(json_encode(array("result" => array(
         	"message"=> "ok деньги зачислены"
             ), 
         )));   
         }else{
-            
+
         $checkPay = $this->db->prepare('SELECT * FROM ga_pay_logs WHERE id = :id');
         $checkPay->bindValue(":id", $InvId);
         $checkPay->execute();
         if($checkPay->rowCount() == '0'){
-        exit(json_encode(array("error" => array("message"=> "Pay not found"),)));    
+        exit(json_encode(array("error" => array("message"=> "Pay not found"),)));
         }
-            
-        exit(json_encode(array("result" => array("message"=> "check"),)));        
+
+        exit(json_encode(array("result" => array("message"=> "check"),)));
         }
-           
-        
-      
+            break;
+
+        default:
+            exit("error");
+            break;
+
+
     
    
     }

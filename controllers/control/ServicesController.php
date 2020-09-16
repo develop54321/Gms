@@ -52,16 +52,9 @@ class ServicesController extends BaseController{
         
         
     $servicesPrice = strip_tags($_POST['servicesPrice']);  
-        
-    $params = '';
-    $servicesParams = $_POST['servicesParams'];
-    if(!empty($servicesParams)){
-        $colors = explode("\n", $servicesParams);
-        $params = json_encode($colors);
-    }
-    
-    $this->db->exec("INSERT INTO ga_services (name, type, period, price, params) 
-    VALUES('$servicesName', '$servicesType', '$servicesPeriod','$servicesPrice', '$params')");
+
+    $this->db->exec("INSERT INTO ga_services (name, type, period, price) 
+    VALUES('$servicesName', '$servicesType', '$servicesPeriod','$servicesPrice')");
    
      $answer['status'] = "success";
      $answer['success'] = "Услуга успешно добавлена";
@@ -102,28 +95,18 @@ class ServicesController extends BaseController{
     if(parent::isAjax()){
         
     $servicesName = strip_tags($_POST['servicesName']);
-    $servicesType = strip_tags($_POST['servicesType']);
+    $servicesType = '';
     $servicesPeriod = 0;
     if($servicesType != 'razz') $servicesPeriod = strip_tags($_POST['servicesPeriod']);        
         
         
     $servicesPrice = strip_tags($_POST['servicesPrice']);  
-        
-    $params = '';
-    $servicesParams = $_POST['servicesParams'];
-    if(!empty($servicesParams)){
-        $colors = explode("\n", $servicesParams);
-        $params = json_encode($colors);
-    }
 
-
-    $sql = "UPDATE ga_services SET name = :name, type = :type, period = :period, price = :price, params = :params WHERE id= :id";
+    $sql = "UPDATE ga_services SET name = :name, period = :period, price = :price WHERE id= :id";
     $update = $this->db->prepare($sql);                                        
     $update->bindParam(':name', $servicesName);   
-    $update->bindParam(':type', $servicesType); 
     $update->bindParam(':period', $servicesPeriod);
     $update->bindParam(':price', $servicesPrice);
-    $update->bindParam(':params', $params);
     $update->bindParam(':id', $id); 
     $update->execute();     
     

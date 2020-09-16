@@ -113,32 +113,23 @@ class CommentsController extends BaseController{
     
     
     if(parent::isAjax()){
-        
-    $status = (int)$_POST['status'];
+    
     $moderation = (int)$_POST['moderation'];
-    
-    
-    $game = $_POST['game'];
-    $ip = $_POST['ip'];
-    $port = $_POST['port'];
-    
-    $rating = $_POST['rating'];
-    
+    $id_user = (int)$_POST['id_user'];
+	$id_server = (int)$_POST['id_server'];
+	$text = $_POST['text'];
 
-    $sql = "UPDATE ga_servers SET status = :status, moderation =:moderation, game = :game, ip = :ip, port = :port, rating = :rating, top_enabled = :top_enabled, top_expired_date = :top_expired_date, vip_enabled = :vip_enabled, vip_expired_date = :vip_expired_date, color_enabled = :color_enabled, color_expired_date = :color_expired_date, ban = :ban, ban_couse = :ban_couse WHERE id= :id";
+    $sql = "UPDATE ga_comments SET moderation =:moderation, id_user = :id_user, id_server = :id_server, text = :text WHERE id= :id";
     $update = $this->db->prepare($sql);                                        
-    $update->bindParam(':status', $status);   
     $update->bindParam(':moderation', $moderation); 
-    $update->bindParam(':game', $game); 
-    $update->bindParam(':ip', $ip);
-    $update->bindParam(':color_expired_date', $color_expired_date);
-    $update->bindParam(':ban', $ban);
-    $update->bindParam(':ban_couse', $ban_couse);
-    $update->bindParam(':id', $id); 
+    $update->bindParam(':id_user', $id_user); 
+    $update->bindParam(':id_server', $id_server);
+    $update->bindParam(':text', $text);
+	$update->bindParam(':id', $id); 
     $update->execute();     
     
     $answer['status'] = "success";
-    $answer['success'] = "Сервер успешно изменен";
+    $answer['success'] = "Комментарий успешно изменен";
     exit(json_encode($answer)); 
         
     }else{

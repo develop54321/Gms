@@ -19,7 +19,7 @@
 
 <h1>Добро пожаловать в установщик скрипта <b>GMS</b></h1>
 <hr>
-<span class="badge badge-primary mb-2">Версия скрипта: <?php echo version;?></span>
+<span class="badge badge-primary mb-2">Версия скрипта: <?php echo VERSION;?></span>
 <?php echo getSystemDemand(); ?>
 </div>
 

@@ -19,7 +19,7 @@
 
 <h1>Настройки доступа</h1>
 <hr>
-<span class="badge badge-primary mb-2">Версия скрипта: <?php echo version;?></span>
+<span class="badge badge-primary mb-2">Версия скрипта: <?php echo VERSION;?></span>
 <?php if(isset($error)) echo $error;?>
 <form method="post">
 

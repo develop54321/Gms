@@ -1,10 +1,11 @@
 <?php
 /*
  @name: Gms - Game Monitoring System
+ @description: auto installer
  @author: https://vk.com/web2424
- @date: 17.08.2020
- @version: 1.1
-*/ 
+ @date: 11.09.2020
+ @version: 1.2
+*/
 
 // Development Mode
 

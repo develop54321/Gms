@@ -127,24 +127,43 @@ class ServerController extends BaseController{
     
     $title = "Информация о сервере :: ".$getInfoServer['hostname'];
     
-    $path = 'public/img/'.$getInfoServer['map'].'.jpg';
-    if(file_exists($path)){
-    $img_map = '/'.$path;
+    $pathimg_map = 'public/img/'.$getInfoServer['map'].'.jpg';
+    if(file_exists($pathimg_map)){
+		$img_map = '/'.$pathimg_map;
     }else{
-    $img_map = '/public/img/no_map.png';
+		$img_map = '/public/img/no_map.png';
     }
-    
     $getInfoServer['img_map'] = $img_map;
-    
+	
+	$pathimg_country = 'public/img/flags/'.mb_strtolower($getInfoServer['country']).'.png';
+	if(file_exists($pathimg_country)){
+		$img_country = '/'.$pathimg_country;
+    }else{
+		$img_country = '/public/img/flags/unknown.png';
+    }
+	$getInfoServer['img_country'] = $img_country;
+	
+    # UserInfo
+	$user_profile = $user->getProfile();
+	$getInfoServer['userid'] = $user_profile['id'];
+	$CheckUserInfo = $this->db->prepare('SELECT * FROM ga_users WHERE id = :id  LIMIT 1');
+	$CheckUserInfo->execute(array(':id' => $getInfoServer['id_user']));
+	$CheckUserInfo = $CheckUserInfo->fetch(); 
+	if($getInfoServer['id_user'] != 0){
+	$getInfoServer['userlastname'] = $CheckUserInfo['lastname'];
+	}else{$getInfoServer['userlastname'] = 'System';}
 
+	if($getInfoServer['game'] = 'cs'){$getInfoServer['gamename']='Counter Strike 1.6';}
+	if($getInfoServer['status'] == 1){$getInfoServer['status']='Online';} else {$getInfoServer['status']='Offline';}
+	$getInfoServer['show_players'] = $system->showbar( $getInfoServer['players'], $getInfoServer['max_players'] );
     
-    
+	
     $moderation = 1;    
     $getComments = $this->db->prepare('SELECT c.id, c.text, u.lastname, u.firstname, c.date_create, u.img FROM ga_comments c LEFT JOIN ga_users u ON c.id_user=u.id WHERE c.id_server = :id_server and c.moderation = :moderation');
     $getComments->execute(array(':id_server' =>  $id, ':moderation' =>  $moderation));   
     $getComments = $getComments->fetchAll();
+	
 
-    
     $content = $this->view->renderPartial("server/info", ['data' => $getInfoServer, 'comments' => $getComments]);
     
     $this->view->render("main", ['content' => $content, 'title' => $title]);
@@ -286,7 +305,7 @@ class ServerController extends BaseController{
     
     if($_SESSION['captcha'] != md5($captcha)){
        $answer['status'] = "error";
-       $answer['error'] = "Капча введен не верно!";
+       $answer['error'] = "Капча введена не верно!";
        exit(json_encode($answer));
     }
         
@@ -351,7 +370,20 @@ class ServerController extends BaseController{
     $answer['error'] = "Только авторизованные пользователи могут оставлять комментарии";
     exit(json_encode($answer));  
     }
-    
+    //	Пустой комментарий
+	if(empty($_POST['comment'])){
+    $answer['status'] = "error";
+    $answer['error'] = "Введите комментарий (от 10 до 300 символов)";
+    exit(json_encode($answer));  
+    }
+    //
+	//	Ограничение ввода символов
+	if (strlen($_POST['comment']) < 10 or strlen($_POST['comment']) > 300) {
+     $answer['status'] = "error";
+     $answer['error'] = "Комментарий должен содержать от 10 до 300 символов";
+     exit(json_encode($answer)); 
+    }
+	//
     if($settings['comments']['moderation'] == '1'){
     $text_success = "Ваш комментарии успешно отправлен!";    
     $moderation = 1; 

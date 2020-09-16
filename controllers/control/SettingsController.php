@@ -20,11 +20,22 @@ class SettingsController extends BaseController{
     $global_settings = $_POST['global_settings'];
     $content['global_settings']['site_name'] = $global_settings['site_name'];
     $content['global_settings']['auto_add_server'] = $global_settings['auto_add_server'];   
-    $content['global_settings']['count_servers_top'] = $global_settings['count_servers_top'];
     $content['global_settings']['count_servers_main'] = $global_settings['count_servers_main'];
+	$content['global_settings']['count_servers_befirst'] = $global_settings['count_servers_befirst'];
+	$content['global_settings']['count_servers_top'] = $global_settings['count_servers_top'];
     $content['global_settings']['count_servers_vip'] = $global_settings['count_servers_vip'];   
     $content['global_settings']['count_servers_boost'] = $global_settings['count_servers_boost'];
-    
+	$content['global_settings']['count_servers_color'] = $global_settings['count_servers_color'];
+	$content['global_settings']['count_servers_gamemenu'] = $global_settings['count_servers_gamemenu']; 
+	# on/off services
+	$content['global_settings']['befirst_on'] = $global_settings['befirst_on'];		// Befirst
+	$content['global_settings']['top_on'] = $global_settings['top_on'];		// Top
+	$content['global_settings']['boost_on'] = $global_settings['boost_on'];		// Boost
+	$content['global_settings']['vip_on'] = $global_settings['vip_on'];		// Vip
+	$content['global_settings']['color_on'] = $global_settings['color_on'];		// Color
+    $content['global_settings']['gamemenu_on'] = $global_settings['gamemenu_on'];		// Gamemenu_on
+	$content['global_settings']['votes_on'] = $global_settings['votes_on'];		// Votes_on
+	
     $comments = $_POST['comments'];
     $content['comments']['guest_allow'] = $comments['guest_allow'];
     $content['comments']['moderation'] = $comments['moderation'];

@@ -26,10 +26,26 @@ class Services extends BaseController{
     $getInfoServer = $getInfoServer->fetch();
         
     switch($getInfoPay['type']){
+		//	Befirst
+		case "befirst":
+        if($getInfoServer['befirst_enabled'] != '0'){
+        $place = $getInfoServer['befirst_enabled'];
+        $expired_time = ($getInfoServices['period']*86400)+$getInfoServer['befirst_expired_date'];
+        }else{
+        $expired_time = time()+$getInfoServices['period']*86400;
+        $place = $getInfoPay['place'];
+        }
+        $sql = "UPDATE ga_servers SET befirst_enabled = :befirst_enabled, befirst_expired_date = :befirst_expired_date  WHERE id = :id";
+        $update = $this->db->prepare($sql);                                  
+        $update->bindParam(':befirst_enabled', $place, PDO::PARAM_INT);   
+        $update->bindParam(':befirst_expired_date', $expired_time);   
+        $update->bindParam(':id', $getInfoPay['id_server'], PDO::PARAM_INT);   
+        $update->execute(); 
+        break;
+		
+		//	Top
         case "top":
-        
         if($getInfoServer['top_enabled'] != '0'){
-        //уже в тоже
         $place = $getInfoServer['top_enabled'];
         $expired_time = ($getInfoServices['period']*86400)+$getInfoServer['top_expired_date'];
         }else{
@@ -42,10 +58,9 @@ class Services extends BaseController{
         $update->bindParam(':top_expired_date', $expired_time);   
         $update->bindParam(':id', $getInfoPay['id_server'], PDO::PARAM_INT);   
         $update->execute(); 
-        
         break;
         
-        
+        //	Vip
         case "vip":
         if($getInfoServer['vip_enabled'] != '0'){
             $expired_time = $getInfoServer['vip_expired_date']+($getInfoServices['period']*86400);
@@ -59,36 +74,28 @@ class Services extends BaseController{
         $update->bindParam(':vip_expired_date', $expired_time, PDO::PARAM_INT);   
         $update->bindParam(':id', $getInfoPay['id_server'], PDO::PARAM_INT);   
         $update->execute(); 
-        
-        
         break;
         
-        
+        //	Color
         case "color":
-        
-        if($getInfoServer['color_enabled'] != null){
+        if($getInfoServer['color_enabled'] != '0'){
             $expired_time = $getInfoServer['color_expired_date']+($getInfoServices['period']*86400);
         }else{
             $expired_time = time()+$getInfoServices['period']*86400;
         }
-        
         $sql = "UPDATE ga_servers SET color_enabled = :color_enabled, color_expired_date = :color_expired_date  WHERE id = :id";
         $update = $this->db->prepare($sql);                                  
         $update->bindParam(':color_enabled', $getInfoPay['color']);   
         $update->bindParam(':color_expired_date', $expired_time, PDO::PARAM_INT);   
         $update->bindParam(':id', $getInfoPay['id_server'], PDO::PARAM_INT);   
         $update->execute(); 
-        
         break;
         
+		//	Boost
         case "boost":
-        
         if($getInfoServer['boost'] != '0'){
-            
         $this->db->query("UPDATE ga_servers SET boost = boost+1 WHERE id = '".$getInfoPay['id_server']."'");
-            
         }else{
-        
         $countBoostServers = $this->db->prepare('SELECT * FROM ga_servers WHERE boost != :boost');
         $countBoostServers->execute(array(':boost' => 0)); 
         $countBoostServers = $countBoostServers->rowCount(); 
@@ -131,14 +138,30 @@ class Services extends BaseController{
         $update->execute();
         }
         }
-        
         break;
         
+		//	Gamemenu
+		case "gamemenu":
+        if($getInfoServer['gamemenu_enabled'] != '0'){
+            $expired_time = $getInfoServer['gamemenu_expired_date']+($getInfoServices['period']*86400);
+        }else{
+            $expired_time = time()+$getInfoServices['period']*86400;
+        }
+        $gamemenu = 1;
+        $sql = "UPDATE ga_servers SET gamemenu_enabled = :gamemenu_enabled, gamemenu_expired_date = :gamemenu_expired_date  WHERE id = :id";
+        $update = $this->db->prepare($sql);                                  
+        $update->bindParam(':gamemenu_enabled', $gamemenu, PDO::PARAM_INT);   
+        $update->bindParam(':gamemenu_expired_date', $expired_time, PDO::PARAM_INT);   
+        $update->bindParam(':id', $getInfoPay['id_server'], PDO::PARAM_INT);   
+        $update->execute(); 
+        break;
+		
+		//	Votes
         case "votes":
         $this->db->query("UPDATE ga_servers SET rating = rating+".$getInfoServices['period']." WHERE id = '".$getInfoPay['id_server']."'");
         break;
         
-        
+        //	Unban
         case "razz":
         $this->db->query("UPDATE ga_servers SET ban = '0', ban_couse = '' WHERE id = '".$getInfoPay['id_server']."'");
         break;

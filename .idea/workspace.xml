@@ -6,50 +6,17 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="25ab11b2-6db2-4fc9-bfc9-de000f79fb21" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/gms.loc.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/changelog.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/install/index.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/install/step1.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/install/step2.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/install/step3.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/install/step4.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/install/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/template/pay/fail.tpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/template/pay/success.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backups/07-04-2019-db_19bc916108fc6938f52cb96f7e087941.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/System.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/System.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/CronController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CronController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ResultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ResultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/install/database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/start.php" beforeDir="false" afterPath="$PROJECT_DIR$/start.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/control/main.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/control/main.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/main.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/main.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/modals/serverServicesModal.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/modals/serverServicesModal.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/pay/unitpay.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/pay/unitpay.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/server/info.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/server/info.tpl" afterDir="false" />
-    </list>
+    <list default="true" id="920c6d79-eec7-4aae-a00b-8c9f581a7707" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,50 +28,68 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1g5f1BcuJPumiHVBd1lwth7Koch" />
+  <component name="ProjectId" id="1hKIrJ6oEa7rKnjX0YZkJ0vIByN" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../888.loc" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="npm" />
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\OpenServer\domains\gms2.loc\install" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="25ab11b2-6db2-4fc9-bfc9-de000f79fb21" name="Default Changelist" comment="" />
-      <created>1597409156733</created>
+      <changelist id="920c6d79-eec7-4aae-a00b-8c9f581a7707" name="Default Changelist" comment="" />
+      <created>1599753553180</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1597409156733</updated>
-      <workItem from="1597409158040" duration="45000" />
-      <workItem from="1597501921271" duration="396000" />
-      <workItem from="1597502523544" duration="41000" />
-      <workItem from="1597599466111" duration="47000" />
-      <workItem from="1597639280995" duration="2646000" />
-      <workItem from="1597647456527" duration="2299000" />
-      <workItem from="1597685766457" duration="4170000" />
+      <updated>1599753553180</updated>
+      <workItem from="1599753560075" duration="893000" />
+      <workItem from="1599798722521" duration="2970000" />
+      <workItem from="1599824510574" duration="663000" />
+      <workItem from="1600174493512" duration="409000" />
+      <workItem from="1600231397309" duration="2301000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -112,17 +97,17 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597686171076">
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599753951631">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1597686171076" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1597641939962">
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1599753951631" />
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1603468297648">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1597641939962" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1597648848791">
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1603468297648" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1600234691945">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1597648848791" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1600234691945" />
   </component>
 </project>

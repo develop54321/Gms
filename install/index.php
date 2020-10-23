@@ -3,12 +3,13 @@
  @name: Gms - Game Monitoring System
  @description: auto installer
  @author: https://vk.com/web2424
- @date: 17.08.2020
- @version: 1.1
+ @date: 10.09.2020
+ @version: 1.2
 */
-if(file_exists("../config.php")) exit("Cms is already installed");
-define("version", "1.1");
 
+if(file_exists("../config.php")) exit("Cms is already installed");
+define("VERSION", "1.2");
+define("ROOT_DIR", __DIR__ ."/");
 
 if(!isset($_GET['step'])) $step = 1;
 else $step = (int)$_GET['step'];
@@ -29,17 +30,21 @@ switch($step){
             $dbh = new PDO('mysql:host='.$server.';dbname='.$baseName.'', $username, $password, array(
                 PDO::ATTR_PERSISTENT => true
             ));
-     
+
             $file = fopen("../configtmp.php", "w+");
+
             $current = file_get_contents($file);
             $current .= "<?php"."\n";
             $current .= 'define("DB_HOST", "'.$server.'");'."\n";
             $current .= 'define("DB_USER", "'.$username.'");'."\n";
             $current .= 'define("DB_PASSWORD", "'.$password.'");'."\n";
             $current .= 'define("DB_NAME", "'.$baseName.'");'."\n";
-            $current .= 'define("TMPL_DIR", "template");'."\n";
+            $current .= 'define("TPL_NAME", "default");'."\n";
+            $current .= 'define("TMPL_DIR", "template/".TPL_NAME);'."\n";
             $current .= "\n";
-            $current .= 'define("VERSION", "'.version.'");'."\n";
+            $current .= 'define("VERSION", "'.VERSION.'");'."\n";
+            $current .= 'date_default_timezone_set("Europe/Moscow");'."\n";
+
             fwrite($file, $current);
 
             header("Location: /install/?step=3");
@@ -67,7 +72,7 @@ switch($step){
         $admiEmail = $email;
         $sql = "INSERT INTO `ga_users` (`id`, `lastname`, `firstname`, `role`, `password`, `email`, `hash`, `balance`, `img`, `date_reg`, `params`, `api_login`, `reset_code`) VALUES
         (1, 'Админ', 'Админ', 'admin', '".$adminHass."', '".$admiEmail."', '', '0', '/public/img/avatar.png', 0, '{\"key_api\":\"\",\"discount_api\":\"\"}', '', '');";
-    
+
         $fileSql = fopen("database.sql", "a+");
         $current = file_get_contents($fileSql);
         fwrite($fileSql, $sql);
@@ -96,15 +101,6 @@ switch($step){
     break;
 
     case "4":
-        $domain = $_SERVER['SERVER_NAME'];
-        $hashKey = "NWJkNTUzZDc0ODgzZmVmYzg1NjNlNDViODIwMmVjOGY=";
-        if( $curl = curl_init() ) {
-            curl_setopt($curl, CURLOPT_URL, 'https://web-24.xyz/counter.php?domain='.$domain.'&hash='.$hashKey);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-            $out = curl_exec($curl);
-            echo $out;
-            curl_close($curl);
-        }
         include_once("step4.php");
         rename("../configtmp.php", "../config.php");
         break;

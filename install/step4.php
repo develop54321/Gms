@@ -23,7 +23,15 @@
 <p><b>Внимание!</b> Рекомендуем удалить папку install с каталого сайта.</p>
 <p>Последние обновления можете найти у нас в группе вк: <a href="https://vk.com/web2424" target="_blank">vk.com/web2424</p>
 <a href="/control" class="btn btn-primary btn-sm">Перейти в админ панель</a>
-</form>
+<div class="mt-3">
+    <h4>Поддержка проекта</h4>
+    <p>GMS — это некоммерческий проект, он не приносит прибыли и развивается как хобби автора, на энтузиазме.
+        Финансовая поддержка очень важна для проекта, за счёт неё он существует.
+        Сейчас вы можете стать меценатом проекта и непосредственным образом повлиять на его дальнейшее развитие.
+    </p>
+    <iframe style="width: 100%" src="https://promo-money.ru/quickpay/shop-widget?writer=buyer&targets=&targets-hint=%D0%92%D0%B0%D1%88%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82&default-sum=100&button-text=14&payment-type-choice=on&mobile-payment-type-choice=on&mail=on&hint=&successURL=&quickpay=shop&account=410011986328082" width="423" height="229" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+</div>
+    </form>
 
 </div>
 

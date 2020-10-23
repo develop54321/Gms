@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 17 2020 г., 20:39
--- Версия сервера: 5.7.29
--- Версия PHP: 7.2.29
+-- Время создания: Сен 11 2020 г., 07:59
+-- Версия сервера: 5.6.47
+-- Версия PHP: 7.1.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `gms`
+-- База данных: `boost`
 --
 
 -- --------------------------------------------------------
@@ -34,6 +34,29 @@ CREATE TABLE `ga_backup` (
   `date_create` int(11) NOT NULL,
   `hash` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `ga_code_colors`
+--
+
+CREATE TABLE `ga_code_colors` (
+  `id` int(11) NOT NULL,
+  `code` varchar(30) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'none',
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `activ` int(1) DEFAULT '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `ga_code_colors`
+--
+
+INSERT INTO `ga_code_colors` (`id`, `code`, `name`, `activ`) VALUES
+(1, '#ff99ca', 'Красный', 1),
+(2, '#99d0ff', 'Синий', 1),
+(3, '#ccfcd4', 'Салатовый', 1),
+(4, '#fbff2e', 'Жёлтый', 1);
 
 -- --------------------------------------------------------
 
@@ -105,7 +128,7 @@ CREATE TABLE `ga_pages` (
 --
 
 INSERT INTO `ga_pages` (`id`, `title`, `text`, `date_create`) VALUES
-(1, 'Контакты', 'Наша группа вконтакте: <b>https://vk.com/web2424</b><br/>\r\nПочта: <b>support@gms.art-gaisin.ru</b> asdasd', 0),
+(1, 'Контакты', 'Группа вк: <b>https://vk.com/</b><br/>\r\nПочта: <b>support@gms.site.ru</b>', 0),
 (2, 'Пользовательское соглашение', '<p><strong>Пользовательское соглашение</strong></p>\r\n\r\n<p>Настоящее Соглашение определяет условия использования Пользователями материалов и сервисов сайта&nbsp;gms.art-gaisin.ru&nbsp; &nbsp; &nbsp; &nbsp; (далее&nbsp;&mdash; &laquo;Сайт&raquo;).</p>\r\n\r\n<p><strong>1.Общие условия</strong></p>\r\n\r\n<p>1.1. Использование материалов и сервисов Сайта регулируется нормами действующего законодательства Российской Федерации.</p>\r\n\r\n<p>1.2. Настоящее Соглашение является публичной офертой. Получая доступ к материалам Сайта Пользователь считается присоединившимся к настоящему Соглашению.</p>\r\n\r\n<p>1.3. Администрация Сайта вправе в любое время в одностороннем порядке изменять условия настоящего Соглашения. Такие изменения вступают в силу по истечении 3 (Трех) дней с момента размещения новой версии Соглашения на сайте. При несогласии Пользователя с внесенными изменениями он обязан отказаться от доступа к Сайту, прекратить использование материалов и сервисов Сайта.</p>\r\n\r\n<p><strong>2. Обязательства Пользователя</strong></p>\r\n\r\n<p>2.1. Пользователь соглашается не предпринимать действий, которые могут рассматриваться как нарушающие российское законодательство или нормы международного права, в том числе в сфере&nbsp;интеллектуальной собственности,&nbsp;<u>авторских&nbsp;</u>и/или&nbsp;<u>смежных правах</u>, а также любых действий, которые приводят или могут привести к нарушению нормальной работы Сайта и сервисов Сайта.</p>\r\n\r\n<p>2.2. Использование материалов Сайта без согласия&nbsp;правообладателей&nbsp;не допускается (статья 1270&nbsp;Г.К РФ). Для правомерного использования материалов Сайта необходимо заключение&nbsp;<u>лицензионных договоров</u>&nbsp;(получение лицензий) от Правообладателей.</p>\r\n\r\n<p>2.3. При&nbsp;цитировании&nbsp;материалов Сайта, включая охраняемые авторские произведения, ссылка на Сайт обязательна (подпункт 1 пункта 1 статьи 1274&nbsp;Г.К РФ).</p>\r\n\r\n<p>2.4. Комментарии и иные записи Пользователя на Сайте не должны вступать в противоречие с требованиями законодательства Российской Федерации и общепринятых норм морали и нравственности.</p>\r\n\r\n<p>2.5. Пользователь предупрежден о том, что Администрация Сайта не несет ответственности за посещение и использование им внешних ресурсов, ссылки на которые могут содержаться на сайте.</p>\r\n\r\n<p>2.6. Пользователь согласен с тем, что Администрация Сайта не несет ответственности и не имеет прямых или косвенных обязательств перед Пользователем в связи с любыми возможными или возникшими потерями или убытками, связанными с любым содержанием Сайта,&nbsp;<u>регистрацией авторских прав</u>&nbsp;и сведениями о такой регистрации, товарами или услугами, доступными на или полученными через внешние сайты или ресурсы либо иные контакты Пользователя, в которые он вступил, используя размещенную на Сайте информацию или ссылки на внешние ресурсы.</p>\r\n\r\n<p>2.7. Пользователь принимает положение о том, что все материалы и сервисы Сайта или любая их часть могут сопровождаться рекламой. Пользователь согласен с тем, что Администрация Сайта не несет какой-либо ответственности и не имеет каких-либо обязательств в связи с такой рекламой.</p>\r\n\r\n<p><strong>3. Прочие условия</strong></p>\r\n\r\n<p>3.1. Все возможные споры, вытекающие из настоящего Соглашения или связанные с ним, подлежат разрешению в соответствии с действующим законодательством Российской Федерации.</p>\r\n\r\n<p>3.2. Ничто в Соглашении не может пониматься как установление между Пользователем и Администрации Сайта агентских отношений, отношений товарищества, отношений по совместной деятельности, отношений личного найма, либо каких-то иных отношений, прямо не предусмотренных Соглашением.</p>\r\n\r\n<p>3.3. Признание судом какого-либо положения Соглашения недействительным или не подлежащим принудительному исполнению не влечет недействительности иных положений Соглашения.</p>\r\n\r\n<p>3.4. Бездействие со стороны Администрации Сайта в случае нарушения кем-либо из Пользователей положений Соглашения не лишает Администрацию Сайта права предпринять позднее соответствующие действия в защиту своих интересов и&nbsp;защиту авторских прав&nbsp;на охраняемые в соответствии с законодательством материалы Сайта.</p>\r\n\r\n<p><strong>Пользователь подтверждает, что ознакомлен со всеми пунктами настоящего Соглашения и безусловно принимает их.</strong></p>\r\n', 0);
 
 -- --------------------------------------------------------
@@ -122,6 +145,13 @@ CREATE TABLE `ga_pay_logs` (
   `pay_methods` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `ga_pay_logs`
+--
+
+INSERT INTO `ga_pay_logs` (`id`, `content`, `id_user`, `date_create`, `pay_methods`, `status`) VALUES
+(1, '{\"type_pay\":\"refill\",\"id_user\":\"1\",\"amout\":1}', 1, 1599800249, 'freekassa', 'expects');
 
 -- --------------------------------------------------------
 
@@ -142,8 +172,9 @@ CREATE TABLE `ga_pay_methods` (
 --
 
 INSERT INTO `ga_pay_methods` (`id`, `status`, `name`, `content`, `typeCode`) VALUES
-(1, '0', 'Robokassa', '', 'robokassa'),
-(2, '0', 'UnitPay', '{\"public_key\":\"133411-e686b\",\"secret_key\":\"338b3429cbe857ca0f53e03e8697892a\"}', 'unitpay');
+(1, '1', 'Robokassa', '{\"login\":\"\",\"password1\":\"\",\"password2\":\"\"}', 'robokassa'),
+(2, '1', 'UnitPay', '{\"public_key\":\"\",\"secret_key\":\"\"}', 'unitpay'),
+(3, '1', 'Free-Kassa', '{\"fk_id\":\"\",\"fk_key1\":\"\",\"fk_key2\":\"\"}', 'freekassa');
 
 -- --------------------------------------------------------
 
@@ -153,9 +184,9 @@ INSERT INTO `ga_pay_methods` (`id`, `status`, `name`, `content`, `typeCode`) VAL
 
 CREATE TABLE `ga_servers` (
   `id` int(11) NOT NULL,
-  `status` decimal(10,0) NOT NULL,
-  `moderation` decimal(10,0) NOT NULL,
-  `id_user` decimal(11,0) NOT NULL,
+  `status` int(11) NOT NULL,
+  `moderation` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `game` varchar(255) NOT NULL,
   `ip` varchar(255) NOT NULL,
   `port` varchar(255) NOT NULL,
@@ -163,30 +194,27 @@ CREATE TABLE `ga_servers` (
   `map` varchar(300) DEFAULT NULL,
   `players` int(11) DEFAULT NULL,
   `max_players` int(11) DEFAULT NULL,
-  `rating` decimal(10,0) NOT NULL DEFAULT '0',
-  `top_enabled` decimal(10,0) DEFAULT '0',
-  `vip_enabled` decimal(10,0) DEFAULT '0',
+  `rating` int(11) NOT NULL DEFAULT '0',
+  `befirst_enabled` int(11) DEFAULT '0',
+  `top_enabled` int(11) DEFAULT '0',
+  `vip_enabled` int(11) DEFAULT '0',
   `color_enabled` varchar(255) DEFAULT '0',
+  `gamemenu_enabled` int(11) DEFAULT '0',
   `date_add` int(11) NOT NULL,
+  `befirst_expired_date` int(11) DEFAULT NULL,
   `top_expired_date` int(11) DEFAULT NULL,
   `vip_expired_date` int(11) DEFAULT NULL,
   `color_expired_date` int(1) DEFAULT NULL,
-  `boost` decimal(10,0) NOT NULL DEFAULT '0',
-  `boost_position` decimal(10,0) NOT NULL DEFAULT '0',
+  `gamemenu_expired_date` int(11) DEFAULT NULL,
+  `boost` int(11) NOT NULL DEFAULT '0',
+  `boost_position` int(11) NOT NULL DEFAULT '0',
   `country` varchar(64) NOT NULL,
-  `ban` decimal(10,0) DEFAULT '0',
+  `ban` int(11) DEFAULT '0',
   `ban_couse` varchar(300) DEFAULT NULL,
+  `ban_date` int(11) DEFAULT NULL,
   `verification_rand` int(11) DEFAULT NULL,
   `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `ga_servers`
---
-
-INSERT INTO `ga_servers` (`id`, `status`, `moderation`, `id_user`, `game`, `ip`, `port`, `hostname`, `map`, `players`, `max_players`, `rating`, `top_enabled`, `vip_enabled`, `color_enabled`, `date_add`, `top_expired_date`, `vip_expired_date`, `color_expired_date`, `boost`, `boost_position`, `country`, `ban`, `ban_couse`, `verification_rand`, `description`) VALUES
-(1, '1', '1', '1', 'ld2', '62.140.250.10', '27015', '! !--Good_Half-Life_Server--! !', 'crossfire', 5, 32, '0', '0', '0', '0', 1597641246, NULL, NULL, NULL, '0', '0', 'RU', '0', NULL, NULL, ''),
-(2, '1', '1', '1', 'tf2', '91.216.250.10', '27015', 'skial.com | 2FORT+ | US 1 █████', 'ctf_2fort', 31, 32, '0', '0', '0', '0', 1597641765, NULL, NULL, NULL, '0', '0', 'US', '0', NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -208,12 +236,14 @@ CREATE TABLE `ga_services` (
 --
 
 INSERT INTO `ga_services` (`id`, `name`, `type`, `period`, `price`, `params`) VALUES
-(1, 'TOP на 30 дней', 'top', 30, 1, ''),
-(2, 'VIP на 30 дней', 'vip', 30, 1, ''),
-(3, 'Выделение цветом 30 дней', 'color', 30, 1, '{\"red\":\"\\u041a\\u0440\\u0430\\u0441\\u043d\\u044b\\u0439\",\"blue\":\"\\u0421\\u0438\\u043d\\u0438\\u0439\",\"black\":\"\\u0427\\u0435\\u0440\\u043d\\u044b\\u0439\",\"white\":\"\\u0411\\u0435\\u043b\\u044b\\u0439\"}'),
-(4, 'Boost 1 круг', 'boost', 1, 1, ''),
-(6, '100 Голосов для сервера', 'votes', 100, 1, ''),
-(7, 'Разбан сервера с бана', 'razz', 0, 1, '');
+(1, 'Будь Первым на 30 дней', 'befirst', 30, 100, ''),
+(2, 'TOP на 30 дней', 'top', 30, 1, ''),
+(3, 'Boost 1 круг', 'boost', 1, 1, ''),
+(4, 'VIP на 30 дней', 'vip', 30, 1, ''),
+(5, 'Выделение цветом 30 дней', 'color', 30, 1, ''),
+(6, 'Gamemenu на 30 дней', 'gamemenu', 30, 100, ''),
+(7, '100 Голосов для сервера', 'votes', 100, 1, ''),
+(8, 'Разбан сервера с бана', 'razz', 0, 1, '');
 
 -- --------------------------------------------------------
 
@@ -233,7 +263,7 @@ CREATE TABLE `ga_settings` (
 --
 
 INSERT INTO `ga_settings` (`id`, `status_site`, `last_update_servers`, `content`) VALUES
-(1, '1', '1597641769', '{\"global_settings\":{\"site_name\":\"Gms - \\u0432\\u0435\\u0431 \\u0434\\u0432\\u0438\\u0436\\u043e\\u043a\",\"auto_add_server\":\"1\",\"count_servers_top\":\"5\",\"count_servers_main\":\"30\",\"count_servers_vip\":\"10\",\"count_servers_boost\":\"30\",\"cron_key\":\"123\",\"auto_backup_database\":\"0\"},\"comments\":{\"guest_allow\":\"0\",\"moderation\":\"0\"}}');
+(1, '1', '1598912410', '{\"global_settings\":{\"site_name\":\"Gms v1.2 - \\u0432\\u0435\\u0431 \\u0434\\u0432\\u0438\\u0436\\u043e\\u043a\",\"auto_add_server\":\"1\",\"count_servers_main\":\"30\",\"count_servers_befirst\":\"1\",\"count_servers_top\":\"5\",\"count_servers_vip\":\"50\",\"count_servers_boost\":\"30\",\"count_servers_color\":\"20\",\"count_servers_gamemenu\":\"5\",\"befirst_on\":\"1\",\"top_on\":\"1\",\"boost_on\":\"1\",\"vip_on\":\"1\",\"color_on\":\"1\",\"gamemenu_on\":\"1\",\"votes_on\":\"1\",\"cron_key\":\"O5v1C0f7\",\"auto_backup_database\":\"0\"},\"comments\":{\"guest_allow\":\"0\",\"moderation\":\"0\"}}');
 
 -- --------------------------------------------------------
 
@@ -265,6 +295,12 @@ CREATE TABLE `ga_users` (
 -- Индексы таблицы `ga_backup`
 --
 ALTER TABLE `ga_backup`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `ga_code_colors`
+--
+ALTER TABLE `ga_code_colors`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -338,6 +374,12 @@ ALTER TABLE `ga_backup`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT для таблицы `ga_code_colors`
+--
+ALTER TABLE `ga_code_colors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT для таблицы `ga_comments`
 --
 ALTER TABLE `ga_comments`
@@ -365,25 +407,25 @@ ALTER TABLE `ga_pages`
 -- AUTO_INCREMENT для таблицы `ga_pay_logs`
 --
 ALTER TABLE `ga_pay_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `ga_pay_methods`
 --
 ALTER TABLE `ga_pay_methods`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `ga_servers`
 --
 ALTER TABLE `ga_servers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `ga_services`
 --
 ALTER TABLE `ga_services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT для таблицы `ga_settings`

@@ -12,6 +12,39 @@ class ResultController extends BaseController{
     if(isset($_GET['type'])) $type = $_GET['type']; else parent::ShowError(404, "Страница не найдена");
     
     switch($type){
+		
+		case "freekassa":
+		$fk_id = addslashes($_REQUEST["MERCHANT_ID"]); // id магазина в ik
+		$out_summ = addslashes($_REQUEST["AMOUNT"]);   //сумма
+    	$InvId = addslashes($_REQUEST["MERCHANT_ORDER_ID"]);      //идентификатор платежа
+    	$crc = $_REQUEST["SIGN"];  //контрольная подпись
+
+        $typeCode = 'freekassa'; 
+        $getInfoPayment = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE typeCode = :typeCode');
+        $getInfoPayment->execute(array(':typeCode' => $typeCode));
+        $getInfoPayment = $getInfoPayment->fetch();
+        $getInfoPayment = json_decode($getInfoPayment['content'], true);
+        
+        $getInfoPay = $this->db->prepare('SELECT * FROM ga_pay_logs WHERE id = :id');
+        $getInfoPay->execute(array(':id' => $InvId));
+        $getInfoPay = $getInfoPay->fetch();
+        $getInfoPay = json_decode($getInfoPay['content'], true);
+		//Сверяем контрольную подпись которую получили от сервера с нашей
+		$my_crc = md5($fk_id.':'.$out_summ .':'.$getInfoPayment['fk_key2'].':'.$InvId);
+		if (strtoupper($my_crc) != strtoupper($crc)) { 
+			exit("bad sign");
+		}
+		
+        if($getInfoPay['type_pay'] == 'refill'){
+        $user->refill(['inv_id' => $InvId, 'amout' => $out_summ]);   
+        }else{
+        $services->checkService(['inv_id' => $InvId, 'price' => $out_summ, 'pay_methods' => $typeCode]);
+        }
+        echo "OK$InvId\n";
+        
+        
+        break;
+		
         case "robokassa":
         $real_out_summ = $_REQUEST["OutSum"];
         $out_summ = (int)$_REQUEST["OutSum"];

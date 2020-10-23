@@ -1,4 +1,7 @@
 <?php
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 class UserController extends BaseController{
     
     
@@ -61,9 +64,9 @@ class UserController extends BaseController{
     $getInfoServer = $getInfoServer->fetch();  
     if(empty($getInfoServer)) parent::ShowError(404, "Сервер не найден!"); 
     
-    if($getInfoServer['ban'] != 0){
+    if($getInfoServer['ban'] != 0 or $getInfoServer['befirst_enabled'] != 0 or $getInfoServer['top_enabled'] != 0 or $getInfoServer['vip_enabled'] != 0 or $getInfoServer['color_enabled'] != 0 or $getInfoServer['gamemenu_enabled'] != 0 or $getInfoServer['boost'] != 0){
     $answer['status'] = "error";
-    $answer['error'] = "Нельзя удалить сервер, так как забанен";
+    $answer['error'] = "Сервер имеет платную услугу или забанен, удаление невозможно!";
     exit(json_encode($answer)); 
     }else{
     
@@ -210,7 +213,7 @@ class UserController extends BaseController{
        $id = $content['id_server'];
        $price = $content['price'];
        }
-       $newArr[] = ['id' => $row['id'], 'type_pay' => $content['type_pay'], 'price' =>$price, 'id_object' => $id, 'servicesName' => $servicesName, 'date_create' => $row['date_create'], 'status' => $row['status']];
+       $newArr[] = ['id' => $row['id'], 'type_pay' => $content['type_pay'], 'price' =>$price, 'id_object' => $id, 'servicesName' => $servicesName, 'date_create' => $row['date_create'], 'pay_methods' => $row['pay_methods'], 'status' => $row['status']];
        
     }
      
@@ -453,7 +456,7 @@ class UserController extends BaseController{
     
     $getSettings = $this->db->query('SELECT * FROM ga_settings');
     $settings = $getSettings->fetch();    
-        
+    $settings = json_decode($settings['content'], true);
            
     $title = "Платные услуги";
     
@@ -483,79 +486,138 @@ class UserController extends BaseController{
     
     if($user_profile['balance'] >= $getInfoServices['price']){
     
+	// Проверка на бан	razz Если сервер в бане и это не услуга разбана
+	if($getInfoServer['ban'] == 1 and $getInfoServices['type'] != 'razz'){
+		$answer['status'] = "error";
+		$answer['error'] = "Сервер Забанен!";
+		exit(json_encode($answer)); 
+	}
+	
     switch($getInfoServices['type']){
+		//	Befirst
+		case "befirst":
+        if($getInfoServer['befirst_enabled'] == '0') $place = (int)$_POST['place']; else $place = 0;
+        if($getInfoServer['befirst_enabled'] == '0'){
+			$checkPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
+			$checkPlace->execute(array(':befirst_enabled' => $place));
+			if($checkPlace->rowCount() != '0') {
+				$answer['status'] = "error";
+				$answer['error'] = "Нет свободных мест";
+				exit(json_encode($answer)); 
+			}
+        }
+		if($settings['global_settings']['befirst_on'] == 0){$answer['status'] = "error"; $answer['error'] = "Услуга отключена"; exit(json_encode($answer));}
+		$limitBefirstServers = $settings['global_settings']['count_servers_befirst'];
+		$countBefirstServers = $this->db->query("SELECT `id` FROM `ga_servers` WHERE `befirst_enabled` != '0'")->rowCount();
+		$CheckBefirstServer = $this->db->query("SELECT * FROM `ga_servers` WHERE `id`='".$id."' and `befirst_enabled` != '0' LIMIT 1")->rowCount();
+		if($countBefirstServers >= $limitBefirstServers and $CheckBefirstServer == 0){
+			$answer['status'] = "error";
+			$answer['error'] = "Нет свободных мест";
+			exit(json_encode($answer));  
+		}
+        $content = json_encode(['id_services' => $id_services, 'type_pay' => "payServices", 'price' => $getInfoServices['price'], 'type' => 'befirst', 'place' => $place, 'id_server' => $id]);
+        $this->db->exec("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods) VALUES('$content','".time()."', 'expects', ".$user_profile['id'].", 'bill')");
+        $payId = $this->db->lastInsertId(); 
+        break;
+		
+		//	Top
         case "top":
-        //ТОП место
         if($getInfoServer['top_enabled'] == '0') $place = (int)$_POST['place']; else $place = 0;
-        
         if($getInfoServer['top_enabled'] == '0'){
-        //check place
-        $checkPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
-        $checkPlace->execute(array(':top_enabled' => $place));
-        if($checkPlace->rowCount() != '0') parent::ShowError(404, "Страница не найдена!");
+			$checkPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
+			$checkPlace->execute(array(':top_enabled' => $place));
+			if($checkPlace->rowCount() != '0') {
+				$answer['status'] = "error";
+				$answer['error'] = "Нет свободных мест";
+				exit(json_encode($answer)); 
+			}
         }
+		if($settings['global_settings']['top_on'] == 0){$answer['status'] = "error"; $answer['error'] = "Услуга отключена"; exit(json_encode($answer));}
+		$limitTopServers = $settings['global_settings']['count_servers_top'];
+		$countTopServers = $this->db->query("SELECT `id` FROM `ga_servers` WHERE `top_enabled` != '0'")->rowCount();
+		$CheckTopServer = $this->db->query("SELECT * FROM `ga_servers` WHERE `id`='".$id."' and `top_enabled` != '0' LIMIT 1")->rowCount();
+		if($countTopServers >= $limitTopServers and $CheckTopServer == 0){
+			$answer['status'] = "error";
+			$answer['error'] = "Нет свободных мест";
+			exit(json_encode($answer));  
+		}
         $content = json_encode(['id_services' => $id_services, 'type_pay' => "payServices", 'price' => $getInfoServices['price'], 'type' => 'top', 'place' => $place, 'id_server' => $id]);
-        
         $this->db->exec("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods) VALUES('$content','".time()."', 'expects', ".$user_profile['id'].", 'bill')");
         $payId = $this->db->lastInsertId(); 
-          
         break;
         
+		//	Vip
         case "vip":
-        //vip статус
         $vip = 1;
-        //check vip place
-        $countVipServers = $this->db->prepare('SELECT * FROM ga_servers WHERE vip_enabled = :vip_enabled');
-        $countVipServers->execute(array(':vip_enabled' => $vip));
-        if($countVipServers->rowCount() == $settings['count_servers_vip']){
-            parent::ShowError(404, "нету мест");
-        }
-        
-         
-        
+		if($settings['global_settings']['vip_on'] == 0){$answer['status'] = "error"; $answer['error'] = "Услуга отключена"; exit(json_encode($answer));}
+		$limitVipServers = $settings['global_settings']['count_servers_vip'];
+		$countVipServers = $this->db->query("SELECT `id` FROM `ga_servers` WHERE `vip_enabled`='1'")->rowCount();
+		$CheckVipServer = $this->db->query("SELECT * FROM `ga_servers` WHERE `id`='".$id."' and `vip_enabled` = '".$vip."' LIMIT 1")->rowCount();
+		if($countVipServers >= $limitVipServers and $CheckVipServer == 0){
+			$answer['status'] = "error";
+			$answer['error'] = "Нет свободных мест";
+			exit(json_encode($answer));   
+		}
         $content = json_encode(['id_services' => $id_services, 'type_pay' => "payServices", 'price' => $getInfoServices['price'], 'type' => 'vip', 'id_server' => $id]);
-        
         $this->db->exec("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods) VALUES('$content','".time()."', 'expects', ".$user_profile['id'].", 'bill')");
         $payId = $this->db->lastInsertId(); 
-        
         break;
         
+		//	Color
         case "color":
-        //Выделение цветом
+		if($settings['global_settings']['color_on'] == 0){$answer['status'] = "error"; $answer['error'] = "Услуга отключена"; exit(json_encode($answer));}
+		$limitColorServers = $settings['global_settings']['count_servers_color'];
+		$countColorServers = $this->db->query("SELECT `id` FROM `ga_servers` WHERE `color_enabled`!= '0'")->rowCount();
+		$CheckColorServer = $this->db->query("SELECT * FROM `ga_servers` WHERE `id`='".$id."' and `color_enabled` != '0' LIMIT 1")->rowCount();
+		if($countColorServers >= $limitColorServers and $CheckColorServer == 0){
+			$answer['status'] = "error";
+			$answer['error'] = "Нет свободных мест";
+			exit(json_encode($answer)); 
+		}
         $color = $_POST['selectColor'];
-        
         $content = json_encode(['id_services' => $id_services, 'type_pay' => "payServices", 'price' => $getInfoServices['price'], 'type' => 'color', 'color' => $color, 'id_server' => $id]);
-        
         $this->db->exec("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods) VALUES('$content','".time()."', 'expects', ".$user_profile['id'].", 'bill')");
         $payId = $this->db->lastInsertId(); 
-        
-        
-        
         break;
-        
+		
+		//	Gamemenu
+        case "gamemenu":
+        $gamemenu = 1;
+		if($settings['global_settings']['gamemenu_on'] == 0){$answer['status'] = "error"; $answer['error'] = "Услуга отключена"; exit(json_encode($answer));}
+		$limitGamemenuServers = $settings['global_settings']['count_servers_gamemenu'];
+		$countGamemenuServers = $this->db->query("SELECT `id` FROM `ga_servers` WHERE `gamemenu_enabled`='1'")->rowCount();
+		$CheckGamemenuServer = $this->db->query("SELECT * FROM `ga_servers` WHERE `id`='".$id."' and `gamemenu_enabled` = '".$gamemenu."' LIMIT 1")->rowCount();
+		if($countGamemenuServers >= $limitGamemenuServers and $CheckGamemenuServer == 0){
+			$answer['status'] = "error";
+			$answer['error'] = "Нет свободных мест";
+			exit(json_encode($answer));   
+		}
+        $content = json_encode(['id_services' => $id_services, 'type_pay' => "payServices", 'price' => $getInfoServices['price'], 'type' => 'gamemenu', 'id_server' => $id]);
+        $this->db->exec("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods) VALUES('$content','".time()."', 'expects', ".$user_profile['id'].", 'bill')");
+        $payId = $this->db->lastInsertId(); 
+        break;
+		
+        //	Boost
         case "boost":
-        //boost
-
-         $content = json_encode(['id_services' => $id_services, 'type_pay' => "payServices", 'price' => $getInfoServices['price'], 'type' => 'boost', 'id_server' => $id]);
-        
+		if($settings['global_settings']['boost_on'] == 0){$answer['status'] = "error"; $answer['error'] = "Услуга отключена"; exit(json_encode($answer));}
+        $content = json_encode(['id_services' => $id_services, 'type_pay' => "payServices", 'price' => $getInfoServices['price'], 'type' => 'boost', 'id_server' => $id]);
         $this->db->exec("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods) VALUES('$content','".time()."', 'expects', ".$user_profile['id'].", 'bill')");
         $payId = $this->db->lastInsertId(); 
-        
-        
-        
         break;
-        
+		
+        //	Votes
         case "votes":
-        //votes
-
-
+		if($settings['global_settings']['votes_on'] == 0){$answer['status'] = "error"; $answer['error'] = "Услуга отключена"; exit(json_encode($answer));}
         $content = json_encode(['id_services' => $id_services, 'type_pay' => "payServices", 'price' => $getInfoServices['price'], 'type' => 'votes', 'id_server' => $id]);
-        
         $this->db->exec("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods) VALUES('$content','".time()."', 'expects', ".$user_profile['id'].", 'bill')");
         $payId = $this->db->lastInsertId(); 
-        
-
-        
+        break;
+		
+		//	Unban
+		case "razz":
+        $content = json_encode(['id_services' => $id_services, 'type_pay' => "payServices", 'price' => $getInfoServices['price'], 'type' => 'razz', 'id_server' => $id]);
+		$this->db->exec("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods) VALUES('$content','".time()."', 'expects', ".$user_profile['id'].", 'bill')");
+        $payId = $this->db->lastInsertId(); 
         break;
         
         default:
@@ -585,7 +647,7 @@ class UserController extends BaseController{
     }
     }else if($step == '1'){
     
-    $content = $this->view->renderPartial("user/serverpay", ['type' => 'selectServices', 'serverInfo' => $getInfoServer, 'services' => $getServices, 'step' => 1]);
+    $content = $this->view->renderPartial("user/serverpay", ['type' => 'selectServices', 'serverInfo' => $getInfoServer, 'settings' => $settings, 'services' => $getServices, 'step' => 1]);
     
     $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
@@ -616,35 +678,54 @@ class UserController extends BaseController{
     if(!isset($id_services)) parent::ShowError(404, "Страница не найдена!");
     
     
-    $data = '';
+	$databefirst = '';
+    if($getInfoServices['type'] == 'befirst'){
+		$databefirst = [];
+		for($i = 1; $i <= $settings['global_settings']['count_servers_befirst']; $i++){
+			$isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
+			$isPlace->execute(array(':befirst_enabled' => $i));    
+			if($isPlace->rowCount() != '0'){
+			$getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
+			$getInfoServer->execute(array(':befirst_enabled' => $i));
+			$getInfoServer = $getInfoServer->fetch();
+			
+			$databefirst[] = ['id' => $i, 'status' => 1];
+			}else{
+			$databefirst[] = ['id' => $i, 'status' => 0];  
+			}
+		}
+    }
+	
+    $datatop = '';
     if($getInfoServices['type'] == 'top'){
-        
-    $data = [];
-    for($i = 1; $i <= $settings['global_settings']['count_servers_top']; $i++){
-        $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
-    $isPlace->execute(array(':top_enabled' => $i));    
-    if($isPlace->rowCount() != '0'){
-    $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
-    $getInfoServer->execute(array(':top_enabled' => $i));
-    $getInfoServer = $getInfoServer->fetch();
-    
-    $data[] = ['id' => $i, 'status' => 1];
-    }else{
-    $data[] = ['id' => $i, 'status' => 0];  
-    }
-        
-    }
+		$datatop = [];
+		for($i = 1; $i <= $settings['global_settings']['count_servers_top']; $i++){
+			$isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
+			$isPlace->execute(array(':top_enabled' => $i));    
+			if($isPlace->rowCount() != '0'){
+			$getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
+			$getInfoServer->execute(array(':top_enabled' => $i));
+			$getInfoServer = $getInfoServer->fetch();
+			
+			$datatop[] = ['id' => $i, 'status' => 1];
+			}else{
+			$datatop[] = ['id' => $i, 'status' => 0];  
+			}
+		}
     }
   
     $status = 1;
     $getPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE status = :status');
     $getPayMethods->execute(array(':status' => $status));
     $getPayMethods = $getPayMethods->fetchAll(); 
-    $colors = [];
-    if($getInfoServices['type'] == 'color'){
-        $colors = json_decode($getInfoServices['params'], true);
-    }
-    $content = $this->view->renderPartial("user/serverpayForm", ['user_profile' => $user_profile,'colors' => $colors, 'serverInfo' => $getInfoServerRow, 'PayMethods' => $getPayMethods, 'type' => $getInfoServices['type'], 'data' => $data, 'infoServices' => $getInfoServices, 'step' => '1'], true);
+    
+	// new colors
+	$activcolor = 1;
+	$getCodeColors = $this->db->prepare('SELECT * FROM ga_code_colors WHERE activ = :activ');
+    $getCodeColors->execute(array(':activ' => $activcolor));
+    $getCodeColors = $getCodeColors->fetchAll(); 
+	
+    $content = $this->view->renderPartial("user/serverpayForm", ['user_profile' => $user_profile,'CodeColors' => $getCodeColors, 'serverInfo' => $getInfoServerRow, 'PayMethods' => $getPayMethods, 'type' => $getInfoServices['type'], 'datatop' => $datatop, 'databefirst' => $databefirst, 'infoServices' => $getInfoServices, 'step' => '1'], true);
     echo $content;
    
     }else parent::ShowError(404, "Страница не найдена!");

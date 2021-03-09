@@ -43,12 +43,16 @@
 </form>
 <?php elseif($step == '2'):?>
 <?php
+$desc = "Пополнение счета  #".$user_profile['id']."";
 if($InfoPayment['typeCode'] == 'robokassa'){
 $crc  = md5("".$InfoPayment['login'].":".$amout.":$payId:".$InfoPayment['password1']."");
 }elseif($InfoPayment['typeCode'] == 'freekassa'){
 $signfk = md5($InfoPayment['fk_id'].":".$amout.":".$InfoPayment['fk_key1'].":".$payId);
+}elseif($InfoPayment['typeCode'] == 'unitpay'){
+$hashStr = $payId.'{up}'.$desc.'{up}'.$amout.'{up}'.$InfoPayment['secret_key'];
+$hash = hash('sha256', $hashStr);
 }
-$desc = "Пополнение счета  #".$user_profile['id']."";
+
 $price = $amout;
 ?> 
 <?php include(TMPL_DIR."/pay/".$InfoPayment['typeCode'].".tpl");?>

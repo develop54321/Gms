@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -17,8 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="920c6d79-eec7-4aae-a00b-8c9f581a7707" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/default/user/pay.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/user/pay.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,14 +43,17 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../185.209.29.238" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -73,6 +79,16 @@
       <workItem from="1600231397309" duration="2301000" />
       <workItem from="1603534858897" duration="247000" />
       <workItem from="1604065491907" duration="19000" />
+      <workItem from="1604129310854" duration="79000" />
+      <workItem from="1604494481885" duration="5000" />
+      <workItem from="1604494702812" duration="10000" />
+      <workItem from="1604494736266" duration="417000" />
+      <workItem from="1604597760331" duration="38000" />
+      <workItem from="1604900313431" duration="71000" />
+      <workItem from="1604903682026" duration="428000" />
+      <workItem from="1604926154837" duration="25000" />
+      <workItem from="1607327778288" duration="896000" />
+      <workItem from="1615281769925" duration="2881000" />
     </task>
     <servers />
   </component>
@@ -104,17 +120,21 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599753951631">
+    <state x="275" y="22" key="#Deployment" timestamp="1615283506446">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1599753951631" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1603535105603">
+    <state x="275" y="22" key="#Deployment/0.0.1366.728@0.0.1366.728" timestamp="1615283506446" />
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1615284729184">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1603535105603" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1600234691945">
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1615284729184" />
+    <state x="184" y="9" key="SettingsEditor" timestamp="1615281887277">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1600234691945" />
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1615281887277" />
+    <state x="473" y="94" key="ftp.server.browser" timestamp="1615282801120">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="473" y="94" key="ftp.server.browser/0.0.1366.728@0.0.1366.728" timestamp="1615282801120" />
   </component>
 </project>

@@ -17,8 +17,8 @@ class View{
         if(isset($params['global_error'])) exit();
         }
         
-        
-        public function renderPartial($file, $params){
+
+        public function renderPartial($file, $params = null){
         $template = $this->dir_tmpl.$file.".tpl";
         extract($params);
         ob_start();

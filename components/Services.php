@@ -94,7 +94,7 @@ class Services extends BaseController{
 		//	Boost
         case "boost":
         if($getInfoServer['boost'] != '0'){
-        $this->db->query("UPDATE ga_servers SET boost = boost+1 WHERE id = '".$getInfoPay['id_server']."'");
+        $this->db->query("UPDATE ga_servers SET boost = boost + ".$getInfoServices['period']." WHERE id = '".$getInfoPay['id_server']."'");
         }else{
         $countBoostServers = $this->db->prepare('SELECT * FROM ga_servers WHERE boost != :boost');
         $countBoostServers->execute(array(':boost' => 0)); 

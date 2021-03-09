@@ -34,10 +34,10 @@ class MainController extends BaseController{
     $img_map = '/public/img/no_map.png';
     }
     
-      $topServers[] = ['id' => $getInfoServer['id'], 'ip' => $getInfoServer['ip'], 'port' => $getInfoServer['port'], 'hostname' => $getInfoServer['hostname'], 'img_map' => $img_map, 'map' => $getInfoServer['map'], 'players' => $getInfoServer['players'], 'max_players' => $getInfoServer['max_players']];
+      $topServers[] = ['id' => $getInfoServer['id'], 'ip' => $getInfoServer['ip'], 'port' => $getInfoServer['port'], 'hostname' => $getInfoServer['hostname'], 'img_map' => $img_map, 'map' => $getInfoServer['map'], 'players' => $getInfoServer['players'], 'max_players' => $getInfoServer['max_players'], 'color_enabled' => $getInfoServer['color_enabled']];
     }else{
     $img_map = '/public/img/no_map.png';
-      $topServers[] = ['id' => '', 'hostname' => 'Место свободно', 'ip' => '127.0.1', 'port' => 27015, 'img_map' => $img_map, 'map' => 'no map', 'players' => 0, 'max_players' => 0];  
+      $topServers[] = ['id' => '', 'hostname' => 'Место свободно', 'ip' => '127.0.1', 'port' => 27015, 'img_map' => $img_map, 'map' => 'no map', 'players' => 0, 'max_players' => 0, 'color_enabled' => null];
     }
         
     }

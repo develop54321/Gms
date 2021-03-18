@@ -20,8 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="920c6d79-eec7-4aae-a00b-8c9f581a7707" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/default/user/pay.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/user/pay.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Pagination.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/Pagination.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +88,8 @@
       <workItem from="1604903682026" duration="428000" />
       <workItem from="1604926154837" duration="25000" />
       <workItem from="1607327778288" duration="896000" />
-      <workItem from="1615281769925" duration="2881000" />
+      <workItem from="1615281769925" duration="3943000" />
+      <workItem from="1616058464034" duration="39000" />
     </task>
     <servers />
   </component>
@@ -124,10 +125,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="22" key="#Deployment/0.0.1366.728@0.0.1366.728" timestamp="1615283506446" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1615284729184">
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1616058471298">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1615284729184" />
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1616058471298" />
     <state x="184" y="9" key="SettingsEditor" timestamp="1615281887277">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -136,5 +137,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="473" y="94" key="ftp.server.browser/0.0.1366.728@0.0.1366.728" timestamp="1615282801120" />
+    <state x="541" y="269" key="publish.login" timestamp="1616058501471">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="541" y="269" key="publish.login/0.0.1366.728@0.0.1366.728" timestamp="1616058501471" />
   </component>
 </project>

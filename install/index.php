@@ -37,7 +37,7 @@ switch($step){
             $current .= 'define("DB_USER", "'.$username.'");'."\n";
             $current .= 'define("DB_PASSWORD", "'.$password.'");'."\n";
             $current .= 'define("DB_NAME", "'.$baseName.'");'."\n";
-            $current .= 'define("TMPL_DIR", "template");'."\n";
+            $current .= 'define("TMPL_DIR", "template/default");'."\n";
             $current .= "\n";
             $current .= 'define("VERSION", "'.version.'");'."\n";
             fwrite($file, $current);

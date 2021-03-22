@@ -1,0 +1,22 @@
+body{
+    background-image: url(../public/img/bg.png);
+}
+
+.wrapper{
+    margin-top: 5rem;
+}
+
+.wrapper .content{
+    padding: 0.75rem 1rem;
+    border: 2px solid #505050;
+}
+
+
+.wrapper .column-right{
+    padding: 0.75rem 1rem;
+    border: 2px solid #505050;
+}
+
+h1{
+    font-size: 2rem !important;
+}

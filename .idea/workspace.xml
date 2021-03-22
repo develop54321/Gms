@@ -21,7 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="920c6d79-eec7-4aae-a00b-8c9f581a7707" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Pagination.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/Pagination.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +44,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../185.209.29.238" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -89,7 +88,8 @@
       <workItem from="1604926154837" duration="25000" />
       <workItem from="1607327778288" duration="896000" />
       <workItem from="1615281769925" duration="3943000" />
-      <workItem from="1616058464034" duration="39000" />
+      <workItem from="1616058464034" duration="132000" />
+      <workItem from="1616124966636" duration="1235000" />
     </task>
     <servers />
   </component>
@@ -137,9 +137,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="473" y="94" key="ftp.server.browser/0.0.1366.728@0.0.1366.728" timestamp="1615282801120" />
-    <state x="541" y="269" key="publish.login" timestamp="1616058501471">
+    <state x="541" y="269" key="publish.login" timestamp="1616058511369">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="541" y="269" key="publish.login/0.0.1366.728@0.0.1366.728" timestamp="1616058501471" />
+    <state x="541" y="269" key="publish.login/0.0.1366.728@0.0.1366.728" timestamp="1616058511369" />
   </component>
 </project>

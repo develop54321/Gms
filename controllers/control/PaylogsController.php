@@ -1,4 +1,9 @@
-<?php 
+<?php
+namespace controllers\control;
+
+use components\User;
+use core\BaseController;
+
 
 class PaylogsController extends BaseController{
     

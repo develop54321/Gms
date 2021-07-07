@@ -20,14 +20,76 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72d76c4a-9567-4788-aead-38343fdd9026" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceQuery/BaseSocket.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceQuery/Buffer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceQuery/Exception/AuthenticationException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceQuery/Exception/InvalidArgumentException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceQuery/Exception/InvalidPacketException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceQuery/Exception/SocketException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceQuery/Exception/SourceQueryException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceQuery/GoldSourceRcon.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceQuery/Socket.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceQuery/SourceQuery.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceQuery/SourceRcon.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceQuery/bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Control.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/Control.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/Mail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Pagination.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/Pagination.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Services.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/Services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/System.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/System.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/BanlistController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/BanlistController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/BoostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/BoostController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/CronController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CronController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ListingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ListingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/MainController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ModalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ModalController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/PageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/PayController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/PayController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ResultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ResultController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/SearchController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ServerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ServerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/BackupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/BackupController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/CodecolorsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/CodecolorsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/CommentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/CommentsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/GamesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/GamesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/PagesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/PagesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/PaylogsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/PaylogsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/PaymethodsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/PaymethodsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/ServersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/ServersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/ServicesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/ServicesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/SettingsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/SettingsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/BaseController_class.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/BaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/BaseException.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/BaseException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/Database_class.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/Database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/Route_class.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/Route.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/View_class.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/View.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/install/database.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/install/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/install/step1.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/install/step2.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/install/step3.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/install/step4.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/install/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/start.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/default/main.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/main.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/default/user/servers.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/user/servers.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
   <component name="Git.Settings">
@@ -37,6 +99,12 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/xpaw/php-source-query-class" />
+    </include_path>
   </component>
   <component name="ProjectId" id="1hKIrJ6oEa7rKnjX0YZkJ0vIByN" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -71,7 +139,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="920c6d79-eec7-4aae-a00b-8c9f581a7707" name="Default Changelist" comment="" />
+      <changelist id="72d76c4a-9567-4788-aead-38343fdd9026" name="Default Changelist" comment="" />
       <created>1599753553180</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -96,6 +164,10 @@
       <workItem from="1616058464034" duration="132000" />
       <workItem from="1616124966636" duration="1235000" />
       <workItem from="1616398549137" duration="360000" />
+      <workItem from="1625574009576" duration="2388000" />
+      <workItem from="1625632200124" duration="202000" />
+      <workItem from="1625639069962" duration="4894000" />
+      <workItem from="1625659594349" duration="591000" />
     </task>
     <servers />
   </component>
@@ -125,27 +197,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="275" y="22" key="#Deployment" timestamp="1615283506446">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="275" y="22" key="#Deployment/0.0.1366.728@0.0.1366.728" timestamp="1615283506446" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1616058471298">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1616058471298" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1615281887277">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1615281887277" />
-    <state x="473" y="94" key="ftp.server.browser" timestamp="1615282801120">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="473" y="94" key="ftp.server.browser/0.0.1366.728@0.0.1366.728" timestamp="1615282801120" />
-    <state x="541" y="269" key="publish.login" timestamp="1616058511369">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="541" y="269" key="publish.login/0.0.1366.728@0.0.1366.728" timestamp="1616058511369" />
   </component>
 </project>

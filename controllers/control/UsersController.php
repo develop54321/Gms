@@ -1,4 +1,10 @@
-<?php 
+<?php
+namespace controllers\control;
+
+
+use components\Pagination;
+use components\User;
+use core\BaseController;
 
 class UsersController extends BaseController{
     
@@ -92,7 +98,7 @@ class UsersController extends BaseController{
     public function actionEdit(){
     $user = new User();
     if(!$user->isAuth()){
-        $this->actionLogin();
+        header("Location: /control/index");
     }
     $getUserPrfile = $user->getProfile();
     if($getUserPrfile['role'] != 'admin')  parent::ShowError(404, "Страница не найдена!");

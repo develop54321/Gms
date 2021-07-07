@@ -1,9 +1,12 @@
 <?php
+namespace controllers;
 
+use components\Pagination;
+use components\System;
+use core\BaseController;
 
 class MainController extends BaseController{
-    
-    
+
     
     public function actionCaptcha(){
     $system = new System();

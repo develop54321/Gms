@@ -1,4 +1,7 @@
 <?php
+namespace controllers;
+use core\BaseController;
+
 class ModalController extends BaseController{
     
 

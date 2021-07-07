@@ -4,13 +4,12 @@
     <meta charset="utf-8">
     <title><?=$title;?></title>
     <meta name="description" content="GMS - это веб движок запрограммированный на языке PHP, для отслеживание за статусами игровых серверов"/>
-    <meta name="keywords" content="мониторинг серверов, игровой мониторинг"/>
+    <meta name="keywords" content="мониторинг серверов, игровой мониторинг, gms, gms v2.0"/>
     <link rel="stylesheet" href="/public/css/style.css"/>
     <link rel="stylesheet" href="/public/css/bootstrap.css"/>
     <link rel="stylesheet" href="/public/css/font-awesome.min.css"/>
     <script src="/public/js/jquery.min.js"></script>
     <script src="/public/js/jquery.form.js"></script>
-    <meta name="verification" content="f19ec2b84181033bf4753a5a51d5d6" />
   </head>
   <body>
 
@@ -73,7 +72,7 @@
 <a style="display: block; color: #fff;" href="/page?id=2">Пользовательское соглашение</a>
        <div class="copyright">
        Copyright © <?php echo $_SERVER['HTTP_HOST']; echo " ".date("Y");?>  Все права защищены<br/>
-              Powered by <a href="https://vk.com/web2424" target="_blank">GMS</a>
+              Powered by <a href="https://vk.com/web2424" target="_blank">GMS v2.0</a>
         </div>
         </center>
         

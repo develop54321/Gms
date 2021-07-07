@@ -1,5 +1,8 @@
 <?php
-require  'SourceQuery/bootstrap.php';
+namespace controllers;
+
+use components\System;
+use core\BaseController;
 use xPaw\SourceQuery\SourceQuery;
 
 class ServerController extends BaseController{

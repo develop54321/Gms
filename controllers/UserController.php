@@ -1,4 +1,11 @@
 <?php
+namespace controllers;
+use components\Mail;
+use components\Pagination;
+use components\System;
+use components\User;
+use core\BaseController;
+use PDO;
 
 class UserController extends BaseController{
     

@@ -1,0 +1,56 @@
+[
+    {
+        "name": "xpaw/php-source-query-class",
+        "version": "2.1.0",
+        "version_normalized": "2.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/xPaw/PHP-Source-Query.git",
+            "reference": "673e572233c3ab4b70b302d648ebaf5a8d9ba32b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/xPaw/PHP-Source-Query/zipball/673e572233c3ab4b70b302d648ebaf5a8d9ba32b",
+            "reference": "673e572233c3ab4b70b302d648ebaf5a8d9ba32b",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=7.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "9.2",
+            "vimeo/psalm": "^3.12"
+        },
+        "time": "2020-12-04T08:20:42+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "xPaw\\SourceQuery\\": "SourceQuery/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-2.1"
+        ],
+        "description": "PHP library to query and send RCON commands to servers based on \"Source Engine Query\" protocol",
+        "homepage": "https://github.com/xPaw/PHP-Source-Query",
+        "keywords": [
+            "ark",
+            "counter-strike",
+            "csgo",
+            "gmod",
+            "minecraft",
+            "rcon",
+            "rust",
+            "starbound",
+            "team fortress"
+        ],
+        "funding": [
+            {
+                "url": "https://github.com/xPaw",
+                "type": "github"
+            }
+        ]
+    }
+]

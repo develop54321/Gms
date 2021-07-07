@@ -1,4 +1,6 @@
 <?php
+namespace components;
+use core\BaseController;
 
 class Pagination extends BaseController
 {

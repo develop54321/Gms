@@ -1,4 +1,8 @@
 <?php
+namespace controllers;
+use components\Services;
+use components\User;
+use core\BaseController;
 
 class ResultController extends BaseController{
     

@@ -1,6 +1,8 @@
 <?php
 
-
+namespace controllers;
+use core\BaseController;
+use components\System;
 class ApiController extends BaseController{
 
 

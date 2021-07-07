@@ -1,4 +1,7 @@
 <?php
+namespace controllers;
+use core\BaseController;
+use components\System;
 class PayController extends BaseController{
     
     public function actionIndex(){

@@ -1,4 +1,7 @@
 <?php
+namespace controllers;
+use core\BaseController;
+
 class SearchController extends BaseController{
     
     public function actionIndex(){

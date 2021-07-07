@@ -1,6 +1,7 @@
 <?php
-
-
+namespace controllers;
+use core\BaseController;
+use components\System;
 class BanlistController extends BaseController{
     
     

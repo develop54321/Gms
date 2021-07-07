@@ -63,8 +63,8 @@ $img_map = '/public/img/no_map.png';
 <span class="badge badge-success">Работает</span>
 <?php elseif($row['status'] == '0'):?>
 <span class="badge badge-warning">Недоступен</span>
-<?endif;?>
-<?endif;?>
+<?php endif;?>
+<?php endif;?>
 </li>
 <li>Владелец: <?=$row['email'];?></li>
 <li><a href="#" onclick="ShowModal('<?=$row['id'];?>', 'serverServices', 'null');return false;">Показать услуги</a></li>

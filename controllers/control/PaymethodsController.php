@@ -1,4 +1,10 @@
-<?php 
+<?php
+namespace controllers\control;
+
+use components\System;
+use components\User;
+use core\BaseController;
+
 
 class PaymethodsController extends BaseController{
      

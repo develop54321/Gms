@@ -18,24 +18,7 @@ class ListingController extends BaseController
         $title = "Листинг серверов";
 
 
-        $befirstServers = [];
-        for ($i = 1; $i <= $settings['global_settings']['count_servers_befirst']; $i++) {
-            $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
-            $isPlace->execute(array(':befirst_enabled' => $i));
-            if ($isPlace->rowCount() != '0') {
-                $getInfoServerBefirst = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
-                $getInfoServerBefirst->execute(array(':befirst_enabled' => $i));
-                $getInfoServerBefirst = $getInfoServerBefirst->fetch();
-                if (file_exists("public/img/flags/" . strtolower($getInfoServerBefirst['country']) . ".png")) {
-                    $imgCountry = "public/img/flags/" . strtolower($getInfoServerBefirst['country']) . ".png";
-                } else {
-                    $imgCountry = "public/img/flags/unknown.png";
-                }
-                $show_players = $system->showbar($getInfoServerBefirst['players'], $getInfoServerBefirst['max_players']);
-                $befirstServers[] = ['id_position' => $i, 'hostname' => $getInfoServerBefirst['hostname'], 'show_players' => $show_players, 'imgCountry' => $imgCountry, 'country' => $getInfoServerBefirst['country'], 'map' => $getInfoServerBefirst['map'], 'players' => $getInfoServerBefirst['players'], 'max_players' => $getInfoServerBefirst['max_players'], 'id' => $getInfoServerBefirst['id'], 'ip' => $getInfoServerBefirst['ip'], 'port' => $getInfoServerBefirst['port'], 'status' => 1, 'befirst_expired_date' => $getInfoServerBefirst['befirst_expired_date']];
-            }
 
-        }
 
         $topServers = [];
         for ($i = 1; $i <= $settings['global_settings']['count_servers_top']; $i++) {
@@ -57,27 +40,6 @@ class ListingController extends BaseController
 
         }
 
-        // Add info Befirst
-        $max_servers_befirst = $settings['global_settings']['count_servers_befirst'];    # кол-во мест в услуге
-        $countBefirstServers = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled != :befirst_enabled');    # кол-во занятых мест
-        $countBefirstServers->execute(array(':befirst_enabled' => 0));
-        $countBefirstServers = $countBefirstServers->rowCount();
-        $free_servers_befirst = $max_servers_befirst - $countBefirstServers;    # кол-во свободных мест
-        if ($free_servers_befirst == $max_servers_befirst) {
-            $free_date_befirst = "~";
-        }# Если все места свободны
-        if ($getInfoServerBefirst['befirst_enabled'] == '0') $place != 0; else $place = 0;
-        $CheckBefirstServerDate = $this->db->prepare("SELECT `befirst_expired_date` FROM `ga_servers` WHERE `befirst_enabled`!='0' ORDER by `befirst_expired_date` ASC LIMIT 1");    # вывод ближайшей даты
-        $CheckBefirstServerDate->execute(array(':befirst_enabled' => $place));
-        $CheckBefirstServerDate = $CheckBefirstServerDate->fetchAll();
-        foreach ($CheckBefirstServerDate as $befirst)
-            if ($free_servers_befirst > 0) {
-                $free_date_befirst = "~";
-            } else {
-                $free_date_befirst = date("d.m.Y [H:i]", $befirst['befirst_expired_date']);
-            }
-        // End
-
         // Add info TOP
         $max_servers_top = $settings['global_settings']['count_servers_top'];    # кол-во мест в услуге
         $countTopServers = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled != :top_enabled');    # кол-во занятых мест
@@ -87,9 +49,8 @@ class ListingController extends BaseController
         if ($free_servers_top == $max_servers_top) {
             $free_date_top = "~";
         }# Если все места свободны
-        if ($getInfoServer['top_enabled'] == '0') $place != 0; else $place = 0;
         $CheckTopServerDate = $this->db->prepare("SELECT `top_expired_date` FROM `ga_servers` WHERE `top_enabled`!='0' ORDER by `top_expired_date` ASC LIMIT 1");    # вывод ближайшей даты
-        $CheckTopServerDate->execute(array(':top_enabled' => $place));
+        $CheckTopServerDate->execute(array(':top_enabled' => 0));
         $CheckTopServerDate = $CheckTopServerDate->fetchAll();
         foreach ($CheckTopServerDate as $top)
             if ($free_servers_top > 0) {
@@ -186,9 +147,6 @@ class ListingController extends BaseController
         $content = $this->view->renderPartial("listing", [
             'settings' => $settings,
             'free_servers_boost' => $free_servers_boost,
-            'free_servers_befirst' => $free_servers_befirst,
-            'free_date_befirst' => $free_date_befirst,
-            'max_servers_befirst' => $max_servers_befirst,
             'free_servers_top' => $free_servers_top,
             'free_date_top' => $free_date_top,
             'max_servers_top' => $max_servers_top,
@@ -198,15 +156,12 @@ class ListingController extends BaseController
             'free_servers_color' => $free_servers_color,
             'free_date_color' => $free_date_color,
             'max_servers_color' => $max_servers_color,
-            'free_servers_gamemenu' => $free_servers_gamemenu,
-            'free_date_gamemenu' => $free_date_gamemenu,
-            'max_servers_gamemenu' => $max_servers_gamemenu,
-            'befirstServers' => $befirstServers,
+            'free_servers_game_menu' => $free_servers_gamemenu,
+            'free_date_game_menu' => $free_date_gamemenu,
             'topServers' => $topServers,
             'vipServers' => $getVipServers,
             'gamemenuServers' => $getGamemenuServers,
             'colorServers' => $getColorServers,
-            'countBefirstServers' => $countBefirstServers,
             'countTopServers' => $countTopServers,
             'countBoostServers' => $countBoostServers,
             'countVipServers' => $countVipServers,

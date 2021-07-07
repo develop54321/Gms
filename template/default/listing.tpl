@@ -20,21 +20,13 @@
 </thead>
 <tbody>
 <?php 
-if($settings['global_settings']['befirst_on']==0 and $settings['global_settings']['top_on']==0 and $settings['global_settings']['boost_on']==0 and $settings['global_settings']['vip_on']==0 and $settings['global_settings']['color_on']==0):
+if($settings['global_settings']['top_on']==0 and $settings['global_settings']['boost_on']==0 and $settings['global_settings']['vip_on']==0 and $settings['global_settings']['color_on']==0):
 ?>
 <tr>
     <td colspan="6" align="center">Платные услуги отключены</td>
 </tr>
 <?php endif;?>
 
-<?php if($settings['global_settings']['befirst_on']==1):?>
-    <tr>
-        <td>Будь первым</td>
-        <td>Наилучший эффект, первая позиция в мастерсервере</td>
-        <td class="text-center"><?php echo $free_servers_befirst;?> из <?php echo $settings['global_settings']['count_servers_befirst'];?></td>
-        <td class="text-center"><?php echo $free_date_befirst;?></td>
-    </tr>
-<?php endif;?>
 <?php if($settings['global_settings']['top_on']==1):?>
     <tr>
         <td>Премиум место</td>
@@ -71,8 +63,8 @@ if($settings['global_settings']['befirst_on']==0 and $settings['global_settings'
 	<tr>
         <td>GameMenu</td>
         <td>Сервер добавляется в игровое меню клиента игры</td>
-        <td class="text-center"><?php echo $free_servers_gamemenu;?> из <?php echo $settings['global_settings']['count_servers_gamemenu'];?></td>
-        <td class="text-center"><?php echo $free_date_gamemenu;?></td>
+        <td class="text-center"><?php echo $free_servers_game_menu;?> из <?php echo $settings['global_settings']['count_servers_gamemenu'];?></td>
+        <td class="text-center"><?php echo $free_date_game_menu;?></td>
     </tr>
 <?php endif;?>
 </tbody>
@@ -82,42 +74,6 @@ if($settings['global_settings']['befirst_on']==0 and $settings['global_settings'
 
 
 <div>
-<?php if($settings['global_settings']['befirst_on']==1):?>
-    <h5 style="padding-top: 25px;">Будь первым</h5>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Название сервера</th>
-                <th>Адрес</th>
-                <th>Заполненость</th>
-                <th>Карта</th>
-                <th>Оплачено до</th>
-            </tr>
-        </thead>
-        <tbody>
-			<?php foreach($befirstServers as $befirst):?>
-            <tr>
-                <td width="3%"><?php echo $befirst['id_position'];?></a></td>
-                <td width="32%" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a href="/server/info?id=<?php echo $befirst['id'];?>"><?php echo $befirst['hostname'];?></a></td>
-                <td width="20%"><img src="<?php echo $befirst['imgCountry'];?>" width="17" alt="<?php echo $befirst['country'];?>" title="<?php echo $befirst['country'];?>">&ensp;<?php echo $befirst['ip'];?>:<?php echo $befirst['port'];?></td>
-                <td width="12%"><div class="uk-progress uk-progress-striped"><div class="uk-progress-bar" style="width: <?php echo $befirst['show_players'];?>;"> <?php echo $befirst['show_players'];?></div></div> </td>
-                <td width="18%"><?php echo $befirst['map'];?></td>
-                <td width="15%"><?php echo date("d.m.Y [H:i]", $befirst['befirst_expired_date']);?></td>
-            </tr>
-            <?php endforeach;
-if($countBefirstServers<1):
-?>
-<tr>
-    <td colspan="6" align="center">Список серверов пуст</td>
-</tr>
-<?php endif;?>	       
-        </tbody>
-    </table>
-<?php endif;?>
-
-
-
 <?php if($settings['global_settings']['top_on']==1):?>
     <h5 style="padding-top: 25px;">ПРЕМИУМ МЕСТО</h5>
     <table class="table">

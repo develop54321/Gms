@@ -291,7 +291,7 @@ class UserController extends BaseController
             $password = password_hash($password, PASSWORD_DEFAULT);
             $time = time();
             $this->db->exec("INSERT INTO ga_users (email, lastname, firstname, password, role, date_reg) 
-    VALUES('$email', '$lastname', '$firstname', '$password', 'user', '$time')");
+            VALUES('$email', '$lastname', '$firstname', '$password', 'user', '$time')");
 
 
             $answer['status'] = "success";

@@ -2,7 +2,9 @@
 namespace controllers;
 
 use components\System;
+use components\User;
 use core\BaseController;
+use Exception;
 use xPaw\SourceQuery\SourceQuery;
 
 class ServerController extends BaseController{
@@ -74,7 +76,7 @@ class ServerController extends BaseController{
     $country = $system->getCountry($ip);
     
     $user = new User();
-    $id_user = '0';
+    $id_user = 0;
     if($user->isAuth()){
     $user_profile = $user->getProfile();
         $id_user = $user_profile['id'];
@@ -123,8 +125,8 @@ class ServerController extends BaseController{
     $settings = json_decode($settings['content'], true);
     $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
     $getInfoServer->execute(array(':id' => $id));
-    $getInfoServer = $getInfoServer->fetch();  
-    
+    $getInfoServer = $getInfoServer->fetch();
+        $getInfoServer['userid'] = null;
     if(empty($getInfoServer)) parent::ShowError(404, "Сервер не найден!");
     
     
@@ -137,7 +139,7 @@ class ServerController extends BaseController{
 		$img_map = '/public/img/no_map.png';
     }
     $getInfoServer['img_map'] = $img_map;
-	
+
 	$pathimg_country = 'public/img/flags/'.mb_strtolower($getInfoServer['country']).'.png';
 	if(file_exists($pathimg_country)){
 		$img_country = '/'.$pathimg_country;
@@ -145,15 +147,19 @@ class ServerController extends BaseController{
 		$img_country = '/public/img/flags/unknown.png';
     }
 	$getInfoServer['img_country'] = $img_country;
-	
+
     # UserInfo
-	$user_profile = $user->getProfile();
-	$getInfoServer['userid'] = $user_profile['id'];
-	$CheckUserInfo = $this->db->prepare('SELECT * FROM ga_users WHERE id = :id  LIMIT 1');
-	$CheckUserInfo->execute(array(':id' => $getInfoServer['id_user']));
-	$CheckUserInfo = $CheckUserInfo->fetch(); 
+        if ($IsAuth) {
+            $user_profile = $user->getProfile();
+            $getInfoServer['userid'] = $user_profile['id'];
+        }
+
+
 	if($getInfoServer['id_user'] != 0){
-	$getInfoServer['userlastname'] = $CheckUserInfo['lastname'];
+        $CheckUserInfo = $this->db->prepare('SELECT * FROM ga_users WHERE id = :id  LIMIT 1');
+        $CheckUserInfo->execute(array(':id' => $getInfoServer['id_user']));
+        $CheckUserInfo = $CheckUserInfo->fetch();
+        $getInfoServer['userlastname'] = $CheckUserInfo['lastname'];
 	}else{$getInfoServer['userlastname'] = 'System';}
 
 	if($getInfoServer['game'] = 'cs'){$getInfoServer['gamename']='Counter Strike 1.6';}

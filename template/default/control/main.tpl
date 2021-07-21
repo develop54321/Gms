@@ -46,18 +46,7 @@
                 <div class="navbar navbar-default" role="navigation">
                     <div class="container">
                         <div class="">
-                          
-                          
-
-                       
-
                             <ul class="nav navbar-nav navbar-right pull-right">
-                              
-                        
-                               
-                               
-                              
-                                
                                 <li class="hidden-xs">
                                     <a href="/user/logout" class="right-bar-toggle waves-effect waves-light"><i class="ti-power-off"></i></a>
                                 </li>

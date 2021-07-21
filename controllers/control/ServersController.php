@@ -1,6 +1,7 @@
 <?php
 namespace controllers\control;
 
+use components\Pagination;
 use components\User;
 use core\BaseController;
 
@@ -139,9 +140,6 @@ class ServersController extends BaseController{
     $rating = $_POST['rating'];
 	$delite_services = $_POST['delite_services'];
 	if ($delite_services == 0) {
-		$befirst_expired_date = 0;
-		$befirst_enabled = $_POST['befirst_enabled'];
-		if($befirst_enabled != 0) $befirst_expired_date = strtotime($_POST['befirst_expired_date']);
 		$top_expired_date = 0;
 		$top_enabled = $_POST['top_enabled'];
 		if($top_enabled != 0) $top_expired_date = strtotime($_POST['top_expired_date']);
@@ -159,12 +157,26 @@ class ServersController extends BaseController{
 			$this->activationBoost($id, $period, $getInfoServerS);
 		}
 	}else{
-		$befirst_enabled = 0; $befirst_expired_date = 0; $top_enabled = 0; $top_expired_date = 0; $period = 0; $vip_enabled = 0; $vip_expired_date = 0; $gamemenu_enabled = 0; $gamemenu_expired_date = 0; $color_enabled = 0; $color_expired_date = 0;
+	    $top_enabled = 0;
+	    $top_expired_date = 0;
+	    $period = 0;
+	    $vip_enabled = 0;
+	    $vip_expired_date = 0;
+	    $gamemenu_enabled = 0;
+	    $gamemenu_expired_date = 0;
+	    $color_enabled = 0;
+	    $color_expired_date = 0;
 	}
     $ban = $_POST['ban'];
-	if($ban == 1){$ban_couse = $_POST['ban_couse']; $ban_date = time();}else{$ban_couse = ''; $ban_date = '';}
+	if($ban == 1){
+	    $ban_couse = $_POST['ban_couse'];
+	    $ban_date = time();
+	}else {
+	    $ban_couse = null;
+	    $ban_date = null;
+	}
 
-    $sql = "UPDATE ga_servers SET status = :status, moderation =:moderation, game = :game, ip = :ip, port = :port, rating = :rating, befirst_enabled = :befirst_enabled, befirst_expired_date = :befirst_expired_date, top_enabled = :top_enabled, top_expired_date = :top_expired_date, boost = :boost, vip_enabled = :vip_enabled, vip_expired_date = :vip_expired_date, gamemenu_enabled = :gamemenu_enabled, gamemenu_expired_date = :gamemenu_expired_date, color_enabled = :color_enabled, color_expired_date = :color_expired_date, ban = :ban, ban_couse = :ban_couse, ban_date = :ban_date WHERE id= :id";
+    $sql = "UPDATE ga_servers SET status = :status, moderation =:moderation, game = :game, ip = :ip, port = :port, rating = :rating, top_enabled = :top_enabled, top_expired_date = :top_expired_date, boost = :boost, vip_enabled = :vip_enabled, vip_expired_date = :vip_expired_date, gamemenu_enabled = :gamemenu_enabled, gamemenu_expired_date = :gamemenu_expired_date, color_enabled = :color_enabled, color_expired_date = :color_expired_date, ban = :ban, ban_couse = :ban_couse, ban_date = :ban_date WHERE id= :id";
     $update = $this->db->prepare($sql);                                        
     $update->bindParam(':status', $status);   
     $update->bindParam(':moderation', $moderation); 
@@ -172,8 +184,6 @@ class ServersController extends BaseController{
     $update->bindParam(':ip', $ip);
     $update->bindParam(':port', $port);
     $update->bindParam(':rating', $rating);
-	$update->bindParam(':befirst_enabled', $befirst_enabled);
-    $update->bindParam(':befirst_expired_date', $befirst_expired_date);
     $update->bindParam(':top_enabled', $top_enabled);
     $update->bindParam(':top_expired_date', $top_expired_date);
 	$update->bindParam(':boost', $period);
@@ -198,28 +208,7 @@ class ServersController extends BaseController{
     $getGames = $this->db->query('SELECT * FROM ga_games WHERE status ="1"');
     $getGames = $getGames->fetchAll();
     
-    $befirstPlaces = [];
-    for($i = 1; $i <= $settings['global_settings']['count_servers_befirst']; $i++){
-        $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
-    $isPlace->execute(array(':befirst_enabled' => $i));    
-    if($isPlace->rowCount() != '0'){
-    $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
-    $getInfoServer->execute(array(':befirst_enabled' => $i));
-    $getInfoServer = $getInfoServer->fetch();
-    
-    if($getInfoServerS['befirst_enabled'] == $i) {
-        $currentServer = true;
-    }else{
-        $currentServer = false;
-    }
-    
-    $befirstPlaces[] = ['id' => $i, 'status' => 1, 'currentServer' => $currentServer];
-    }else{
-    $befirstPlaces[] = ['id' => $i, 'status' => 0, 'currentServer' => $currentServer];  
-    }
-        
-    }
-	
+
     $topPlaces = [];
     for($i = 1; $i <= $settings['global_settings']['count_servers_top']; $i++){
         $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
@@ -237,7 +226,7 @@ class ServersController extends BaseController{
     
     $topPlaces[] = ['id' => $i, 'status' => 1, 'currentServer' => $currentServer];
     }else{
-    $topPlaces[] = ['id' => $i, 'status' => 0, 'currentServer' => $currentServer];  
+    $topPlaces[] = ['id' => $i, 'status' => 0, 'currentServer' => false];
     }
         
     }
@@ -245,7 +234,7 @@ class ServersController extends BaseController{
 
         
 
-    $content = $this->view->renderPartial("control/servers/edit", ['topPlaces' => $topPlaces, 'befirstPlaces' => $befirstPlaces, 'data' => $getInfoServerS, 'games' => $getGames]);
+    $content = $this->view->renderPartial("control/servers/edit", ['topPlaces' => $topPlaces, 'data' => $getInfoServerS, 'games' => $getGames]);
  
     $this->view->render("control/main", ['content' => $content, 'title' => $title]);   
     

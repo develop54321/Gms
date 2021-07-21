@@ -1,17 +1,15 @@
 <?php
 
 namespace controllers;
-require 'SourceQuery/bootstrap.php';
 
 use core\BaseController;
 use components\System;
+use Exception;
 use xPaw\SourceQuery\SourceQuery;
 
 class CronController extends BaseController
 {
-
     public $backup_folder = 'backups';
-
 
     public function actionPay()
     {

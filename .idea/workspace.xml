@@ -20,10 +20,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72d76c4a-9567-4788-aead-38343fdd9026" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ListingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ListingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changelog.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/CronController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CronController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ServerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ServerController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/default/listing.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/listing.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/ServersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/ServersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/info.txt" beforeDir="false" afterPath="$PROJECT_DIR$/info.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/default/control/main.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/control/main.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/default/control/servers/edit.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/control/servers/edit.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/default/control/services/add.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/control/services/add.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/default/top_servers.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/top_servers.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +44,9 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution />
+    <execution>
+      <executable path="composer" />
+    </execution>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -109,7 +123,11 @@
       <workItem from="1625574009576" duration="2388000" />
       <workItem from="1625632200124" duration="202000" />
       <workItem from="1625639069962" duration="4894000" />
-      <workItem from="1625659594349" duration="1484000" />
+      <workItem from="1625659594349" duration="3220000" />
+      <workItem from="1625744428447" duration="2047000" />
+      <workItem from="1625804251570" duration="77000" />
+      <workItem from="1626848042551" duration="1169000" />
+      <workItem from="1626849855537" duration="775000" />
     </task>
     <servers />
   </component>

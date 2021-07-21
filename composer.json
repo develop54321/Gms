@@ -1,12 +1,21 @@
 {
-  "autoload": {
-    "psr-4": {
-      "core\\": "core",
-      "controllers\\": "controllers",
-      "components\\": "components"
+    "name": "gms/v2.0",
+    "description": "Game Monitoring System",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Danil",
+            "email": "zell123456789@yandex.ru"
+        }
+    ],
+    "require": {
+        "xpaw/php-source-query-class": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "core\\": "core",
+            "controllers\\": "controllers",
+            "components\\": "components"
+        }
     }
-  },
-  "require": {
-    "xpaw/php-source-query-class": "^2.1"
-  }
 }

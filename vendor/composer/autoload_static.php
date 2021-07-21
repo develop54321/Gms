@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit20bdcbb218edd010a7faa4ccf3fb0f53
 {
     public static $prefixLengthsPsr4 = array (
+        'x' => 
+        array (
+            'xPaw\\SourceQuery\\' => 17,
+        ),
         'c' => 
         array (
             'core\\' => 5,
@@ -16,6 +20,10 @@ class ComposerStaticInit20bdcbb218edd010a7faa4ccf3fb0f53
     );
 
     public static $prefixDirsPsr4 = array (
+        'xPaw\\SourceQuery\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/xpaw/php-source-query-class/SourceQuery',
+        ),
         'core\\' => 
         array (
             0 => __DIR__ . '/../..' . '/core',

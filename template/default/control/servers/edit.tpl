@@ -93,15 +93,6 @@
 
 <div class="col-md-6">
 
-<div class="form-group">
-<label for="befirst_enabled">Befirst</label>
-<select class="form-control" name="befirst_enabled">
-<option value="0">Не выбрана</option>
-<?php foreach($befirstPlaces as $befirst):?>
-<option value="<?=$befirst['id'];?>" <?php if($befirst['status'] == '1' && $befirst['currentServer'] == false):?>disabled<?php endif;?><?php if($data['befirst_enabled'] == $befirst['id']):?>selected<?php endif;?>>Место #<?=$befirst['id'];?></option>
-<?php endforeach;?>
-</select>
-</div>
 
 <div class="form-group">
 <label for="befirst_expired_date">Время истечения</label>

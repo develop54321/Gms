@@ -22,7 +22,6 @@
 <div class="form-group">
 <label for="servicesName">Тип услуги</label>
 <select name="servicesType" class="form-control" id="servicesType" onchange="services();">
-<option value="befirst">Befirst</option>
 <option value="top">TOP</option>
 <option value="vip">VIP</option>
 <option value="color">Выделение цветом</option>

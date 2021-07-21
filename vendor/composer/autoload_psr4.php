@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'xPaw\\SourceQuery\\' => array($vendorDir . '/xpaw/php-source-query-class/SourceQuery'),
     'core\\' => array($baseDir . '/core'),
     'controllers\\' => array($baseDir . '/controllers'),
     'components\\' => array($baseDir . '/components'),

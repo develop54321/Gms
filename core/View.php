@@ -22,8 +22,11 @@ class View{
 
         public function renderPartial($file, $params = null){
         $template = $this->dir_tmpl.$file.".tpl";
-        extract($params);
-        ob_start();
+        if ($params !== null) {
+            extract($params);
+            ob_start();
+        }
+
         include($template);
         return ob_get_clean();
         }

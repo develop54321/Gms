@@ -28,18 +28,10 @@
    ?>
     <tr <?php if($row['color_enabled'] != null):?>style="background: <?php echo $row['color_enabled'];?>"<?php endif;?>>
       <td>
+          <?php widgets\servers\status\Status::run($row['game']);?>
       <a href="?game=<?=$row['game'];?>">
-      <?php if($row['game'] == 'cs'):?>
-      <img src="/public/img/gameicons/cs.png" style="width: 16px;"/>
-      <?php elseif($row['game'] == 'csgo'):?>
-      <img src="/public/img/gameicons/csgo.png" style="width: 16px;"/>
-      <?php elseif($row['game'] == 'css'):?>
-      <img src="/public/img/gameicons/css.png" style="width: 16px;"/>
-      <?php elseif($row['game'] == 'tf2'):?>
-      <img src="/public/img/gameicons/tf2.png" style="width: 16px;"/>
-       <?php elseif($row['game'] == 'ld2'):?>
-      <img src="/public/img/gameicons/ld2.png" style="width: 16px;"/>
-      <?php endif;?>
+
+
       </a>
       </td>
       <td><a class="hostname" href="/server/info?id=<?php echo $row['id'];?>"><?php echo $row['hostname'];?></a></td>

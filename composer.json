@@ -15,7 +15,8 @@
         "psr-4": {
             "core\\": "core",
             "controllers\\": "controllers",
-            "components\\": "components"
+            "components\\": "components",
+            "widgets\\": "widgets"
         }
     }
 }

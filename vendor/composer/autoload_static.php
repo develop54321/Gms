@@ -11,6 +11,10 @@ class ComposerStaticInit20bdcbb218edd010a7faa4ccf3fb0f53
         array (
             'xPaw\\SourceQuery\\' => 17,
         ),
+        'w' => 
+        array (
+            'widgets\\' => 8,
+        ),
         'c' => 
         array (
             'core\\' => 5,
@@ -23,6 +27,10 @@ class ComposerStaticInit20bdcbb218edd010a7faa4ccf3fb0f53
         'xPaw\\SourceQuery\\' => 
         array (
             0 => __DIR__ . '/..' . '/xpaw/php-source-query-class/SourceQuery',
+        ),
+        'widgets\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/widgets',
         ),
         'core\\' => 
         array (

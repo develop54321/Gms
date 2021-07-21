@@ -20,20 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72d76c4a-9567-4788-aead-38343fdd9026" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/core/WidgetsInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/widgets/servers/status/Status.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/widgets/servers/status/views/index.tpl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/changelog.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/CronController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CronController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/ServerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ServerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/ServersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/ServersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/View.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/View.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/info.txt" beforeDir="false" afterPath="$PROJECT_DIR$/info.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/default/control/main.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/control/main.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/default/control/servers/edit.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/control/servers/edit.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/default/control/services/add.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/control/services/add.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/default/top_servers.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/top_servers.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/default/servers_list.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/servers_list.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
@@ -55,6 +52,14 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -127,7 +132,7 @@
       <workItem from="1625744428447" duration="2047000" />
       <workItem from="1625804251570" duration="77000" />
       <workItem from="1626848042551" duration="1169000" />
-      <workItem from="1626849855537" duration="775000" />
+      <workItem from="1626849855537" duration="3111000" />
     </task>
     <servers />
   </component>

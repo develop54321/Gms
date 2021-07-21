@@ -126,9 +126,9 @@ class ServerController extends BaseController{
     $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
     $getInfoServer->execute(array(':id' => $id));
     $getInfoServer = $getInfoServer->fetch();
-        $getInfoServer['userid'] = null;
+
     if(empty($getInfoServer)) parent::ShowError(404, "Сервер не найден!");
-    
+        $getInfoServer['userid'] = null;
     
     $title = "Информация о сервере :: ".$getInfoServer['hostname'];
     

@@ -3,7 +3,7 @@
  @name: Gms - Game Monitoring System
  @description: auto installer
  @author: https://vk.com/web2424
- @date: 07.090.2021
+ @date: 22.07.2021
  @version: 2.0
 */
 
@@ -19,4 +19,5 @@ define("BACKUP_DIR", realpath("../")."/");
 require_once "config.php";
 $Route = new Route();
 $Route->start();
+
 

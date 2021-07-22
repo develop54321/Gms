@@ -5,7 +5,7 @@ use core\BaseController;
 use core\View;
 use core\WidgetsInterface;
 
-class Status extends BaseController implements WidgetsInterface
+class Status implements WidgetsInterface
 {
 
     public static function run($params = null){

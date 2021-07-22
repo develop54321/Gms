@@ -10,6 +10,7 @@ class Pagination extends BaseController
         $per_page = $array['per_page'];
 
         if (isset($_GET['page'])) $page = ($_GET['page'] - 1); else $page = 0;
+
         $start = abs($page * $per_page);
         $symbol = "?";
         if (isset($array['no_rgp'])) {
@@ -56,6 +57,7 @@ class Pagination extends BaseController
             $ViewPagination[] = ["<a href='" . $getUrl . $symbol . "page=$forwardButton' class='next'>Вперед</a>"];
         }
 
+        if ($page == 0) $ViewPagination = [];
 
         return ['ViewPagination' => $ViewPagination, 'start' => $start];
 

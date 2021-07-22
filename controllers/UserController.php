@@ -421,7 +421,7 @@ class UserController extends BaseController
                 }
             }else{
                 $answer['status'] = "error";
-                $answer['error'] = "Пользователь не найден";
+                $answer['error'] = "Неправильный пароль или логин";
                 exit(json_encode($answer));
             }
 

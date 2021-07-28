@@ -20,9 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72d76c4a-9567-4788-aead-38343fdd9026" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/dump.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ServerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ServerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config_dist.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dump_import.sql" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/install.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -134,7 +134,8 @@
       <workItem from="1626894197442" duration="2675000" />
       <workItem from="1626938451789" duration="3195000" />
       <workItem from="1627451537513" duration="2963000" />
-      <workItem from="1627455478753" duration="2904000" />
+      <workItem from="1627455478753" duration="3031000" />
+      <workItem from="1627474403211" duration="2619000" />
     </task>
     <servers />
   </component>

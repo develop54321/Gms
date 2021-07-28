@@ -1,0 +1,11 @@
+HTTP/1.1 302 Found
+Server: nginx/1.18.0 (Ubuntu)
+Date: Wed, 28 Jul 2021 12:48:26 GMT
+Content-Type: text/html; charset=UTF-8
+Connection: keep-alive
+Set-Cookie: PHPSESSID=dj581t4aahuecblfusj5q1biad; path=/; HttpOnly
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Location: http://gamems.ru/ru
+

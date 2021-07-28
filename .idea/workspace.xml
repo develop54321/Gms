@@ -20,16 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72d76c4a-9567-4788-aead-38343fdd9026" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/changelist.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/install.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/gameicons/rust.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dump.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Pagination.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/Pagination.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/servers/status/Status.php" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/servers/status/Status.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/servers/status/views/index.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/servers/status/views/index.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ServerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ServerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/install.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +132,9 @@
       <workItem from="1626848042551" duration="1169000" />
       <workItem from="1626849855537" duration="3229000" />
       <workItem from="1626894197442" duration="2675000" />
-      <workItem from="1626938451789" duration="3145000" />
+      <workItem from="1626938451789" duration="3195000" />
+      <workItem from="1627451537513" duration="2963000" />
+      <workItem from="1627455478753" duration="2904000" />
     </task>
     <servers />
   </component>

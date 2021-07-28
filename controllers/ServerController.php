@@ -5,6 +5,7 @@ use components\System;
 use components\User;
 use core\BaseController;
 use Exception;
+use PDO;
 use xPaw\SourceQuery\SourceQuery;
 
 class ServerController extends BaseController{
@@ -348,7 +349,7 @@ class ServerController extends BaseController{
     $update->bindParam(':rating', $rating, PDO::PARAM_INT);       
     $update->bindParam(':id', $id, PDO::PARAM_INT);   
     $update->execute(); 
-    
+
     $answer['status'] = "success";
     $answer['success'] = "Ваш голос успешно учтен!";
     $answer['rating'] = $rating;

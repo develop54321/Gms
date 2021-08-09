@@ -20,70 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72d76c4a-9567-4788-aead-38343fdd9026" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/new-style/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/widgets/user/top_menu/TopMenu.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/widgets/user/top_menu/views/index.tpl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/PaymethodsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/PaymethodsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/headers" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/bootstrap-grid.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/bootstrap-grid.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/bootstrap-grid.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/bootstrap-grid.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/bootstrap-grid.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/bootstrap-grid.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/bootstrap-grid.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/bootstrap-grid.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/bootstrap-reboot.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/bootstrap-reboot.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/bootstrap-reboot.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/bootstrap-reboot.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/bootstrap-reboot.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/bootstrap-reboot.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/bootstrap-reboot.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/bootstrap-reboot.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/bootstrap.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/bootstrap.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/bootstrap.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/bootstrap.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/bootstrap.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/FontAwesome.otf" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/fonts/FontAwesome.otf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/Helvetica-bold.otf" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/fonts/Helvetica-bold.otf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/Helvitica.otf" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/fonts/Helvitica.otf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/captcha.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/fonts/captcha.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.eot" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/fonts/fontawesome-webfont.eot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/fonts/fontawesome-webfont.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/fonts/fontawesome-webfont.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.woff" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/fonts/fontawesome-webfont.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/fonts/fontawesome-webfont.woff2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/bootstrap.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/js/bootstrap.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/bootstrap.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/js/bootstrap.bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/bootstrap.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/js/bootstrap.bundle.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/bootstrap.bundle.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/js/bootstrap.bundle.min.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/js/bootstrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/bootstrap.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/js/bootstrap.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/js/bootstrap.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/bootstrap.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/js/bootstrap.min.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/less/animated.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/less/animated.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/less/bordered-pulled.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/less/bordered-pulled.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/less/core.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/less/core.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/less/fixed-width.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/less/fixed-width.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/less/font-awesome.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/less/font-awesome.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/less/icons.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/less/icons.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/less/larger.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/less/larger.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/less/list.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/less/list.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/less/mixins.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/less/mixins.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/less/path.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/less/path.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/less/rotated-flipped.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/less/rotated-flipped.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/less/screen-reader.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/less/screen-reader.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/less/stacked.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/less/stacked.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/less/variables.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/less/variables.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_animated.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/scss/_animated.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_bordered-pulled.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/scss/_bordered-pulled.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_core.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/scss/_core.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_fixed-width.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/scss/_fixed-width.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_icons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/scss/_icons.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_larger.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/scss/_larger.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_list.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/scss/_list.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_mixins.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/scss/_mixins.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_path.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/scss/_path.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_rotated-flipped.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/scss/_rotated-flipped.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_screen-reader.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/scss/_screen-reader.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_stacked.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/scss/_stacked.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/scss/_variables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/font-awesome.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/scss/font-awesome.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/default/control/paymethods/edit.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/control/paymethods/edit.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/MainController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/new-style/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/new-style/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/main.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/main.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/servers_list.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/servers_list.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/top_servers.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/servers_top.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +147,8 @@
       <workItem from="1627474403211" duration="2923000" />
       <workItem from="1627533873222" duration="194000" />
       <workItem from="1627842832245" duration="1275000" />
-      <workItem from="1628486579758" duration="773000" />
+      <workItem from="1628486579758" duration="1654000" />
+      <workItem from="1628500358882" duration="1664000" />
     </task>
     <servers />
   </component>

@@ -77,7 +77,7 @@ class MainController extends BaseController{
     $getServers = $getServers->fetchAll();
 
     
-    $content = $this->view->renderPartial("top_servers", ['topServers' => $topServers, 'settings' => $settings]);
+    $content = $this->view->renderPartial("servers_top", ['topServers' => $topServers, 'settings' => $settings]);
     $content .= $this->view->renderPartial("servers_list", ['servers' => $getServers, 'ViewPagination' => $result['ViewPagination']]);
     
     $this->view->render("main", ['content' => $content, 'title' => $title]);

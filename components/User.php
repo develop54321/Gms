@@ -9,7 +9,6 @@ class User extends BaseController
 
     public function isAuth()
     {
-        session_start();
         if (isset($_SESSION['id_user']) && isset($_SESSION['hash'])) {
             $id_user = $_SESSION['id_user'];
             $hash = $_SESSION['hash'];

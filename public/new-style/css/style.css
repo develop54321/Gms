@@ -1,0 +1,17 @@
+.top-servers{
+    margin: 30px 0;
+}
+
+.top-servers .top-servers-wrapper{
+    box-shadow: 1px 1px 10px rgb(33 37 41 / 34%);
+    padding: 15px;
+}
+
+.top-servers .top-servers-wrapper .top-servers-info{
+    background: #212529;
+    width: 100%;
+}
+
+.top-servers .top-servers-wrapper .top-servers-info .image-map{
+    width: 100%;
+}

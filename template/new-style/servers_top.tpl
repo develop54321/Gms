@@ -1,7 +1,7 @@
 <section class="top-servers">
 
     <div class="container">
-        <div class="name-block">
+        <div class="name-block text-center">
             <i class="fa fa-star-o"></i> Топ сервера
         </div>
 

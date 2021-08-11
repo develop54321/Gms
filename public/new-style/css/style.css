@@ -12,6 +12,19 @@
     width: 100%;
 }
 
-.top-servers .top-servers-wrapper .top-servers-info .image-map{
+.top-servers .top-servers-wrapper .top-servers-info .image-map img{
     width: 100%;
+}
+
+.top-servers .name-block, .list-servers .name-block{
+    background: #212529;
+    color: #fff;
+    font-weight: bold;
+    border-bottom: 3px solid #050606;
+    padding: 0.4em;
+
+}
+
+.form-control-dark{
+    background-color: #212529 !important;
 }

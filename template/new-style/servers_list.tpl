@@ -1,11 +1,8 @@
 <section class="list-servers">
     <div class="container">
-
-
-        <div class="name-block">
+        <div class="name-block text-center">
             <i class="fa fa-star-o"></i> Список серверов
         </div>
-
 
         <div class="serversList">
             <table class="table">

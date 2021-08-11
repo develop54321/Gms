@@ -20,16 +20,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72d76c4a-9567-4788-aead-38343fdd9026" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/widgets/user/top_menu/TopMenu.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/widgets/user/top_menu/views/index.tpl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/fonts/FontAwesome.otf" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/FontAwesome.otf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/fonts/Helvetica-bold.otf" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/Helvetica-bold.otf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/fonts/Helvitica.otf" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/Helvitica.otf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/fonts/captcha.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/captcha.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/fonts/fontawesome-webfont.eot" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.eot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/fonts/fontawesome-webfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/fonts/fontawesome-webfont.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/fonts/fontawesome-webfont.woff" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/fonts/fontawesome-webfont.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.woff2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/new-style/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/new-style/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/control/main.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/control/main.tpl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/new-style/main.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/main.tpl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/new-style/servers_list.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/servers_list.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/top_servers.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/servers_top.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/servers_top.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/servers_top.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +84,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/js" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -91,14 +97,15 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/js" />
       <recent name="$PROJECT_DIR$/public/img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/public/css" />
       <recent name="$PROJECT_DIR$/public/js" />
       <recent name="$PROJECT_DIR$/public/default" />
       <recent name="$PROJECT_DIR$/public/img/gameicons" />
-      <recent name="C:\OpenServer\domains\gms2.loc\install" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -148,7 +155,8 @@
       <workItem from="1627533873222" duration="194000" />
       <workItem from="1627842832245" duration="1275000" />
       <workItem from="1628486579758" duration="1654000" />
-      <workItem from="1628500358882" duration="1664000" />
+      <workItem from="1628500358882" duration="1740000" />
+      <workItem from="1628662576908" duration="2568000" />
     </task>
     <servers />
   </component>

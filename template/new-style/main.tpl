@@ -77,7 +77,7 @@
                             <a href="#!" class="text-white">Банлист</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-white">Новости</a>
+                            <a href="/news" class="text-white">Новости</a>
                         </li>
                         <li>
                             <a href="#!" class="text-white">Помощь</a>

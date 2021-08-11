@@ -1,11 +1,11 @@
-<div class="content">
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Главная</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Платные услуги</li>
-  </ol>
-</nav>
-
+<section class="content mt-5">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Главная</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Платные услуги</li>
+      </ol>
+    </nav>
 
 
 <?php if($type == 'search'):?>
@@ -68,7 +68,9 @@
 
 
 <form method="post">
-
+  <div class="alert alert-dark" role="alert">
+    Для того чтобы заказать какую-либо платную услугу, надо сначала найти сервер.
+  </div>
 
 <input type="text" class="form-control form-control-sm" name="query" style="width: 200px;float: left;margin-right: 3px;" placeholder="Адрес сервера">
 <button type="submit" class="btn btn-primary btn-sm">Найти</button>
@@ -130,5 +132,5 @@ function updateForm(){
 }
 </script>
 <?php endif;?>
-
-</div>
+  </div>
+</section>

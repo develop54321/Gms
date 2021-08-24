@@ -3,64 +3,31 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </select>
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="72d76c4a-9567-4788-aead-38343fdd9026" name="Default Changelist" comment="">
+    <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/template/default/servers_top.tpl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/listing.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/listing.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/pay.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/pay.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changelist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/changelist.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config_dist.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/new-style/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/new-style/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/default/main.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/main.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/main.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/main.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/user/login.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/login.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/user/reset.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/reset.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/user/signup.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/signup.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
-    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution>
-      <executable path="composer" />
-    </execution>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/install.sh" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="PhpWorkspaceProjectConfiguration">
-    <include_path>
-      <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/xpaw/php-source-query-class" />
-    </include_path>
-  </component>
-  <component name="ProjectId" id="1hKIrJ6oEa7rKnjX0YZkJ0vIByN" />
+  <component name="ProjectId" id="1x9shzPtjhv4Y01iJgSACcIUBjw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -69,110 +36,28 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/js" />
-      <recent name="$PROJECT_DIR$/public/img" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public" />
-      <recent name="$PROJECT_DIR$/public/css" />
-      <recent name="$PROJECT_DIR$/public/js" />
-      <recent name="$PROJECT_DIR$/public/default" />
-      <recent name="$PROJECT_DIR$/public/img/gameicons" />
-    </key>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="72d76c4a-9567-4788-aead-38343fdd9026" name="Default Changelist" comment="" />
-      <created>1599753553180</created>
+      <changelist id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="" />
+      <created>1629778761994</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1599753553180</updated>
-      <workItem from="1599753560075" duration="893000" />
-      <workItem from="1599798722521" duration="2970000" />
-      <workItem from="1599824510574" duration="663000" />
-      <workItem from="1600174493512" duration="409000" />
-      <workItem from="1600231397309" duration="2301000" />
-      <workItem from="1603534858897" duration="247000" />
-      <workItem from="1604065491907" duration="19000" />
-      <workItem from="1604129310854" duration="79000" />
-      <workItem from="1604494481885" duration="5000" />
-      <workItem from="1604494702812" duration="10000" />
-      <workItem from="1604494736266" duration="417000" />
-      <workItem from="1604597760331" duration="38000" />
-      <workItem from="1604900313431" duration="71000" />
-      <workItem from="1604903682026" duration="428000" />
-      <workItem from="1604926154837" duration="25000" />
-      <workItem from="1607327778288" duration="896000" />
-      <workItem from="1615281769925" duration="3943000" />
-      <workItem from="1616058464034" duration="132000" />
-      <workItem from="1616124966636" duration="1235000" />
-      <workItem from="1616398549137" duration="360000" />
-      <workItem from="1625574009576" duration="2388000" />
-      <workItem from="1625632200124" duration="202000" />
-      <workItem from="1625639069962" duration="4894000" />
-      <workItem from="1625659594349" duration="3220000" />
-      <workItem from="1625744428447" duration="2047000" />
-      <workItem from="1625804251570" duration="77000" />
-      <workItem from="1626848042551" duration="1169000" />
-      <workItem from="1626849855537" duration="3229000" />
-      <workItem from="1626894197442" duration="2675000" />
-      <workItem from="1626938451789" duration="3195000" />
-      <workItem from="1627451537513" duration="2963000" />
-      <workItem from="1627455478753" duration="3031000" />
-      <workItem from="1627474403211" duration="2923000" />
-      <workItem from="1627533873222" duration="194000" />
-      <workItem from="1627842832245" duration="1275000" />
-      <workItem from="1628486579758" duration="1654000" />
-      <workItem from="1628500358882" duration="1740000" />
-      <workItem from="1628662576908" duration="3040000" />
-      <workItem from="1628666064694" duration="415000" />
+      <updated>1629778761994</updated>
+      <workItem from="1629778763313" duration="1719000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

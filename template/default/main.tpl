@@ -5,8 +5,8 @@
     <title><?=$title;?></title>
     <meta name="description" content="GMS - это веб движок запрограммированный на языке PHP, для отслеживание за статусами игровых серверов"/>
     <meta name="keywords" content="мониторинг серверов, игровой мониторинг, gms, gms v2.0"/>
-    <link rel="stylesheet" href="/public/css/style.css"/>
-    <link rel="stylesheet" href="/public/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/public/default/css/style.css"/>
+    <link rel="stylesheet" href="/public/default/css/bootstrap.css"/>
     <link rel="stylesheet" href="/public/css/font-awesome.min.css"/>
     <script src="/public/js/jquery.min.js"></script>
     <script src="/public/js/jquery.form.js"></script>

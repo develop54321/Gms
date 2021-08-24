@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "xpaw/php-source-query-class": "^2.1"
+        "xpaw/php-source-query-class": "^2.1",
+        "google/recaptcha": "^1.2"
     },
     "autoload": {
         "psr-4": {

@@ -11,4 +11,5 @@ return array(
     'core\\' => array($baseDir . '/core'),
     'controllers\\' => array($baseDir . '/controllers'),
     'components\\' => array($baseDir . '/components'),
+    'ReCaptcha\\' => array($vendorDir . '/google/recaptcha/src/ReCaptcha'),
 );

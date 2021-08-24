@@ -21,6 +21,10 @@ class ComposerStaticInit20bdcbb218edd010a7faa4ccf3fb0f53
             'controllers\\' => 12,
             'components\\' => 11,
         ),
+        'R' => 
+        array (
+            'ReCaptcha\\' => 10,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -43,6 +47,10 @@ class ComposerStaticInit20bdcbb218edd010a7faa4ccf3fb0f53
         'components\\' => 
         array (
             0 => __DIR__ . '/../..' . '/components',
+        ),
+        'ReCaptcha\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
         ),
     );
 

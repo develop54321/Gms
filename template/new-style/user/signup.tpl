@@ -41,6 +41,8 @@
                         <label for="email">Электронная почта</label>
                         <input type="email" name="email" class="form-control form-control-sm" id="email" required="">
                     </div>
+                    <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+
 
                     <div class="mb-3">
                         <input type="submit" class="btn btn-outline-success" value="Продолжить"/>
@@ -58,23 +60,32 @@
 
 
 
+<script src="https://www.google.com/recaptcha/api.js?render=<?php echo RECAPTCHA_PUBLIC_KEY;?>"></script>
+
 <script>
-    $(document).ready(function () {
-        $('#signupForm').ajaxForm({
-            dataType: "json",
-            success: function (data) {
-                switch (data.status) {
-                    case "error":
-                        ShowModal(data.error, 'answer', 'error');
-                        break;
 
-                    case "success":
-                        ShowModal(data.success, 'answer', 'success');
-                        break;
+    grecaptcha.ready(function () {
+        grecaptcha.execute('<?php echo RECAPTCHA_PUBLIC_KEY;?>', { action: 'contact' }).then(function (token) {
+            var recaptchaResponse = document.getElementById('recaptchaResponse');
+            recaptchaResponse.value = token;
+            $('#signupForm').ajaxForm({
+                dataType: "json",
+                success: function (data) {
+                    switch (data.status) {
+                        case "error":
+                            ShowModal(data.error, 'answer', 'error');
+                            break;
+
+                        case "success":
+                            ShowModal(data.success, 'answer', 'success');
+                            break;
 
 
-                }
-            },
+                    }
+                },
+            });
+
         });
     });
+
 </script>

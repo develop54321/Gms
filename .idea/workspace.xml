@@ -5,17 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/components/ReCaptcha.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/user/signup.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/signup.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Pagination.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/Pagination.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/new-style/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/new-style/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/server/add.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/server/add.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/servers_list.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/servers_list.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -65,7 +66,9 @@
       <option name="presentableId" value="Default" />
       <updated>1629778761994</updated>
       <workItem from="1629778763313" duration="1791000" />
-      <workItem from="1629791082293" duration="2598000" />
+      <workItem from="1629791082293" duration="2638000" />
+      <workItem from="1629893211588" duration="105000" />
+      <workItem from="1629893395565" duration="1976000" />
     </task>
     <servers />
   </component>

@@ -1,11 +1,15 @@
 <section class="list-servers">
     <div class="container">
+        <div class="mb-2">
+            <a href="/server/add" class="btn btn-outline-success"><i class="fa fa-star-o"></i> Добавить сервер бесплатно</a>
+        </div>
+
         <div class="name-block text-center">
             <i class="fa fa-star-o"></i> Список серверов
         </div>
 
         <div class="serversList">
-            <table class="table">
+            <table class="table table-striped table-hover">
                 <thead>
                 <tr>
                     <th scope="col">Игра</th>
@@ -64,9 +68,13 @@
             </table>
 
             <div class="pagination">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
                 <?php foreach($ViewPagination as $p):?>
                 <?php echo $p[0];?>
                 <?php endforeach;?>
+                    </ul>
+                </nav>
             </div>
 
         </div>

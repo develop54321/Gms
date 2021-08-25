@@ -1,4 +1,5 @@
-<div class="content">
+<section class="content mt-5">
+  <div class="container">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Главная</a></li>
@@ -76,6 +77,8 @@
 </div>
 
 </div>
+  </div>
+</section>
 
 
 
@@ -96,4 +99,3 @@ $('#addServer').ajaxForm({
    },                          
 }); 
 </script>
-</div>

@@ -29,7 +29,8 @@ class Pagination extends BaseController
         $backButton = $page;
         $i = 1;
         if ($page != '0') {
-            $ViewPagination[] = ["<a href='" . $getUrl . $symbol . "page=$backButton' class='back'>Назад</a>"];
+            $link = $getUrl.$symbol."page=".$backButton;
+            $ViewPagination[] = ['<li class="page-item"><a class="page-link" href="'.$link.'" class="back">Назад</a>'];
         }
         $num_pages_for = $num_pages;
 
@@ -40,24 +41,25 @@ class Pagination extends BaseController
 
         for ($i; $i <= $num_pages_for; $i++) {
             if ($i - 1 == $page) {
-                $ViewPagination[] = ['<span class="selected">' . $i . '</span>'];
+                $ViewPagination[] = ['<li class="page-item active" aria-current="page"><span class="page-link">' . $i . '</span></li>'];
             } else {
-                $ViewPagination[] = ['<a href="' . $getUrl . $symbol . 'page=' . $i . '">' . $i . '</a>'];
+                $ViewPagination[] = ['<li class="page-item"><a class="page-link" href="' . $getUrl . $symbol . 'page=' . $i . '">' . $i . '</a></li>'];
             }
         }
 
         if ($num_pages > '5') {
-            $ViewPagination[] = ['<a href="#">...</a>'];
-            $ViewPagination[] = ['<a href="' . $getUrl . $symbol . 'page=' . $num_pages . '">' . $num_pages . '</a>'];
+            $ViewPagination[] = ['<li class="page-item"><a class="page-link" href="#">...</a></li>'];
+            $ViewPagination[] = ['<li class="page-item"><a class="page-link" href="' . $getUrl . $symbol . 'page=' . $num_pages . '">' . $num_pages . '</a></li>'];
         }
 
         $forwardButton = $page + 2;
 
         if ($forwardButton < $num_pages + 1) {
-            $ViewPagination[] = ["<a href='" . $getUrl . $symbol . "page=$forwardButton' class='next'>Вперед</a>"];
+            $link = $getUrl.$symbol."page=".$forwardButton;
+            $ViewPagination[] = ['<li class="page-item"><a class="page-link" href="'.$link.'" class="next">Вперед</a>'];
         }
 
-        if ($page == 0) $ViewPagination = [];
+
 
         return ['ViewPagination' => $ViewPagination, 'start' => $start];
 

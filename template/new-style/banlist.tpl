@@ -1,5 +1,7 @@
-<div class="content">
-<nav aria-label="breadcrumb">
+<section class="content mt-5">
+  <div class="container">
+
+  <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Главная</a></li>
     <li class="breadcrumb-item active" aria-current="page">Банлист</li>
@@ -13,8 +15,10 @@
 При попадание сервера в бан, все услуги на нем аннулируются и средства не возвращаются.
 </p>
 </div>
-
-<table class="table">
+    <div class="heading-table">
+      <i class="fa fa-star-o"></i> Банлист
+    </div>
+    <table class="table table-striped table-hover">
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
@@ -59,3 +63,4 @@
 
 
 </div>
+</section>

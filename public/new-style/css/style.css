@@ -72,3 +72,58 @@ body{
 footer{
     background-color: #3e4551;
 }
+
+.heading-table{
+    background: #212529;
+    color: #fff;
+    font-weight: bold;
+    border-bottom: 3px solid #050606;
+    padding: 0.4em;
+}
+
+
+.my-servers-list .server-info{
+    border:1px solid #6c757d;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    background: #e9ecef;
+    position: relative;
+}
+
+
+.my-servers-list .server-info .img img  {
+    width: 160px;
+    height: 110px;
+    margin: 10px;
+    border: 3px solid #bd8c00;
+    border-radius: 3px;
+}
+
+
+.my-servers-list .server-info .img{
+    width: 20%;
+    float: left;
+}
+
+.my-servers-list .server-info .info-2{
+    float: left;
+    width: 38%;
+    margin-top: 8px;
+}
+
+.my-servers-list .server-info .info ul li, .info-2 ul li{
+    padding-bottom: 3px;
+}
+
+.my-servers-list .server-info .info{
+    margin-top: 8px;
+    width: 40%;
+    float: left;
+}
+
+.my-servers-list .server-info .btn-remove-server{
+    float: right;
+    margin: 3px;
+    color: #f14040;
+}

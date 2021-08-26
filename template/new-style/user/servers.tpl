@@ -1,4 +1,5 @@
-<div class="content">
+<section class="content mt-5">
+  <div class="container">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Главная</a></li>
@@ -12,9 +13,17 @@
 </p>
 </div>
 
-<?php $url = "servers"; include("UserMenu.tpl");?>
 
 
+    <div class="row">
+
+      <div class="col-md-2">
+        <?php $url = "servers"; include("UserMenu.tpl");?>
+
+      </div>
+
+
+      <div class="col-md-10">
 
 
 <div class="my-servers-list">
@@ -85,9 +94,11 @@ $img_map = '/public/img/no_map.png';
 <?php endforeach;?>
 </div>
 
-
+      </div>
+    </div>
 
 </div>
+</section>
 <script>
 function remove(id){
     if(confirm("Вы действительно хотите удалить данный сервер?")){

@@ -1,4 +1,5 @@
-<div class="content">
+<section class="content mt-5">
+    <div class="container">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Главная</a></li>
@@ -10,37 +11,27 @@
 <?php $url = "pay"; include("UserMenu.tpl");?>
 
 <?php if($step == '1'):?>
-<form action="#" method="post">
+<div class="row">
+    <div class="col-md-4">
+        <form action="#" method="post">
+            <div class="mb-3">
+                <label>Выберите способ оплаты</label>
+                <select class="form-control form-control-sm" name="typePayment">
+                    <?php foreach($PayMethods as $pm):?>
+                    <option value="<?php echo $pm['id'];?>"><?php echo $pm['name'];?></option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <input type="number" name="amout" class="form-control form-control-sm" required="">
+            </div>
+            <button type="submit" class="btn btn-outline-primary">Далее</button>
+        </form>
 
-<table class="table">
-<tr>
-<td colspan="2">    
-<div class="form-group">
-<label>Выберите способ оплаты</label>
-<select class="form-control form-control-sm" name="typePayment">
-<?php foreach($PayMethods as $pm):?>
-<option value="<?php echo $pm['id'];?>"><?php echo $pm['name'];?></option>
-<?php endforeach;?>
-</select>
+    </div>
 </div>
-</td>
 
 
-<td>
-<div class="form-group">
-<label>Введите сумму пополнения</label>
-<input type="number" name="amout" class="form-control form-control-sm" required="">
- </div>      
-</td>
-</tr>
-
-<tr>
-<td style="border: none;"><input type="submit" class="btn btn-primary btn-sm" value="Далее"/></td>
-</tr>
-</table>
-
-
-</form>
 <?php elseif($step == '2'):?>
 <?php
 $desc = "Пополнение счета  #".$user_profile['id']."";
@@ -60,3 +51,4 @@ $price = $amout;
 <?php endif;?>
 
 </div>
+</section>

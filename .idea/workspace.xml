@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/widgets/user/status/Status.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/widgets/user/status/views/index.tpl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/no_map.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/no_map.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/default/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/new-style/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/new-style/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/servers_top.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/servers_top.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/banlist.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/banlist.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/user/UserMenu.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/UserMenu.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/user/index.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/index.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/user/pay.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/pay.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/user/paylogs.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/paylogs.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/user/servers.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/servers.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +54,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/img" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/widgets/user" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -59,6 +65,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/widgets/user" />
       <recent name="$PROJECT_DIR$/public/img" />
     </key>
   </component>
@@ -74,7 +81,7 @@
       <workItem from="1629791082293" duration="2638000" />
       <workItem from="1629893211588" duration="105000" />
       <workItem from="1629893395565" duration="2644000" />
-      <workItem from="1629957873107" duration="1720000" />
+      <workItem from="1629957873107" duration="3519000" />
     </task>
     <servers />
   </component>

@@ -85,7 +85,7 @@ class ServerController extends BaseController{
     
     if($settings['global_settings']['auto_add_server'] == '1'){
          $moderation = 1;
-         $success_text = "Ваш сервер успешно добавлен";
+         $success_text = "Ваш сервер успешно добавлен, информацию об сервере появиться в течение 5 минут";
     }else{
         $moderation = 0;
         $success_text = "Ваш сервер успешно добавлен, после проверки администратором она появиться в мониторинге";

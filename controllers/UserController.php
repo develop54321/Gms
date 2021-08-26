@@ -139,7 +139,7 @@ class UserController extends BaseController
                 $update->bindParam(':id', $payId);
                 $update->execute();
 
-                $qiwiLink = $qiwi->createBill($billIdGenerate, $amout);
+                $qiwiLink = $qiwi->createBill($billIdGenerate, $amout, $user_profile['email']);
 
                 $InfoPayment = array_merge($InfoPayment, array('qiwiLink' => $qiwiLink['payUrl']));
 

@@ -94,6 +94,9 @@ class CronController extends BaseController
         } else parent::ShowError(404, "Страница не найдена");
     }
 
+    /**
+     * @throws Exception
+     */
     public function actionIndex()
     {
         $mem_start = memory_get_usage();
@@ -108,6 +111,7 @@ class CronController extends BaseController
             $Query = new SourceQuery();
             $Info = array();
             foreach ($getServers as $row) {
+                if (in_array($row['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust'])){
                 try {
                     $Query->Connect($row['ip'], $row['port'], 2, SourceQuery::GOLDSOURCE);
                     $Info = $Query->GetInfo();
@@ -131,6 +135,47 @@ class CronController extends BaseController
                     $update->execute();
                 }
                 $Query->Disconnect();
+            }elseif (in_array($row['game'], ['samp', 'mta'])){
+                    try {
+
+                        $GameQ = new \GameQ\GameQ();
+                        $GameQ->addServer([
+                            'type' => $row['game'],
+                            'host' => $row['ip'].":".$row['port'],
+                         //   'host' => "185.169.134.164:7777",
+                        ]);
+                        $results = $GameQ->process();
+
+                        $Info = array_shift($results);
+                        $hostname = $Info['gq_hostname'];
+
+                        $status = 1;
+
+                        $gameMode = $Info['gametype'];
+                        $players = $Info['gq_numplayers'];
+                        $maxPlayers = $Info['gq_maxplayers'];
+                        $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players WHERE id = :id";
+                        $update = $this->db->prepare($sql);
+                        $update->bindParam(':status', $status);
+                        $update->bindParam(':hostname', $hostname);
+                        $update->bindParam(':map', $gameMode);
+                        $update->bindParam(':players', $players);
+                        $update->bindParam(':max_players', $maxPlayers);
+                        $update->bindParam(':id', $row['id']);
+                        $update->execute();
+                    } catch (Exception $e) {
+                        print_r($e);
+                        die();
+                        $Exception = $e;
+                        $status = 0;
+                        $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
+                        $update = $this->db->prepare($sql);
+                        $update->bindParam(':status', $status);
+                        $update->bindParam(':id', $row['id']);
+                        $update->execute();
+                    }
+
+                }
             }
 
         } else parent::ShowError(404, "Страница не найдена");
@@ -230,6 +275,9 @@ class CronController extends BaseController
                 }
 
             }
+            echo "invoices have been processed successfully";
+        }else{
+            parent::ShowError(404, "Страница не найдена!");
         }
     }
 

@@ -5,13 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/public/img/gameicons/mta.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/gameicons/samp.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/paymethods/QiwiP2p.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/paymethods/QiwiP2p.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changelist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/changelist.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/CronController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CronController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ServerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ServerController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/SettingsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/SettingsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/control/settings.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/control/settings.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/user/paylogs/status/views/index.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/user/paylogs/status/views/index.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/servers_list.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/servers_list.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/widgets/servers/status/Status.php" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/server/game/Status.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/widgets/servers/status/views/index.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/server/game/views/index.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +53,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
       <path value="$PROJECT_DIR$/vendor/ramsey/collection" />
       <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/vendor/austinb/gameq" />
     </include_path>
   </component>
   <component name="ProjectId" id="1x9shzPtjhv4Y01iJgSACcIUBjw" />
@@ -56,7 +66,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/widgets/user/paylogs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -67,9 +77,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/public/img/gameicons" />
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/widgets/user/paylogs" />
       <recent name="$PROJECT_DIR$/widgets/user" />
-      <recent name="$PROJECT_DIR$/public/img" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/img/gameicons" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -85,7 +100,9 @@
       <workItem from="1629893211588" duration="105000" />
       <workItem from="1629893395565" duration="2644000" />
       <workItem from="1629957873107" duration="3582000" />
-      <workItem from="1629962298241" duration="6333000" />
+      <workItem from="1629962298241" duration="7843000" />
+      <workItem from="1629978363325" duration="2679000" />
+      <workItem from="1629981201204" duration="935000" />
     </task>
     <servers />
   </component>

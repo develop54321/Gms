@@ -2,3 +2,4 @@
 ./.idea
 config.php
 /vendor/
+gms.sql

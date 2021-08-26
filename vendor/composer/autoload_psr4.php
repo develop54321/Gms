@@ -17,5 +17,6 @@ return array(
     'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
     'Ramsey\\Collection\\' => array($vendorDir . '/ramsey/collection/src'),
     'Qiwi\\Api\\' => array($vendorDir . '/qiwi/bill-payments-php-sdk/src'),
+    'GameQ\\' => array($vendorDir . '/austinb/gameq/src/GameQ'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
 );

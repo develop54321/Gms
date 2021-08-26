@@ -42,6 +42,10 @@ class ComposerStaticInit20bdcbb218edd010a7faa4ccf3fb0f53
         array (
             'Qiwi\\Api\\' => 9,
         ),
+        'G' => 
+        array (
+            'GameQ\\' => 6,
+        ),
         'B' => 
         array (
             'Brick\\Math\\' => 11,
@@ -92,6 +96,10 @@ class ComposerStaticInit20bdcbb218edd010a7faa4ccf3fb0f53
         'Qiwi\\Api\\' => 
         array (
             0 => __DIR__ . '/..' . '/qiwi/bill-payments-php-sdk/src',
+        ),
+        'GameQ\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/austinb/gameq/src/GameQ',
         ),
         'Brick\\Math\\' => 
         array (

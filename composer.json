@@ -12,7 +12,8 @@
         "xpaw/php-source-query-class": "^2.1",
         "google/recaptcha": "^1.2",
         "qiwi/bill-payments-php-sdk": "^0.2.2",
-        "ramsey/uuid": "^4.2"
+        "ramsey/uuid": "^4.2",
+        "austinb/gameq": "~3.0"
     },
     "autoload": {
         "psr-4": {

@@ -8,7 +8,14 @@ body{
 
 .top-servers .top-servers-wrapper{
     box-shadow: 1px 1px 10px rgb(33 37 41 / 34%);
-    padding: 15px;
+    padding: 7px;
+}
+
+.top-servers .top-servers-wrapper .top-servers-info .hostname a{
+    padding: 3px 6px;
+    color: #ffc107;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .top-servers .top-servers-wrapper .top-servers-info{
@@ -16,8 +23,37 @@ body{
     width: 100%;
 }
 
+.top-servers .top-servers-wrapper .top-servers-info .image-map{
+    position: relative;
+}
+
+.top-servers .top-servers-wrapper .top-servers-info .info .players{
+    color: #ffc107;
+    padding: 3px 6px;
+    background: #070809;
+    font-weight: bold;
+}
+
+.top-servers .top-servers-wrapper .top-servers-info .info .address{
+    color: #ffc107;
+    padding: 3px 6px;
+    font-weight: bold;
+    border-top: 1px solid #202429;
+    font-style: italic;
+}
+
+
 .top-servers .top-servers-wrapper .top-servers-info .image-map img{
     width: 100%;
+}
+
+.top-servers .top-servers-wrapper .top-servers-info .image-map .name-map{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #ffc107;
+    padding: 2px 4px;
+    font-size: 12px;
 }
 
 .top-servers .name-block, .list-servers .name-block{

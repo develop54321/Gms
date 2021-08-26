@@ -20,7 +20,9 @@
                     <a href="<?php if($row['id'] != null):?>/server/info?id=<?php echo $row['id'];?><?php else:?>/pay<?php endif;?>">
                         <img src="<?php echo $row['img_map'];?>"/>
                     </a>
+                    <?php if ($row['map'] !== null):?>
                     <div class="name-map"><?php echo $row['map'];?></div>
+                    <?php endif;?>
                 </div>
 
                 <div class="info">

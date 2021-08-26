@@ -12,4 +12,5 @@ return array(
     'controllers\\' => array($baseDir . '/controllers'),
     'components\\' => array($baseDir . '/components'),
     'ReCaptcha\\' => array($vendorDir . '/google/recaptcha/src/ReCaptcha'),
+    'Qiwi\\Api\\' => array($vendorDir . '/qiwi/bill-payments-php-sdk/src'),
 );

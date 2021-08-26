@@ -129,7 +129,7 @@ class PaymethodsController extends BaseController{
     $content = json_encode(['login' => $_POST['login'], 'password1' => $_POST['password1'], 'password2' => $_POST['password2']]);    
     }elseif($getInfoPaymethods['typeCode'] == 'freekassa'){
     $content = json_encode(['fk_id' => $_POST['fk_id'], 'fk_key1' => $_POST['fk_key1'], 'fk_key2' => $_POST['fk_key2']]);    
-    }elseif($getInfoPaymethods['typeCode'] == 'qiwi_2p2'){
+    }elseif($getInfoPaymethods['typeCode'] == 'qiwi_p2p'){
     $content = json_encode(['public_key' => $_POST['public_key'], 'secret_key' => $_POST['secret_key']]);
     }
 

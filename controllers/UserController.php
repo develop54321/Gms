@@ -4,6 +4,7 @@ namespace controllers;
 
 use components\Mail;
 use components\Pagination;
+use components\paymethods\QiwiP2p;
 use components\ReCaptcha;
 use components\System;
 use components\User;
@@ -126,6 +127,14 @@ class UserController extends BaseController
 
             $this->db->exec("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods) VALUES('$content','" . time() . "', 'expects', " . $user_profile['id'] . ", '" . $getInfoPayMethods['typeCode'] . "')");
             $payId = $this->db->lastInsertId();
+
+            if ($getInfoPayMethods['typeCode'] == 'qiwi_p2p'){
+                $qiwi = new QiwiP2p($InfoPayment['secret_key'], $InfoPayment['public_key']);
+                $qiwiLink = $qiwi->createBill($payId, $amout);
+
+                $InfoPayment = array_merge($InfoPayment, array('qiwiLink' => $qiwiLink['payUrl']));
+
+            }
 
             $content = $this->view->renderPartial("user/pay", ['step' => "2", 'amout' => $amout, 'payId' => $payId, 'user_profile' => $user_profile, 'InfoPayment' => $InfoPayment]);
 

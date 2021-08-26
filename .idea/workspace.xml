@@ -5,10 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/components/paymethods/QiwiP2p.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template/new-style/pay/qiwi_p2p.tpl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/user/pay.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/pay.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/user/paylogs.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/paylogs.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/user/servers.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/servers.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changelist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/changelist.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/PaymethodsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/PaymethodsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/control/paymethods/edit.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/control/paymethods/edit.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/control/paymethods/index.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/control/paymethods/index.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +44,7 @@
       <path value="$PROJECT_DIR$/vendor/google/recaptcha" />
       <path value="$PROJECT_DIR$/vendor/xpaw/php-source-query-class" />
       <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/qiwi/bill-payments-php-sdk" />
     </include_path>
   </component>
   <component name="ProjectId" id="1x9shzPtjhv4Y01iJgSACcIUBjw" />
@@ -75,7 +85,7 @@
       <workItem from="1629893211588" duration="105000" />
       <workItem from="1629893395565" duration="2644000" />
       <workItem from="1629957873107" duration="3582000" />
-      <workItem from="1629962298241" duration="743000" />
+      <workItem from="1629962298241" duration="2436000" />
     </task>
     <servers />
   </component>

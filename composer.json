@@ -10,7 +10,8 @@
     ],
     "require": {
         "xpaw/php-source-query-class": "^2.1",
-        "google/recaptcha": "^1.2"
+        "google/recaptcha": "^1.2",
+        "qiwi/bill-payments-php-sdk": "^0.2.2"
     },
     "autoload": {
         "psr-4": {

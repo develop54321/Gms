@@ -93,12 +93,12 @@
     <?php elseif($data['typeCode'] == 'qiwi_p2p'):?>
     <div class="form-group">
         <label for="status">public_key</label>
-        <input type="text" class="form-control" name="public_key" value="<?=$params['public_key'];?>">
+        <input type="text" class="form-control" name="public_key" value="<?php echo $params['public_key'];?>">
     </div>
 
     <div class="form-group">
         <label for="fk_key1">secret_key</label>
-        <input type="text" class="form-control" id="secret_key" name="secret_key" value="<?=$params['secret_key'];?>">
+        <input type="text" class="form-control" id="secret_key" name="secret_key" value="<?php echo $params['secret_key'];?>">
     </div>
 
 
@@ -109,7 +109,7 @@
 
     <?php endif;?>
 
-<?php endif;?>
+
 </div>
 
 </div>

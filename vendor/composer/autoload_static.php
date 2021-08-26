@@ -25,6 +25,10 @@ class ComposerStaticInit20bdcbb218edd010a7faa4ccf3fb0f53
         array (
             'ReCaptcha\\' => 10,
         ),
+        'Q' => 
+        array (
+            'Qiwi\\Api\\' => 9,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -51,6 +55,10 @@ class ComposerStaticInit20bdcbb218edd010a7faa4ccf3fb0f53
         'ReCaptcha\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
+        ),
+        'Qiwi\\Api\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/qiwi/bill-payments-php-sdk/src',
         ),
     );
 

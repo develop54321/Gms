@@ -29,10 +29,10 @@
 <tr id="services<?=$row['id'];?>">
 <td><?=$row['id'];?></td>
 <td><?=$row['name'];?></td>
-<td><? if($row['status'] == '1'):?>Подключена<? else:?>Отключена<?php endif;?></td>
+<td><?php if($row['status'] == '1'):?>Подключена<?php else:?>Отключена<?php endif;?></td>
 <td style="text-align: right;">
 <a href="/control/paymethods/edit?id=<?php echo $row['id'];?>" class="text-muted" title="Изменить платежную систему"><i class="fa fa-pencil"></i></a>
-<a href="#" onclick="remove(<?=$row['id'];?>); return false;" class="text-muted" title="Удалить платежную систему"><i class="fa fa-trash"></i></a>
+<a href="#" onclick="remove(<?php echo $row['id'];?>); return false;" class="text-muted" title="Удалить платежную систему"><i class="fa fa-trash"></i></a>
 
 </td>
 </tr> 

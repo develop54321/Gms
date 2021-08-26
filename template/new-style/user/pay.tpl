@@ -7,8 +7,17 @@
   </ol>
 </nav>
 
+        <div class="row">
 
-<?php $url = "pay"; include("UserMenu.tpl");?>
+            <div class="col-md-2">
+                <?php $url = "pay"; include("UserMenu.tpl");?>
+
+            </div>
+
+            <div class="col-md-10">
+
+
+
 
 <?php if($step == '1'):?>
 <div class="row">
@@ -49,6 +58,7 @@ $price = $amout;
 <?php include(TMPL_DIR."/pay/".$InfoPayment['typeCode'].".tpl");?>
 
 <?php endif;?>
-
+            </div>
+        </div>
 </div>
 </section>

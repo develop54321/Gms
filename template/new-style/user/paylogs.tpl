@@ -1,5 +1,6 @@
 <section class="content mt-5">
   <div class="container">
+  <div class="container">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Главная</a></li>
@@ -8,12 +9,17 @@
 </nav>
 
 
-<?php $url = "paylogs"; include("UserMenu.tpl");?>
 
 
+    <div class="row">
+
+      <div class="col-md-2">
+        <?php $url = "paylogs"; include("UserMenu.tpl");?>
+
+      </div>
 
 
-
+      <div class="col-md-10">
 <table class="table table table-hover m-0">
   <thead>
     <tr>
@@ -53,7 +59,7 @@
     
   </tbody>
 </table>
-
+      </div>
 
 
 
@@ -63,6 +69,5 @@
 <?php endforeach;?>
 </div>
 
-
-</div>
+  </div>
 </section>

@@ -15,7 +15,6 @@
                     <th scope="col">Игра</th>
                     <th scope="col">Название</th>
                     <th scope="col">Адрес</th>
-                    <th scope="col"></th>
                     <th scope="col">Карта</th>
                     <th scope="col">Игроки</th>
                     <th scope="col" style="text-align: center;">Рейтинг</th>
@@ -45,8 +44,6 @@
                        href="/server/info?id=<?php echo $row['id'];?>"><?php echo $row['hostname'];?></a></td>
                 <td><img src="<?php echo $imgCountry;?>" alt="<?php echo $row['hostname'];?>"/> <?php echo $row['ip'];?>
                     :<?php echo $row['port'];?></td>
-                <td><a href="steam://connect/<?php echo $row['ip'];?>:<?php echo $row['port'];?>">
-                        <i class="fa fa-gamepad text-dark" title="<?=$lang['connect_to_server'];?>"></i></a></td>
                 <td><?php echo $row['map'];?></td>
                 <td><?php echo $row['players'];?>/<?php echo $row['max_players'];?></td>
                 <td style="text-align: center;">

@@ -127,3 +127,12 @@ footer{
     margin: 3px;
     color: #f14040;
 }
+
+.breadcrumb{
+    padding: 10px !important;
+    background: whitesmoke;
+}
+
+.breadcrumb li a{
+    color: #ffc107;
+}

@@ -5,17 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/components/paymethods/QiwiP2p.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/template/new-style/pay/qiwi_p2p.tpl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/widgets/user/paylogs/status/Status.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/widgets/user/paylogs/status/views/index.tpl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/changelist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/changelist.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/paymethods/QiwiP2p.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/paymethods/QiwiP2p.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/CronController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CronController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/PaymethodsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/PaymethodsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/new-style/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/new-style/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/new-style/control/paymethods/edit.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/control/paymethods/edit.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/control/paymethods/index.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/control/paymethods/index.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/user/paylogs.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/paylogs.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
     </list>
@@ -45,6 +49,11 @@
       <path value="$PROJECT_DIR$/vendor/xpaw/php-source-query-class" />
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/qiwi/bill-payments-php-sdk" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/brick/math" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/collection" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
     </include_path>
   </component>
   <component name="ProjectId" id="1x9shzPtjhv4Y01iJgSACcIUBjw" />
@@ -57,7 +66,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/widgets/user/paylogs" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -68,6 +77,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/widgets/user/paylogs" />
       <recent name="$PROJECT_DIR$/widgets/user" />
       <recent name="$PROJECT_DIR$/public/img" />
     </key>
@@ -85,7 +95,7 @@
       <workItem from="1629893211588" duration="105000" />
       <workItem from="1629893395565" duration="2644000" />
       <workItem from="1629957873107" duration="3582000" />
-      <workItem from="1629962298241" duration="2436000" />
+      <workItem from="1629962298241" duration="5683000" />
     </task>
     <servers />
   </component>

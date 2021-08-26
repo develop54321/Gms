@@ -10,6 +10,7 @@ use components\System;
 use components\User;
 use core\BaseController;
 use PDO;
+use Ramsey\Uuid\Uuid;
 
 class UserController extends BaseController
 {
@@ -130,7 +131,15 @@ class UserController extends BaseController
 
             if ($getInfoPayMethods['typeCode'] == 'qiwi_p2p'){
                 $qiwi = new QiwiP2p($InfoPayment['secret_key'], $InfoPayment['public_key']);
-                $qiwiLink = $qiwi->createBill($payId, $amout);
+
+                $billIdGenerate = Uuid::uuid4()->toString();
+                $sql = "UPDATE ga_pay_logs SET bill_id = :bill_id WHERE id = :id";
+                $update = $this->db->prepare($sql);
+                $update->bindParam(':bill_id', $billIdGenerate);
+                $update->bindParam(':id', $payId);
+                $update->execute();
+
+                $qiwiLink = $qiwi->createBill($billIdGenerate, $amout);
 
                 $InfoPayment = array_merge($InfoPayment, array('qiwiLink' => $qiwiLink['payUrl']));
 

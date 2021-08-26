@@ -2,6 +2,8 @@
 
 namespace controllers;
 
+use components\paymethods\QiwiP2p;
+use components\User;
 use core\BaseController;
 use components\System;
 use Exception;
@@ -162,6 +164,45 @@ class CronController extends BaseController
         $command = 'mysqldump -h' . DB_HOST . ' -u' . DB_USER . ' -p' . DB_PASSWORD . ' ' . DB_NAME . ' > ' . $fullFileName;
         shell_exec($command);
         return $fullFileName;
+    }
+
+
+    /**
+     * Обработка платежей по кассе киви
+     * @throws \Qiwi\Api\BillPaymentsException|\ErrorException
+     */
+    public function actionQiwi(){
+        $getSettings = $this->db->query('SELECT content FROM ga_settings');
+        $settings = $getSettings->fetch();
+        $settings = json_decode($settings['content'], true);
+
+        if (!isset($_GET['key'])) parent::ShowError(404, "Страница не найдена!");
+        if ($settings['global_settings']['cron_key'] == $_GET['key']) {
+
+            $user = new User();
+            $payMethod = "qiwi_p2p";
+            $getInfoPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE typeCode = :typeCode');
+            $getInfoPayMethods->execute(array(':typeCode' => $payMethod));
+            $getInfoPayMethods = $getInfoPayMethods->fetch();
+            $InfoPayment = json_decode($getInfoPayMethods['content'], true);
+
+            $getPayLogs = $this->db->query('SELECT * FROM ga_pay_logs WHERE pay_methods = "'.$payMethod.'" and status = "expects"');
+            $getPayLogs = $getPayLogs->fetchAll();
+            foreach ($getPayLogs as $row) {
+                $content = json_decode($row['content'], true);
+                $qiwi = new QiwiP2p($InfoPayment['secret_key'], $InfoPayment['public_key']);
+                $result = $qiwi->getBillInfo($row['bill_id']);
+                if ($result['status']['value'] == 'PAID'){
+                    $user->refill(['inv_id' => $row['id'], 'amout' => $content['amout']]);
+                }
+
+
+
+            }
+            echo "invoices have been processed successfully";
+        }else{
+            parent::ShowError(404, "Страница не найдена!");
+        }
     }
 
 }

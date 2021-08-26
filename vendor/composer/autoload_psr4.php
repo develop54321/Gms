@@ -11,6 +11,11 @@ return array(
     'core\\' => array($baseDir . '/core'),
     'controllers\\' => array($baseDir . '/controllers'),
     'components\\' => array($baseDir . '/components'),
+    'Symfony\\Polyfill\\Php81\\' => array($vendorDir . '/symfony/polyfill-php81'),
+    'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'ReCaptcha\\' => array($vendorDir . '/google/recaptcha/src/ReCaptcha'),
+    'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
+    'Ramsey\\Collection\\' => array($vendorDir . '/ramsey/collection/src'),
     'Qiwi\\Api\\' => array($vendorDir . '/qiwi/bill-payments-php-sdk/src'),
+    'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
 );

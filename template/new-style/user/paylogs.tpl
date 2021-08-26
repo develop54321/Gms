@@ -1,6 +1,5 @@
 <section class="content mt-5">
   <div class="container">
-  <div class="container">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Главная</a></li>
@@ -43,11 +42,7 @@
 	  <td><?php if($row['pay_methods'] == 'bill'):?>Личный счёт<?php elseif($row['pay_methods'] == 'freekassa'):?>Free-Kassa<?php elseif($row['pay_methods'] == 'robokassa'):?>Robokassa<?php elseif($row['pay_methods'] == 'unitpay'):?>UnitPay<?php endif;?></td>
       <td><?php echo $row['price'];?>р.</td>
       <td>
-      <?php if($row['status'] == 'expects'):?>
-      <label class="badge badge-warning">Ожидает платежа</label>
-      <?php elseif($row['status'] == 'paid'):?>
-      <label class="badge badge-success">Оплаченный</label>
-      <?php endif;?>
+        <?php widgets\user\paylogs\status\Status::run($row['status']);?>
       </td>
     
       
@@ -59,15 +54,17 @@
     
   </tbody>
 </table>
+        <div class="pagination mt-2">
+          <?php foreach($ViewPagination as $p):?>
+          <?php echo $p[0];?>
+          <?php endforeach;?>
+        </div>
       </div>
 
 
 
-<div class="pagination">
-<?php foreach($ViewPagination as $p):?>
-<?php echo $p[0];?>
-<?php endforeach;?>
-</div>
 
+
+  </div>
   </div>
 </section>

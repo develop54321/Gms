@@ -104,7 +104,8 @@
 
 
     <code>
-        Обработчик: <?php echo $url;?>/result?type=qiwi_p2p
+        Крон задача: каждую минуту <br>
+        Обработчик: <?php echo $url;?>/cron/qiwi?key=123
     </code>
 
     <?php endif;?>

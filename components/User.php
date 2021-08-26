@@ -3,6 +3,7 @@
 namespace components;
 
 use core\BaseController;
+use PDO;
 
 class User extends BaseController
 {

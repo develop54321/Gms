@@ -24,16 +24,15 @@ class SettingsController extends BaseController{
     $content = [];
     $global_settings = $_POST['global_settings'];
     $content['global_settings']['site_name'] = $global_settings['site_name'];
-    $content['global_settings']['auto_add_server'] = $global_settings['auto_add_server'];   
+    $content['global_settings']['expired_time_payment'] = $global_settings['expired_time_payment'];
+    $content['global_settings']['auto_add_server'] = $global_settings['auto_add_server'];
     $content['global_settings']['count_servers_main'] = $global_settings['count_servers_main'];
-	$content['global_settings']['count_servers_befirst'] = $global_settings['count_servers_befirst'];
 	$content['global_settings']['count_servers_top'] = $global_settings['count_servers_top'];
     $content['global_settings']['count_servers_vip'] = $global_settings['count_servers_vip'];   
     $content['global_settings']['count_servers_boost'] = $global_settings['count_servers_boost'];
 	$content['global_settings']['count_servers_color'] = $global_settings['count_servers_color'];
 	$content['global_settings']['count_servers_gamemenu'] = $global_settings['count_servers_gamemenu']; 
 	# on/off services
-	$content['global_settings']['befirst_on'] = $global_settings['befirst_on'];		// Befirst
 	$content['global_settings']['top_on'] = $global_settings['top_on'];		// Top
 	$content['global_settings']['boost_on'] = $global_settings['boost_on'];		// Boost
 	$content['global_settings']['vip_on'] = $global_settings['vip_on'];		// Vip

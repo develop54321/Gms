@@ -190,7 +190,7 @@ class CronController extends BaseController
             $getPayLogs = $getPayLogs->fetchAll();
             foreach ($getPayLogs as $row) {
                 $content = json_decode($row['content'], true);
-                $qiwi = new QiwiP2p($InfoPayment['secret_key'], $InfoPayment['public_key']);
+                $qiwi = new QiwiP2p($InfoPayment['secret_key']);
                 $result = $qiwi->getBillInfo($row['bill_id']);
                 if ($result['status']['value'] == 'PAID'){
                     $user->refill(['inv_id' => $row['id'], 'amout' => $content['amout']]);
@@ -202,6 +202,34 @@ class CronController extends BaseController
             echo "invoices have been processed successfully";
         }else{
             parent::ShowError(404, "Страница не найдена!");
+        }
+    }
+
+    /**
+     * Проверка счетов на актуальность
+     */
+    public function actionPayments()
+    {
+        $getSettings = $this->db->query('SELECT content FROM ga_settings');
+        $settings = $getSettings->fetch();
+        $settings = json_decode($settings['content'], true);
+
+        if (!isset($_GET['key'])) parent::ShowError(404, "Страница не найдена!");
+        if ($settings['global_settings']['cron_key'] == $_GET['key']) {
+            $getPayLogs = $this->db->query('SELECT * FROM ga_pay_logs WHERE pay_methods != "bill" and status = "expects"');
+            $getPayLogs = $getPayLogs->fetchAll();
+            foreach ($getPayLogs as $row) {
+                $expiredTime = $row['date_create']+($settings['global_settings']['expired_time_payment'] * 3600);
+                if ($expiredTime < time()){
+                    $status = 'expired';
+                    $sql = "UPDATE ga_pay_logs SET status = :status WHERE id = :id";
+                    $update = $this->db->prepare($sql);
+                    $update->bindParam(':status', $status);
+                    $update->bindParam(':id', $row['id']);
+                    $update->execute();
+                }
+
+            }
         }
     }
 

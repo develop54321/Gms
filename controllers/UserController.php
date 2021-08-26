@@ -130,7 +130,7 @@ class UserController extends BaseController
             $payId = $this->db->lastInsertId();
 
             if ($getInfoPayMethods['typeCode'] == 'qiwi_p2p'){
-                $qiwi = new QiwiP2p($InfoPayment['secret_key'], $InfoPayment['public_key']);
+                $qiwi = new QiwiP2p($InfoPayment['secret_key']);
 
                 $billIdGenerate = Uuid::uuid4()->toString();
                 $sql = "UPDATE ga_pay_logs SET bill_id = :bill_id WHERE id = :id";

@@ -8,26 +8,25 @@ use Qiwi\Api\BillPaymentsException;
 class QiwiP2p
 {
     private $secret_key;
-    private $public_key;
     private $billPayments;
 
+    private $currency = "RUB";
 
     /**
      * @throws \ErrorException
      */
-    public function __construct($secret_key, $public_key)
+    public function __construct($secret_key)
     {
         $this->secret_key = $secret_key;
-        $this->public_key = $public_key;
         $this->billPayments = new BillPayments($this->secret_key);
     }
 
-    public function createBill($billId, $amount): array
+    public function createBill($billId, $amount, $email): array
     {
         $params = [
             'amount' => $amount,
-            'currency' => 'RUB',
-            'email' => 'example@mail.org'
+            'currency' => $this->currency,
+            'email' => $email
         ];
 
 

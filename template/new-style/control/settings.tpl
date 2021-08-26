@@ -37,10 +37,13 @@
  <div class="col-md-6">
 <div class="form-group">
 <label>Название сайта</label>
-<input type="int" name="global_settings[site_name]" class="form-control" value="<?=$settings['global_settings']['site_name'];?>">
+<input type="text" name="global_settings[site_name]" class="form-control" value="<?=$settings['global_settings']['site_name'];?>">
 </div>
 
-                     
+     <div class="form-group">
+         <label >Срок истечение не оплаченных счетов(в часах)</label>
+         <input type="number" name="global_settings[expired_time_payment]" class="form-control" value="<?=$settings['global_settings']['expired_time_payment'];?>">
+     </div>
 
 </div>
 
@@ -58,6 +61,8 @@
 <label >Кол-во серверов на главной странице</label>
 <input type="int" name="global_settings[count_servers_main]" class="form-control" value="<?=$settings['global_settings']['count_servers_main'];?>">
 </div>
+
+
                 				
 </div> 
 </div>
@@ -69,11 +74,7 @@
 <div class="row">
  <div class="col-md-6">
                           
-<div class="form-group">
-<label >Кол-во серверов Befirst</label>
-<input type="int" name="global_settings[count_servers_befirst]" class="form-control" value="<?=$settings['global_settings']['count_servers_befirst'];?>">
-</div>
-	                                            
+
 <div class="form-group">
 <label >Кол-во серверов Top</label>
 <input type="int" name="global_settings[count_servers_top]" class="form-control" value="<?=$settings['global_settings']['count_servers_top'];?>">
@@ -103,10 +104,7 @@
 
 
 <div class="col-md-6">
-<div class="form-group">
-<label >Вкл/Выкл Befirst</label>
-<input type="int" name="global_settings[befirst_on]" class="form-control" value="<?=$settings['global_settings']['befirst_on'];?>">
-</div>
+
 
 <div class="form-group">
 <label >Вкл/Выкл Top</label>

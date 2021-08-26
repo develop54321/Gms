@@ -5,23 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/widgets/user/paylogs/status/Status.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/widgets/user/paylogs/status/views/index.tpl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/paymethods/QiwiP2p.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/paymethods/QiwiP2p.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/CronController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CronController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/new-style/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/new-style/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/control/paymethods/edit.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/control/paymethods/edit.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/user/paylogs.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/paylogs.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/SettingsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/SettingsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/control/settings.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/control/settings.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/widgets/user/paylogs/status/views/index.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/user/paylogs/status/views/index.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +85,7 @@
       <workItem from="1629893211588" duration="105000" />
       <workItem from="1629893395565" duration="2644000" />
       <workItem from="1629957873107" duration="3582000" />
-      <workItem from="1629962298241" duration="5683000" />
+      <workItem from="1629962298241" duration="6333000" />
     </task>
     <servers />
   </component>

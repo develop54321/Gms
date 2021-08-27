@@ -63,13 +63,6 @@ class BackupController extends BaseController{
     VALUES('$name', 'database', ".time().", '$full_path')");
     header("Location: /control/backup");
     
-    }elseif($type == 'files'){
-    $hash = "files_".md5(mt_rand(111,999));
-    $name = $currentDate."-".$hash.".zip";
-    $full_path = $this->backupFiles($this->backup_folder, "$currentDate-$hash");   
-    $this->db->exec("INSERT INTO ga_backup (name, type, date_create, hash) 
-    VALUES('$name', 'files', ".time().", '$full_path')");
-    header("Location: /control/backup");
     }else parent::ShowError(404, "Страница не найдена!");
     
     
@@ -81,17 +74,7 @@ class BackupController extends BaseController{
     shell_exec($command);
     return $fullFileName;
     }
-    
-    
-    private function backupFiles($backup_folder, $backup_name){
-    $fullFileName = $backup_folder . '/' . $backup_name . '.zip';
-    shell_exec("zip -r " . $fullFileName . " " . ROOT_DIR . "/* ");
-    return $fullFileName;
-    }
-    
- 
-    
-    
+
     public function actionRemove(){
     $control = new Control();
     if(!$control->isAuth()) header("Location: /control/index");   

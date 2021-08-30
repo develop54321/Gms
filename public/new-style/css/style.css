@@ -136,3 +136,110 @@ footer{
 .breadcrumb li a{
     color: #ffc107;
 }
+
+.server-info {min-height:200px;}
+.server-info .info-map{
+    float: left;
+    margin: 5px 0;
+    width: 170px;
+}
+
+.server-info .info-text{
+    margin: 10px 0px 10px 175px;
+}
+
+.server-info .info-text ul li{
+    border-bottom: 1px dashed #dee2e6;
+    padding: 3px 0;
+}
+
+
+.info-map img{
+    width: 165px;
+    height: 110px;
+    float: left;
+    border: 2px solid #008bdb;
+
+}
+.info-map p {
+    margin: 4px;
+    text-align: center;
+}
+
+.server-info .info-text .hostname{
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.comments .comment{
+    border-bottom: 1px solid #e9ecef;
+}
+.comments .comment :last-child{
+    border: none;
+}
+
+
+.comments .comment .img-user{
+    margin: 5px;
+    float: left;
+    width: 10%;
+}
+
+.comments .comment .img-user img{
+    width: 50px;
+    border-radius: 50%;
+}
+
+.comments .comment .text{
+    margin: 5px;
+    float: left;
+    position: relative;
+    width: 86%;
+    padding-bottom: 10px;
+}
+
+.comments .comment .date{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #e9ecef;
+    padding: 3px;
+    border-radius: 3px;
+    font-size: 13px;
+
+}
+
+.comment:last-child{
+    border: none;
+}
+
+.reviews-text p{
+    text-align: justify !important;
+}
+
+.comments{
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.comments::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+
+/* Handle */
+.comments::-webkit-scrollbar-thumb {
+    background: #212529;
+}
+
+
+.comments .comment .author{
+    background: #e9ecef;
+    padding: 3px;
+    border-radius: 3px;
+    font-size: 13px;
+    display: inline-block;
+}

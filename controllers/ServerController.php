@@ -116,6 +116,10 @@ class ServerController extends BaseController{
     public function actionInfo(){
     $user = new User();
     $IsAuth = $user->isAuth();
+
+    $currentSession = null;
+    if ($IsAuth) $currentSession = $IsAuth['id'];
+
         
     $system = new System();
     if(isset($_GET['id'])) $id = (int)$_GET['id'];
@@ -129,7 +133,7 @@ class ServerController extends BaseController{
     $getInfoServer = $getInfoServer->fetch();
 
     if(empty($getInfoServer)) parent::ShowError(404, "Сервер не найден!");
-        $getInfoServer['userid'] = null;
+
     
     $title = "Информация о сервере :: ".$getInfoServer['hostname'];
     
@@ -155,13 +159,16 @@ class ServerController extends BaseController{
             $getInfoServer['userid'] = $user_profile['id'];
         }
 
-
+        $userLastName = null;
 	if($getInfoServer['id_user'] != 0){
-        $CheckUserInfo = $this->db->prepare('SELECT * FROM ga_users WHERE id = :id  LIMIT 1');
-        $CheckUserInfo->execute(array(':id' => $getInfoServer['id_user']));
-        $CheckUserInfo = $CheckUserInfo->fetch();
-        $getInfoServer['userlastname'] = $CheckUserInfo['lastname'];
-	}else{$getInfoServer['userlastname'] = 'System';}
+        $getInfoUser = $this->db->prepare('SELECT lastname FROM ga_users WHERE id = :id');
+        $getInfoUser->execute(array(':id' => $getInfoServer['id']));
+        $getInfoUser = $getInfoUser->fetch();
+
+        $userLastName = $getInfoUser['lastname'] ?? null;
+	}else{
+	    $getInfoServer['userlastname'] = 'System';
+	}
 
 	if($getInfoServer['game'] = 'cs'){$getInfoServer['gamename']='Counter Strike 1.6';}
 	if($getInfoServer['status'] == 1){$getInfoServer['status']='Online';} else {$getInfoServer['status']='Offline';}
@@ -174,7 +181,7 @@ class ServerController extends BaseController{
     $getComments = $getComments->fetchAll();
 	
 
-    $content = $this->view->renderPartial("server/info", ['data' => $getInfoServer, 'comments' => $getComments]);
+    $content = $this->view->renderPartial("server/info", ['data' => $getInfoServer, 'comments' => $getComments, 'currentSession' => $currentSession, 'userLastName' => $userLastName ]);
     
     $this->view->render("main", ['content' => $content, 'title' => $title]);
     

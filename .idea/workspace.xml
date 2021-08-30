@@ -6,13 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/UsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/control/services/index.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/control/services/index.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/control/users/edit.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/control/users/edit.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changelist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/changelist.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ServerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ServerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/CommentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/CommentsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/new-style/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/new-style/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/new-style/modals/answerModal.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/modals/answerModal.tpl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/new-style/modals/serverServicesModal.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/modals/serverServicesModal.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/modals/voteModal.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/modals/voteModal.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/server/info.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/server/info.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/server/verification.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/server/verification.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +99,8 @@
       <workItem from="1630039962872" duration="304000" />
       <workItem from="1630045945024" duration="1731000" />
       <workItem from="1630053628999" duration="553000" />
-      <workItem from="1630298091754" duration="282000" />
+      <workItem from="1630298091754" duration="1060000" />
+      <workItem from="1630326583618" duration="1434000" />
     </task>
     <servers />
   </component>

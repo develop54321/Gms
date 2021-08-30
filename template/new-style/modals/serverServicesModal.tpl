@@ -1,11 +1,9 @@
-<div class="modal fade" id="serverServicesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="voteModal" tabindex="-1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Услуги сервера - #<?php echo $data['id'];?></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
       <p>
@@ -52,7 +50,7 @@ GameMenu: <a href="/user/serverpay?id=<?php echo $data['id'];?>">Купить</a
       </p>
 </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Закрыть</button>
       </div>
     </div>
   </div>

@@ -35,8 +35,8 @@
 </div>
 
 <div class="form-group">
-<label for="email">Пароль(md5)</label>
-<input type="text" name="password" class="form-control" required="" value="<?php echo $data['password'];?>"/>
+<label for="email">Пароль</label>
+<input type="text" name="password" class="form-control" value=""/>
 </div>
 
 </div>

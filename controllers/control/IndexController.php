@@ -10,6 +10,7 @@ class IndexController extends BaseController{
     $user = new User();
     if(!$user->isAuth()){
         $this->actionLogin();
+        return false;
     }else{
     $getUserPrfile = $user->getProfile();
     if($getUserPrfile['role'] != 'admin')  parent::ShowError(404, "Страница не найдена!");

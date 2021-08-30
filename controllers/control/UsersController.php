@@ -132,18 +132,26 @@ class UsersController extends BaseController{
 
     
     
-    $sql = "UPDATE ga_users SET firstname = :firstname, lastname = :lastname, email = :email, password = :password, role = :role, balance = :balance, params = :params, api_login = :api_login WHERE id = :id";
+    $sql = "UPDATE ga_users SET firstname = :firstname, lastname = :lastname, email = :email, role = :role, balance = :balance, params = :params, api_login = :api_login WHERE id = :id";
     $update = $this->db->prepare($sql);                                        
     $update->bindParam(':firstname', $firstname);   
     $update->bindParam(':lastname', $lastname); 
-    $update->bindParam(':email', $email); 
-    $update->bindParam(':password', $password); 
+    $update->bindParam(':email', $email);
     $update->bindParam(':role', $role); 
     $update->bindParam(':balance', $balance); 
     $update->bindParam(':api_login', $api_login); 
     $update->bindParam(':params', $params); 
     $update->bindParam(':id', $id); 
-    $update->execute();     
+    $update->execute();
+
+    if (!empty($password)){
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "UPDATE ga_users SET password = :password WHERE id = :id";
+        $update = $this->db->prepare($sql);
+        $update->bindParam(':password', $password);
+        $update->bindParam(':id', $id);
+        $update->execute();
+    }
     
     $answer['status'] = "success";
     $answer['success'] = "Пользователь успешно изменен";

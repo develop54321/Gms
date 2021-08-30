@@ -29,14 +29,14 @@
 <tbody>
 <?php foreach($services as $row):?>
 <tr id="element<?=$row['id'];?>">
-<td><?=$row['id'];?></td>
-<td><?=$row['name'];?></td>
-<td><? if($row['type'] == 'befirst'):?>Befirst<? elseif($row['type'] == 'top'):?>TOP<? elseif($row['type'] == 'vip'):?>VIP<? elseif($row['type'] == 'color'):?>Выделение цветом<? elseif($row['type'] == 'boost'):?>Буст<? elseif($row['type'] == 'gamemenu'):?>Gamemenu<? elseif($row['type'] == 'votes'):?>Голоса<? elseif($row['type'] == 'razz'):?>Разбан<?php endif;?></td>
-<td><?=$row['period'];?></td>
+<td><?php echo $row['id'];?></td>
+<td><?php echo $row['name'];?></td>
+<td><?php if($row['type'] == 'befirst'):?>Befirst<?php elseif($row['type'] == 'top'):?>TOP<?php elseif($row['type'] == 'vip'):?>VIP<?php elseif($row['type'] == 'color'):?>Выделение цветом<?php elseif($row['type'] == 'boost'):?>Буст<?php elseif($row['type'] == 'gamemenu'):?>Gamemenu<?php elseif($row['type'] == 'votes'):?>Голоса<?php elseif($row['type'] == 'razz'):?>Разбан<?php endif;?></td>
+<td><?php echo $row['period'];?></td>
 <td style="float: right;">
   <a href="/control/services/edit?id=<?=$row['id'];?>" class="text-warning" title="Изменить услугу"><i class="fa fa-pencil"></i></a>
 
-<a href="#" onclick="remove(<?=$row['id'];?>); return false;" class="text-danger" title="Удалить услугу"><i class="fa fa-trash"></i></a>
+<a href="#" onclick="remove(<?php echo $row['id'];?>); return false;" class="text-danger" title="Удалить услугу"><i class="fa fa-trash"></i></a>
 </td>
 </tr>
 <?php endforeach;?>				

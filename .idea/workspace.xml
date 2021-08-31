@@ -7,13 +7,14 @@
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/changelist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/changelist.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ServerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ServerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/CommentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/CommentsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/info.txt" beforeDir="false" afterPath="$PROJECT_DIR$/info.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/default/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/new-style/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/new-style/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/modals/answerModal.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/modals/answerModal.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/modals/serverServicesModal.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/modals/serverServicesModal.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/listing.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/listing.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/main.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/main.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/search.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/search.tpl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/new-style/server/info.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/server/info.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/server/verification.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/server/verification.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/servers_list.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/servers_list.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +101,9 @@
       <workItem from="1630045945024" duration="1731000" />
       <workItem from="1630053628999" duration="553000" />
       <workItem from="1630298091754" duration="1060000" />
-      <workItem from="1630326583618" duration="1434000" />
+      <workItem from="1630326583618" duration="1794000" />
+      <workItem from="1630400120000" duration="1461000" />
+      <workItem from="1630403875632" duration="311000" />
     </task>
     <servers />
   </component>

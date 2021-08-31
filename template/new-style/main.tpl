@@ -30,17 +30,11 @@
                 <li><a href="#" class="nav-link px-2 text-white">О нас</a></li>
             </ul>
 
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-
+            <form action="/search" method="post" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
                 <div class="input-group">
-
-                    <input type="search" class="form-control form-control-dark form-control-sm" placeholder="Поиск..."
-                           aria-label="Search">
-
-                    <button type="button" class="btn btn-outline-warning">Найти</button>
+                    <input type="search" class="form-control form-control-dark form-control-sm" name="query" placeholder="Поиск..." aria-label="Search">
+                    <button type="submit" class="btn btn-outline-warning">Найти</button>
                 </div>
-
-
             </form>
 
             <?php widgets\user\top_menu\TopMenu::run();?>

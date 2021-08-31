@@ -168,7 +168,7 @@ footer{
 
 .server-info .info-text .hostname{
     overflow: hidden;
-    display: inline-block;
+    display: inline-flex;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -242,4 +242,27 @@ footer{
     border-radius: 3px;
     font-size: 13px;
     display: inline-block;
+}
+
+
+
+.players-list{
+    overflow-y: scroll;
+    max-height: 360px;
+}
+
+
+
+.players-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+.players-list::-webkit-scrollbar-thumb {
+    background: #212529;
+}
+
+.server-info .head-block{
+    background: whitesmoke;
+    padding: 0.4em 0.6em;
 }

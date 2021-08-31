@@ -35,15 +35,11 @@
                 "<?php endif;?>>
                 <td>
                     <?php widgets\server\game\Status::run($row['game']);?>
-                    <a href="?game=<?=$row['game'];?>">
-
-
-                    </a>
+                    <a href="?game=<?=$row['game'];?>"></a>
                 </td>
                 <td><a class="hostname"
                        href="/server/info?id=<?php echo $row['id'];?>"><?php echo $row['hostname'];?></a></td>
-                <td><img src="<?php echo $imgCountry;?>" alt="<?php echo $row['hostname'];?>"/> <?php echo $row['ip'];?>
-                    :<?php echo $row['port'];?></td>
+                <td><img src="<?php echo $imgCountry;?>" alt="<?php echo $row['hostname'];?>"/> <?php echo $row['ip'];?>:<?php echo $row['port'];?></td>
                 <td><?php echo $row['map'];?></td>
                 <td><?php echo $row['players'];?>/<?php echo $row['max_players'];?></td>
                 <td style="text-align: center;">

@@ -9,7 +9,7 @@
             </ol>
         </nav>
 
-        <span style="float: right;">Текущее время:<br><?php echo date("d.m.Y [H:i]");?></span>
+        <span style="float: right;">Текущее время: <?php echo date("d.m.Y [H:i]");?></span>
 
         <table class="table">
             <thead>

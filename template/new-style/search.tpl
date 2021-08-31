@@ -1,12 +1,18 @@
-<div class="content">
+<section class="content mt-5 list-servers">
+  <div class="container">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Главная</a></li>
     <li class="breadcrumb-item active" aria-current="page">Поиск сервера</li>
   </ol>
 </nav>
-<table class="table">
-  <thead class="thead-dark">
+
+    <div class="name-block text-center">
+      <i class="fa fa-star-o"></i> Список серверов
+    </div>
+    <div class="serversList">
+      <table class="table table-striped table-hover">
+        <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Игра</th>
@@ -38,9 +44,12 @@
       <?php if($row['vip_enabled'] != '0'):?>
       VIP
       <?php else:?>
-       <a href="#" onclick="votePlus(<?php echo $row['id'];?>);return false;"><i class="fa fa-minus"></i></a> 
-       <label id="vote<?php echo $row['id'];?>" class="badge badge-info"><?php echo $row['rating'];?></label> 
-      <a href="#" onclick="votePlus(<?php echo $row['id'];?>);return false;"><i class="fa fa-plus"></i></a>
+
+        <a href="#" onclick="ShowModal('<?=$row['id'];?>', 'vote', 'minus');return false;"><i
+                  class="fa fa-minus"></i></a>
+        <label id="vote<?php echo $row['id'];?>" class="rating-bg"><?php echo $row['rating'];?></label>
+        <a href="#" onclick="ShowModal('<?=$row['id'];?>', 'vote', 'plus');return false;"><i
+                  class="fa fa-plus"></i></a>
       <?php endif;?>
       
       </td>
@@ -56,3 +65,4 @@
 
 
 </div>
+</section>

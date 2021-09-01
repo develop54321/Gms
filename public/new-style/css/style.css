@@ -2,6 +2,10 @@ body{
     font-size: 14px !important;
 }
 
+.content{
+    min-height: calc(100vh - 80px);
+}
+
 .top-servers{
     margin: 30px 0;
 }

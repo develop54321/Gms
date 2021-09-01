@@ -169,8 +169,7 @@ class ServerController extends BaseController{
 	}else{
 	    $getInfoServer['userlastname'] = 'System';
 	}
-
-	if($getInfoServer['game'] = 'cs'){$getInfoServer['gamename']='Counter Strike 1.6';}
+	
 	if($getInfoServer['status'] == 1){$getInfoServer['status']='Online';} else {$getInfoServer['status']='Offline';}
 	$getInfoServer['show_players'] = $system->showbar( $getInfoServer['players'], $getInfoServer['max_players'] );
     

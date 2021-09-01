@@ -85,13 +85,7 @@
     <tr id="server<?php echo $row['id'];?>">
       <td><?php echo $row['id'];?></td>
       <td>
-      <?php if($row['game'] == 'cs'):?>
-      <img src="/public/img/gameicons/cs.png" style="width: 16px;"/>
-      <?php elseif($row['game'] == 'csgo'):?>
-      <img src="/public/img/gameicons/csgo.png" style="width: 16px;"/>
-      <?php elseif($row['game'] == 'css'):?>
-      <img src="/public/img/gameicons/css.png" style="width: 16px;"/>
-      <?php endif;?>
+        <?php widgets\server\game\Status::run($row['game']);?>
       </td>
       <td><a href="/server/info?id=<?php echo $row['id'];?>"><?php echo $row['hostname'];?></a></td>
       <td><img src="<?php echo $imgCountry;?>" alt="<?php echo $row['hostname'];?>"/> <?php echo $row['ip'];?>:<?php echo $row['port'];?></td>

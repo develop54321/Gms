@@ -135,37 +135,32 @@ class CronController extends BaseController
                     $update->execute();
                 }
                 $Query->Disconnect();
-            }elseif (in_array($row['game'], ['samp', 'mta'])){
+            }elseif ($row['game'] == 'samp'){
                     try {
-
                         $GameQ = new \GameQ\GameQ();
                         $GameQ->addServer([
                             'type' => $row['game'],
                             'host' => $row['ip'].":".$row['port'],
-                         //   'host' => "185.169.134.164:7777",
                         ]);
                         $results = $GameQ->process();
-
                         $Info = array_shift($results);
-                        $hostname = $Info['gq_hostname'];
+                        $hostname = utf8_decode($Info['servername']);
+
 
                         $status = 1;
-
-                        $gameMode = $Info['gametype'];
+                        $mapName = $Info['gq_hostname'];
                         $players = $Info['gq_numplayers'];
                         $maxPlayers = $Info['gq_maxplayers'];
                         $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players WHERE id = :id";
                         $update = $this->db->prepare($sql);
                         $update->bindParam(':status', $status);
                         $update->bindParam(':hostname', $hostname);
-                        $update->bindParam(':map', $gameMode);
+                        $update->bindParam(':map', $mapName);
                         $update->bindParam(':players', $players);
                         $update->bindParam(':max_players', $maxPlayers);
                         $update->bindParam(':id', $row['id']);
                         $update->execute();
                     } catch (Exception $e) {
-                        print_r($e);
-                        die();
                         $Exception = $e;
                         $status = 0;
                         $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
@@ -175,6 +170,44 @@ class CronController extends BaseController
                         $update->execute();
                     }
 
+                }elseif ($row['game'] == 'mta'){
+                    try {
+
+                        $GameQ = new \GameQ\GameQ();
+                        $GameQ->addServer([
+                            'type' => 'mta',
+                            'host' => $row['ip'].":".$row['port'],
+                        ]);
+                        $results = $GameQ->process();
+
+                        $Info = array_shift($results);
+
+                        if (empty($Info['gq_hostname'])){
+                            throw new \DomainException();
+                        }
+                        $hostname = $Info['gq_hostname'];
+                        $status = 1;
+                        $mapName = $Info['gq_mapname'];
+                        $players = $Info['num_players'];
+                        $maxPlayers = $Info['max_players'];
+                        $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players WHERE id = :id";
+                        $update = $this->db->prepare($sql);
+                        $update->bindParam(':status', $status);
+                        $update->bindParam(':hostname', $hostname);
+                        $update->bindParam(':map', $mapName);
+                        $update->bindParam(':players', $players);
+                        $update->bindParam(':max_players', $maxPlayers);
+                        $update->bindParam(':id', $row['id']);
+                        $update->execute();
+                    } catch (Exception $e) {
+                        $Exception = $e;
+                        $status = 0;
+                        $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
+                        $update = $this->db->prepare($sql);
+                        $update->bindParam(':status', $status);
+                        $update->bindParam(':id', $row['id']);
+                        $update->execute();
+                    }
                 }
             }
 

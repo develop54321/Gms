@@ -35,8 +35,7 @@
                     <div class="info-text">
                         <ul>
                             <li>Название: <span class="hostname"><?php echo $data['hostname'];?></span></li>
-                            <li>Игра: <img src="/public/img/gameicons/<?php echo $data['game'];?>.png"
-                                           style="width: 16px;"> <?php echo $data['gamename'];?></li>
+                            <li>Игра: <?php widgets\server\game\Status::run($data['game']);?></li>
                             <li>Статус: <?php echo $data['status'];?></li>
                             <li>Адрес: <img src="<?php echo $data['img_country'];?>" width="17" alt="unknown"
                                             title="unknown"> <?php echo $data['ip'];?>:<?php echo $data['port'];?></li>
@@ -63,7 +62,7 @@
                 <div>
                 <div class="head-block">Платные услуги</div>
                 <a class="btn btn-outline-success btn-sm mt-2" href="/pay/server?id=<?php echo $data['id'];?>"> Заказать платную услугу</a>
-                <table class="table" style="text-align: center;">
+                <table class="table">
 
                     <?php if($data['befirst_enabled'] != '0'):?>
                     <tr>

@@ -135,11 +135,7 @@
       <?php echo $row['payMethods'];?></td>
       <td><?php echo $row['price'];?>р.</td>
       <td>
-      <?php if($row['status'] == 'expects'):?>
-      <label class="label label-warning">Ожидает платежа</label>
-      <?php elseif($row['status'] == 'paid'):?>
-      <label class="label label-success">Оплаченный</label>
-      <?php endif;?>
+        <?php widgets\user\paylogs\status\Status::run($row['status']);?>
       </td>
     
       

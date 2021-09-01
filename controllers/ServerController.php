@@ -186,9 +186,11 @@ class ServerController extends BaseController{
     
 
     }
-    
-    
-    
+
+
+    /**
+     * @throws Exception
+     */
     public function actionVerification(){
     $user = new User();
     $user_profile = $user->isAuth();
@@ -212,15 +214,43 @@ class ServerController extends BaseController{
    
     if(parent::isAjax()){
          
-    $Query = new SourceQuery( );
-	$Info = Array( );
-   
-	try
-	{
-	$Query->Connect( $getInfoServer['ip'], $getInfoServer['port'], 2, SourceQuery::GOLDSOURCE);
-    $Info = $Query->GetInfo( );
+
+        if (in_array($getInfoServer['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust'])) {
+            $Query = new SourceQuery();
+            $Info = array();
+            try {
+                $Query->Connect($getInfoServer['ip'], $getInfoServer['port'], 2, SourceQuery::GOLDSOURCE);
+                $Info = $Query->GetInfo();
+                $hostname = $Info['HostName'];
+            } catch (Exception $e) {
+                $Query->Disconnect();
+                $answer['status'] = "error";
+                $answer['error'] = "Сервер недоступен";
+                exit(json_encode($answer));
+            }
+        }elseif ($getInfoServer['game'] == 'samp'){
+            $GameQ = new \GameQ\GameQ();
+            $GameQ->addServer([
+                'type' => 'mta',
+                'host' => $getInfoServer['ip'].":".$getInfoServer['port'],
+            ]);
+            $results = $GameQ->process();
+            $Info = array_shift($results);
+            $hostname = utf8_decode($Info['servername']);
+        } elseif ($getInfoServer['game'] == 'mta'){
+            $GameQ = new \GameQ\GameQ();
+            $GameQ->addServer([
+                'type' => 'mta',
+                'host' => $getInfoServer['ip'].":".$getInfoServer['port'],
+            ]);
+            $results = $GameQ->process();
+            $Info = array_shift($results);
+            $hostname = utf8_decode($Info['gq_hostname']);
+        }
+
+
      
-    if("verification".$getInfoServer['verification_rand'] == $Info['HostName']){
+    if("verification".$getInfoServer['verification_rand'] == $hostname){
         
     $sql = "UPDATE ga_servers SET id_user = :id_user WHERE id = :id";
     $update = $this->db->prepare($sql);                                  
@@ -238,14 +268,9 @@ class ServerController extends BaseController{
     exit(json_encode($answer));      
     }
 
-	}
-	catch( Exception $e ){
-    $answer['status'] = "error";
-    $answer['error'] = "Сервер недоступен";
-    exit(json_encode($answer));   
-	}
-	$Query->Disconnect( );
-        
+
+
+
         
         
     }else{   

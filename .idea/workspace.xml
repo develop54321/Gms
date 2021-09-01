@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/controllers/control/NewsController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template/new-style/control/news/add.tpl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template/new-style/control/news/edit.tpl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template/new-style/control/news/index.tpl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/USE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/BaseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/BaseException.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/BaseException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ServerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ServerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/PagesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/PagesController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/install.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/control/main.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/control/main.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +59,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/template/new-style/control/news" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -68,11 +70,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/template/new-style/control/news" />
       <recent name="$PROJECT_DIR$/public/js" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/public/img/gameicons" />
       <recent name="$PROJECT_DIR$/public" />
-      <recent name="$PROJECT_DIR$/widgets/user/paylogs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/js" />
@@ -108,7 +110,7 @@
       <workItem from="1630470573969" duration="561000" />
       <workItem from="1630471800812" duration="22000" />
       <workItem from="1630472307554" duration="13000" />
-      <workItem from="1630480153840" duration="6202000" />
+      <workItem from="1630480153840" duration="7698000" />
     </task>
     <servers />
   </component>

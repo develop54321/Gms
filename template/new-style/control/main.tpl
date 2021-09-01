@@ -108,6 +108,11 @@
                                
                             </li>
 
+                            <li class="has_sub">
+                                <a href="/control/news" class="waves-effect"><i class="fa fa-folder"></i> <span> Новости </span> </a>
+
+                            </li>
+
                             
                             
                             

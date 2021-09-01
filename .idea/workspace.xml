@@ -6,64 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/CronController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CronController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ReCaptcha.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/ServerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ServerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/PaylogsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/PaylogsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/new-style/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/new-style/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/control/paylogs/index.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/control/paylogs/index.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/control/servers/index.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/control/servers/index.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/captcha.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/captcha.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/server/add.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/server/add.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/server/getPlayers.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/server/getPlayers.tpl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/new-style/server/info.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/server/info.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/autoload.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/.github/workflows/ci.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/CONTRIBUTING.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Examples/Example.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Examples/RconExample.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Examples/View.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/SourceQuery/BaseSocket.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/SourceQuery/Buffer.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/SourceQuery/Exception/AuthenticationException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/SourceQuery/Exception/InvalidArgumentException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/SourceQuery/Exception/InvalidPacketException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/SourceQuery/Exception/SocketException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/SourceQuery/Exception/SourceQueryException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/SourceQuery/GoldSourceRcon.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/SourceQuery/Socket.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/SourceQuery/SourceQuery.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/SourceQuery/SourceRcon.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/SourceQuery/bootstrap.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Info/csgo.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Info/csgo.raw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Info/gmod_cyrillic.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Info/gmod_cyrillic.raw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Info/hltv.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Info/hltv.raw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Info/svencoop_nonsteam.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Info/svencoop_nonsteam.raw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Info/tf2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Info/tf2.raw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Info/theship.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Info/theship.raw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Players/csgo.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Players/csgo.raw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Rules/tf2_sourcemod.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Rules/tf2_sourcemod.raw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/Tests.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/Tests/phpunit.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/composer.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/xpaw/php-source-query-class/psalm.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/user/servers.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/servers.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +76,7 @@
       <recent name="$PROJECT_DIR$/widgets/user" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/fonts" />
       <recent name="$PROJECT_DIR$/public/img/gameicons" />
     </key>
   </component>
@@ -158,12 +108,23 @@
       <workItem from="1630470573969" duration="561000" />
       <workItem from="1630471800812" duration="22000" />
       <workItem from="1630472307554" duration="13000" />
-      <workItem from="1630480153840" duration="3257000" />
+      <workItem from="1630480153840" duration="5121000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

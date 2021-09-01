@@ -47,7 +47,7 @@
   </div>
   
 
-  <div class="form-group">
+  <div class="form-group mt-2">
     <button class="btn btn-outline-primary btn-sm" type="submit">Добавить</button>
      <button class="btn btn-outline-secondary btn-sm" type="reset">Сбросить форму</button>
   </div>

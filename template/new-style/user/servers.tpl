@@ -59,19 +59,19 @@ $img_map = '/public/img/no_map.png';
 <li>
 Состояние:
 <?php if($row['moderation'] == '1'):?>
-<span class="badge badge-primary">Показывается</span>
+<span class="badge bg-primary">Показывается</span>
 <?php else:?>
-<span class="badge badge-warning">Ожидает проверки администратором</span>
+<span class="badge bg-warning">Ожидает проверки администратором</span>
 <?php endif;?>
 </li>
 <li>Статус:
 <?php if($row['ban'] == '1'):?>
-<span class="badge badge-danger">Забанен</span>
+<span class="badge bg-danger">Забанен</span>
 <?php else:?>
 <?php if($row['status'] == '1'):?>
-<span class="badge badge-success">Работает</span>
+<span class="badge bg-success">Работает</span>
 <?php elseif($row['status'] == '0'):?>
-<span class="badge badge-warning">Недоступен</span>
+<span class="badge bg-warning">Недоступен</span>
 <?php endif;?>
 <?php endif;?>
 </li>

@@ -280,22 +280,31 @@ class ServerController extends BaseController{
     $Query = new SourceQuery( );
 	
 	$Players = Array();
-	
 
-	try
-	{
-		$Query->Connect( $getInfoServer['ip'], $getInfoServer['port'], 2, SourceQuery::GOLDSOURCE);
 
-		$Players = $Query->GetPlayers( );
+        if (in_array($getInfoServer['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust'])) {
+            try {
+                $Query->Connect($getInfoServer['ip'], $getInfoServer['port'], 2, SourceQuery::GOLDSOURCE);
 
-	}
-	catch( Exception $e )
-	{
-	$Exception = $e;  
-	}
+                $Players = $Query->GetPlayers();
+
+            } catch (Exception $e) {
+                $Exception = $e;
+            }
+        }else if($getInfoServer['game'] == 'samp'){
+            $GameQ = new \GameQ\GameQ();
+            $GameQ->addServer([
+                'type' => 'samp',
+                'host' => $getInfoServer['ip'].":".$getInfoServer['port'],
+            ]);
+            $results = $GameQ->process();
+            $Info = array_shift($results);
+            $Players = $Info['players'];
+
+        }
 
     
-    $content = $this->view->renderPartial("server/getPlayers", ['data' => $Players]);
+    $content = $this->view->renderPartial("server/getPlayers", ['data' => $Players, 'game' => $getInfoServer['game']]);
     echo $content;
     } 
     

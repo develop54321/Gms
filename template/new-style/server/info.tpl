@@ -59,7 +59,7 @@
 
                 </div>
 
-                <div>
+                <div style="clear: both;">
                 <div class="head-block">Платные услуги</div>
                 <a class="btn btn-outline-success btn-sm mt-2" href="/pay/server?id=<?php echo $data['id'];?>"> Заказать платную услугу</a>
                 <table class="table">

@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dump.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/info.txt" beforeDir="false" afterPath="$PROJECT_DIR$/info.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/install.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dump.sql" beforeDir="false" afterPath="$PROJECT_DIR$/dump.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,9 +63,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/template/new-style/control/news" />
       <recent name="$PROJECT_DIR$/public/js" />
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/public/img/gameicons" />
       <recent name="$PROJECT_DIR$/public" />
     </key>
@@ -109,7 +105,7 @@
       <workItem from="1630472307554" duration="13000" />
       <workItem from="1630480153840" duration="7835000" />
       <workItem from="1630492036842" duration="431000" />
-      <workItem from="1630508948418" duration="238000" />
+      <workItem from="1630508948418" duration="1767000" />
     </task>
     <servers />
   </component>

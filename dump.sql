@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Сен 01 2021 г., 20:14
+-- Время создания: Сен 01 2021 г., 20:41
 -- Версия сервера: 8.0.26-0ubuntu0.20.04.2
 -- Версия PHP: 8.0.10
 
@@ -122,10 +122,10 @@ CREATE TABLE `ga_logs_vote` (
 
 CREATE TABLE `ga_news` (
   `id` int NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `text` text NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `text` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `date_create` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 

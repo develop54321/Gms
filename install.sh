@@ -1,10 +1,6 @@
 #!/bin/bash
 VERSION="2.0"
 echo "Добро пожаловать в автоустановщик GMS"
-
-  echo "Спасибо за установку!\n"
-  echo "Документацией по работе скриптом, Вы можете ознакомиться на сайте: http://gamems.ru/"
-
 function readMysqlData() {
   read -p 'Сервер: ' host_mysql
   read -p 'База данных: ' data_base_mysql

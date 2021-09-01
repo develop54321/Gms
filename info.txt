@@ -1,3 +1,10 @@
+Стандартный парооль и логин для доступа:
+admin@gamems.ru
+admin123
+
+Ссылка на панель управления:
+site.ru/control
+
 Системные требование:
 php 7.4 или выше
 mysql 5.6 или выше
@@ -13,36 +20,10 @@ gd
 site.ru/cron?key=123 - для обновления информациии о серверах: каждые 5 минут
 site.ru/cron/pay?key=123 - для проверки платных услуг: каждую минуту
 site.ru/cron/tasks?key=123 - для проверки системных задач: раз в день
+site.ru/cron/qiwi?key=123 - для проверки платежей: раз 1 минуту
+site.ru/cron/payments?key=123 - для проверки просроченных счетов: раз в час
 
 Страница успешной оплаты:
 site.ru/result/success
 Страница провальный оплаты:
 site.ru/result/fail
-
-
-Запросы для мастерсервера:
-SQL запрос:
-(SELECT CONCAT(ip, ':',port) as address FROM ga_servers WHERE `status` = 1 AND `game` = 'cs' AND `ban` != '1' AND befirst_enabled > '0' ORDER BY befirst_enabled) UNION (SELECT CONCAT(ip, ':',port) as address FROM ga_servers WHERE `status` = 1 AND `game` = 'cs' AND `ban` != '1' AND top_enabled > '0' ORDER BY top_enabled) UNION (SELECT CONCAT(ip, ':',port) as address FROM ga_servers WHERE `status` = 1 AND `game` = 'cs' AND `ban` != '1' AND boost > '0' ORDER BY boost_position DESC) UNION (SELECT CONCAT(ip, ':',port) as address FROM ga_servers WHERE `status` = 1 AND `game` = 'cs' AND `ban` != '1' AND vip_enabled > '0' AND color_enabled > '0' ORDER BY RAND()) UNION (SELECT CONCAT(ip, ':',port) as address FROM ga_servers WHERE `status` = 1 AND `game` = 'cs' AND `ban` != '1' AND vip_enabled > '0' ORDER BY RAND())
-
-Сортировка:
-Будь Первым (по порядку, как на сайте)
-Топ (по порядку, как на сайте)
-Буст (по порядку, как на сайте)
-Вип+Цвет (рандом)
-Вип (рандом)
-
-
-Если хотите что бы в мастерсервер попадали и все остальные сервера(без услуг) в самый низ
-SQL запрос:
-(SELECT CONCAT(ip, ':',port) as address FROM ga_servers WHERE `status` = 1 AND `game` = 'cs' AND `ban` != '1' AND befirst_enabled > '0' ORDER BY befirst_enabled) UNION (SELECT CONCAT(ip, ':',port) as address FROM ga_servers WHERE `status` = 1 AND `game` = 'cs' AND `ban` != '1' AND top_enabled > '0' ORDER BY top_enabled) UNION (SELECT CONCAT(ip, ':',port) as address FROM ga_servers WHERE `status` = 1 AND `game` = 'cs' AND `ban` != '1' AND boost > '0' ORDER BY boost_position DESC) UNION (SELECT CONCAT(ip, ':',port) as address FROM ga_servers WHERE `status` = 1 AND `game` = 'cs' AND `ban` != '1' AND vip_enabled > '0' AND color_enabled > '0' ORDER BY RAND()) UNION (SELECT CONCAT(ip, ':',port) as address FROM ga_servers WHERE `status` = 1 AND `game` = 'cs' AND `ban` != '1' AND vip_enabled > '0' ORDER BY RAND()) UNION (SELECT CONCAT(ip, ':',port) as address FROM ga_servers WHERE `status` = 1 AND `game` = 'cs' AND `ban` != '1' ORDER BY rating ASC)
-
-Сортировка:
-Будь Первым (по порядку, как на сайте)
-Топ (по порядку, как на сайте)
-Буст (по порядку, как на сайте)
-Вип+Цвет (рандом)
-Вип (рандом)
-Все сервера (по рейтингу сайта)
-
-
-add game Rust

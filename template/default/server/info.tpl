@@ -32,12 +32,19 @@
 <div class="info-text">
 <ul>
 <li>Название: <span class="hostname"><?php echo $data['hostname'];?></span></li>
-<li>Игра: <img src="/public/img/gameicons/<?php echo $data['game'];?>.png" style="width: 16px;"> <?php echo $data['gamename'];?></li>
+<li>Игра: <?php widgets\server\game\Status::run($data['game']);?></li>
 <li>Статус: <?php echo $data['status'];?></li>
 <li>Адрес: <img src="<?php echo $data['img_country'];?>" width="17" alt="unknown" title="unknown"> <?php echo $data['ip'];?>:<?php echo $data['port'];?></li>
 <li>Добавлен в мониторинг: <?php echo date("d.m.Y [H:i]", $data['date_add']);?></li>
-<li>Владелец: <?php echo $data['userlastname'];?> <?php if($data['userid'] != $data['id_user']):?><a href="/server/verification?id=<?php echo $data['id'];?>">(Это Вы?)</a><?php else:?>(Это Вы!)<?php endif;?></li>
+    <li>Владелец:
 
+        <?php if($userLastName != null){ echo $userLastName;};?>
+        <?php if($currentSession != $data['id_user']):?>
+        <a href="/server/verification?id=<?php echo $data['id'];?>">(Это Вы?)</a>
+        <?php else:?>
+        (Это Вы!)
+        <?php endif;?>
+    </li>
 <li>Рейтинг: <a href="#" onclick="ShowModal('<?=$data['id'];?>', 'vote', 'minus');return false;"><i class="fa fa-minus"></i></a> 
        <label id="vote<?php echo $data['id'];?>" class="rating-bg"><?php echo $data['rating'];?></label> 
       <a href="#" onclick="ShowModal('<?=$data['id'];?>', 'vote', 'plus');return false;"><i class="fa fa-plus"></i></a></li>

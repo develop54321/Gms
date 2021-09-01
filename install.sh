@@ -19,7 +19,7 @@ function generate_config() {
   echo 'const DB_USER = "'${user_mysql}'";' >>config_dist.php
   echo 'const DB_PASSWORD = "'${user_password}'";' >>config_dist.php
   echo 'const DB_NAME = "'${data_base_mysql}'";' >>config_dist.php
-  echo 'const TMPL_DIR = "template/default";' >>config_dist.php
+  echo 'const TMPL_DIR = "template/new-style";' >>config_dist.php
   echo -en '\n' >>config_dist.php
   echo 'const VERSION = "2.0";' >>config_dist.php
 }

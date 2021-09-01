@@ -32,4 +32,21 @@
     </tr>
     <?php endforeach;?>
 </table>
+<?php elseif($game == 'mta'):?>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Ник</th>
+        <th>Фраги</th>
+        <th>Пинг</th>
+    </tr>
+    </thead>
+    <?php foreach($data as $row):?>
+    <tr>
+        <td><?php echo $row['name'];?></td>
+        <td><?php echo $row['score'];?></td>
+        <td><?php echo $row['ping'];?></td>
+    </tr>
+    <?php endforeach;?>
+</table>
 <?php endif;?>

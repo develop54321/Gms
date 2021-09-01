@@ -301,6 +301,16 @@ class ServerController extends BaseController{
             $Info = array_shift($results);
             $Players = $Info['players'];
 
+        }else if($getInfoServer['game'] == 'mta'){
+            $GameQ = new \GameQ\GameQ();
+            $GameQ->addServer([
+                'type' => 'mta',
+                'host' => $getInfoServer['ip'].":".$getInfoServer['port'],
+            ]);
+            $results = $GameQ->process();
+            $Info = array_shift($results);
+            $Players = $Info['players'];
+
         }
 
     

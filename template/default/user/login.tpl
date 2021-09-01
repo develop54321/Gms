@@ -45,7 +45,7 @@
                         
                         case "success":
                         ShowModal(data.success, 'answer', 'success');
-                        setTimeout('document.location.replace("/user")', 3000);
+                          setTimeout('location.replace("/user")', 2000);
                         break;
                         
 

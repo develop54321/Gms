@@ -6,23 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ServerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ServerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/USE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/BaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/BaseException.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/BaseException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/install.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/default/js/bootstrap.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bootstrap.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/default/js/bootstrap.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bootstrap.bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/default/js/bootstrap.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bootstrap.bundle.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/default/js/bootstrap.bundle.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bootstrap.bundle.min.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/default/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bootstrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/default/js/bootstrap.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bootstrap.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/default/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bootstrap.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/default/js/bootstrap.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bootstrap.min.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/default/server/getPlayers.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/server/getPlayers.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/default/server/info.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/server/info.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/default/servers_list.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/servers_list.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/default/user/login.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/user/login.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/default/user/paylogs.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/default/user/paylogs.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/server/getPlayers.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/server/getPlayers.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/user/login.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/login.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +108,7 @@
       <workItem from="1630470573969" duration="561000" />
       <workItem from="1630471800812" duration="22000" />
       <workItem from="1630472307554" duration="13000" />
-      <workItem from="1630480153840" duration="5966000" />
+      <workItem from="1630480153840" duration="6202000" />
     </task>
     <servers />
   </component>

@@ -13,15 +13,15 @@ function readMysqlData() {
 }
 
 function generate_config() {
-  touch config_dist.php
-  echo '<?php' >config_dist.php
-  echo 'const DB_HOST = "'${host_mysql}'";' >>config_dist.php
-  echo 'const DB_USER = "'${user_mysql}'";' >>config_dist.php
-  echo 'const DB_PASSWORD = "'${user_password}'";' >>config_dist.php
-  echo 'const DB_NAME = "'${data_base_mysql}'";' >>config_dist.php
-  echo 'const TMPL_DIR = "template/new-style";' >>config_dist.php
-  echo -en '\n' >>config_dist.php
-  echo 'const VERSION = "2.0";' >>config_dist.php
+  touch config.php
+  echo '<?php' >config.php
+  echo 'const DB_HOST = "'${host_mysql}'";' >>config.php
+  echo 'const DB_USER = "'${user_mysql}'";' >>config.php
+  echo 'const DB_PASSWORD = "'${user_password}'";' >>config.php
+  echo 'const DB_NAME = "'${data_base_mysql}'";' >>config.php
+  echo 'const TMPL_DIR = "template/new-style";' >>config.php
+  echo -en '\n' >>config.php
+  echo 'const VERSION = "2.0";' >>config.php
 }
 
 function import_database() {

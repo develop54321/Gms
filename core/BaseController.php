@@ -4,7 +4,7 @@ namespace core;
 
 abstract class BaseController
 {
-    protected $view;
+    protected View $view;
 
     public function __construct()
     {

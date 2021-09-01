@@ -1,6 +1,8 @@
 <?php
 namespace core;
 
+use Exception;
+
 interface IException
 {
     /* Protected methods inherited from Exception class */

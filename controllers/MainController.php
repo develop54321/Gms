@@ -2,6 +2,7 @@
 namespace controllers;
 
 use components\Pagination;
+use components\Servers;
 use components\System;
 use core\BaseController;
 
@@ -29,15 +30,12 @@ class MainController extends BaseController{
     $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
     $getInfoServer->execute(array(':top_enabled' => $i));
     $getInfoServer = $getInfoServer->fetch();
-    
-    $path = 'public/img/maps/'.$getInfoServer['map'].'.jpg';
-    if(file_exists($path)){
-    $img_map = '/'.$path;
-    }else{
-    $img_map = '/public/img/no_map.png';
-    }
-    
-      $topServers[] = ['id' => $getInfoServer['id'], 'ip' => $getInfoServer['ip'], 'port' => $getInfoServer['port'], 'hostname' => $getInfoServer['hostname'], 'img_map' => $img_map, 'map' => $getInfoServer['map'], 'players' => $getInfoServer['players'], 'max_players' => $getInfoServer['max_players'], 'color_enabled' => $getInfoServer['color_enabled']];
+
+
+        $img_map = Servers::getImagePath($getInfoServer['map'], $getInfoServer['game']);
+
+
+        $topServers[] = ['id' => $getInfoServer['id'], 'ip' => $getInfoServer['ip'], 'port' => $getInfoServer['port'], 'hostname' => $getInfoServer['hostname'], 'img_map' => $img_map, 'map' => $getInfoServer['map'], 'players' => $getInfoServer['players'], 'max_players' => $getInfoServer['max_players'], 'color_enabled' => $getInfoServer['color_enabled']];
     }else{
     $img_map = '/public/img/no_map.png';
       $topServers[] = ['id' => '', 'hostname' => 'Место свободно', 'ip' => '127.0.1', 'port' => 27015, 'img_map' => $img_map, 'map' => null, 'players' => 0, 'max_players' => 0, 'color_enabled' => null];

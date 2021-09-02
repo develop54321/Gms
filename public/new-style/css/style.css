@@ -20,6 +20,11 @@ body{
     color: #ffc107;
     text-decoration: none;
     font-weight: bold;
+    white-space: nowrap;
+    width: 90%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .top-servers .top-servers-wrapper .top-servers-info{

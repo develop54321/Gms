@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/components/Servers.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dump.sql" beforeDir="false" afterPath="$PROJECT_DIR$/dump.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/MainController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ServerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ServerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/new-style/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/new-style/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/404.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/404.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +109,9 @@
       <workItem from="1630472307554" duration="13000" />
       <workItem from="1630480153840" duration="7835000" />
       <workItem from="1630492036842" duration="431000" />
-      <workItem from="1630508948418" duration="1767000" />
+      <workItem from="1630508948418" duration="1920000" />
+      <workItem from="1630511151638" duration="702000" />
+      <workItem from="1630597997818" duration="1488000" />
     </task>
     <servers />
   </component>
@@ -129,7 +135,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/controllers/ServerController.php</url>
-          <line>12</line>
+          <line>13</line>
           <properties>
             <option name="className" value="\controllers\ServerController" />
             <option name="methodName" value="actionAdd" />

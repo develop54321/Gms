@@ -1,6 +1,7 @@
 <?php
 namespace controllers;
 
+use components\Servers;
 use components\System;
 use components\User;
 use core\BaseController;
@@ -137,13 +138,8 @@ class ServerController extends BaseController{
     
     $title = "Информация о сервере :: ".$getInfoServer['hostname'];
     
-    $pathimg_map = 'public/img/'.$getInfoServer['map'].'.jpg';
-    if(file_exists($pathimg_map)){
-		$img_map = '/'.$pathimg_map;
-    }else{
-		$img_map = '/public/img/no_map.png';
-    }
-    $getInfoServer['img_map'] = $img_map;
+
+    $getInfoServer['img_map'] = Servers::getImagePath($getInfoServer['map'], $getInfoServer['game']);
 
 	$pathimg_country = 'public/img/flags/'.mb_strtolower($getInfoServer['country']).'.png';
 	if(file_exists($pathimg_country)){

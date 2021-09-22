@@ -1,0 +1,90 @@
+{
+  "name": "austinb/gameq",
+  "description": "GameQ Gameserver Library",
+  "keywords": [
+    "gameq",
+    "serverstatus"
+  ],
+  "version": "v3.0.15",
+  "license": "LGPL-3.0+",
+  "authors": [
+    {
+      "name": "Austin Bischoff",
+      "email": "austin.bischoff@gmail.com",
+      "role": "Packagist/Composer Maintainer, Developer",
+      "homepage": "https://github.com/Austinb"
+    },
+    {
+      "name": "Christoph Kretzschmar",
+      "email": "blackskyliner@googlemail.com",
+      "role": "Developer",
+      "homepage": "https://github.com/Blackskyliner"
+    },
+    {
+      "name": "Marcel Bößendörfer",
+      "email": "m.boessendoerfer@marbis.net",
+      "role": "Developer",
+      "homepage": "https://github.com/nitrado"
+    },
+    {
+      "name": "Alexander Hambalgo",
+      "role": "Developer",
+      "homepage": "http://balgo.users.sourceforge.net/"
+    },
+    {
+      "name": "Holger",
+      "role": "Developer",
+      "homepage": "http://icet33.users.sourceforge.net/"
+    },
+    {
+      "name": "Sebastian Weidenbach",
+      "role": "Developer",
+      "homepage": "http://sebastianwe.users.sourceforge.net/"
+    }
+  ],
+  "support": {
+    "source": "https://github.com/Austinb/GameQ/v3",
+    "issues": "https://github.com/Austinb/GameQ/issues",
+    "wiki": "https://github.com/Austinb/GameQ/wiki"
+  },
+  "require": {
+    "php": ">=5.6.40",
+    "ext-bz2": "*",
+    "ext-xml": "*"
+  },
+  "require-dev": {
+    "ext-curl": "*",
+    "phpunit/phpunit": "^4.8 || ^6.0 || ^7.0",
+    "phpunit/php-invoker": "*",
+    "phpmd/phpmd": "@stable",
+    "squizlabs/php_codesniffer": "3.*@stable",
+    "corneltek/getoptionkit": "~2",
+    "php-coveralls/php-coveralls": "^1.1 || ^2.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "GameQ\\": "src/GameQ/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "GameQ\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": [
+      "@test-phpcs",
+      "@test-phpmd",
+      "@test-php"
+    ],
+    "test-php": "vendor/bin/phpunit",
+    "test-phpcs": "vendor/bin/phpcs src tests --extensions=php --ignore=bootstrap --report=checkstyle --report-file=build/logs/checkstyle.xml --standard=build/config/phpcs.xml -v",
+    "test-phpmd": "vendor/bin/phpmd src,tests xml build/config/phpmd.xml"
+  },
+  "scripts-descriptions": {
+    "test": "Run all tests!",
+    "test-php": "Run phpunit tests",
+    "test-phpcs": "Run PHP Code Style checks",
+    "test-phpmd": "Run PHP Mess Detector checks"
+  }
+}

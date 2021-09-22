@@ -22,7 +22,7 @@ function generate_config() {
 
 function import_database() {
   MYSQL_PWD=${user_password} mysql -u $user_mysql $data_base_mysql <dump.sql
-  echo "Success Install GMS script"
+  echo "The database was imported successfully"
 }
 
 function connect_mysql() {
@@ -41,6 +41,6 @@ connect_mysql
 
 function success_install() {
   echo "Спасибо за установку!\n"
-  echo "Документацией по работе скриптом, Вы можете ознакомиться на сайте: http://gamems.ru/"
+  echo "Документацией по работе скриптом, Вы можете ознакомиться на сайте: https://gamems.ru/"
 }
 success_install

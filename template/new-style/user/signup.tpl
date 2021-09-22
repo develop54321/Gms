@@ -15,33 +15,28 @@
 
                     <div class="mb-3">
                         <label for="firstname">Имя</label>
-                        <input type="text" name="firstname" id="firstname" class="form-control form-control-sm"
-                               id="inputFirstname" required="">
+                        <input type="text" name="firstname" id="firstname" class="form-control form-control-sm" id="inputFirstname" required="">
                     </div>
 
                     <div class="mb-3">
                         <label for="lastname">Фамилия</label>
-                        <input type="text" name="lastname" class="form-control form-control-sm" id="lastname"
-                               required="">
+                        <input type="text" name="lastname" class="form-control form-control-sm" id="lastname" required="">
                     </div>
 
                     <div class="mb-3">
                         <label for="password">Пароль</label>
-                        <input type="password" name="password" class="form-control form-control-sm" id="password"
-                               required="">
+                        <input type="password" name="password" class="form-control form-control-sm" id="password" required="">
                     </div>
 
                     <div class="mb-3">
                         <label for="password2">Повторите пароль</label>
-                        <input type="password" name="password2" class="form-control form-control-sm" id="password2"
-                               required="">
+                        <input type="password" name="password2" class="form-control form-control-sm" id="password2" required="">
                     </div>
 
                     <div class="mb-3">
                         <label for="email">Электронная почта</label>
                         <input type="email" name="email" class="form-control form-control-sm" id="email" required="">
                     </div>
-                    <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 
 
                     <div class="mb-3">
@@ -60,14 +55,8 @@
 
 
 
-<script src="https://www.google.com/recaptcha/api.js?render=<?php echo RECAPTCHA_PUBLIC_KEY;?>"></script>
 
 <script>
-
-    grecaptcha.ready(function () {
-        grecaptcha.execute('<?php echo RECAPTCHA_PUBLIC_KEY;?>', { action: 'contact' }).then(function (token) {
-            var recaptchaResponse = document.getElementById('recaptchaResponse');
-            recaptchaResponse.value = token;
             $('#signupForm').ajaxForm({
                 dataType: "json",
                 success: function (data) {
@@ -84,8 +73,4 @@
                     }
                 },
             });
-
-        });
-    });
-
 </script>

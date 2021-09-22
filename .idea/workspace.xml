@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/components/Servers.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ServerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ServerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/new-style/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/new-style/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/404.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/404.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Services.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/Services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/install.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/user/signup.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/user/signup.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/autoload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,16 +36,16 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
-      <path value="$PROJECT_DIR$/vendor/brick/math" />
-      <path value="$PROJECT_DIR$/vendor/google/recaptcha" />
-      <path value="$PROJECT_DIR$/vendor/austinb/gameq" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
-      <path value="$PROJECT_DIR$/vendor/qiwi/bill-payments-php-sdk" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
       <path value="$PROJECT_DIR$/vendor/ramsey/collection" />
-      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/vendor/google/recaptcha" />
       <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/brick/math" />
       <path value="$PROJECT_DIR$/vendor/xpaw/php-source-query-class" />
+      <path value="$PROJECT_DIR$/vendor/qiwi/bill-payments-php-sdk" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/vendor/austinb/gameq" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
     </include_path>
   </component>
   <component name="ProjectId" id="1x9shzPtjhv4Y01iJgSACcIUBjw" />
@@ -74,6 +76,7 @@
       <recent name="$PROJECT_DIR$/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/img/maps/cs" />
       <recent name="$PROJECT_DIR$/public/js" />
       <recent name="$PROJECT_DIR$/public/fonts" />
       <recent name="$PROJECT_DIR$/public/img/gameicons" />
@@ -111,7 +114,16 @@
       <workItem from="1630492036842" duration="431000" />
       <workItem from="1630508948418" duration="1920000" />
       <workItem from="1630511151638" duration="702000" />
-      <workItem from="1630597997818" duration="1488000" />
+      <workItem from="1630597997818" duration="1790000" />
+      <workItem from="1630643236358" duration="25000" />
+      <workItem from="1630652539667" duration="2406000" />
+      <workItem from="1630659473197" duration="5196000" />
+      <workItem from="1630673017486" duration="203000" />
+      <workItem from="1631019385482" duration="489000" />
+      <workItem from="1631524378171" duration="29000" />
+      <workItem from="1631593642086" duration="492000" />
+      <workItem from="1631941076890" duration="463000" />
+      <workItem from="1632285349785" duration="135000" />
     </task>
     <servers />
   </component>

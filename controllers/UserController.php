@@ -6,6 +6,7 @@ use components\Mail;
 use components\Pagination;
 use components\paymethods\QiwiP2p;
 use components\ReCaptcha;
+use components\Services;
 use components\System;
 use components\User;
 use core\BaseController;
@@ -265,16 +266,6 @@ class UserController extends BaseController
 
             $password = strip_tags($_POST['password']);
             $password2 = strip_tags($_POST['password2']);
-            $recaptcha_response = strip_tags($_POST['recaptcha_response']);
-
-            $recaptcha = new ReCaptcha();
-            if ($res = $recaptcha->verify($recaptcha_response) !== true){
-                $answer['status'] = "error";
-                $answer['error'] = $res;
-                exit(json_encode($answer));
-            }
-
-
 
             if (!preg_match('/^[a-zA-Zа-яА-Я]+$/ui', $firstname)) {
                 $answer['status'] = "error";

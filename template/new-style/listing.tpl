@@ -1,3 +1,6 @@
+<?php
+use components\System;
+?>
 <section class="content mt-5">
     <div class="container">
 

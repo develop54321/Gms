@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/new-style/listing.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/listing.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +120,8 @@
       <workItem from="1632285349785" duration="299000" />
       <workItem from="1632805137159" duration="12000" />
       <workItem from="1632805167994" duration="3000" />
+      <workItem from="1635705207955" duration="982000" />
+      <workItem from="1637573234576" duration="316000" />
     </task>
     <servers />
   </component>
@@ -148,6 +151,24 @@
             <option name="methodName" value="actionAdd" />
           </properties>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/controllers/UserController.php</url>
+          <line>716</line>
+          <properties>
+            <option name="className" value="\controllers\UserController" />
+            <option name="methodName" value="actionGetForm" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/controllers/UserController.php</url>
+          <line>64</line>
+          <properties>
+            <option name="className" value="\controllers\UserController" />
+            <option name="methodName" value="actionRemoveserver" />
+          </properties>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

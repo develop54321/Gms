@@ -7,6 +7,7 @@ use components\User;
 use core\BaseController;
 use components\System;
 use Exception;
+use PDO;
 use xPaw\SourceQuery\SourceQuery;
 
 class CronController extends BaseController

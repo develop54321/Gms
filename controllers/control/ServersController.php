@@ -4,9 +4,10 @@ namespace controllers\control;
 use components\Pagination;
 use components\User;
 use core\BaseController;
+use PDO;
 
 class ServersController extends BaseController{
-    
+
     public function actionSearch(){
     $user = new User();
     if(!$user->isAuth()){
@@ -14,16 +15,16 @@ class ServersController extends BaseController{
     }
     $getUserPrfile = $user->getProfile();
     if($getUserPrfile['role'] != 'admin')  parent::ShowError(404, "Страница не найдена!");
-    
+
     $getSettings = $this->db->query('SELECT * FROM ga_settings');
     $settings = $getSettings->fetch();
-    
-    $title = "Поиск сервера";
-    
 
-    
-    
-          
+    $title = "Поиск сервера";
+
+
+
+
+
     $filter = [];
     $sql = '';
 
@@ -34,36 +35,36 @@ class ServersController extends BaseController{
     if(!isset($query[1])) $query[1] = null;
     $sql .= "WHERE ip = '".$query[0]."' and port = '".$query[1]."'";
     }else $filter['address'] = '';
-    
-   
+
+
     if(isset($_GET['status']) && $_GET['status'] != ''){
     $filter['status'] = $_GET['status'];
     $moderation = strip_tags($_GET['status']);
-    if(stristr($sql, "WHERE") == false){ 
-      $sql .= "WHERE moderation = '$moderation'";   
-    }else $sql .= " AND moderation = '$moderation'"; 
+    if(stristr($sql, "WHERE") == false){
+      $sql .= "WHERE moderation = '$moderation'";
+    }else $sql .= " AND moderation = '$moderation'";
     }else $filter['status'] = '';
 
     $countServers = $this->db->query("SELECT * FROM ga_servers $sql");
     $count = $countServers->rowCount();
-    
+
     $filter['count'] = $count;
-    
+
     $pagination = new Pagination();
     $per_page = 15;
-    $result = $pagination->create(array('per_page' => $per_page, 'count' => $count, 'no_rgp' => ''));   
-    
+    $result = $pagination->create(array('per_page' => $per_page, 'count' => $count, 'no_rgp' => ''));
+
     $getServers = $this->db->query("SELECT * FROM ga_servers $sql ORDER BY vip_enabled DESC, rating DESC, players DESC LIMIT ".$result['start'].", ".$per_page."");
     $getServers = $getServers->fetchAll();
-    
-    
+
+
      $content = $this->view->renderPartial("control/servers/index", ['ViewPagination' => $result['ViewPagination'], 'filter' => $filter, 'servers' => $getServers]);
-    
-    
-    $this->view->render("control/main", ['content' => $content, 'title' => $title]);   
+
+
+    $this->view->render("control/main", ['content' => $content, 'title' => $title]);
     }
-    
-    
+
+
     public function actionIndex(){
     $user = new User();
     if(!$user->isAuth()){
@@ -71,27 +72,27 @@ class ServersController extends BaseController{
     }
     $getUserPrfile = $user->getProfile();
     if($getUserPrfile['role'] != 'admin')  parent::ShowError(404, "Страница не найдена!");
-    
+
     $getSettings = $this->db->query('SELECT * FROM ga_settings');
     $settings = $getSettings->fetch();
-    
+
     $title = "Серверы";
-    
+
     if(parent::isAjax()){
-        
-        
+
+
     }else{
-    
+
     $filter = [];
-    
+
     $filter['address'] = '';
     $filter['status'] = '';
-    
-    
+
+
     $countServers = $this->db->prepare('SELECT * FROM ga_servers WHERE status = :status');
-    $countServers->execute(array(':status' => 1)); 
+    $countServers->execute(array(':status' => 1));
     $count = $countServers->rowCount();
-    
+
 
     $pagination = new Pagination();
     $per_page = 15;
@@ -101,36 +102,36 @@ class ServersController extends BaseController{
     $getServers = $getServers->fetchAll();
     $filter['count'] = count($getServers);
     $content = $this->view->renderPartial("control/servers/index", ['filter' => $filter, 'servers' => $getServers, 'ViewPagination' => $result['ViewPagination']]);
- 
-    $this->view->render("control/main", ['content' => $content, 'title' => $title]);   
+
+    $this->view->render("control/main", ['content' => $content, 'title' => $title]);
     }
-    
+
     }
-    
-    
+
+
     public function actionEdit(){
     $getSettings = $this->db->query('SELECT * FROM ga_settings');
-    $settings = $getSettings->fetch();    
+    $settings = $getSettings->fetch();
     $settings = json_decode($settings['content'], true);
-        
+
     $user = new User();
     if(!$user->isAuth()){
         header("Location: /control/index");
     }
-    
+
     $getUserPrfile = $user->getProfile();
     if($getUserPrfile['role'] != 'admin')  parent::ShowError(404, "Страница не найдена!");
 
     if(isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
-    
+
     $title = "Изменение сервера #$id";
-     
+
     $getInfoServerS = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
     $getInfoServerS->execute(array(':id' => $id));
     $getInfoServerS = $getInfoServerS->fetch();
     if(empty($getInfoServerS)) parent::ShowError(404, "Страница не найдена!");
-    
-    
+
+
     if(parent::isAjax()){
     $status = (int)$_POST['status'];
     $moderation = (int)$_POST['moderation'];
@@ -177,10 +178,10 @@ class ServersController extends BaseController{
 	}
 
     $sql = "UPDATE ga_servers SET status = :status, moderation =:moderation, game = :game, ip = :ip, port = :port, rating = :rating, top_enabled = :top_enabled, top_expired_date = :top_expired_date, boost = :boost, vip_enabled = :vip_enabled, vip_expired_date = :vip_expired_date, gamemenu_enabled = :gamemenu_enabled, gamemenu_expired_date = :gamemenu_expired_date, color_enabled = :color_enabled, color_expired_date = :color_expired_date, ban = :ban, ban_couse = :ban_couse, ban_date = :ban_date WHERE id= :id";
-    $update = $this->db->prepare($sql);                                        
-    $update->bindParam(':status', $status);   
-    $update->bindParam(':moderation', $moderation); 
-    $update->bindParam(':game', $game); 
+    $update = $this->db->prepare($sql);
+    $update->bindParam(':status', $status);
+    $update->bindParam(':moderation', $moderation);
+    $update->bindParam(':game', $game);
     $update->bindParam(':ip', $ip);
     $update->bindParam(':port', $port);
     $update->bindParam(':rating', $rating);
@@ -196,51 +197,51 @@ class ServersController extends BaseController{
     $update->bindParam(':ban', $ban);
     $update->bindParam(':ban_couse', $ban_couse);
 	$update->bindParam(':ban_date', $ban_date);
-    $update->bindParam(':id', $id); 
-    $update->execute();     
-    
+    $update->bindParam(':id', $id);
+    $update->execute();
+
     $answer['status'] = "success";
     $answer['success'] = "Сервер успешно изменен";
-    exit(json_encode($answer)); 
-        
+    exit(json_encode($answer));
+
     }else{
-        
+
     $getGames = $this->db->query('SELECT * FROM ga_games WHERE status ="1"');
     $getGames = $getGames->fetchAll();
-    
+
 
     $topPlaces = [];
     for($i = 1; $i <= $settings['global_settings']['count_servers_top']; $i++){
         $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
-    $isPlace->execute(array(':top_enabled' => $i));    
+    $isPlace->execute(array(':top_enabled' => $i));
     if($isPlace->rowCount() != '0'){
     $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
     $getInfoServer->execute(array(':top_enabled' => $i));
     $getInfoServer = $getInfoServer->fetch();
-    
+
     if($getInfoServerS['top_enabled'] == $i) {
         $currentServer = true;
     }else{
         $currentServer = false;
     }
-    
+
     $topPlaces[] = ['id' => $i, 'status' => 1, 'currentServer' => $currentServer];
     }else{
     $topPlaces[] = ['id' => $i, 'status' => 0, 'currentServer' => false];
     }
-        
-    }
-    
 
-        
+    }
+
+
+
 
     $content = $this->view->renderPartial("control/servers/edit", ['topPlaces' => $topPlaces, 'data' => $getInfoServerS, 'games' => $getGames]);
- 
-    $this->view->render("control/main", ['content' => $content, 'title' => $title]);   
-    
+
+    $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+
     }
     }
-    
+
     public function actionRemove(){
     $user = new User();
     if(!$user->isAuth()){
@@ -248,73 +249,73 @@ class ServersController extends BaseController{
     }
     $getUserPrfile = $user->getProfile();
     if($getUserPrfile['role'] != 'admin')  parent::ShowError(404, "Страница не найдена!");
-    
+
     if(parent::isAjax()){
     if(isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
     $sql = "DELETE FROM ga_servers WHERE id =  :id";
     $stmt = $this->db->prepare($sql);
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);   
-    $stmt->execute();     
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
 
     }
-    
-        
+
+
     }
-    
-    
-    
+
+
+
     private function activationBoost($id, $period, $getInfoServer){
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();  
-        
+        $settings = $getSettings->fetch();
+
          if($getInfoServer['boost'] != '0'){
-            
+
         $this->db->query("UPDATE ga_servers SET boost = $period WHERE id = '".$id."'");
-            
+
         }else{
-        
+
         $countBoostServers = $this->db->prepare('SELECT * FROM ga_servers WHERE boost != :boost');
-        $countBoostServers->execute(array(':boost' => 0)); 
-        $countBoostServers = $countBoostServers->rowCount(); 
-  
+        $countBoostServers->execute(array(':boost' => 0));
+        $countBoostServers = $countBoostServers->rowCount();
+
         $getBoostServers = $this->db->prepare('SELECT id, hostname, boost FROM ga_servers WHERE boost != :boost ORDER BY boost_position ASC');
-        $getBoostServers->execute(array(':boost' => 0)); 
+        $getBoostServers->execute(array(':boost' => 0));
         $getBoostServers = $getBoostServers->fetchAll();
-        
+
         if($countBoostServers == $settings['count_servers_boost']){
         foreach($getBoostServers as $row){
         if($row['boost'] == '1'){
         $zero = 0;
         $sql = "UPDATE ga_servers SET boost = :boost, boost_position = :boost_position WHERE id = :id";
-        $update = $this->db->prepare($sql);                                  
-        $update->bindParam(':boost', $zero);     
-        $update->bindParam(':boost_position', $zero);    
-        $update->bindParam(':id', $row['id']); 
-        $update->execute(); 
+        $update = $this->db->prepare($sql);
+        $update->bindParam(':boost', $zero);
+        $update->bindParam(':boost_position', $zero);
+        $update->bindParam(':id', $row['id']);
+        $update->execute();
         break;
         }else{
-        $boost_position = time()+1; 
+        $boost_position = time()+1;
         $this->db->query("UPDATE ga_servers SET boost = boost-1, boost_position = $boost_position WHERE id = '".$row['id']."'");
         }}
 
         $boost_position = time();
         $sql = "UPDATE ga_servers SET boost = :boost, boost_position = :boost_position WHERE id = :id";
-        $update = $this->db->prepare($sql);                                  
-        $update->bindParam(':boost', $period);     
-        $update->bindParam(':boost_position', $boost_position);    
-        $update->bindParam(':id', $id); 
-        $update->execute(); 
+        $update = $this->db->prepare($sql);
+        $update->bindParam(':boost', $period);
+        $update->bindParam(':boost_position', $boost_position);
+        $update->bindParam(':id', $id);
+        $update->execute();
         }else{
-            
+
         $boost_position = time();
         $sql = "UPDATE ga_servers SET boost = :boost, boost_position = :boost_position WHERE id = :id";
-        $update = $this->db->prepare($sql);                                  
-        $update->bindParam(':boost', $period);     
-        $update->bindParam(':boost_position', $boost_position);    
-        $update->bindParam(':id', $id); 
+        $update = $this->db->prepare($sql);
+        $update->bindParam(':boost', $period);
+        $update->bindParam(':boost_position', $boost_position);
+        $update->bindParam(':id', $id);
         $update->execute();
         }
         }
     }
-    
+
 }

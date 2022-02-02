@@ -3,6 +3,8 @@
 namespace controllers;
 use core\BaseController;
 use components\System;
+use PDO;
+
 class ApiController extends BaseController{
 
 

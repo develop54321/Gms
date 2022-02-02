@@ -6,7 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/new-style/listing.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/new-style/listing.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/CronController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CronController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/BackupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/BackupController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/CodecolorsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/CodecolorsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/CommentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/CommentsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/PaylogsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/PaylogsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/ServersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/ServersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/ServicesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/ServicesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/control/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/UsersController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +36,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -121,7 +133,8 @@
       <workItem from="1632805137159" duration="12000" />
       <workItem from="1632805167994" duration="3000" />
       <workItem from="1635705207955" duration="982000" />
-      <workItem from="1637573234576" duration="316000" />
+      <workItem from="1637573234576" duration="449000" />
+      <workItem from="1643784555524" duration="1071000" />
     </task>
     <servers />
   </component>
@@ -138,7 +151,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

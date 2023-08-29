@@ -62,6 +62,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "last_opened_file_path": "/var/www/dev.223.etpp.loc",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -153,7 +154,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/controllers/ServerController.php</url>
-          <line>13</line>
+          <line>15</line>
           <properties>
             <option name="className" value="\controllers\ServerController" />
             <option name="methodName" value="actionAdd" />

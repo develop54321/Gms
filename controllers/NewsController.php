@@ -1,4 +1,5 @@
 <?php
+
 namespace controllers;
 
 
@@ -6,7 +7,8 @@ use core\BaseController;
 
 class NewsController extends BaseController
 {
-    public function actionIndex(){
+    public function actionIndex()
+    {
         $title = "Новости";
 
 

@@ -112,36 +112,36 @@ class CronController extends BaseController
             $Query = new SourceQuery();
             $Info = array();
             foreach ($getServers as $row) {
-                if (in_array($row['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust'])){
-                try {
-                    $Query->Connect($row['ip'], $row['port'], 2, SourceQuery::GOLDSOURCE);
-                    $Info = $Query->GetInfo();
-                    $status = 1;
-                    $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players WHERE id = :id";
-                    $update = $this->db->prepare($sql);
-                    $update->bindParam(':status', $status);
-                    $update->bindParam(':hostname', $Info['HostName']);
-                    $update->bindParam(':map', $Info['Map']);
-                    $update->bindParam(':players', $Info['Players']);
-                    $update->bindParam(':max_players', $Info['MaxPlayers']);
-                    $update->bindParam(':id', $row['id']);
-                    $update->execute();
-                } catch (Exception $e) {
-                    $Exception = $e;
-                    $status = 0;
-                    $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
-                    $update = $this->db->prepare($sql);
-                    $update->bindParam(':status', $status);
-                    $update->bindParam(':id', $row['id']);
-                    $update->execute();
-                }
-                $Query->Disconnect();
-            }elseif ($row['game'] == 'samp'){
+                if (in_array($row['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust'])) {
+                    try {
+                        $Query->Connect($row['ip'], $row['port'], 2, SourceQuery::GOLDSOURCE);
+                        $Info = $Query->GetInfo();
+                        $status = 1;
+                        $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players WHERE id = :id";
+                        $update = $this->db->prepare($sql);
+                        $update->bindParam(':status', $status);
+                        $update->bindParam(':hostname', $Info['HostName']);
+                        $update->bindParam(':map', $Info['Map']);
+                        $update->bindParam(':players', $Info['Players']);
+                        $update->bindParam(':max_players', $Info['MaxPlayers']);
+                        $update->bindParam(':id', $row['id']);
+                        $update->execute();
+                    } catch (Exception $e) {
+                        $Exception = $e;
+                        $status = 0;
+                        $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
+                        $update = $this->db->prepare($sql);
+                        $update->bindParam(':status', $status);
+                        $update->bindParam(':id', $row['id']);
+                        $update->execute();
+                    }
+                    $Query->Disconnect();
+                } elseif ($row['game'] == 'samp') {
                     try {
                         $GameQ = new \GameQ\GameQ();
                         $GameQ->addServer([
                             'type' => $row['game'],
-                            'host' => $row['ip'].":".$row['port'],
+                            'host' => $row['ip'] . ":" . $row['port'],
                         ]);
                         $results = $GameQ->process();
                         $Info = array_shift($results);
@@ -171,19 +171,19 @@ class CronController extends BaseController
                         $update->execute();
                     }
 
-                }elseif ($row['game'] == 'mta'){
+                } elseif ($row['game'] == 'mta') {
                     try {
 
                         $GameQ = new \GameQ\GameQ();
                         $GameQ->addServer([
                             'type' => 'mta',
-                            'host' => $row['ip'].":".$row['port'],
+                            'host' => $row['ip'] . ":" . $row['port'],
                         ]);
                         $results = $GameQ->process();
 
                         $Info = array_shift($results);
 
-                        if (empty($Info['gq_hostname'])){
+                        if (empty($Info['gq_hostname'])) {
                             throw new \DomainException();
                         }
                         $hostname = $Info['gq_hostname'];
@@ -224,7 +224,8 @@ class CronController extends BaseController
      * Обработка платежей по кассе киви
      * @throws \Qiwi\Api\BillPaymentsException|\ErrorException
      */
-    public function actionQiwi(){
+    public function actionQiwi()
+    {
         $getSettings = $this->db->query('SELECT content FROM ga_settings');
         $settings = $getSettings->fetch();
         $settings = json_decode($settings['content'], true);
@@ -239,21 +240,20 @@ class CronController extends BaseController
             $getInfoPayMethods = $getInfoPayMethods->fetch();
             $InfoPayment = json_decode($getInfoPayMethods['content'], true);
 
-            $getPayLogs = $this->db->query('SELECT * FROM ga_pay_logs WHERE pay_methods = "'.$payMethod.'" and status = "expects"');
+            $getPayLogs = $this->db->query('SELECT * FROM ga_pay_logs WHERE pay_methods = "' . $payMethod . '" and status = "expects"');
             $getPayLogs = $getPayLogs->fetchAll();
             foreach ($getPayLogs as $row) {
                 $content = json_decode($row['content'], true);
                 $qiwi = new QiwiP2p($InfoPayment['secret_key']);
                 $result = $qiwi->getBillInfo($row['bill_id']);
-                if ($result['status']['value'] == 'PAID'){
+                if ($result['status']['value'] == 'PAID') {
                     $user->refill(['inv_id' => $row['id'], 'amout' => $content['amout']]);
                 }
 
 
-
             }
             echo "invoices have been processed successfully";
-        }else{
+        } else {
             parent::ShowError(404, "Страница не найдена!");
         }
     }
@@ -272,8 +272,8 @@ class CronController extends BaseController
             $getPayLogs = $this->db->query('SELECT * FROM ga_pay_logs WHERE pay_methods != "bill" and status = "expects"');
             $getPayLogs = $getPayLogs->fetchAll();
             foreach ($getPayLogs as $row) {
-                $expiredTime = $row['date_create']+($settings['global_settings']['expired_time_payment'] * 3600);
-                if ($expiredTime < time()){
+                $expiredTime = $row['date_create'] + ($settings['global_settings']['expired_time_payment'] * 3600);
+                if ($expiredTime < time()) {
                     $status = 'expired';
                     $sql = "UPDATE ga_pay_logs SET status = :status WHERE id = :id";
                     $update = $this->db->prepare($sql);
@@ -284,7 +284,7 @@ class CronController extends BaseController
 
             }
             echo "invoices have been processed successfully";
-        }else{
+        } else {
             parent::ShowError(404, "Страница не найдена!");
         }
     }

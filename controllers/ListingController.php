@@ -18,8 +18,6 @@ class ListingController extends BaseController
         $title = "Листинг серверов";
 
 
-
-
         $topServers = [];
         for ($i = 1; $i <= $settings['global_settings']['count_servers_top']; $i++) {
             $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');

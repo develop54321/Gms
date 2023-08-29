@@ -130,7 +130,7 @@ class UserController extends BaseController
             $this->db->exec("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods) VALUES('$content','" . time() . "', 'expects', " . $user_profile['id'] . ", '" . $getInfoPayMethods['typeCode'] . "')");
             $payId = $this->db->lastInsertId();
 
-            if ($getInfoPayMethods['typeCode'] == 'qiwi_p2p'){
+            if ($getInfoPayMethods['typeCode'] == 'qiwi_p2p') {
                 $qiwi = new QiwiP2p($InfoPayment['secret_key']);
 
                 $billIdGenerate = Uuid::uuid4()->toString();
@@ -433,12 +433,12 @@ class UserController extends BaseController
             $check->bindValue(":email", $email);
             $check->execute();
             if ($row = $check->fetch()) {
-                if (!password_verify($password, $row['password'])){
+                if (!password_verify($password, $row['password'])) {
                     $answer['status'] = "error";
                     $answer['error'] = "Неправильный пароль или логин";
                     exit(json_encode($answer));
                 }
-            }else{
+            } else {
                 $answer['status'] = "error";
                 $answer['error'] = "Неправильный пароль или логин";
                 exit(json_encode($answer));

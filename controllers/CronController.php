@@ -219,32 +219,6 @@ class CronController extends BaseController
         echo "server information updated successfully";
     }
 
-    public function actionTasks()
-    {
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-        $settings = json_decode($settings['content'], true);
-
-        if (!isset($_GET['key'])) parent::ShowError(404, "Страница не найдена");
-        if ($settings['global_settings']['cron_key'] == $_GET['key']) {
-            if ($settings['global_settings']['autoBackupDb'] == '1') {
-                $currentDate = date("d-m-Y");
-                $hash = "db_" . md5(mt_rand(111, 999));
-                $name = $currentDate . "-" . $hash . ".sql";
-                $full_path = $this->backupDB($this->backup_folder, "$currentDate-$hash");
-                $this->db->exec("INSERT INTO ga_backup (name, type, date_create, hash) VALUES('$name', 'database', " . time() . ", '$full_path')");
-            }
-        }
-    }
-
-    private function backupDB($backup_folder, $backup_name)
-    {
-        $fullFileName = $backup_folder . '/' . $backup_name . '.sql';
-        $command = 'mysqldump -h' . DB_HOST . ' -u' . DB_USER . ' -p' . DB_PASSWORD . ' ' . DB_NAME . ' > ' . $fullFileName;
-        shell_exec($command);
-        return $fullFileName;
-    }
-
 
     /**
      * Обработка платежей по кассе киви

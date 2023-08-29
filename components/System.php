@@ -94,10 +94,6 @@ class System extends BaseController
     function generateCaptcha()
     {
 
-
-        session_start();
-
-
         $randomnr = mt_rand(1000, 9999);
         $_SESSION['captcha'] = md5($randomnr);
 

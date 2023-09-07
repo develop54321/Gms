@@ -8,10 +8,8 @@ use components\System;
 class PayController extends BaseController
 {
 
-    public function actionIndex()
+    public function index()
     {
-        $system = new System();
-
         $title = "Платные услуги";
 
         if (isset($_POST['query'])) {

@@ -3,17 +3,13 @@
 namespace controllers;
 
 use core\BaseController;
-use components\System;
 
 class BanlistController extends BaseController
 {
 
 
-    public function actionIndex()
+    public function index()
     {
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
         $title = "Банлист";
 
         $getBannisterServers = $this->db->prepare('SELECT * FROM ga_servers WHERE ban != :ban');

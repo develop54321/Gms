@@ -196,7 +196,7 @@ class UserController extends BaseController
 
     }
 
-    public function actionPaylogs()
+    public function actionPayLogs()
     {
 
         $getSettings = $this->db->query('SELECT * FROM ga_settings');

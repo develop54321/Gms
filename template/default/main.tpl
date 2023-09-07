@@ -29,7 +29,7 @@
   <li><a href="/banlist" <?php if($getUrl == 'banlist'):?>class="current-link"<?php endif;?>>Банлист</a></li>
   <li><a href="/listing" <?php if($getUrl == 'listing'):?>class="current-link"<?php endif;?>>Листинг</a></li>
   <li><a href="/boost" <?php if($getUrl == 'boost'):?>class="current-link"<?php endif;?>>Раскрутка</a></li>
-  <li><a href="/page?id=1" <?php if($getUrl == '/page?id=1'):?>class="current-link"<?php endif;?>>Контакты</a></li>
+  <li><a href="/page/1" <?php if($getUrl == '/page?id=1'):?>class="current-link"<?php endif;?>>Контакты</a></li>
   
  
   <li style="float: right;"><a href="/user">Личный кабинет</a></li>
@@ -69,7 +69,7 @@
 
 
 <center>
-<a style="display: block; color: #fff;" href="/page?id=2">Пользовательское соглашение</a>
+<a style="display: block; color: #fff;" href="/page/2">Пользовательское соглашение</a>
        <div class="copyright">
        Copyright © <?php echo $_SERVER['HTTP_HOST']; echo " ".date("Y");?>  Все права защищены<br/>
               Powered by <a href="https://vk.com/web2424" target="_blank">GMS v2.0</a>

@@ -8,7 +8,7 @@ class ComposerStaticInitf73448d816e9b2840ef24f8d405f3c6d
 {
     public static $files = array (
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
     );
 
@@ -30,7 +30,6 @@ class ComposerStaticInitf73448d816e9b2840ef24f8d405f3c6d
         'S' => 
         array (
             'Symfony\\Polyfill\\Php81\\' => 23,
-            'Symfony\\Polyfill\\Ctype\\' => 23,
         ),
         'R' => 
         array (
@@ -45,6 +44,10 @@ class ComposerStaticInitf73448d816e9b2840ef24f8d405f3c6d
         'G' => 
         array (
             'GameQ\\' => 6,
+        ),
+        'F' => 
+        array (
+            'FastRoute\\' => 10,
         ),
         'B' => 
         array (
@@ -77,10 +80,6 @@ class ComposerStaticInitf73448d816e9b2840ef24f8d405f3c6d
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
         ),
-        'Symfony\\Polyfill\\Ctype\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
-        ),
         'ReCaptcha\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
@@ -101,6 +100,10 @@ class ComposerStaticInitf73448d816e9b2840ef24f8d405f3c6d
         array (
             0 => __DIR__ . '/..' . '/austinb/gameq/src/GameQ',
         ),
+        'FastRoute\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nikic/fast-route/src',
+        ),
         'Brick\\Math\\' => 
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
@@ -108,6 +111,8 @@ class ComposerStaticInitf73448d816e9b2840ef24f8d405f3c6d
     );
 
     public static $classMap = array (
+        'CURLStringFile' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/CURLStringFile.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
     );
 

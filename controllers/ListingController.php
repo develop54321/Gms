@@ -9,7 +9,7 @@ class ListingController extends BaseController
 {
 
 
-    public function actionIndex()
+    public function index()
     {
         $system = new System();
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
@@ -47,7 +47,7 @@ class ListingController extends BaseController
         if ($free_servers_top == $max_servers_top) {
             $free_date_top = "~";
         }# Если все места свободны
-        $CheckTopServerDate = $this->db->prepare("SELECT `top_expired_date` FROM `ga_servers` WHERE `top_enabled`!='0' ORDER by `top_expired_date` ASC LIMIT 1");    # вывод ближайшей даты
+        $CheckTopServerDate = $this->db->prepare("SELECT `top_expired_date` FROM `ga_servers` WHERE top_enabled != :top_enabled ORDER by `top_expired_date` ASC LIMIT 1");    # вывод ближайшей даты
         $CheckTopServerDate->execute(array(':top_enabled' => 0));
         $CheckTopServerDate = $CheckTopServerDate->fetchAll();
         foreach ($CheckTopServerDate as $top)
@@ -75,7 +75,7 @@ class ListingController extends BaseController
         if ($free_servers_vip == $max_servers_vip) {
             $free_date_vip = "~";
         }    # Если все места свободны
-        $CheckVipServerDate = $this->db->prepare("SELECT `vip_expired_date` FROM `ga_servers` WHERE `vip_enabled`='1' ORDER by `vip_expired_date` ASC LIMIT 1");    # вывод ближайшей даты
+        $CheckVipServerDate = $this->db->prepare("SELECT `vip_expired_date` FROM `ga_servers` WHERE vip_enabled != :vip_enabled ORDER by `vip_expired_date` ASC LIMIT 1");    # вывод ближайшей даты
         $CheckVipServerDate->execute(array(':vip_enabled' => 0));
         $CheckVipServerDate = $CheckVipServerDate->fetchAll();
         foreach ($CheckVipServerDate as $vip)
@@ -95,7 +95,7 @@ class ListingController extends BaseController
         if ($free_servers_gamemenu == $max_servers_gamemenu) {
             $free_date_gamemenu = "~";
         }    # Если все места свободны
-        $CheckGamemenuServerDate = $this->db->prepare("SELECT `gamemenu_expired_date` FROM `ga_servers` WHERE `gamemenu_enabled`='1' ORDER by `gamemenu_expired_date` ASC LIMIT 1");    # вывод ближайшей даты
+        $CheckGamemenuServerDate = $this->db->prepare("SELECT `gamemenu_expired_date` FROM `ga_servers` WHERE gamemenu_enabled != :gamemenu_enabled ORDER by `gamemenu_expired_date` ASC LIMIT 1");    # вывод ближайшей даты
         $CheckGamemenuServerDate->execute(array(':gamemenu_enabled' => 0));
         $CheckGamemenuServerDate = $CheckGamemenuServerDate->fetchAll();
         foreach ($CheckGamemenuServerDate as $gamemenu)
@@ -115,7 +115,7 @@ class ListingController extends BaseController
         if ($free_servers_color == $max_servers_color) {
             $free_date_color = "~";
         }    # Если все места свободны
-        $CheckColorServerDate = $this->db->prepare("SELECT `color_expired_date` FROM `ga_servers` WHERE `color_enabled`!= '0' ORDER by `color_expired_date` ASC LIMIT 1");    # вывод ближайшей даты
+        $CheckColorServerDate = $this->db->prepare("SELECT `color_expired_date` FROM `ga_servers` WHERE color_enabled != :color_enabled ORDER by `color_expired_date` ASC LIMIT 1");    # вывод ближайшей даты
         $CheckColorServerDate->execute(array(':color_enabled' => 0));
         $CheckColorServerDate = $CheckColorServerDate->fetchAll();
         foreach ($CheckColorServerDate as $color)

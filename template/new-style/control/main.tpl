@@ -80,7 +80,6 @@
                                 <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-cog"></i><span> Настройки </span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled" style="display: none;">
                                     <li><a href="/control/settings">Основные</a></li>
-                                    <li><a href="/control/backup">Резервные копии</a></li>
                                     <li><a href="/control/paymethods">Способы оплаты</a></li>
                                     <li><a href="/control/games">Игры</a></li>
                                     <li><a href="/control/services">Тарифы</a></li>
@@ -165,7 +164,7 @@
                 </div> 
 
                 <footer class="footer text-right">
-                   Powered by <a href="https://gamems.ru" target="_blank">GMS</a>
+                   Powered by <a href="https://game-ms.ru" target="_blank">GMS</a>
                 </footer>
 
             </div>

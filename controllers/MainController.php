@@ -17,9 +17,8 @@ class MainController extends BaseController
         $captcha = $system->generateCaptcha();
     }
 
-    public function actionIndex()
+    public function index()
     {
-
 
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
         $settings = $getSettings->fetch();

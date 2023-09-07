@@ -27,7 +27,7 @@
                 <li><a href="/listing" class="nav-link px-2 text-white">Листинг</a></li>
                 <li><a href="/pay" class="nav-link px-2 text-white">Услуги</a></li>
                 <li><a href="/banlist" class="nav-link px-2 text-white">Банлист</a></li>
-                <li><a href="/page?id=1" class="nav-link px-2 text-white">Контакты</a></li>
+                <li><a href="/page/1" class="nav-link px-2 text-white">Контакты</a></li>
             </ul>
 
             <form action="/search" method="post" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -125,7 +125,7 @@
     </div>
 
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-        Powered by <a class="text-white" href="https://gamems.ru">GMS</a>
+        Powered by <a class="text-white" href="https://game-ms.ru" target="_blank">GMS</a>
     </div>
 
 </footer>

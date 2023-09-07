@@ -8,18 +8,13 @@ class PageController extends BaseController
 {
 
 
-    public function actionIndex()
+    public function index($id)
     {
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
-
-        if (isset($_GET['id'])) $id = (int)$_GET['id'];
-        else parent::ShowError(404, "Страница не найдена!");
-
         $getPageContent = $this->db->prepare('SELECT * FROM ga_pages WHERE id = :id');
         $getPageContent->execute(array(':id' => $id));
         $getPageContent = $getPageContent->fetch();
+
+        if (!$getPageContent)  parent::ShowError(404, "Страница не найдена!");
 
 
         $title = $getPageContent['title'];

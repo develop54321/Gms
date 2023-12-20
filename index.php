@@ -1,9 +1,9 @@
 <?php
 /*
- @name: Gms - Game Monitoring System v2.0
+ @name: Gms - Game Monitoring System v2.1
  @author: https://vk.com/dev_gamems
- @site: game-ms.ru
- @version: 2.0
+ @site: https://game-ms.ru
+ @version: 2.1
 */
 
 use core\Route;

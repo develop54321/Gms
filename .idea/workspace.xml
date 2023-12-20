@@ -4,201 +4,73 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/CronController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CronController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/BackupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/BackupController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/CodecolorsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/CodecolorsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/CommentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/CommentsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/PaylogsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/PaylogsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/ServersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/ServersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/ServicesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/ServicesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/control/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/control/UsersController.php" afterDir="false" />
-    </list>
+    <list default="true" id="d8b242d0-2182-4103-a7c6-18fc117416b5" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
-    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+  <component name="ComposerSettings">
     <execution />
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php">
-    <include_path>
-      <path value="$PROJECT_DIR$/vendor/ramsey/collection" />
-      <path value="$PROJECT_DIR$/vendor/google/recaptcha" />
-      <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/brick/math" />
-      <path value="$PROJECT_DIR$/vendor/xpaw/php-source-query-class" />
-      <path value="$PROJECT_DIR$/vendor/qiwi/bill-payments-php-sdk" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
-      <path value="$PROJECT_DIR$/vendor/austinb/gameq" />
-      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
-      <path value="$PROJECT_DIR$/vendor/nikic/fast-route" />
-    </include_path>
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 6
-}</component>
-  <component name="ProjectId" id="1x9shzPtjhv4Y01iJgSACcIUBjw" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2ZnLGY62XADwV9fWHgn1Q7Z2hDC" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/var/www/gms.loc&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/var/www/gms.loc/docker/development",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docker/development" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/template/new-style/control/news" />
-      <recent name="$PROJECT_DIR$/public/js" />
-      <recent name="$PROJECT_DIR$/public/img/gameicons" />
-      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$/docker/development/nginx" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/img/maps/cs" />
-      <recent name="$PROJECT_DIR$/public/js" />
-      <recent name="$PROJECT_DIR$/public/fonts" />
-      <recent name="$PROJECT_DIR$/public/img/gameicons" />
-    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="v" />
+    </option>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-php-predefined-ba97393d7c68-74080bdb84d3-com.jetbrains.php.sharedIndexes-PS-233.11799.297" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f10ccc7c-c518-418b-975c-fa26fd2edca4" name="Changes" comment="" />
-      <created>1629778761994</created>
+      <changelist id="d8b242d0-2182-4103-a7c6-18fc117416b5" name="Changes" comment="" />
+      <created>1703052801492</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1629778761994</updated>
-      <workItem from="1629778763313" duration="1791000" />
-      <workItem from="1629791082293" duration="2638000" />
-      <workItem from="1629893211588" duration="105000" />
-      <workItem from="1629893395565" duration="2644000" />
-      <workItem from="1629957873107" duration="3582000" />
-      <workItem from="1629962298241" duration="7843000" />
-      <workItem from="1629978363325" duration="2679000" />
-      <workItem from="1629981201204" duration="1619000" />
-      <workItem from="1630039962872" duration="304000" />
-      <workItem from="1630045945024" duration="1731000" />
-      <workItem from="1630053628999" duration="553000" />
-      <workItem from="1630298091754" duration="1060000" />
-      <workItem from="1630326583618" duration="1794000" />
-      <workItem from="1630400120000" duration="1461000" />
-      <workItem from="1630403875632" duration="845000" />
-      <workItem from="1630409051467" duration="940000" />
-      <workItem from="1630414506145" duration="320000" />
-      <workItem from="1630470573969" duration="561000" />
-      <workItem from="1630471800812" duration="22000" />
-      <workItem from="1630472307554" duration="13000" />
-      <workItem from="1630480153840" duration="7835000" />
-      <workItem from="1630492036842" duration="431000" />
-      <workItem from="1630508948418" duration="1920000" />
-      <workItem from="1630511151638" duration="702000" />
-      <workItem from="1630597997818" duration="1790000" />
-      <workItem from="1630643236358" duration="25000" />
-      <workItem from="1630652539667" duration="2406000" />
-      <workItem from="1630659473197" duration="5196000" />
-      <workItem from="1630673017486" duration="203000" />
-      <workItem from="1631019385482" duration="489000" />
-      <workItem from="1631524378171" duration="29000" />
-      <workItem from="1631593642086" duration="492000" />
-      <workItem from="1631941076890" duration="463000" />
-      <workItem from="1632285349785" duration="299000" />
-      <workItem from="1632805137159" duration="12000" />
-      <workItem from="1632805167994" duration="3000" />
-      <workItem from="1635705207955" duration="982000" />
-      <workItem from="1637573234576" duration="449000" />
-      <workItem from="1643784555524" duration="1071000" />
-      <workItem from="1693811807734" duration="315000" />
-      <workItem from="1693812317552" duration="8000" />
-      <workItem from="1694057779774" duration="3240000" />
+      <updated>1703052801492</updated>
+      <workItem from="1703052802539" duration="4602000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php-line-method">
-          <url>file://$PROJECT_DIR$/controllers/ServerController.php</url>
-          <line>15</line>
-          <properties>
-            <option name="className" value="\controllers\ServerController" />
-            <option name="methodName" value="actionAdd" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php-line-method">
-          <url>file://$PROJECT_DIR$/controllers/UserController.php</url>
-          <line>716</line>
-          <properties>
-            <option name="className" value="\controllers\UserController" />
-            <option name="methodName" value="actionGetForm" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php-line-method">
-          <url>file://$PROJECT_DIR$/controllers/UserController.php</url>
-          <line>64</line>
-          <properties>
-            <option name="className" value="\controllers\UserController" />
-            <option name="methodName" value="actionRemoveserver" />
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php-line-method">
-          <url>file://$PROJECT_DIR$/controllers/UserController.php</url>
-          <line>19</line>
-          <properties>
-            <option name="className" value="\controllers\UserController" />
-            <option name="methodName" value="actionLogout" />
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

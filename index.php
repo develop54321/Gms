@@ -2,7 +2,7 @@
 /*
  @name: Gms - Game Monitoring System v2.0
  @author: https://vk.com/dev_gamems
- @site: gamems.ru
+ @site: game-ms.ru
  @version: 2.0
 */
 
@@ -13,6 +13,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 session_start();
 require_once 'vendor/autoload.php';
+
+if (file_exists("config.php") === false){
+    exit("config.php not found");
+}
 const ROOT_DIR = __DIR__ . "/";
 
 require_once "config.php";

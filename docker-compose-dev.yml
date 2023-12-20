@@ -1,0 +1,63 @@
+version: '3.4'
+services:
+  gms-nginx:
+    image: gms-nginx
+    build:
+      context: docker/development/nginx
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+    ports:
+      - "2222:80"
+    depends_on:
+      - gns-php-fpm
+
+  gns-php-fpm:
+    image: gms-php-fpm
+    build:
+      context: docker/development/php-fpm
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+    depends_on:
+      - gms-db
+
+  gms-php-cli:
+    container_name: gms-php-cli
+    image: gms-php-cli
+    build:
+      context: docker/development/php-cli
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+    depends_on:
+      - gms-db
+
+  gms-db:
+    image: mysql:5.7
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: my_secret_password
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_user_pass
+    ports:
+      - "6033:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  gms-phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - gms-db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 2223:80
+
+volumes:
+  dbdata:
+

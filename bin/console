@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+// application.php
+
+require __DIR__.'/../vendor/autoload.php';
+require_once "config.php";
+
+//use src\core\Database;
+use Symfony\Component\Console\Application;
+$application = new Application();
+$application->add(new \command\CronCommand());
+
+
+$application->run();

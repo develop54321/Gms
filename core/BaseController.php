@@ -5,6 +5,7 @@ namespace core;
 abstract class BaseController
 {
     protected View $view;
+    protected Database $db;
 
     public function __construct()
     {

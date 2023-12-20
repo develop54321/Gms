@@ -14,14 +14,16 @@
         "qiwi/bill-payments-php-sdk": "^0.2.2",
         "ramsey/uuid": "^4.2",
         "austinb/gameq": "~3.0",
-        "nikic/fast-route": "^1.3"
+        "nikic/fast-route": "^1.3",
+        "symfony/console": "^6.4"
     },
     "autoload": {
         "psr-4": {
             "core\\": "core",
             "controllers\\": "controllers",
             "components\\": "components",
-            "widgets\\": "widgets"
+            "widgets\\": "widgets",
+            "command\\": "command"
         }
     }
 }

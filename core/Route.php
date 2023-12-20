@@ -32,7 +32,7 @@ class Route{
             $r->addGroup('/user', function (RouteCollector $r) {
                 $r->addRoute(['GET', 'POST'], '/login', ['controllers\UserController', 'actionLogin']);
                 $r->addRoute('GET', '/reset', ['controllers\UserController', 'actionReset']);
-                $r->addRoute('GET', '/signup', ['controllers\UserController', 'actionSignup']);
+                $r->addRoute(['GET', 'POST'], '/signup', ['controllers\UserController', 'actionSignup']);
                 $r->addRoute('GET', '/logout', ['controllers\UserController', 'actionLogout']);
                 $r->addRoute('GET', '/servers', ['controllers\UserController', 'actionServers']);
                 $r->addRoute('GET', '/pay', ['controllers\UserController', 'actionPay']);

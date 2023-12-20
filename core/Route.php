@@ -7,6 +7,8 @@ use FastRoute\RouteCollector;
 
 class Route{
 
+    private View $view;
+
     public function start(){
         $this->view = new View(TMPL_DIR);
 
@@ -19,6 +21,7 @@ class Route{
             $r->addRoute('GET', '/pay', ['controllers\PayController', 'index']);
             $r->addRoute('GET', '/banlist', ['controllers\BanlistController', 'index']);
             $r->addRoute('GET', '/page/{id:\d+}', ['controllers\PageController', 'index']);
+            $r->addRoute('POST', '/search', ['controllers\SearchController', 'index']);
 
             $r->addGroup('/server', function (RouteCollector $r) {
                 $r->addRoute(['GET', 'POST'], '/add', ['controllers\ServerController', 'actionAdd']);

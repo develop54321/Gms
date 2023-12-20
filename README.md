@@ -26,9 +26,9 @@
 
 \newpage
 ## Настройка крон задач
-php bin/console cron - обновления игровых серверов
-php bin/console payment - проверка истекших счетов
-php bin/console qiwi - проверка платежей киви
+php bin/console cron - обновления игровых серверов <br>
+php bin/console payment - проверка истекших счетов<br>
+php bin/console qiwi - проверка платежей киви<br>
 php bin/console services - проверка платных услуг на истечение
 
 **Страница успешной оплаты:** [https://mysite.ru/result/success](https://mysite.ru/result/success)  

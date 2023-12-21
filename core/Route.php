@@ -56,6 +56,11 @@ class Route{
                 $r->addRoute(['GET', 'POST'], '/game/edit', ['controllers\control\GamesController', 'edit']);
                 $r->addRoute('GET', '/games/remove', ['controllers\control\GamesController', 'remove']);
 
+                $r->addRoute('GET', '/codecolors', ['controllers\control\CodecolorsController', 'index']);
+                $r->addRoute(['GET', 'POST'], '/codecolors/add', ['controllers\control\CodecolorsController', 'add']);
+                $r->addRoute(['GET', 'POST'], '/codecolors/edit', ['controllers\control\CodecolorsController', 'edit']);
+                $r->addRoute('GET', '/codecolors/remove', ['controllers\control\CodecolorsController', 'remove']);
+
                 $r->addRoute('GET', '/services', ['controllers\control\ServicesController', 'index']);
                 $r->addRoute(['GET', 'POST'], '/services/add', ['controllers\control\ServicesController', 'add']);
                 $r->addRoute(['GET', 'POST'], '/services/edit', ['controllers\control\ServicesController', 'edit']);

@@ -7,7 +7,7 @@ use core\BaseController;
 class SearchController extends BaseController
 {
 
-    public function actionIndex()
+    public function index()
     {
 
         $title = "Поиск сервера";

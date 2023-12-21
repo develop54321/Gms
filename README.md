@@ -1,5 +1,4 @@
-## Описание
-![GMS v2.3](1.png)
+### GMS v2.3
 
 > Бесплатный движок мониторинга игровых серверов **с открытым исходным кодом**.
 
@@ -15,20 +14,20 @@
 
 
 ## Cистемные требования
-* Nginx
+* Nginx или apache 2
 * php 7.4 или выше
 * mysql 5.6 или выше
 * Curl
 * Планировщик задач
 * Открытыие udp/tcp порты
-* curl, mbstring, bz2, short_tags (короткие теги), gd
+* curl, mbstring, bz2, short_tags (короткие теги), gd 
 * Данные доступа: **логин:** admin@gamems.ru **пароль:**  admin123
 
 \newpage
 ## Настройка крон задач
-php bin/console cron - обновления игровых серверов
-php bin/console payment - проверка истекших счетов
-php bin/console qiwi - проверка платежей киви
+php bin/console cron - обновления игровых серверов <br>
+php bin/console payment - проверка истекших счетов<br>
+php bin/console qiwi - проверка платежей киви<br>
 php bin/console services - проверка платных услуг на истечение
 
 **Страница успешной оплаты:** [https://mysite.ru/result/success](https://mysite.ru/result/success)  

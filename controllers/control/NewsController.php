@@ -7,11 +7,11 @@ use components\User;
 use core\BaseController;
 use PDO;
 
-class NewsController extends BaseController
+class NewsController extends AbstractController
 {
 
 
-    public function actionIndex()
+    public function index()
     {
         $user = new User();
         if (!$user->isAuth()) {
@@ -40,7 +40,7 @@ class NewsController extends BaseController
 
     }
 
-    public function actionAdd()
+    public function add()
     {
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
         $settings = $getSettings->fetch();
@@ -81,7 +81,7 @@ class NewsController extends BaseController
     }
 
 
-    public function actionEdit()
+    public function edit()
     {
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
         $settings = $getSettings->fetch();
@@ -132,7 +132,7 @@ class NewsController extends BaseController
     }
 
 
-    public function actionRemove()
+    public function remove()
     {
         $user = new User();
         if (!$user->isAuth()) {

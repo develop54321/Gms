@@ -37,17 +37,17 @@
 <?php if($data['typeCode'] == 'robokassa'):?>
 <div class="form-group">
 <label for="status">login</label>
-<input type="text" class="form-control" name="login" value="<?=$params['login'];?>">
+<input type="text" class="form-control" name="login" value="<?=$params['login'] ?? null;?>">
 </div>
 
 <div class="form-group">
 <label for="password1">password 1</label>
-<input type="text" class="form-control" id="password1" name="password1" value="<?=$params['password1'];?>">
+<input type="text" class="form-control" id="password1" name="password1" value="<?=$params['password1'] ?? null;?>">
 </div>
 
 <div class="form-group">
 <label for="password2">password 2</label>
-<input type="text" class="form-control" id="password2" name="password2" value="<?=$params['password2'];?>">
+<input type="text" class="form-control" id="password2" name="password2" value="<?=$params['password2'] ?? null;?>">
 </div>
 
 <code>
@@ -57,12 +57,12 @@
 <?php elseif($data['typeCode'] == 'unitpay'):?>
 <div class="form-group">
 <label for="status">PUBLIC KEY</label>
-<input type="text" class="form-control" name="public_key" value="<?=$params['public_key'];?>">
+<input type="text" class="form-control" name="public_key" value="<?=$params['public_key'] ?? null;?>">
 </div>
 
 <div class="form-group">
 <label for="status">SECRET KEY</label>
-<input type="text" class="form-control" name="secret_key" value="<?=$params['secret_key'];?>">
+<input type="text" class="form-control" name="secret_key" value="<?=$params['secret_key'] ?? null;?>">
 </div>
 
 <code>
@@ -73,17 +73,17 @@
 <?php elseif($data['typeCode'] == 'freekassa'):?>
 <div class="form-group">
 <label for="status">fk_id</label>
-<input type="text" class="form-control" name="fk_id" value="<?=$params['fk_id'];?>">
+<input type="text" class="form-control" name="fk_id" value="<?=$params['fk_id'] ?? null;?>">
 </div>
 
 <div class="form-group">
 <label for="fk_key1">fk_key1</label>
-<input type="text" class="form-control" id="fk_key1" name="fk_key1" value="<?=$params['fk_key1'];?>">
+<input type="text" class="form-control" id="fk_key1" name="fk_key1" value="<?=$params['fk_key1'] ?? null;?>">
 </div>
 
 <div class="form-group">
 <label for="fk_key2">fk_key2</label>
-<input type="text" class="form-control" id="fk_key2" name="fk_key2" value="<?=$params['fk_key2'];?>">
+<input type="text" class="form-control" id="fk_key2" name="fk_key2" value="<?=$params['fk_key2'] ?? null;?>">
 </div>
 
 <code>
@@ -93,23 +93,24 @@
     <?php elseif($data['typeCode'] == 'qiwi_p2p'):?>
     <div class="form-group">
         <label for="status">public_key</label>
-        <input type="text" class="form-control" name="public_key" value="<?=$params['public_key'];?>">
+        <input type="text" class="form-control" name="public_key" value="<?php echo $params['public_key'] ?? null;?>">
     </div>
 
     <div class="form-group">
         <label for="fk_key1">secret_key</label>
-        <input type="text" class="form-control" id="secret_key" name="secret_key" value="<?=$params['secret_key'];?>">
+        <input type="text" class="form-control" id="secret_key" name="secret_key" value="<?php echo $params['secret_key'] ?? null;?>">
     </div>
 
 
 
     <code>
-        Обработчик: <?php echo $url;?>/result?type=qiwi_p2p
+        Крон задача: каждую минуту <br>
+        Обработчик: <?php echo $url;?>/cron/qiwi?key=123
     </code>
 
     <?php endif;?>
 
-<?php endif;?>
+
 </div>
 
 </div>

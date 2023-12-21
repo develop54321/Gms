@@ -11,10 +11,10 @@ class MainController extends BaseController
 {
 
 
-    public function actionCaptcha()
+    public function captcha()
     {
         $system = new System();
-        $captcha = $system->generateCaptcha();
+        $system->generateCaptcha();
     }
 
     public function index()

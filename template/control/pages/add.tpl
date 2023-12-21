@@ -27,7 +27,7 @@
 
 <div class="form-group">
 <label for="rating">Текст</label>
-<textarea name="text" class="form-control"></textarea>
+<textarea name="text" class="form-control" rows="12"></textarea>
 </div>
 
 <div class="form-group text-right m-b-0">

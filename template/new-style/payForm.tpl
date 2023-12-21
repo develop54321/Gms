@@ -109,8 +109,8 @@
 
 
 <?php elseif($step == '2'):?>
-<div class="content">
-
+<section class="content mt-5">
+  <div class="container">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Главная</a></li>
@@ -130,5 +130,6 @@ $signfk = md5($InfoPayment['fk_id'].":".$price.":".$InfoPayment['fk_key1'].":".$
 }
 ?>
 <?php include("pay/".$InfoPayment['typeCode'].".tpl");?>
-</div>
+  </div>
+</section>
 <?php endif;?>

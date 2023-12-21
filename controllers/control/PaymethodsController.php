@@ -6,9 +6,9 @@ use components\User;
 use core\BaseController;
 
 
-class PaymethodsController extends BaseController{
+class PaymethodsController extends AbstractController{
      
-    public function actionIndex(){
+    public function index(){
     $user = new User();
     if(!$user->isAuth()){
         header("Location: /control/index");
@@ -30,7 +30,7 @@ class PaymethodsController extends BaseController{
     $this->view->render("control/main", ['content' => $content, 'title' => $title]);
     }
     
-    public function actionAdd(){
+    public function add(){
     $user = new User();
     if(!$user->isAuth()){
         header("Location: /control/index");
@@ -79,7 +79,7 @@ class PaymethodsController extends BaseController{
     
     }
     
-    public function actionRemove(){
+    public function remove(){
     $user = new User();
     if(!$user->isAuth()){
         header("Location: /control/index");
@@ -102,7 +102,7 @@ class PaymethodsController extends BaseController{
     }
     
     
-    public function actionEdit(){
+    public function edit(){
     $user = new User();
     if(!$user->isAuth()){
         header("Location: /control/index");

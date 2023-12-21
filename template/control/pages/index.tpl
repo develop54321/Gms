@@ -37,7 +37,7 @@
       <td><?php echo $row['id'];?></td>
     
       <td>
-      <a style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: block;width: 500px;" href="/page?id=<?php echo $row['id'];?>" target="_blank"><?php echo $row['title'];?></a></td>
+      <a style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: block;width: 500px;" href="/page/<?php echo $row['id'];?>" target="_blank"><?php echo $row['title'];?></a></td>
       <td>
       <?php echo date("d:m:Y [H:i]", $row['date_create']);?>
       </td>

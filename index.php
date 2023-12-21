@@ -1,16 +1,19 @@
 <?php
 /*
- @name: Gms - Game Monitoring System v2.1
+ @name: Gms - Game Monitoring System
  @author: https://vk.com/dev_gamems
  @site: https://game-ms.ru
- @version: 2.1
+ @version: 2.3
 */
 
 use core\Route;
 
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+//dev mode
+//ini_set('error_reporting', E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+
+
 session_start();
 require_once 'vendor/autoload.php';
 

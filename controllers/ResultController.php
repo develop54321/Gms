@@ -10,7 +10,7 @@ class ResultController extends BaseController
 {
 
 
-    public function actionIndex()
+    public function index()
     {
         $services = new Services();
         $user = new User();
@@ -162,7 +162,7 @@ class ResultController extends BaseController
 
     }
 
-    public function actionSuccess()
+    public function success()
     {
         $title = "Оплата успешно прошла";
         $content = $this->view->renderPartial("pay/success");
@@ -170,7 +170,7 @@ class ResultController extends BaseController
         $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
 
-    public function actionFail()
+    public function fail()
     {
         $title = "Ошибка платежа";
         $content = $this->view->renderPartial("pay/fail");

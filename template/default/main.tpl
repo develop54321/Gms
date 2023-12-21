@@ -26,11 +26,12 @@
   <li><a href="/" <?php if($getUrl == ''):?>class="current-link"<?php endif;?>>Главная</a></li>
     <li><a href="/server/add" <?php if($getUrl == 'server/add'):?>class="current-link"<?php endif;?>>Добавить сервер</a></li>
   <li><a href="/pay" <?php if($getUrl == 'pay'):?>class="current-link"<?php endif;?>>Платные услуги</a></li>
+  <li><a href="/news" <?php if($getUrl == 'news'):?>class="current-link"<?php endif;?>>Новости</a></li>
   <li><a href="/banlist" <?php if($getUrl == 'banlist'):?>class="current-link"<?php endif;?>>Банлист</a></li>
   <li><a href="/listing" <?php if($getUrl == 'listing'):?>class="current-link"<?php endif;?>>Листинг</a></li>
   <li><a href="/boost" <?php if($getUrl == 'boost'):?>class="current-link"<?php endif;?>>Раскрутка</a></li>
   <li><a href="/page/1" <?php if($getUrl == '/page?id=1'):?>class="current-link"<?php endif;?>>Контакты</a></li>
-  
+
  
   <li style="float: right;"><a href="/user">Личный кабинет</a></li>
   

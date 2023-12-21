@@ -28,7 +28,7 @@
                                                 </li>
                                                 
                                                 <li class="list-group-item">
-                                                    <span class="badge badge-primary"><?php echo $sizeDatabase;?></span>
+                                                    <span class="badge badge-primary"><?php echo $sizeDatabase;?> мб.</span>
                                                     Размер Базы Данных
                                                 </li>
                                                 
@@ -41,7 +41,12 @@
                                                     <span class="badge badge-primary"><?php echo time()-$settings['last_update_servers'];?> сек.</span>
                                                     Последняя проверка серверов
                                                 </li>
-                                              
+
+                                                <li class="list-group-item">
+                                                    <span class="badge badge-primary"><?php echo $version;?></span>
+                                                    Текущая версия
+                                                </li>
+
                                             </ul>
 									</div>
 								</div>

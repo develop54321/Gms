@@ -24,9 +24,9 @@ class View{
         $template = $this->dir_tmpl.$file.".tpl";
         if ($params !== null) {
             extract($params);
-            ob_start();
         }
 
+            ob_start();
         include($template);
         return ob_get_clean();
         }

@@ -25,7 +25,12 @@ class Route{
             $r->addRoute('POST', '/search', ['controllers\SearchController', 'index']);
             $r->addRoute('GET', '/captcha', ['controllers\MainController', 'captcha']);
             $r->addRoute(['GET', 'POST'], '/pay/server', ['controllers\PayController', 'server']);
+            $r->addRoute(['GET', 'POST'], '/pay', ['controllers\PayController', 'index']);
             $r->addRoute('GET', '/pay/getform', ['controllers\PayController', 'getForm']);
+
+            $r->addRoute(['GET', 'POST'], '/result', ['controllers\ResultController', 'index']);
+            $r->addRoute('GET', '/result/success', ['controllers\ResultController', 'success']);
+            $r->addRoute('GET', '/result/fail', ['controllers\ResultController', 'fail']);
 
             $r->addGroup('/server', function (RouteCollector $r) {
                 $r->addRoute(['GET', 'POST'], '/add', ['controllers\ServerController', 'add']);

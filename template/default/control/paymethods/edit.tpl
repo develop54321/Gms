@@ -42,12 +42,12 @@
 
 <div class="form-group">
 <label for="password1">password 1</label>
-<input type="text" class="form-control" id="password1" name="password1" value="<?=$params['password1'];?>">
+<input type="text" class="form-control" id="password1" name="password1" value="<?=$params['password1'] ?? null;?>">
 </div>
 
 <div class="form-group">
 <label for="password2">password 2</label>
-<input type="text" class="form-control" id="password2" name="password2" value="<?=$params['password2'];?>">
+<input type="text" class="form-control" id="password2" name="password2" value="<?=$params['password2'] ?? null;?>">
 </div>
 
 <code>

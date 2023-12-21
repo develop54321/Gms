@@ -40,6 +40,62 @@ class Route{
                 $r->addRoute('GET', '', ['controllers\UserController', 'actionIndex']);
             });
 
+            $r->addGroup('/control', function (RouteCollector $r) {
+                $r->addRoute('GET', '', ['controllers\control\IndexController', 'index']);
+                $r->addRoute(['GET', 'POST'], '/login', ['controllers\control\IndexController', 'login']);
+                $r->addRoute(['GET', 'POST'], '/reset', ['controllers\UserController', 'actionReset']);
+                $r->addRoute(['GET', 'POST'], '/settings', ['controllers\control\SettingsController', 'index']);
+
+                $r->addRoute('GET', '/paymethods', ['controllers\control\PaymethodsController', 'index']);
+                $r->addRoute(['GET', 'POST'], '/paymethods/add', ['controllers\control\PaymethodsController', 'add']);
+                $r->addRoute(['GET', 'POST'], '/paymethods/edit', ['controllers\control\PaymethodsController', 'edit']);
+                $r->addRoute('GET', '/paymethods/remove', ['controllers\control\PaymethodsController', 'remove']);
+
+                $r->addRoute('GET', '/games', ['controllers\control\GamesController', 'index']);
+                $r->addRoute(['GET', 'POST'], '/games/add', ['controllers\control\GamesController', 'add']);
+                $r->addRoute(['GET', 'POST'], '/game/edit', ['controllers\control\GamesController', 'edit']);
+                $r->addRoute('GET', '/games/remove', ['controllers\control\GamesController', 'remove']);
+
+                $r->addRoute('GET', '/services', ['controllers\control\ServicesController', 'index']);
+                $r->addRoute(['GET', 'POST'], '/services/add', ['controllers\control\ServicesController', 'add']);
+                $r->addRoute(['GET', 'POST'], '/services/edit', ['controllers\control\ServicesController', 'edit']);
+                $r->addRoute('GET', '/services/remove', ['controllers\control\ServicesController', 'remove']);
+
+                $r->addRoute('GET', '/users', ['controllers\control\UsersController', 'index']);
+                $r->addRoute(['GET', 'POST'], '/users/search', ['controllers\control\UsersController', 'search']);
+                $r->addRoute(['GET', 'POST'], '/users/edit', ['controllers\control\UsersController', 'edit']);
+                $r->addRoute('GET', '/users/remove', ['controllers\control\UsersController', 'remove']);
+
+                $r->addRoute('GET', '/servers', ['controllers\control\ServersController', 'index']);
+                $r->addRoute(['GET', 'POST'], '/servers/search', ['controllers\control\ServersController', 'search']);
+                $r->addRoute(['GET', 'POST'], '/servers/edit', ['controllers\control\ServersController', 'edit']);
+                $r->addRoute('GET', '/servers/remove', ['controllers\control\ServersController', 'remove']);
+
+                $r->addRoute('GET', '/comments', ['controllers\control\CommentsController', 'index']);
+                $r->addRoute('GET', '/comments/search', ['controllers\control\CommentsController', 'search']);
+                $r->addRoute(['GET', 'POST'], '/comments/edit', ['controllers\control\CommentsController', 'edit']);
+                $r->addRoute('GET', '/comments/moderation', ['controllers\control\CommentsController', 'edit']);
+                $r->addRoute('GET', '/comments/remove', ['controllers\control\CommentsController', 'remove']);
+
+                $r->addRoute('GET', '/pages', ['controllers\control\PagesController', 'index']);
+                $r->addRoute(['GET', 'POST'], '/pages/add', ['controllers\control\PagesController', 'add    ']);
+                $r->addRoute(['GET', 'POST'], '/pages/edit', ['controllers\control\PagesController', 'edit']);
+                $r->addRoute('GET', '/pages/remove', ['controllers\control\PagesController', 'remove']);
+
+                $r->addRoute('GET', '/news', ['controllers\control\NewsController', 'index']);
+                $r->addRoute(['GET', 'POST'], '/news/add', ['controllers\control\NewsController', 'add']);
+                $r->addRoute(['GET', 'POST'], '/news/edit', ['controllers\control\NewsController', 'edit']);
+                $r->addRoute('GET', '/news/remove', ['controllers\control\NewsController', 'remove']);
+
+                $r->addRoute('GET', '/paylogs', ['controllers\control\PaylogsController', 'index']);
+                $r->addRoute('GET', '/paylogs/search', ['controllers\control\PaylogsController', 'search']);
+                $r->addRoute(['GET', 'POST'], '/paylogs/add', ['controllers\control\PaylogsController', 'add']);
+                $r->addRoute(['GET', 'POST'], '/paylogs/edit', ['controllers\control\PaylogsController', 'edit']);
+                $r->addRoute('GET', '/paylogs/remove', ['controllers\control\PaylogsController', 'remove']);
+
+
+            });
+
         });
 
 

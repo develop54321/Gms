@@ -10,7 +10,7 @@ class CodecolorsController extends BaseController
 {
 
 
-    public function actionIndex()
+    public function index()
     {
         $user = new User();
         if (!$user->isAuth()) {
@@ -27,7 +27,7 @@ class CodecolorsController extends BaseController
         $this->view->render("control/main", ['content' => $content, 'title' => $title]);
     }
 
-    public function actionAdd()
+    public function add()
     {
         $user = new User();
         if (!$user->isAuth()) {
@@ -53,7 +53,7 @@ class CodecolorsController extends BaseController
         }
     }
 
-    public function actionEdit()
+    public function edit()
     {
         $user = new User();
         if (!$user->isAuth()) {
@@ -88,7 +88,7 @@ class CodecolorsController extends BaseController
     }
 
 
-    public function actionRemove()
+    public function remove()
     {
         $user = new User();
         if (!$user->isAuth()) {

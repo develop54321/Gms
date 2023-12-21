@@ -41,14 +41,16 @@ class Route{
 
 
             $r->addGroup('/user', function (RouteCollector $r) {
-                $r->addRoute(['GET', 'POST'], '/login', ['controllers\UserController', 'actionLogin']);
-                $r->addRoute(['GET', 'POST'], '/reset', ['controllers\UserController', 'actionReset']);
-                $r->addRoute(['GET', 'POST'], '/signup', ['controllers\UserController', 'actionSignup']);
-                $r->addRoute('GET', '/logout', ['controllers\UserController', 'actionLogout']);
-                $r->addRoute('GET', '/servers', ['controllers\UserController', 'actionServers']);
-                $r->addRoute('GET', '/pay', ['controllers\UserController', 'actionPay']);
-                $r->addRoute('GET', '/pay-logs', ['controllers\UserController', 'actionPayLogs']);
-                $r->addRoute('GET', '', ['controllers\UserController', 'actionIndex']);
+                $r->addRoute(['GET', 'POST'], '/login', ['controllers\UserController', 'login']);
+                $r->addRoute(['GET', 'POST'], '/reset', ['controllers\UserController', 'reset']);
+                $r->addRoute(['GET', 'POST'], '/signup', ['controllers\UserController', 'signup']);
+                $r->addRoute('GET', '/logout', ['controllers\UserController', 'logout']);
+                $r->addRoute('GET', '/servers', ['controllers\UserController', 'servers']);
+                $r->addRoute(['GET', 'POST'], '/pay', ['controllers\UserController', 'pay']);
+                $r->addRoute(['GET', 'POST'], '/serverpay', ['controllers\UserController', 'serverPay']);
+                $r->addRoute(['GET', 'POST'], '/getform', ['controllers\UserController', 'getForm']);
+                $r->addRoute('GET', '/pay-logs', ['controllers\UserController', 'payLogs']);
+                $r->addRoute('GET', '', ['controllers\UserController', 'index']);
             });
 
             $r->addGroup('/control', function (RouteCollector $r) {

@@ -1,4 +1,5 @@
-<div class="content">
+<section class="content mt-5">
+  <div class="container">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Главная</a></li>
@@ -6,7 +7,14 @@
   </ol>
 </nav>
 
-<?php $url = "null"; include("UserMenu.tpl");?>
+    <div class="row">
+
+      <div class="col-md-2">
+        <?php $url = "pay"; include("UserMenu.tpl");?>
+
+      </div>
+
+      <div class="col-md-10">
 
 
 <?php if($type == 'selectServices'):?>
@@ -48,6 +56,8 @@
 <div id="contentForm"></div>
 </form>
 
+      </div>
+
 
 
 <script>
@@ -82,4 +92,6 @@ function updateForm(){
 </script>
 <?php endif;?>
 
-</div>
+  </div>
+  </div>
+</section>

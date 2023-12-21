@@ -17,7 +17,7 @@ class UserController extends BaseController
 {
 
 
-    public function actionLogout()
+    public function logout()
     {
         $user = new User();
         if ($user->isAuth()) {
@@ -27,7 +27,7 @@ class UserController extends BaseController
         }
     }
 
-    public function actionIndex()
+    public function index()
     {
         $title = "Панель управления";
         $user = new User();
@@ -62,7 +62,7 @@ class UserController extends BaseController
 
     }
 
-    public function actionRemoveserver()
+    public function removeServer()
     {
         $user = new User();
         $user_profile = $user->isAuth();
@@ -101,7 +101,7 @@ class UserController extends BaseController
     }
 
 
-    public function actionPay()
+    public function pay()
     {
         $title = "Пополнение счета";
         $user = new User();
@@ -161,7 +161,7 @@ class UserController extends BaseController
         $this->view->render("main", ['content' => $content, 'title' => $title, 'user_profile' => $user_profile]);
     }
 
-    public function actionServers()
+    public function servers()
     {
 
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
@@ -196,7 +196,7 @@ class UserController extends BaseController
 
     }
 
-    public function actionPayLogs()
+    public function payLogs()
     {
 
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
@@ -253,7 +253,7 @@ class UserController extends BaseController
 
     }
 
-    public function actionSignup()
+    public function singup()
     {
         $title = "Регистрация";
         $user = new User();
@@ -327,7 +327,7 @@ class UserController extends BaseController
     }
 
 
-    public function actionReset()
+    public function reset()
     {
         $title = "Восстановления пароля";
         $user = new User();
@@ -419,7 +419,7 @@ class UserController extends BaseController
     }
 
 
-    public function actionLogin()
+    public function login()
     {
         $title = "Авторизация";
         $user = new User();
@@ -479,7 +479,7 @@ class UserController extends BaseController
     }
 
 
-    public function actionServerpay()
+    public function serverPay()
     {
 
         $user = new User();
@@ -714,7 +714,7 @@ class UserController extends BaseController
 
     }
 
-    public function actionGetForm()
+    public function getForm()
     {
         $user = new User();
         $user_profile = $user->isAuth();

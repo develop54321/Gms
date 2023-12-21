@@ -9,12 +9,9 @@ class BoostController extends BaseController
 {
 
 
-    public function actionIndex()
+    public function index()
     {
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
-        $title = "Boost раскрутка";
+        $title = "Раскрутка";
 
         $getBoostServers = $this->db->prepare('SELECT * FROM ga_servers WHERE boost != :boost and status = :status ORDER BY boost_position DESC');
         $getBoostServers->execute(array(':boost' => 0, ':status' => 1));

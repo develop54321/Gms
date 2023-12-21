@@ -13,7 +13,7 @@
       <div class="row">
       <div class="col-md-4">
        <a href="#" id="captchaImg" onclick="updateCaptcha(); return false;">
-       <img src="/main/captcha" src="Каптча"/>
+       <img src="/captcha" src="Каптча"/>
        </a>
       </div>
       <div class="col-md-8">
@@ -41,7 +41,7 @@
 
 <script>
 function updateCaptcha(){
-$("#captchaImg").html('<img src="/main/captcha" src="Каптча"/>');
+$("#captchaImg").html('<img src="/captcha" src="Каптча"/>');
 }
 
 function voteServer(id){

@@ -19,13 +19,17 @@ class Route{
             $r->addRoute('GET', '/listing', ['controllers\ListingController', 'index']);
             $r->addRoute(['GET', 'POST'], '/modal', ['controllers\ModalController', 'actionIndex']);
             $r->addRoute('GET', '/pay', ['controllers\PayController', 'index']);
+            $r->addRoute('GET', '/news', ['controllers\NewsController', 'index']);
+            $r->addRoute('GET', '/boost', ['controllers\BoostController', 'index']);
             $r->addRoute('GET', '/banlist', ['controllers\BanlistController', 'index']);
             $r->addRoute('GET', '/page/{id:\d+}', ['controllers\PageController', 'index']);
             $r->addRoute('POST', '/search', ['controllers\SearchController', 'index']);
+            $r->addRoute('GET', '/captcha', ['controllers\MainController', 'captcha']);
 
             $r->addGroup('/server', function (RouteCollector $r) {
-                $r->addRoute(['GET', 'POST'], '/add', ['controllers\ServerController', 'actionAdd']);
-                $r->addRoute('GET', '/reset', ['controllers\UserController', 'actionReset']);
+                $r->addRoute(['GET', 'POST'], '/add', ['controllers\ServerController', 'add']);
+                $r->addRoute(['GET', 'POST'], '/info', ['controllers\ServerController', 'info']);
+                $r->addRoute('POST', '/vote', ['controllers\ServerController', 'vote']);
             });
 
 

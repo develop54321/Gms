@@ -13,7 +13,7 @@ use xPaw\SourceQuery\SourceQuery;
 class ServerController extends BaseController
 {
 
-    public function actionAdd()
+    public function add()
     {
 
         $system = new System();
@@ -116,7 +116,7 @@ class ServerController extends BaseController
     }
 
 
-    public function actionInfo()
+    public function info()
     {
         $user = new User();
         $IsAuth = $user->isAuth();
@@ -194,7 +194,7 @@ class ServerController extends BaseController
     /**
      * @throws Exception
      */
-    public function actionVerification()
+    public function verification()
     {
         $user = new User();
         $user_profile = $user->isAuth();
@@ -291,7 +291,7 @@ class ServerController extends BaseController
 
     }
 
-    public function actionGetPlayers()
+    public function getPlayers()
     {
         $system = new System();
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = null;
@@ -344,12 +344,13 @@ class ServerController extends BaseController
     }
 
 
-    public function actionVote()
+    public function vote()
     {
 
         $id = (int)$_POST['id'];
         $type = $_POST['type'];
         $captcha = $_POST['captcha'];
+
 
         $checkServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
         $checkServer->execute(array(':id' => $id));
@@ -360,7 +361,11 @@ class ServerController extends BaseController
             $system = new System();
             $ip = $system->getIP();
 
-            session_start();
+            if (!isset($_SESSION['captcha'])){
+                $answer['status'] = "error";
+                $answer['error'] = "Капча введена не верно!";
+                exit(json_encode($answer));
+            }
 
             if ($_SESSION['captcha'] != md5($captcha)) {
                 $answer['status'] = "error";
@@ -407,7 +412,7 @@ class ServerController extends BaseController
         }
     }
 
-    public function actionAddcomment()
+    public function AddComment()
     {
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
         $settings = $getSettings->fetch();

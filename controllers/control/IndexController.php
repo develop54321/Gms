@@ -6,7 +6,7 @@ use components\User;
 use core\BaseController;
 use PDO;
 
-class IndexController extends BaseController
+class IndexController extends AbstractController
 {
 
     public function index()
@@ -31,8 +31,12 @@ class IndexController extends BaseController
             $countUsers = $countUsers->rowCount();
 
 
-            $sizeDatabase = $this->db->query('SELECT table_schema "' . DB_NAME . '", sum( data_length + index_length )/1024/1024 "Data Base Size in MB" FROM information_schema.TABLES GROUP BY table_schema;');
+            $sizeDatabase = $this->db->query('
+            SELECT table_schema "' . DB_NAME . '", 
+            ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS "size" 
+            FROM information_schema.TABLES GROUP BY table_schema;');
             $sizeDatabase = $sizeDatabase->fetch();
+
 
             $getVersionMysql = $this->db->query('SELECT version()');
             $getVersionMysql = $getVersionMysql->fetch();
@@ -49,7 +53,7 @@ class IndexController extends BaseController
             $counts[] = ['type' => 'countUsers', 'countUsers' => $countUsers];
             $counts[] = ['type' => 'countServers', 'countServers' => $countServers];
 
-            $content = $this->view->renderPartial("control/index", ['counts' => $counts, 'notification' => $notification, 'settings' => $settings, 'sizeDatabase' => $sizeDatabase[1], 'versionMysql' => $getVersionMysql[0]]);
+            $content = $this->view->renderPartial("control/index", ['counts' => $counts, 'notification' => $notification, 'settings' => $settings, 'sizeDatabase' => $sizeDatabase[1], 'versionMysql' => $getVersionMysql[0], 'version' => VERSION]);
 
             $this->view->render("control/main", ['content' => $content, 'title' => $title]);
 

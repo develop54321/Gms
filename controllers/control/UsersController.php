@@ -8,7 +8,7 @@ use components\User;
 use core\BaseController;
 use PDO;
 
-class UsersController extends BaseController
+class UsersController extends AbstractController
 {
 
     public function search()

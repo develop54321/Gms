@@ -6,7 +6,7 @@ use components\User;
 use core\BaseController;
 use PDO;
 
-class CodecolorsController extends BaseController
+class CodecolorsController extends AbstractController
 {
 
 

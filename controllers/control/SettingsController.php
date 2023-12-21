@@ -6,7 +6,7 @@ namespace controllers\control;
 use components\User;
 use core\BaseController;
 
-class SettingsController extends BaseController
+class SettingsController extends AbstractController
 {
 
     public function index()

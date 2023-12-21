@@ -2,7 +2,7 @@
 namespace core;
 
 class View{
-        protected $dir_tmpl;
+        protected string $dir_tmpl;
     
         public function __construct($dir_tmpl){
             $this->dir_tmpl = $dir_tmpl."/";

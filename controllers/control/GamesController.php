@@ -6,7 +6,7 @@ use components\System;
 use components\User;
 use core\BaseController;
 
-class GamesController extends BaseController
+class GamesController extends AbstractController
 {
 
     public function index()

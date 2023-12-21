@@ -7,7 +7,7 @@ use components\User;
 use core\BaseController;
 use PDO;
 
-class NewsController extends BaseController
+class NewsController extends AbstractController
 {
 
 

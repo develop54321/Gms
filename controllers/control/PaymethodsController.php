@@ -6,7 +6,7 @@ use components\User;
 use core\BaseController;
 
 
-class PaymethodsController extends BaseController{
+class PaymethodsController extends AbstractController{
      
     public function index(){
     $user = new User();

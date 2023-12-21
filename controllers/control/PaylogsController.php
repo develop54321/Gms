@@ -8,7 +8,7 @@ use core\BaseController;
 use PDO;
 
 
-class PaylogsController extends BaseController
+class PaylogsController extends AbstractController
 {
 
     public function index()

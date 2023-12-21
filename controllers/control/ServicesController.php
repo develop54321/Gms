@@ -7,7 +7,7 @@ use core\BaseController;
 use PDO;
 
 
-class ServicesController extends BaseController
+class ServicesController extends AbstractController
 {
 
     public function index()

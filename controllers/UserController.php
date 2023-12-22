@@ -253,7 +253,7 @@ class UserController extends BaseController
 
     }
 
-    public function singup()
+    public function signup()
     {
         $title = "Регистрация";
         $user = new User();

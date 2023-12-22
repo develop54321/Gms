@@ -37,6 +37,7 @@ class Route{
                 $r->addRoute(['GET', 'POST'], '/info', ['controllers\ServerController', 'info']);
                 $r->addRoute('POST', '/vote', ['controllers\ServerController', 'vote']);
                 $r->addRoute('GET', '/getplayers', ['controllers\ServerController', 'getPlayers']);
+                $r->addRoute('GET', '/verification', ['controllers\ServerController', 'verification']);
             });
 
 

@@ -13,7 +13,7 @@ class IndexController extends AbstractController
     {
         $user = new User();
         if (!$user->isAuth()) {
-            $this->actionLogin();
+            $this->login();
             return false;
         } else {
             $getUserPrfile = $user->getProfile();

@@ -738,43 +738,47 @@ class UserController extends BaseController
             $getInfoServices = $getInfoServices->fetch();
             if (!isset($id_services)) parent::ShowError(404, "Страница не найдена!");
 
+            $databefirst = null;
+            $datatop = null;
+            if ($getInfoServices) {
 
-            $databefirst = '';
-            if ($getInfoServices['type'] == 'befirst') {
-                $databefirst = [];
-                for ($i = 1; $i <= $settings['global_settings']['count_servers_befirst']; $i++) {
-                    $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
-                    $isPlace->execute(array(':befirst_enabled' => $i));
-                    if ($isPlace->rowCount() != '0') {
-                        $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
-                        $getInfoServer->execute(array(':befirst_enabled' => $i));
-                        $getInfoServer = $getInfoServer->fetch();
 
-                        $databefirst[] = ['id' => $i, 'status' => 1];
-                    } else {
-                        $databefirst[] = ['id' => $i, 'status' => 0];
+                if ($getInfoServices['type'] == 'befirst') {
+                    $databefirst = [];
+                    for ($i = 1; $i <= $settings['global_settings']['count_servers_befirst']; $i++) {
+                        $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
+                        $isPlace->execute(array(':befirst_enabled' => $i));
+                        if ($isPlace->rowCount() != '0') {
+                            $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
+                            $getInfoServer->execute(array(':befirst_enabled' => $i));
+                            $getInfoServer = $getInfoServer->fetch();
+
+                            $databefirst[] = ['id' => $i, 'status' => 1];
+                        } else {
+                            $databefirst[] = ['id' => $i, 'status' => 0];
+                        }
                     }
                 }
-            }
 
-            $datatop = '';
-            if ($getInfoServices['type'] == 'top') {
-                $datatop = [];
-                for ($i = 1; $i <= $settings['global_settings']['count_servers_top']; $i++) {
-                    $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
-                    $isPlace->execute(array(':top_enabled' => $i));
-                    if ($isPlace->rowCount() != '0') {
-                        $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
-                        $getInfoServer->execute(array(':top_enabled' => $i));
-                        $getInfoServer = $getInfoServer->fetch();
 
-                        $datatop[] = ['id' => $i, 'status' => 1];
-                    } else {
-                        $datatop[] = ['id' => $i, 'status' => 0];
+                if ($getInfoServices['type'] == 'top') {
+                    $datatop = [];
+                    for ($i = 1; $i <= $settings['global_settings']['count_servers_top']; $i++) {
+                        $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
+                        $isPlace->execute(array(':top_enabled' => $i));
+                        if ($isPlace->rowCount() != '0') {
+                            $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
+                            $getInfoServer->execute(array(':top_enabled' => $i));
+                            $getInfoServer = $getInfoServer->fetch();
+
+                            $datatop[] = ['id' => $i, 'status' => 1];
+                        } else {
+                            $datatop[] = ['id' => $i, 'status' => 0];
+                        }
                     }
                 }
-            }
 
+            }
             $status = 1;
             $getPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE status = :status');
             $getPayMethods->execute(array(':status' => $status));
@@ -786,7 +790,18 @@ class UserController extends BaseController
             $getCodeColors->execute(array(':activ' => $activcolor));
             $getCodeColors = $getCodeColors->fetchAll();
 
-            $content = $this->view->renderPartial("user/serverpayForm", ['user_profile' => $user_profile, 'CodeColors' => $getCodeColors, 'serverInfo' => $getInfoServerRow, 'PayMethods' => $getPayMethods, 'type' => $getInfoServices['type'], 'datatop' => $datatop, 'databefirst' => $databefirst, 'infoServices' => $getInfoServices, 'step' => '1'], true);
+            $content = $this->view->renderPartial("user/serverpayForm", [
+                'user_profile' =>
+                $user_profile,
+                'CodeColors' => $getCodeColors,
+                'serverInfo' => $getInfoServerRow,
+                'PayMethods' => $getPayMethods,
+                'type' => $getInfoServices['type'] ?? null,
+                'datatop' => $datatop,
+                'databefirst' => $databefirst,
+                'infoServices' => $getInfoServices,
+                'step' => '1'
+            ]);
             echo $content;
 
         } else parent::ShowError(404, "Страница не найдена!");

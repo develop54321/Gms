@@ -6,6 +6,6 @@
 <?php else:?>
     <div class="text-end">
         <a href="/user/login" class="btn btn-outline-light me-2">Авторизация</a>
-        <a href="/user/signup" class="btn btn-warning">Регистрация</a>
+        <a href="/user/signup" class="btn btn-green">Регистрация</a>
     </div>
 <?php endif;?>

@@ -302,7 +302,7 @@ CREATE TABLE `ga_users` (
 --
 
 INSERT INTO `ga_users` (`id`, `lastname`, `firstname`, `role`, `password`, `email`, `hash`, `balance`, `img`, `date_reg`, `params`, `api_login`, `reset_code`) VALUES
-(4, 'System', 'Admin', 'admin', '$2y$10$ZtVHAPch2ebEQQwleSLId.W4Hr1F/qyaLqLihN63rDFTDVVeXHbpO', 'admin@gamems.ru', 'a87ff679a2f3e71d9181a67b7542122c', '10', '/public/img/avatar.png	', 1629893904, '{\"key_api\":\"<br \\/><b>Notice<\\/b>:  Trying to access array offset on value of type null in <b>\\/home\\/danil\\/sites\\/gms.loc\\/template\\/new-style\\/control\\/users\\/edit.tpl<\\/b> on line <b>78<\\/b><br \\/>\",\"discount_api\":\"\"}', '', NULL);
+(4, 'System', 'Admin', 'admin', '$2y$10$ZtVHAPch2ebEQQwleSLId.W4Hr1F/qyaLqLihN63rDFTDVVeXHbpO', 'admin@gamems.ru', 'a87ff679a2f3e71d9181a67b7542122c', '0', '/public/img/avatar.png	', 1629893904, '{\"key_api\":\"<br \\/><b>Notice<\\/b>:  Trying to access array offset on value of type null in <b>\\/home\\/danil\\/sites\\/gms.loc\\/template\\/new-style\\/control\\/users\\/edit.tpl<\\/b> on line <b>78<\\/b><br \\/>\",\"discount_api\":\"\"}', '', NULL);
 
 --
 -- Индексы сохранённых таблиц

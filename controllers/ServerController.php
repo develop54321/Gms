@@ -129,10 +129,11 @@ class ServerController extends BaseController
         if (isset($_GET['id'])) $id = (int)$_GET['id'];
         else parent::ShowError(404, "Сервер не найден!");
 
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-        $settings = json_decode($settings['content'], true);
-        $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
+
+        $getInfoServer = $this->db->prepare('
+        SELECT s.id, s.map, s.game, s.hostname, s.country, s.id_user, s.status, s.players, s.max_players, s.ban, s.ip, s.port, s.date_add, s.rating, s.befirst_enabled, s.top_enabled, s.vip_enabled, s.color_enabled, s.boost, s.gamemenu_enabled, s.vip_expired_date, s.gamemenu_expired_date, g.game game_name
+        FROM ga_servers s LEFT JOIN ga_games g ON s.game = g.code 
+        WHERE s.id = :id');
         $getInfoServer->execute(array(':id' => $id));
         $getInfoServer = $getInfoServer->fetch();
 
@@ -201,14 +202,11 @@ class ServerController extends BaseController
         if (!$user_profile) header("Location: /user/login");
         $title = "Смена владельца сервера";
 
-        $system = new System();
 
         if (isset($_GET['id'])) $id = (int)$_GET['id'];
         else parent::ShowError(404, "Сервер не найден!");
 
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-        $settings = json_decode($settings['content'], true);
+
         $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
         $getInfoServer->execute(array(':id' => $id));
         $getInfoServer = $getInfoServer->fetch();

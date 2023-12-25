@@ -54,15 +54,14 @@ class MainController extends BaseController
             $sort_where = array(':status' => 1, ':ban' => 0, ':game' => $game);
             $countServers = $this->db->prepare('SELECT * FROM ga_servers WHERE ban = :ban and status = :status and game = :game');
             $countServers->execute(array(':ban' => 1, ':status' => 0, ':game' => $game));
-            $count = $countServers->rowCount();
         } else {
             $sort_where_count = array(':ban' => 0, ':status' => 1);
             $sort_where = array(':status' => 1, ':ban' => 0);
             $countServers = $this->db->prepare('SELECT * FROM ga_servers WHERE ban = :ban and status = :status');
             $countServers->execute($sort_where_count);
-            $count = $countServers->rowCount();
-        }
 
+        }
+        $count = $countServers->rowCount();
 
         $pagination = new Pagination();
         $per_page = $settings['global_settings']['count_servers_main'];

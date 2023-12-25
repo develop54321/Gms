@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: gms-db:3306
--- Время создания: Дек 22 2023 г., 04:49
+-- Время создания: Дек 25 2023 г., 04:57
 -- Версия сервера: 5.7.44
 -- Версия PHP: 8.1.15
 
@@ -20,20 +20,6 @@ SET time_zone = "+00:00";
 --
 -- База данных: `app_db`
 --
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `ga_backup`
---
-
-CREATE TABLE `ga_backup` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `date_create` int(11) NOT NULL,
-  `hash` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -188,7 +174,7 @@ CREATE TABLE `ga_pay_methods` (
 --
 
 INSERT INTO `ga_pay_methods` (`id`, `status`, `name`, `content`, `typeCode`) VALUES
-(1, 1, 'Robokassa', '{\"login\":\"\",\"password1\":\"\",\"password2\":\"\"}', 'robokassa'),
+(1, 0, 'Robokassa', '{\"login\":\"\",\"password1\":\"\",\"password2\":\"\"}', 'robokassa'),
 (2, 0, 'UnitPay', '{\"public_key\":\"\",\"secret_key\":\"\"}', 'unitpay'),
 (3, 0, 'Free-Kassa', '{\"fk_id\":\"\",\"fk_key1\":\"\",\"fk_key2\":\"\"}', 'freekassa'),
 (4, 0, 'Qiwi p2p', '{\"public_key\":\"\",\"secret_key\":\"\"}', 'qiwi_p2p');
@@ -258,7 +244,7 @@ INSERT INTO `ga_services` (`id`, `name`, `type`, `period`, `price`, `params`) VA
 (6, 'Gamemenu на 30 дней', 'gamemenu', 30, 100, ''),
 (7, '100 Голосов для сервера', 'votes', 100, 1, ''),
 (8, 'Разбан сервера с бана', 'razz', 0, 1, ''),
-(9, '123', 'top', 132, 200, '');
+(10, 'Boost 1 круг', 'boost', 1, 15, '');
 
 -- --------------------------------------------------------
 
@@ -278,7 +264,7 @@ CREATE TABLE `ga_settings` (
 --
 
 INSERT INTO `ga_settings` (`id`, `status_site`, `last_update_servers`, `content`) VALUES
-(1, 1, 1703133063, '{\"global_settings\":{\"site_name\":\"Gms - \\u0432\\u0435\\u0431 \\u0434\\u0432\\u0438\\u0436\\u043e\\u043a\",\"expired_time_payment\":\"1\",\"auto_add_server\":\"1\",\"count_servers_main\":\"10\",\"count_servers_top\":\"5\",\"count_servers_vip\":\"50\",\"count_servers_boost\":\"30\",\"count_servers_color\":\"20\",\"count_servers_gamemenu\":\"5\",\"top_on\":\"1\",\"boost_on\":\"1\",\"vip_on\":\"1\",\"color_on\":\"1\",\"gamemenu_on\":\"1\",\"votes_on\":\"1\",\"cron_key\":\"123\",\"auto_backup_database\":\"0\"},\"comments\":{\"guest_allow\":\"0\",\"moderation\":\"0\"}}');
+(1, 1, 1703478024, '{\"global_settings\":{\"site_name\":\"Gms - \\u0432\\u0435\\u0431 \\u0434\\u0432\\u0438\\u0436\\u043e\\u043a\",\"expired_time_payment\":\"1\",\"auto_add_server\":\"1\",\"count_servers_main\":\"10\",\"count_servers_top\":\"5\",\"count_servers_vip\":\"50\",\"count_servers_boost\":\"30\",\"count_servers_color\":\"20\",\"count_servers_gamemenu\":\"5\",\"top_on\":\"1\",\"boost_on\":\"1\",\"vip_on\":\"1\",\"color_on\":\"1\",\"gamemenu_on\":\"1\",\"votes_on\":\"1\",\"cron_key\":\"123\",\"auto_backup_database\":\"0\"},\"comments\":{\"guest_allow\":\"0\",\"moderation\":\"0\"}}');
 
 -- --------------------------------------------------------
 
@@ -294,7 +280,7 @@ CREATE TABLE `ga_users` (
   `password` varchar(300) NOT NULL,
   `email` varchar(300) NOT NULL,
   `hash` varchar(300) DEFAULT NULL,
-  `balance` decimal(11,0) NOT NULL DEFAULT '9',
+  `balance` decimal(11,0) NOT NULL DEFAULT '0',
   `img` varchar(300) DEFAULT '/public/img/avatar.png',
   `date_reg` int(11) NOT NULL,
   `params` text,
@@ -307,17 +293,11 @@ CREATE TABLE `ga_users` (
 --
 
 INSERT INTO `ga_users` (`id`, `lastname`, `firstname`, `role`, `password`, `email`, `hash`, `balance`, `img`, `date_reg`, `params`, `api_login`, `reset_code`) VALUES
-(4, 'System', 'Admin', 'admin', '$2y$10$ZtVHAPch2ebEQQwleSLId.W4Hr1F/qyaLqLihN63rDFTDVVeXHbpO', 'admin@gamems.ru', 'a87ff679a2f3e71d9181a67b7542122c', 0, '/public/img/avatar.png	', 1629893904, '{\"key_api\":\"<br \\/><b>Notice<\\/b>:  Trying to access array offset on value of type null in <b>\\/home\\/danil\\/sites\\/gms.loc\\/template\\/new-style\\/control\\/users\\/edit.tpl<\\/b> on line <b>78<\\/b><br \\/>\",\"discount_api\":\"\"}', '', NULL);
+(4, 'System', 'Admin', 'admin', '$2y$10$ZtVHAPch2ebEQQwleSLId.W4Hr1F/qyaLqLihN63rDFTDVVeXHbpO', 'admin@gamems.ru', 'a87ff679a2f3e71d9181a67b7542122c', 0, '/public/img/avatar.png	', 1629893904, '', '', NULL);
 
 --
 -- Индексы сохранённых таблиц
 --
-
---
--- Индексы таблицы `ga_backup`
---
-ALTER TABLE `ga_backup`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `ga_code_colors`
@@ -396,12 +376,6 @@ ALTER TABLE `ga_users`
 --
 
 --
--- AUTO_INCREMENT для таблицы `ga_backup`
---
-ALTER TABLE `ga_backup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT для таблицы `ga_code_colors`
 --
 ALTER TABLE `ga_code_colors`
@@ -441,7 +415,7 @@ ALTER TABLE `ga_pages`
 -- AUTO_INCREMENT для таблицы `ga_pay_logs`
 --
 ALTER TABLE `ga_pay_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `ga_pay_methods`
@@ -459,7 +433,7 @@ ALTER TABLE `ga_servers`
 -- AUTO_INCREMENT для таблицы `ga_services`
 --
 ALTER TABLE `ga_services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT для таблицы `ga_settings`
@@ -471,7 +445,7 @@ ALTER TABLE `ga_settings`
 -- AUTO_INCREMENT для таблицы `ga_users`
 --
 ALTER TABLE `ga_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

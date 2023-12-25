@@ -349,8 +349,8 @@ class UserController extends BaseController
 
                 $sql = "UPDATE ga_users SET reset_code = :reset_code WHERE email = :email";
                 $update = $this->db->prepare($sql);
-                $update->bindParam(':reset_code', $reset_code, PDO::PARAM_STR);
-                $update->bindParam(':email', $email, PDO::PARAM_INT);
+                $update->bindParam(':reset_code', $reset_code);
+                $update->bindParam(':email', $email);
                 $update->execute();
 
                 $site_url = $_SERVER['SERVER_NAME'];

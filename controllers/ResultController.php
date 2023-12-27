@@ -2,13 +2,38 @@
 
 namespace controllers;
 
+use app\models\user\users_pay_logs\UsersPayLogs;
 use components\Services;
 use components\User;
 use core\BaseController;
+use yii\web\NotFoundHttpException;
 
 class ResultController extends BaseController
 {
 
+    const SECRET_KEY = "kMo7VdHS7J9Dzk5cQ+w2VgU6";
+    public $enableCsrfValidation = false;
+    public function actionYoumoney(){
+
+
+
+        $payLog = UsersPayLogs::findOne(['id' => $idOrder, 'status' => 'WAIT']);
+
+
+        $userInfo = \app\models\user\User::findOne(['id' => $payLog['id_user']]);
+
+        $balance = $userInfo['balance'] + $payLog['price'];
+        $userInfo->updateAttributes(['balance' => $balance]);
+
+
+
+        UsersPayLogs::updateAll([
+            'status' => 'SUCCEEDED',
+        ], ['id' => $idOrder]);
+
+
+        exit();
+    }
 
     public function index()
     {
@@ -152,6 +177,44 @@ class ResultController extends BaseController
                     exit(json_encode(array("result" => array("message" => "check"),)));
                 }
                 break;
+
+
+
+            case "youmoney":
+                if (!$_POST) exit("Method not allowed");
+
+
+                $typeCode = 'yoomoney';
+                $getInfoPayment = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE typeCode = :typeCode');
+                $getInfoPayment->execute(array(':typeCode' => $typeCode));
+                $getInfoPayment = $getInfoPayment->fetch();
+                $getInfoPayment = json_decode($getInfoPayment['content'], true);
+
+
+                $sha1 = sha1( $_POST['notification_type'] . '&'. $_POST['operation_id']. '&' . $_POST['amount'] . '&643&' . $_POST['datetime'] . '&'. $_POST['sender'] . '&' . $_POST['codepro'] . '&' . $getInfoPayment['secret_key']. '&' . $_POST['label'] );
+
+                if ($sha1 != $_POST['sha1_hash'] ) {
+                    exit();
+                }
+
+                $amount = $_POST['amount'];
+                $idOrder = $_POST['label'];
+
+                $getInfoPay = $this->db->prepare('SELECT * FROM ga_pay_logs WHERE id = :id');
+                $getInfoPay->execute(array(':id' => $idOrder));
+                $getInfoPay = $getInfoPay->fetch();
+                $getInfoPay = json_decode($getInfoPay['content'], true);
+
+                if ($getInfoPay['type_pay'] == '$idOrder') {
+                    $user->refill(['inv_id' => $idOrder, 'amout' => $amount]);
+                } else {
+                    $services->checkService(['inv_id' => $idOrder, 'price' => $amount, 'pay_methods' => $typeCode]);
+                }
+
+                break;
+
+
+
 
             default:
                 exit("error");

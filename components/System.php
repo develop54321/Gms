@@ -34,8 +34,7 @@ class System extends BaseController
     function getUrl()
     {
         $url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';
-        $url = $url . $_SERVER['SERVER_NAME'];
-        return $url;
+        return $url . $_SERVER['SERVER_NAME'];
     }
 
     // Add function showbar

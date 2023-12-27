@@ -129,6 +129,8 @@ class PaymethodsController extends AbstractController{
     $content = json_encode(['login' => $_POST['login'], 'password1' => $_POST['password1'], 'password2' => $_POST['password2']]);    
     }elseif($getInfoPaymethods['typeCode'] == 'freekassa'){
     $content = json_encode(['fk_id' => $_POST['fk_id'], 'fk_key1' => $_POST['fk_key1'], 'fk_key2' => $_POST['fk_key2']]);    
+    }elseif($getInfoPaymethods['typeCode'] == 'yoomoney'){
+    $content = json_encode(['receiver' => $_POST['receiver'], 'secret_key' => $_POST['secret_key']]);
     }
 
     $sql = "UPDATE ga_pay_methods SET status = :status, content = :content WHERE id= :id";

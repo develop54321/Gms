@@ -34,11 +34,12 @@ abstract class BaseController
 
     }
 
-    public function isAjax()
+    public function isAjax(): bool
     {
         if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             return true;
         }
 
+        return false;
     }
 }

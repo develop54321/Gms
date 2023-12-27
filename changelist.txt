@@ -1,4 +1,7 @@
 -delete qiwi p2p pay method
+-Добавлена новая игра cs go 2
+-удалена команда php bin/console qiwi
+
 
 21.12.2023
 -Исправления ошибок в админ панели

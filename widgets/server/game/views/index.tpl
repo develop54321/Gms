@@ -14,4 +14,6 @@
 <img src="/public/img/gameicons/samp.jpg" style="width: 16px;"/>
 <?php elseif($game == 'mta'):?>
 <img src="/public/img/gameicons/mta.png" style="width: 16px;"/>
+<?php elseif($game == 'csgo2'):?>
+<img src="/public/img/gameicons/csgo2.png" style="width: 16px;"/>
 <?php endif;?>

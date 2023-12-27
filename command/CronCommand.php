@@ -29,7 +29,7 @@ class CronCommand extends Command
         $Query = new SourceQuery();
         $Info = array();
         foreach ($getServers as $row) {
-            if (in_array($row['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust'])) {
+            if (in_array($row['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])) {
                 try {
                     $Query->Connect($row['ip'], $row['port'], 2, SourceQuery::GOLDSOURCE);
                     $Info = $Query->GetInfo();

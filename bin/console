@@ -2,7 +2,8 @@
 <?php
 
 require __DIR__.'/../vendor/autoload.php';
-require_once "config.php";
+require_once __DIR__."/../config.php";
+
 
 //use src\core\Database;
 use Symfony\Component\Console\Application;

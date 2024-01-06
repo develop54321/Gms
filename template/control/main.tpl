@@ -206,7 +206,7 @@
 
         <script src="/public/control/js/jquery.core.js"></script>
         <script src="/public/control/js/jquery.app.js"></script>
-        <script src="/public/js/main.js"></script>
+        <script src="/public/js/control.js"></script>
         <script src="/public/control/plugins/bootstrap-inputmask/bootstrap-inputmask.min.js" type="text/javascript"></script>
 
     </body>

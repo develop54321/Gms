@@ -32,9 +32,9 @@ class ServicesController extends AbstractController
             $getServices = $this->db->query('SELECT * FROM ga_services');
             $getServices = $getServices->fetchAll();
 
-            $content = $this->view->renderPartial("control/services/index", ['services' => $getServices]);
+            $content = $this->view->renderPartial("services/index", ['services' => $getServices]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
 
     }
@@ -70,9 +70,9 @@ class ServicesController extends AbstractController
 
         } else {
 
-            $content = $this->view->renderPartial("control/services/add", []);
+            $content = $this->view->renderPartial("services/add", []);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
 
     }
@@ -126,9 +126,9 @@ class ServicesController extends AbstractController
         } else {
 
 
-            $content = $this->view->renderPartial("control/services/edit", ['data' => $getInfoServices]);
+            $content = $this->view->renderPartial("services/edit", ['data' => $getInfoServices]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
     }

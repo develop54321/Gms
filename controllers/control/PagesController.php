@@ -42,9 +42,9 @@ class PagesController extends AbstractController
             $getComments = $this->db->query('SELECT * FROM ga_pages ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
             $getComments = $getComments->fetchAll();
 
-            $content = $this->view->renderPartial("control/pages/index", ['comments' => $getComments, 'ViewPagination' => $result['ViewPagination']]);
+            $content = $this->view->renderPartial("pages/index", ['comments' => $getComments, 'ViewPagination' => $result['ViewPagination']]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
 
     }
@@ -82,9 +82,9 @@ class PagesController extends AbstractController
         } else {
 
 
-            $content = $this->view->renderPartial("control/pages/add", []);
+            $content = $this->view->renderPartial("pages/add", []);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
     }
@@ -133,9 +133,9 @@ class PagesController extends AbstractController
         } else {
 
 
-            $content = $this->view->renderPartial("control/pages/edit", ['data' => $getInfoPage]);
+            $content = $this->view->renderPartial("pages/edit", ['data' => $getInfoPage]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
     }

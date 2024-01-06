@@ -15,4 +15,12 @@ class Servers
         return $imgMap;
     }
 
+
+    public static function parseAddress($value): array
+    {
+        $explode = explode(":", $value);
+
+        return ["ip" => $explode[0], "port" => $explode[1]];
+    }
+
 }

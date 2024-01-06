@@ -23,8 +23,8 @@ class CodecolorsController extends AbstractController
         $getCodeColors = $this->db->prepare('SELECT * FROM ga_code_colors WHERE activ = :activ');
         $getCodeColors->execute(array(':activ' => $activcolor));
         $getCodeColors = $getCodeColors->fetchAll();
-        $content = $this->view->renderPartial("control/codecolors/index", ['CodeColors' => $getCodeColors]);
-        $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+        $content = $this->view->renderPartial("codecolors/index", ['CodeColors' => $getCodeColors]);
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
 
     public function add()
@@ -48,8 +48,8 @@ class CodecolorsController extends AbstractController
             $answer['success'] = "Цвет успешно добавлен";
             exit(json_encode($answer));
         } else {
-            $content = $this->view->renderPartial("control/codecolors/add", []);
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $content = $this->view->renderPartial("codecolors/add", []);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
     }
 
@@ -82,8 +82,8 @@ class CodecolorsController extends AbstractController
             $answer['success'] = "Цвет успешно изменен";
             exit(json_encode($answer));
         } else {
-            $content = $this->view->renderPartial("control/codecolors/edit", ['data' => $getInfoCodeColors]);
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $content = $this->view->renderPartial("codecolors/edit", ['data' => $getInfoCodeColors]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
     }
 

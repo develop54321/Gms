@@ -12,10 +12,7 @@ class IndexController extends AbstractController
     public function index()
     {
         $user = new User();
-        if (!$user->isAuth()) {
-            $this->login();
-            return false;
-        } else {
+
             $getUserPrfile = $user->getProfile();
             if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
@@ -53,11 +50,11 @@ class IndexController extends AbstractController
             $counts[] = ['type' => 'countUsers', 'countUsers' => $countUsers];
             $counts[] = ['type' => 'countServers', 'countServers' => $countServers];
 
-            $content = $this->view->renderPartial("control/index", ['counts' => $counts, 'notification' => $notification, 'settings' => $settings, 'sizeDatabase' => $sizeDatabase[1], 'versionMysql' => $getVersionMysql[0], 'version' => VERSION]);
+            $content = $this->view->renderPartial("index", ['counts' => $counts, 'notification' => $notification, 'settings' => $settings, 'sizeDatabase' => $sizeDatabase[1], 'versionMysql' => $getVersionMysql[0], 'version' => VERSION]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
-        }
+
     }
 
     public function login()
@@ -69,25 +66,28 @@ class IndexController extends AbstractController
 
             $email = strip_tags($_POST['email']);
             $password = strip_tags($_POST['password']);
-            $password = md5($password);
 
 
             $role = 'admin';
-            $check = $this->db->prepare('SELECT * FROM ga_users WHERE email = :email and password = :password and role = :role');
+            $check = $this->db->prepare('SELECT password, email FROM ga_users WHERE email = :email and role = :role');
             $check->bindValue(":email", $email);
-            $check->bindValue(":password", $password);
             $check->bindValue(":role", $role);
             $check->execute();
-            if ($check->rowCount() == '0') {
+            if ($row = $check->fetch()) {
+                if (!password_verify($password, $row['password'])) {
+                    $answer['status'] = "error";
+                    $answer['error'] = "Неправильный пароль или логин";
+                    exit(json_encode($answer));
+                }
+            } else {
                 $answer['status'] = "error";
                 $answer['error'] = "Неправильный пароль или логин";
                 exit(json_encode($answer));
             }
 
 
-            $info_user = $this->db->prepare('SELECT * FROM ga_users WHERE email = :email and password = :password');
+            $info_user = $this->db->prepare('SELECT * FROM ga_users WHERE email = :email');
             $info_user->bindValue(":email", $email);
-            $info_user->bindValue(":password", $password);
             $info_user->execute();
             $data_user = $info_user->fetch();
 
@@ -108,7 +108,7 @@ class IndexController extends AbstractController
 
 
         } else {
-            $this->view->render("control/login", ['title' => $title]);
+            $this->view->render("login", ['title' => $title]);
         }
     }
 }

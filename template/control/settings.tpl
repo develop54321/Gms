@@ -12,27 +12,24 @@
 <h4 class="m-t-0 header-title"><b>Настройки</b></h4>
 
 
-<div class="col-lg-12"> 
-                                <div class="tabs-vertical-env"> 
-                                    <ul class="nav tabs-vertical"> 
+<div class="col-lg-12">
+                                <div class="tabs-vertical-env">
+                                    <ul class="nav tabs-vertical">
                                         <li class="active">
                                             <a href="#v-home" data-toggle="tab" aria-expanded="false">Основные</a>
-                                        </li> 
+                                        </li>
                                         <li class="">
                                             <a href="#v-services" data-toggle="tab" aria-expanded="false">Услуги</a>
-                                        </li> 
+                                        </li>
                                         <li class="">
                                             <a href="#v-comments" data-toggle="tab" aria-expanded="false">Комментарии</a>
-                                        </li> 
-                                        <li class="">
-                                            <a href="#v-settings" data-toggle="tab" aria-expanded="false">Системные</a>
-                                        </li> 
-                                    </ul> 
+                                        </li>
+                                    </ul>
 
-<div class="tab-content" style="width: 100%;"> 
+<div class="tab-content" style="width: 100%;">
 
-<div class="tab-pane active" id="v-home"> 
-          <form id="settingsForm" method="post">                              
+<div class="tab-pane active" id="v-home">
+          <form id="settingsForm" method="post">
 <div class="row">
  <div class="col-md-6">
 <div class="form-group">
@@ -63,17 +60,17 @@
 </div>
 
 
-                				
-</div> 
+
+</div>
 </div>
 
-</div> 
+</div>
 
 
-<div class="tab-pane" id="v-services"> 
+<div class="tab-pane" id="v-services">
 <div class="row">
  <div class="col-md-6">
-                          
+
 
 <div class="form-group">
 <label >Кол-во серверов Top</label>
@@ -93,12 +90,12 @@
 <div class="form-group">
 <label >Кол-во серверов Color</label>
 <input type="int" name="global_settings[count_servers_color]" class="form-control" value="<?=$settings['global_settings']['count_servers_color'];?>">
-</div>                
-	                                            
+</div>
+
 <div class="form-group">
 <label >Кол-во серверов Gamemenu</label>
 <input type="int" name="global_settings[count_servers_gamemenu]" class="form-control" value="<?=$settings['global_settings']['count_servers_gamemenu'];?>">
-</div>                       
+</div>
 
 </div>
 
@@ -134,16 +131,16 @@
 <div class="form-group">
 <label >Вкл/Выкл Покупку голосов</label>
 <input type="int" name="global_settings[votes_on]" class="form-control" value="<?=$settings['global_settings']['votes_on'];?>">
-</div>  
-                   				
+</div>
+
 </div>
 </div>
 </div>
 
-<div class="tab-pane" id="v-comments"> 
+<div class="tab-pane" id="v-comments">
 <div class="row">
  <div class="col-md-6">
-                                                                     
+
 <div class="form-group">
 <label>Разрешить гостям оставлять комментарии</label>
 <select class="form-control" name="comments[guest_allow]" >
@@ -167,46 +164,25 @@
 </div>
 
 
- 
-</div>
-</div>
- 
-<div class="tab-pane" id="v-settings"> 
-<div class="row">
- <div class="col-md-6">
-<div class="form-group">
-<label>Cron ключ</label>
-<input type="text" name="global_settings[cron_key]" class="form-control" value="<?=$settings['global_settings']['cron_key'];?>">
-</div>	                                                                                                                                     				
-</div> 
 
-<div class="col-md-6">
- <div class="form-group">
-<label>Автоматическое создание резервной копии базы</label>
-<select class="form-control" name="global_settings[auto_backup_database]">
-<option value="1">Да</option>
-<option value="0" <?php if($settings['global_settings']['auto_backup_database'] == '0'):?>selected=""<?php endif;?>>Нет</option>
-</select>
 </div>
 </div>
 
-</div>
-</div> 
 
 
 <div class="form-group">
 <button type="submit" class="btn btn-primary btn-block text-uppercase waves-effect waves-light">Сохранить</button>
 </div>
 </form>
-	    
-                                    </div> 
-                                </div> 
-                            </div> 
+
+                                    </div>
+                                </div>
+                            </div>
 
 
 
- <div class="clearfix"></div>				
-                        	
+ <div class="clearfix"></div>
+
 </div>
 </div>
 
@@ -218,11 +194,11 @@ $('#settingsForm').ajaxForm({
         case "error":
         ShowModal(data.error, 'answer', 'error');
         break;
-        
+
         case "success":
         ShowModal(data.success, 'answer', 'success');
         break;
      }
-   },                          
-}); 
+   },
+});
 </script>

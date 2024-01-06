@@ -77,9 +77,9 @@ class PaylogsController extends AbstractController
             $getPayMethods = $getPayMethods->fetchAll();
 
             $userPay = '';
-            $content = $this->view->renderPartial("control/paylogs/index", ['userPay' => $userPay, 'data' => $newArr, 'PayMethods' => $getPayMethods, 'methodPay' => '', 'statusPay' => '', 'typePay' => '', 'ViewPagination' => $result['ViewPagination']]);
+            $content = $this->view->renderPartial("paylogs/index", ['userPay' => $userPay, 'data' => $newArr, 'PayMethods' => $getPayMethods, 'methodPay' => '', 'statusPay' => '', 'typePay' => '', 'ViewPagination' => $result['ViewPagination']]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
 
     }
@@ -224,9 +224,9 @@ class PaylogsController extends AbstractController
             $getPayMethods = $getPayMethods->fetchAll();
 
 
-            $content = $this->view->renderPartial("control/paylogs/index", ['filter' => $filter, 'userPay' => $userPay, 'methodPay' => $methodPay, 'PayMethods' => $getPayMethods, 'statusPay' => $statusPay, 'typePay' => $typePay, 'data' => $newArr, 'ViewPagination' => $result['ViewPagination']]);
+            $content = $this->view->renderPartial("paylogs/index", ['filter' => $filter, 'userPay' => $userPay, 'methodPay' => $methodPay, 'PayMethods' => $getPayMethods, 'statusPay' => $statusPay, 'typePay' => $typePay, 'data' => $newArr, 'ViewPagination' => $result['ViewPagination']]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
 
     }
@@ -265,9 +265,9 @@ class PaylogsController extends AbstractController
 
         } else {
 
-            $content = $this->view->renderPartial("control/partners/add", []);
+            $content = $this->view->renderPartial("partners/add", []);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
 
     }

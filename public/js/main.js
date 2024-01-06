@@ -65,3 +65,4 @@ function voteMinus(id){
        error: function(e) {alert(e)}
     });
 }
+

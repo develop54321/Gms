@@ -34,9 +34,9 @@ class NewsController extends AbstractController
         $getNews = $this->db->query('SELECT * FROM ga_news ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
         $getNews = $getNews->fetchAll();
 
-        $content = $this->view->renderPartial("control/news/index", ['news' => $getNews, 'ViewPagination' => $result['ViewPagination']]);
+        $content = $this->view->renderPartial("news/index", ['news' => $getNews, 'ViewPagination' => $result['ViewPagination']]);
 
-        $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
 
     }
 
@@ -73,9 +73,9 @@ class NewsController extends AbstractController
         } else {
 
 
-            $content = $this->view->renderPartial("control/news/add", []);
+            $content = $this->view->renderPartial("news/add", []);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
     }
@@ -124,9 +124,9 @@ class NewsController extends AbstractController
         } else {
 
 
-            $content = $this->view->renderPartial("control/news/edit", ['data' => $getInfoPost]);
+            $content = $this->view->renderPartial("news/edit", ['data' => $getInfoPost]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
     }

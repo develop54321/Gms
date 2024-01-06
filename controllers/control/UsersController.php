@@ -34,10 +34,10 @@ class UsersController extends AbstractController
             $getUsers->execute();
             $getUsers = $getUsers->fetchAll();
 
-            $content = $this->view->renderPartial("control/users/index", ['users' => $getUsers, 'action' => 'search']);
+            $content = $this->view->renderPartial("users/index", ['users' => $getUsers, 'action' => 'search']);
         }
 
-        $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
 
 
@@ -72,9 +72,9 @@ class UsersController extends AbstractController
             $getUsers = $this->db->query('SELECT * FROM ga_users ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
             $getUsers = $getUsers->fetchAll();
 
-            $content = $this->view->renderPartial("control/users/index", ['users' => $getUsers, 'ViewPagination' => $result['ViewPagination']]);
+            $content = $this->view->renderPartial("users/index", ['users' => $getUsers, 'ViewPagination' => $result['ViewPagination']]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
 
     }
@@ -166,9 +166,9 @@ class UsersController extends AbstractController
         } else {
 
             $api_params = json_decode($getInfoUser['params'], true);
-            $content = $this->view->renderPartial("control/users/edit", ['data' => $getInfoUser, 'api_params' => $api_params]);
+            $content = $this->view->renderPartial("users/edit", ['data' => $getInfoUser, 'api_params' => $api_params]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
     }

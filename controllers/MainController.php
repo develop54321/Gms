@@ -38,10 +38,32 @@ class MainController extends BaseController
                 $img_map = Servers::getImagePath($getInfoServer['map'], $getInfoServer['game']);
 
 
-                $topServers[] = ['id' => $getInfoServer['id'], 'ip' => $getInfoServer['ip'], 'port' => $getInfoServer['port'], 'hostname' => $getInfoServer['hostname'], 'img_map' => $img_map, 'map' => $getInfoServer['map'], 'players' => $getInfoServer['players'], 'max_players' => $getInfoServer['max_players'], 'color_enabled' => $getInfoServer['color_enabled']];
+                $topServers[] = [
+                    'id' => $getInfoServer['id'],
+                    'ip' => $getInfoServer['ip'],
+                    'port' => $getInfoServer['port'],
+                    'hostname' => $getInfoServer['hostname'],
+                    'img_map' => $img_map,
+                    'map' => $getInfoServer['map'],
+                    'players' => $getInfoServer['players'],
+                    'max_players' => $getInfoServer['max_players'],
+                    'color_enabled' => $getInfoServer['color_enabled'],
+                    'status' => $getInfoServer['status']
+                ];
             } else {
                 $img_map = '/public/img/no_map.png';
-                $topServers[] = ['id' => '', 'hostname' => 'Место свободно', 'ip' => '127.0.1', 'port' => 27015, 'img_map' => $img_map, 'map' => null, 'players' => 0, 'max_players' => 0, 'color_enabled' => null];
+                $topServers[] = [
+                    'id' => '',
+                    'hostname' => 'Место свободно',
+                    'ip' => '127.0.1',
+                    'port' => 27015,
+                    'img_map' => $img_map,
+                    'map' => null,
+                    'players' => 0,
+                    'max_players' => 0,
+                    'color_enabled' => null,
+                    'status' => 0
+                ];
             }
 
         }

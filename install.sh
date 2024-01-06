@@ -41,6 +41,6 @@ connect_mysql
 
 function success_install() {
   echo "Спасибо за установку!\n"
-  echo "Документацией по работе скриптом, Вы можете ознакомиться на сайте: https://gam-ems.ru"
+  echo "Документацией по работе скриптом, Вы можете ознакомиться на сайте: https://game-ms.ru"
 }
 success_install

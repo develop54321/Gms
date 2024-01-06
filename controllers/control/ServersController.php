@@ -58,10 +58,10 @@ class ServersController extends AbstractController
         $getServers = $getServers->fetchAll();
 
 
-        $content = $this->view->renderPartial("control/servers/index", ['ViewPagination' => $result['ViewPagination'], 'filter' => $filter, 'servers' => $getServers]);
+        $content = $this->view->renderPartial("servers/index", ['ViewPagination' => $result['ViewPagination'], 'filter' => $filter, 'servers' => $getServers]);
 
 
-        $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
 
 
@@ -102,9 +102,9 @@ class ServersController extends AbstractController
             $getServers = $this->db->query('SELECT * FROM ga_servers ORDER BY vip_enabled DESC, rating DESC, players DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
             $getServers = $getServers->fetchAll();
             $filter['count'] = count($getServers);
-            $content = $this->view->renderPartial("control/servers/index", ['filter' => $filter, 'servers' => $getServers, 'ViewPagination' => $result['ViewPagination']]);
+            $content = $this->view->renderPartial("servers/index", ['filter' => $filter, 'servers' => $getServers, 'ViewPagination' => $result['ViewPagination']]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
 
     }
@@ -235,9 +235,9 @@ class ServersController extends AbstractController
             }
 
 
-            $content = $this->view->renderPartial("control/servers/edit", ['topPlaces' => $topPlaces, 'data' => $getInfoServerS, 'games' => $getGames]);
+            $content = $this->view->renderPartial("servers/edit", ['topPlaces' => $topPlaces, 'data' => $getInfoServerS, 'games' => $getGames]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
     }

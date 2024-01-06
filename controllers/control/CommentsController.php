@@ -49,10 +49,10 @@ class CommentsController extends AbstractController
         $countComments = $countComments->fetchAll();
 
 
-        $content = $this->view->renderPartial("control/comments/index", ['ViewPagination' => $result['ViewPagination'], 'filter' => $filter, 'comments' => $countComments]);
+        $content = $this->view->renderPartial("comments/index", ['ViewPagination' => $result['ViewPagination'], 'filter' => $filter, 'comments' => $countComments]);
 
 
-        $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
 
 
@@ -92,9 +92,9 @@ class CommentsController extends AbstractController
             $getComments = $this->db->query('SELECT * FROM ga_comments ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
             $getComments = $getComments->fetchAll();
             $filter['count'] = count($getComments);
-            $content = $this->view->renderPartial("control/comments/index", ['filter' => $filter, 'comments' => $getComments, 'ViewPagination' => $result['ViewPagination']]);
+            $content = $this->view->renderPartial("comments/index", ['filter' => $filter, 'comments' => $getComments, 'ViewPagination' => $result['ViewPagination']]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
 
     }
@@ -146,9 +146,9 @@ class CommentsController extends AbstractController
         } else {
 
 
-            $content = $this->view->renderPartial("control/comments/edit", ['data' => $getInfoComments]);
+            $content = $this->view->renderPartial("comments/edit", ['data' => $getInfoComments]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
     }

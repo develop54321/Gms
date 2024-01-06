@@ -116,6 +116,6 @@ $('#authForm').ajaxForm({
 
         <script src="/public/control/js/jquery.core.js"></script>
         <script src="/public/control/js/jquery.app.js"></script>
-   <script src="/public/js/main.js"></script>
+   <script src="/public/js/control.js"></script>
 	</body>
 </html>

@@ -38,7 +38,7 @@ class System extends BaseController
     }
 
     // Add function showbar
-    function showbar($players, $maxplayers)
+    function showbar($players, $maxplayers): string
     {
         if ($maxplayers > 0) {
             $full_off = round(($players / $maxplayers) * 100);
@@ -64,7 +64,7 @@ class System extends BaseController
 
     // End
 
-    function generate_password($number)
+    function generate_password($number): string
     {
         $arr = array('a', 'b', 'c', 'd', 'e', 'f',
             'g', 'h', 'i', 'j', 'k', 'l',

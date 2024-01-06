@@ -26,9 +26,9 @@ class PaymethodsController extends AbstractController
         $payMethods = $getPayMethods->fetchAll();
 
 
-        $content = $this->view->renderPartial("control/paymethods/index", ['paymethods' => $payMethods]);
+        $content = $this->view->renderPartial("paymethods/index", ['paymethods' => $payMethods]);
 
-        $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
 
     public function add()
@@ -72,9 +72,9 @@ class PaymethodsController extends AbstractController
             $getPayMethods = $this->db->query('SELECT * FROM ga_pay_methods WHERE status = "0"');
             $getPayMethods = $getPayMethods->fetchAll();
 
-            $content = $this->view->renderPartial("control/paymethods/add", ['PayMethods' => $getPayMethods]);
+            $content = $this->view->renderPartial("paymethods/add", ['PayMethods' => $getPayMethods]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
 
     }
@@ -151,9 +151,9 @@ class PaymethodsController extends AbstractController
             $system = new System();
             $url = $system->getUrl();
             $params = json_decode($getInfoPayMethods['content'], true);
-            $content = $this->view->renderPartial("control/paymethods/edit", ['data' => $getInfoPayMethods, 'params' => $params, 'url' => $url]);
+            $content = $this->view->renderPartial("paymethods/edit", ['data' => $getInfoPayMethods, 'params' => $params, 'url' => $url]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
     }

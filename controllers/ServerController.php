@@ -116,7 +116,7 @@ class ServerController extends BaseController
     }
 
 
-    public function info()
+    public function info($address)
     {
         $user = new User();
         $IsAuth = $user->isAuth();
@@ -126,15 +126,16 @@ class ServerController extends BaseController
 
 
         $system = new System();
-        if (isset($_GET['id'])) $id = (int)$_GET['id'];
-        else parent::ShowError(404, "Сервер не найден!");
+
+        $parseAddress = Servers::parseAddress($address);
 
 
         $getInfoServer = $this->db->prepare('
-        SELECT s.id, s.map, s.game, s.hostname, s.country, s.id_user, s.status, s.players, s.max_players, s.ban, s.ip, s.port, s.date_add, s.rating, s.befirst_enabled, s.top_enabled, s.vip_enabled, s.color_enabled, s.boost, s.gamemenu_enabled, s.vip_expired_date, s.gamemenu_expired_date, g.game game_name
+        SELECT s.id, s.map, s.game, s.hostname, s.country, s.id_user, s.status, s.players, s.max_players, s.ban, s.ip, s.port, s.date_add, s.rating, s.befirst_enabled, s.top_enabled, s.vip_enabled, s.color_enabled, s.boost, s.gamemenu_enabled, s.vip_expired_date, s.gamemenu_expired_date, 
+               g.game game_name
         FROM ga_servers s LEFT JOIN ga_games g ON s.game = g.code 
-        WHERE s.id = :id');
-        $getInfoServer->execute(array(':id' => $id));
+        WHERE s.ip = :ip and s.port = :port');
+        $getInfoServer->execute(array(':ip' => $parseAddress['ip'], ':port' => $parseAddress['port']));
         $getInfoServer = $getInfoServer->fetch();
 
         if (empty($getInfoServer)) parent::ShowError(404, "Сервер не найден!");
@@ -180,7 +181,7 @@ class ServerController extends BaseController
 
         $moderation = 1;
         $getComments = $this->db->prepare('SELECT c.id, c.text, u.lastname, u.firstname, c.date_create, u.img FROM ga_comments c LEFT JOIN ga_users u ON c.id_user=u.id WHERE c.id_server = :id_server and c.moderation = :moderation');
-        $getComments->execute(array(':id_server' => $id, ':moderation' => $moderation));
+        $getComments->execute(array(':id_server' => $getInfoServer['id'], ':moderation' => $moderation));
         $getComments = $getComments->fetchAll();
 
 

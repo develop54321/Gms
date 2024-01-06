@@ -2,6 +2,7 @@
 
 namespace controllers;
 
+use components\Flash;
 use components\Mail;
 use components\Pagination;
 use components\ReCaptcha;
@@ -108,6 +109,10 @@ class UserController extends BaseController
         if (!$user_profile) header("Location: /user/login");
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (!isset($_POST['typePayment'])){
+                Flash::add("danger", "Выберите способ оплаты");
+                return header("Location: /user/pay");
+            }
             $typePayment = (int)$_POST['typePayment'];
             $amout = (int)$_POST['amout'];
 
@@ -168,7 +173,7 @@ class UserController extends BaseController
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
 
-        $getMyServers = $this->db->prepare('SELECT s.id, s.map, s.hostname, s.moderation, s.ip, s.port, s.players, s.max_players, s.rating, s.ban, s.status, u.email FROM ga_servers s LEFT JOIN ga_users u ON s.id_user=u.id WHERE s.id_user = :id_user ORDER BY s.id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
+        $getMyServers = $this->db->prepare('SELECT s.id, s.map, s.hostname, s.game, s.moderation, s.ip, s.port, s.players, s.max_players, s.rating, s.ban, s.status, u.email FROM ga_servers s LEFT JOIN ga_users u ON s.id_user=u.id WHERE s.id_user = :id_user ORDER BY s.id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
         $getMyServers->execute(array(':id_user' => $user_profile['id']));
         $getMyServers = $getMyServers->fetchAll();
 

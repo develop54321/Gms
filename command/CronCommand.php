@@ -62,11 +62,17 @@ class CronCommand extends Command
                     ]);
                     $results = $GameQ->process();
                     $Info = array_shift($results);
-                    $hostname = utf8_decode($Info['servername']);
+
+
+                    if (!isset($Info['servername'])){
+                        throw new Exception("server is not available");
+                    }
+
+                    $hostname = iconv('WINDOWS-1251', 'UTF-8', utf8_decode($Info['servername']));
 
 
                     $status = 1;
-                    $mapName = $Info['gq_hostname'];
+                    $mapName = $Info['mapname'];
                     $players = $Info['gq_numplayers'];
                     $maxPlayers = $Info['gq_maxplayers'];
                     $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players WHERE id = :id";
@@ -79,6 +85,7 @@ class CronCommand extends Command
                     $update->bindParam(':id', $row['id']);
                     $update->execute();
                 } catch (Exception $e) {
+                 //   print_r($e->getMessage());
                     $Exception = $e;
                     $status = 0;
                     $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";

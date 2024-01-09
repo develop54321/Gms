@@ -47,8 +47,13 @@ class IndexController extends AbstractController
             $countCommentsModeration = $countCommentsModeration->rowCount();
             if ($countCommentsModeration != '0') $notification[] = ['type' => 'moderationComments', 'count' => $countCommentsModeration];
 
+
+            $countActiveServers = $this->db->query('SELECT * FROM ga_servers WHERE status = 1');
+            $countActiveServers = $countActiveServers->rowCount();
+
             $counts[] = ['type' => 'countUsers', 'countUsers' => $countUsers];
             $counts[] = ['type' => 'countServers', 'countServers' => $countServers];
+            $counts[] = ['type' => 'countActiveServers', 'countActiveServers' => $countActiveServers];
 
             $content = $this->view->renderPartial("index", ['counts' => $counts, 'notification' => $notification, 'settings' => $settings, 'sizeDatabase' => $sizeDatabase[1], 'versionMysql' => $getVersionMysql[0], 'version' => VERSION]);
 

@@ -8,14 +8,8 @@ use PDO;
 
 class ApiController extends BaseController
 {
-
-
-    public function actionIndex()
+    public function index()
     {
-
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
         $spQueryFields = array('login', 'sv', 'services', 'key', 'game');
         foreach ($spQueryFields as $spFieldName) {
             if (!isset($_REQUEST[$spFieldName])) {

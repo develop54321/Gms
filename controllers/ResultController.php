@@ -11,8 +11,6 @@ use yii\web\NotFoundHttpException;
 class ResultController extends BaseController
 {
 
-    const SECRET_KEY = "kMo7VdHS7J9Dzk5cQ+w2VgU6";
-    public $enableCsrfValidation = false;
     public function actionYoumoney(){
 
 

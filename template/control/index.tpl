@@ -67,12 +67,12 @@
                                      <?php if($n['type'] == 'moderationServers' && $n['count'] != '0'):?>
                                      <li class="list-group-item">
                                      <span class="badge badge-danger"><?php echo $n['count'];?></span>
-                                     Сервера ожидающую проверку: 
+                                     Серверов ожидают проверку:
                                      </li>
                                      <?php elseif($n['type'] == 'moderationComments' && $n['count'] != '0'):?>
                                      <li class="list-group-item">
                                      <span class="badge badge-danger"><?php echo $n['count'];?></span>
-                                     Комментарьев ожидающую проверку: 
+                                         Комментариев ожидающую проверку:
                                      </li>
                                      <?php endif;?>
                                      <?php endforeach;?>
@@ -108,7 +108,11 @@
 <ul class="list-group">
 <?php foreach($counts as $c):?>
 <?php if($c['type'] == 'countServers'):?>
-<li class="list-group-item"><span class="badge badge-primary"><?php echo $c['countServers'];?></span>Всего серверов в базе: </li>
+<li class="list-group-item"><span class="badge badge-primary"><?php echo $c['countServers'];?></span>Всего серверов: </li>
+<?php endif;?>
+
+<?php if($c['type'] == 'countActiveServers'):?>
+<li class="list-group-item"><span class="badge badge-primary"><?php echo $c['countActiveServers'];?></span>Всего активных серверов: </li>
 <?php endif;?>
 
 <?php if($c['type'] == 'countUsers'):?>

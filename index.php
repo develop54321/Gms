@@ -20,7 +20,7 @@ session_start();
 require_once 'vendor/autoload.php';
 
 if (file_exists("config.php") === false){
-    exit("config.php not found");
+    header("Location: /install.php");
 }
 const ROOT_DIR = __DIR__ . "/";
 

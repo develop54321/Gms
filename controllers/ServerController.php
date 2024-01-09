@@ -77,7 +77,7 @@ class ServerController extends BaseController
             }
 
 
-            $country = $system->getCountry($ip);
+
 
             $user = new User();
             $id_user = 0;
@@ -94,8 +94,8 @@ class ServerController extends BaseController
                 $success_text = "Ваш сервер успешно добавлен, после проверки администратором она появиться в мониторинге";
             }
 
-            $this->db->exec("INSERT INTO ga_servers (status, moderation, id_user, game, ip, port, date_add, country, description) 
-    VALUES('$status', '$moderation','$id_user', '$game', '$ip', '$port', '" . time() . "', '$country', '$text')");
+            $this->db->exec("INSERT INTO ga_servers (status, moderation, id_user, game, ip, port, date_add, description) 
+    VALUES('$status', '$moderation','$id_user', '$game', '$ip', '$port', '" . time() . "', '$text')");
 
             $answer['status'] = "success";
             $answer['success'] = $success_text;
@@ -146,13 +146,7 @@ class ServerController extends BaseController
 
         $getInfoServer['img_map'] = Servers::getImagePath($getInfoServer['map'], $getInfoServer['game']);
 
-        $pathimg_country = 'public/img/flags/' . mb_strtolower($getInfoServer['country']) . '.png';
-        if (file_exists($pathimg_country)) {
-            $img_country = '/' . $pathimg_country;
-        } else {
-            $img_country = '/public/img/flags/unknown.png';
-        }
-        $getInfoServer['img_country'] = $img_country;
+
 
         # UserInfo
         if ($IsAuth) {
@@ -160,16 +154,15 @@ class ServerController extends BaseController
             $getInfoServer['userid'] = $user_profile['id'];
         }
 
-        $userLastName = null;
-        if ($getInfoServer['id_user'] != 0) {
-            $getInfoUser = $this->db->prepare('SELECT lastname FROM ga_users WHERE id = :id');
-            $getInfoUser->execute(array(':id' => $getInfoServer['id']));
+        $ownerName = null;
+        if ($getInfoServer['id_user'] !== 0) {
+            $getInfoUser = $this->db->prepare('SELECT email FROM ga_users WHERE id = :id');
+            $getInfoUser->execute(array(':id' => $getInfoServer['id_user']));
             $getInfoUser = $getInfoUser->fetch();
-
-            $userLastName = $getInfoUser['lastname'] ?? null;
-        } else {
-            $getInfoServer['userlastname'] = 'System';
+            $ownerName = Servers::hiddenOwnerEmail($getInfoUser['email']);
         }
+
+
 
         if ($getInfoServer['status'] == 1) {
             $getInfoServer['status'] = 'Online';
@@ -185,7 +178,7 @@ class ServerController extends BaseController
         $getComments = $getComments->fetchAll();
 
 
-        $content = $this->view->renderPartial("server/info", ['data' => $getInfoServer, 'comments' => $getComments, 'currentSession' => $currentSession, 'userLastName' => $userLastName]);
+        $content = $this->view->renderPartial("server/info", ['data' => $getInfoServer, 'comments' => $getComments, 'currentSession' => $currentSession, 'ownerName' => $ownerName]);
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
 

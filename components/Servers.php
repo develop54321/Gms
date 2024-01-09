@@ -23,4 +23,14 @@ class Servers
         return ["ip" => $explode[0], "port" => $explode[1]];
     }
 
+
+    public static function hiddenOwnerEmail(string  $value): string
+    {
+        list($username, $domain) = explode('@', $value);
+        $usernameLength = strlen($username);
+
+        $hiddenUsername = str_repeat('*', $usernameLength - 1) . substr($username, -1);
+
+        return $hiddenUsername . '@' . $domain;
+    }
 }

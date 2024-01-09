@@ -77,7 +77,7 @@
       <span class="badge badge-info">Партнер</span>
       <?php endif;?>
       </td>
-      <td><?php echo $row['balance'];?>р.</td>
+      <td><?php echo \widgets\money\Money::run($row['balance']);?></td>
       <td>
       <?php echo date("d:m:Y [H:i]", $row['date_reg']);?>
       </td>

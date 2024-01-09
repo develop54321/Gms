@@ -17,11 +17,9 @@ class UsersController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
+        $getUserProfile = $user->getProfile();
+        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
 
         $title = "Поиск пользователя";
 
@@ -47,18 +45,13 @@ class UsersController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
+        $getUserProfile = $user->getProfile();
+        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
 
         $title = "Пользователи";
 
-        if (parent::isAjax()) {
 
-
-        } else {
 
 
             $countUsers = $this->db->query('SELECT * FROM ga_users');
@@ -75,7 +68,7 @@ class UsersController extends AbstractController
             $content = $this->view->renderPartial("users/index", ['users' => $getUsers, 'ViewPagination' => $result['ViewPagination']]);
 
             $this->view->render("main", ['content' => $content, 'title' => $title]);
-        }
+
 
     }
 
@@ -85,8 +78,8 @@ class UsersController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
+        $getUserProfile = $user->getProfile();
+        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';

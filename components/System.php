@@ -64,7 +64,7 @@ class System extends BaseController
 
     // End
 
-    function generate_password($number): string
+    function generateCharacter($number): string
     {
         $arr = array('a', 'b', 'c', 'd', 'e', 'f',
             'g', 'h', 'i', 'j', 'k', 'l',
@@ -88,6 +88,17 @@ class System extends BaseController
             $pass .= $arr[$index];
         }
         return $pass;
+    }
+
+    function generateRandomNumbers(int $limit): string
+    {
+        $randomDigits = '';
+
+        for ($i = 0; $i < $limit; $i++) {
+            $randomDigits .= rand(0, 9);
+        }
+
+        return $randomDigits;
     }
 
     function generateCaptcha()

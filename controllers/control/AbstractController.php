@@ -29,7 +29,7 @@ abstract class AbstractController extends BaseController
 
        } else {
            $getUserProfile = $user->getProfile();
-           if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
+           if ($getUserProfile['role'] != 'admin') exit("Access denied");
            if ($uri === "/control/login"){
                header("Location: /control");
            }

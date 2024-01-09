@@ -95,7 +95,7 @@ class Route{
                 $r->addRoute('GET', '/comments', ['controllers\control\CommentsController', 'index']);
                 $r->addRoute('GET', '/comments/search', ['controllers\control\CommentsController', 'search']);
                 $r->addRoute(['GET', 'POST'], '/comments/edit', ['controllers\control\CommentsController', 'edit']);
-                $r->addRoute('GET', '/comments/moderation', ['controllers\control\CommentsController', 'edit']);
+                $r->addRoute(['GET', 'POST'], '/comments/moderation', ['controllers\control\CommentsController', 'edit']);
                 $r->addRoute('GET', '/comments/remove', ['controllers\control\CommentsController', 'remove']);
 
                 $r->addRoute('GET', '/pages', ['controllers\control\PagesController', 'index']);

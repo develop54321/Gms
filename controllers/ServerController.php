@@ -16,7 +16,6 @@ class ServerController extends BaseController
     public function add()
     {
 
-        $system = new System();
 
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
         $settings = $getSettings->fetch();
@@ -146,8 +145,6 @@ class ServerController extends BaseController
 
         $getInfoServer['img_map'] = Servers::getImagePath($getInfoServer['map'], $getInfoServer['game']);
 
-
-
         # UserInfo
         if ($IsAuth) {
             $user_profile = $user->getProfile();
@@ -178,7 +175,13 @@ class ServerController extends BaseController
         $getComments = $getComments->fetchAll();
 
 
-        $content = $this->view->renderPartial("server/info", ['data' => $getInfoServer, 'comments' => $getComments, 'currentSession' => $currentSession, 'ownerName' => $ownerName]);
+        $content = $this->view->renderPartial("server/info", [
+            'data' => $getInfoServer,
+            'comments' => $getComments,
+            'currentSession' => $currentSession,
+            'ownerName' => $ownerName,
+            'current_user' => $IsAuth
+        ]);
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
 
@@ -196,6 +199,7 @@ class ServerController extends BaseController
         if (!$user_profile) header("Location: /user/login");
         $title = "Смена владельца сервера";
 
+        $system = new System();
 
         if (isset($_GET['id'])) $id = (int)$_GET['id'];
         else parent::ShowError(404, "Сервер не найден!");
@@ -245,7 +249,7 @@ class ServerController extends BaseController
             }
 
 
-            if ("verification" . $getInfoServer['verification_rand'] == $hostname) {
+            if ("verification_" . $getInfoServer['verification_rand'] == $hostname) {
 
                 $sql = "UPDATE ga_servers SET id_user = :id_user WHERE id = :id";
                 $update = $this->db->prepare($sql);
@@ -265,8 +269,9 @@ class ServerController extends BaseController
 
 
         } else {
-            if ($getInfoServer['verification_rand'] == '0') {
-                $verification_rand = mt_rand(11111, 99999);
+
+            if ($getInfoServer['verification_rand'] == 0) {
+                $verification_rand = $system->generateRandomNumbers(5);
                 $sql = "UPDATE ga_servers SET verification_rand = :verification_rand WHERE id = :id";
                 $update = $this->db->prepare($sql);
                 $update->bindParam(':verification_rand', $verification_rand);

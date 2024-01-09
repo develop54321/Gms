@@ -385,7 +385,7 @@ class UserController extends BaseController
                 $checkCode->bindValue(":reset_code", $code);
                 $checkCode->execute();
                 if ($checkCode->rowCount() == '1') {
-                    $newPassword = $system->generate_password(8);
+                    $newPassword = $system->generateCharacter(8);
                     $hashPassword = md5($newPassword);
                     $reset_code = '';
                     $sql = "UPDATE ga_users SET password = :password, reset_code = '' WHERE reset_code = :reset_code";

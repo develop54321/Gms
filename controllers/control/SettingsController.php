@@ -47,8 +47,6 @@ class SettingsController extends AbstractController
             $content['comments']['guest_allow'] = $comments['guest_allow'];
             $content['comments']['moderation'] = $comments['moderation'];
 
-            $content['global_settings']['cron_key'] = $global_settings['cron_key'];
-            $content['global_settings']['auto_backup_database'] = $global_settings['auto_backup_database'];
 
             $contentJson = json_encode($content);
 

@@ -1,21 +1,24 @@
 <?php
+if (file_exists("config.php")){
+    exit("CMS is already installed");
+}
+const CONFIG_TEMPLATE_DIR = "new-style";
+const CONFIG_VERSION = 3.0;
+
 $step = "requiredExtension";
+
 $versionRequired = null;
-// Проверка минимальной версии PHP
 if (version_compare(phpversion(), '7.0', '<')) {
     $versionRequired = "Требуется PHP версии 7.0 и выше";
 }
 
 $required_extensions = ['intl', 'gd', 'curl', 'mbstring'];
-
 if (isset($_POST['step'])) {
     $step = $_POST['step'];
 }
 
-
-
 $errorText = null;
-// Вывод формы для ввода данных
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'database_check') {
     $db_host = $_POST['db_host'];
     $db_user = $_POST['db_user'];
@@ -23,22 +26,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'database_check') {
     $db_name = $_POST['db_name'];
 
     try {
-        // Подключение к базе данных используя PDO
         $dsn = "mysql:host=$db_host;dbname=$db_name";
-        $conn = new PDO($dsn, $db_user, $db_password);
+        $conn = new PDO($dsn, $db_user, $db_password,    [
+            PDO::ATTR_TIMEOUT => 5,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        ]);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Импорт базы данных
         $dump_file = 'dump.sql';
         $sql = file_get_contents($dump_file);
         $conn->exec($sql);
 
-        echo 'База данных успешно импортирована.';
-
-        echo "Спасибо за установку!\n";
-        echo "Документацией по работе с движком, Вы можете ознакомиться на сайте: https://game-ms.ru";
-
-        // Создание конфигурационного файла
         $config_content = <<<EOD
 <?php
 
@@ -47,10 +45,12 @@ const DB_USER = "$db_user";
 const DB_PASSWORD = "$db_password";
 const DB_NAME = "$db_name";
 const TMPL_DIR = "template/dark1";
-const VERSION = 3.0;
+const VERSION = CONFIG_VERSION;
 EOD;
 
         file_put_contents('config.php', $config_content);
+
+        $step = "finish";
 
     } catch (PDOException $e) {
         $errorText = $e->getMessage();
@@ -70,19 +70,36 @@ foreach ($required_extensions as $extension) {
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Установка GMS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
+<style>
+    body {
+        background-color: #f2f7fc;
+    }
+
+    .content {
+        background-color: #fff;
+        border: 1px solid #dadada;
+        max-width: 700px;
+        margin: 2em auto;
+        padding: 1.2em 0.8em;
+        border-radius: 0.3em;
+    }
+</style>
 <body>
-<div style="max-width: 700px; margin: 2em auto">
+<div class="content">
     <?php if ($step === "requiredExtension"): ?>
         <form method="post">
             <input type="hidden" name="step" value="database">
-            <h4 class="pb-2">Проверка системных требований</h4>
+            <h4 class="mb-3">
+                Добро пожаловать в установщик <b>Game Monitoring System</b>
+            </h4>
+            <p class="p-0 m-0">Проверка системных требований</p>
             <table class="table table-bordered">
                 <?php if ($versionRequired): ?>
                     <tr>
@@ -136,14 +153,16 @@ foreach ($required_extensions as $extension) {
 
     <?php if ($step === "database" or $step === 'database_check'): ?>
         <form method="post">
-            <h4 class="pb-2">Укажите данные для подключения к базе данных</h4>
-            <?php if ($errorText):?>
-            <div class="alert alert-danger">
-                <p>
-                    <?php echo $errorText;?>
-                </p>
-            </div>
-            <?php endif;?>
+            <h4 class="pb-2">
+                Сведения о подключении к базе данных
+            </h4>
+            <?php if ($errorText): ?>
+                <div class="alert alert-danger">
+                    <p>
+                        <?php echo $errorText; ?>
+                    </p>
+                </div>
+            <?php endif; ?>
             <input type="hidden" name="step" value="database_check">
             <table class="table table-bordered">
                 <tr>
@@ -175,6 +194,25 @@ foreach ($required_extensions as $extension) {
             </table>
         </form>
     <?php endif; ?>
+
+
+    <?php if ($step === "finish"): ?>
+        <div>
+            <h4 class="pb-2">Благодарим за установку нашего продукта</h4>
+            <p>Пожалуйста нажмите кнопку "Войти", чтобы попасть в систему управления.</p>
+            <a class="btn btn-primary" href="/control">Войти</a>
+        </div>
+
+        <p>
+            Документацией по работе с движком, Вы можете ознакомиться на сайте: <a
+                    href="https://game-ms.ru">game-ms.ru</a>
+        </p>
+    <?php endif; ?>
+
+    <footer class="text-center">
+        <a href="https://game-ms.ru/" target="_blank">Сайт проекта</a>
+    </footer>
+
 </div>
 </body>
 </html>

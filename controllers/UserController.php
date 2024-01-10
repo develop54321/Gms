@@ -268,7 +268,7 @@ class UserController extends BaseController
                 exit(json_encode($answer));
             }
 
-            if (!preg_match('/\w{6,}/', $password)) {
+            if (!preg_match('/^.{6,}$/', $password)) {
                 $answer['status'] = "error";
                 $answer['error'] = "<b>Пароль</b> введен неверно, минимум 6 символов";
                 exit(json_encode($answer));

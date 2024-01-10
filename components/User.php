@@ -54,10 +54,10 @@ class User extends BaseController
         $getInfoPay->execute(array(':id' => $data['inv_id']));
         $getInfoPay = $getInfoPay->fetch();
 
-        if (empty($getInfoPay)) parent::ShowError(404, "�������� �� �������!");
+        if (empty($getInfoPay)) throw new \Exception("payment account not found");
         $getInfoPay = json_decode($getInfoPay['content'], true);
 
-        if ($getInfoPay['amout'] != $data['amout']) parent::ShowError(404, "�������� �� �������!");
+        if ($getInfoPay['amout'] != $data['amout']) throw new \Exception("wrong data");
 
         $getInfoUser = $this->db->prepare('SELECT * FROM ga_users WHERE id = :id');
         $getInfoUser->execute(array(':id' => $getInfoPay['id_user']));

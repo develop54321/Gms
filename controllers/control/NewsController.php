@@ -17,8 +17,8 @@ class NewsController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
+        $getUserProfile = $user->getProfile();
+        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
         $title = "Новости";
 
@@ -50,8 +50,8 @@ class NewsController extends AbstractController
             header("Location: /control/index");
         }
 
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
+        $getUserProfile = $user->getProfile();
+        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
         $title = "Добавление новостя";
 
@@ -91,8 +91,8 @@ class NewsController extends AbstractController
             header("Location: /control/index");
         }
 
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
+        $getUserProfile = $user->getProfile();
+        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 
@@ -138,8 +138,8 @@ class NewsController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
+        $getUserProfile = $user->getProfile();
+        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';

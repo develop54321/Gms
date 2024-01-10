@@ -12,13 +12,6 @@ class PaymethodsController extends AbstractController
 
     public function index()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserProfile = $user->getProfile();
-        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
 
         $title = "Способы оплаты";
 
@@ -33,14 +26,6 @@ class PaymethodsController extends AbstractController
 
     public function add()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserProfile = $user->getProfile();
-        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
-
         $title = "Добавление платежной системы";
 
         if (parent::isAjax()) {
@@ -81,13 +66,6 @@ class PaymethodsController extends AbstractController
 
     public function remove()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
             $status = 0;
@@ -96,7 +74,6 @@ class PaymethodsController extends AbstractController
             $update->bindParam(':status', $status);
             $update->bindParam(':id', $id);
             $update->execute();
-
         }
 
 
@@ -105,13 +82,6 @@ class PaymethodsController extends AbstractController
 
     public function edit()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserProfile = $user->getProfile();
-        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 
         $title = "Изменение платежной системы #$id";

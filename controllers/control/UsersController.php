@@ -13,14 +13,6 @@ class UsersController extends AbstractController
 
     public function search()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserProfile = $user->getProfile();
-        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
-
         $title = "Поиск пользователя";
 
         if (isset($_POST['query'])) {
@@ -41,46 +33,29 @@ class UsersController extends AbstractController
 
     public function index()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserProfile = $user->getProfile();
-        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
-
         $title = "Пользователи";
 
 
+        $countUsers = $this->db->query('SELECT * FROM ga_users');
+        $countUsers = $countUsers->rowCount();
 
 
-            $countUsers = $this->db->query('SELECT * FROM ga_users');
-            $countUsers = $countUsers->rowCount();
+        $pagination = new Pagination();
+        $per_page = 15;
+        $result = $pagination->create(array('per_page' => $per_page, 'count' => $countUsers));
 
+        $getUsers = $this->db->query('SELECT * FROM ga_users ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
+        $getUsers = $getUsers->fetchAll();
 
-            $pagination = new Pagination();
-            $per_page = 15;
-            $result = $pagination->create(array('per_page' => $per_page, 'count' => $countUsers));
+        $content = $this->view->renderPartial("users/index", ['users' => $getUsers, 'ViewPagination' => $result['ViewPagination']]);
 
-            $getUsers = $this->db->query('SELECT * FROM ga_users ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
-            $getUsers = $getUsers->fetchAll();
-
-            $content = $this->view->renderPartial("users/index", ['users' => $getUsers, 'ViewPagination' => $result['ViewPagination']]);
-
-            $this->view->render("main", ['content' => $content, 'title' => $title]);
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
 
 
     }
 
     public function remove()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserProfile = $user->getProfile();
-        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
             $sql = "DELETE FROM ga_users WHERE id =  :id";
@@ -96,13 +71,6 @@ class UsersController extends AbstractController
 
     public function edit()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 
         $title = "Изменение пользователя #$id";

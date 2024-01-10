@@ -11,13 +11,6 @@ class SettingsController extends AbstractController
 
     public function index()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
         $settings = $getSettings->fetch();
 

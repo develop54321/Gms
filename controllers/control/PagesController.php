@@ -9,70 +9,35 @@ use PDO;
 
 class PagesController extends AbstractController
 {
-
-
     public function index()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
         $title = "Страницы";
 
-        if (parent::isAjax()) {
+        $countComments = $this->db->query('SELECT * FROM ga_pages');
+        $count = $countComments->rowCount();
 
 
-        } else {
+        $pagination = new Pagination();
+        $per_page = 15;
+        $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
+        $getComments = $this->db->query('SELECT * FROM ga_pages ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
+        $getComments = $getComments->fetchAll();
 
-            $countComments = $this->db->query('SELECT * FROM ga_pages');
-            $count = $countComments->rowCount();
+        $content = $this->view->renderPartial("pages/index", ['comments' => $getComments, 'ViewPagination' => $result['ViewPagination']]);
 
-
-            $pagination = new Pagination();
-            $per_page = 15;
-            $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
-
-            $getComments = $this->db->query('SELECT * FROM ga_pages ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
-            $getComments = $getComments->fetchAll();
-
-            $content = $this->view->renderPartial("pages/index", ['comments' => $getComments, 'ViewPagination' => $result['ViewPagination']]);
-
-            $this->view->render("main", ['content' => $content, 'title' => $title]);
-        }
-
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
 
     public function add()
     {
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         $title = "Добавление страницы";
-
-
         if (parent::isAjax()) {
-
             $titlePage = $_POST['title'];
             $text = $_POST['text'];
 
-
             $this->db->exec("INSERT INTO ga_pages (title, text, date_create) 
-    VALUES('$titlePage', '$text', '" . time() . "')");
+            VALUES('$titlePage', '$text', '" . time() . "')");
 
 
             $answer['status'] = "success";
@@ -92,17 +57,6 @@ class PagesController extends AbstractController
 
     public function edit()
     {
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 
         $title = "Изменение страницы #$id";
@@ -143,20 +97,12 @@ class PagesController extends AbstractController
 
     public function remove()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
             $sql = "DELETE FROM ga_pages WHERE id =  :id";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
-
         }
 
 

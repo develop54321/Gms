@@ -15,11 +15,6 @@ class GamesController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
 
         $title = "Игры";
 
@@ -38,11 +33,6 @@ class GamesController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
 
         $title = "Добавление новой игры";
 
@@ -80,8 +70,6 @@ class GamesController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
@@ -104,8 +92,6 @@ class GamesController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 

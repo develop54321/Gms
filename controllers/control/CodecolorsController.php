@@ -16,8 +16,6 @@ class CodecolorsController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
         $title = "Цвета";
         $activcolor = 1;
         $getCodeColors = $this->db->prepare('SELECT * FROM ga_code_colors WHERE activ = :activ');
@@ -33,10 +31,7 @@ class CodecolorsController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
+
         $title = "Добавление нового цвета";
         if (parent::isAjax()) {
             $activ = strip_tags($_POST['activ']);
@@ -59,8 +54,8 @@ class CodecolorsController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
+
+
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
         $title = "Изменение цвета";
         $getInfoCodeColors = $this->db->prepare('SELECT * FROM ga_code_colors WHERE id = :id');
@@ -94,8 +89,6 @@ class CodecolorsController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
             $sql = "DELETE FROM ga_code_colors WHERE id =  :id";

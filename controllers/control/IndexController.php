@@ -11,53 +11,49 @@ class IndexController extends AbstractController
 
     public function index()
     {
-        $user = new User();
 
-            $getUserPrfile = $user->getProfile();
-            if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
+        $getSettings = $this->db->query('SELECT * FROM ga_settings');
+        $settings = $getSettings->fetch();
 
-            $getSettings = $this->db->query('SELECT * FROM ga_settings');
-            $settings = $getSettings->fetch();
+        $title = "Панель управления сайтом";
 
-            $title = "Панель управления сайтом";
+        $countServers = $this->db->query('SELECT * FROM ga_servers');
+        $countServers = $countServers->rowCount();
 
-            $countServers = $this->db->query('SELECT * FROM ga_servers');
-            $countServers = $countServers->rowCount();
-
-            $countUsers = $this->db->query('SELECT * FROM ga_users');
-            $countUsers = $countUsers->rowCount();
+        $countUsers = $this->db->query('SELECT * FROM ga_users');
+        $countUsers = $countUsers->rowCount();
 
 
-            $sizeDatabase = $this->db->query('
+        $sizeDatabase = $this->db->query('
             SELECT table_schema "' . DB_NAME . '", 
             ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS "size" 
             FROM information_schema.TABLES GROUP BY table_schema;');
-            $sizeDatabase = $sizeDatabase->fetch();
+        $sizeDatabase = $sizeDatabase->fetch();
 
 
-            $getVersionMysql = $this->db->query('SELECT version()');
-            $getVersionMysql = $getVersionMysql->fetch();
+        $getVersionMysql = $this->db->query('SELECT version()');
+        $getVersionMysql = $getVersionMysql->fetch();
 
-            $notification = [];
-            $countServersModeration = $this->db->query('SELECT * FROM ga_servers WHERE moderation = "0"');
-            $countServersModeration = $countServersModeration->rowCount();
-            if ($countServersModeration != '0') $notification[] = ['type' => 'moderationServers', 'count' => $countServersModeration];
+        $notification = [];
+        $countServersModeration = $this->db->query('SELECT * FROM ga_servers WHERE moderation = "0"');
+        $countServersModeration = $countServersModeration->rowCount();
+        if ($countServersModeration != '0') $notification[] = ['type' => 'moderationServers', 'count' => $countServersModeration];
 
-            $countCommentsModeration = $this->db->query('SELECT * FROM ga_comments WHERE moderation = "0"');
-            $countCommentsModeration = $countCommentsModeration->rowCount();
-            if ($countCommentsModeration != '0') $notification[] = ['type' => 'moderationComments', 'count' => $countCommentsModeration];
+        $countCommentsModeration = $this->db->query('SELECT * FROM ga_comments WHERE moderation = "0"');
+        $countCommentsModeration = $countCommentsModeration->rowCount();
+        if ($countCommentsModeration != '0') $notification[] = ['type' => 'moderationComments', 'count' => $countCommentsModeration];
 
 
-            $countActiveServers = $this->db->query('SELECT * FROM ga_servers WHERE status = 1');
-            $countActiveServers = $countActiveServers->rowCount();
+        $countActiveServers = $this->db->query('SELECT * FROM ga_servers WHERE status = 1');
+        $countActiveServers = $countActiveServers->rowCount();
 
-            $counts[] = ['type' => 'countUsers', 'countUsers' => $countUsers];
-            $counts[] = ['type' => 'countServers', 'countServers' => $countServers];
-            $counts[] = ['type' => 'countActiveServers', 'countActiveServers' => $countActiveServers];
+        $counts[] = ['type' => 'countUsers', 'countUsers' => $countUsers];
+        $counts[] = ['type' => 'countServers', 'countServers' => $countServers];
+        $counts[] = ['type' => 'countActiveServers', 'countActiveServers' => $countActiveServers];
 
-            $content = $this->view->renderPartial("index", ['counts' => $counts, 'notification' => $notification, 'settings' => $settings, 'sizeDatabase' => $sizeDatabase[1], 'versionMysql' => $getVersionMysql[0], 'version' => VERSION]);
+        $content = $this->view->renderPartial("index", ['counts' => $counts, 'notification' => $notification, 'settings' => $settings, 'sizeDatabase' => $sizeDatabase[1], 'versionMysql' => $getVersionMysql[0], 'version' => VERSION]);
 
-            $this->view->render("main", ['content' => $content, 'title' => $title]);
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
 
 
     }

@@ -2,14 +2,11 @@
 if (file_exists("config.php")) {
     exit("CMS is already installed");
 }
-const CONFIG_TEMPLATE_DIR = "new-style";
-const CONFIG_VERSION = 3.0;
-
 $step = "requiredExtension";
 
 $versionRequired = null;
-if (version_compare(phpversion(), '7.0', '<')) {
-    $versionRequired = "Требуется PHP версии 7.0 и выше";
+if (version_compare(phpversion(), '7.4', '<')) {
+    $versionRequired = "Требуется PHP версии 7.4 и выше";
 }
 
 $required_extensions = ['intl', 'gd', 'curl', 'mbstring'];
@@ -44,8 +41,8 @@ const DB_HOST = "$db_host";
 const DB_USER = "$db_user";
 const DB_PASSWORD = "$db_password";
 const DB_NAME = "$db_name";
-const TMPL_DIR = "template/dark1";
-const VERSION = CONFIG_VERSION;
+const TMPL_DIR = "template/new-style";
+const VERSION = "3.0";
 EOD;
 
         file_put_contents('config.php', $config_content);
@@ -85,7 +82,7 @@ foreach ($required_extensions as $extension) {
     .content {
         background-color: #fff;
         border: 1px solid #dadada;
-        max-width: 700px;
+        max-width: 660px;
         margin: 2em auto;
         padding: 1.2em 0.8em;
         border-radius: 0.3em;
@@ -166,7 +163,7 @@ foreach ($required_extensions as $extension) {
                 <tr>
                     <td>Хост базы данных</td>
                     <td>
-                        <input type="text" name="db_host" required class="form-control form-control-sm">
+                        <input type="text" name="db_host" required class="form-control form-control-sm" value="localhost">
                     </td>
                 </tr>
 

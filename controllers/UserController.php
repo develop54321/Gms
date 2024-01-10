@@ -122,7 +122,7 @@ class UserController extends BaseController
             if ($CheckPayMethods->rowCount() == '0') parent::ShowError(404, "Страница не найдена!");
             if ($amout < 0) parent::ShowError(404, "Страница не найдена!");
 
-            $content = json_encode(['type_pay' => "refill", 'id_user' => $user_profile['id'], 'amout' => $amout]);
+            $content = json_encode(['type_pay' => "refill", 'id_user' => $user_profile['id'], 'amount' => $amout]);
 
             $getInfoPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE id = :id');
             $getInfoPayMethods->execute(array(':id' => $typePayment));
@@ -135,7 +135,7 @@ class UserController extends BaseController
             $payId = $this->db->lastInsertId();
 
 
-            $content = $this->view->renderPartial("user/pay", ['step' => "2", 'amout' => $amout, 'payId' => $payId, 'user_profile' => $user_profile, 'InfoPayment' => $InfoPayment]);
+            $content = $this->view->renderPartial("user/pay", ['step' => "2", 'amount' => $amout, 'payId' => $payId, 'user_profile' => $user_profile, 'InfoPayment' => $InfoPayment]);
 
         } else {
             $status = 1;
@@ -217,7 +217,7 @@ class UserController extends BaseController
             if ($content['type_pay'] == 'refill') {
                 $id = $content['id_user'];
                 $servicesName = "Пополнение счета";
-                $price = $content['amout'];
+                $price = $content['amount'];
             } elseif ($content['type_pay'] == "payServices" or $content['type_pay'] == "payApi") {
                 $getInfoServices = $this->db->prepare('SELECT * FROM ga_services WHERE id = :id');
                 $getInfoServices->execute(array(':id' => $content['id_services']));

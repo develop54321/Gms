@@ -47,7 +47,7 @@ class PaylogsController extends AbstractController
                 if ($content['type_pay'] == 'refill') {
                     $id = $content['id_user'];
                     $servicesName = "Пополнение счета";
-                    $price = $content['amout'];
+                    $price = $content['amount'];
                 } elseif ($content['type_pay'] == "payServices" or $content['type_pay'] == 'payApi') {
                     if ($content['type_pay'] == 'payApi') $payApi = "[API]"; else $payApi = '';
                     $getInfoServices = $this->db->prepare('SELECT * FROM ga_services WHERE id = :id');
@@ -193,7 +193,7 @@ class PaylogsController extends AbstractController
                 if ($content['type_pay'] == 'refill') {
                     $id = $content['id_user'];
                     $servicesName = "Пополнение счета";
-                    $price = $content['amout'];
+                    $price = $content['amount'];
                 } elseif ($content['type_pay'] == "payServices" or $content['type_pay'] == 'payApi') {
                     if ($content['type_pay'] == 'payApi') $payApi = "[API]"; else $payApi = '';
                     $getInfoServices = $this->db->prepare('SELECT * FROM ga_services WHERE id = :id');

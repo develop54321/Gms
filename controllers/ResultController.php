@@ -46,7 +46,7 @@ class ResultController extends BaseController
                     }
 
                     if ($getInfoPay['type_pay'] == 'refill') {
-                        $user->refill(['inv_id' => $InvId, 'amout' => $out_summ]);
+                        $user->refill(['inv_id' => $InvId, 'amount' => $out_summ]);
                     } else {
                         $services->checkService(['inv_id' => $InvId, 'price' => $out_summ, 'pay_methods' => $typeCode]);
                     }
@@ -76,7 +76,7 @@ class ResultController extends BaseController
                     if ($my_crc != $crc) exit("error po");
 
                     if ($getInfoPay['type_pay'] == 'refill') {
-                        $user->refill(['inv_id' => $InvId, 'amout' => $out_summ]);
+                        $user->refill(['inv_id' => $InvId, 'amount' => $out_summ]);
                     } else {
                         $services->checkService(['inv_id' => $InvId, 'price' => $out_summ, 'pay_methods' => $typeCode]);
                     }
@@ -133,7 +133,7 @@ class ResultController extends BaseController
 
                     if ($method == 'pay') {
                         if ($getInfoPay['type_pay'] == 'refill') {
-                            $user->refill(['inv_id' => $InvId, 'amout' => $out_summ]);
+                            $user->refill(['inv_id' => $InvId, 'amount' => $out_summ]);
                         } else {
                             $services->checkService(['inv_id' => $InvId, 'price' => $out_summ, 'pay_methods' => $typeCode]);
                         }
@@ -173,16 +173,16 @@ class ResultController extends BaseController
                         exit("bad hash");
                     }
 
-                    $amount = $_POST['amount'];
+                    $amount = $_POST['withdraw_amount'];
                     $InvId = $_POST['label'];
-
+ 
                     $getInfoPay = $this->db->prepare('SELECT * FROM ga_pay_logs WHERE id = :id');
                     $getInfoPay->execute(array(':id' => $InvId));
                     $getInfoPay = $getInfoPay->fetch();
                     $getInfoPay = json_decode($getInfoPay['content'], true);
 
                     if ($getInfoPay['type_pay'] == 'refill') {
-                        $user->refill(['inv_id' => $InvId, 'amout' => $amount]);
+                        $user->refill(['inv_id' => $InvId, 'amount' => $amount]);
                     } else {
                         $services->checkService(['inv_id' => $InvId, 'price' => $amount, 'pay_methods' => $typeCode]);
                     }

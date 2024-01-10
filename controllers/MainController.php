@@ -19,7 +19,6 @@ class MainController extends BaseController
 
     public function index()
     {
-
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
         $settings = $getSettings->fetch();
         $settings = json_decode($settings['content'], true);

@@ -101,10 +101,8 @@ if($settings['global_settings']['top_on']==0 and $settings['global_settings']['b
                     <td width="3%"><?php echo $t['id_position'];?></a></td>
                     <td width="32%"
                         style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a
-                                href="/server/info?id=<?php echo $t['id'];?>"><?php echo $t['hostname'];?></a></td>
-                    <td width="20%"><img src="<?php echo $t['imgCountry'];?>" width="17"
-                                         alt="<?php echo $t['country'];?>"
-                                         title="<?php echo $t['country'];?>">&ensp;<?php echo $t['ip'];?>
+                                href="/server/<?php echo $t['ip'];?>:<?php echo $t['port'];?>/info"><?php echo $t['hostname'];?></a></td>
+                    <td width="20%"><?php echo $t['ip'];?>
                         :<?php echo $t['port'];?></td>
                     <td width="12%">
                         <div class="uk-progress uk-progress-striped">
@@ -144,11 +142,6 @@ if($countTopServers<1):
                 <tbody>
                 <?php $i = 1;
 foreach($boostServers as $b):
-if(file_exists("public/img/flags/".strtolower($b['country']).".png")){
-	$imgCountryBoost = "public/img/flags/".strtolower($b['country']).".png";
-}else{
-	$imgCountryBoost = "public/img/flags/unknown.png";
-}
 $system = new System();
 $show_playersBoost = $system->showbar( $b['players'], $b['max_players'] );
                 ?>
@@ -156,10 +149,8 @@ $show_playersBoost = $system->showbar( $b['players'], $b['max_players'] );
                     <td width="3%"><?php echo $i;?></a></td>
                     <td width="32%"
                         style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a
-                                href="/server/info?id=<?php echo $b['id'];?>"><?php echo $b['hostname'];?></a></td>
-                    <td width="20%"><img src="<?php echo $imgCountryBoost;?>" width="17"
-                                         alt="<?php echo $b['country'];?>"
-                                         title="<?php echo $b['country'];?>">&ensp;<?php echo $b['ip'];?>
+                                href="/server/<?php echo $b['ip'];?>:<?php echo $b['port'];?>/info"><?php echo $b['hostname'];?></a></td>
+                    <td width="20%"><?php echo $b['ip'];?>
                         :<?php echo $b['port'];?></td>
                     <td width="12%">
                         <div class="uk-progress uk-progress-striped">
@@ -202,11 +193,6 @@ if($countBoostServers<1):
 
                 <?php $i = 1;
 foreach($vipServers as $v):
-if(file_exists("public/img/flags/".strtolower($v['country']).".png")){
-	$imgCountryVip = "public/img/flags/".strtolower($v['country']).".png";
-}else{
-	$imgCountryVip = "public/img/flags/unknown.png";
-}
 $system = new System();
 $show_playersVip = $system->showbar( $v['players'], $v['max_players'] );
                 ?>
@@ -214,9 +200,9 @@ $show_playersVip = $system->showbar( $v['players'], $v['max_players'] );
                     <td width="3%"><?php echo $i;?></a></td>
                     <td width="32%"
                         style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a
-                                href="/server/info?id=<?php echo $v['id'];?>"><?php echo $v['hostname'];?></a></td>
-                    <td width="20%"><img src="<?php echo $imgCountryVip;?>" width="17" alt="<?php echo $v['country'];?>"
-                                         title="<?php echo $v['country'];?>">&ensp;<?php echo $v['ip'];?>
+                                href="/server/<?php echo $v['ip'];?>:<?php echo $v['port'];?>/info"><?php echo $v['hostname'];?></a></td>
+                    <td width="20%">
+                        <?php echo $v['ip'];?>
                         :<?php echo $v['port'];?></td>
                     <td width="12%">
                         <div class="uk-progress uk-progress-striped">
@@ -261,11 +247,6 @@ if($countVipServers<1):
                 <tbody>
                 <?php $i = 1;
 foreach($colorServers as $c):
-if(file_exists("public/img/flags/".strtolower($c['country']).".png")){
-	$imgCountryColor = "public/img/flags/".strtolower($c['country']).".png";
-}else{
-	$imgCountryColor = "public/img/flags/unknown.png";
-}
 $system = new System();
 $show_playersColor = $system->showbar( $c['players'], $c['max_players'] );
                 ?>
@@ -273,10 +254,9 @@ $show_playersColor = $system->showbar( $c['players'], $c['max_players'] );
                     <td width="3%"><?php echo $i;?></a></td>
                     <td width="32%"
                         style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a
-                                href="/server/info?id=<?php echo $c['id'];?>"><?php echo $c['hostname'];?></a></td>
-                    <td width="20%"><img src="<?php echo $imgCountryColor;?>" width="17"
-                                         alt="<?php echo $c['country'];?>"
-                                         title="<?php echo $c['country'];?>">&ensp;<?php echo $c['ip'];?>
+                                href="/server/<?php echo $c['ip'];?>:<?php echo $c['port'];?>/info><?php echo $c['hostname'];?></a></td>
+                    <td width="20%">
+                        <?php echo $c['ip'];?>
                         :<?php echo $c['port'];?></td>
                     <td width="12%">
                         <div class="uk-progress uk-progress-striped">
@@ -319,11 +299,6 @@ if($countColorServers<1):
 
                 <?php $i = 1;
 foreach($gamemenuServers as $g):
-if(file_exists("public/img/flags/".strtolower($g['country']).".png")){
-	$imgCountryGamemenu = "public/img/flags/".strtolower($g['country']).".png";
-}else{
-	$imgCountryGamemenu = "public/img/flags/unknown.png";
-}
 $system = new System();
 $show_playersGamemenu = $system->showbar( $g['players'], $g['max_players'] );
                 ?>
@@ -331,10 +306,8 @@ $show_playersGamemenu = $system->showbar( $g['players'], $g['max_players'] );
                     <td width="3%"><?php echo $i;?></a></td>
                     <td width="32%"
                         style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a
-                                href="/server/info?id=<?php echo $g['id'];?>"><?php echo $g['hostname'];?></a></td>
-                    <td width="20%"><img src="<?php echo $imgCountryGamemenu;?>" width="17"
-                                         alt="<?php echo $g['country'];?>"
-                                         title="<?php echo $g['country'];?>">&ensp;<?php echo $g['ip'];?>
+                                href="/server/<?php echo $g['ip'];?>:<?php echo $g['port'];?>/info"><?php echo $g['hostname'];?></a></td>
+                    <td width="20%"><?php echo $g['ip'];?>
                         :<?php echo $g['port'];?></td>
                     <td width="12%">
                         <div class="uk-progress uk-progress-striped">

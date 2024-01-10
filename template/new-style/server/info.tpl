@@ -37,16 +37,17 @@
                             <li>Название: <span class="hostname"><?php echo $data['hostname'];?></span></li>
                             <li>Игра: <?php widgets\server\game\Status::run($data['game']);?></li>
                             <li>Статус: <?php echo $data['status'];?></li>
-                            <li>Адрес: <img src="<?php echo $data['img_country'];?>" width="17" alt="unknown"
-                                            title="unknown"> <?php echo $data['ip'];?>:<?php echo $data['port'];?></li>
+                            <li>Адрес: <?php echo $data['ip'];?>:<?php echo $data['port'];?></li>
                             <li>Добавлен в мониторинг: <?php echo date("d.m.Y [H:i]", $data['date_add']);?></li>
                             <li>Владелец:
-
-                                <?php if($userLastName != null){ echo $userLastName;};?>
-                                <?php if($currentSession != $data['id_user']):?>
-                                <a href="/server/verification?id=<?php echo $data['id'];?>">(Это Вы?)</a>
+                                <?php if ($current_user):?>
+                                    <?php if ($current_user['id'] !== $data['id_user']):?>
+                                        <a href="/server/verification?id=<?php echo $data['id'];?>">(Это Вы?)</a>
+                                    <?php else:?>
+                                        <?php echo $ownerName;?>
+                                    <?php endif;?>
                                 <?php else:?>
-                                (Это Вы!)
+                                    <?php echo $ownerName;?>
                                 <?php endif;?>
                             </li>
 

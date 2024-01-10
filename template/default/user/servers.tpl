@@ -36,7 +36,7 @@ $img_map = '/public/img/no_map.png';
 <div class="info">
 <ul>
 <li>id сервера: #<?php echo $row['id'];?></li>
-<li>Название: <a href="/server/info?id=<?php echo $row['id'];?>"><?php echo $row['hostname'];?></a></li>
+<li>Название: <a href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo $row['hostname'];?></a></li>
 <li>Адрес: <?php echo $row['ip'];?>:<?php echo $row['port'];?></li>
 <li>Игроки: <?php echo $row['players'];?>/<?php echo $row['max_players'];?></li>
 <li>Карта: <?php echo $row['map'];?></li>

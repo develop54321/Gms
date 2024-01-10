@@ -130,7 +130,29 @@ class ServerController extends BaseController
 
 
         $getInfoServer = $this->db->prepare('
-        SELECT s.id, s.map, s.game, s.hostname, s.country, s.id_user, s.status, s.players, s.max_players, s.ban, s.ip, s.port, s.date_add, s.rating, s.befirst_enabled, s.top_enabled, s.vip_enabled, s.color_enabled, s.boost, s.gamemenu_enabled, s.vip_expired_date, s.gamemenu_expired_date, 
+        SELECT s.id, 
+               s.map, 
+               s.game, 
+               s.hostname, 
+               s.country, 
+               s.id_user, 
+               s.status, 
+               s.players, 
+               s.max_players, 
+               s.ban, 
+               s.ip, 
+               s.port, 
+               s.date_add, 
+               s.rating, 
+               s.befirst_enabled, 
+               s.top_enabled, 
+               s.vip_enabled, 
+               s.color_enabled, 
+               s.boost, 
+               s.gamemenu_enabled, 
+               s.vip_expired_date, 
+               s.gamemenu_expired_date, 
+               s.top_expired_date,
                g.game game_name
         FROM ga_servers s LEFT JOIN ga_games g ON s.game = g.code 
         WHERE s.ip = :ip and s.port = :port');

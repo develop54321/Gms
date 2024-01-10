@@ -36,7 +36,7 @@
       <img src="/public/img/gameicons/css.png" style="width: 16px;"/>
       <?php endif;?>
       </th>
-      <td><a href="/server/info/<?php echo $row['id'];?>"><?php echo $row['hostname'];?></a></td>
+      <td><a href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo $row['hostname'];?></a></td>
       <td><?php echo $row['ip'];?>:<?php echo $row['port'];?></td>
       <td><?php echo $row['map'];?></td>
             <td><?php echo $row['players'];?>/<?php echo $row['max_players'];?></td>

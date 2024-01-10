@@ -40,7 +40,7 @@
       <?php if($row['type_pay'] == 'payApi'):?><b>[API]</b><?php endif;?> <?php echo $row['servicesName'];?> (<?php if($row['type_pay'] == 'refill'):?>id пользователя<?php elseif($row['type_pay'] == 'payServices' or $row['type_pay'] == 'payApi'):?>id сервера<?php endif;?> #<?php echo $row['id_object'];?>)</td>
       <td><?php echo date("d:m:Y [H:i]", $row['date_create']);?></td>
 	  <td><?php if($row['pay_methods'] == 'bill'):?>Личный счёт<?php elseif($row['pay_methods'] == 'freekassa'):?>Free-Kassa<?php elseif($row['pay_methods'] == 'robokassa'):?>Robokassa<?php elseif($row['pay_methods'] == 'unitpay'):?>UnitPay<?php endif;?></td>
-      <td><?php echo $row['price'];?>р.</td>
+      <td><?php echo \widgets\money\Money::run($row['price']);?></td>
       <td>
         <?php widgets\user\paylogs\status\Status::run($row['status']);?>
       </td>

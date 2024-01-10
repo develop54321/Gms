@@ -6,7 +6,9 @@
   </ol>
 </nav>
 
-<span style="float: right;">Текущее время:<br><?php echo date("d.m.Y [H:i]");?></span>
+<span style="float: right;">Текущее время:<br><?php use components\System;
+
+    echo date("d.m.Y [H:i]");?></span>
 <h5>Информация</h5>
 <br /><br />
 <table class="table">
@@ -20,7 +22,7 @@
 </thead>
 <tbody>
 <?php 
-if($settings['global_settings']['top_on']==0 and $settings['global_settings']['boost_on']==0 and $settings['global_settings']['vip_on']==0 and $settings['global_settings']['color_on']==0):
+if($settings['global_settings']['top_on'] == 0 and $settings['global_settings']['boost_on'] == 0 and $settings['global_settings']['vip_on'] == 0 and $settings['global_settings']['color_on'] == 0):
 ?>
 <tr>
     <td colspan="6" align="center">Платные услуги отключены</td>
@@ -91,8 +93,8 @@ if($settings['global_settings']['top_on']==0 and $settings['global_settings']['b
 			<?php foreach($topServers as $t):?>
             <tr>
                 <td width="3%"><?php echo $t['id_position'];?></a></td>
-                <td width="32%" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a href="/server/info?id=<?php echo $t['id'];?>"><?php echo $t['hostname'];?></a></td>
-                <td width="20%"><img src="<?php echo $t['imgCountry'];?>" width="17" alt="<?php echo $t['country'];?>" title="<?php echo $t['country'];?>">&ensp;<?php echo $t['ip'];?>:<?php echo $t['port'];?></td>
+                <td width="32%" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a href="/server/<?php echo $t['ip'];?>:<?php echo $t['port'];?>/info"><?php echo $t['hostname'];?></a></td>
+                <td width="20%"><?php echo $t['ip'];?>:<?php echo $t['port'];?></td>
                 <td width="12%"><div class="uk-progress uk-progress-striped"><div class="uk-progress-bar" style="width: <?php echo $t['show_players'];?>;"> <?php echo $t['show_players'];?></div></div> </td>
                 <td width="18%"><?php echo $t['map'];?></td>
                 <td width="15%"><?php echo date("d.m.Y [H:i]", $t['top_expired_date']);?></td>
@@ -129,18 +131,13 @@ if($countTopServers<1):
         <tbody>
 <?php $i = 1;
 foreach($boostServers as $b):
-if(file_exists("public/img/flags/".strtolower($b['country']).".png")){
-	$imgCountryBoost = "public/img/flags/".strtolower($b['country']).".png";
-}else{
-	$imgCountryBoost = "public/img/flags/unknown.png";
-}
 $system = new System();
 $show_playersBoost = $system->showbar( $b['players'], $b['max_players'] );
 ?>
 <tr>
     <td width="3%"><?php echo $i;?></a></td>
-    <td width="32%" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a href="/server/info?id=<?php echo $b['id'];?>"><?php echo $b['hostname'];?></a></td>
-    <td width="20%"><img src="<?php echo $imgCountryBoost;?>" width="17" alt="<?php echo $b['country'];?>" title="<?php echo $b['country'];?>">&ensp;<?php echo $b['ip'];?>:<?php echo $b['port'];?></td>
+    <td width="32%" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a href="/server/<?php echo $b['ip'];?>:<?php echo $b['port'];?>/info"><?php echo $b['hostname'];?></a></td>
+    <td width="20%"><?php echo $b['ip'];?>:<?php echo $b['port'];?></td>
 	<td width="12%"><div class="uk-progress uk-progress-striped"><div class="uk-progress-bar" style="width: <?php echo $show_playersBoost;?>;"> <?php echo $show_playersBoost;?></div></div> </td>
     <td width="18%"><?php echo $b['map'];?></td>
     <td width="15%"><?php echo $b['boost'];?></td>
@@ -179,18 +176,13 @@ if($countBoostServers<1):
 
 <?php $i = 1;
 foreach($vipServers as $v):
-if(file_exists("public/img/flags/".strtolower($v['country']).".png")){
-	$imgCountryVip = "public/img/flags/".strtolower($v['country']).".png";
-}else{
-	$imgCountryVip = "public/img/flags/unknown.png";
-}
 $system = new System();
 $show_playersVip = $system->showbar( $v['players'], $v['max_players'] );
 ?>
 <tr>
     <td width="3%"><?php echo $i;?></a></td>
-    <td width="32%" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a href="/server/info?id=<?php echo $v['id'];?>"><?php echo $v['hostname'];?></a></td>
-    <td width="20%"><img src="<?php echo $imgCountryVip;?>" width="17" alt="<?php echo $v['country'];?>" title="<?php echo $v['country'];?>">&ensp;<?php echo $v['ip'];?>:<?php echo $v['port'];?></td>
+    <td width="32%" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a href="/server/<?php echo $v['ip'];?>:<?php echo $v['port'];?>/info"><?php echo $v['hostname'];?></a></td>
+    <td width="20%"><?php echo $v['ip'];?>:<?php echo $v['port'];?></td>
 	<td width="12%"><div class="uk-progress uk-progress-striped"><div class="uk-progress-bar" style="width: <?php echo $show_playersVip;?>;"> <?php echo $show_playersVip;?></div></div> </td>
     <td width="18%"><?php echo $v['map'];?></td>
     <td width="15%"><?php echo date("d.m.Y [H:i]", $v['vip_expired_date']);?></td>
@@ -231,18 +223,13 @@ if($countVipServers<1):
         <tbody>
 <?php $i = 1;
 foreach($colorServers as $c):
-if(file_exists("public/img/flags/".strtolower($c['country']).".png")){
-	$imgCountryColor = "public/img/flags/".strtolower($c['country']).".png";
-}else{
-	$imgCountryColor = "public/img/flags/unknown.png";
-}
 $system = new System();
 $show_playersColor = $system->showbar( $c['players'], $c['max_players'] );
 ?>
 <tr>
     <td width="3%"><?php echo $i;?></a></td>
-    <td width="32%" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a href="/server/info?id=<?php echo $c['id'];?>"><?php echo $c['hostname'];?></a></td>
-    <td width="20%"><img src="<?php echo $imgCountryColor;?>" width="17" alt="<?php echo $c['country'];?>" title="<?php echo $c['country'];?>">&ensp;<?php echo $c['ip'];?>:<?php echo $c['port'];?></td>
+    <td width="32%" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a href="/server/<?php echo $c['ip'];?>:<?php echo $c['port'];?>/info"><?php echo $c['hostname'];?></a></td>
+    <td width="20%"><?php echo $c['ip'];?>:<?php echo $c['port'];?></td>
 	<td width="12%"><div class="uk-progress uk-progress-striped"><div class="uk-progress-bar" style="width: <?php echo $show_playersColor;?>;"> <?php echo $show_playersColor;?></div></div> </td>
     <td width="18%"><?php echo $c['map'];?></td>
     <td width="15%"><?php echo date("d.m.Y [H:i]", $c['color_expired_date']);?></td>
@@ -280,18 +267,13 @@ if($countColorServers<1):
 
 <?php $i = 1;
 foreach($gamemenuServers as $g):
-if(file_exists("public/img/flags/".strtolower($g['country']).".png")){
-	$imgCountryGamemenu = "public/img/flags/".strtolower($g['country']).".png";
-}else{
-	$imgCountryGamemenu = "public/img/flags/unknown.png";
-}
 $system = new System();
 $show_playersGamemenu = $system->showbar( $g['players'], $g['max_players'] );
 ?>
 <tr>
     <td width="3%"><?php echo $i;?></a></td>
-    <td width="32%" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a href="/server/info?id=<?php echo $g['id'];?>"><?php echo $g['hostname'];?></a></td>
-    <td width="20%"><img src="<?php echo $imgCountryGamemenu;?>" width="17" alt="<?php echo $g['country'];?>" title="<?php echo $g['country'];?>">&ensp;<?php echo $g['ip'];?>:<?php echo $g['port'];?></td>
+    <td width="32%" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a href="/server/<?php echo $g['ip'];?>:<?php echo $g['port'];?>/info"><?php echo $g['hostname'];?></a></td>
+    <td width="20%"><?php echo $g['ip'];?>:<?php echo $g['port'];?></td>
 	<td width="12%"><div class="uk-progress uk-progress-striped"><div class="uk-progress-bar" style="width: <?php echo $show_playersGamemenu;?>;"> <?php echo $show_playersGamemenu;?></div></div> </td>
     <td width="18%"><?php echo $g['map'];?></td>
     <td width="15%"><?php echo date("d.m.Y [H:i]", $g['gamemenu_expired_date']);?></td>

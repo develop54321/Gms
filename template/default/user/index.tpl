@@ -29,7 +29,7 @@
   
   <?php if($user_profile['role'] == 'partner'):?>
   <li class="list-group-item"><b>Размер скидки:</b><?php echo $user_profile['discount_api'];?>%</li>
-  <li class="list-group-item"><b>Расход за текущий месяц:</b><?php echo \widgets\money\Money::run($sumMonth);?>р.</li>
+  <li class="list-group-item"><b>Расход за текущий месяц:</b><?php echo \widgets\money\Money::run($sumMonth);?></li>
   <?php endif;?>
 </ul>
 </div>

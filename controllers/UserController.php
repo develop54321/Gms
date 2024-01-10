@@ -217,7 +217,7 @@ class UserController extends BaseController
             if ($content['type_pay'] == 'refill') {
                 $id = $content['id_user'];
                 $servicesName = "Пополнение счета";
-                $price = $content['amount'];
+                $price = $content['amount'] ?? 0;
             } elseif ($content['type_pay'] == "payServices" or $content['type_pay'] == "payApi") {
                 $getInfoServices = $this->db->prepare('SELECT * FROM ga_services WHERE id = :id');
                 $getInfoServices->execute(array(':id' => $content['id_services']));

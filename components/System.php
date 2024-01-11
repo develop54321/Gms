@@ -31,14 +31,14 @@ class System extends BaseController
         return $result;
     }
 
-    function getUrl()
+    public function getUrl()
     {
         $url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';
         return $url . $_SERVER['SERVER_NAME'];
     }
 
     // Add function showbar
-    function showbar($players, $maxplayers): string
+    public function showbar($players, $maxplayers): string
     {
         if ($maxplayers > 0) {
             $full_off = round(($players / $maxplayers) * 100);
@@ -64,7 +64,7 @@ class System extends BaseController
 
     // End
 
-    function generateCharacter($number): string
+    public function generateCharacter($number): string
     {
         $arr = array('a', 'b', 'c', 'd', 'e', 'f',
             'g', 'h', 'i', 'j', 'k', 'l',
@@ -90,7 +90,7 @@ class System extends BaseController
         return $pass;
     }
 
-    function generateRandomNumbers(int $limit): string
+    public function generateRandomNumbers(int $limit): string
     {
         $randomDigits = '';
 
@@ -101,9 +101,8 @@ class System extends BaseController
         return $randomDigits;
     }
 
-    function generateCaptcha()
+    public function generateCaptcha()
     {
-       // header("Content-type: image/gif");
         $randomnr = mt_rand(1000, 9999);
         $_SESSION['captcha'] = md5($randomnr);
 

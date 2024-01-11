@@ -10,9 +10,9 @@ services:
     ports:
       - "2222:80"
     depends_on:
-      - gns-php-fpm
+      - gms-php-fpm
 
-  gns-php-fpm:
+  gms-php-fpm:
     image: gms-php-fpm
     build:
       context: docker/development/php-fpm

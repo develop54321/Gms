@@ -47,7 +47,7 @@
                                         <?php echo $ownerName;?>
                                     <?php endif;?>
                                 <?php else:?>
-                                    <?php echo $ownerName;?>
+                                    <?php echo $ownerName ?? 'Гость';?>
                                 <?php endif;?>
                             </li>
 

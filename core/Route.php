@@ -137,7 +137,7 @@ class Route{
         switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:
                 // Если маршрут не найден, можно вывести ошибку или выполнить другое действие
-                echo '404 Not Found';
+                $this->showError("404", "Page Not Found");
                 break;
             case Dispatcher::METHOD_NOT_ALLOWED:
                 // Если метод не разрешен для данного маршрута, можно вывести ошибку или выполнить другое действие
@@ -156,11 +156,25 @@ class Route{
         }
     }
 
-    public static function rgp($url) {
-    return preg_replace('/^([^?]+)(\?.*?)?(#.*)?$/', '$1$3', $url);
-    }
+    private function showError(int $code, string $data)
+    {
 
-    public function showError(){
+        switch ($code) {
+            case 404:
+                header("HTTP/1.0 404 Not Found");
+                break;
+
+            case 403:
+                header('HTTP/1.0 403 Forbidden');
+
+                break;
+        }
+
+
+        $content = $this->view->renderPartial("404", ['code' => $code, 'data' => $data]);
+
+        $this->view->render("main", ['content' => $content, 'title' => $data]);
+        exit();
 
     }
 }

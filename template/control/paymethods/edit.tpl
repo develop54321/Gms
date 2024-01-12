@@ -90,24 +90,21 @@
 Обработчик: <?php echo $url;?>/result?type=freekassa
 </code>
 
-    <?php elseif($data['typeCode'] == 'qiwi_p2p'):?>
+    <?php elseif($data['typeCode'] == 'yoomoney'):?>
     <div class="form-group">
-        <label for="status">public_key</label>
-        <input type="text" class="form-control" name="public_key" value="<?php echo $params['public_key'] ?? null;?>">
+        <label for="status">Кошелек получателя</label>
+        <input type="text" class="form-control" name="receiver" value="<?=$params['receiver'] ?? null;?>">
     </div>
 
     <div class="form-group">
-        <label for="fk_key1">secret_key</label>
-        <input type="text" class="form-control" id="secret_key" name="secret_key" value="<?php echo $params['secret_key'] ?? null;?>">
+        <label for="fk_key1">Секретный ключ</label>
+        <input type="text" class="form-control" name="secret_key" value="<?=$params['secret_key'] ?? null;?>">
     </div>
-
 
 
     <code>
-        Крон задача: каждую минуту <br>
-        Обработчик: <?php echo $url;?>/cron/qiwi?key=123
+        Обработчик: <?php echo $url;?>/result?type=yoomoney
     </code>
-
     <?php endif;?>
 
 

@@ -208,6 +208,8 @@ class PayController extends BaseController
 
             $InfoPayment = array_merge($InfoPayment, array('typeCode' => $getInfoPayment['typeCode']));
 
+
+
             $content = $this->view->renderPartial("payForm", ['InfoPayment' => $InfoPayment, 'infoServices' => $getInfoServices, 'payId' => $payId, 'type' => 'selectServices', 'serverInfo' => $getInfoServer, 'services' => $getServices, 'step' => 2]);
 
             $this->view->render("main", ['content' => $content, 'title' => $title]);

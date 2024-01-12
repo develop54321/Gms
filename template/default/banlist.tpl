@@ -42,7 +42,7 @@
       <img src="/public/img/gameicons/ld2.png" style="width: 16px;"/>
       <?php endif;?>
       </td>
-      <td><a href="/server/info?id=<?php echo $row['id'];?>"><?php echo $row['hostname'];?></a></td>
+      <td><a href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo $row['hostname'];?></a></td>
       <td><?php echo $row['ip'];?>:<?php echo $row['port'];?></td>
       <td>
       <?php echo $row['ban_couse'];?>

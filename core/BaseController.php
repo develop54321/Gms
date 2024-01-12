@@ -15,6 +15,7 @@ abstract class BaseController
 
     public function ShowError($code, $data)
     {
+
         switch ($code) {
             case "404":
                 header("HTTP/1.0 404 Not Found");
@@ -34,11 +35,12 @@ abstract class BaseController
 
     }
 
-    public function isAjax()
+    public function isAjax(): bool
     {
         if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             return true;
         }
 
+        return false;
     }
 }

@@ -87,7 +87,7 @@
       <td>
         <?php widgets\server\game\Status::run($row['game']);?>
       </td>
-      <td><a href="/server/info?id=<?php echo $row['id'];?>"><?php echo $row['hostname'];?></a></td>
+      <td><a href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo $row['hostname'];?></a></td>
       <td><img src="<?php echo $imgCountry;?>" alt="<?php echo $row['hostname'];?>"/> <?php echo $row['ip'];?>:<?php echo $row['port'];?></td>
       <td>
       <?php echo date("d:m:Y [H:i]", $row['date_add']);?>

@@ -13,16 +13,6 @@ class UsersController extends AbstractController
 
     public function search()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
         $title = "Поиск пользователя";
 
         if (isset($_POST['query'])) {
@@ -34,60 +24,38 @@ class UsersController extends AbstractController
             $getUsers->execute();
             $getUsers = $getUsers->fetchAll();
 
-            $content = $this->view->renderPartial("control/users/index", ['users' => $getUsers, 'action' => 'search']);
+            $content = $this->view->renderPartial("users/index", ['users' => $getUsers, 'action' => 'search']);
         }
 
-        $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
 
 
     public function index()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
         $title = "Пользователи";
 
-        if (parent::isAjax()) {
+
+        $countUsers = $this->db->query('SELECT * FROM ga_users');
+        $countUsers = $countUsers->rowCount();
 
 
-        } else {
+        $pagination = new Pagination();
+        $per_page = 15;
+        $result = $pagination->create(array('per_page' => $per_page, 'count' => $countUsers));
 
+        $getUsers = $this->db->query('SELECT * FROM ga_users ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
+        $getUsers = $getUsers->fetchAll();
 
-            $countUsers = $this->db->query('SELECT * FROM ga_users');
-            $countUsers = $countUsers->rowCount();
+        $content = $this->view->renderPartial("users/index", ['users' => $getUsers, 'ViewPagination' => $result['ViewPagination']]);
 
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
 
-            $pagination = new Pagination();
-            $per_page = 15;
-            $result = $pagination->create(array('per_page' => $per_page, 'count' => $countUsers));
-
-            $getUsers = $this->db->query('SELECT * FROM ga_users ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
-            $getUsers = $getUsers->fetchAll();
-
-            $content = $this->view->renderPartial("control/users/index", ['users' => $getUsers, 'ViewPagination' => $result['ViewPagination']]);
-
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
-        }
 
     }
 
     public function remove()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
             $sql = "DELETE FROM ga_users WHERE id =  :id";
@@ -103,13 +71,6 @@ class UsersController extends AbstractController
 
     public function edit()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 
         $title = "Изменение пользователя #$id";
@@ -166,9 +127,9 @@ class UsersController extends AbstractController
         } else {
 
             $api_params = json_decode($getInfoUser['params'], true);
-            $content = $this->view->renderPartial("control/users/edit", ['data' => $getInfoUser, 'api_params' => $api_params]);
+            $content = $this->view->renderPartial("users/edit", ['data' => $getInfoUser, 'api_params' => $api_params]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
     }

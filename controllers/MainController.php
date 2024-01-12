@@ -19,7 +19,6 @@ class MainController extends BaseController
 
     public function index()
     {
-
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
         $settings = $getSettings->fetch();
         $settings = json_decode($settings['content'], true);
@@ -38,10 +37,32 @@ class MainController extends BaseController
                 $img_map = Servers::getImagePath($getInfoServer['map'], $getInfoServer['game']);
 
 
-                $topServers[] = ['id' => $getInfoServer['id'], 'ip' => $getInfoServer['ip'], 'port' => $getInfoServer['port'], 'hostname' => $getInfoServer['hostname'], 'img_map' => $img_map, 'map' => $getInfoServer['map'], 'players' => $getInfoServer['players'], 'max_players' => $getInfoServer['max_players'], 'color_enabled' => $getInfoServer['color_enabled']];
+                $topServers[] = [
+                    'id' => $getInfoServer['id'],
+                    'ip' => $getInfoServer['ip'],
+                    'port' => $getInfoServer['port'],
+                    'hostname' => $getInfoServer['hostname'],
+                    'img_map' => $img_map,
+                    'map' => $getInfoServer['map'],
+                    'players' => $getInfoServer['players'],
+                    'max_players' => $getInfoServer['max_players'],
+                    'color_enabled' => $getInfoServer['color_enabled'],
+                    'status' => $getInfoServer['status']
+                ];
             } else {
                 $img_map = '/public/img/no_map.png';
-                $topServers[] = ['id' => '', 'hostname' => 'Место свободно', 'ip' => '127.0.1', 'port' => 27015, 'img_map' => $img_map, 'map' => null, 'players' => 0, 'max_players' => 0, 'color_enabled' => null];
+                $topServers[] = [
+                    'id' => '',
+                    'hostname' => 'Место свободно',
+                    'ip' => '127.0.1',
+                    'port' => 27015,
+                    'img_map' => $img_map,
+                    'map' => null,
+                    'players' => 0,
+                    'max_players' => 0,
+                    'color_enabled' => null,
+                    'status' => 0
+                ];
             }
 
         }
@@ -54,15 +75,14 @@ class MainController extends BaseController
             $sort_where = array(':status' => 1, ':ban' => 0, ':game' => $game);
             $countServers = $this->db->prepare('SELECT * FROM ga_servers WHERE ban = :ban and status = :status and game = :game');
             $countServers->execute(array(':ban' => 1, ':status' => 0, ':game' => $game));
-            $count = $countServers->rowCount();
         } else {
             $sort_where_count = array(':ban' => 0, ':status' => 1);
             $sort_where = array(':status' => 1, ':ban' => 0);
             $countServers = $this->db->prepare('SELECT * FROM ga_servers WHERE ban = :ban and status = :status');
             $countServers->execute($sort_where_count);
-            $count = $countServers->rowCount();
-        }
 
+        }
+        $count = $countServers->rowCount();
 
         $pagination = new Pagination();
         $per_page = $settings['global_settings']['count_servers_main'];

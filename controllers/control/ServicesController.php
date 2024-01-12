@@ -12,42 +12,20 @@ class ServicesController extends AbstractController
 
     public function index()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
         $title = "Услуги";
 
-        if (parent::isAjax()) {
+        $getServices = $this->db->query('SELECT * FROM ga_services');
+        $getServices = $getServices->fetchAll();
 
+        $content = $this->view->renderPartial("services/index", ['services' => $getServices]);
 
-        } else {
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
 
-            $getServices = $this->db->query('SELECT * FROM ga_services');
-            $getServices = $getServices->fetchAll();
-
-            $content = $this->view->renderPartial("control/services/index", ['services' => $getServices]);
-
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
-        }
 
     }
 
     public function add()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
 
         $title = "Добавление новой услуги";
 
@@ -62,7 +40,7 @@ class ServicesController extends AbstractController
             $servicesPrice = strip_tags($_POST['servicesPrice']);
 
             $this->db->exec("INSERT INTO ga_services (name, type, period, price, params) 
-    VALUES('$servicesName', '$servicesType', '$servicesPeriod','$servicesPrice', '')");
+            VALUES('$servicesName', '$servicesType', '$servicesPeriod','$servicesPrice', '')");
 
             $answer['status'] = "success";
             $answer['success'] = "Услуга успешно добавлена";
@@ -70,9 +48,9 @@ class ServicesController extends AbstractController
 
         } else {
 
-            $content = $this->view->renderPartial("control/services/add", []);
+            $content = $this->view->renderPartial("services/add", []);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
 
     }
@@ -80,17 +58,6 @@ class ServicesController extends AbstractController
 
     public function edit()
     {
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 
         $title = "Изменение услуги #$id";
@@ -126,22 +93,15 @@ class ServicesController extends AbstractController
         } else {
 
 
-            $content = $this->view->renderPartial("control/services/edit", ['data' => $getInfoServices]);
+            $content = $this->view->renderPartial("services/edit", ['data' => $getInfoServices]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
     }
 
     public function remove()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
             $sql = "DELETE FROM ga_services WHERE id =  :id";
@@ -149,8 +109,6 @@ class ServicesController extends AbstractController
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
         }
-
-
     }
 
 }

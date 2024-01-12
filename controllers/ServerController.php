@@ -16,7 +16,6 @@ class ServerController extends BaseController
     public function add()
     {
 
-        $system = new System();
 
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
         $settings = $getSettings->fetch();
@@ -77,7 +76,7 @@ class ServerController extends BaseController
             }
 
 
-            $country = $system->getCountry($ip);
+
 
             $user = new User();
             $id_user = 0;
@@ -94,8 +93,8 @@ class ServerController extends BaseController
                 $success_text = "Ваш сервер успешно добавлен, после проверки администратором она появиться в мониторинге";
             }
 
-            $this->db->exec("INSERT INTO ga_servers (status, moderation, id_user, game, ip, port, date_add, country, description) 
-    VALUES('$status', '$moderation','$id_user', '$game', '$ip', '$port', '" . time() . "', '$country', '$text')");
+            $this->db->exec("INSERT INTO ga_servers (status, moderation, id_user, game, ip, port, date_add, description) 
+    VALUES('$status', '$moderation','$id_user', '$game', '$ip', '$port', '" . time() . "', '$text')");
 
             $answer['status'] = "success";
             $answer['success'] = $success_text;
@@ -116,7 +115,7 @@ class ServerController extends BaseController
     }
 
 
-    public function info()
+    public function info($address)
     {
         $user = new User();
         $IsAuth = $user->isAuth();
@@ -126,14 +125,38 @@ class ServerController extends BaseController
 
 
         $system = new System();
-        if (isset($_GET['id'])) $id = (int)$_GET['id'];
-        else parent::ShowError(404, "Сервер не найден!");
 
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-        $settings = json_decode($settings['content'], true);
-        $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
-        $getInfoServer->execute(array(':id' => $id));
+        $parseAddress = Servers::parseAddress($address);
+
+
+        $getInfoServer = $this->db->prepare('
+        SELECT s.id, 
+               s.map, 
+               s.game, 
+               s.hostname, 
+               s.country, 
+               s.id_user, 
+               s.status, 
+               s.players, 
+               s.max_players, 
+               s.ban, 
+               s.ip, 
+               s.port, 
+               s.date_add, 
+               s.rating, 
+               s.befirst_enabled, 
+               s.top_enabled, 
+               s.vip_enabled, 
+               s.color_enabled, 
+               s.boost, 
+               s.gamemenu_enabled, 
+               s.vip_expired_date, 
+               s.gamemenu_expired_date, 
+               s.top_expired_date,
+               g.game game_name
+        FROM ga_servers s LEFT JOIN ga_games g ON s.game = g.code 
+        WHERE s.ip = :ip and s.port = :port');
+        $getInfoServer->execute(array(':ip' => $parseAddress['ip'], ':port' => $parseAddress['port']));
         $getInfoServer = $getInfoServer->fetch();
 
         if (empty($getInfoServer)) parent::ShowError(404, "Сервер не найден!");
@@ -144,30 +167,21 @@ class ServerController extends BaseController
 
         $getInfoServer['img_map'] = Servers::getImagePath($getInfoServer['map'], $getInfoServer['game']);
 
-        $pathimg_country = 'public/img/flags/' . mb_strtolower($getInfoServer['country']) . '.png';
-        if (file_exists($pathimg_country)) {
-            $img_country = '/' . $pathimg_country;
-        } else {
-            $img_country = '/public/img/flags/unknown.png';
-        }
-        $getInfoServer['img_country'] = $img_country;
-
         # UserInfo
         if ($IsAuth) {
             $user_profile = $user->getProfile();
             $getInfoServer['userid'] = $user_profile['id'];
         }
 
-        $userLastName = null;
-        if ($getInfoServer['id_user'] != 0) {
-            $getInfoUser = $this->db->prepare('SELECT lastname FROM ga_users WHERE id = :id');
-            $getInfoUser->execute(array(':id' => $getInfoServer['id']));
+        $ownerName = null;
+        if ($getInfoServer['id_user'] !== 0) {
+            $getInfoUser = $this->db->prepare('SELECT email FROM ga_users WHERE id = :id');
+            $getInfoUser->execute(array(':id' => $getInfoServer['id_user']));
             $getInfoUser = $getInfoUser->fetch();
-
-            $userLastName = $getInfoUser['lastname'] ?? null;
-        } else {
-            $getInfoServer['userlastname'] = 'System';
+            $ownerName = Servers::hiddenOwnerEmail($getInfoUser['email']);
         }
+
+
 
         if ($getInfoServer['status'] == 1) {
             $getInfoServer['status'] = 'Online';
@@ -179,11 +193,17 @@ class ServerController extends BaseController
 
         $moderation = 1;
         $getComments = $this->db->prepare('SELECT c.id, c.text, u.lastname, u.firstname, c.date_create, u.img FROM ga_comments c LEFT JOIN ga_users u ON c.id_user=u.id WHERE c.id_server = :id_server and c.moderation = :moderation');
-        $getComments->execute(array(':id_server' => $id, ':moderation' => $moderation));
+        $getComments->execute(array(':id_server' => $getInfoServer['id'], ':moderation' => $moderation));
         $getComments = $getComments->fetchAll();
 
 
-        $content = $this->view->renderPartial("server/info", ['data' => $getInfoServer, 'comments' => $getComments, 'currentSession' => $currentSession, 'userLastName' => $userLastName]);
+        $content = $this->view->renderPartial("server/info", [
+            'data' => $getInfoServer,
+            'comments' => $getComments,
+            'currentSession' => $currentSession,
+            'ownerName' => $ownerName,
+            'current_user' => $IsAuth
+        ]);
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
 
@@ -206,9 +226,7 @@ class ServerController extends BaseController
         if (isset($_GET['id'])) $id = (int)$_GET['id'];
         else parent::ShowError(404, "Сервер не найден!");
 
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-        $settings = json_decode($settings['content'], true);
+
         $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
         $getInfoServer->execute(array(':id' => $id));
         $getInfoServer = $getInfoServer->fetch();
@@ -253,7 +271,7 @@ class ServerController extends BaseController
             }
 
 
-            if ("verification" . $getInfoServer['verification_rand'] == $hostname) {
+            if ("verification_" . $getInfoServer['verification_rand'] == $hostname) {
 
                 $sql = "UPDATE ga_servers SET id_user = :id_user WHERE id = :id";
                 $update = $this->db->prepare($sql);
@@ -273,8 +291,9 @@ class ServerController extends BaseController
 
 
         } else {
-            if ($getInfoServer['verification_rand'] == '0') {
-                $verification_rand = mt_rand(11111, 99999);
+
+            if ($getInfoServer['verification_rand'] == 0) {
+                $verification_rand = $system->generateRandomNumbers(5);
                 $sql = "UPDATE ga_servers SET verification_rand = :verification_rand WHERE id = :id";
                 $update = $this->db->prepare($sql);
                 $update->bindParam(':verification_rand', $verification_rand);

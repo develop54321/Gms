@@ -75,7 +75,7 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12 text-center">
-					 Powered by <a href="http://art-gaisin.ru" target="_blank">GMS</a>
+					 Powered by <a href="https://game-ms.ru" target="_blank">GMS</a>
 				</div>
 			</div>
 
@@ -116,6 +116,6 @@ $('#authForm').ajaxForm({
 
         <script src="/public/control/js/jquery.core.js"></script>
         <script src="/public/control/js/jquery.app.js"></script>
-   <script src="/public/js/main.js"></script>
+   <script src="/public/js/control.js"></script>
 	</body>
 </html>

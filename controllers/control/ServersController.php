@@ -12,16 +12,6 @@ class ServersController extends AbstractController
 
     public function search()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
         $title = "Поиск сервера";
 
 
@@ -58,54 +48,42 @@ class ServersController extends AbstractController
         $getServers = $getServers->fetchAll();
 
 
-        $content = $this->view->renderPartial("control/servers/index", ['ViewPagination' => $result['ViewPagination'], 'filter' => $filter, 'servers' => $getServers]);
+        $content = $this->view->renderPartial("servers/index", ['ViewPagination' => $result['ViewPagination'], 'filter' => $filter, 'servers' => $getServers]);
 
 
-        $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
 
 
     public function index()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
 
         $title = "Серверы";
 
-        if (parent::isAjax()) {
+
+        $filter = [];
+
+        $filter['address'] = '';
+        $filter['status'] = '';
 
 
-        } else {
-
-            $filter = [];
-
-            $filter['address'] = '';
-            $filter['status'] = '';
+        $countServers = $this->db->prepare('SELECT * FROM ga_servers WHERE status = :status');
+        $countServers->execute(array(':status' => 1));
+        $count = $countServers->rowCount();
 
 
-            $countServers = $this->db->prepare('SELECT * FROM ga_servers WHERE status = :status');
-            $countServers->execute(array(':status' => 1));
-            $count = $countServers->rowCount();
+        $pagination = new Pagination();
+        $per_page = 15;
+        $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
+        $getServers = $this->db->query('SELECT * FROM ga_servers ORDER BY vip_enabled DESC, rating DESC, players DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
+        $getServers = $getServers->fetchAll();
+        $filter['count'] = count($getServers);
+        $content = $this->view->renderPartial("servers/index", ['filter' => $filter, 'servers' => $getServers, 'ViewPagination' => $result['ViewPagination']]);
 
-            $pagination = new Pagination();
-            $per_page = 15;
-            $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
 
-            $getServers = $this->db->query('SELECT * FROM ga_servers ORDER BY vip_enabled DESC, rating DESC, players DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
-            $getServers = $getServers->fetchAll();
-            $filter['count'] = count($getServers);
-            $content = $this->view->renderPartial("control/servers/index", ['filter' => $filter, 'servers' => $getServers, 'ViewPagination' => $result['ViewPagination']]);
-
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
-        }
 
     }
 
@@ -115,14 +93,6 @@ class ServersController extends AbstractController
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
         $settings = $getSettings->fetch();
         $settings = json_decode($settings['content'], true);
-
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 
@@ -235,29 +205,21 @@ class ServersController extends AbstractController
             }
 
 
-            $content = $this->view->renderPartial("control/servers/edit", ['topPlaces' => $topPlaces, 'data' => $getInfoServerS, 'games' => $getGames]);
+            $content = $this->view->renderPartial("servers/edit", ['topPlaces' => $topPlaces, 'data' => $getInfoServerS, 'games' => $getGames]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
     }
 
     public function remove()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
             $sql = "DELETE FROM ga_servers WHERE id =  :id";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
-
         }
 
 

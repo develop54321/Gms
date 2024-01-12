@@ -16,11 +16,6 @@ class CommentsController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
 
         $title = "Поиск комментарии";
 
@@ -45,14 +40,13 @@ class CommentsController extends AbstractController
         $per_page = 15;
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count, 'no_rgp' => ''));
 
-        $getComments = $this->db->query("SELECT * FROM ga_comments $sql ORDER BY id DESC LIMIT " . $result['start'] . ", " . $per_page . "");
         $countComments = $countComments->fetchAll();
 
 
-        $content = $this->view->renderPartial("control/comments/index", ['ViewPagination' => $result['ViewPagination'], 'filter' => $filter, 'comments' => $countComments]);
+        $content = $this->view->renderPartial("comments/index", ['ViewPagination' => $result['ViewPagination'], 'filter' => $filter, 'comments' => $countComments]);
 
 
-        $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
 
 
@@ -62,11 +56,6 @@ class CommentsController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
 
         $title = "Комментарии";
 
@@ -92,9 +81,9 @@ class CommentsController extends AbstractController
             $getComments = $this->db->query('SELECT * FROM ga_comments ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
             $getComments = $getComments->fetchAll();
             $filter['count'] = count($getComments);
-            $content = $this->view->renderPartial("control/comments/index", ['filter' => $filter, 'comments' => $getComments, 'ViewPagination' => $result['ViewPagination']]);
+            $content = $this->view->renderPartial("comments/index", ['filter' => $filter, 'comments' => $getComments, 'ViewPagination' => $result['ViewPagination']]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
 
     }
@@ -102,16 +91,12 @@ class CommentsController extends AbstractController
 
     public function edit()
     {
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
 
         $user = new User();
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
 
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 
@@ -146,9 +131,9 @@ class CommentsController extends AbstractController
         } else {
 
 
-            $content = $this->view->renderPartial("control/comments/edit", ['data' => $getInfoComments]);
+            $content = $this->view->renderPartial("comments/edit", ['data' => $getInfoComments]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
     }
@@ -160,8 +145,6 @@ class CommentsController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
         $moderation = 1;
@@ -182,8 +165,7 @@ class CommentsController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
+
 
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';

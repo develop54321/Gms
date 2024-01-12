@@ -22,14 +22,6 @@
                 </thead>
                 <tbody>
                 <?php foreach($servers as $row):?>
-                <?php
-   if(file_exists("public/img/flags/".strtolower($row['country']).".png")){
-    $imgCountry = "public/img/flags/".strtolower($row['country']).".png";
-   }else{
-    $imgCountry = "public/img/flags/unknown.png";
-   }
-   
-   ?>
                 <tr
                 <?php if($row['color_enabled'] != null):?>style="background: <?php echo $row['color_enabled'];?>
                 "<?php endif;?>>
@@ -37,9 +29,8 @@
                     <?php widgets\server\game\Status::run($row['game']);?>
                     <a href="?game=<?=$row['game'];?>"></a>
                 </td>
-                <td><a class="hostname"
-                       href="/server/info?id=<?php echo $row['id'];?>"><?php echo $row['hostname'];?></a></td>
-                <td><img src="<?php echo $imgCountry;?>" alt="<?php echo $row['hostname'];?>"/> <?php echo $row['ip'];?>:<?php echo $row['port'];?></td>
+                <td><a class="hostname" href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo $row['hostname'];?></a></td>
+                <td><?php echo $row['ip'];?>:<?php echo $row['port'];?></td>
                 <td><?php echo $row['map'];?></td>
                 <td><?php echo $row['players'];?>/<?php echo $row['max_players'];?></td>
                 <td style="text-align: center;">

@@ -2,9 +2,9 @@
 
 namespace controllers;
 
+use components\Flash;
 use components\Mail;
 use components\Pagination;
-use components\paymethods\QiwiP2p;
 use components\ReCaptcha;
 use components\Services;
 use components\System;
@@ -109,6 +109,10 @@ class UserController extends BaseController
         if (!$user_profile) header("Location: /user/login");
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (!isset($_POST['typePayment'])){
+                Flash::add("danger", "Выберите способ оплаты");
+                return header("Location: /user/pay");
+            }
             $typePayment = (int)$_POST['typePayment'];
             $amout = (int)$_POST['amout'];
 
@@ -118,7 +122,7 @@ class UserController extends BaseController
             if ($CheckPayMethods->rowCount() == '0') parent::ShowError(404, "Страница не найдена!");
             if ($amout < 0) parent::ShowError(404, "Страница не найдена!");
 
-            $content = json_encode(['type_pay' => "refill", 'id_user' => $user_profile['id'], 'amout' => $amout]);
+            $content = json_encode(['type_pay' => "refill", 'id_user' => $user_profile['id'], 'amount' => $amout]);
 
             $getInfoPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE id = :id');
             $getInfoPayMethods->execute(array(':id' => $typePayment));
@@ -130,23 +134,8 @@ class UserController extends BaseController
             $this->db->exec("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods) VALUES('$content','" . time() . "', 'expects', " . $user_profile['id'] . ", '" . $getInfoPayMethods['typeCode'] . "')");
             $payId = $this->db->lastInsertId();
 
-            if ($getInfoPayMethods['typeCode'] == 'qiwi_p2p') {
-                $qiwi = new QiwiP2p($InfoPayment['secret_key']);
 
-                $billIdGenerate = Uuid::uuid4()->toString();
-                $sql = "UPDATE ga_pay_logs SET bill_id = :bill_id WHERE id = :id";
-                $update = $this->db->prepare($sql);
-                $update->bindParam(':bill_id', $billIdGenerate);
-                $update->bindParam(':id', $payId);
-                $update->execute();
-
-                $qiwiLink = $qiwi->createBill($billIdGenerate, $amout, $user_profile['email']);
-
-                $InfoPayment = array_merge($InfoPayment, array('qiwiLink' => $qiwiLink['payUrl']));
-
-            }
-
-            $content = $this->view->renderPartial("user/pay", ['step' => "2", 'amout' => $amout, 'payId' => $payId, 'user_profile' => $user_profile, 'InfoPayment' => $InfoPayment]);
+            $content = $this->view->renderPartial("user/pay", ['step' => "2", 'amount' => $amout, 'payId' => $payId, 'user_profile' => $user_profile, 'InfoPayment' => $InfoPayment]);
 
         } else {
             $status = 1;
@@ -184,7 +173,7 @@ class UserController extends BaseController
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
 
-        $getMyServers = $this->db->prepare('SELECT s.id, s.map, s.hostname, s.moderation, s.ip, s.port, s.players, s.max_players, s.rating, s.ban, s.status, u.email FROM ga_servers s LEFT JOIN ga_users u ON s.id_user=u.id WHERE s.id_user = :id_user ORDER BY s.id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
+        $getMyServers = $this->db->prepare('SELECT s.id, s.map, s.hostname, s.game, s.moderation, s.ip, s.port, s.players, s.max_players, s.rating, s.ban, s.status, u.email FROM ga_servers s LEFT JOIN ga_users u ON s.id_user=u.id WHERE s.id_user = :id_user ORDER BY s.id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
         $getMyServers->execute(array(':id_user' => $user_profile['id']));
         $getMyServers = $getMyServers->fetchAll();
 
@@ -228,7 +217,7 @@ class UserController extends BaseController
             if ($content['type_pay'] == 'refill') {
                 $id = $content['id_user'];
                 $servicesName = "Пополнение счета";
-                $price = $content['amout'];
+                $price = $content['amount'] ?? 0;
             } elseif ($content['type_pay'] == "payServices" or $content['type_pay'] == "payApi") {
                 $getInfoServices = $this->db->prepare('SELECT * FROM ga_services WHERE id = :id');
                 $getInfoServices->execute(array(':id' => $content['id_services']));
@@ -253,7 +242,7 @@ class UserController extends BaseController
 
     }
 
-    public function singup()
+    public function signup()
     {
         $title = "Регистрация";
         $user = new User();
@@ -279,7 +268,7 @@ class UserController extends BaseController
                 exit(json_encode($answer));
             }
 
-            if (!preg_match('/\w{6,}/', $password)) {
+            if (!preg_match('/^.{6,}$/', $password)) {
                 $answer['status'] = "error";
                 $answer['error'] = "<b>Пароль</b> введен неверно, минимум 6 символов";
                 exit(json_encode($answer));
@@ -349,8 +338,8 @@ class UserController extends BaseController
 
                 $sql = "UPDATE ga_users SET reset_code = :reset_code WHERE email = :email";
                 $update = $this->db->prepare($sql);
-                $update->bindParam(':reset_code', $reset_code, PDO::PARAM_STR);
-                $update->bindParam(':email', $email, PDO::PARAM_INT);
+                $update->bindParam(':reset_code', $reset_code);
+                $update->bindParam(':email', $email);
                 $update->execute();
 
                 $site_url = $_SERVER['SERVER_NAME'];
@@ -396,7 +385,7 @@ class UserController extends BaseController
                 $checkCode->bindValue(":reset_code", $code);
                 $checkCode->execute();
                 if ($checkCode->rowCount() == '1') {
-                    $newPassword = $system->generate_password(8);
+                    $newPassword = $system->generateCharacter(8);
                     $hashPassword = md5($newPassword);
                     $reset_code = '';
                     $sql = "UPDATE ga_users SET password = :password, reset_code = '' WHERE reset_code = :reset_code";
@@ -738,43 +727,47 @@ class UserController extends BaseController
             $getInfoServices = $getInfoServices->fetch();
             if (!isset($id_services)) parent::ShowError(404, "Страница не найдена!");
 
+            $databefirst = null;
+            $datatop = null;
+            if ($getInfoServices) {
 
-            $databefirst = '';
-            if ($getInfoServices['type'] == 'befirst') {
-                $databefirst = [];
-                for ($i = 1; $i <= $settings['global_settings']['count_servers_befirst']; $i++) {
-                    $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
-                    $isPlace->execute(array(':befirst_enabled' => $i));
-                    if ($isPlace->rowCount() != '0') {
-                        $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
-                        $getInfoServer->execute(array(':befirst_enabled' => $i));
-                        $getInfoServer = $getInfoServer->fetch();
 
-                        $databefirst[] = ['id' => $i, 'status' => 1];
-                    } else {
-                        $databefirst[] = ['id' => $i, 'status' => 0];
+                if ($getInfoServices['type'] == 'befirst') {
+                    $databefirst = [];
+                    for ($i = 1; $i <= $settings['global_settings']['count_servers_befirst']; $i++) {
+                        $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
+                        $isPlace->execute(array(':befirst_enabled' => $i));
+                        if ($isPlace->rowCount() != '0') {
+                            $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
+                            $getInfoServer->execute(array(':befirst_enabled' => $i));
+                            $getInfoServer = $getInfoServer->fetch();
+
+                            $databefirst[] = ['id' => $i, 'status' => 1];
+                        } else {
+                            $databefirst[] = ['id' => $i, 'status' => 0];
+                        }
                     }
                 }
-            }
 
-            $datatop = '';
-            if ($getInfoServices['type'] == 'top') {
-                $datatop = [];
-                for ($i = 1; $i <= $settings['global_settings']['count_servers_top']; $i++) {
-                    $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
-                    $isPlace->execute(array(':top_enabled' => $i));
-                    if ($isPlace->rowCount() != '0') {
-                        $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
-                        $getInfoServer->execute(array(':top_enabled' => $i));
-                        $getInfoServer = $getInfoServer->fetch();
 
-                        $datatop[] = ['id' => $i, 'status' => 1];
-                    } else {
-                        $datatop[] = ['id' => $i, 'status' => 0];
+                if ($getInfoServices['type'] == 'top') {
+                    $datatop = [];
+                    for ($i = 1; $i <= $settings['global_settings']['count_servers_top']; $i++) {
+                        $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
+                        $isPlace->execute(array(':top_enabled' => $i));
+                        if ($isPlace->rowCount() != '0') {
+                            $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
+                            $getInfoServer->execute(array(':top_enabled' => $i));
+                            $getInfoServer = $getInfoServer->fetch();
+
+                            $datatop[] = ['id' => $i, 'status' => 1];
+                        } else {
+                            $datatop[] = ['id' => $i, 'status' => 0];
+                        }
                     }
                 }
-            }
 
+            }
             $status = 1;
             $getPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE status = :status');
             $getPayMethods->execute(array(':status' => $status));
@@ -786,7 +779,18 @@ class UserController extends BaseController
             $getCodeColors->execute(array(':activ' => $activcolor));
             $getCodeColors = $getCodeColors->fetchAll();
 
-            $content = $this->view->renderPartial("user/serverpayForm", ['user_profile' => $user_profile, 'CodeColors' => $getCodeColors, 'serverInfo' => $getInfoServerRow, 'PayMethods' => $getPayMethods, 'type' => $getInfoServices['type'], 'datatop' => $datatop, 'databefirst' => $databefirst, 'infoServices' => $getInfoServices, 'step' => '1'], true);
+            $content = $this->view->renderPartial("user/serverpayForm", [
+                'user_profile' =>
+                $user_profile,
+                'CodeColors' => $getCodeColors,
+                'serverInfo' => $getInfoServerRow,
+                'PayMethods' => $getPayMethods,
+                'type' => $getInfoServices['type'] ?? null,
+                'datatop' => $datatop,
+                'databefirst' => $databefirst,
+                'infoServices' => $getInfoServices,
+                'step' => '1'
+            ]);
             echo $content;
 
         } else parent::ShowError(404, "Страница не найдена!");

@@ -31,15 +31,14 @@ class System extends BaseController
         return $result;
     }
 
-    function getUrl()
+    public function getUrl()
     {
         $url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';
-        $url = $url . $_SERVER['SERVER_NAME'];
-        return $url;
+        return $url . $_SERVER['SERVER_NAME'];
     }
 
     // Add function showbar
-    function showbar($players, $maxplayers)
+    public function showbar($players, $maxplayers): string
     {
         if ($maxplayers > 0) {
             $full_off = round(($players / $maxplayers) * 100);
@@ -65,7 +64,7 @@ class System extends BaseController
 
     // End
 
-    function generate_password($number)
+    public function generateCharacter($number): string
     {
         $arr = array('a', 'b', 'c', 'd', 'e', 'f',
             'g', 'h', 'i', 'j', 'k', 'l',
@@ -91,9 +90,19 @@ class System extends BaseController
         return $pass;
     }
 
-    function generateCaptcha()
+    public function generateRandomNumbers(int $limit): string
     {
+        $randomDigits = '';
 
+        for ($i = 0; $i < $limit; $i++) {
+            $randomDigits .= rand(0, 9);
+        }
+
+        return $randomDigits;
+    }
+
+    public function generateCaptcha()
+    {
         $randomnr = mt_rand(1000, 9999);
         $_SESSION['captcha'] = md5($randomnr);
 
@@ -107,7 +116,7 @@ class System extends BaseController
 
         imagefilledrectangle($im, 0, 0, 200, 35, $black);
 
-        $font = ROOT_DIR . 'public/fonts/captcha.ttf';
+        $font =  ROOT_DIR. 'public/fonts/captcha.ttf';
 
         imagettftext($im, 33, 0, 0, 35, $grey, $font, $randomnr);
 
@@ -119,7 +128,7 @@ class System extends BaseController
         header("Cache-Control: post-check=0, pre-check=0", false);
         header("Pragma: no-cache");
 
-        header("Content-type: image/gif");
+
         imagegif($im);
         imagedestroy($im);
 

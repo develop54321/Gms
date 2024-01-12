@@ -6,7 +6,7 @@
 
     <?php foreach($topServers as $row):?>
     <div class="item">
-        <div class="hostname" <?php if ($row['color_enabled'] != null):?>style="background: <?php echo $row['color_enabled'];?>"<?php endif;?>><a href="<?php if($row['id'] != null):?>/server/info?id=<?php echo $row['id'];?><?php else:?>/pay<?php endif;?>"><?php echo $row['hostname'];?></a></div>
+        <div class="hostname" <?php if ($row['color_enabled'] != null):?>style="background: <?php echo $row['color_enabled'];?>"<?php endif;?>><a href="<?php if($row['id'] != null):?>/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info<?php else:?>/pay<?php endif;?>"><?php echo $row['hostname'];?></a></div>
     <div class="image-map">
         <img src="<?php echo $row['img_map'];?>"/>
         <div class="name-map"><?php echo $row['map'];?></div>

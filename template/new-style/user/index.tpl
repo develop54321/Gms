@@ -23,12 +23,12 @@
       <li class="list-group-item"><b>Ваше Имя:</b> <?php echo $user_profile['firstname'];?></li>
       <li class="list-group-item"><b>Ваше Фамилия:</b> <?php echo $user_profile['lastname'];?></li>
       <li class="list-group-item"><b>Ваш E-mail:</b> <?php echo $user_profile['email'];?></li>
-      <li class="list-group-item"><b>Ваш счет:</b> <?php echo $user_profile['balance'];?>р. [<a href="/user/pay" style="color: #0078b1;">Пополнить</a>]</li>
+      <li class="list-group-item"><b>Ваш счет:</b> <?php echo \widgets\money\Money::run($user_profile['balance']);?> [<a href="/user/pay" style="color: #0078b1;">Пополнить</a>]</li>
       <li class="list-group-item"><b>Ваш статус:</b>  <?php widgets\user\status\Status::run($user_profile['role']);?></li>
 
       <?php if($user_profile['role'] == 'partner'):?>
       <li class="list-group-item"><b>Размер скидки:</b><?php echo $user_profile['discount_api'];?>%</li>
-      <li class="list-group-item"><b>Расход за текущий месяц:</b><?php echo $sumMonth;?>р.</li>
+      <li class="list-group-item"><b>Расход за текущий месяц:</b><?php echo \widgets\money\Money::run($sumMonth);?></li>
       <?php endif;?>
     </ul>
   </div>

@@ -15,11 +15,6 @@ class GamesController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
 
         $title = "Игры";
 
@@ -27,9 +22,9 @@ class GamesController extends AbstractController
         $getGames = $getGames->fetchAll();
 
 
-        $content = $this->view->renderPartial("control/games/index", ['games' => $getGames]);
+        $content = $this->view->renderPartial("games/index", ['games' => $getGames]);
 
-        $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
 
     public function add()
@@ -38,11 +33,6 @@ class GamesController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
 
         $title = "Добавление новой игры";
 
@@ -67,9 +57,9 @@ class GamesController extends AbstractController
             $getGames = $this->db->query('SELECT * FROM ga_games WHERE status = "0"');
             $getGames = $getGames->fetchAll();
 
-            $content = $this->view->renderPartial("control/games/add", ['games' => $getGames]);
+            $content = $this->view->renderPartial("games/add", ['games' => $getGames]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
 
     }
@@ -80,8 +70,6 @@ class GamesController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
@@ -104,8 +92,6 @@ class GamesController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 
@@ -144,9 +130,9 @@ class GamesController extends AbstractController
             $system = new System();
             $url = $system->getUrl();
             $params = json_decode($getInfoPaymethods['content'], true);
-            $content = $this->view->renderPartial("control/paymethods/edit", ['data' => $getInfoPaymethods, 'params' => $params, 'url' => $url]);
+            $content = $this->view->renderPartial("paymethods/edit", ['data' => $getInfoPaymethods, 'params' => $params, 'url' => $url]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
     }

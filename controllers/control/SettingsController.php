@@ -11,13 +11,6 @@ class SettingsController extends AbstractController
 
     public function index()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
         $settings = $getSettings->fetch();
 
@@ -47,8 +40,6 @@ class SettingsController extends AbstractController
             $content['comments']['guest_allow'] = $comments['guest_allow'];
             $content['comments']['moderation'] = $comments['moderation'];
 
-            $content['global_settings']['cron_key'] = $global_settings['cron_key'];
-            $content['global_settings']['auto_backup_database'] = $global_settings['auto_backup_database'];
 
             $contentJson = json_encode($content);
 
@@ -66,9 +57,9 @@ class SettingsController extends AbstractController
 
         } else {
             $settings = json_decode($settings['content'], true);
-            $content = $this->view->renderPartial("control/settings", ['settings' => $settings]);
+            $content = $this->view->renderPartial("settings", ['settings' => $settings]);
 
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
     }

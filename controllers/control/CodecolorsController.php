@@ -16,15 +16,13 @@ class CodecolorsController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
         $title = "Цвета";
         $activcolor = 1;
         $getCodeColors = $this->db->prepare('SELECT * FROM ga_code_colors WHERE activ = :activ');
         $getCodeColors->execute(array(':activ' => $activcolor));
         $getCodeColors = $getCodeColors->fetchAll();
-        $content = $this->view->renderPartial("control/codecolors/index", ['CodeColors' => $getCodeColors]);
-        $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+        $content = $this->view->renderPartial("codecolors/index", ['CodeColors' => $getCodeColors]);
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
 
     public function add()
@@ -33,10 +31,7 @@ class CodecolorsController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
+
         $title = "Добавление нового цвета";
         if (parent::isAjax()) {
             $activ = strip_tags($_POST['activ']);
@@ -48,8 +43,8 @@ class CodecolorsController extends AbstractController
             $answer['success'] = "Цвет успешно добавлен";
             exit(json_encode($answer));
         } else {
-            $content = $this->view->renderPartial("control/codecolors/add", []);
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $content = $this->view->renderPartial("codecolors/add", []);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
     }
 
@@ -59,8 +54,8 @@ class CodecolorsController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
+
+
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
         $title = "Изменение цвета";
         $getInfoCodeColors = $this->db->prepare('SELECT * FROM ga_code_colors WHERE id = :id');
@@ -82,8 +77,8 @@ class CodecolorsController extends AbstractController
             $answer['success'] = "Цвет успешно изменен";
             exit(json_encode($answer));
         } else {
-            $content = $this->view->renderPartial("control/codecolors/edit", ['data' => $getInfoCodeColors]);
-            $this->view->render("control/main", ['content' => $content, 'title' => $title]);
+            $content = $this->view->renderPartial("codecolors/edit", ['data' => $getInfoCodeColors]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
     }
 
@@ -94,8 +89,6 @@ class CodecolorsController extends AbstractController
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-        $getUserPrfile = $user->getProfile();
-        if ($getUserPrfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
             $sql = "DELETE FROM ga_code_colors WHERE id =  :id";

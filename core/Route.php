@@ -22,7 +22,7 @@ class Route{
             $r->addRoute('GET', '/boost', ['controllers\BoostController', 'index']);
             $r->addRoute('GET', '/banlist', ['controllers\BanlistController', 'index']);
             $r->addRoute('GET', '/page/{id:\d+}', ['controllers\PageController', 'index']);
-            $r->addRoute('POST', '/search', ['controllers\SearchController', 'index']);
+            $r->addRoute(['GET', 'POST'], '/search', ['controllers\SearchController', 'index']);
             $r->addRoute('GET', '/captcha', ['controllers\MainController', 'captcha']);
             $r->addRoute(['GET', 'POST'], '/pay/server', ['controllers\PayController', 'server']);
             $r->addRoute(['GET', 'POST'], '/pay', ['controllers\PayController', 'index']);
@@ -34,9 +34,11 @@ class Route{
 
             $r->addGroup('/server', function (RouteCollector $r) {
                 $r->addRoute(['GET', 'POST'], '/add', ['controllers\ServerController', 'add']);
-                $r->addRoute(['GET', 'POST'], '/info', ['controllers\ServerController', 'info']);
+                $r->addRoute(['GET', 'POST'], '/{address}/info', ['controllers\ServerController', 'info']);
                 $r->addRoute('POST', '/vote', ['controllers\ServerController', 'vote']);
                 $r->addRoute('GET', '/getplayers', ['controllers\ServerController', 'getPlayers']);
+                $r->addRoute('GET', '/verification', ['controllers\ServerController', 'verification']);
+                $r->addRoute('POST', '/addcomment', ['controllers\ServerController', 'addComment']);
             });
 
 
@@ -55,7 +57,7 @@ class Route{
             });
 
             $r->addGroup('/control', function (RouteCollector $r) {
-                $r->addRoute('GET', '', ['controllers\control\IndexController', 'index']);
+                $r->addRoute(['GET', 'POST'], '', ['controllers\control\IndexController', 'index']);
                 $r->addRoute(['GET', 'POST'], '/login', ['controllers\control\IndexController', 'login']);
                 $r->addRoute(['GET', 'POST'], '/reset', ['controllers\UserController', 'actionReset']);
                 $r->addRoute(['GET', 'POST'], '/settings', ['controllers\control\SettingsController', 'index']);
@@ -93,7 +95,7 @@ class Route{
                 $r->addRoute('GET', '/comments', ['controllers\control\CommentsController', 'index']);
                 $r->addRoute('GET', '/comments/search', ['controllers\control\CommentsController', 'search']);
                 $r->addRoute(['GET', 'POST'], '/comments/edit', ['controllers\control\CommentsController', 'edit']);
-                $r->addRoute('GET', '/comments/moderation', ['controllers\control\CommentsController', 'edit']);
+                $r->addRoute(['GET', 'POST'], '/comments/moderation', ['controllers\control\CommentsController', 'edit']);
                 $r->addRoute('GET', '/comments/remove', ['controllers\control\CommentsController', 'remove']);
 
                 $r->addRoute('GET', '/pages', ['controllers\control\PagesController', 'index']);
@@ -111,10 +113,12 @@ class Route{
                 $r->addRoute(['GET', 'POST'], '/paylogs/add', ['controllers\control\PaylogsController', 'add']);
                 $r->addRoute(['GET', 'POST'], '/paylogs/edit', ['controllers\control\PaylogsController', 'edit']);
                 $r->addRoute('GET', '/paylogs/remove', ['controllers\control\PaylogsController', 'remove']);
-
-
+                $r->addRoute('POST', '/modal', ['controllers\control\ModalController', 'index']);
             });
 
+            $r->addGroup('/api', function (RouteCollector $r) {
+                $r->addRoute(['POST'], '', ['controllers\ApiController', 'index']);
+            });
         });
 
 
@@ -133,7 +137,7 @@ class Route{
         switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:
                 // Если маршрут не найден, можно вывести ошибку или выполнить другое действие
-                echo '404 Not Found';
+                $this->showError("404", "Page Not Found");
                 break;
             case Dispatcher::METHOD_NOT_ALLOWED:
                 // Если метод не разрешен для данного маршрута, можно вывести ошибку или выполнить другое действие
@@ -144,68 +148,33 @@ class Route{
                 $controller = $routeInfo[1][0];
                 $method = $routeInfo[1][1];
 
+
                 // Вызываем контроллер и метод
                 $instance = new $controller();
                 call_user_func_array([$instance, $method], $routeInfo[2]);
                 break;
         }
-
-
-
-//        $controllerName = "Main";
-//        $actionName = "index";
-//
-//        $getUrl = self::rgp($_SERVER['REQUEST_URI']);
-//
-//        $uri = explode("/", $getUrl);
-//        $uri = array_diff($uri, array(''));
-//
-//        if(isset($uri[1])) $controllerName = $uri[1];
-//        if(isset($uri[2])) $actionName = $uri[2];
-//
-//
-//        if(is_dir("controllers/$controllerName")){
-//
-//        if(isset($uri[2])){
-//            $uriTwo = $uri[2];
-//        }else{
-//            $uri[2] = "index";
-//        }
-//            $controllerName =  ucfirst($uri[2])."Controller";;
-//            $controllerPath = "\\controllers\\".$uri[1]."\\{$controllerName}";
-//        if(isset($uri[3])) $actionName = "action".$uri[3];
-//        else $actionName = "actionIndex";
-//
-//        }else{
-//            $actionName = "action".$actionName;
-//            $controllerName = ucfirst($controllerName)."Controller";
-//            $controllerPath = "\\controllers\\$controllerName";
-//        }
-//
-//        if(class_exists($controllerPath)) {
-//            $controller = new $controllerPath;
-//        }
-//        else{
-//            header("HTTP/1.0 404 Not Found");
-//            $content = $this->view->renderPartial("404", ['code' => "404", 'data' => "Page Not Found"]);
-//            $this->view->render("main", ['content' => $content, 'title' => '404 Page Not Found ', 'global_error' => true]);
-//        }
-//
-//        if(method_exists($controller, $actionName)) $controller->$actionName();
-//        else {
-//            header("HTTP/1.0 404 Not Found");
-//            $content = $this->view->renderPartial("404", ['code' => "404", 'data' => "Page Not Found"]);
-//            $this->view->render("main", ['content' => $content, 'title' => '404 Page Not Found ', 'global_error' => true]);
-//        }
-
-
     }
 
-    public static function rgp($url) {
-    return preg_replace('/^([^?]+)(\?.*?)?(#.*)?$/', '$1$3', $url);
-    }
+    private function showError(int $code, string $data)
+    {
 
-    public function showError(){
+        switch ($code) {
+            case 404:
+                header("HTTP/1.0 404 Not Found");
+                break;
+
+            case 403:
+                header('HTTP/1.0 403 Forbidden');
+
+                break;
+        }
+
+
+        $content = $this->view->renderPartial("404", ['code' => $code, 'data' => $data]);
+
+        $this->view->render("main", ['content' => $content, 'title' => $data]);
+        exit();
 
     }
 }

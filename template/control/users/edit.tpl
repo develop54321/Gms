@@ -69,13 +69,13 @@
 <div id="partnerStatus" style="<?php if($data['role'] == 'partner'):?>display: block;<?php else:?>display: none;<?php endif;?>">
 <div class="form-group">
 <label for="status">Api Логин</label>
-<input type="text" name="api_login" class="form-control" value="<?php echo $data['api_login'];?>"/>
+<input type="text" name="api_login" class="form-control" value="<?php echo $data['api_login'] ?? null;?>"/>
 </div>
 
 <div class="form-group">
 <label for="status">Api Ключ</label>
 <div class="input-group m-t-10">
-<input type="text" id="key" name="api[key]" class="form-control" minlength="16" value="<?php echo $api_params['key_api'];?>">
+<input type="text" id="key" name="api[key]" class="form-control" minlength="16" value="<?php echo $api_params['key_api'] ?? null;?>">
 <a class="input-group-addon btn btn-primary" title="Сгенировать ключ" onclick="generateKey(16);"><i class="fa fa-gears"></i></a>
 </div>
 

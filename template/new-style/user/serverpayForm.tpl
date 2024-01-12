@@ -80,7 +80,7 @@
 <div class="col-md-5">
 <h4>Выберите способ оплаты</h4>
 <select class="form-control form-control-sm" name="typePayment">
-<option value="balance">Лицевой счет - <?php echo $user_profile['balance'];?>р.</option>
+<option value="balance">Лицевой счет: <?php echo \widgets\money\Money::run( $user_profile['balance']);?></option>
 
 </select>
 </div>
@@ -88,7 +88,7 @@
 
 <div class="form-row mt-3">
 <div class="col-md-5">
-<h4>Стоимость: <?php echo $infoServices['price'];?> руб.</h4>
+<h4>Стоимость: <?php echo \widgets\money\Money::run($infoServices['price']);?></h4>
 </div>
 </div>
 

@@ -94,7 +94,7 @@
 
 <div class="form-row mt-3">
 <div class="col-md-5">
-<h4>Стоимость: <?php echo $infoServices['price'];?> руб.</h4>
+<h4>Стоимость: <?php echo \widgets\money\Money::run($infoServices['price']);?></h4>
 </div>
 </div>
 

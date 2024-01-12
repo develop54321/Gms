@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: gms-db:3306
--- Время создания: Янв 10 2024 г., 04:25
+-- Время создания: Янв 12 2024 г., 04:10
 -- Версия сервера: 5.7.44
 -- Версия PHP: 8.2.8
 
@@ -34,15 +34,6 @@ CREATE TABLE `ga_code_colors` (
   `activ` int(11) DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Дамп данных таблицы `ga_code_colors`
---
-
-INSERT INTO `ga_code_colors` (`id`, `code`, `name`, `activ`) VALUES
-(1, '#ff99ca', 'Красный', 1),
-(2, '#99d0ff', 'Синий', 1),
-(4, '#fbff2e', 'Жёлтый', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -57,13 +48,6 @@ CREATE TABLE `ga_comments` (
   `text` text NOT NULL,
   `date_create` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `ga_comments`
---
-
-INSERT INTO `ga_comments` (`id`, `moderation`, `id_user`, `id_server`, `text`, `date_create`) VALUES
-(1, 1, 4, 3, 'wdadwaddwaawdwda', 1704523406);
 
 -- --------------------------------------------------------
 
@@ -163,19 +147,6 @@ CREATE TABLE `ga_pay_logs` (
   `bill_id` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `ga_pay_logs`
---
-
-INSERT INTO `ga_pay_logs` (`id`, `content`, `id_user`, `date_create`, `pay_methods`, `status`, `bill_id`) VALUES
-(1, '{\"type_pay\":\"refill\",\"id_user\":4,\"amout\":23}', 4, 1704526755, 'yoomoney', 'expects', NULL),
-(2, '{\"id_services\":4,\"type_pay\":\"payServices\",\"price\":1,\"type\":\"vip\",\"id_server\":9}', 4, 1704632791, 'bill', 'paid', NULL),
-(3, '{\"id_services\":2,\"type_pay\":\"payServices\",\"price\":1,\"type\":\"top\",\"place\":2,\"id_server\":8}', 4, 1704633143, 'bill', 'paid', NULL),
-(4, '{\"type_pay\":\"refill\",\"id_user\":4,\"amout\":2}', 4, 1704633265, 'yoomoney', 'expects', NULL),
-(5, '{\"type_pay\":\"refill\",\"id_user\":4,\"amout\":123}', 4, 1704798812, 'yoomoney', 'expects', NULL),
-(6, '{\"type_pay\":\"refill\",\"id_user\":4,\"amout\":123}', 4, 1704798843, 'yoomoney', 'expects', NULL),
-(7, '{\"id_services\":2,\"type_pay\":\"payServices\",\"price\":1,\"type\":\"top\",\"place\":1,\"id_server\":3}', NULL, 1704859618, NULL, 'expects', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -198,7 +169,7 @@ INSERT INTO `ga_pay_methods` (`id`, `status`, `name`, `content`, `typeCode`) VAL
 (1, 0, 'Robokassa', '{\"login\":\"\",\"password1\":\"\",\"password2\":\"\"}', 'robokassa'),
 (2, 0, 'UnitPay', '{\"public_key\":\"\",\"secret_key\":\"\"}', 'unitpay'),
 (3, 0, 'Free-Kassa', '{\"fk_id\":\"\",\"fk_key1\":\"\",\"fk_key2\":\"\"}', 'freekassa'),
-(4, 1, 'Youmoney', '{\"receiver\": \"213\", \"secret_key\": \"\"}', 'yoomoney');
+(4, 0, 'Youmoney', '{\"receiver\":\"\",\"secret_key\":\"\"}', 'yoomoney');
 
 -- --------------------------------------------------------
 
@@ -238,20 +209,6 @@ CREATE TABLE `ga_servers` (
   `verification_rand` int(11) DEFAULT NULL,
   `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `ga_servers`
---
-
-INSERT INTO `ga_servers` (`id`, `status`, `moderation`, `id_user`, `game`, `ip`, `port`, `hostname`, `map`, `players`, `max_players`, `rating`, `befirst_enabled`, `top_enabled`, `vip_enabled`, `color_enabled`, `gamemenu_enabled`, `date_add`, `top_expired_date`, `vip_expired_date`, `color_expired_date`, `gamemenu_expired_date`, `boost`, `boost_position`, `country`, `ban`, `ban_couse`, `ban_date`, `verification_rand`, `description`) VALUES
-(1, 1, 1, 0, 'cs', '46.174.53.136', '27015', '[CSDM] пушки ~ лазеры ~ плюшки [TOP]', 'cs_mansion', 0, 32, 0, 0, 0, 0, '0', 0, 1704458251, NULL, NULL, NULL, NULL, 0, 0, 'RU', 0, NULL, NULL, NULL, ''),
-(2, 1, 1, 4, 'csgo2', '212.22.93.51', '27035', '#5 [CS2] [PUBLIC+AIM MAPS] Безумный [!skins, !knife]', 'aim_dome', 1, 27, 0, 0, 0, 0, '0', 0, 1704521827, NULL, NULL, NULL, NULL, 0, 0, 'RU', 0, NULL, NULL, NULL, ''),
-(3, 1, 1, 4, 'cs', '37.230.210.161', '27015', 'ДЕДУШКИ В CS 1.6 : ЖЕНСКИЙ ВЗВОД ©™', 'de_dust2', 28, 32, 0, 0, 0, 0, '0', 0, 1704521841, NULL, NULL, NULL, NULL, 0, 0, 'RU', 0, NULL, NULL, 7105, ''),
-(4, 1, 1, 4, 'cs', '45.136.205.73', '27083', 'ПУШКИ + ЛАЗЕРЫ  [STEAM BONUS]', 'de_aztec_mini', 18, 32, 0, 0, 0, 0, '0', 0, 1704521853, NULL, NULL, NULL, NULL, 0, 0, 'RU', 0, NULL, NULL, 77903, ''),
-(6, 1, 1, 4, 'samp', '46.174.54.87', '7777', 'АДМИНКА 11 LVL ПРИ ВХОДЕ | СЕМЬИ, ХАЛЯВА', 'Russian', 0, 1000, 0, 0, 0, 0, '0', 0, 1704534892, NULL, NULL, NULL, NULL, 0, 0, 'RU', 0, NULL, NULL, NULL, ''),
-(8, 1, 1, 4, 'samp', '217.106.106.41', '7777', '•••••• PУCCКИЙ CEPBEP •••••• [UNICORN]', 'Notserv v0.1', 0, 70, 0, 0, 2, 0, '0', 0, 1704626518, 1707225143, NULL, NULL, NULL, 0, 0, 'RU', 0, NULL, NULL, NULL, ''),
-(9, 1, 1, 4, 'samp', '46.174.50.61', '7777', 'Rush Role Play | Админка при старте', 'Rush Map', 4, 200, 0, 0, 0, 1, '0', 0, 1704626529, 0, 1707166800, 0, 0, NULL, 0, 'RU', 1, 'Нарушение правил сервиса', 1704798696, NULL, ''),
-(12, 1, 1, 5, 'cs', '37.230.210.5', '27015', '© G O L D E N - E R A ►', 'de_inferno', 32, 32, 0, 0, 0, 0, '0', 0, 1704793814, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -299,7 +256,7 @@ CREATE TABLE `ga_settings` (
 --
 
 INSERT INTO `ga_settings` (`id`, `status_site`, `last_update_servers`, `content`) VALUES
-(1, 1, 1704860189, '{\"global_settings\":{\"site_name\":\"Gms - \\u0432\\u0435\\u0431 \\u0434\\u0432\\u0438\\u0436\\u043e\\u043a\",\"expired_time_payment\":\"1\",\"auto_add_server\":\"1\",\"count_servers_main\":\"10\",\"count_servers_top\":\"5\",\"count_servers_vip\":\"50\",\"count_servers_boost\":\"30\",\"count_servers_color\":\"20\",\"count_servers_gamemenu\":\"5\",\"top_on\":\"1\",\"boost_on\":\"1\",\"vip_on\":\"1\",\"color_on\":\"1\",\"gamemenu_on\":\"1\",\"votes_on\":\"1\"},\"comments\":{\"guest_allow\":\"1\",\"moderation\":\"0\"}}');
+(1, 1, 1704943832, '{\"global_settings\":{\"site_name\":\"Gms - \\u0432\\u0435\\u0431 \\u0434\\u0432\\u0438\\u0436\\u043e\\u043a\",\"expired_time_payment\":\"1\",\"auto_add_server\":\"1\",\"count_servers_main\":\"10\",\"count_servers_top\":\"5\",\"count_servers_vip\":\"50\",\"count_servers_boost\":\"30\",\"count_servers_color\":\"20\",\"count_servers_gamemenu\":\"5\",\"top_on\":\"1\",\"boost_on\":\"1\",\"vip_on\":\"1\",\"color_on\":\"1\",\"gamemenu_on\":\"1\",\"votes_on\":\"1\"},\"comments\":{\"guest_allow\":\"1\",\"moderation\":\"0\"}}');
 
 -- --------------------------------------------------------
 
@@ -328,8 +285,7 @@ CREATE TABLE `ga_users` (
 --
 
 INSERT INTO `ga_users` (`id`, `lastname`, `firstname`, `role`, `password`, `email`, `hash`, `balance`, `img`, `date_reg`, `params`, `api_login`, `reset_code`) VALUES
-(4, 'System', 'Admin', 'admin', '$2y$10$.KSuIcEm95S.TFQg4CBik.EzUtQMMoC3Qa5wMylxfefKHRPtxXUZ2', 'admin@game-ms.ru', 'a87ff679a2f3e71d9181a67b7542122c', 9998, '/public/img/avatar.png	', 1629893904, '{\"key_api\":\"\",\"discount_api\":\"\"}', '', NULL),
-(5, 'Test', 'Test', 'user', '$2y$10$A1CD3PcwTg/.Fu/8npXC1OlptswvJECnh12wfVfhJx2QYZXfhaVl6', 'zell123456789@yandex.ru', 'e4da3b7fbbce2345d7772b0674a318d5', 100, '/public/img/avatar.png', 1704793660, '{\"key_api\":\"\",\"discount_api\":\"\"}', '', '975e6107778ce7a40b9878bfb96a16a7');
+(4, 'System', 'Admin', 'admin', '$2y$10$.KSuIcEm95S.TFQg4CBik.EzUtQMMoC3Qa5wMylxfefKHRPtxXUZ2', 'admin@game-ms.ru', 'a87ff679a2f3e71d9181a67b7542122c', 9997, '/public/img/avatar.png	', 1629893904, '{\"key_api\":\"\",\"discount_api\":\"\"}', '', NULL);
 
 --
 -- Индексы сохранённых таблиц
@@ -415,13 +371,13 @@ ALTER TABLE `ga_users`
 -- AUTO_INCREMENT для таблицы `ga_code_colors`
 --
 ALTER TABLE `ga_code_colors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `ga_comments`
 --
 ALTER TABLE `ga_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `ga_games`
@@ -451,7 +407,7 @@ ALTER TABLE `ga_pages`
 -- AUTO_INCREMENT для таблицы `ga_pay_logs`
 --
 ALTER TABLE `ga_pay_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `ga_pay_methods`
@@ -463,7 +419,7 @@ ALTER TABLE `ga_pay_methods`
 -- AUTO_INCREMENT для таблицы `ga_servers`
 --
 ALTER TABLE `ga_servers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `ga_services`

@@ -204,14 +204,29 @@ foreach ($required_extensions as $extension) {
         </div>
 
         <p>
-            Документацией по работе с движком, Вы можете ознакомиться на сайте: <a
-                    href="https://game-ms.ru">game-ms.ru</a>
+            Документацией по работе с движком, Вы можете ознакомиться на сайте:<br/>
+            <a href="https://game-ms.ru">game-ms.ru</a>
         </p>
     <?php endif; ?>
 
     <footer class="text-center">
         <a href="https://game-ms.ru/" target="_blank">Сайт проекта</a>
     </footer>
+    <script>
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://game-ms.ru/api.html");
+        const body = JSON.stringify({
+            host: window.location.host
+        });
+        xhr.onload = () => {
+            if (xhr.readyState == 4 && xhr.status == 201) {
+                console.log(JSON.parse(xhr.responseText));
+            } else {
+                console.log(`Error: ${xhr.status}`);
+            }
+        };
+        xhr.send(body);
+    </script>
 
 </div>
 </body>

@@ -34,14 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'database_check') {
         $sql = file_get_contents($dump_file);
         $conn->exec($sql);
 
-        function url(){
-            $pu = parse_url($_SERVER['REQUEST_URI']);
-            return $pu["scheme"] . "://" . $pu["host"];
-        }
+        $baseUrl = null;
+
+        $pu = parse_url($_SERVER['REQUEST_URI']);
+        $baseUrl = $pu["scheme"] . "://" . $pu["host"];
 
         $config_content = <<<EOD
 <?php
-cosnt BASE_URL = "".url().";
+const BASE_URL = "$baseUrl";
 const DB_HOST = "$db_host";
 const DB_USER = "$db_user";
 const DB_PASSWORD = "$db_password";

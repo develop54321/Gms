@@ -8,7 +8,7 @@
 
 
 <?php $url = "pay"; include("UserMenu.tpl");?>
-
+    <?php echo widgets\flash\Flash::run();?>
 <?php if($step == '1'):?>
 <form action="#" method="post">
 

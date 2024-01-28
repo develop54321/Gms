@@ -37,7 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'database_check') {
         $baseUrl = null;
 
         $pu = parse_url($_SERVER['REQUEST_URI']);
-        $baseUrl = $pu["scheme"] . "://" . $pu["host"];
+
+        $scheme = isset($pu["scheme"]) ? $pu["scheme"] : '';
+        $host = isset($pu["host"]) ? $pu["host"] : '';
+
+
+        $baseUrl = $scheme . "://" . $host;
 
         $config_content = <<<EOD
 <?php

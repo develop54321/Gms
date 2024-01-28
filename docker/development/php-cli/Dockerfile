@@ -1,4 +1,4 @@
-FROM php:8.1-cli-alpine
+FROM php:7.4-cli-alpine
 
 RUN apk update && apk add autoconf g++ make icu-dev libpq postgresql-dev libzip-dev zip libpng-dev \
     && docker-php-ext-install pdo_mysql gd bz2 \

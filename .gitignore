@@ -1,6 +1,5 @@
 .idea
 ./.idea
 config.php
-gms.sql
 vendor/
 vendor

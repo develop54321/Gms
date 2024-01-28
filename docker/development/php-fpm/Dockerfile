@@ -1,4 +1,4 @@
-FROM php:8.1-fpm-alpine
+FROM php:7.4-fpm-alpine
 
 # Change the mirror to a different one
 RUN sed -i -e 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/' /etc/apk/repositories

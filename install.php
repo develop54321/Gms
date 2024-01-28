@@ -36,8 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'database_check') {
 
         $baseUrl = null;
 
-        $pu = parse_url($_SERVER['REQUEST_URI']);
-        $baseUrl = $pu["scheme"] . "://" . $pu["host"];
+        $protocol = isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'http';
+        $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+        $fullDomain = $protocol . '://' . $host;
+
+        $baseUrl = $fullDomain;
 
         $config_content = <<<EOD
 <?php
@@ -50,6 +53,8 @@ const TMPL_DIR = "template/new-style";
 const VERSION = "3.0";
 EOD;
 
+        print_r($config_content);
+        die();
         file_put_contents('config.php', $config_content);
 
         $step = "finish";

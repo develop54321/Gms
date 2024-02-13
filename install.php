@@ -53,8 +53,7 @@ const TMPL_DIR = "template/new-style";
 const VERSION = "3.0";
 EOD;
 
-        print_r($config_content);
-        die();
+
         file_put_contents('config.php', $config_content);
 
         $step = "finish";

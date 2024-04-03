@@ -93,13 +93,6 @@
 
 <div class="col-md-6">
 
-
-<div class="form-group">
-<label for="befirst_expired_date">Время истечения</label>
-<input type="date" class="form-control" name="befirst_expired_date" value="<?php echo date("Y-m-d", $data['befirst_expired_date']);?>">
-</div>
-
-
 <div class="form-group">
 <label for="top_enabled">TOP</label>
 <select class="form-control" name="top_enabled">
@@ -112,7 +105,7 @@
 
 <div class="form-group">
 <label for="top_expired_date">Время истечения</label>
-<input type="date" class="form-control" name="top_expired_date" value="<?php echo date("Y-m-d", $data['top_expired_date']);?>">
+<input type="date" class="form-control" name="top_expired_date" value="<?php echo $data['top_expired_date'] ? date("Y-m-d", $data['top_expired_date']) : null;?>">
 </div>
 
 
@@ -127,7 +120,7 @@
 
 <div class="form-group">
 <label for="vip_expired_date">Время истечения</label>
-<input type="date" class="form-control" name="vip_expired_date" value="<?php echo date("Y-m-d", $data['vip_expired_date']);?>">
+<input type="date" class="form-control" name="vip_expired_date" value="<?php echo $data['vip_expired_date'] ? date("Y-m-d", $data['vip_expired_date']) : null;?>">
 </div>
 
 
@@ -153,7 +146,7 @@
 
 <div class="form-group">
 <label for="color_expired_date">Время истечения</label>
-<input type="date" class="form-control" name="color_expired_date" value="<?php echo date("Y-m-d", $data['color_expired_date']);?>">
+<input type="date" class="form-control" name="color_expired_date" value="<?php echo $data['color_expired_date'] ? date("Y-m-d", $data['color_expired_date']) : null;?>">
 </div>
 
 

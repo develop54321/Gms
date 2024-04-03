@@ -99,7 +99,7 @@ class Route{
                 $r->addRoute('GET', '/comments/remove', ['controllers\control\CommentsController', 'remove']);
 
                 $r->addRoute('GET', '/pages', ['controllers\control\PagesController', 'index']);
-                $r->addRoute(['GET', 'POST'], '/pages/add', ['controllers\control\PagesController', 'add    ']);
+                $r->addRoute(['GET', 'POST'], '/pages/add', ['controllers\control\PagesController', 'add']);
                 $r->addRoute(['GET', 'POST'], '/pages/edit', ['controllers\control\PagesController', 'edit']);
                 $r->addRoute('GET', '/pages/remove', ['controllers\control\PagesController', 'remove']);
 

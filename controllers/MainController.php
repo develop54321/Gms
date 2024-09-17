@@ -6,6 +6,7 @@ use components\Pagination;
 use components\Servers;
 use components\System;
 use core\BaseController;
+use PDO;
 
 class MainController extends BaseController
 {
@@ -102,4 +103,45 @@ class MainController extends BaseController
     }
 
 
+
+    public function stats()
+    {
+
+        $count_uq16 = [];
+
+        for ($x = 0; $x <= 6; $x++) {
+            $m = date("m", strtotime("-$x day"));
+            $m2 = date("Y", strtotime("-$x day"));
+            $m3 = date("d", strtotime("-$x day"));
+
+            // Prepare SQL query
+            $stmt = $this->db->prepare("SELECT COUNT(DISTINCT CONCAT(`ip`,':',`port`)) AS `unique` FROM `mslog` WHERE timeyear = :year AND timemonth = :month AND timeday = :day AND type = 'cs'");
+
+            // Bind parameters
+            $stmt->bindParam(':year', $m2, PDO::PARAM_STR);
+            $stmt->bindParam(':month', $m, PDO::PARAM_STR);
+            $stmt->bindParam(':day', $m3, PDO::PARAM_STR);
+
+            // Execute the query
+            $stmt->execute();
+
+            // Fetch the result
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Store the count in the array
+            $count_uq16[] = $row['unique'];
+        }
+
+// Reverse the array
+        $uq_reverse = array_reverse($count_uq16);
+
+// Output the data
+
+
+        $str = "data: [";implode(", ", $uq_reverse);"]";
+
+        $content = $this->view->renderPartial("stats", ["data" => $str]);
+
+        $this->view->render("main", ['content' => $content, 'title' => "Статистика мастер сервера"]);
+    }
 }

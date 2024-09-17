@@ -1,0 +1,352 @@
+body{
+    font-size: 14px !important;
+    font-family: 'Roboto Reqular', sans-serif !important;
+}
+
+.content{
+    min-height: calc(100vh - 80px);
+}
+
+
+
+.top-servers .top-servers-wrapper{
+    padding: 7px;
+}
+
+
+.top-servers .top-servers-wrapper .top-servers-info .image-map{
+    position: relative;
+}
+
+
+
+.top-servers .name-block, .list-servers .name-block{
+    background: #212529;
+    color: #fff;
+    font-weight: bold;
+    border-bottom: 3px solid #050606;
+    padding: 0.4em;
+
+}
+
+.form-control-dark{
+    background-color: #212529 !important;
+}
+
+footer{
+    background-color: #3e4551;
+}
+
+.heading-table{
+    background: #212529;
+    color: #fff;
+    font-weight: bold;
+    border-bottom: 3px solid #050606;
+    padding: 0.4em;
+}
+
+
+.my-servers-list .server-info{
+    border:1px solid #6c757d;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    background: #e9ecef;
+    position: relative;
+}
+
+
+.my-servers-list .server-info .img img  {
+    width: 160px;
+    height: 110px;
+    margin: 10px;
+    border: 3px solid #bd8c00;
+    border-radius: 3px;
+}
+
+
+.my-servers-list .server-info .img{
+    width: 20%;
+    float: left;
+}
+
+.my-servers-list .server-info .info-2{
+    float: left;
+    width: 38%;
+    margin-top: 8px;
+}
+
+.my-servers-list .server-info .info ul li, .info-2 ul li{
+    padding-bottom: 3px;
+}
+
+.my-servers-list .server-info .info{
+    margin-top: 8px;
+    width: 40%;
+    float: left;
+}
+
+.my-servers-list .server-info .btn-remove-server{
+    float: right;
+    margin: 3px;
+    color: #f14040;
+}
+
+.breadcrumb{
+    padding: 10px !important;
+    background: whitesmoke;
+}
+
+
+.server-info {min-height:200px;}
+.server-info .info-map{
+    float: left;
+    margin: 5px 0;
+    width: 170px;
+}
+
+.server-info .info-text{
+    margin: 10px 0px 10px 175px;
+}
+
+.server-info .info-text ul li{
+    border-bottom: 1px dashed #dee2e6;
+    padding: 3px 0;
+}
+
+
+.info-map img{
+    width: 165px;
+    height: 110px;
+    float: left;
+    border: 2px solid #008bdb;
+
+}
+.info-map p {
+    margin: 4px;
+    text-align: center;
+}
+
+.server-info .info-text .hostname{
+    overflow: hidden;
+    display: inline-flex;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.comments .comment{
+    border-bottom: 1px solid #e9ecef;
+}
+.comments .comment :last-child{
+    border: none;
+}
+
+
+.comments .comment .img-user{
+    margin: 5px;
+    float: left;
+    width: 10%;
+}
+
+.comments .comment .img-user img{
+    width: 50px;
+    border-radius: 50%;
+}
+
+.comments .comment .text{
+    margin: 5px;
+    float: left;
+    position: relative;
+    width: 86%;
+    padding-bottom: 10px;
+}
+
+.comments .comment .date{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #e9ecef;
+    padding: 3px;
+    border-radius: 3px;
+    font-size: 13px;
+
+}
+
+.comment:last-child{
+    border: none;
+}
+
+.reviews-text p{
+    text-align: justify !important;
+}
+
+.comments{
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.comments::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+
+/* Handle */
+.comments::-webkit-scrollbar-thumb {
+    background: #212529;
+}
+
+
+.comments .comment .author{
+    background: #e9ecef;
+    padding: 3px;
+    border-radius: 3px;
+    font-size: 13px;
+    display: inline-block;
+}
+
+
+
+.players-list{
+    overflow-y: scroll;
+    max-height: 360px;
+}
+
+
+
+.players-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+.players-list::-webkit-scrollbar-thumb {
+    background: #212529;
+}
+
+.server-info .head-block{
+    background: whitesmoke;
+    padding: 0.4em 0.6em;
+}
+
+
+
+
+
+
+
+
+
+
+
+header{
+    background: #3c4854;
+    margin-bottom: 40px;
+}
+
+header .btn-logout{
+    border-radius: 0;
+    background: #2779a7;
+    color: #fff;
+    border-color: unset;
+}
+
+header .btn-logout:hover{
+    opacity: 0.7;
+}
+
+
+.main-content{
+    background: #dde1e5;
+    padding: 0.3em 0.4em;
+}
+
+.servers-list{
+    margin-top: 50px;
+}
+
+.servers-list table thead{
+    background: #c9c9c9;
+}
+
+.servers-list table td{
+    padding: 0.8em;
+}
+
+.servers-list table tr{
+    border-bottom: 1px solid rgb(118 104 104 / 15%);
+}
+
+
+.top-servers{
+    background: #e9ecef;
+    padding-bottom: 1.3em;
+}
+
+.top-servers .top-servers-wrapper .top-servers-info .hostname a{
+    padding: 3px 6px;
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+    white-space: nowrap;
+    width: 90%;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.top-servers .top-servers-wrapper .top-servers-info .hostname a{
+    color: #fff;
+}
+
+.top-servers .top-servers-wrapper .top-servers-info{
+    background: #2779a7;
+    width: 100%;
+}
+
+.top-servers .top-servers-wrapper .top-servers-info .image-map img{
+    width: 100%;
+    height: 110px;
+}
+
+
+.top-servers .top-servers-wrapper .top-servers-info .info .players{
+    color: #fff;
+    padding: 3px 6px;
+    background: #070809;
+    font-weight: bold;
+}
+
+.top-servers .top-servers-wrapper .top-servers-info .info .address{
+    color: #fff;
+    padding: 4px 6px;
+    font-weight: bold;
+    border-top: 1px solid #202429;
+    display: block;
+    font-size: 13px;
+}
+
+
+.top-servers .top-servers-wrapper .top-servers-info .image-map .name-map{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #fff;
+    padding: 2px 4px;
+    font-size: 12px;
+}
+
+.top-welcome-text h1{
+    font-size: 24px;
+}
+
+.top-welcome-text .btn.add-server{
+    background: #2779a7;
+    color: #fff;
+    border-radius: 0;
+}
+
+.top-welcome-text .btn.add-server:hover{
+    opacity: 0.7;
+}
+
+

@@ -65,7 +65,7 @@ class ServerController extends BaseController
 
                 $answer['status'] = "error";
                 $answer['error'] = "Сервер уже добавлен" . "<br/>
-       <a href='/server/verification?id=" . $getInfoServer['id'] . "'>Вы владелец сервера?</a>";
+                    <a href='/server/verification?id=" . $getInfoServer['id'] . "'>Вы владелец сервера?</a>";
                 exit(json_encode($answer));
             }
 
@@ -94,7 +94,7 @@ class ServerController extends BaseController
             }
 
             $this->db->exec("INSERT INTO ga_servers (status, moderation, id_user, game, ip, port, date_add, description) 
-    VALUES('$status', '$moderation','$id_user', '$game', '$ip', '$port', '" . time() . "', '$text')");
+                VALUES('$status', '$moderation','$id_user', '$game', '$ip', '$port', '" . time() . "', '$text')");
 
             $answer['status'] = "success";
             $answer['success'] = $success_text;

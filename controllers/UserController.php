@@ -255,6 +255,19 @@ class UserController extends BaseController
 
             $password = strip_tags($_POST['password']);
             $password2 = strip_tags($_POST['password2']);
+            $captcha = $_POST['captcha'];
+
+            if (!isset($_SESSION['captcha'])){
+                $answer['status'] = "error";
+                $answer['error'] = "Капча введена не верно!";
+                exit(json_encode($answer));
+            }
+
+            if ($_SESSION['captcha'] != md5($captcha)) {
+                $answer['status'] = "error";
+                $answer['error'] = "Капча введена не верно!";
+                exit(json_encode($answer));
+            }
 
             if (!preg_match('/^[a-zA-Zа-яА-Я]+$/ui', $firstname)) {
                 $answer['status'] = "error";

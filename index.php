@@ -3,17 +3,18 @@
  @name: Gms - Game Monitoring System
  @author: https://vk.com/dev_gamems
  @site: https://game-ms.ru
- @version: 2.3
+ @version: 3.1
 */
 
 use core\Route;
 
-//dev mode
-//ini_set('error_reporting', E_ALL);
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
 
-ini_set('display_errors', 'Off');
+//dev mode
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
+ini_set('display_errors', 'On');
 
 
 session_start();

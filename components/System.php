@@ -103,11 +103,11 @@ class System extends BaseController
 
     public function generateCaptcha()
     {
-        $randomnr = mt_rand(1000, 9999);
+        $randomnr = mt_rand(11111, 99999);
         $_SESSION['captcha'] = md5($randomnr);
 
 
-        $im = imagecreatetruecolor(120, 38);
+        $im = imagecreatetruecolor(140, 38);
 
 
         $white = imagecolorallocate($im, 255, 255, 255);

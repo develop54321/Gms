@@ -51,6 +51,13 @@ class ServerController extends BaseController
                 exit(json_encode($answer));
             }
 
+            if (!is_string($text) && strlen($text) >= 300) {
+                $answer['status'] = "error";
+                $answer['error'] = "Ошибка: описание не должен превышать 300 символов";
+                exit(json_encode($answer));
+            }
+
+
             $CheckServer = $this->db->prepare('SELECT * FROM ga_servers WHERE ip = :ip and port = :port');
             $CheckServer->bindValue(":ip", $ip);
             $CheckServer->bindValue(":port", $port);

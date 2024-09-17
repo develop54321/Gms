@@ -3,11 +3,13 @@
 
 
         <div class="title">
-            <i class="fa fa-star-o"></i> Список серверов
+            <h3>
+                <i class="fa fa-star-o"></i>   Список серверов
+            </h3>
         </div>
 
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-dark">
                 <thead>
                 <tr>
                     <th scope="col">Игра</th>
@@ -28,9 +30,18 @@
                     <a href="?game=<?=$row['game'];?>"></a>
                 </td>
                 <td><a class="hostname" href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo $row['hostname'];?></a></td>
-                <td><?php echo $row['ip'];?>:<?php echo $row['port'];?></td>
+                <td>
+                    <span class="address">
+                                     <?php echo $row['ip'];?>:<?php echo $row['port'];?>
+                    </span>
+
+                </td>
                 <td><?php echo $row['map'];?></td>
-                <td><?php echo $row['players'];?>/<?php echo $row['max_players'];?></td>
+                <td>
+                    <span class="players">
+                        <?php echo $row['players'];?>/<?php echo $row['max_players'];?>
+                    </span>
+                </td>
                 <td style="text-align: center;">
                     <?php if($row['vip_enabled'] != '0'):?>
                     <b>VIP</b>

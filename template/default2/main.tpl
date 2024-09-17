@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title><?=$title;?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <meta name="description"
           content="GMS - это веб движок запрограммированный на языке PHP, для отслеживание за статусами игровых серверов"/>
     <meta name="keywords"
@@ -15,35 +17,8 @@
     <script src="/public/js/jquery.form.js"></script>
 </head>
 <body>
-
-<header class="p-3 text-white">
-    <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                <b>GMS</b>
-            </a>
-
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/" class="nav-link px-2 text-white">Главная</a></li>
-                <li><a href="/news" class="nav-link px-2 text-white">Новости</a></li>
-                <li><a href="/listing" class="nav-link px-2 text-white">Листинг</a></li>
-                <li><a href="/pay" class="nav-link px-2 text-white">Услуги</a></li>
-                <li><a href="/banlist" class="nav-link px-2 text-white">Банлист</a></li>
-                <li><a href="/page/1" class="nav-link px-2 text-white">Контакты</a></li>
-            </ul>
-
-            <form action="/search" method="post" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                <div class="input-group">
-                    <input type="search" class="form-control form-control-dark form-control-sm" name="query" placeholder="Поиск..." aria-label="Поиск">
-                    <button type="submit" class="btn btn-primary">Найти</button>
-                </div>
-            </form>
-
-            <?php widgets\default2\user\top_menu\TopMenu::run();?>
-        </div>
-    </div>
-</header>
-
+<div class="background"></div>
+<div class="overlay"></div>
 
 <?php
    $getUrl = $_SERVER['REQUEST_URI'];
@@ -51,12 +26,45 @@
    ?>
 
 <div class="main">
-    <div class="container">
+
+    <header class="p-3 text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <b>GMS</b>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="/" class="nav-link px-2 text-white">Главная</a></li>
+                    <li><a href="/news" class="nav-link px-2 text-white">Новости</a></li>
+                    <li><a href="/listing" class="nav-link px-2 text-white">Листинг</a></li>
+                    <li><a href="/pay" class="nav-link px-2 text-white">Услуги</a></li>
+                    <li><a href="/banlist" class="nav-link px-2 text-white">Банлист</a></li>
+                    <li><a href="/page/1" class="nav-link px-2 text-white">Контакты</a></li>
+                </ul>
+
+                <form action="/search" method="post" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <div class="input-group">
+                        <input type="search" class="form-control form-control-dark form-control-sm" name="query" placeholder="Поиск..." aria-label="Поиск">
+                        <button type="submit" class="btn btn-primary">Найти</button>
+                    </div>
+                </form>
+
+                <?php widgets\default2\user\top_menu\TopMenu::run();?>
+            </div>
+        </div>
+    </header>
+
+
+
+
         <div class="main-content">
+            <div class="container">
                 <?php echo $content;?>
+            </div>
         </div>
 
-        <footer class="text-center text-lg-start text-white mt-4" style="background-color: #3e4551">
+        <div class="footer text-center text-lg-start mt-4">
             <div class="container p-4 pb-0">
                 <section class="">
                     <div class="row">
@@ -111,9 +119,9 @@
                 Powered by <a class="text-white" href="https://game-ms.ru" target="_blank">GMS</a>
             </div>
 
-        </footer>
+        </div>
     </div>
-</div>
+
 
 
 

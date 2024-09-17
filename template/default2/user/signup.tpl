@@ -1,15 +1,9 @@
-<section class="content">
-    <div class="container">
-<!--        <nav aria-label="breadcrumb">-->
-<!--            <ol class="breadcrumb">-->
-<!--                <li class="breadcrumb-item"><a href="/">Главная</a></li>-->
-<!--                <li class="breadcrumb-item active" aria-current="page">Регистрация</li>-->
-<!--            </ol>-->
-<!--        </nav>-->
-
-        <h1 class="content-title">
-            Регистрация
-        </h1>
+ <section class="page add-server">
+            <div class="container">
+                <h1 class="content-title">
+                    Регистрация
+                </h1>
+                <hr/>
 
         <form id="signupForm" method="post">
 
@@ -17,28 +11,24 @@
                 <div class="col-md-5">
 
                     <div class="mb-3">
-                        <label for="firstname">Имя</label>
-                        <input type="text" name="firstname" id="firstname" class="form-control" id="inputFirstname" required="">
+                        <input type="text" name="firstname" id="firstname" class="form-control" id="inputFirstname" required="" placeholder="Имя">
                     </div>
 
                     <div class="mb-3">
-                        <label for="lastname">Фамилия</label>
-                        <input type="text" name="lastname" class="form-control" id="lastname" required="">
+                        <input type="text" name="lastname" class="form-control" id="lastname" required="" placeholder="Фамилия">
                     </div>
 
                     <div class="mb-3">
                         <label for="password">Пароль</label>
-                        <input type="password" name="password" class="form-control" id="password" required="">
+                        <input type="password" name="password" class="form-control" id="password" required="" placeholder="Пароль">
                     </div>
 
                     <div class="mb-3">
-                        <label for="password2">Повторите пароль</label>
-                        <input type="password" name="password2" class="form-control" id="password2" required="">
+                        <input type="password" name="password2" class="form-control" id="password2" required="" placeholder="Повторите пароль">
                     </div>
 
                     <div class="mb-3">
-                        <label for="email">Электронная почта</label>
-                        <input type="email" name="email" class="form-control" id="email" required="">
+                        <input type="email" name="email" class="form-control" id="email" required="" placeholder="Электронная почта">
                     </div>
 
                     <div class="mb-3">
@@ -48,8 +38,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="captcha">Цифры с картинки</label>
-                        <input type="text" name="captcha" class="form-control" id="captcha" required=""/>
+                        <input type="text" name="captcha" class="form-control" id="captcha" required="" placeholder="Цифры с картинки"/>
                         <small class="form-text text-muted">Если цифры не видны, то обновите картинку, кликнев на него.</small>
                     </div>
 

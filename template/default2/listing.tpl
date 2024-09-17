@@ -2,11 +2,15 @@
 use components\System;
 ?>
 
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Листинг серверов</li>
-    </ol>
-</nav>
+
+
+<section class="page pay">
+    <div class="container">
+        <h1 class="content-title">
+            Листинг серверов
+        </h1>
+        <hr/>
+
 
 
 <div class="section-listing">
@@ -343,3 +347,5 @@ if($countGamemenuServers<1):
     </div>
 
 </div>
+    </div>
+</section>

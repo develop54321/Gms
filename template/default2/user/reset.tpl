@@ -1,11 +1,9 @@
-<section class="content mt-5">
+<section class="content">
     <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Главная</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Восстановления пароля</li>
-            </ol>
-        </nav>
+        <h1 class="content-title">
+            Восстановления пароля
+        </h1>
+
 
         <?php if(isset($password)):?>
         <p>
@@ -18,13 +16,13 @@
 
                     <div class="mb-3">
                         <label for="email">Электронная почта</label>
-                        <input type="email" name="email" class="form-control form-control-sm" id="email">
+                        <input type="email" name="email" class="form-control" id="email">
                     </div>
 
                 </div>
             </div>
             <div class="mb-3">
-                <input type="submit" class="btn btn-outline-success" value="Отправить"/>
+                <input type="submit" class="btn btn-primary" value="Отправить"/>
             </div>
 
         </form>

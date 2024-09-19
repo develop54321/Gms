@@ -5,6 +5,6 @@
 </div>
 <?php else:?>
     <div class="text-end">
-        <a href="/user" class="btn btn-outline-light">Личный кабинет</a>
+        <a href="/user" class="btn btn-lk">Личный кабинет</a>
     </div>
 <?php endif;?>

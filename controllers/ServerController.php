@@ -181,12 +181,14 @@ class ServerController extends BaseController
         }
 
         $ownerName = null;
-        if ($getInfoServer['id_user'] !== 0) {
+        if ((int)$getInfoServer['id_user'] !== 0) {
             $getInfoUser = $this->db->prepare('SELECT email FROM ga_users WHERE id = :id');
             $getInfoUser->execute(array(':id' => $getInfoServer['id_user']));
             $getInfoUser = $getInfoUser->fetch();
             $ownerName = Servers::hiddenOwnerEmail($getInfoUser['email']);
+
         }
+
 
 
 

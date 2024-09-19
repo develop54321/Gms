@@ -1,11 +1,12 @@
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Банлист</li>
-    </ol>
-</nav>
+<section class="page banlist">
+    <div class="container">
+        <h1 class="content-title">
+            Банлист
+        </h1>
+        <hr/>
 
 
-<div class="section-banlsit">
+
   <div class="container">
 
 
@@ -66,3 +67,4 @@
 
 </div>
 </div>
+</section>

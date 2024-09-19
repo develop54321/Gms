@@ -31,7 +31,7 @@
 </div>
       <div class="modal-footer">
           <a href="#" class="btn btn-primary btn-sm" onclick="voteServer(<?php echo $data['id'];?>); return false;">Голосовать</a>
-          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Закрыть</button>
+          <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">Закрыть</button>
       </div>
     </div>
   </div>

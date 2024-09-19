@@ -74,6 +74,12 @@ header .btn-logout:hover{
     background: #00000052;
 }
 
+
+.top-servers .title{
+    font-size: 1.6em;
+    padding: 0.3em 0;
+}
+
 .top-servers .top-servers-wrapper .top-servers-info .hostname a{
     padding: 3px 6px;
     color: #000000;
@@ -208,3 +214,4 @@ select option {
     background: #2d283e;
     color: #fff;
 }
+

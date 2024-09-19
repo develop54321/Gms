@@ -7,9 +7,12 @@ include_once("top_welcome_text.tpl");
 
 
     <div class="container">
-        <div class="top-servers">
-        <div class="name-block text-center">
-            <i class="fa fa-star-o"></i> Топ сервера
+        <div class="title">
+            <h3>
+                <i class="fa fa-star-o"></i> Топ сервера
+            </h3>
+
+
         </div>
 
         <div class="top-servers-wrapper">
@@ -54,8 +57,6 @@ include_once("top_welcome_text.tpl");
             </div>
     </div>
 
-
-</div>
 
 </div>
 </div>

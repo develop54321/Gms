@@ -1,16 +1,17 @@
-<section class="content mt-5">
-  <div class="container">
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Главная</a></li>
-    <li class="breadcrumb-item active" aria-current="page">История платежей</li>
-  </ol>
-</nav>
+
+
+      <section class="page">
+          <div class="container">
+              <h1 class="content-title">
+                  История платежей
+              </h1>
+              <hr/>
 
 
 
 
-    <div class="row">
+
+              <div class="row">
 
       <div class="col-md-2">
         <?php $url = "paylogs"; include("UserMenu.tpl");?>

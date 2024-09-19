@@ -167,6 +167,11 @@ header .nav-link:hover{
     font-size: 12px;
 }
 
+.top-welcome-text{
+    padding: 0.3em;
+    background: #00000052;
+}
+
 .top-welcome-text h1{
     font-size: 24px;
 }

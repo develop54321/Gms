@@ -1,8 +1,9 @@
-<div class="top-servers mb-4">
 <?php
 
 include_once("top_welcome_text.tpl");
 ?>
+
+<div class="top-servers mb-3">
 
 
 

@@ -176,6 +176,16 @@ header .btn-logout:hover{
     font-style: italic;
 }
 
+.servers-list table .hostname{
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.servers-list table .hostname:hover{
+    opacity: 0.7;
+}
+
 .footer {
     border-top: 2px solid #1b1729;
     background: #2d283e;

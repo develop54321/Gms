@@ -23,72 +23,73 @@
                     </p>
                 </div>
 
-                <div class="my-servers-list">
+                <table class="table table-bordered table-responsive">
+                    <tbody>
+                    <tr>
+                        <th>id</th>
+                        <th>Название</th>
+                        <th>Адрес</th>
+                        <th>Карта/игроки</th>
+                        <th>Статус</th>
+                        <th>Рейтинг</th>
+                        <th></th>
+                    </tr>
+                    </tbody>
+
                     <?php foreach ($servers as $row): ?>
-                        <?php
-                        $path = 'public/img/maps/' . $row['map'] . '.jpg';
-                        if (file_exists($path)) {
-                            $img_map = '/' . $path;
-                        } else {
-                            $img_map = '/public/img/no_map.png';
-                        }
-                        ?>
-                        <div class="server-info" style="min-height: 0px;">
+                    <tr>
+                        <td>
+                            <?php echo $row['id']; ?>
+                        </td>
+
+                        <td>
+                            <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo $row['hostname']; ?></a>
+                        </td>
+
+                        <td>
+                            <?php echo $row['ip']; ?>:<?php echo $row['port']; ?>
+                        </td>
+
+                        <td>
+                            <?php echo $row['map']; ?> / <?php echo $row['players']; ?>/<?php echo $row['max_players']; ?>
+
+                        </td>
+
+                        <td>
+                            <?php if ($row['moderation'] == '1'): ?>
+                                <span class="badge bg-primary">Показывается</span>
+                            <?php else: ?>
+                                <span class="badge bg-warning">Ожидает проверки администратором</span>
+                            <?php endif; ?>
+
+                            <?php if ($row['ban'] === 1): ?>
+                                <span class="badge bg-danger">Забанен</span>
+                            <?php else: ?>
+                                <?php if ($row['status'] === 1): ?>
+                                    <span class="badge bg-success">Работает</span>
+                                <?php elseif ($row['status'] === 0): ?>
+                                    <span class="badge bg-warning">Недоступен</span>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </td>
+
+                        <td>
+                            <label id="vote<?php echo $row['id']; ?>" class="rating-bg"><?php echo $row['rating']; ?></label>
+                        </td>
+
+                        <td>
                             <a href="#" onclick="remove(<?= $row['id']; ?>); return false;" class="btn-remove-server"
-                               title="Удалить сервер"><i class="fa fa-trash"></i></a>
-                            <div class="img">
-                                <img src="<?= $img_map; ?>" title="<?= $row['map']; ?>"/>
-                            </div>
+                               title="Удалить сервер"><i class="fa fa-trash"></i>
+                            </a>
 
-                            <div class="info">
-                                <ul>
-                                    <li>id сервера: #<?php echo $row['id']; ?></li>
-                                    <li>Название: <a
-                                                href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo $row['hostname']; ?></a>
-                                    </li>
-                                    <li>Адрес: <?php echo $row['ip']; ?>:<?php echo $row['port']; ?></li>
-                                    <li>Игроки: <?php echo $row['players']; ?>/<?php echo $row['max_players']; ?></li>
-                                    <li>Карта: <?php echo $row['map']; ?></li>
-                                    <li>Рейтинг: <label id="vote<?php echo $row['id']; ?>"
-                                                        class="rating-bg"><?php echo $row['rating']; ?></label></li>
-                                </ul>
+                            <a href="#"
+                               onclick="ShowModal('<?= $row['id']; ?>', 'serverServices', 'null');return false;">Показать
+                                услуги</a>
+                        </td>
+                    </tr>
+                    <?php endforeach;?>
+                </table>
 
-                            </div>
-
-                            <div class="info-2">
-                                <ul>
-                                    <li>
-                                        Состояние:
-                                        <?php if ($row['moderation'] == '1'): ?>
-                                            <span class="badge bg-primary">Показывается</span>
-                                        <?php else: ?>
-                                            <span class="badge bg-warning">Ожидает проверки администратором</span>
-                                        <?php endif; ?>
-                                    </li>
-                                    <li>Статус:
-                                        <?php if ($row['ban'] == '1'): ?>
-                                            <span class="badge bg-danger">Забанен</span>
-                                        <?php else: ?>
-                                            <?php if ($row['status'] == '1'): ?>
-                                                <span class="badge bg-success">Работает</span>
-                                            <?php elseif ($row['status'] == '0'): ?>
-                                                <span class="badge bg-warning">Недоступен</span>
-                                            <?php endif; ?>
-                                        <?php endif; ?>
-                                    </li>
-                                    <li>Владелец: <?= $row['email']; ?></li>
-                                    <li><a href="#"
-                                           onclick="ShowModal('<?= $row['id']; ?>', 'serverServices', 'null');return false;">Показать
-                                            услуги</a></li>
-                                </ul>
-
-                            </div>
-
-
-                            <div class="clearfix"></div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
 
                 <div class="pagination">
                     <?php foreach ($ViewPagination as $p): ?>

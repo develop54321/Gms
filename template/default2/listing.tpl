@@ -2,9 +2,7 @@
 use components\System;
 ?>
 
-
-
-<section class="page pay">
+<section class="page">
     <div class="container">
         <h1 class="content-title">
             Листинг серверов
@@ -12,15 +10,8 @@ use components\System;
         <hr/>
 
 
-
-<div class="section-listing">
-
-    <div class="container">
-
-
         <span style="float: right;">Текущее время: <?php echo date("d.m.Y [H:i]");?></span>
-
-        <table class="table">
+        <table class="table table-dark">
             <thead>
             <tr>
                 <th>Услуга</th>
@@ -30,13 +21,6 @@ use components\System;
             </tr>
             </thead>
             <tbody>
-            <?php
-if($settings['global_settings']['top_on']==0 and $settings['global_settings']['boost_on']==0 and $settings['global_settings']['vip_on']==0 and $settings['global_settings']['color_on']==0):
-?>
-            <tr>
-                <td colspan="6" align="center">Платные услуги отключены</td>
-            </tr>
-            <?php endif;?>
 
             <?php if($settings['global_settings']['top_on']==1):?>
             <tr>
@@ -86,11 +70,10 @@ if($settings['global_settings']['top_on']==0 and $settings['global_settings']['b
             </tbody>
         </table>
 
-
         <div>
             <?php if($settings['global_settings']['top_on']==1):?>
-            <h5 style="padding-top: 25px;">ПРЕМИУМ МЕСТО</h5>
-            <table class="table">
+            <h5>ПРЕМИУМ МЕСТО</h5>
+            <table class="table table-dark">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -132,9 +115,9 @@ if($countTopServers<1):
 
 
             <?php if($settings['global_settings']['boost_on']==1):?>
-            <h5 style="padding-top: 25px;">BOOST</h5>
+            <h5>BOOST</h5>
 
-            <table class="table">
+            <table class="table table-dark">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -182,9 +165,9 @@ if($countBoostServers<1):
 
 
             <?php if($settings['global_settings']['vip_on']==1):?>
-            <h5 style="padding-top: 25px;">VIP СТАТУС</h5>
+            <h5>VIP СТАТУС</h5>
 
-            <table class="table">
+            <table class="table table-dark">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -238,8 +221,8 @@ if($countVipServers<1):
 
 
             <?php if($settings['global_settings']['color_on']==1):?>
-            <h5 style="padding-top: 25px;">Выделение цветом</h5>
-            <table class="table">
+            <h5>Выделение цветом</h5>
+            <table class="table table-dark">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -288,9 +271,9 @@ if($countColorServers<1):
 
 
             <?php if($settings['global_settings']['gamemenu_on']==1):?>
-            <h5 style="padding-top: 25px;">GameMenu</h5>
+            <h5>GameMenu</h5>
 
-            <table class="table">
+            <table class="table table-dark">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -327,10 +310,10 @@ $show_playersGamemenu = $system->showbar( $g['players'], $g['max_players'] );
 
 
                 <?php
-$i++;
-endforeach;
-if($countGamemenuServers<1):
-?>
+                    $i++;
+                    endforeach;
+                    if($countGamemenuServers<1):
+                    ?>
                 <tr>
                     <td colspan="6" align="center">Список серверов пуст</td>
                 </tr>
@@ -346,6 +329,4 @@ if($countGamemenuServers<1):
 
     </div>
 
-</div>
-    </div>
 </section>

@@ -1,15 +1,15 @@
-<section class="content">
+<section class="page pay">
     <div class="container">
         <h1 class="content-title">
             Восстановления пароля
         </h1>
+        <hr/>
 
-
-        <?php if(isset($password)):?>
-        <p>
-            Ваш новый пароль: <code><?php echo $password;?></code>
-        </p>
-        <?php else:?>
+        <?php if (isset($password)): ?>
+            <p>
+                Ваш новый пароль: <code><?php echo $password; ?></code>
+            </p>
+        <?php else: ?>
         <form id="resetForm" method="post">
             <div class="row">
                 <div class="col-md-5">
@@ -48,4 +48,4 @@
         });
     });
 </script>
-<?php endif;?>
+<?php endif; ?>

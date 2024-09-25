@@ -16,6 +16,12 @@ class PageController extends BaseController
 
         if (!$getPageContent)  parent::ShowError(404, "Страница не найдена!");
 
+        $stmt = $this->db->prepare("UPDATE ga_pages SET count_visited = count_visited + 1 WHERE id = :id");
+
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+
 
         $title = $getPageContent['title'];
 

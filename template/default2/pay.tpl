@@ -1,11 +1,11 @@
-<section class="page pay">
-    <div class="container">
-        <h1 class="content-title">
-            Заказ платной услуги
-        </h1>
-        <hr/>
 
-        <div class="section-pay">
+        <section class="page">
+            <div class="container">
+                <h1 class="content-title">
+                    Заказ платной услуги
+                </h1>
+                <hr/>
+
 
 
             <?php if ($type == 'search'): ?>
@@ -72,7 +72,6 @@
 
             <?php elseif ($type == 'searchForm'): ?>
 
-
                 <form method="post">
                     <div class="alert alert-primary" role="alert">
                         <p>
@@ -86,7 +85,6 @@
 
 
                 </form>
-
             <?php elseif ($type == 'selectServices'): ?>
             <?php if (empty($services)): ?>
                 <h3 style="text-align: center;">Нету достные услуг для заказа</h3>
@@ -136,14 +134,14 @@
                         </select>
                     </div>
                 </div>
-
-
                 <div id="contentForm"></div>
             </form>
 
+            <?php endif; ?>
 
-        </div>
-    </div>
+            </div>
+
+
 </section>
 <script>
     function updateForm() {
@@ -157,5 +155,4 @@
         });
     }
 </script>
-<?php endif; ?>
 

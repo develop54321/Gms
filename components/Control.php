@@ -6,7 +6,7 @@ use core\BaseController;
 
 class Control extends BaseController
 {
-    function isAuth()
+    function isAuth(): bool
     {
         session_start();
         if (isset($_SESSION['email']) && isset($_SESSION['hash'])) {

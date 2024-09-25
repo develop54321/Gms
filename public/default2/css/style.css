@@ -198,30 +198,30 @@ header .nav-link:hover{
     padding: 0.3em 0;
 }
 
-.servers-list table thead{
+.table-dark thead{
     background: #251e3a
 }
 
-.servers-list table thead tr th{
+.table-dark thead tr th{
     border-bottom: none;
     padding: 0.8em;
 }
 
-.servers-list table td{
+.table-dark td{
     padding: 0.8em;
 }
 
-.servers-list table tr{
+.table-dark tr{
     border-bottom: #1b1729;
 }
 
-.servers-list table .address, .players{
+.table-dark .address, .players{
     background: #1b1729;
     padding: 0.2em 0.4em;
     border-radius: 0.25em;
 }
 
-.servers-list table .vote{
+.table-dark .vote{
     background: #1b1729;
     padding: 0.2em 0.4em;
     border-radius: 0.25em;

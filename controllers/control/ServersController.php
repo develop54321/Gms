@@ -77,7 +77,7 @@ class ServersController extends AbstractController
         $per_page = 15;
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
-        $getServers = $this->db->query('SELECT * FROM ga_servers ORDER BY vip_enabled DESC, rating DESC, players DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
+        $getServers = $this->db->query('SELECT * FROM ga_servers LIMIT ' . $result['start'] . ', ' . $per_page . '');
         $getServers = $getServers->fetchAll();
         $filter['count'] = count($getServers);
         $content = $this->view->renderPartial("servers/index", ['filter' => $filter, 'servers' => $getServers, 'ViewPagination' => $result['ViewPagination']]);

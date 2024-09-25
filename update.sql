@@ -1,0 +1,1 @@
+ALTER TABLE `ga_comments` CHANGE `id_user` `id_user` INT(11) NULL;

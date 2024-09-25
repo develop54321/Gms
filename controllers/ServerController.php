@@ -448,6 +448,7 @@ class ServerController extends BaseController
 
         $user = new User();
         $profile = $user->isAuth();
+        $idUser = $profile['id'] ?? null;
         if (parent::isAjax()) {
             if (isset($_POST['id'])) $id = (int)$_POST['id']; else $id = null;
             $comment = strip_tags($_POST['comment']);
@@ -486,7 +487,18 @@ class ServerController extends BaseController
             }
 
 
-            $this->db->exec("INSERT INTO ga_comments (id_user, moderation, id_server, text, date_create) VALUES('" . $profile['id'] . "', '" . $moderation . "', '" . $id . "', '" . $comment . "','" . time() . "')");
+
+            $stmt = $this->db->prepare("INSERT INTO ga_comments (moderation, id_user, id_server, text, date_create) 
+                            VALUES (:moderation, :id_user, :id_server, :text, :date_create)");
+
+            $stmt->bindParam(':moderation', $moderation);
+            $stmt->bindParam(':id_user', $idUser);
+            $stmt->bindParam(':id_server', $id);
+            $stmt->bindParam(':text', $comment);
+            $stmt->bindValue(':date_create', time());
+
+            $stmt->execute();
+
 
 
             $answer['status'] = "success";

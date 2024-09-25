@@ -1,4 +1,4 @@
-<section class="page">
+<section class="page server-info">
     <div class="container">
         <h1 class="content-title">
             Информация о сервере - <?php echo $data['hostname'];?>
@@ -22,7 +22,7 @@
                         <p>Игроков: <strong><?php echo $data['players'];?>/<?php echo $data['max_players'];?></strong></p>
                         <p>Карта: <?php echo $data['map'];?></p>
 
-                        <p>Игра: <?php widgets\server\game\Status::run($data['game']);?></p>
+                        <p>Игра: <?php echo $data['game_name'];?></p>
                         <p>Статус: <?php echo $data['status'];?></p>
 
                         <p>
@@ -44,9 +44,10 @@
 
                         <p>
                             Рейтинг:
-                            <a href="#" onclick="ShowModal('<?=$data['id'];?>', 'vote', 'minus');return false;"><i class="fa fa-minus"></i></a>
+                            <a href="#" onclick="ShowModal('<?=$data['id'];?>', 'vote', 'minus');return false;"><i class="fa fa-thumbs-down"></i></a>
                             <label id="vote<?php echo $data['id'];?>" class="rating-bg"><?php echo $data['rating'];?></label>
-                            <a href="#" onclick="ShowModal('<?=$data['id'];?>', 'vote', 'plus');return false;"><i class="fa fa-plus"></i></a>
+                            <a href="#" onclick="ShowModal('<?=$data['id'];?>', 'vote', 'plus');return false;"><i class="fa fa-thumbs-up"></i></a>
+
                         </p>
 
                         <?php if(!empty($data['description'])):?>
@@ -55,74 +56,42 @@
 
 
 
-                        <div class="progress" style="margin: 10px;">
-                            <div class="progress-bar"
-                                 style="width: <?php echo $data['show_players'];?>;"> <?php echo $data['show_players'];?></div>
-                        </div>
                         <hr>
 
                         <h3>Платные услуги</h3>
                         <ul class="list-group">
-                            <li class="list-group-item">VIP доступ - <strong>5$</strong></li>
-                            <li class="list-group-item">Премиум скины - <strong>10$</strong></li>
-                            <li class="list-group-item">Супер оружие - <strong>7$</strong></li>
+                            <?php if($data['top_enabled'] != '0'):?>
+                                <li class="list-group-item">
+                                    Премиум место(Место №<?php echo $data['top_enabled'];?>)<br/>
+                                    Оплачено до: <?php echo date("d.m.Y [H:i]", $data['top_expired_date']);?>
+                                </li>
+                            <?php endif;?>
+
+                            <?php if($data['vip_enabled'] != '0'):?>
+                                <li class="list-group-item">
+                                    VIP статус<br/>
+                                    Оплачено до: <?php echo date("d.m.Y [H:i]", $data['vip_expired_date']);?>
+                                </li>
+                            <?php endif;?>
+
+                            <?php if($data['color_enabled'] != '0'):?>
+                                <li class="list-group-item">
+                                    Выделение цветом<br/>
+                                    Оплачено до: <?php echo date("d.m.Y [H:i]", $data['color_expired_date']);?>
+                                </li>
+                            <?php endif;?>
+
+
+                            <?php if($data['boost'] != '0'):?>
+                                <li class="list-group-item">
+                                    Boost:<br/>
+                                    Осталось кругов: <?php echo $data['boost'];?>
+                                </li>
+                            <?php endif;?>
+
                         </ul>
 
-                                 <a class="btn btn-outline-success btn-sm mt-2" href="/pay/server?id=<?php echo $data['id'];?>"> Заказать платную услугу</a>
-<!--                <table class="table">-->
-<!---->
-<!---->
-<!--                    --><?php //if($data['top_enabled'] != '0'):?>
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            Премиум место: (Место № --><?php //echo $data['top_enabled'];?><!--) Оплачено-->
-<!--                            до: --><?php //echo date("d.m.Y [H:i]", $data['top_expired_date']);?>
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    --><?php //endif;?>
-<!---->
-<!--                    --><?php //if($data['vip_enabled'] != '0'):?>
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            VIP статус: Оплачено до: --><?php //echo date("d.m.Y [H:i]", $data['vip_expired_date']);?>
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    --><?php //endif;?>
-<!---->
-<!---->
-<!--                    --><?php //if($data['color_enabled'] != '0'):?>
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            Выделение цветом: Оплачено-->
-<!--                            до: --><?php //echo date("d.m.Y [H:i]", $data['color_expired_date']);?>
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    --><?php //endif;?>
-<!---->
-<!--                    --><?php //if($data['boost'] != '0'):?>
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            Boost: Осталось кругов: --><?php //echo $data['boost'];?>
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    --><?php //endif;?>
-<!---->
-<!--                    --><?php //if($data['gamemenu_enabled'] != '0'):?>
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            GameMenu: Оплачено до: --><?php //echo date("d.m.Y [H:i]", $data['gamemenu_expired_date']);?>
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    --><?php //endif;?>
-<!---->
-<!--                    --><?php //if($data['befirst_enabled'] == '0' and $data['top_enabled'] == '0' and $data['vip_enabled'] == '0' and $data['boost'] == '0' and $data['color_enabled'] == '0' and $data['gamemenu_enabled'] == '0'):?>
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    --><?php //endif;?>
-<!--                </table>-->
-
+                                 <a class="btn btn-primary btn-sm mt-2" href="/pay/server?id=<?php echo $data['id'];?>"> Заказать платную услугу</a>
                         <hr>
 
 

@@ -267,3 +267,11 @@ select option {
     color: #fff;
 }
 
+
+.server-info .fa-thumbs-down{
+    color: #f35959;
+}
+
+.server-info .fa-thumbs-up{
+    color: #6ff359;
+}

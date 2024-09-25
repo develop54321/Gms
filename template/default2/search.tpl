@@ -1,16 +1,10 @@
-<section class="content mt-5 list-servers">
+<section class="page">
     <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Главная</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Поиск сервера</li>
-            </ol>
-        </nav>
+        <h1 class="content-title">
+            Поиск
+        </h1>
+        <hr/>
 
-        <div class="name-block text-center">
-            <i class="fa fa-star-o"></i> Список серверов
-        </div>
-        <div class="serversList">
             <?php if ($servers):?>
             <table class="table table-striped table-hover">
                 <thead>
@@ -65,7 +59,7 @@
             <?php endif;?>
 
             <?php if (empty($servers)): ?>
-                <h3 style="text-align: center;">По вашему запросу ничего не найдено!</h3>
+                <h3>По вашему запросу ничего не найдено!</h3>
             <?php endif; ?>
 
 

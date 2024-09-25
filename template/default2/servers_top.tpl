@@ -20,7 +20,7 @@ include_once("top_welcome_text.tpl");
             <div class="row">
                 <?php foreach($topServers as $row):?>
 
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 block">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 block mb-2">
                         <div class="top-servers-info">
                             <div class="hostname"
                                  <?php if ($row['color_enabled'] != null):?>style="background: <?php echo $row['color_enabled'];?>

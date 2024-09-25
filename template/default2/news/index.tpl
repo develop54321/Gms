@@ -18,13 +18,14 @@
                         <div class="col-md-6">
                             <div class="card flex-md-row mb-4 box-shadow h-md-250">
                                 <div class="card-body d-flex flex-column align-items-start">
-                                    <strong class="d-inline-block mb-2 text-primary"><?php echo $item['title']; ?></strong>
-                                    <div class="mb-1 text-muted">
-                                        <?php echo date("d.m.Y", $item['date_create']); ?>
-                                    </div>
+                                    <strong class="d-inline-block mb-2"><?php echo $item['title']; ?></strong>
                                     <p class="card-text mb-auto">
                                         <?php echo $item['text']; ?>
                                     </p>
+
+                                    <div class="mt-2 text-muted">
+                                        <?php echo date("d.m.Y", $item['date_create']); ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>

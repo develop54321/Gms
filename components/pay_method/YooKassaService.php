@@ -15,12 +15,17 @@ use YooKassa\Common\Exceptions\ResponseProcessingException;
 use YooKassa\Common\Exceptions\TooManyRequestsException;
 use YooKassa\Common\Exceptions\UnauthorizedException;
 
-class YooKassaService
+final class YooKassaService
 {
 
-    private const SHOP_ID = 448594;
-    //private const SECRET_KEY_TEST = "test_o_EfvesnAvvM37fvoo0ZLyMyPUnuAGOYOOpEY9-Sy7Y";
-    private const SECRET_KEY = "live_T7aE36rVTE6XDqmQP9CxL0MQTjVOA6WgoxG9qbNJ_UA";
+    public function __construct(
+        int $shopId,
+        string $secretKey
+    )
+    {
+        $this->shopId = $shopId;
+        $this->secretKey = $secretKey;
+    }
 
     /**
      * @throws NotFoundException
@@ -37,12 +42,12 @@ class YooKassaService
      */
     public function createPayment(float $price,
                                   string $description,
-                                  string $payLogGuid,
+                                  string $payLogId,
                                   string $returnUrl
     ): array
     {
         $client = new Client();
-        $client->setAuth(self::SHOP_ID, self::SECRET_KEY);
+        $client->setAuth($this->shopId, $this->secretKey);
 
         $idempotenceKey = uniqid('', true);
         $response = $client->createPayment(
@@ -57,7 +62,7 @@ class YooKassaService
                     'return_url' => $returnUrl
                 ),
                 'metadata' => [
-                    "pay_log_guid" => $payLogGuid
+                    "pay_log_id" => $payLogId
                 ],
                 'description' => $description
             ),
@@ -75,7 +80,7 @@ class YooKassaService
     public function getPaymentInfo(string $paymentGuid): ?\YooKassa\Model\Payment\PaymentInterface
     {
         $client = new Client();
-        $client->setAuth(self::SHOP_ID, self::SECRET_KEY);
+        $client->setAuth($this->shopId, $this->secretKey);
 
         return $client->getPaymentInfo($paymentGuid);
     }

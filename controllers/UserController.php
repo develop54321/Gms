@@ -5,12 +5,14 @@ namespace controllers;
 use components\Flash;
 use components\Mail;
 use components\Pagination;
+use components\pay_method\YooKassaService;
 use components\ReCaptcha;
 use components\Services;
 use components\System;
 use components\User;
 use core\BaseController;
 use PDO;
+use PDOException;
 use Ramsey\Uuid\Uuid;
 
 class UserController extends BaseController
@@ -114,15 +116,15 @@ class UserController extends BaseController
                 return header("Location: /user/pay");
             }
             $typePayment = (int)$_POST['typePayment'];
-            $amout = (int)$_POST['amout'];
+            $amount = (int)$_POST['amout'];
 
             $CheckPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE id = :id');
             $CheckPayMethods->bindValue(":id", $typePayment);
             $CheckPayMethods->execute();
             if ($CheckPayMethods->rowCount() == '0') parent::ShowError(404, "Страница не найдена!");
-            if ($amout < 0) parent::ShowError(404, "Страница не найдена!");
+            if ($amount < 0) parent::ShowError(404, "Страница не найдена!");
 
-            $content = json_encode(['type_pay' => "refill", 'id_user' => $user_profile['id'], 'amount' => $amout]);
+            $content = json_encode(['type_pay' => "refill", 'id_user' => $user_profile['id'], 'amount' => $amount]);
 
             $getInfoPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE id = :id');
             $getInfoPayMethods->execute(array(':id' => $typePayment));
@@ -131,11 +133,53 @@ class UserController extends BaseController
             $InfoPayment = json_decode($getInfoPayMethods['content'], true);
             $InfoPayment = array_merge($InfoPayment, array('typeCode' => $getInfoPayMethods['typeCode']));
 
-            $this->db->exec("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods) VALUES('$content','" . time() . "', 'expects', " . $user_profile['id'] . ", '" . $getInfoPayMethods['typeCode'] . "')");
+
+            $stmt = $this->db->prepare("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods)
+            VALUES (:content, :date_create, :status, :id_user, :pay_methods)");
+
+
+            $stmt->bindParam(':content', $content);
+            $stmt->bindValue(':date_create', time(), PDO::PARAM_INT);
+            $stmt->bindValue(':status', 'expects');
+            $stmt->bindValue(':id_user', $user_profile['id'], PDO::PARAM_INT);
+            $stmt->bindValue(':pay_methods', $getInfoPayMethods['typeCode']);
+            $stmt->execute();
+
             $payId = $this->db->lastInsertId();
 
+            if ($getInfoPayMethods['typeCode'] === "yookassa"){
+                $description = "Оплата счета " . $payId;
+                $returnUrl = BASE_URL . "/result/success";
 
-            $content = $this->view->renderPartial("user/pay", ['step' => "2", 'amount' => $amout, 'payId' => $payId, 'user_profile' => $user_profile, 'InfoPayment' => $InfoPayment]);
+                $youKassaService = new YooKassaService(
+                    $InfoPayment['shop_id'],
+                    $InfoPayment['secret_key'],
+                );
+
+                try {
+                    $res = $youKassaService->createPayment(
+                        $amount,
+                        $description,
+                        $payId,
+                        $returnUrl
+                    );
+                    header("Location: " . $res['url']);
+                }catch (\Exception $e) {
+                    Flash::add("danger", $e->getMessage());
+
+                    return header("Location: /user/pay");
+                }
+            }
+
+
+
+            $content = $this->view->renderPartial("user/pay", [
+                'step' => "2",
+                'amount' => $amount,
+                'payId' => $payId,
+                'user_profile' => $user_profile,
+                'InfoPayment' => $InfoPayment
+            ]);
 
         } else {
             $status = 1;

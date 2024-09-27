@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e081692a2596c1de80006f527e5bb7a",
+    "content-hash": "d033d698c54574fc5ec0d3ab3f8f721e",
     "packages": [
         {
             "name": "austinb/gameq",
@@ -311,6 +311,56 @@
                 "source": "https://github.com/php-fig/container/tree/1.1.2"
             },
             "time": "2021-11-05T16:50:12+00:00"
+        },
+        {
+            "name": "psr/log",
+            "version": "1.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/log/tree/1.1.4"
+            },
+            "time": "2021-05-03T11:20:27+00:00"
         },
         {
             "name": "ramsey/collection",
@@ -1460,6 +1510,60 @@
                 }
             ],
             "time": "2020-12-04T08:20:42+00:00"
+        },
+        {
+            "name": "yoomoney/yookassa-sdk-php",
+            "version": "2.11.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.yoomoney.ru/scm/sdk/yookassa-sdk-php.git",
+                "reference": "111316af97206e4436b4ba6db462bdac8e0ff92c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://git.yoomoney.ru/rest/api/latest/projects/SDK/repos/yookassa-sdk-php/archive?at=refs%2Ftags%2F2.11.1&format=zip"
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.0",
+                "psr/log": "^1.0"
+            },
+            "require-dev": {
+                "ext-xml": "*",
+                "mockery/mockery": "^0.9 || ^1.6",
+                "php-parallel-lint/php-parallel-lint": "^1.0",
+                "phpmd/phpmd": "^2.13",
+                "phpunit/phpunit": "^4.8 || ^5.7",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "YooKassa\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "YooMoney",
+                    "email": "cms@yoomoney.ru"
+                }
+            ],
+            "description": "This is a developer tool for integration with YooMoney.",
+            "homepage": "https://yookassa.ru/developers/api",
+            "keywords": [
+                "api",
+                "payments",
+                "sdk",
+                "yookassa",
+                "yoomoney"
+            ],
+            "time": "2024-09-18T14:44:05+00:00"
         }
     ],
     "packages-dev": [],

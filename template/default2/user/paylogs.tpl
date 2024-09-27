@@ -20,7 +20,7 @@
 
 
       <div class="col-md-10">
-<table class="table table table-hover m-0">
+<table class="table table table-dark m-0">
   <thead>
     <tr>
       <th scope="col">#</th>

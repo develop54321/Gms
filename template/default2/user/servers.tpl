@@ -23,7 +23,7 @@
                     </p>
                 </div>
 
-                <table class="table table-bordered table-responsive">
+                <table class="table table-dark">
                     <tbody>
                     <tr>
                         <th>id</th>

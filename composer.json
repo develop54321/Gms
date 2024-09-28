@@ -1,11 +1,11 @@
 {
-    "name": "gms/v2.0",
+    "name": "gms/v3.1",
     "description": "Game Monitoring System",
     "type": "project",
     "authors": [
         {
-            "name": "Danil",
-            "email": "zell123456789@yandex.ru"
+            "name": "game-ms.ru",
+            "email": "admin@game-ms.ru"
         }
     ],
     "require": {

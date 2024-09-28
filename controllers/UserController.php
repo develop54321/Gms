@@ -13,6 +13,7 @@ use components\User;
 use core\BaseController;
 use PDO;
 use PDOException;
+use Ramsey\Uuid\Guid\Guid;
 use Ramsey\Uuid\Uuid;
 
 class UserController extends BaseController
@@ -157,12 +158,21 @@ class UserController extends BaseController
                 );
 
                 try {
+
                     $res = $youKassaService->createPayment(
                         $amount,
                         $description,
                         $payId,
                         $returnUrl
                     );
+
+                    $sql = "UPDATE ga_pay_logs SET bill_id = :bill_id WHERE id = :id";
+                    $update = $this->db->prepare($sql);
+                    $update->bindParam(':bill_id', $res['guid'], );
+                    $update->bindParam(':id', $payId);
+                    $update->execute();
+
+
                     header("Location: " . $res['url']);
                 }catch (\Exception $e) {
                     Flash::add("danger", $e->getMessage());

@@ -8,4 +8,6 @@
     UnitPay
 <?php elseif($value == 'yoomoney'):?>
     ЮMoney
+<?php elseif($value == 'yookassa'):?>
+    ЮKassa
 <?php endif;?>

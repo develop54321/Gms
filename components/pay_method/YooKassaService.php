@@ -17,6 +17,8 @@ use YooKassa\Common\Exceptions\UnauthorizedException;
 
 final class YooKassaService
 {
+    private $shopId;
+    private $secretKey;
 
     public function __construct(
         int $shopId,
@@ -64,7 +66,8 @@ final class YooKassaService
                 'metadata' => [
                     "pay_log_id" => $payLogId
                 ],
-                'description' => $description
+                'description' => $description,
+                'capture' => true
             ),
             $idempotenceKey
         );
@@ -77,7 +80,18 @@ final class YooKassaService
 
     }
 
-    public function getPaymentInfo(string $paymentGuid): ?\YooKassa\Model\Payment\PaymentInterface
+    /**
+     * @throws NotFoundException
+     * @throws ApiException
+     * @throws ResponseProcessingException
+     * @throws BadApiRequestException
+     * @throws ExtensionNotFoundException
+     * @throws InternalServerError
+     * @throws ForbiddenException
+     * @throws TooManyRequestsException
+     * @throws UnauthorizedException
+     */
+    public function getPaymentInfo(string $paymentGuid)
     {
         $client = new Client();
         $client->setAuth($this->shopId, $this->secretKey);

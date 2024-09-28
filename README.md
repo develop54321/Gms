@@ -1,4 +1,4 @@
-### GMS v3.0
+### GMS v3.1
 
 #### Внимание данная версия не совместима с предыдущими версиями.
 
@@ -26,6 +26,7 @@
 >* Robokassa, 
 >* FreeKassa,
 >* YooMoney 
+>* ЮKassa 
 >обеспечивая безопасные и эффективные методы оплаты.
 
 >Модуль API для интеграции с хостинг-провайдерами: 
@@ -61,7 +62,8 @@
 php bin/console cron - обновления игровых серверов <br>
 php bin/console payment - проверка истекших счетов<br>
 php bin/console qiwi - проверка платежей киви<br>
-php bin/console services - проверка платных услуг на истечение
+php bin/console services - проверка платных услуг на истечение<br>
+php bin/console yookassa - проверка платежей ЮKassa
 
 **Страница успешной оплаты:** [https://mysite.ru/result/success](https://mysite.ru/result/success)  
 **Страница провальной оплаты:** [https://mysite.ru/result/fail](https://mysite.ru/result/fail)
@@ -126,4 +128,6 @@ php bin/console services - проверка платных услуг на ис�
 
 ## Документация
 [https://game-ms.ru/documentation.html](https://game-ms.ru/documentation.html)
-	
+
+
+<iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=xqHYDQIFbT0.230522&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe>

@@ -6,8 +6,6 @@ use core\BaseController;
 
 class BanlistController extends BaseController
 {
-
-
     public function index()
     {
         $title = "Банлист";
@@ -22,5 +20,4 @@ class BanlistController extends BaseController
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
-
 }

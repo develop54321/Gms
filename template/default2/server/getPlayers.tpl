@@ -1,4 +1,4 @@
-<?php if (in_array($game, ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust'])):?>
+<?php if (in_array($game, ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])):?>
 <table class="table">
 <thead>
 <tr>

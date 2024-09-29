@@ -17,16 +17,21 @@
 
                 <div class="col-lg-8 mb-4">
                     <div class="server-info">
-                        <p>Название сервера: <strong><?php echo $data['hostname'];?></strong></p>
-                        <p>IP: <strong><?php echo $data['ip'];?>:<?php echo $data['port'];?></strong></p>
-                        <p>Игроков: <strong><?php echo $data['players'];?>/<?php echo $data['max_players'];?></strong></p>
-                        <p>Карта: <?php echo $data['map'];?></p>
+                        <p>Название сервера: <span class="name"><?php echo $data['hostname'];?></span></p>
+                        <p>Игра: <span class="game"> <?php echo $data['game_name'];?></span> </p>
+                        <p>Адрес: <span class="address"><?php echo $data['ip'];?>:<?php echo $data['port'];?></span></p>
+                        <p>Игроков: <span class="players"><?php echo $data['players'];?>/<?php echo $data['max_players'];?></span></p>
+                        <p>Карта: <span class="map"><?php echo $data['map'];?></span> </p>
 
-                        <p>Игра: <?php echo $data['game_name'];?></p>
-                        <p>Статус: <?php echo $data['status'];?></p>
+
+                        <p>Статус:
+                        <span class="<?php if ($data['status']):?>status-online<?php else:?>status-offline<?php endif;?>">
+                            <?php echo $data['status'];?>
+                        </span>
+                        </p>
 
                         <p>
-                            Добавлен в мониторинг: <?php echo date("d.m.Y [H:i]", $data['date_add']);?>
+                            Добавлен в мониторинг: <span class="created-at"><?php echo date("d.m.Y [H:i]", $data['date_add']);?></span>
                         </p>
 
                         <p>
@@ -136,7 +141,7 @@
 
                     <img class="w-100" src="<?php echo $data['img_map'];?>" alt="<?php echo $data['map'];?>">
 
-                    <button type="button" class="btn btn-success players-btn mt-2">Показать игроков</button>
+                    <a onclick="ShowModal('<?= $data['id']; ?>', 'showPlayers');return false;" class="btn btn-success players-btn mt-2">Показать игроков</a>
                 </div>
             </div>
         </div>

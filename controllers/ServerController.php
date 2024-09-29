@@ -321,7 +321,6 @@ class ServerController extends BaseController
 
     public function getPlayers()
     {
-        $system = new System();
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = null;
 
         $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
@@ -331,13 +330,10 @@ class ServerController extends BaseController
         if (empty($getInfoServer)) parent::ShowError(404, "Сервер не найден!");
 
         $Query = new SourceQuery();
-
-        $Players = array();
-
-
-        if (in_array($getInfoServer['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust'])) {
+        $Players = [];
+        if (in_array($getInfoServer['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])) {
             try {
-                $Query->Connect($getInfoServer['ip'], $getInfoServer['port'], 2, SourceQuery::GOLDSOURCE);
+                $Query->Connect($getInfoServer['ip'], $getInfoServer['port'], 3, SourceQuery::GOLDSOURCE);
 
                 $Players = $Query->GetPlayers();
 

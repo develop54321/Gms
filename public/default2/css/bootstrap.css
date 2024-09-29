@@ -200,11 +200,11 @@ sup {
 }
 
 a {
-  color: #0d6efd;
+  color: #ffc107;
   text-decoration: underline;
 }
 a:hover {
-  color: #0a58ca;
+  color: #ffb300;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -4693,8 +4693,8 @@ textarea.form-control-lg {
 
 .alert-warning {
   color: #4e4e4e;
-  background-color: #ffcf7a;
-  border-color: #ffecb5;
+  background-color: #fffcde;
+  border-color: #f6f2c5;
 }
 .alert-warning .alert-link {
   color: #523e02;

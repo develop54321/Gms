@@ -102,21 +102,19 @@
 
 <div class="form-row mt-3">
 <div class="col-md-5">
-<button type="submit" class="btn btn-success">Далее</button>
+<button type="submit" class="btn btn-primary btn-sm">Далее</button>
 </div>
 </div>
 <?php endif;?>
 
 
 <?php elseif($step == '2'):?>
-<section class="content mt-5">
-  <div class="container">
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Главная</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Платные услуги</li>
-  </ol>
-</nav>
+    <section class="page">
+        <div class="container">
+            <h1 class="content-title">
+                Платные услуги
+            </h1>
+            <hr/>
 <?php
 $price = $infoServices['price'];
 $desc = "Оплата услуги  #".$infoServices['id']."";

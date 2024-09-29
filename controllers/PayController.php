@@ -2,6 +2,8 @@
 
 namespace controllers;
 
+use components\Flash;
+use components\pay_method\YooKassaService;
 use core\BaseController;
 use components\System;
 
@@ -149,7 +151,11 @@ class PayController extends BaseController
                     if ($countColorServers >= $limitColorServers and $CheckColorServer == 0) {
                         parent::ShowError(404, "Нет свободных мест");
                     }
-                    $color = $_POST['selectColor'];
+                    $color = $_POST['selectColor'] ?? null;
+                    if ($color === null){
+                        Flash::add("danger", "Выберите цвет");
+                        return header("Location: /pay/server?id=" . $id);
+                    }
                     $content = json_encode(['id_services' => $id_services, 'type_pay' => "payServices", 'price' => $getInfoServices['price'], 'type' => 'color', 'color' => $color, 'id_server' => $id]);
                     $this->db->exec("INSERT INTO ga_pay_logs (content, date_create, status) VALUES('$content','" . time() . "', 'expects')");
                     $payId = $this->db->lastInsertId();
@@ -209,6 +215,37 @@ class PayController extends BaseController
             $InfoPayment = array_merge($InfoPayment, array('typeCode' => $getInfoPayment['typeCode']));
 
 
+            if ($getInfoPayment['typeCode'] === "yookassa"){
+                $description = "Оплата счета " . $payId;
+                $returnUrl = BASE_URL . "/result/success";
+
+                $youKassaService = new YooKassaService(
+                    $InfoPayment['shop_id'],
+                    $InfoPayment['secret_key'],
+                );
+
+                try {
+                    $res = $youKassaService->createPayment(
+                        $getInfoServices['price'],
+                        $description,
+                        $payId,
+                        $returnUrl
+                    );
+
+                    $sql = "UPDATE ga_pay_logs SET bill_id = :bill_id WHERE id = :id";
+                    $update = $this->db->prepare($sql);
+                    $update->bindParam(':bill_id', $res['guid'], );
+                    $update->bindParam(':id', $payId);
+                    $update->execute();
+
+                    header("Location: " . $res['url']);
+                }catch (\Exception $e) {
+                    Flash::add("danger", $e->getMessage());
+
+                    return header("Location: /pay/server?id=" . $id);
+                }
+            }
+
 
             $content = $this->view->renderPartial("payForm", ['InfoPayment' => $InfoPayment, 'infoServices' => $getInfoServices, 'payId' => $payId, 'type' => 'selectServices', 'serverInfo' => $getInfoServer, 'services' => $getServices, 'step' => 2]);
 
@@ -255,10 +292,6 @@ class PayController extends BaseController
                         $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
                         $isPlace->execute(array(':befirst_enabled' => $i));
                         if ($isPlace->rowCount() != '0') {
-                            $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
-                            $getInfoServer->execute(array(':befirst_enabled' => $i));
-                            $getInfoServer = $getInfoServer->fetch();
-
                             $databefirst[] = ['id' => $i, 'status' => 1];
                         } else {
                             $databefirst[] = ['id' => $i, 'status' => 0];
@@ -273,10 +306,6 @@ class PayController extends BaseController
                         $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
                         $isPlace->execute(array(':top_enabled' => $i));
                         if ($isPlace->rowCount() != '0') {
-                            $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
-                            $getInfoServer->execute(array(':top_enabled' => $i));
-                            $getInfoServer = $getInfoServer->fetch();
-
                             $datatop[] = ['id' => $i, 'status' => 1];
                         } else {
                             $datatop[] = ['id' => $i, 'status' => 0];

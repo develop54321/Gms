@@ -6,7 +6,7 @@
         <hr/>
 
             <?php if ($servers):?>
-            <table class="table table-striped table-hover">
+            <table class="table table-dark">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -23,31 +23,34 @@
                     <tr>
                         <td><?php echo $row['id']; ?></td>
                         <td>
-                            <?php if ($row['game'] == 'cs'): ?>
-                                <img src="/public/img/gameicons/cs.png" style="width: 16px;"/>
-                            <?php elseif ($row['game'] == 'csgo'): ?>
-                                <img src="/public/img/gameicons/csgo.png" style="width: 16px;"/>
-                            <?php elseif ($row['game'] == 'css'): ?>
-                                <img src="/public/img/gameicons/css.png" style="width: 16px;"/>
-                            <?php endif; ?>
+                            <?php echo \widgets\server\game\GameIcon::run($row['game']);?>
                         </td>
                         <td>
                             <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo $row['hostname']; ?></a>
                         </td>
-                        <td><?php echo $row['ip']; ?>:<?php echo $row['port']; ?></td>
+                        <td>
+                              <span class="address">
+                            <?php echo $row['ip']; ?>:<?php echo $row['port']; ?>
+                              </span>
+                        </td>
                         <td><?php echo $row['map']; ?></td>
-                        <td><?php echo $row['players']; ?>/<?php echo $row['max_players']; ?></td>
+                        <td>
+                              <span class="players">
+                            <?php echo $row['players']; ?>/<?php echo $row['max_players']; ?>
+                              </span>
+
+                        </td>
                         <td style="text-align: center;">
                             <?php if ($row['vip_enabled'] != '0'): ?>
                                 VIP
                             <?php else: ?>
 
-                                <a href="#" onclick="ShowModal('<?= $row['id']; ?>', 'vote', 'minus');return false;"><i
-                                            class="fa fa-minus"></i></a>
+                                <a href="#" onclick="ShowModal('<?=$row['id'];?>', 'vote', 'minus');return false;"><i class="fa fa-thumbs-down"></i></a>
+
                                 <label id="vote<?php echo $row['id']; ?>"
                                        class="rating-bg"><?php echo $row['rating']; ?></label>
-                                <a href="#" onclick="ShowModal('<?= $row['id']; ?>', 'vote', 'plus');return false;"><i
-                                            class="fa fa-plus"></i></a>
+
+                                <a href="#" onclick="ShowModal('<?=$row['id'];?>', 'vote', 'plus');return false;"><i class="fa fa-thumbs-up"></i></a>
                             <?php endif; ?>
 
                         </td>

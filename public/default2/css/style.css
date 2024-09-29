@@ -243,11 +243,11 @@ header .nav-link:hover{
     opacity: 0.7;
 }
 
-.servers-list table .fa-thumbs-down{
+.table-dark .fa-thumbs-down{
     color: #f35959;
 }
 
-.servers-list table .fa-thumbs-up{
+.table-dark  .fa-thumbs-up{
     color: #6ff359;
 }
 

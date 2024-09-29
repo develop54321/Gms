@@ -73,7 +73,7 @@
                 <tr id="server<?php echo $row['id']; ?>">
                     <td><?php echo $row['id']; ?></td>
                     <td>
-                        <?php widgets\server\game\Status::run($row['game']); ?>
+                        <?php widgets\server\game\GameIcon::run($row['game']); ?>
                     </td>
                     <td>
                         <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo $row['hostname']; ?></a>

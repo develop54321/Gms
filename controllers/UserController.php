@@ -392,6 +392,12 @@ class UserController extends BaseController
         if (parent::isAjax()) {
             $email = strip_tags($_POST['email']);
 
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $answer['status'] = "error";
+                $answer['error'] = "<b>E-mail</b> адрес указан верно";
+                exit(json_encode($answer));
+            }
+
 
             $check = $this->db->prepare('SELECT * FROM ga_users WHERE email = :email ');
             $check->bindValue(":email", $email);

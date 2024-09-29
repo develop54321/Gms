@@ -27,7 +27,7 @@
                 <?php if($row['color_enabled'] != null):?>style="background: <?php echo $row['color_enabled'];?>
                 "<?php endif;?>>
                 <td>
-                    <?php widgets\server\game\Status::run($row['game']);?>
+                    <?php widgets\server\game\GameIcon::run($row['game']);?>
                     <a href="?game=<?=$row['game'];?>"></a>
                 </td>
                 <td><a class="hostname" href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo $row['hostname'];?></a></td>

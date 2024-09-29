@@ -32,7 +32,7 @@
 <div class="info-text">
 <ul>
 <li>Название: <span class="hostname"><?php echo $data['hostname'];?></span></li>
-<li>Игра: <?php widgets\server\game\Status::run($data['game']);?></li>
+<li>Игра: <?php widgets\server\game\GameIcon::run($data['game']);?></li>
 <li>Статус: <?php echo $data['status'];?></li>
 <li>Адрес: <?php echo $data['ip'];?>:<?php echo $data['port'];?></li>
 <li>Добавлен в мониторинг: <?php echo date("d.m.Y [H:i]", $data['date_add']);?></li>

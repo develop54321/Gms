@@ -17,3 +17,4 @@
 <?php elseif($game == 'csgo2'):?>
 <img src="/public/img/gameicons/csgo2.png" style="width: 16px;"/>
 <?php endif;?>
+

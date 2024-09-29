@@ -309,7 +309,7 @@ class UserController extends BaseController
 
             $password = strip_tags($_POST['password']);
             $password2 = strip_tags($_POST['password2']);
-            $captcha = $_POST['captcha'];
+            $captcha = $_POST['captcha'] ?? null;
 
             if (!isset($_SESSION['captcha'])){
                 $answer['status'] = "error";

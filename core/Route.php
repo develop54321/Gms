@@ -16,6 +16,7 @@ class Route{
 
         $dispatcher = \FastRoute\simpleDispatcher(function(RouteCollector $r) {
             $r->addRoute('GET', '/', ['controllers\MainController', 'index']);
+            $r->addRoute('GET', '/game/{code}', ['controllers\GamesController', 'view']);
             $r->addRoute('GET', '/stats', ['controllers\MainController', 'stats']);
             $r->addRoute('GET', '/listing', ['controllers\ListingController', 'index']);
             $r->addRoute(['GET', 'POST'], '/modal', ['controllers\ModalController', 'actionIndex']);

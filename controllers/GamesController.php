@@ -4,26 +4,23 @@ namespace controllers;
 
 use components\Pagination;
 use components\Servers;
-use components\System;
 use core\BaseController;
-use PDO;
 
-class MainController extends BaseController
+class GamesController extends BaseController
 {
-
-
-    public function captcha()
+    public function view($code)
     {
-        $system = new System();
-        $system->generateCaptcha();
-    }
+        $getGame = $this->db->prepare('SELECT id, code, game FROM ga_games WHERE code = :code');
+        $getGame->execute([':code' => $code]);
+        $getGame = $getGame->fetch();
 
-    public function index()
-    {
+
+        if (!$getGame) parent::ShowError(404, "Страница не найдена!");
+
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
         $settings = $getSettings->fetch();
         $settings = json_decode($settings['content'], true);
-        $title = $settings['global_settings']['site_name'] . " :: Главная";
+        $title = $settings['global_settings']['site_name'] . " :: " . $getGame['game'];
 
         $topServers = [];
         for ($i = 1; $i <= $settings['global_settings']['count_servers_top']; $i++) {
@@ -68,20 +65,12 @@ class MainController extends BaseController
 
         }
 
-        $sort = '';
-        if (isset($_GET['game'])) {
-            $game = $_GET['game'];
-            $sort = "and game = :game";
-            $sort_where = array(':status' => 1, ':ban' => 0, ':game' => $game);
-            $countServers = $this->db->prepare('SELECT * FROM ga_servers WHERE ban = :ban and status = :status and game = :game');
-            $countServers->execute(array(':ban' => 1, ':status' => 0, ':game' => $game));
-        } else {
-            $sort_where_count = array(':ban' => 0, ':status' => 1);
-            $sort_where = array(':status' => 1, ':ban' => 0);
-            $countServers = $this->db->prepare('SELECT * FROM ga_servers WHERE ban = :ban and status = :status');
-            $countServers->execute($sort_where_count);
+        $game = $getGame['code'];
+        $sort = "and game = :game";
+        $sort_where = array(':status' => 1, ':ban' => 0, ':game' => $game);
+        $countServers = $this->db->prepare('SELECT * FROM ga_servers WHERE ban = :ban and status = :status and game = :game');
+        $countServers->execute(array(':ban' => 1, ':status' => 0, ':game' => $game));
 
-        }
         $count = $countServers->rowCount();
 
         $pagination = new Pagination();
@@ -98,49 +87,6 @@ class MainController extends BaseController
         $content .= $this->view->renderPartial("servers_list", ['servers' => $getServers, 'ViewPagination' => $result['ViewPagination']]);
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
-
     }
 
-
-
-    public function stats()
-    {
-
-        $count_uq16 = [];
-
-        for ($x = 0; $x <= 6; $x++) {
-            $m = date("m", strtotime("-$x day"));
-            $m2 = date("Y", strtotime("-$x day"));
-            $m3 = date("d", strtotime("-$x day"));
-
-            // Prepare SQL query
-            $stmt = $this->db->prepare("SELECT COUNT(DISTINCT CONCAT(`ip`,':',`port`)) AS `unique` FROM `mslog` WHERE timeyear = :year AND timemonth = :month AND timeday = :day AND type = 'cs'");
-
-            // Bind parameters
-            $stmt->bindParam(':year', $m2, PDO::PARAM_STR);
-            $stmt->bindParam(':month', $m, PDO::PARAM_STR);
-            $stmt->bindParam(':day', $m3, PDO::PARAM_STR);
-
-            // Execute the query
-            $stmt->execute();
-
-            // Fetch the result
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            // Store the count in the array
-            $count_uq16[] = $row['unique'];
-        }
-
-// Reverse the array
-        $uq_reverse = array_reverse($count_uq16);
-
-// Output the data
-
-
-        $str = "data: [";implode(", ", $uq_reverse);"]";
-
-        $content = $this->view->renderPartial("stats", ["data" => $str]);
-
-        $this->view->render("main", ['content' => $content, 'title' => "Статистика мастер сервера"]);
-    }
 }

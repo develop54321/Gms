@@ -1,3 +1,5 @@
+<?php \widgets\common\games\menu\Menu::run();?>
+
 <div class="servers-list">
     <div class="container">
 

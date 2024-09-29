@@ -78,13 +78,14 @@
                         </td>
 
                         <td>
-                            <a href="#" onclick="remove(<?= $row['id']; ?>); return false;" class="btn-remove-server"
-                               title="Удалить сервер"><i class="fa fa-trash"></i>
-                            </a>
-
                             <a href="#"
                                onclick="ShowModal('<?= $row['id']; ?>', 'serverServices', 'null');return false;">Показать
                                 услуги</a>
+
+                            <a href="#" onclick="remove(<?= $row['id']; ?>); return false;" class="btn btn-danger btn-sm"
+                               title="Удалить сервер"><i class="fa fa-trash"></i>
+                            </a>
+
                         </td>
                     </tr>
                     <?php endforeach;?>

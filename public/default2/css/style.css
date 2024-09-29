@@ -283,7 +283,12 @@ select option {
     color: #6ff359;
 }
 
-.server-info .game, .name, .address, .players, .map, .created-at{
+.server-info .game,
+.server-info .name,
+.server-info .address,
+.server-info .players,
+.server-info .map,
+.server-info .created-at{
     background: #0d6efd;
     padding: 0.2em 0.4em;
     border-radius: 0.25em;
@@ -322,3 +327,9 @@ select option {
     color: #fff;
 }
 
+.comments .comment{
+    background-color: #2d283e;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    border: 1px solid #00000075;
+}

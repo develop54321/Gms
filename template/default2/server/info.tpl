@@ -106,7 +106,7 @@
                                 <textarea class="form-control" name="comment" style="resize: none;"
                                           placeholder="Оставьте свой комментарий..." rows="3"></textarea>
                                 <br/>
-                                <input type="submit" class="btn btn-primary" value="Отправить"/>
+                                <input type="submit" class="btn btn-primary btn-sm mb-2" value="Отправить"/>
                             </form>
 
                         <div class="comments">
@@ -116,14 +116,18 @@
                             <?php endif;?>
                             <?php foreach($comments as $c):?>
                                 <div class="comment">
+                                    <?php if ($c['img'] !== null):?>
                                     <div class="img-user">
-                                        <img src="<?php echo $c['img'];?>" alt="user avatar"/>
+                                        <img style="width: 24px;" src="<?php echo $c['img'];?>" alt="user avatar"/>
                                     </div>
+                                    <?php endif;?>
                                     <div class="text">
                                         <div class="author">
                                             <?php echo $c['lastname'];?>
                                         </div>
                                         <?php echo $c['text'];?>
+
+                                        <hr/>
 
                                         <div class="date"><?php echo date("d.m.Y H:i", $c['date_create']);?></div>
                                     </div>

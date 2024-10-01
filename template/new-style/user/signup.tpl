@@ -38,6 +38,17 @@
                         <input type="email" name="email" class="form-control form-control-sm" id="email" required="">
                     </div>
 
+                    <div class="mb-3">
+                        <a href="#" id="captchaImg" onclick="updateCaptcha(); return false;">
+                            <img src="/captcha" src="Каптча"/>
+                        </a>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" name="captcha" class="form-control" id="captcha" required="" placeholder="Цифры с картинки"/>
+                        <small class="form-text text-muted">Если цифры не видны, то обновите картинку, кликнев на него.</small>
+                    </div>
+
 
                     <div class="mb-3">
                         <input type="submit" class="btn btn-outline-success" value="Продолжить"/>

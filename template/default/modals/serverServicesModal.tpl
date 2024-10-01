@@ -10,12 +10,6 @@
       <div class="modal-body">
       <p>
 
-<li><?php if($data['befirst_enabled'] != '0'):?>
-Будь Первым - место #<?php echo $data['befirst_enabled'];?> | истекает: <?php echo date("d-m-Y H:i", $data['befirst_expired_date']);?>
-<?php else:?>
-Будь Первым: <a href="/user/serverpay?id=<?php echo $data['id'];?>">Купить</a>
-<?php endif;?>
-</li>
 <li><?php if($data['top_enabled'] != '0'):?>
 TOP - место #<?php echo $data['top_enabled'];?> | истекает: <?php echo date("d-m-Y H:i", $data['top_expired_date']);?>
 <?php else:?>

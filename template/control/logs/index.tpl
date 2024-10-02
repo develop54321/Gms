@@ -1,0 +1,56 @@
+<div class="row">
+<div class="col-sm-12">
+<h4 class="page-title">Логи</h4>
+<ol class="breadcrumb">
+<li><a href="/control">Главная</a></li>
+<li class="active">Логи</li>
+</ol>
+</div>
+</div>
+
+
+<div class="col-sm-12">
+
+<div class="card-box">
+<h4 class="m-t-0 header-title"><b>Логи</b></h4>
+<p class="text-muted m-b-30 font-12">по умолчанию сортируется по дате</p>
+
+<div class="filter">
+<h4 class="m-t-0 header-title"><b>Логи</b></h4>
+</div>
+
+
+
+<table class="table table table-hover m-0">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Описание</th>
+      <th scope="col">Дата инициализация</th>
+    </tr>
+  </thead>
+  <tbody>
+   <?php foreach($data as $row):?>
+
+    <tr>
+      <td><?php echo $row['id'];?></td>
+      <td><?php echo $row['text'];?></td>
+      <td><?php echo date("d:m:Y [H:i]", $row['date_create']);?></td>
+    </tr>
+    <?php endforeach;?>
+    
+  </tbody>
+</table>
+
+<?php if(!isset($action)):?>
+<div class="pagination">
+<?php foreach($ViewPagination as $p):?>
+<?php echo $p[0];?>
+<?php endforeach;?>
+</div>
+<?php endif;?>
+
+
+
+</div>
+</div>

@@ -4,6 +4,7 @@ namespace command;
 
 use core\Database;
 use Exception;
+use PDO;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,6 +25,8 @@ class CronCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $startTime = microtime(true);
+
         $getServers = $this->db->query('SELECT * FROM ga_servers');
         $getServers = $getServers->fetchAll();
         $Query = new SourceQuery();
@@ -139,8 +142,20 @@ class CronCommand extends Command
         $time = time();
         $sql = "UPDATE ga_settings SET last_update_servers = $time";
         $this->db->query($sql);
-        echo "server information updated successfully";
 
+        $endTime = microtime(true);
+        $executionTime = $endTime - $startTime;
+        $text = "Серверы успешно обновлены, процесс занял ".round($executionTime, 4)." секунд";
+
+        $sql = 'INSERT INTO ga_system_logs (text, date_create) VALUES (:text, :date_create)';
+        $stmt = $this->db->prepare($sql);
+
+        $stmt->bindValue(':text', $text, PDO::PARAM_STR);
+        $stmt->bindValue(':date_create', time(), PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        echo "server information updated successfully";
 
         return Command::SUCCESS;
     }

@@ -28,7 +28,7 @@
 
                     <li class="list-group-item">
                         <span class="badge badge-primary"><?php echo $sizeDatabase; ?> мб.</span>
-                        Размер Базы Данных
+                        Размер базы данных
                     </li>
 
                     <li class="list-group-item">

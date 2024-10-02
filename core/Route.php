@@ -115,7 +115,12 @@ class Route{
                 $r->addRoute(['GET', 'POST'], '/paylogs/add', ['controllers\control\PaylogsController', 'add']);
                 $r->addRoute(['GET', 'POST'], '/paylogs/edit', ['controllers\control\PaylogsController', 'edit']);
                 $r->addRoute('GET', '/paylogs/remove', ['controllers\control\PaylogsController', 'remove']);
+
+                $r->addRoute('GET', '/logs', ['controllers\control\LogsController', 'index']);
+
                 $r->addRoute('POST', '/modal', ['controllers\control\ModalController', 'index']);
+
+
             });
 
             $r->addGroup('/api', function (RouteCollector $r) {

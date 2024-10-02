@@ -13,19 +13,14 @@ class PaylogsController extends AbstractController
 
     public function index()
     {
-
-
         $title = "Логи платежей";
-
 
         $countServers = $this->db->query('SELECT * FROM ga_pay_logs');
         $count = $countServers->rowCount();
 
-
         $pagination = new Pagination();
         $per_page = 15;
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
-
 
         $newArr = [];
         $getPaylogs = $this->db->query('SELECT * FROM ga_pay_logs ORDER BY date_create DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');

@@ -125,7 +125,8 @@
                                 <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-file-o"></i><span> Логи </span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled" style="display: none;">
                                     <li><a href="/control/paylogs">История платежей</a></li>
-                                  
+                                    <li><a href="/control/logs">Системные</a></li>
+
                                 </ul>
                             </li>
 

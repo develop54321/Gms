@@ -15,3 +15,6 @@ CREATE TABLE IF NOT EXISTS `mslog` (
     `port` varchar(255) DEFAULT NULL,
     `type` varchar(255) DEFAULT NULL
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `app_db`.`ga_system_logs` (`id` INT NOT NULL AUTO_INCREMENT COMMENT '11' , `text` TEXT CHARACTER SET utf8 COLLATE utf8_bin NOT NULL , `date_create` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;

@@ -58,45 +58,50 @@ class CommentsController extends AbstractController
         }
 
         $title = "Комментарии";
+        $filter = [];
 
-        if (parent::isAjax()) {
+        $filter['address'] = '';
+        $filter['status'] = '';
+
+        $countComments = $this->db->query('SELECT * FROM ga_comments');
+        $count = $countComments->rowCount();
+
+        $pagination = new Pagination();
+        $per_page = 15;
+        $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
+
+        $sql = '
+            SELECT gc.*, gs.ip, gs.port
+            FROM ga_comments gc
+            JOIN ga_servers gs ON gc.id_server = gs.id
+            ORDER BY gc.id DESC
+            LIMIT :start, :per_page';
 
 
-        } else {
+        $stmt = $this->db->prepare($sql);
 
-            $filter = [];
+        $stmt->bindValue(':start', (int) $result['start'], PDO::PARAM_INT);
+        $stmt->bindValue(':per_page', (int) $per_page, PDO::PARAM_INT);
+        $stmt->execute();
 
-            $filter['address'] = '';
-            $filter['status'] = '';
-
-
-            $countComments = $this->db->query('SELECT * FROM ga_comments');
-            $count = $countComments->rowCount();
+        $getComments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-            $pagination = new Pagination();
-            $per_page = 15;
-            $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
+        $filter['count'] = count($getComments);
+        $content = $this->view->renderPartial("comments/index", ['filter' => $filter, 'comments' => $getComments, 'ViewPagination' => $result['ViewPagination']]);
 
-            $getComments = $this->db->query('SELECT * FROM ga_comments ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
-            $getComments = $getComments->fetchAll();
-            $filter['count'] = count($getComments);
-            $content = $this->view->renderPartial("comments/index", ['filter' => $filter, 'comments' => $getComments, 'ViewPagination' => $result['ViewPagination']]);
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
 
-            $this->view->render("main", ['content' => $content, 'title' => $title]);
-        }
 
     }
 
 
     public function edit()
     {
-
         $user = new User();
         if (!$user->isAuth()) {
             header("Location: /control/index");
         }
-
 
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 

@@ -12,23 +12,7 @@
         <h4 class="m-t-0 header-title"><b>Настройки</b></h4>
 
 
-        <div class="col-lg-12">
-            <div class="tabs-vertical-env">
-                <ul class="nav tabs-vertical">
-                    <li class="active">
-                        <a href="#v-home" data-toggle="tab" aria-expanded="false">Основные</a>
-                    </li>
-                    <li class="">
-                        <a href="#v-services" data-toggle="tab" aria-expanded="false">Услуги</a>
-                    </li>
-                    <li class="">
-                        <a href="#v-comments" data-toggle="tab" aria-expanded="false">Комментарии</a>
-                    </li>
-                </ul>
 
-                <div class="tab-content" style="width: 100%;">
-
-                    <div class="tab-pane active" id="v-home">
                         <form id="settingsForm" method="post">
                             <div class="row">
                                 <div class="col-md-6">
@@ -47,7 +31,6 @@
 
                                 </div>
 
-
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Добавление сервера</label>
@@ -62,7 +45,7 @@
 
                                     <div class="form-group">
                                         <label>Кол-во серверов на главной странице</label>
-                                        <input type="int" name="global_settings[count_servers_main]"
+                                        <input type="number" name="global_settings[count_servers_main]"
                                                class="form-control"
                                                value="<?= $settings['global_settings']['count_servers_main']; ?>">
                                     </div>
@@ -71,10 +54,10 @@
                                 </div>
                             </div>
 
-                    </div>
 
 
-                    <div class="tab-pane" id="v-services">
+                            <hr/>
+
                         <div class="row">
                             <div class="col-md-6">
 
@@ -154,9 +137,9 @@
 
                             </div>
                         </div>
-                    </div>
 
-                    <div class="tab-pane" id="v-comments">
+
+                            <hr/>
                         <div class="row">
                             <div class="col-md-6">
 
@@ -187,10 +170,7 @@
                                 </div>
 
                             </div>
-
-
                         </div>
-                    </div>
 
 
                     <div class="form-group">
@@ -202,13 +182,9 @@
 
                 </div>
             </div>
-        </div>
 
 
         <div class="clearfix"></div>
-
-    </div>
-</div>
 
 <script>
     $('#settingsForm').ajaxForm({

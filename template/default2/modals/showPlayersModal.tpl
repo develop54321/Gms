@@ -24,7 +24,7 @@
                   <?php endforeach;?>
               </table>
           <?php elseif($game == 'samp'):?>
-              <table class="table">
+              <table class="table table-dark">
                   <thead>
                   <tr>
                       <th>Ник</th>
@@ -41,7 +41,7 @@
                   <?php endforeach;?>
               </table>
           <?php elseif($game == 'mta'):?>
-              <table class="table">
+              <table class="table table-dark">
                   <thead>
                   <tr>
                       <th>Ник</th>

@@ -110,10 +110,12 @@ header .nav-link:hover{
 }
 
 
-.top-servers .title{
+.top-servers .title h3{
     font-size: 1.6em;
     padding: 0.3em 0;
 }
+
+
 
 .top-servers .top-servers-wrapper .top-servers-info .hostname a{
     padding: 3px 6px;

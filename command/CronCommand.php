@@ -136,6 +136,44 @@ class CronCommand extends Command
                     $update->bindParam(':id', $row['id']);
                     $update->execute();
                 }
+            }elseif ($row['game'] == 'arma_3') {
+                try {
+
+                    $GameQ = new \GameQ\GameQ();
+                    $GameQ->addServer([
+                        'type' => 'arma3',
+                        'host' => $row['ip'] . ":" . $row['port'],
+                    ]);
+                    $results = $GameQ->process();
+
+                    $Info = array_shift($results);
+
+                    if (empty($Info['gq_hostname'])) {
+                        throw new \DomainException();
+                    }
+                    $hostname = $Info['gq_hostname'];
+                    $status = 1;
+                    $mapName = $Info['gq_mapname'];
+                    $players = $Info['num_players'];
+                    $maxPlayers = $Info['max_players'];
+                    $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players WHERE id = :id";
+                    $update = $this->db->prepare($sql);
+                    $update->bindParam(':status', $status);
+                    $update->bindParam(':hostname', $hostname);
+                    $update->bindParam(':map', $mapName);
+                    $update->bindParam(':players', $players);
+                    $update->bindParam(':max_players', $maxPlayers);
+                    $update->bindParam(':id', $row['id']);
+                    $update->execute();
+                } catch (Exception $e) {
+                    $Exception = $e;
+                    $status = 0;
+                    $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
+                    $update = $this->db->prepare($sql);
+                    $update->bindParam(':status', $status);
+                    $update->bindParam(':id', $row['id']);
+                    $update->execute();
+                }
             }
         }
 

@@ -18,3 +18,5 @@ CREATE TABLE IF NOT EXISTS `mslog` (
 
 
 CREATE TABLE `app_db`.`ga_system_logs` (`id` INT NOT NULL AUTO_INCREMENT COMMENT '11' , `text` TEXT CHARACTER SET utf8 COLLATE utf8_bin NOT NULL , `date_create` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+INSERT INTO `ga_games` (`id`, `code`, `game`, `status`) VALUES ('10', 'arma_3', 'Arma 3', '0'), ('11', 'mta', 'Mta', '0')

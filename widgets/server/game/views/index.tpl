@@ -16,5 +16,7 @@
 <img src="/public/img/gameicons/mta.png" style="width: 16px;"/>
 <?php elseif($game == 'csgo2'):?>
 <img src="/public/img/gameicons/csgo2.png" style="width: 16px;"/>
+<?php elseif($game == 'arma_3'):?>
+<img src="/public/img/gameicons/arma3.png" style="width: 16px;"/>
 <?php endif;?>
 

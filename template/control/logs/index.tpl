@@ -15,9 +15,8 @@
 <h4 class="m-t-0 header-title"><b>Логи</b></h4>
 <p class="text-muted m-b-30 font-12">по умолчанию сортируется по дате</p>
 
-<div class="filter">
-<h4 class="m-t-0 header-title"><b>Логи</b></h4>
-</div>
+
+    <a href="/control/logs/clear" style="float: right;" onclick="return confirm('Вы действительно хотите очистить логи?');" class="btn btn-danger btn-custom btn-rounded waves-effect waves-light btn-xs"> <i class="fa fa-trash"></i> Очистить</a>
 
 
 

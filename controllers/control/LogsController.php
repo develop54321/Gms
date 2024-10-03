@@ -35,15 +35,11 @@ class LogsController extends AbstractController
 
     }
 
-    public function remove()
-    {
-        if (parent::isAjax()) {
-            if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
-            $sql = "DELETE FROM ga_system_logs WHERE id =  :id";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            $stmt->execute();
-        }
+    public function clear(){
+        $sql = "TRUNCATE TABLE ga_system_logs";
+        $this->db->exec($sql);
+
+        return header("Location: /control/logs");
     }
 
 }

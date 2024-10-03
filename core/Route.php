@@ -122,6 +122,7 @@ class Route
                 $r->addRoute('GET', '/paylogs/remove', ['controllers\control\PaylogsController', 'remove']);
 
                 $r->addRoute('GET', '/logs', ['controllers\control\LogsController', 'index']);
+                $r->addRoute('GET', '/logs/clear', ['controllers\control\LogsController', 'clear']);
 
                 $r->addRoute('POST', '/modal', ['controllers\control\ModalController', 'index']);
 

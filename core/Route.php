@@ -197,7 +197,7 @@ class Route
 
     public function handleError($errno, $errstr, $errfile, $errline)
     {
-        $text = $errno . "\n" . $errstr . "\n" . $errfile . "\n" . $errline;
+        $text = $errno . "\n" . $errstr . "\n" . $errfile . "\n" ."Line: ". $errline;
         $logger = new Logger();
         $logger->writeDatabase($text);
         $this->showError("500", "Internal Server Error");

@@ -24,7 +24,7 @@
                 </div>
 
                 <table class="table table-dark">
-                    <tbody>
+                    <thead>
                     <tr>
                         <th>id</th>
                         <th>Название</th>
@@ -34,7 +34,7 @@
                         <th>Рейтинг</th>
                         <th></th>
                     </tr>
-                    </tbody>
+                    </thead>
 
                     <?php foreach ($servers as $row): ?>
                     <tr>

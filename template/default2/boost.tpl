@@ -1,22 +1,21 @@
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Раскрутка сервера</li>
-    </ol>
-</nav>
-
+<section class="page banlist">
+    <div class="container">
+        <h1 class="content-title">
+            Раскрутка сервера
+        </h1>
+        <hr/>
 
 <div class="section-boost">
 
-<div class="alert alert-info">
-<b>Turbo Boost</b>
-<p>Смысл услуги Turbo boost cs 1.6 таков: список содержит в себе ровно 100 серверов и cервера добавляются только в мастер сервер, каждый добавленный новый сервер выталкивает из списка сервер, который находится на 100 месте. <br/>
-То есть первый становится вторым и т.д., 100 сервер пропадает.
-
+<div class="alert alert-warning">
+<p>
+    Услуга "Раскрутка сервера", работает следующим образом: существует список, содержащий ровно n серверов, которые добавляются только в мастер-сервер. <br/>
+    Каждый новый добавленный сервер вытесняет последний сервер в списке. Таким образом, первый сервер перемещается на второе место, второй — на третье и так далее, а сервер, который выходит за пределы списка, удаляется из списка.
 </p>
 </div>
 
-<table class="table">
-  <thead class="thead-dark">
+<table class="table table-dark">
+  <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Игра</th>
@@ -32,22 +31,20 @@
     <tr>
       <td><?php echo $row['id'];?></td>
       <td>
-      <?php if($row['game'] == 'cs'):?>
-      <img src="/public/img/gameicons/cs.png" style="width: 16px;"/>
-      <?php elseif($row['game'] == 'csgo'):?>
-      <img src="/public/img/gameicons/csgo.png" style="width: 16px;"/>
-      <?php elseif($row['game'] == 'css'):?>
-      <img src="/public/img/gameicons/css.png" style="width: 16px;"/>
-      <?php elseif($row['game'] == 'tf2'):?>
-      <img src="/public/img/gameicons/tf2.png" style="width: 16px;"/>
-       <?php elseif($row['game'] == 'ld2'):?>
-      <img src="/public/img/gameicons/ld2.png" style="width: 16px;"/>
-      <?php endif;?>
+          <?php echo \widgets\server\game\GameIcon::run($row['game']);?>
       </td>
       <td><a href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo $row['hostname'];?></a></td>
-      <td><?php echo $row['ip'];?>:<?php echo $row['port'];?></td>
+      <td>
+          <span class="address">
+              <?php echo $row['ip'];?>:<?php echo $row['port'];?>
+          </span>
+      </td>
       <td><?php echo $row['map'];?></td>
-            <td><?php echo $row['players'];?>/<?php echo $row['max_players'];?></td>
+        <td>
+            <span class="players">
+                <?php echo $row['players'];?>/<?php echo $row['max_players'];?>
+            </span>
+        </td>
       <td style="text-align: center;">
       <?php echo $row['boost'];?>
       </td>
@@ -59,3 +56,5 @@
 
 
 </div>
+    </div>
+</section>

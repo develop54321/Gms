@@ -75,7 +75,7 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12 text-center">
-					 Powered by <a href="https://game-ms.ru" target="_blank">GMS</a>
+					 Powered by <a href="https://game-ms.ru" target="_blank">GMS <?php echo VERSION;?></a>
 				</div>
 			</div>
 

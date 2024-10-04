@@ -145,6 +145,7 @@
 
 
 </section>
+<?php if (isset($serverInfo)):?>
 <script>
     function updateForm() {
         id_services = $("#id_services").val();
@@ -157,4 +158,4 @@
         });
     }
 </script>
-
+<?php endif;?>

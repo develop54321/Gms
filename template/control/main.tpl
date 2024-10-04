@@ -165,7 +165,7 @@
                 </div> 
 
                 <footer class="footer text-right">
-                   Powered by <a href="https://game-ms.ru" target="_blank">GMS</a>
+                   Powered by <a href="https://game-ms.ru" target="_blank">GMS <?php echo VERSION;?></a>
                 </footer>
 
             </div>

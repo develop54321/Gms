@@ -16,9 +16,6 @@
                     При попадание сервера в бан, все услуги на нем аннулируются и средства не возвращаются.
                 </p>
             </div>
-            <div class="heading-table">
-                <i class="fa fa-star-o"></i> Банлист
-            </div>
             <table class="table table-dark">
                 <thead class="thead-dark">
                 <tr>

@@ -214,7 +214,7 @@ foreach ($required_extensions as $extension) {
     <?php endif; ?>
 
     <footer class="text-center">
-        <a href="https://game-ms.ru/" target="_blank">Сайт проекта</a>
+        <a href="https://game-ms.ru" target="_blank">Сайт проекта</a>
     </footer>
     <script>
         const xhr = new XMLHttpRequest();

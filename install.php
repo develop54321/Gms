@@ -52,8 +52,8 @@ const DB_HOST = "$db_host";
 const DB_USER = "$db_user";
 const DB_PASSWORD = "$db_password";
 const DB_NAME = "$db_name";
-const TMPL_DIR = "template/new-style";
-const VERSION = "3.0";
+const TMPL_DIR = "template/default2";
+const VERSION = "3.1";
 EOD;
 
 

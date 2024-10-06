@@ -1,20 +1,8 @@
 <?php
-
-$version = 3.1;
-$configFile = 'config.php';
-
-$updateAvailable = false;
-if (file_exists($configFile)) {
-    $pattern = '/const VERSION =\s*([0-9.]+);/';
-
-    $configContent = file_get_contents($configFile);
-    preg_match($pattern, $configContent, $matches);
-    $currentVersion = $matches[1];
-
-    if (version_compare($version, $currentVersion, '>')) {
-        $updateAvailable = true;
-    }
+if (file_exists("config.php")) {
+    exit("CMS is already installed");
 }
+
 $step = "requiredExtension";
 
 $versionRequired = null;
@@ -30,7 +18,7 @@ if (isset($_POST['step'])) {
 $errorText = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'database_check') {
-    exit("CMS is already installed");
+
 
     $db_host = $_POST['db_host'];
     $db_user = $_POST['db_user'];

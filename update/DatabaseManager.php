@@ -1,5 +1,7 @@
 <?php
 
+namespace update;
+
 class DatabaseManager {
     private $dsn;
     private $user;

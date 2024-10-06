@@ -1,5 +1,7 @@
 <?php
 
+namespace update;
+
 class ConfigManager {
     private $configFile;
     private $versionPattern = '/const VERSION =\s*([0-9.]+);/';

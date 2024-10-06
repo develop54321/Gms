@@ -1,5 +1,6 @@
 <?php
 
+namespace update;
 class UpdateSystem {
     private $version;
     private $migrationFile;

@@ -242,9 +242,6 @@ class UserController extends BaseController
     public function payLogs()
     {
 
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
         $title = "История платежей";
         $user = new User();
         $user_profile = $user->isAuth();

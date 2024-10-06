@@ -126,7 +126,7 @@ class UsersController extends AbstractController
 
         } else {
 
-            $api_params = json_decode($getInfoUser['params'], true);
+            $api_params = $getInfoUser['params'] ? json_decode($getInfoUser['params'], true) : ['discount_api' => null, 'key_api' => null];
             $content = $this->view->renderPartial("users/edit", ['data' => $getInfoUser, 'api_params' => $api_params]);
 
             $this->view->render("main", ['content' => $content, 'title' => $title]);

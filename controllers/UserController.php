@@ -35,7 +35,7 @@ class UserController extends BaseController
         $title = "Панель управления";
         $user = new User();
         $user_profile = $user->isAuth();
-        if (!$user_profile) header("Location: /user/login");
+       if ($user_profile === false) return header("Location: /user/login");
 
 
         $sumMonth = 0;

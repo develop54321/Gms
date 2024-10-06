@@ -78,7 +78,6 @@ GMS является удобным и мощным решением для ад
 
 - `php bin/console cron` — обновление игровых серверов.
 - `php bin/console payment` — проверка истёкших счетов.
-- `php bin/console qiwi` — проверка платежей через QIWI.
 - `php bin/console services` — проверка платных услуг на истечение.
 - `php bin/console yookassa` — проверка платежей через YooKassa.
 

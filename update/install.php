@@ -1,6 +1,19 @@
 <?php
-if (file_exists("config.php")) {
-    exit("CMS is already installed");
+
+$version = 3.1;
+$configFile = 'config.php';
+
+$updateAvailable = false;
+if (file_exists($configFile)) {
+    $pattern = '/const VERSION =\s*([0-9.]+);/';
+
+    $configContent = file_get_contents($configFile);
+    preg_match($pattern, $configContent, $matches);
+    $currentVersion = $matches[1];
+
+    if (version_compare($version, $currentVersion, '>')) {
+        $updateAvailable = true;
+    }
 }
 $step = "requiredExtension";
 
@@ -17,6 +30,8 @@ if (isset($_POST['step'])) {
 $errorText = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'database_check') {
+    exit("CMS is already installed");
+
     $db_host = $_POST['db_host'];
     $db_user = $_POST['db_user'];
     $db_password = $_POST['db_password'];
@@ -91,10 +106,14 @@ foreach ($required_extensions as $extension) {
     .content {
         background-color: #fff;
         border: 1px solid #dadada;
-        max-width: 660px;
+        max-width: 766px;
         margin: 2em auto;
-        padding: 1.2em 0.8em;
-        border-radius: 0.3em;
+        padding: 1.2em 1em;
+        border-radius: 0.1em;
+    }
+
+    h1{
+        font-size: 1.5em;
     }
 </style>
 <body>
@@ -102,9 +121,17 @@ foreach ($required_extensions as $extension) {
     <?php if ($step === "requiredExtension"): ?>
         <form method="post">
             <input type="hidden" name="step" value="database">
-            <h4 class="mb-3">
+            <h1 class="mb-3">
                 Добро пожаловать в установщик <b>Game Monitoring System</b>
-            </h4>
+            </h1>
+
+            <?php if ($updateAvailable):?>
+            <div class="alert alert-info">
+                Для вашей системы доступно обновления до версии: <?php echo $version; ?>, желаете обновиться?<br/>
+                <a href="/update/update.phpate.php">Перейти к обновлении</a>
+            </div>
+            <?php endif;?>
+
             <p class="p-0 m-0">Проверка системных требований</p>
             <table class="table table-bordered">
                 <?php if ($versionRequired): ?>

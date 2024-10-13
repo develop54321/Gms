@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <div id="answer"></div>
-                <form id="" method="post">
+                <form method="post">
                     <input type="hidden" name="type" id="type" value="<?php echo $type; ?>"/>
 
                     <div class="row">
@@ -20,10 +20,10 @@
 
                             <div class="form-group">
                                 <label for="captcha">Цифры с картинки</label>
-                                <input type="text" name="captcha" class="form-control form-control-sm" id="captcha"
-                                       required=""/>
-                                <small class="form-text text-muted">Если цифры не видны, то обновите картинку, кликнев
-                                    на него.</small>
+                                <input type="text" name="captcha" class="form-control form-control-sm" id="captcha"/>
+                                <small class="form-text text-muted">
+                                    Если цифры не видны, то обновите картинку, кликнев на него.
+                                </small>
                             </div>
 
                         </div>
@@ -32,8 +32,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn btn-primary btn-sm"
-                   onclick="voteServer(<?php echo $data['id']; ?>); return false;">Голосовать</a>
+                <a href="#" class="btn btn-primary btn-sm" onclick="voteServer(<?php echo $data['id']; ?>); return false;">Голосовать</a>
                 <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">Закрыть</button>
             </div>
         </div>
@@ -42,6 +41,10 @@
 
 
 <script>
+    $(document).on("keydown", "form", function(event) {
+        return event.key !== "Enter";
+    });
+
     function updateCaptcha() {
         $("#captchaImg").html('<img src="/captcha" src="Каптча"/>');
     }

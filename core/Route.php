@@ -200,7 +200,7 @@ class Route
         $text = $errno . "\n" . $errstr . "\n" . $errfile . "\n" ."Line: ". $errline;
         $logger = new Logger();
         $logger->writeDatabase($text);
-        $this->showError("500", "Internal Server Error");
+        $this->showError("500", $errstr);
     }
 
 
@@ -210,7 +210,7 @@ class Route
         $logger = new Logger();
         $logger->writeDatabase($text);
 
-        $this->showError("500", "Internal Server Error");
+        $this->showError("500", $exception->getMessage());
     }
 }
 

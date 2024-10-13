@@ -243,7 +243,7 @@ $show_playersColor = $system->showbar( $c['players'], $c['max_players'] );
                     <td width="3%"><?php echo $i;?></a></td>
                     <td width="32%"
                         style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 260px;"><a
-                                href="/server/<?php echo $c['ip'];?>:<?php echo $c['port'];?>/info><?php echo $c['hostname'];?></a></td>
+                                href="/server/<?php echo $c['ip'];?>:<?php echo $c['port'];?>/info"><?php echo $c['hostname'];?></a></td>
                     <td width="20%">
                         <?php echo $c['ip'];?>
                         :<?php echo $c['port'];?></td>

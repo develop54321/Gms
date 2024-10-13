@@ -157,6 +157,7 @@ class ServerController extends BaseController
                s.color_enabled, 
                s.boost, 
                s.gamemenu_enabled, 
+               s.color_expired_date, 
                s.vip_expired_date, 
                s.gamemenu_expired_date, 
                s.top_expired_date,
@@ -404,13 +405,15 @@ class ServerController extends BaseController
                 exit(json_encode($answer));
             }
 
-            $checkVote = $this->db->prepare('SELECT * FROM ga_logs_vote WHERE ip = :ip');
+            $checkVote = $this->db->prepare('SELECT date_create FROM ga_logs_vote WHERE ip = :ip');
             $checkVote->execute(array(':ip' => $ip));
             $checkVote = $checkVote->fetch();
-            if ($checkVote['date_create'] > time()) {
-                $answer['status'] = "error";
-                $answer['error'] = "Вы уже голосовали сегодня за этот сервер!";
-                exit(json_encode($answer));
+            if ($checkVote) {
+                if ($checkVote['date_create'] > time()) {
+                    $answer['status'] = "error";
+                    $answer['error'] = "Вы уже голосовали сегодня за этот сервер!";
+                    exit(json_encode($answer));
+                }
             }
 
             $nameCookie = "votePlus" . $id;

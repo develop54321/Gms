@@ -105,13 +105,26 @@
     <code>
         Обработчик: <?php echo $url;?>/result?type=yoomoney
     </code>
+
+
+
+    <?php elseif($data['typeCode'] == 'yookassa'):?>
+    <div class="form-group">
+        <label for="status">shop id</label>
+        <input type="text" class="form-control" name="shop_id" value="<?=$params['shop_id'] ?? null;?>">
+    </div>
+
+    <div class="form-group">
+        <label for="fk_key1">Секретный ключ</label>
+        <input type="text" class="form-control" name="secret_key" value="<?=$params['secret_key'] ?? null;?>">
+    </div>
+
     <?php endif;?>
-
-
-</div>
 
 </div>
 </form>
+</div>
+
 
 
 

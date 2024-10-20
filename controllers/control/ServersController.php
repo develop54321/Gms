@@ -77,7 +77,7 @@ class ServersController extends AbstractController
         $per_page = 15;
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
-        $getServers = $this->db->query('SELECT * FROM ga_servers ORDER BY vip_enabled DESC, rating DESC, players DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
+        $getServers = $this->db->query('SELECT * FROM ga_servers LIMIT ' . $result['start'] . ', ' . $per_page . '');
         $getServers = $getServers->fetchAll();
         $filter['count'] = count($getServers);
         $content = $this->view->renderPartial("servers/index", ['filter' => $filter, 'servers' => $getServers, 'ViewPagination' => $result['ViewPagination']]);
@@ -116,15 +116,41 @@ class ServersController extends AbstractController
                 $top_expired_date = 0;
                 $top_enabled = $_POST['top_enabled'];
                 if ($top_enabled != 0) $top_expired_date = strtotime($_POST['top_expired_date']);
-                $vip_expired_date = 0;
-                $vip_enabled = $_POST['vip_enabled'];
-                if ($vip_enabled != 0) $vip_expired_date = strtotime($_POST['vip_expired_date']);
+
+
                 $gamemenu_expired_date = 0;
                 $gamemenu_enabled = $_POST['gamemenu_enabled'];
                 if ($gamemenu_enabled != 0) $gamemenu_expired_date = strtotime($_POST['gamemenu_expired_date']);
-                $color_expired_date = 0;
-                $color_enabled = $_POST['color_enabled'];
-                if (!empty($color_enabled)) $color_expired_date = strtotime($_POST['color_expired_date']);
+
+                //  $vip_expired_date = 0;
+                //   $vip_enabled = $_POST['vip_enabled'];
+                //  if ($vip_enabled != 0) $vip_expired_date = strtotime(date('Y-m-d', strtotime($_POST['vip_expired_date'])));
+
+
+
+
+
+                if ($_POST['vip_enabled'] == "0"){
+                    $vip_enabled = 0;
+                    $vip_expired_date = 0;
+                }else{
+
+                    $vip_enabled = $_POST['vip_enabled'];
+                    $vip_expired_date = strtotime(date('Y-m-d', strtotime($_POST['vip_expired_date'])));
+                }
+
+                if ($_POST['color_enabled'] === null or $_POST['color_enabled'] === ""){
+                    $color_enabled = 0;
+                    $color_expired_date = 0;
+                }else{
+                    $color_enabled = $_POST['color_enabled'];
+                    $color_expired_date = strtotime(date('Y-m-d', strtotime($_POST['color_expired_date'])));
+                }
+
+
+
+
+
                 if (!empty($_POST['boost'])) {
                     $period = $_POST['boost'];
                     $this->activationBoost($id, $period, $getInfoServerS);

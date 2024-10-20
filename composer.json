@@ -1,11 +1,11 @@
 {
-    "name": "gms/v2.0",
+    "name": "gms/v3.1",
     "description": "Game Monitoring System",
     "type": "project",
     "authors": [
         {
-            "name": "Danil",
-            "email": "zell123456789@yandex.ru"
+            "name": "game-ms.ru",
+            "email": "admin@game-ms.ru"
         }
     ],
     "require": {
@@ -14,7 +14,8 @@
         "ramsey/uuid": "^4.2",
         "austinb/gameq": "~3.0",
         "nikic/fast-route": "^1.3",
-        "symfony/console": "^5.4"
+        "symfony/console": "^5.4",
+        "yoomoney/yookassa-sdk-php": "^2.11"
     },
     "autoload": {
         "psr-4": {

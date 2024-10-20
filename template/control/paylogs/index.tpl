@@ -67,14 +67,14 @@
 <div class="col-md-3">
 <div class="form-group">
 <label>Дата(с числа)</label>
-<input type="date" name="dateStart" class="form-control input-sm" value="<?php echo $filter['dateStart'];?>"/>
+<input type="date" name="dateStart" class="form-control input-sm" value="<?php echo $filter ? $filter['dateStart'] : null;?>"/>
 </div>
 </div>
 
 <div class="col-md-3">
 <div class="form-group">
 <label>Дата(до числа)</label>
-<input type="date" name="dateEnd" class="form-control input-sm" value="<?php echo $filter['dateEnd'];?>"/>
+<input type="date" name="dateEnd" class="form-control input-sm" value="<?php echo $filter ? $filter['dateEnd'] : null;?>"/>
 </div>
 </div>
 

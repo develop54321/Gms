@@ -24,10 +24,10 @@ class ResultController extends BaseController
             switch ($type) {
 
                 case "freekassa":
-                    $fk_id = addslashes($_REQUEST["MERCHANT_ID"]); // id магазина в ik
-                    $out_summ = addslashes($_REQUEST["AMOUNT"]);   //сумма
-                    $InvId = addslashes($_REQUEST["MERCHANT_ORDER_ID"]);      //идентификатор платежа
-                    $crc = $_REQUEST["SIGN"];  //контрольная подпись
+                    $fk_id = addslashes($_REQUEST["MERCHANT_ID"]);
+                    $out_summ = addslashes($_REQUEST["AMOUNT"]);
+                    $InvId = addslashes($_REQUEST["MERCHANT_ORDER_ID"]);
+                    $crc = $_REQUEST["SIGN"];
 
                     $typeCode = 'freekassa';
                     $getInfoPayment = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE typeCode = :typeCode');
@@ -39,7 +39,7 @@ class ResultController extends BaseController
                     $getInfoPay->execute(array(':id' => $InvId));
                     $getInfoPay = $getInfoPay->fetch();
                     $getInfoPay = json_decode($getInfoPay['content'], true);
-                    //Сверяем контрольную подпись которую получили от сервера с нашей
+
                     $my_crc = md5($fk_id . ':' . $out_summ . ':' . $getInfoPayment['fk_key2'] . ':' . $InvId);
                     if (strtoupper($my_crc) != strtoupper($crc)) {
                         exit("bad sign");
@@ -157,8 +157,6 @@ class ResultController extends BaseController
 
 
                 case "yoomoney":
-                    // if (!$_POST) exit("Method not allowed");
-
 
                     $typeCode = 'yoomoney';
                     $getInfoPayment = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE typeCode = :typeCode');
@@ -191,7 +189,6 @@ class ResultController extends BaseController
 
                     break;
 
-
                 default:
                     exit("error");
                     break;
@@ -218,6 +215,4 @@ class ResultController extends BaseController
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
-
-
 }

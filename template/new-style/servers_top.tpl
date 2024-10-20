@@ -9,7 +9,7 @@
             <div class="row">
                 <?php foreach($topServers as $row):?>
 
-                <div class="col-3" style="width: 20%">
+                <div class="col-3 mb-2" style="width: 20%">
                     <div class="top-servers-info">
                     <div class="hostname"
                     <?php if ($row['color_enabled'] != null):?>style="background: <?php echo $row['color_enabled'];?>

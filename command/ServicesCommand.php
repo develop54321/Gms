@@ -3,6 +3,7 @@
 namespace command;
 
 use core\Database;
+use PDO;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -20,22 +21,9 @@ class ServicesCommand extends Command
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int{
-        $getServers = $this->db->query('SELECT * FROM ga_servers WHERE befirst_enabled != "0" or top_enabled != "0" or vip_enabled !="0" or color_enabled !="0" or gamemenu_enabled !="0"');
+        $getServers = $this->db->query('SELECT * FROM ga_servers WHERE top_enabled != "0" or vip_enabled !="0" or color_enabled !="0" or gamemenu_enabled !="0"');
         $getServers = $getServers->fetchAll();
         foreach ($getServers as $row) {
-            if ($row['befirst_enabled'] != '0') {
-                if ($row['befirst_expired_date'] < time()) {
-                    $befirst_enabled = 0;
-                    $befirst_expired_date = 0;
-                    $sql = "UPDATE ga_servers SET befirst_enabled = :befirst_enabled, befirst_expired_date = :befirst_expired_date WHERE id = :id";
-                    $update = $this->db->prepare($sql);
-                    $update->bindParam(':befirst_enabled', $befirst_enabled, PDO::PARAM_INT);
-                    $update->bindParam(':befirst_expired_date', $befirst_expired_date, PDO::PARAM_INT);
-                    $update->bindParam(':id', $row['id'], PDO::PARAM_INT);
-                    $update->execute();
-                }
-            }
-
             if ($row['top_enabled'] != '0') {
                 if ($row['top_expired_date'] < time()) {
                     $top_enabled = 0;

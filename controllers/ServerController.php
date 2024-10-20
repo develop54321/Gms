@@ -51,6 +51,13 @@ class ServerController extends BaseController
                 exit(json_encode($answer));
             }
 
+            if (!is_string($text) && strlen($text) >= 300) {
+                $answer['status'] = "error";
+                $answer['error'] = "Ошибка: описание не должен превышать 300 символов";
+                exit(json_encode($answer));
+            }
+
+
             $CheckServer = $this->db->prepare('SELECT * FROM ga_servers WHERE ip = :ip and port = :port');
             $CheckServer->bindValue(":ip", $ip);
             $CheckServer->bindValue(":port", $port);
@@ -65,7 +72,7 @@ class ServerController extends BaseController
 
                 $answer['status'] = "error";
                 $answer['error'] = "Сервер уже добавлен" . "<br/>
-       <a href='/server/verification?id=" . $getInfoServer['id'] . "'>Вы владелец сервера?</a>";
+                    <a href='/server/verification?id=" . $getInfoServer['id'] . "'>Вы владелец сервера?</a>";
                 exit(json_encode($answer));
             }
 
@@ -94,7 +101,7 @@ class ServerController extends BaseController
             }
 
             $this->db->exec("INSERT INTO ga_servers (status, moderation, id_user, game, ip, port, date_add, description) 
-    VALUES('$status', '$moderation','$id_user', '$game', '$ip', '$port', '" . time() . "', '$text')");
+                VALUES('$status', '$moderation','$id_user', '$game', '$ip', '$port', '" . time() . "', '$text')");
 
             $answer['status'] = "success";
             $answer['success'] = $success_text;
@@ -150,6 +157,7 @@ class ServerController extends BaseController
                s.color_enabled, 
                s.boost, 
                s.gamemenu_enabled, 
+               s.color_expired_date, 
                s.vip_expired_date, 
                s.gamemenu_expired_date, 
                s.top_expired_date,
@@ -174,12 +182,14 @@ class ServerController extends BaseController
         }
 
         $ownerName = null;
-        if ($getInfoServer['id_user'] !== 0) {
+        if ((int)$getInfoServer['id_user'] !== 0) {
             $getInfoUser = $this->db->prepare('SELECT email FROM ga_users WHERE id = :id');
             $getInfoUser->execute(array(':id' => $getInfoServer['id_user']));
             $getInfoUser = $getInfoUser->fetch();
             $ownerName = Servers::hiddenOwnerEmail($getInfoUser['email']);
+
         }
+
 
 
 
@@ -312,7 +322,6 @@ class ServerController extends BaseController
 
     public function getPlayers()
     {
-        $system = new System();
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = null;
 
         $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
@@ -322,13 +331,10 @@ class ServerController extends BaseController
         if (empty($getInfoServer)) parent::ShowError(404, "Сервер не найден!");
 
         $Query = new SourceQuery();
-
-        $Players = array();
-
-
-        if (in_array($getInfoServer['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust'])) {
+        $Players = [];
+        if (in_array($getInfoServer['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])) {
             try {
-                $Query->Connect($getInfoServer['ip'], $getInfoServer['port'], 2, SourceQuery::GOLDSOURCE);
+                $Query->Connect($getInfoServer['ip'], $getInfoServer['port'], 3, SourceQuery::GOLDSOURCE);
 
                 $Players = $Query->GetPlayers();
 
@@ -399,13 +405,15 @@ class ServerController extends BaseController
                 exit(json_encode($answer));
             }
 
-            $checkVote = $this->db->prepare('SELECT * FROM ga_logs_vote WHERE ip = :ip');
+            $checkVote = $this->db->prepare('SELECT date_create FROM ga_logs_vote WHERE ip = :ip');
             $checkVote->execute(array(':ip' => $ip));
             $checkVote = $checkVote->fetch();
-            if ($checkVote['date_create'] > time()) {
-                $answer['status'] = "error";
-                $answer['error'] = "Вы уже голосовали сегодня за этот сервер!";
-                exit(json_encode($answer));
+            if ($checkVote) {
+                if ($checkVote['date_create'] > time()) {
+                    $answer['status'] = "error";
+                    $answer['error'] = "Вы уже голосовали сегодня за этот сервер!";
+                    exit(json_encode($answer));
+                }
             }
 
             $nameCookie = "votePlus" . $id;
@@ -439,6 +447,7 @@ class ServerController extends BaseController
 
         $user = new User();
         $profile = $user->isAuth();
+        $idUser = $profile['id'] ?? null;
         if (parent::isAjax()) {
             if (isset($_POST['id'])) $id = (int)$_POST['id']; else $id = null;
             $comment = strip_tags($_POST['comment']);
@@ -477,7 +486,18 @@ class ServerController extends BaseController
             }
 
 
-            $this->db->exec("INSERT INTO ga_comments (id_user, moderation, id_server, text, date_create) VALUES('" . $profile['id'] . "', '" . $moderation . "', '" . $id . "', '" . $comment . "','" . time() . "')");
+
+            $stmt = $this->db->prepare("INSERT INTO ga_comments (moderation, id_user, id_server, text, date_create) 
+                            VALUES (:moderation, :id_user, :id_server, :text, :date_create)");
+
+            $stmt->bindParam(':moderation', $moderation);
+            $stmt->bindParam(':id_user', $idUser);
+            $stmt->bindParam(':id_server', $id);
+            $stmt->bindParam(':text', $comment);
+            $stmt->bindValue(':date_create', time());
+
+            $stmt->execute();
+
 
 
             $answer['status'] = "success";

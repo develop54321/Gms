@@ -2,6 +2,7 @@
 if (file_exists("config.php")) {
     exit("CMS is already installed");
 }
+
 $step = "requiredExtension";
 
 $versionRequired = null;
@@ -17,6 +18,8 @@ if (isset($_POST['step'])) {
 $errorText = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'database_check') {
+
+
     $db_host = $_POST['db_host'];
     $db_user = $_POST['db_user'];
     $db_password = $_POST['db_password'];
@@ -49,8 +52,8 @@ const DB_HOST = "$db_host";
 const DB_USER = "$db_user";
 const DB_PASSWORD = "$db_password";
 const DB_NAME = "$db_name";
-const TMPL_DIR = "template/new-style";
-const VERSION = "3.0";
+const TMPL_DIR = "template/default2";
+const VERSION = "3.1";
 EOD;
 
 
@@ -91,10 +94,14 @@ foreach ($required_extensions as $extension) {
     .content {
         background-color: #fff;
         border: 1px solid #dadada;
-        max-width: 660px;
+        max-width: 766px;
         margin: 2em auto;
-        padding: 1.2em 0.8em;
-        border-radius: 0.3em;
+        padding: 1.2em 1em;
+        border-radius: 0.1em;
+    }
+
+    h1{
+        font-size: 1.5em;
     }
 </style>
 <body>
@@ -102,9 +109,17 @@ foreach ($required_extensions as $extension) {
     <?php if ($step === "requiredExtension"): ?>
         <form method="post">
             <input type="hidden" name="step" value="database">
-            <h4 class="mb-3">
+            <h1 class="mb-3">
                 Добро пожаловать в установщик <b>Game Monitoring System</b>
-            </h4>
+            </h1>
+
+            <?php if ($updateAvailable):?>
+            <div class="alert alert-info">
+                Для вашей системы доступно обновления до версии: <?php echo $version; ?>, желаете обновиться?<br/>
+                <a href="/update/update.phpate.php">Перейти к обновлении</a>
+            </div>
+            <?php endif;?>
+
             <p class="p-0 m-0">Проверка системных требований</p>
             <table class="table table-bordered">
                 <?php if ($versionRequired): ?>
@@ -214,7 +229,7 @@ foreach ($required_extensions as $extension) {
     <?php endif; ?>
 
     <footer class="text-center">
-        <a href="https://game-ms.ru/" target="_blank">Сайт проекта</a>
+        <a href="https://game-ms.ru" target="_blank">Сайт проекта</a>
     </footer>
     <script>
         const xhr = new XMLHttpRequest();

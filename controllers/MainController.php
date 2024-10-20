@@ -6,6 +6,7 @@ use components\Pagination;
 use components\Servers;
 use components\System;
 use core\BaseController;
+use PDO;
 
 class MainController extends BaseController
 {
@@ -71,7 +72,6 @@ class MainController extends BaseController
         if (isset($_GET['game'])) {
             $game = $_GET['game'];
             $sort = "and game = :game";
-            $sort_where_count = array(':status' => 1, ':game' => $game);
             $sort_where = array(':status' => 1, ':ban' => 0, ':game' => $game);
             $countServers = $this->db->prepare('SELECT * FROM ga_servers WHERE ban = :ban and status = :status and game = :game');
             $countServers->execute(array(':ban' => 1, ':status' => 0, ':game' => $game));
@@ -102,4 +102,48 @@ class MainController extends BaseController
     }
 
 
+
+    public function stats()
+    {
+
+        $count_uq16 = [];
+
+        for ($x = 0; $x <= 6; $x++) {
+            $m = date("m", strtotime("-$x day"));
+            $m2 = date("Y", strtotime("-$x day"));
+            $m3 = date("d", strtotime("-$x day"));
+
+
+            $stmt = $this->db->prepare("SELECT COUNT(DISTINCT CONCAT(`ip`,':',`port`)) AS `unique` FROM `mslog` WHERE timeyear = :year AND timemonth = :month AND timeday = :day AND type = 'cs'");
+
+
+            $stmt->bindParam(':year', $m2, PDO::PARAM_STR);
+            $stmt->bindParam(':month', $m, PDO::PARAM_STR);
+            $stmt->bindParam(':day', $m3, PDO::PARAM_STR);
+
+
+            $stmt->execute();
+
+
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $count_uq16[] = $row['unique'];
+        }
+
+
+        $uq_reverse = array_reverse($count_uq16);
+
+
+        if (!empty($uq_reverse)){
+            $str = "data: [".implode(", ", $uq_reverse)."]";
+
+        }else {
+            $str = "data: []";
+        }
+
+
+        $content = $this->view->renderPartial("stats", ["str" => $str]);
+
+        $this->view->render("main", ['content' => $content, 'title' => "Статистика мастер сервера"]);
+    }
 }

@@ -125,7 +125,8 @@
                                 <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-file-o"></i><span> Логи </span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled" style="display: none;">
                                     <li><a href="/control/paylogs">История платежей</a></li>
-                                  
+                                    <li><a href="/control/logs">Системные</a></li>
+
                                 </ul>
                             </li>
 
@@ -164,7 +165,7 @@
                 </div> 
 
                 <footer class="footer text-right">
-                   Powered by <a href="https://game-ms.ru" target="_blank">GMS</a>
+                   Powered by <a href="https://game-ms.ru" target="_blank">GMS <?php echo VERSION;?></a>
                 </footer>
 
             </div>

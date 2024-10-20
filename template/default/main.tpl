@@ -73,7 +73,7 @@
 <a style="display: block; color: #fff;" href="/page/2">Пользовательское соглашение</a>
        <div class="copyright">
        Copyright © <?php echo $_SERVER['HTTP_HOST']; echo " ".date("Y");?>  Все права защищены<br/>
-              Powered by <a href="https://vk.com/web2424" target="_blank">GMS v2.0</a>
+              Powered by <a href="https://vk.com/dev_gamems" target="_blank"><?php echo VERSION;?></a>
         </div>
         </center>
         

@@ -1,21 +1,28 @@
 <?php
+
 namespace core;
 
+use components\logger\Logger;
 use FastRoute;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 
-class Route{
+class Route
+{
 
     private View $view;
 
-    public function start(){
+    public function start()
+    {
         $this->view = new View(TMPL_DIR);
 
+        set_error_handler([$this, 'handleError']);
+        set_exception_handler([$this, 'handleException']);
 
-
-        $dispatcher = \FastRoute\simpleDispatcher(function(RouteCollector $r) {
+        $dispatcher = \FastRoute\simpleDispatcher(function (RouteCollector $r) {
             $r->addRoute('GET', '/', ['controllers\MainController', 'index']);
+            $r->addRoute('GET', '/game/{code}', ['controllers\GamesController', 'view']);
+            $r->addRoute('GET', '/stats', ['controllers\MainController', 'stats']);
             $r->addRoute('GET', '/listing', ['controllers\ListingController', 'index']);
             $r->addRoute(['GET', 'POST'], '/modal', ['controllers\ModalController', 'actionIndex']);
             $r->addRoute('GET', '/news', ['controllers\NewsController', 'index']);
@@ -113,7 +120,13 @@ class Route{
                 $r->addRoute(['GET', 'POST'], '/paylogs/add', ['controllers\control\PaylogsController', 'add']);
                 $r->addRoute(['GET', 'POST'], '/paylogs/edit', ['controllers\control\PaylogsController', 'edit']);
                 $r->addRoute('GET', '/paylogs/remove', ['controllers\control\PaylogsController', 'remove']);
+
+                $r->addRoute('GET', '/logs', ['controllers\control\LogsController', 'index']);
+                $r->addRoute('GET', '/logs/clear', ['controllers\control\LogsController', 'clear']);
+
                 $r->addRoute('POST', '/modal', ['controllers\control\ModalController', 'index']);
+
+
             });
 
             $r->addGroup('/api', function (RouteCollector $r) {
@@ -136,11 +149,9 @@ class Route{
 
         switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:
-                // Если маршрут не найден, можно вывести ошибку или выполнить другое действие
                 $this->showError("404", "Page Not Found");
                 break;
             case Dispatcher::METHOD_NOT_ALLOWED:
-                // Если метод не разрешен для данного маршрута, можно вывести ошибку или выполнить другое действие
                 echo '405 Method Not Allowed';
                 break;
             case Dispatcher::FOUND:
@@ -154,6 +165,7 @@ class Route{
                 call_user_func_array([$instance, $method], $routeInfo[2]);
                 break;
         }
+
     }
 
     private function showError(int $code, string $data)
@@ -168,6 +180,11 @@ class Route{
                 header('HTTP/1.0 403 Forbidden');
 
                 break;
+
+            case 500:
+                header('HTTP/1.0 500 Internal Server Error');
+
+                break;
         }
 
 
@@ -176,6 +193,24 @@ class Route{
         $this->view->render("main", ['content' => $content, 'title' => $data]);
         exit();
 
+    }
+
+    public function handleError($errno, $errstr, $errfile, $errline)
+    {
+        $text = $errno . "\n" . $errstr . "\n" . $errfile . "\n" ."Line: ". $errline;
+        $logger = new Logger();
+        $logger->writeDatabase($text);
+        $this->showError("500", $errstr);
+    }
+
+
+    public function handleException($exception)
+    {
+        $text = $exception->getMessage() . "\n" . $exception->getFile() . "\n" . "Line: " . $exception->getLine();
+        $logger = new Logger();
+        $logger->writeDatabase($text);
+
+        $this->showError("500", $exception->getMessage());
     }
 }
 

@@ -4,6 +4,7 @@ namespace command;
 
 use core\Database;
 use Exception;
+use PDO;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,6 +25,8 @@ class CronCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $startTime = microtime(true);
+
         $getServers = $this->db->query('SELECT * FROM ga_servers');
         $getServers = $getServers->fetchAll();
         $Query = new SourceQuery();
@@ -133,14 +136,64 @@ class CronCommand extends Command
                     $update->bindParam(':id', $row['id']);
                     $update->execute();
                 }
+            }elseif ($row['game'] == 'arma_3') {
+                try {
+
+                    $GameQ = new \GameQ\GameQ();
+                    $GameQ->addServer([
+                        'type' => 'arma3',
+                        'host' => $row['ip'] . ":" . $row['port'],
+                    ]);
+                    $results = $GameQ->process();
+
+                    $Info = array_shift($results);
+
+                    if (empty($Info['gq_hostname'])) {
+                        throw new \DomainException();
+                    }
+                    $hostname = $Info['gq_hostname'];
+                    $status = 1;
+                    $mapName = $Info['gq_mapname'];
+                    $players = $Info['num_players'];
+                    $maxPlayers = $Info['max_players'];
+                    $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players WHERE id = :id";
+                    $update = $this->db->prepare($sql);
+                    $update->bindParam(':status', $status);
+                    $update->bindParam(':hostname', $hostname);
+                    $update->bindParam(':map', $mapName);
+                    $update->bindParam(':players', $players);
+                    $update->bindParam(':max_players', $maxPlayers);
+                    $update->bindParam(':id', $row['id']);
+                    $update->execute();
+                } catch (Exception $e) {
+                    $Exception = $e;
+                    $status = 0;
+                    $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
+                    $update = $this->db->prepare($sql);
+                    $update->bindParam(':status', $status);
+                    $update->bindParam(':id', $row['id']);
+                    $update->execute();
+                }
             }
         }
 
         $time = time();
         $sql = "UPDATE ga_settings SET last_update_servers = $time";
         $this->db->query($sql);
-        echo "server information updated successfully";
 
+        $endTime = microtime(true);
+        $executionTime = $endTime - $startTime;
+        $text = "Серверы успешно обновлены, процесс занял ".round($executionTime, 4)." секунд";
+
+        $sql = 'INSERT INTO ga_system_logs (text, date_create) VALUES (:text, :date_create)';
+        $stmt = $this->db->prepare($sql);
+
+        $stmt->bindValue(':text', $text, PDO::PARAM_STR);
+        $stmt->bindValue(':date_create', time(), PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        echo "server information updated successfully";
 
         return Command::SUCCESS;
     }

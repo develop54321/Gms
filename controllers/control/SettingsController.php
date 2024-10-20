@@ -57,7 +57,7 @@ class SettingsController extends AbstractController
 
         } else {
             $settings = json_decode($settings['content'], true);
-            $content = $this->view->renderPartial("settings", ['settings' => $settings]);
+            $content = $this->view->renderPartial("settings/index", ['settings' => $settings]);
 
             $this->view->render("main", ['content' => $content, 'title' => $title]);
 

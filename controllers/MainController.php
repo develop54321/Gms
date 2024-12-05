@@ -7,6 +7,7 @@ use components\Servers;
 use components\System;
 use core\BaseController;
 use PDO;
+use xPaw\SourceQuery\SourceQuery;
 
 class MainController extends BaseController
 {
@@ -102,7 +103,6 @@ class MainController extends BaseController
     }
 
 
-
     public function stats()
     {
 
@@ -134,10 +134,10 @@ class MainController extends BaseController
         $uq_reverse = array_reverse($count_uq16);
 
 
-        if (!empty($uq_reverse)){
-            $str = "data: [".implode(", ", $uq_reverse)."]";
+        if (!empty($uq_reverse)) {
+            $str = "data: [" . implode(", ", $uq_reverse) . "]";
 
-        }else {
+        } else {
             $str = "data: []";
         }
 

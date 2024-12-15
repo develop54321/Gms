@@ -122,17 +122,14 @@ class ServerController extends BaseController
     }
 
 
-    public function info($address)
-    {
+    public function info($address){
         $user = new User();
         $IsAuth = $user->isAuth();
 
         $currentSession = null;
         if ($IsAuth) $currentSession = $IsAuth['id'];
 
-
         $system = new System();
-
         $parseAddress = Servers::parseAddress($address);
 
 

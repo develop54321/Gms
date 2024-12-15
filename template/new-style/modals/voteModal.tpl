@@ -40,7 +40,12 @@
 
 
 <script>
-function updateCaptcha(){
+    $(document).on("keydown", "form", function(event) {
+        return event.key !== "Enter";
+    });
+
+
+    function updateCaptcha(){
 $("#captchaImg").html('<img src="/captcha" src="Каптча"/>');
 }
 

@@ -2,6 +2,7 @@
 
 namespace controllers;
 
+use components\GameServerQuery;
 use components\Servers;
 use components\System;
 use components\User;
@@ -16,7 +17,6 @@ class ServerController extends BaseController
     public function add()
     {
 
-
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
         $settings = $getSettings->fetch();
         $settings = json_decode($settings['content'], true);
@@ -26,6 +26,7 @@ class ServerController extends BaseController
             $game = strip_tags($_POST['game']);
             $ip = strip_tags($_POST['ip']);
             $port = strip_tags($_POST['port']);
+            //$queryPort = strip_tags($_POST['query_port']);
             $text = strip_tags($_POST['text']);
 
             $isGame = $this->db->prepare('SELECT * FROM ga_games WHERE code = :code and status = :status');
@@ -62,50 +63,123 @@ class ServerController extends BaseController
             $CheckServer->bindValue(":ip", $ip);
             $CheckServer->bindValue(":port", $port);
             $CheckServer->execute();
-            if ($CheckServer->rowCount() == '1') {
 
-                $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE ip = :ip and port = :port');
-                $getInfoServer->bindValue(":ip", $ip);
-                $getInfoServer->bindValue(":port", $port);
-                $getInfoServer->execute();
-                $getInfoServer = $getInfoServer->fetch();
+            if ($CheckServer->rowCount() !== 0) {
 
                 $answer['status'] = "error";
-                $answer['error'] = "Сервер уже добавлен" . "<br/>
-                    <a href='/server/verification?id=" . $getInfoServer['id'] . "'>Вы владелец сервера?</a>";
+                $answer['error'] = "Сервер уже добавлен в систему";
                 exit(json_encode($answer));
             }
 
-            if ($settings['global_settings']['auto_add_server']) {
+            try {
+                $GameServerQuery = new GameServerQuery($ip, $port, $game, null);
+                $GameServerQuery = $GameServerQuery->query();
+
+                if ($GameServerQuery['gq_online'] === false){
+                    throw new \Exception("Не удалось получить информацию о сервере, <br>
+                            Возможные причины: <br>
+                            Неверные настройки firewall <br>
+                            Неверные настройки сервера <br>
+                            Неверно указаны порты");
+                }
+
                 $status = 1;
-            } else {
-                $status = 0;
-            }
+
+                $user = new User();
+                $id_user = 0;
+                if ($user->isAuth()) {
+                    $user_profile = $user->getProfile();
+                    $id_user = $user_profile['id'];
+                }
 
 
-
-
-            $user = new User();
-            $id_user = 0;
-            if ($user->isAuth()) {
-                $user_profile = $user->getProfile();
-                $id_user = $user_profile['id'];
-            }
-
-            if ($settings['global_settings']['auto_add_server'] == '1') {
                 $moderation = 1;
-                $success_text = "Ваш сервер успешно добавлен, информацию об сервере появиться в течение 5 минут";
-            } else {
-                $moderation = 0;
-                $success_text = "Ваш сервер успешно добавлен, после проверки администратором она появиться в мониторинге";
-            }
 
-            $this->db->exec("INSERT INTO ga_servers (status, moderation, id_user, game, ip, port, date_add, description) 
+
+                $query = "INSERT INTO ga_servers (
+                status, 
+                moderation, 
+                id_user, 
+                game,
+                ip, 
+                port,
+                date_add,
+                description,
+                hostname,
+                map, 
+                players,
+                max_players
+            ) VALUES (
+                :status, 
+                :moderation, 
+                :id_user, 
+                :game, 
+                :ip, 
+                :port, 
+                :date_add, 
+                :description, 
+                :hostname, 
+                :map, 
+                :players, 
+                :max_players
+            )";
+
+                $stmt = $this->db->prepare($query);
+
+                $stmt->execute([
+                    ':status' => $status,
+                    ':moderation' => $moderation,
+                    ':id_user' => $id_user,
+                    ':game' => $game,
+                    ':ip' => $ip,
+                    ':port' => $port,
+                    ':date_add' => time(),
+                    ':description' => $text,
+                    ':hostname' => $GameServerQuery['gq_hostname'] ?? null,
+                    ':map' => $GameServerQuery['gq_mapname'] ?? null,
+                    ':players' => $GameServerQuery['gq_numplayers'] ?? null,
+                    ':max_players' => $GameServerQuery['gq_maxplayers'] ?? null
+                ]);
+
+                if ($settings['global_settings']['auto_add_server']) {
+                    $status = 1;
+                } else {
+                    $status = 0;
+                }
+
+
+
+                $user = new User();
+                $id_user = 0;
+                if ($user->isAuth()) {
+                    $user_profile = $user->getProfile();
+                    $id_user = $user_profile['id'];
+                }
+                $moderation = 0;
+                if ($settings['global_settings']['auto_add_server'] == '1') {
+                    $moderation = 1;
+                    $success_text = "Ваш сервер успешно добавлен, <a href='/server/{$ip}:{$port}/info'>перейти</a>";
+                } else {
+                    $success_text = "Ваш сервер успешно добавлен, после проверки администратором она появиться в мониторинге";
+                }
+
+                $this->db->exec("INSERT INTO ga_servers (status, moderation, id_user, game, ip, port, date_add, description) 
                 VALUES('$status', '$moderation','$id_user', '$game', '$ip', '$port', '" . time() . "', '$text')");
 
-            $answer['status'] = "success";
-            $answer['success'] = $success_text;
-            exit(json_encode($answer));
+                $answer['status'] = "success";
+                $answer['success'] = $success_text;
+                exit(json_encode($answer));
+
+
+
+            }catch (Exception $e){
+                $answer['status'] = "error";
+                $answer['error'] = $e->getMessage();
+                exit(json_encode($answer));
+            }
+
+
+
 
 
         } else {

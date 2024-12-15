@@ -31,7 +31,7 @@
       <td><a class="hostname" href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo $row['hostname'];?></a></td>
       <td><<?php echo $row['ip'];?>:<?php echo $row['port'];?></td>
       <td><a href="steam://connect/<?php echo $row['ip'];?>:<?php echo $row['port'];?>">
-      <i class="fa fa-gamepad text-dark" title="<?=$lang['connect_to_server'];?>"></i></a></td>
+      <i class="fa fa-gamepad text-dark" title="<?=$row['hostname'];?>"></i></a></td>
       <td><?php echo $row['map'];?></td>
             <td><?php echo $row['players'];?>/<?php echo $row['max_players'];?></td>
       <td style="text-align: center;">

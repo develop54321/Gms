@@ -30,7 +30,7 @@
                     <?php widgets\server\game\GameIcon::run($row['game']);?>
                     <a href="?game=<?=$row['game'];?>"></a>
                 </td>
-                <td><a class="hostname" href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo $row['hostname'];?></a></td>
+                <td><a class="hostname" href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo $row['hostname'] ?? 'Сервер недоступен';?></a></td>
                 <td>
                     <span class="address">
                         <?php echo $row['ip'];?>:<?php echo $row['port'];?>
@@ -62,11 +62,9 @@
             </table>
 
             <div class="pagination">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                <?php foreach($ViewPagination as $p):?>
-                <?php echo $p[0];?>
-                <?php endforeach;?>
+                <nav aria-label="Pagination">
+                    <ul class="pagination justify-content-center">
+                        <?= implode("\n", $pagination_html) ?>
                     </ul>
                 </nav>
             </div>

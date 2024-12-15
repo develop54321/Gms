@@ -90,13 +90,22 @@ class MainController extends BaseController
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
 
-        $getServers = $this->db->prepare('SELECT * FROM ga_servers WHERE status = :status and ban = :ban ' . $sort . ' and hostname != "" ORDER BY vip_enabled DESC, rating DESC, players DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
+
+
+        $getServers = $this->db->prepare('SELECT * FROM ga_servers WHERE status = :status and ban = :ban ' . $sort . ' ORDER BY vip_enabled DESC, rating DESC, players DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
         $getServers->execute($sort_where);
         $getServers = $getServers->fetchAll();
 
 
+        $pagination_html = $result['ViewPagination'];
+
+
         $content = $this->view->renderPartial("servers_top", ['topServers' => $topServers, 'settings' => $settings]);
-        $content .= $this->view->renderPartial("servers_list", ['servers' => $getServers, 'ViewPagination' => $result['ViewPagination']]);
+        $content .= $this->view->renderPartial("servers_list", ['servers' => $getServers,
+            'pagination_html' => $pagination_html
+        ]);
+
+
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
 

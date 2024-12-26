@@ -141,30 +141,12 @@ class ServerController extends BaseController
                     ':max_players' => $GameServerQuery['gq_maxplayers'] ?? null
                 ]);
 
-                if ($settings['global_settings']['auto_add_server']) {
-                    $status = 1;
-                } else {
-                    $status = 0;
-                }
 
-
-
-                $user = new User();
-                $id_user = 0;
-                if ($user->isAuth()) {
-                    $user_profile = $user->getProfile();
-                    $id_user = $user_profile['id'];
-                }
-                $moderation = 0;
                 if ($settings['global_settings']['auto_add_server'] == '1') {
-                    $moderation = 1;
                     $success_text = "Ваш сервер успешно добавлен, <a href='/server/{$ip}:{$port}/info'>перейти</a>";
                 } else {
                     $success_text = "Ваш сервер успешно добавлен, после проверки администратором она появиться в мониторинге";
                 }
-
-                $this->db->exec("INSERT INTO ga_servers (status, moderation, id_user, game, ip, port, date_add, description) 
-                VALUES('$status', '$moderation','$id_user', '$game', '$ip', '$port', '" . time() . "', '$text')");
 
                 $answer['status'] = "success";
                 $answer['success'] = $success_text;

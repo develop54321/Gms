@@ -41,9 +41,14 @@ class CommentsController extends AbstractController
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count, 'no_rgp' => ''));
 
         $countComments = $countComments->fetchAll();
+        $pagination_html = $result['ViewPagination'];
 
 
-        $content = $this->view->renderPartial("comments/index", ['ViewPagination' => $result['ViewPagination'], 'filter' => $filter, 'comments' => $countComments]);
+        $content = $this->view->renderPartial("comments/index", [
+            'pagination_html' => $pagination_html,
+            'filter' => $filter,
+            'comments' => $countComments
+        ]);
 
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
@@ -88,7 +93,14 @@ class CommentsController extends AbstractController
 
 
         $filter['count'] = count($getComments);
-        $content = $this->view->renderPartial("comments/index", ['filter' => $filter, 'comments' => $getComments, 'ViewPagination' => $result['ViewPagination']]);
+
+        $pagination_html = $result['ViewPagination'];
+
+        $content = $this->view->renderPartial("comments/index", [
+            'filter' => $filter,
+            'comments' => $getComments,
+            '   pagination_html' => $pagination_html
+        ]);
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
 

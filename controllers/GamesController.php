@@ -83,8 +83,13 @@ class GamesController extends BaseController
         $getServers = $getServers->fetchAll();
 
 
+        $pagination_html = $result['ViewPagination'];
+
+
         $content = $this->view->renderPartial("servers_top", ['topServers' => $topServers, 'settings' => $settings]);
-        $content .= $this->view->renderPartial("servers_list", ['servers' => $getServers, 'ViewPagination' => $result['ViewPagination']]);
+        $content .= $this->view->renderPartial("servers_list", ['servers' => $getServers,
+            'pagination_html' => $pagination_html
+        ]);
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
     }

@@ -9,6 +9,7 @@ use PDO;
 
 class ServersController extends AbstractController
 {
+    private const PER_PAGE = 15;
 
     public function search()
     {
@@ -41,14 +42,21 @@ class ServersController extends AbstractController
         $filter['count'] = $count;
 
         $pagination = new Pagination();
-        $per_page = 15;
+        $per_page = self::PER_PAGE;
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count, 'no_rgp' => ''));
 
         $getServers = $this->db->query("SELECT * FROM ga_servers $sql ORDER BY vip_enabled DESC, rating DESC, players DESC LIMIT " . $result['start'] . ", " . $per_page . "");
         $getServers = $getServers->fetchAll();
 
 
-        $content = $this->view->renderPartial("servers/index", ['ViewPagination' => $result['ViewPagination'], 'filter' => $filter, 'servers' => $getServers]);
+        $pagination_html = $result['ViewPagination'];
+
+
+        $content = $this->view->renderPartial("servers/index", [
+            'pagination_html' => $pagination_html,
+            'filter' => $filter,
+            'servers' => $getServers
+        ]);
 
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
@@ -74,13 +82,21 @@ class ServersController extends AbstractController
 
 
         $pagination = new Pagination();
-        $per_page = 15;
+        $per_page = self::PER_PAGE;
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
         $getServers = $this->db->query('SELECT * FROM ga_servers LIMIT ' . $result['start'] . ', ' . $per_page . '');
         $getServers = $getServers->fetchAll();
         $filter['count'] = count($getServers);
-        $content = $this->view->renderPartial("servers/index", ['filter' => $filter, 'servers' => $getServers, 'ViewPagination' => $result['ViewPagination']]);
+
+        $pagination_html = $result['ViewPagination'];
+
+
+        $content = $this->view->renderPartial("servers/index", [
+            'filter' => $filter,
+            'servers' => $getServers,
+            'pagination_html' => $pagination_html
+        ]);
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
 

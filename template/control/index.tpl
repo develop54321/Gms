@@ -55,12 +55,12 @@
     <div class="col-lg-6">
         <div class="panel panel-border panel-danger">
             <div class="panel-heading">
-                <h3 class="panel-title">Уведомление </h3>
+                <h3 class="panel-title">Уведомление</h3>
             </div>
             <div class="panel-body">
                 <ul class="list-group">
                     <?php if (empty($notification)): ?>
-                        Новых уведомление нету
+                        Новых уведомлений нету
                     <?php else: ?>
                         <?php foreach ($notification as $n): ?>
                             <?php if ($n['type'] == 'moderationServers' && $n['count'] != '0'): ?>

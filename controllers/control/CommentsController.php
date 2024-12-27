@@ -99,7 +99,7 @@ class CommentsController extends AbstractController
         $content = $this->view->renderPartial("comments/index", [
             'filter' => $filter,
             'comments' => $getComments,
-            '   pagination_html' => $pagination_html
+            'pagination_html' => $pagination_html
         ]);
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);

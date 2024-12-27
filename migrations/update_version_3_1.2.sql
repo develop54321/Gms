@@ -1,0 +1,1 @@
+CREATE TABLE `app_db`.`ga_queue` (`id` INT(11) NOT NULL AUTO_INCREMENT , `type` VARCHAR(255) NOT NULL , `date_create` INT(11) NOT NULL , `status` VARCHAR(255) NOT NULL , `attempt` INT NOT NULL , `max_attempt` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;

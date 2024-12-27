@@ -231,8 +231,13 @@ class UserController extends BaseController
         $getMyServers->execute(array(':id_user' => $user_profile['id']));
         $getMyServers = $getMyServers->fetchAll();
 
+        $pagination_html = $result['ViewPagination'];
 
-        $content = $this->view->renderPartial("user/servers", ['user_profile' => $user_profile, 'servers' => $getMyServers, 'ViewPagination' => $result['ViewPagination']]);
+        $content = $this->view->renderPartial("user/servers", [
+            'user_profile' => $user_profile,
+            'servers' => $getMyServers,
+            'pagination_html' => $pagination_html
+        ]);
 
 
         $this->view->render("main", ['content' => $content, 'title' => $title, 'user_profile' => $user_profile]);
@@ -286,7 +291,13 @@ class UserController extends BaseController
 
         }
 
-        $content = $this->view->renderPartial("user/paylogs", ['user_profile' => $user_profile, 'data' => $newArr, 'ViewPagination' => $result['ViewPagination']]);
+        $pagination_html = $result['ViewPagination'];
+
+        $content = $this->view->renderPartial("user/paylogs", [
+            'user_profile' => $user_profile,
+            'data' => $newArr,
+            'pagination_html' => $pagination_html
+        ]);
 
 
         $this->view->render("main", ['content' => $content, 'title' => $title, 'user_profile' => $user_profile]);

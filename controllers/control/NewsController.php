@@ -34,7 +34,14 @@ class NewsController extends AbstractController
         $getNews = $this->db->query('SELECT * FROM ga_news ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
         $getNews = $getNews->fetchAll();
 
-        $content = $this->view->renderPartial("news/index", ['news' => $getNews, 'ViewPagination' => $result['ViewPagination']]);
+
+        $pagination_html = $result['ViewPagination'];
+
+
+        $content = $this->view->renderPartial("news/index", [
+            'news' => $getNews,
+            'pagination_html' => $pagination_html
+        ]);
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
 

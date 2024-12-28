@@ -27,8 +27,15 @@ class LogsController extends AbstractController
         $getLogs = $getLogs->fetchAll();
 
 
+        $pagination_html = $result['ViewPagination'];
+
+
         $userPay = '';
-        $content = $this->view->renderPartial("logs/index", ['userPay' => $userPay, 'data' => $getLogs, 'ViewPagination' => $result['ViewPagination']]);
+        $content = $this->view->renderPartial("logs/index", [
+            'userPay' => $userPay,
+            'data' => $getLogs,
+            'pagination_html' => $pagination_html
+        ]);
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
 

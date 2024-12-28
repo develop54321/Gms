@@ -29,7 +29,8 @@
                         <th>id</th>
                         <th>Название</th>
                         <th>Адрес</th>
-                        <th>Карта/игроки</th>
+                        <th>Карта</th>
+                        <th>игроки</th>
                         <th>Статус</th>
                         <th>Рейтинг</th>
                         <th></th>
@@ -52,6 +53,14 @@
 
                         <td>
                             <?php echo $row['map']; ?> / <?php echo $row['players']; ?>/<?php echo $row['max_players']; ?>
+                        </td>
+
+                        <td>
+                            <?php if ($row['players'] === null):?>
+                             ~
+                            <?php else:?>
+                                <?php echo $row['players']; ?>/<?php echo $row['max_players']; ?>
+                            <?php endif;?>
 
                         </td>
 
@@ -77,10 +86,10 @@
                             <label id="vote<?php echo $row['id']; ?>" class="rating-bg"><?php echo $row['rating']; ?></label>
                         </td>
 
-                        <td>
-                            <a href="#"
-                               onclick="ShowModal('<?= $row['id']; ?>', 'serverServices', 'null');return false;">Показать
-                                услуги</a>
+                        <td style="width: 80px;">
+                            <a href="#" onclick="ShowModal('<?= $row['id']; ?>', 'serverServices', 'null');return false;" class="btn btn-warning btn-sm">
+                                <i class="fa fa-dollar"></i>
+                            </a>
 
                             <a href="#" onclick="remove(<?= $row['id']; ?>); return false;" class="btn btn-danger btn-sm"
                                title="Удалить сервер"><i class="fa fa-trash"></i>
@@ -93,9 +102,11 @@
 
 
                 <div class="pagination">
-                    <?php foreach ($ViewPagination as $p): ?>
-                        <?php echo $p[0]; ?>
-                    <?php endforeach; ?>
+                    <nav aria-label="Pagination">
+                        <ul class="pagination justify-content-center">
+                            <?= implode("\n", $pagination_html) ?>
+                        </ul>
+                    </nav>
                 </div>
 
             </div>

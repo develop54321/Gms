@@ -47,7 +47,12 @@ class UsersController extends AbstractController
         $getUsers = $this->db->query('SELECT * FROM ga_users ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
         $getUsers = $getUsers->fetchAll();
 
-        $content = $this->view->renderPartial("users/index", ['users' => $getUsers, 'ViewPagination' => $result['ViewPagination']]);
+        $pagination_html = $result['ViewPagination'];
+
+        $content = $this->view->renderPartial("users/index", [
+            'users' => $getUsers,
+            'pagination_html' => $pagination_html
+        ]);
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
 

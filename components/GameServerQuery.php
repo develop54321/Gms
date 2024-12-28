@@ -75,7 +75,7 @@ class GameServerQuery
      * @return mixed|null
      * @throws \Exception
      */
-    public function query(): mixed
+    public function query()
     {
         $ip = $this->convertIp($this->ip);
         $convertorGameType = $this->getConvertorGameType($this->game_type);
@@ -95,15 +95,11 @@ class GameServerQuery
             $queryParams['options']['query_port'] = $this->query_port;
         }
 
-
-
         try {
 
             $GameQ = new \GameQ\GameQ();
             $GameQ->addServer($queryParams);
             $results = $GameQ->process();
-
-
 
             return $results[$address] ?? null;
         } catch (\Exception $e) {

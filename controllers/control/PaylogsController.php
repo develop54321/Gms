@@ -59,6 +59,9 @@ class PaylogsController extends AbstractController
         $getPayMethods->execute(array(':status' => $status));
         $getPayMethods = $getPayMethods->fetchAll();
 
+
+        $pagination_html = $result['ViewPagination'];
+
         $userPay = '';
         $content = $this->view->renderPartial("paylogs/index", ['userPay' => $userPay,
             'data' => $newArr,
@@ -66,7 +69,7 @@ class PaylogsController extends AbstractController
             'methodPay' => '',
             'statusPay' => '',
             'typePay' => '',
-            'ViewPagination' => $result['ViewPagination'],
+            'pagination_html' => $pagination_html,
             'filter' => null
         ]);
 

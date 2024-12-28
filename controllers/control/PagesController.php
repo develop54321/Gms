@@ -24,7 +24,12 @@ class PagesController extends AbstractController
         $getComments = $this->db->query('SELECT * FROM ga_pages ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
         $getComments = $getComments->fetchAll();
 
-        $content = $this->view->renderPartial("pages/index", ['comments' => $getComments, 'ViewPagination' => $result['ViewPagination']]);
+        $pagination_html = $result['ViewPagination'];
+
+        $content = $this->view->renderPartial("pages/index", [
+            'comments' => $getComments,
+            'pagination_html' => $pagination_html
+        ]);
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
     }

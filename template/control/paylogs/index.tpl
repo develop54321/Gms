@@ -148,14 +148,13 @@
   </tbody>
 </table>
 
-<?php if(!isset($action)):?>
-<div class="pagination">
-<?php foreach($ViewPagination as $p):?>
-<?php echo $p[0];?>
-<?php endforeach;?>
-</div>
-<?php endif;?>
-
+    <div class="pagination">
+        <nav aria-label="Pagination">
+            <ul class="pagination justify-content-center">
+                <?= implode("\n", $pagination_html) ?>
+            </ul>
+        </nav>
+    </div>
 
 
 </div>

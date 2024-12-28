@@ -26,14 +26,10 @@ class ListingController extends BaseController
                 $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
                 $getInfoServer->execute(array(':top_enabled' => $i));
                 $getInfoServer = $getInfoServer->fetch();
-                if (file_exists("public/img/flags/" . strtolower($getInfoServer['country']) . ".png")) {
-                    $imgCountry = "public/img/flags/" . strtolower($getInfoServer['country']) . ".png";
-                } else {
-                    $imgCountry = "public/img/flags/unknown.png";
-                }
+
                 $show_players = $system->showbar($getInfoServer['players'], $getInfoServer['max_players']);
 
-                $topServers[] = ['id_position' => $i, 'hostname' => $getInfoServer['hostname'], 'show_players' => $show_players, 'imgCountry' => $imgCountry, 'country' => $getInfoServer['country'], 'map' => $getInfoServer['map'], 'players' => $getInfoServer['players'], 'max_players' => $getInfoServer['max_players'], 'id' => $getInfoServer['id'], 'ip' => $getInfoServer['ip'], 'port' => $getInfoServer['port'], 'status' => 1, 'top_expired_date' => $getInfoServer['top_expired_date']];
+                $topServers[] = ['id_position' => $i, 'hostname' => $getInfoServer['hostname'], 'show_players' => $show_players, 'country' => $getInfoServer['country'], 'map' => $getInfoServer['map'], 'players' => $getInfoServer['players'], 'max_players' => $getInfoServer['max_players'], 'id' => $getInfoServer['id'], 'ip' => $getInfoServer['ip'], 'port' => $getInfoServer['port'], 'status' => 1, 'top_expired_date' => $getInfoServer['top_expired_date']];
             }
 
         }

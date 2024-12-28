@@ -53,7 +53,7 @@ const DB_USER = "$db_user";
 const DB_PASSWORD = "$db_password";
 const DB_NAME = "$db_name";
 const TMPL_DIR = "template/default2";
-const VERSION = "3.1.1";
+const VERSION = "3.1.2";
 EOD;
 
 

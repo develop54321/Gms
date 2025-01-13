@@ -52,11 +52,9 @@
             </table>
 
             <div class="pagination">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                <?php foreach($ViewPagination as $p):?>
-                <?php echo $p[0];?>
-                <?php endforeach;?>
+                <nav aria-label="Pagination">
+                    <ul class="pagination justify-content-center">
+                        <?= implode("\n", $pagination_html) ?>
                     </ul>
                 </nav>
             </div>

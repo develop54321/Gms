@@ -79,11 +79,13 @@ $img_map = '/public/img/no_map.png';
 <?php endforeach;?>
 </div>
 
-<div class="pagination">
-<?php foreach($ViewPagination as $p):?>
-<?php echo $p[0];?>
-<?php endforeach;?>
-</div>
+  <div class="pagination">
+    <nav aria-label="Pagination">
+      <ul class="pagination justify-content-center">
+        <?= implode("\n", $pagination_html) ?>
+      </ul>
+    </nav>
+  </div>
 
 
 

@@ -46,7 +46,7 @@
                     if ($InfoPayment['typeCode'] == 'robokassa') {
                         $crc = md5("" . $InfoPayment['login'] . ":" . $amount . ":$payId:" . $InfoPayment['password1'] . "");
                     } elseif ($InfoPayment['typeCode'] == 'freekassa') {
-                        $signfk = md5($InfoPayment['fk_id'] . ":" . $amount . ":" . $InfoPayment['fk_key1'] . ":" . $payId);
+                        $signfk = md5($InfoPayment['fk_id'].':'.$amount.':'.$InfoPayment['fk_key1'].':RUB:'.$payId);
                     } elseif ($InfoPayment['typeCode'] == 'unitpay') {
                         $hashStr = $payId . '{up}' . $desc . '{up}' . $amount . '{up}' . $InfoPayment['secret_key'];
                         $hash = hash('sha256', $hashStr);

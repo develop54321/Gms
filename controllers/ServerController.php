@@ -75,6 +75,11 @@ class ServerController extends BaseController
                 $GameServerQuery = new GameServerQuery($ip, $port, $game, null);
                 $GameServerQuery = $GameServerQuery->query();
 
+                $serverName = $GameServerQuery['gq_hostname'];
+
+                $serverName = iconv('utf-8//IGNORE', 'cp1252//IGNORE', $serverName);
+                $serverName = iconv('cp1251//IGNORE', 'utf-8//IGNORE', $serverName);
+
                 if ($GameServerQuery['gq_online'] === false){
                     throw new \Exception("Не удалось получить информацию о сервере, <br>
                             Возможные причины: <br>
@@ -126,6 +131,9 @@ class ServerController extends BaseController
 
                 $stmt = $this->db->prepare($query);
 
+
+
+
                 $stmt->execute([
                     ':status' => $status,
                     ':moderation' => $moderation,
@@ -135,7 +143,7 @@ class ServerController extends BaseController
                     ':port' => $port,
                     ':date_add' => time(),
                     ':description' => $text,
-                    ':hostname' => $GameServerQuery['gq_hostname'] ?? null,
+                    ':hostname' => $serverName ?? null,
                     ':map' => $GameServerQuery['gq_mapname'] ?? null,
                     ':players' => $GameServerQuery['gq_numplayers'] ?? null,
                     ':max_players' => $GameServerQuery['gq_maxplayers'] ?? null

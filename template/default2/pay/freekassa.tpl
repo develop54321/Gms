@@ -4,5 +4,5 @@
 	<input type="hidden" name="currency" value="RUB" />
 	<input type="hidden" name="o" value="<?=$payId;?>" />
 	<input type="hidden" name="s" value="<?=$signfk;?>" />
-	<input type="submit" class="btn btn-success btn-sm" value="Оплатить Free-Kassa"/>
+	<input type="submit" class="btn btn-success btn-sm" value="Оплатить FreeKassa"/>
 </form>

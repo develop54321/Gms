@@ -68,6 +68,7 @@ class Route
                 $r->addRoute(['GET', 'POST'], '/login', ['controllers\control\IndexController', 'login']);
                 $r->addRoute(['GET', 'POST'], '/reset', ['controllers\UserController', 'actionReset']);
                 $r->addRoute(['GET', 'POST'], '/settings', ['controllers\control\SettingsController', 'index']);
+                $r->addRoute(['GET', 'POST'], '/settings/mail', ['controllers\control\SettingsController', 'mail']);
 
                 $r->addRoute('GET', '/paymethods', ['controllers\control\PaymethodsController', 'index']);
                 $r->addRoute(['GET', 'POST'], '/paymethods/add', ['controllers\control\PaymethodsController', 'add']);

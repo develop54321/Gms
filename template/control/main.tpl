@@ -11,12 +11,9 @@
         <link href="/public/control/css/pages.css" rel="stylesheet" type="text/css" />
         <link href="/public/control/css/responsive.css" rel="stylesheet" type="text/css" />
 
-        <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
+<!--        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
+<!--        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>-->
+<!---->
 
         <script src="/public/control/js/modernizr.min.js"></script>
         <script src="/public/control/js/jquery.min.js"></script>
@@ -80,6 +77,7 @@
                                 <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-cog"></i><span> Настройки </span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled" style="display: none;">
                                     <li><a href="/control/settings">Основные</a></li>
+                                    <li><a href="/control/settings/mail">Почты</a></li>
                                     <li><a href="/control/paymethods">Способы оплаты</a></li>
                                     <li><a href="/control/games">Игры</a></li>
                                     <li><a href="/control/services">Тарифы</a></li>
@@ -138,30 +136,14 @@
                     <div class="clearfix"></div>
                 </div>
             </div>
-            <!-- Left Sidebar End --> 
 
-
-
-            <!-- ============================================================== -->
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->                      
             <div class="content-page">
                 <!-- Start content -->
                 <div class="content">
                     <div class="container">
-
-                        
-                                
-<?=$content;?>
-                          
-                        
-
-                      
-
-                        
-
+                        <?=$content;?>
                     </div>
-                               
+
                 </div> 
 
                 <footer class="footer text-right">
@@ -169,24 +151,7 @@
                 </footer>
 
             </div>
-            
-            
-            <!-- ============================================================== -->
-            <!-- End Right content here -->
-            <!-- ============================================================== -->
-
-
-           
         </div>
-        <!-- END wrapper -->
-
-
-    
-        <script>
-            var resizefunc = [];
-        </script>
-
-        <!-- jQuery  -->
 
         <script src="/public/control/js/bootstrap.min.js"></script>
         <script src="/public/control/js/detect.js"></script>
@@ -198,12 +163,8 @@
         <script src="/public/control/js/jquery.nicescroll.js"></script>
         <script src="/public/control/js/jquery.scrollTo.min.js"></script>
 
-        <!-- Counterup  -->
         <script src="/public/control/plugins/waypoints/lib/jquery.waypoints.js"></script>
         <script src="/public/control/plugins/counterup/jquery.counterup.min.js"></script>
-
-		
-		<!--<script src="/public/control/pages/jquery.dashboard_4.js"></script>-->
 
         <script src="/public/control/js/jquery.core.js"></script>
         <script src="/public/control/js/jquery.app.js"></script>

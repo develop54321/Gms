@@ -65,4 +65,40 @@ class SettingsController extends AbstractController
     }
 
 
+    public function mail()
+    {
+        $getSettings = $this->db->query('SELECT * FROM ga_settings');
+        $settings = $getSettings->fetch();
+
+        $title = "Настройки почты";
+
+        if (parent::isAjax()) {
+            $mailParams = $_POST['mail_params'];
+
+            $paramsMail = [];
+            $paramsMail['type'] = $mailParams['type'];
+
+            $paramsMailJson = json_encode($paramsMail);
+            $id = 1;
+            $sql = "UPDATE ga_settings SET params_mail = :params_mail WHERE id= :id";
+            $update = $this->db->prepare($sql);
+            $update->bindParam(':params_mail', $paramsMailJson);
+            $update->bindParam(':id', $id);
+            $update->execute();
+
+
+            $answer['status'] = "success";
+            $answer['success'] = "Настройки успешно сохранены";
+            exit(json_encode($answer));
+        }else {
+
+            $settings = json_decode($settings['content'], true);
+
+            $content = $this->view->renderPartial("settings/mail", ['settings' => $settings]);
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
+
+        }
+    }
+
+
 }

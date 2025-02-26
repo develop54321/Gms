@@ -1,0 +1,1 @@
+ALTER TABLE `ga_settings` ADD `params_mail` TEXT NULL AFTER `content`;

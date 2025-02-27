@@ -3,8 +3,11 @@
 namespace controllers\control;
 
 
+use components\Mail;
 use components\User;
 use core\BaseController;
+use Exception;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class SettingsController extends AbstractController
 {
@@ -67,7 +70,7 @@ class SettingsController extends AbstractController
 
     public function mail()
     {
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
+        $getSettings = $this->db->query('SELECT params_mail FROM ga_settings');
         $settings = $getSettings->fetch();
 
         $title = "Настройки почты";
@@ -77,6 +80,13 @@ class SettingsController extends AbstractController
 
             $paramsMail = [];
             $paramsMail['type'] = $mailParams['type'];
+            $paramsMail['from'] = $mailParams['from'];
+            $paramsMail['smtp_server'] = $mailParams['smtp_server'];
+            $paramsMail['smtp_port'] = $mailParams['smtp_port'];
+            $paramsMail['encrypt'] = $mailParams['encrypt'];
+            $paramsMail['smtp_username'] = $mailParams['smtp_username'];
+            $paramsMail['smtp_password'] = $mailParams['smtp_password'];
+            $paramsMail['auto_tls'] = $mailParams['auto_tls'] ?? false;
 
             $paramsMailJson = json_encode($paramsMail);
             $id = 1;
@@ -92,7 +102,8 @@ class SettingsController extends AbstractController
             exit(json_encode($answer));
         }else {
 
-            $settings = json_decode($settings['content'], true);
+            $settings = json_decode($settings['params_mail'], true);
+
 
             $content = $this->view->renderPartial("settings/mail", ['settings' => $settings]);
             $this->view->render("main", ['content' => $content, 'title' => $title]);
@@ -100,5 +111,42 @@ class SettingsController extends AbstractController
         }
     }
 
+
+    public function mailTest()
+    {
+        $getSettings = $this->db->query('SELECT params_mail FROM ga_settings');
+        $settings = $getSettings->fetch();
+        $settings = json_decode($settings['params_mail'], true);
+
+        $title = "Тестирование почты";
+
+        if (parent::isAjax()) {
+            $mailParams = $_POST['mail_params'];
+            $mail = new Mail();
+
+            try {
+                $mail->send(
+                    $settings,
+                    [
+                        'address' => $mailParams['address'],
+                        'subject' => $mailParams['subject'],
+                        'content' => $mailParams['message'],
+                    ]
+                );
+
+                $answer['status'] = "success";
+                $answer['success'] = "Тестовое письмо отправлено, проверьте почту";
+                exit(json_encode($answer));
+            }catch (Exception $e) {
+                $answer['status'] = "error";
+                $answer['error'] = $e->getMessage();
+                exit(json_encode($answer));
+            }
+
+        }else {
+            $content = $this->view->renderPartial("settings/mail_test");
+            $this->view->render("main", ['content' => $content, 'title' => $title]);
+        }
+    }
 
 }

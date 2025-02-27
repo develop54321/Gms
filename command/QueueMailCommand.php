@@ -2,6 +2,7 @@
 
 namespace command;
 
+use command\queue\MailerQueue;
 use core\Database;
 use Exception;
 use Symfony\Component\Console\Command\Command;
@@ -29,7 +30,7 @@ class QueueMailCommand extends Command
 
         try {
             // Fetch records to process
-            $getQueueRecords = $this->db->query('SELECT * FROM ga_queue WHERE status = :status AND attempt < max_attempt LIMIT 10');
+            $getQueueRecords = $this->db->query('SELECT message, id FROM ga_queue WHERE status = :status AND attempt < max_attempt LIMIT 50');
             $rows = $getQueueRecords->fetchAll();
 
             if (empty($rows)) {
@@ -37,12 +38,14 @@ class QueueMailCommand extends Command
                 return Command::SUCCESS;
             }
 
+            $mailerQueue = new MailerQueue();
             foreach ($rows as $row) {
                 try {
                     $this->processRecord($row);
 
+                    $message = json_decode($row['message'], true);
                     //mailer
-
+                    $mailerQueue->run($output, $message);
 
                     $status = "COMPLETED";
                     $sql = "UPDATE ga_queue SET status = :status WHERE id = :id";
@@ -55,7 +58,7 @@ class QueueMailCommand extends Command
                 } catch (Exception $e) {
                     // Increment attempt counter
                     $stmt = $this->db->prepare("UPDATE ga_queue SET attempt = attempt + 1 WHERE id = :id");
-                    $stmt->bindParam(':id', $id);
+                    $stmt->bindParam(':id', $row['id']);
                     $stmt->execute();
                 }
             }

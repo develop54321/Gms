@@ -22,37 +22,47 @@
                             <option value="smtp">smtp(рекомендуемый)</option>
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label>Имя(отправителя)</label>
+                        <input type="text" name="mail_params[from]" class="form-control" value="">
+                    </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>SMTP сервер</label>
-                        <input type="number" name="global_settings[expired_time_payment]" class="form-control" value="">
+                        <input type="text" name="mail_params[smtp_server]" class="form-control" value="">
                     </div>
 
                     <div class="form-group">
                         <label>SMTP порт</label>
-                        <input type="number" name="global_settings[expired_time_payment]" class="form-control" value="">
+                        <input type="number" name="mail_params[smtp_port]" class="form-control" value="">
                     </div>
 
                     <div class="form-group">
                         <label>Шифрование</label>
-                        <select class="form-control">
+                        <select name="mail_params[encrypt]" class="form-control">
                             <option value="none">Нет</option>
-                            <option value="smtp">SSL</option>
-                            <option value="smtp">TLS</option>
+                            <option value="ssl">SSL</option>
+                            <option value="tls">TLS</option>
                         </select>
                         <span> Для большинство серверов рекомендуется TLS. Если SMTP-провайдер поддерживает и то и другое, мы рекдомендуем использовать TLS.</span>
                     </div>
 
                     <div class="form-group">
                         <label>Имя пользователя SMTP</label>
-                        <input type="number" name="global_settings[expired_time_payment]" class="form-control" value="">
+                        <input type="text" name="mail_params[smtp_username]" class="form-control" value="">
                     </div>
 
                     <div class="form-group">
                         <label>Пароль SMTP</label>
-                        <input type="number" name="global_settings[expired_time_payment]" class="form-control" value="">
+                        <input type="text" name="mail_params[smtp_password]" class="form-control" value="">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Auto tls</label>
+                        <input type="text" name="mail_params[auto_tls]" class="form-control" value="">
                     </div>
                 </div>
             </div>

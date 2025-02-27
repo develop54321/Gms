@@ -58,7 +58,7 @@
 
                     <div class="form-group">
                         <label>Пароль SMTP</label>
-                        <input type="text" name="mail_params[smtp_password]" class="form-control" value="<?php echo $settings['smtp_password'] ?? null; ?>">
+                        <input type="password" name="mail_params[smtp_password]" class="form-control" value="<?php echo $settings['smtp_password'] ?? null; ?>">
                     </div>
 
                     <div class="form-group">

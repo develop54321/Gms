@@ -87,9 +87,10 @@
 
             </form>
         <?php elseif ($type == 'selectServices'): ?>
+
         <?php echo \widgets\flash\Flash::run();?>
             <?php if (empty($services)): ?>
-                <h3 style="text-align: center;">Нету достные услуг для заказа</h3>
+                <h3 style="text-align: center;">Нету доступных услуг для заказа</h3>
             <?php else: ?>
                 <h4>Выбранный вами сервер: <?php echo $serverInfo['hostname']; ?></h4>
             <?php endif; ?>

@@ -34,6 +34,118 @@ class PayController extends BaseController
     }
 
 
+    public function select($id)
+    {
+        $getSettings = $this->db->query('SELECT * FROM ga_settings');
+        $settings = $getSettings->fetch();
+        $settings = json_decode($settings['content'], true);
+
+
+        $title = "Платные услуги";
+
+
+        $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
+        $getInfoServer->execute(array(':id' => $id));
+        $getInfoServer = $getInfoServer->fetch();
+
+
+        $getServices = $this->db->query('SELECT * FROM ga_services');
+        $getServices = $getServices->fetchAll();
+
+
+        $content = $this->view->renderPartial("pay/select", ['type' => 'selectServices',
+            'serverInfo' => $getInfoServer,
+            'settings' => $settings,
+            'services' => $getServices,
+            'step' => 1
+        ]);
+
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
+    }
+
+
+    public function form()
+    {
+        if (parent::isAjax()) {
+            $getSettings = $this->db->query('SELECT * FROM ga_settings');
+            $settings = $getSettings->fetch();
+            $settings = json_decode($settings['content'], true);
+
+            if (isset($_GET['id_server'])) $id_server = (int)$_GET['id_server']; else $id_server = null;
+
+            $getInfoServerRow = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
+            $getInfoServerRow->execute(array(':id' => $id_server));
+            $getInfoServerRow = $getInfoServerRow->fetch();
+            if (empty($getInfoServerRow)) parent::ShowError(404, "Сервер не найден!");
+
+            if (isset($_GET['id_services'])) $id_services = (int)$_GET['id_services']; else  parent::ShowError(404, "Страница не найдена!");
+
+            $getInfoServices = $this->db->prepare('SELECT * FROM ga_services WHERE id = :id');
+            $getInfoServices->execute(array(':id' => $id_services));
+            $getInfoServices = $getInfoServices->fetch();
+            if (!isset($id_services)) parent::ShowError(404, "Страница не найдена!");
+
+
+            $datatop = null;
+            $databefirst = null;
+
+            if ($getInfoServices) {
+                $databefirst = '';
+                if ($getInfoServices['type'] == 'befirst') {
+                    $databefirst = [];
+                    for ($i = 1; $i <= $settings['global_settings']['count_servers_befirst']; $i++) {
+                        $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE befirst_enabled = :befirst_enabled');
+                        $isPlace->execute(array(':befirst_enabled' => $i));
+                        if ($isPlace->rowCount() != '0') {
+                            $databefirst[] = ['id' => $i, 'status' => 1];
+                        } else {
+                            $databefirst[] = ['id' => $i, 'status' => 0];
+                        }
+                    }
+                }
+
+                $datatop = '';
+                if ($getInfoServices['type'] == 'top') {
+                    $datatop = [];
+                    for ($i = 1; $i <= $settings['global_settings']['count_servers_top']; $i++) {
+                        $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
+                        $isPlace->execute(array(':top_enabled' => $i));
+                        if ($isPlace->rowCount() != '0') {
+                            $datatop[] = ['id' => $i, 'status' => 1];
+                        } else {
+                            $datatop[] = ['id' => $i, 'status' => 0];
+                        }
+                    }
+                }
+
+            }
+            $status = 1;
+            $getPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE status = :status');
+            $getPayMethods->execute(array(':status' => $status));
+            $getPayMethods = $getPayMethods->fetchAll();
+
+            // new colors
+            $activcolor = 1;
+            $getCodeColors = $this->db->prepare('SELECT * FROM ga_code_colors WHERE activ = :activ');
+            $getCodeColors->execute(array(':activ' => $activcolor));
+            $getCodeColors = $getCodeColors->fetchAll();
+
+            $content = $this->view->renderPartial("pay/form", [
+                'CodeColors' => $getCodeColors,
+                'serverInfo' => $getInfoServerRow,
+                'PayMethods' => $getPayMethods,
+                'type' => $getInfoServices['type'] ?? null,
+                'datatop' => $datatop,
+                'databefirst' => $databefirst,
+                'infoServices' => $getInfoServices
+            ], true);
+            echo $content;
+
+        } else parent::ShowError(404, "Страница не найдена!");
+    }
+
+
+
     public function server()
     {
 
@@ -234,7 +346,7 @@ class PayController extends BaseController
 
                     $sql = "UPDATE ga_pay_logs SET bill_id = :bill_id WHERE id = :id";
                     $update = $this->db->prepare($sql);
-                    $update->bindParam(':bill_id', $res['guid'], );
+                    $update->bindParam(':bill_id', $res['guid']);
                     $update->bindParam(':id', $payId);
                     $update->execute();
 
@@ -258,6 +370,9 @@ class PayController extends BaseController
         }
 
     }
+
+
+
 
     public function getForm()
     {

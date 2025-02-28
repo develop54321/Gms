@@ -35,6 +35,9 @@ class Route
             $r->addRoute(['GET', 'POST'], '/pay', ['controllers\PayController', 'index']);
             $r->addRoute('GET', '/pay/getform', ['controllers\PayController', 'getForm']);
 
+            $r->addRoute('GET', '/pay/{id}/select', ['controllers\PayController', 'select']);
+            $r->addRoute('GET', '/pay/form', ['controllers\PayController', 'form']);
+
             $r->addRoute(['GET', 'POST'], '/result', ['controllers\ResultController', 'index']);
             $r->addRoute('GET', '/result/success', ['controllers\ResultController', 'success']);
             $r->addRoute('GET', '/result/fail', ['controllers\ResultController', 'fail']);

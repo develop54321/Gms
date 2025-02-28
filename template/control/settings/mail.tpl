@@ -30,7 +30,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6 smtp-settings">
                     <div class="form-group">
                         <label>Сервер SMTP</label>
                         <input type="text" name="mail_params[smtp_server]" class="form-control" value="<?php echo $settings['smtp_server'] ?? null; ?>">
@@ -71,13 +71,8 @@
                             Автоматически используется tls шифрование, если сервер поддерживает его.
                         </span>
                     </div>
-
-
-
-
                 </div>
             </div>
-
 
             <div class="form-group">
                 <button type="submit" class="btn btn-primary text-uppercase waves-effect waves-light">
@@ -86,27 +81,51 @@
             </div>
         </form>
     </div>
-
 </div>
 
 <script>
-    $('#settingsMailForm').ajaxForm({
-        dataType: 'json',
-        success: function (data) {
-            switch (data.status) {
-                case "error":
-                    ShowModal(data.error, 'answer', 'error');
-                    break;
-
-                case "success":
-                    ShowModal(data.success, 'answer', 'success');
-                    break;
+    $(document).ready(function() {
+        // Функция для управления видимостью полей SMTP
+        function toggleSmtpSettings() {
+            if ($('select[name="mail_params[type]"]').val() === 'smtp') {
+                $('.smtp-settings').show();
+            } else {
+                $('.smtp-settings').hide();
             }
-        },
-
-        error: function(xhr, status, error) {
-            console.log(xhr.status);
-            console.log(error);
         }
+
+        // Вызов функции при загрузке страницы
+        toggleSmtpSettings();
+
+        // Вызов функции при изменении выбранного метода отправки
+        $('select[name="mail_params[type]"]').change(function() {
+            toggleSmtpSettings();
+        });
+
+        $('#settingsMailForm').ajaxForm({
+            dataType: 'json',
+            success: function (data) {
+                switch (data.status) {
+                    case "error":
+                        ShowModal(data.error, 'answer', 'error');
+                        break;
+
+                    case "success":
+                        ShowModal(data.success, 'answer', 'success');
+                        break;
+                }
+            },
+
+            error: function(xhr, status, error) {
+                console.log(xhr.status);
+                console.log(error);
+            }
+        });
     });
 </script>
+
+<style>
+    .smtp-settings {
+        display: none;
+    }
+</style>

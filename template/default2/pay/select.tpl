@@ -11,7 +11,7 @@
                 text-decoration: none;
             }
             .card {
-                background: rgb(0 0 0 / 28%);
+                background: #2d283e;
                 cursor: pointer;
                 border: 1px solid #000000;
                 color: #fff;
@@ -19,7 +19,7 @@
             }
 
             .card.active {
-                background: rgb(78 78 78 / 53%);
+                opacity: 0.7;
             }
         </style>
 
@@ -39,7 +39,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $service['name']; ?></h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <p class="card-text"><?php echo $service['text']; ?></p>
                             </div>
                         </div>
                     </a>

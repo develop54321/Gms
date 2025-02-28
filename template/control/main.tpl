@@ -80,7 +80,7 @@
                                     <li><a href="/control/settings/mail">Почты</a></li>
                                     <li><a href="/control/paymethods">Способы оплаты</a></li>
                                     <li><a href="/control/games">Игры</a></li>
-                                    <li><a href="/control/services">Тарифы</a></li>
+                                    <li><a href="/control/services">Услуги</a></li>
 									<li><a href="/control/codecolors">Цвета</a></li>
                                 </ul>
                             </li>

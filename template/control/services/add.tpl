@@ -42,6 +42,13 @@
                 <input type="int" name="servicesPrice" class="form-control" id="servicesPrice">
             </div>
 
+            <div class="form-group">
+                <label for="servicesName">Описание</label>
+                <textarea name="text" class="form-control" id="text">
+
+                </textarea>
+            </div>
+
             <div class="form-group text-right m-b-0">
                 <button class="btn btn-primary waves-effect waves-light" type="submit">
                     Добавить

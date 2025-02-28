@@ -78,7 +78,9 @@
 
     <?php elseif ($type == 'razz'): ?>
         <?php if ($serverInfo['ban'] == '0'): ?>
-            Вы не можете купить эту услугу, так как сервер не находится в бане.
+            <div class="alert alert-danger">
+                Вы не можете купить эту услугу, так как сервер не находится в бане.
+            </div>
         <?php endif; ?>
 
     <?php endif; ?>

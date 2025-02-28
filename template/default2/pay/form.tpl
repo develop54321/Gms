@@ -87,16 +87,38 @@
 
 
     <hr/>
-        <div class="form-row mt-3">
-            <div class="col-md-5">
-                <h4>Выберите способ оплаты</h4>
-                <select class="form-control" name="typePayment" required>
-                    <?php foreach ($PayMethods as $pm): ?>
-                        <option value="<?php echo $pm['id']; ?>"><?php echo $pm['name']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
+<!--        <div class="form-row mt-3">-->
+<!--            <div class="col-md-5">-->
+<!--
+<!--                <select class="form-control" name="typePayment" required>-->
+<!--                    --><?php //foreach ($PayMethods as $pm): ?>
+<!--                        <option value="--><?php //echo $pm['id']; ?><!--">--><?php //echo $pm['name']; ?><!--</option>-->
+<!--                    --><?php //endforeach; ?>
+<!--                </select>-->
+<!--            </div>-->
+<!--        </div>-->
+
+
+        <h4>Выберите способ оплаты</h4>
+        <div class="row">
+            <?php foreach ($PayMethods as $pm): ?>
+                <div class="col-sm-3 mb-3">
+                    <a href="#" onclick="loadForm(<?php echo $pm['id']; ?>); toggleActive(this); return false;">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $pm['name']; ?></h5>
+                                <p class="card-text">
+                                    Описание...
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
         </div>
+
+
+
 
         <div class="form-row mt-3">
             <div class="col-md-5">

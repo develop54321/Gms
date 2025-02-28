@@ -6,13 +6,20 @@
         <hr/>
 
         <style>
+            a{
+                color: #fff;
+                text-decoration: none;
+            }
             .card {
-                background: rgba(255, 255, 255, 0.36);
+                background: rgb(0 0 0 / 28%);
+                cursor: pointer;
+                border: 1px solid #000000;
+                color: #fff;
                 cursor: pointer; /* Добавляем курсор в виде указателя */
             }
 
             .card.active {
-                background: red;
+                background: rgb(78 78 78 / 53%);
             }
         </style>
 

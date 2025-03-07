@@ -34,7 +34,7 @@
 
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary text-uppercase waves-effect waves-light">
+                <button type="submit" class="btn btn-primary">
                     Отправить
                 </button>
             </div>

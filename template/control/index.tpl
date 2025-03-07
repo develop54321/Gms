@@ -1,121 +1,154 @@
-<div class="row">
-    <div class="col-sm-12">
-        <h4 class="page-title">Главная</h4>
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Cards</h1>
+    </div>
+    <div class="ms-auto pageheader-btn">
         <ol class="breadcrumb">
-            <li class="active">Добро пожаловать в панель управления</li>
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Advanced UI</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Cards</li>
         </ol>
     </div>
 </div>
 
-
-<div class="row">
-    <div class="col-lg-6">
-        <div class="panel panel-border panel-inverse">
-            <div class="panel-heading">
-                <h3 class="panel-title">Информация о системе</h3>
+<div class="row row-deck">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-status card-status-left bg-primary br-bl-7 br-tl-7"></div>
+            <div class="card-header border-bottom">
+                <h3 class="card-title">Информация о системе</h3>
             </div>
-            <div class="panel-body">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <span class="badge badge-primary"><?php echo phpversion(); ?></span>
-                        Версия php
-                    </li>
+            <div class="card-body">
+                <table class="table  border text-nowrap text-md-nowrap">
+                    <tbody>
+                    <tr>
+                        <td>
+                            Версия php: <?php echo phpversion(); ?>
+                        </td>
+                    </tr>
 
-                    <li class="list-group-item">
-                        <span class="badge badge-primary"><?php echo $versionMysql; ?></span>
-                        Версия mysql
-                    </li>
+                    <tr>
+                        <td>Версия mysql: <?php echo $versionMysql; ?></td>
+                    </tr>
 
-                    <li class="list-group-item">
-                        <span class="badge badge-primary"><?php echo $sizeDatabase; ?> мб.</span>
-                        Размер базы данных
-                    </li>
+                    <tr>
+                        <td>Размер базы данных: <?php echo $sizeDatabase; ?> мб.</td>
+                    </tr>
 
-                    <li class="list-group-item">
-                        <span class="badge badge-primary"><?php echo date("d:m:Y H:i"); ?></span>
-                        Время на сервере
-                    </li>
+                    <tr>
+                        <td>Время на сервере: <?php echo date("d:m:Y H:i"); ?></td>
+                    </tr>
 
-                    <li class="list-group-item">
-                        <span class="badge badge-primary"><?php echo time() - $settings['last_update_servers']; ?> сек.</span>
-                        Последняя проверка серверов
-                    </li>
+                    <tr>
+                        <td>Последняя проверка серверов: <?php echo time() - $settings['last_update_servers']; ?> сек.</td>
+                    </tr>
 
-                    <li class="list-group-item">
-                        <span class="badge badge-primary"><?php echo $version; ?></span>
-                        Текущая версия
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-lg-6">
-        <div class="panel panel-border panel-danger">
-            <div class="panel-heading">
-                <h3 class="panel-title">Уведомление</h3>
-            </div>
-            <div class="panel-body">
-                <ul class="list-group">
-                    <?php if (empty($notification)): ?>
-                        Новых уведомлений нету
-                    <?php else: ?>
-                        <?php foreach ($notification as $n): ?>
-                            <?php if ($n['type'] == 'moderationServers' && $n['count'] != '0'): ?>
-                                <li class="list-group-item">
-                                    <span class="badge badge-danger"><?php echo $n['count']; ?></span>
-                                    Серверов ожидают проверку:
-                                </li>
-                            <?php elseif ($n['type'] == 'moderationComments' && $n['count'] != '0'): ?>
-                                <li class="list-group-item">
-                                    <span class="badge badge-danger"><?php echo $n['count']; ?></span>
-                                    Комментариев ожидающую проверку:
-                                </li>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-
-
-                </ul>
+                    <tr>
+                        <td>
+                            Текущая версия: <?php echo $version; ?>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+
     </div>
 
+    <div class="col-md-6">
 
-</div>
-
-
-<div class="row">
-    <div class="col-lg-6">
-        <div class="panel panel-border panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">Статистика </h3>
+        <div class="card">
+            <div class="card-status card-status-left bg-red br-bl-7 br-tl-7"></div>
+            <div class="card-header border-bottom">
+                <h3 class="card-title">Статистика</h3>
             </div>
-            <div class="panel-body">
-                <ul class="list-group">
+            <div class="card-body">
+
+                <table class="table  border text-nowrap text-md-nowrap">
+                    <tbody>
+
                     <?php foreach ($counts as $c): ?>
                         <?php if ($c['type'] == 'countServers'): ?>
-                            <li class="list-group-item"><span
-                                        class="badge badge-primary"><?php echo $c['countServers']; ?></span>Всего серверов
-                            </li>
+                            <tr>
+                                <td>
+                                    Всего серверов: <?php echo $c['countServers']; ?>
+                                </td>
+                            </tr>
                         <?php endif; ?>
 
                         <?php if ($c['type'] == 'countActiveServers'): ?>
-                            <li class="list-group-item"><span
-                                        class="badge badge-primary"><?php echo $c['countActiveServers']; ?></span>Всего активных серверов
-                            </li>
+
+                            <tr>
+                                <td>
+                                    Всего активных серверов: <?php echo $c['countActiveServers']; ?>
+                                </td>
+                            </tr>
                         <?php endif; ?>
 
                         <?php if ($c['type'] == 'countUsers'): ?>
-                            <li class="list-group-item"><span
-                                        class="badge badge-primary"><?php echo $c['countUsers']; ?></span>Всего зарегистрированных пользователей
-                            </li>
+                            <tr>
+                                <td>
+                                    Всего зарегистрированных пользователей: <?php echo $c['countUsers']; ?>
+                                </td>
+                            </tr>
                         <?php endif; ?>
 
                     <?php endforeach; ?>
-                </ul>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="row row-deck">
+    <div class="col-md-6">
+
+
+        <div class="card">
+            <div class="card-status card-status-left bg-red br-bl-7 br-tl-7"></div>
+            <div class="card-header border-bottom">
+                <h3 class="card-title">Уведомление</h3>
+            </div>
+            <div class="card-body">
+
+
+
+
+                    <?php if (empty($notification)): ?>
+                        Новых уведомлений нету
+                    <?php else: ?>
+
+                    <table class="table  border text-nowrap text-md-nowrap">
+                        <tbody>
+
+                        <?php foreach ($notification as $n): ?>
+                            <?php if ($n['type'] == 'moderationServers' && $n['count'] !== 0): ?>
+                                <tr>
+                                    <td>
+                                        Серверов ожидают проверку: <?php echo $n['count']; ?>
+                                    </td>
+                                </tr>
+
+                            <?php elseif ($n['type'] == 'moderationComments' && $n['count'] !== 0): ?>
+                                <tr>
+                                    <td>
+                                        Комментариев ожидающую проверку: <?php echo $n['count']; ?>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+
+                        </tbody>
+                    </table>
+                    <?php endif; ?>
+
             </div>
         </div>
     </div>

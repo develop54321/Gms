@@ -4,22 +4,31 @@ jQuery.fn.exists = function(){return this.length>0;}
 
 
 
-function ShowModal(param, action, type){
+function ShowModal(param, action, type) {
     $.ajax({
-       url: "/modal",
-       data: {'action':action, 'param':param, 'type':type},
-       type: 'post',
-       success: function(data){
-         if($("#"+action+"Modal").exists()) {
-             $("#"+action+"Modal").remove();
-             $("body").append(data);
-         }else{
-             $("body").append(data);
-         }
-         $("#"+action+"Modal").modal('show');
-       },
+        url: "/modal",
+        data: { 'action': action, 'param': param, 'type': type },
+        type: 'post',
+        success: function (data) {
+            let modalId = "#" + action + "Modal";
+
+            // Закрываем модальное окно, если оно уже существует
+            if ($(modalId).exists()) {
+                $(modalId).modal('hide');
+                setTimeout(function () {
+                    $(modalId).remove(); // Удаляем после скрытия
+                    $("body").append(data);
+                    $(modalId).modal('show');
+                }, 300); // Небольшая задержка перед удалением
+            } else {
+                $("body").append(data);
+                $(modalId).modal('show');
+            }
+        }
     });
-} 
+}
+
+
 
 
 function votePlus(id){

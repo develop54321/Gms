@@ -1,11 +1,11 @@
 <div class="page-header">
     <div>
-        <h1 class="page-title">Cards</h1>
+        <h1 class="page-title">Пользователи</h1>
     </div>
     <div class="ms-auto pageheader-btn">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0);">Advanced UI</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Cards</li>
+            <li class="breadcrumb-item"><a href="/control">Главная</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Пользователи</li>
         </ol>
     </div>
 </div>
@@ -51,7 +51,7 @@
             Пользователи по умолчанию сортируется по дате регистрации
         </h6>
         <hr/>
-        <table class="table  border text-nowrap text-md-nowrap">
+        <table class="table table-bordered border text-nowrap text-md-nowrap">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -72,11 +72,11 @@
                     </td>
                     <td><?php echo $row['email']; ?></td>
                     <td><?php if ($row['role'] == 'admin'): ?>
-                            <span class="badge badge-success">Администратор</span>
+                            <span class="badge bg-dark my-1">Администратор</span>
                         <?php elseif ($row['role'] == 'user'): ?>
-                            <span class="badge badge-warning">Пользователь</span>
+                            <span class="badge bg-dark my-1">Пользователь</span>
                         <?php elseif ($row['role'] == 'partner'): ?>
-                            <span class="badge badge-info">Партнер</span>
+                            <span class="badge bg-dark my-1">Партнер</span>
                         <?php endif; ?>
                     </td>
                     <td><?php echo \widgets\money\Money::run($row['balance']); ?></td>

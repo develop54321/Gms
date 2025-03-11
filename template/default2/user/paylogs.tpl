@@ -39,7 +39,7 @@
                                 (<?php if ($row['type_pay'] == 'refill'): ?>id пользователя<?php elseif ($row['type_pay'] == 'payServices' or $row['type_pay'] == 'payApi'): ?>id сервера<?php endif; ?>
                                 #<?php echo $row['id_object']; ?>)
                             </td>
-                            <td><?php echo date("d:m:Y [H:i]", $row['date_create']); ?></td>
+                            <td><?php echo date("d.m.Y [H:i]", $row['date_create']); ?></td>
                             <td>
                                 <?php echo \widgets\pay_method\PatMethod::run($row['pay_methods']); ?>
                             </td>

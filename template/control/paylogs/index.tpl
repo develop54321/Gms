@@ -130,7 +130,7 @@
       <?php endif;?>
       
        </td>
-      <td><?php echo date("d:m:Y [H:i]", $row['date_create']);?></td>
+      <td><?php echo date("d.m.Y [H:i]", $row['date_create']);?></td>
       <td>
       <?php echo $row['payMethods'];?></td>
       <td><?php echo \widgets\money\Money::run($row['price']);?></td>

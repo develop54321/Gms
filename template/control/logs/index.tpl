@@ -34,7 +34,7 @@
     <tr>
       <td><?php echo $row['id'];?></td>
       <td><?php echo $row['text'];?></td>
-      <td><?php echo date("d:m:Y [H:i]", $row['date_create']);?></td>
+      <td><?php echo date("d.m.Y [H:i]", $row['date_create']);?></td>
     </tr>
     <?php endforeach;?>
     

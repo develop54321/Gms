@@ -9,7 +9,7 @@ use PDO;
 
 class ServersController extends AbstractController
 {
-    private const PER_PAGE = 15;
+    private const PER_PAGE = 20;
 
     public function search()
     {
@@ -67,7 +67,7 @@ class ServersController extends AbstractController
     {
 
 
-        $title = "Серверы";
+        $title = "Сервера";
 
 
         $filter = [];

@@ -37,7 +37,7 @@
                 <td>
                     <a style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: block;width: 500px;" href="/news" target="_blank"><?php echo $row['title'];?></a></td>
                 <td>
-                    <?php echo date("d:m:Y [H:i]", $row['date_create']);?>
+                    <?php echo date("d.m.Y [H:i]", $row['date_create']);?>
                 </td>
 
                 <td>

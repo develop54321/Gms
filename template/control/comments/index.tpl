@@ -68,7 +68,7 @@
       <td>
       <a style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: block;width: 500px;" target="_blank" href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo $row['text'];?></a></td>
       <td>
-      <?php echo date("d:m:Y [H:i]", $row['date_create']);?>
+      <?php echo date("d.m.Y [H:i]", $row['date_create']);?>
       </td>
     
       

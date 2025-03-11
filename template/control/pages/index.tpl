@@ -43,7 +43,7 @@
                         <?php echo $row['count_visited']; ?>
                     </td>
                     <td>
-                        <?php echo date("d:m:Y [H:i]", $row['date_create']); ?>
+                        <?php echo date("d.m.Y [H:i]", $row['date_create']); ?>
                     </td>
 
 

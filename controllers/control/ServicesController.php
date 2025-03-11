@@ -2,8 +2,6 @@
 
 namespace controllers\control;
 
-use components\User;
-use core\BaseController;
 use PDO;
 
 

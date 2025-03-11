@@ -3,8 +3,6 @@
 namespace controllers\control;
 
 use components\System;
-use components\User;
-use core\BaseController;
 
 
 class PaymethodsController extends AbstractController
@@ -12,7 +10,6 @@ class PaymethodsController extends AbstractController
 
     public function index()
     {
-
         $title = "Способы оплаты";
 
         $getPayMethods = $this->db->query('SELECT * FROM ga_pay_methods WHERE status ="1"');
@@ -20,7 +17,6 @@ class PaymethodsController extends AbstractController
 
 
         $content = $this->view->renderPartial("paymethods/index", ['paymethods' => $payMethods]);
-
         $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
 
@@ -53,12 +49,10 @@ class PaymethodsController extends AbstractController
 
         } else {
 
-
             $getPayMethods = $this->db->query('SELECT * FROM ga_pay_methods WHERE status = "0"');
             $getPayMethods = $getPayMethods->fetchAll();
 
             $content = $this->view->renderPartial("paymethods/add", ['PayMethods' => $getPayMethods]);
-
             $this->view->render("main", ['content' => $content, 'title' => $title]);
         }
 
@@ -75,8 +69,6 @@ class PaymethodsController extends AbstractController
             $update->bindParam(':id', $id);
             $update->execute();
         }
-
-
     }
 
 

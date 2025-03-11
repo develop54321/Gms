@@ -3,24 +3,17 @@
 namespace controllers\control;
 
 use components\System;
-use components\User;
-use core\BaseController;
+
 
 class GamesController extends AbstractController
 {
 
     public function index()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
         $title = "Игры";
 
         $getGames = $this->db->query('SELECT * FROM ga_games WHERE status ="1"');
         $getGames = $getGames->fetchAll();
-
 
         $content = $this->view->renderPartial("games/index", ['games' => $getGames]);
 
@@ -29,11 +22,6 @@ class GamesController extends AbstractController
 
     public function add()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
         $title = "Добавление новой игры";
 
         if (parent::isAjax()) {
@@ -66,11 +54,6 @@ class GamesController extends AbstractController
 
     public function remove()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
             $status = 0;
@@ -79,20 +62,12 @@ class GamesController extends AbstractController
             $update->bindParam(':status', $status);
             $update->bindParam(':id', $id);
             $update->execute();
-
         }
-
-
     }
 
 
     public function edit()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 
         $title = "Изменение платежной системы #$id";
@@ -133,7 +108,6 @@ class GamesController extends AbstractController
             $content = $this->view->renderPartial("paymethods/edit", ['data' => $getInfoPaymethods, 'params' => $params, 'url' => $url]);
 
             $this->view->render("main", ['content' => $content, 'title' => $title]);
-
         }
     }
 

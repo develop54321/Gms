@@ -6,7 +6,6 @@ class ModalController extends AbstractController
 {
     public function index()
     {
-
         if (parent::isAjax()) {
             $action = $_POST['action'];
             switch ($action) {
@@ -21,8 +20,6 @@ class ModalController extends AbstractController
                     break;
             }
         }
-
-
     }
 
 }

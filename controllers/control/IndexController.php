@@ -2,8 +2,6 @@
 
 namespace controllers\control;
 
-use components\User;
-use core\BaseController;
 use PDO;
 
 class IndexController extends AbstractController
@@ -141,14 +139,12 @@ class IndexController extends AbstractController
 
     public function login()
     {
-
         $title = "Авторизация";
 
         if (parent::isAjax()) {
 
             $email = strip_tags($_POST['email']);
             $password = strip_tags($_POST['password']);
-
 
             $role = 'admin';
             $check = $this->db->prepare('SELECT password, email FROM ga_users WHERE email = :email and role = :role');

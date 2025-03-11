@@ -2,16 +2,12 @@
 
 namespace controllers\control;
 
-
 use components\Mail;
-use components\User;
-use core\BaseController;
 use Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class SettingsController extends AbstractController
 {
-
     public function index()
     {
         $getSettings = $this->db->query('SELECT * FROM ga_settings');

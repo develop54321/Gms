@@ -3,8 +3,6 @@
 namespace controllers\control;
 
 use components\Pagination;
-use components\User;
-use core\BaseController;
 use PDO;
 
 class NewsController extends AbstractController
@@ -13,13 +11,6 @@ class NewsController extends AbstractController
 
     public function index()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserProfile = $user->getProfile();
-        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         $title = "Новости";
 
 
@@ -49,34 +40,20 @@ class NewsController extends AbstractController
 
     public function add()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
-        $getUserProfile = $user->getProfile();
-        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         $title = "Новый пост";
 
-
         if (parent::isAjax()) {
-
             $titlePage = $_POST['title'];
             $text = $_POST['text'];
 
-
             $this->db->exec("INSERT INTO ga_news (title, text, date_create) 
             VALUES('$titlePage', '$text', '" . time() . "')");
-
 
             $answer['status'] = "success";
             $answer['success'] = "Пост успешно опубликован";
             exit(json_encode($answer));
 
         } else {
-
-
             $content = $this->view->renderPartial("news/add", []);
 
             $this->view->render("main", ['content' => $content, 'title' => $title]);
@@ -98,11 +75,9 @@ class NewsController extends AbstractController
 
 
         if (parent::isAjax()) {
-
             $titlePage = $_POST['title'];
             $text = $_POST['text'];
             $dateCreate = strtotime($_POST['date_create']);
-
 
             $sql = "UPDATE ga_news SET title = :title, text = :text, date_create = :date_create WHERE id= :id";
             $update = $this->db->prepare($sql);
@@ -117,12 +92,9 @@ class NewsController extends AbstractController
             exit(json_encode($answer));
 
         } else {
-
-
             $content = $this->view->renderPartial("news/edit", ['data' => $getInfoPost]);
 
             $this->view->render("main", ['content' => $content, 'title' => $title]);
-
         }
     }
 
@@ -135,11 +107,9 @@ class NewsController extends AbstractController
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
-
         }
 
         parent::ShowError(400, "Bad request!");
-
     }
 
 

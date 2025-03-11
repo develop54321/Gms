@@ -4,7 +4,6 @@ namespace controllers\control;
 
 use components\Pagination;
 use components\User;
-use core\BaseController;
 use PDO;
 
 
@@ -81,10 +80,7 @@ class PaylogsController extends AbstractController
 
     public function search()
     {
-
-
         $title = "Логи платежей";
-
 
         $filter = [];
         $sql = '';

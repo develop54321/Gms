@@ -113,12 +113,6 @@ foreach ($required_extensions as $extension) {
                 Добро пожаловать в установщик <b>Game Monitoring System</b>
             </h1>
 
-            <?php if ($updateAvailable):?>
-            <div class="alert alert-info">
-                Для вашей системы доступно обновления до версии: <?php echo $version; ?>, желаете обновиться?<br/>
-                <a href="/update/update.phpate.php">Перейти к обновлении</a>
-            </div>
-            <?php endif;?>
 
             <p class="p-0 m-0">Проверка системных требований</p>
             <table class="table table-bordered">

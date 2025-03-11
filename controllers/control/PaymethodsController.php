@@ -76,7 +76,7 @@ class PaymethodsController extends AbstractController
     {
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 
-        $title = "Изменение платежной системы #$id";
+        $title = "Настройка кассы";
 
         $getInfoPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE id = :id');
         $getInfoPayMethods->execute(array(':id' => $id));

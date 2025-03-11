@@ -1,17 +1,22 @@
-<div class="row">
-<div class="col-sm-12">
-<h4 class="page-title">Добавление платежной системы</h4>
-<ol class="breadcrumb">
-<li><a href="/control">Главная</a></li>
-<li><a href="/control/paymethods">Способы оплаты</a></li>
-<li class="active">Добавление платежной системы</li>
-</ol>
-</div>
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Добавление платежной системы</h1>
+    </div>
+    <div class="ms-auto pageheader-btn">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/control">Главная</a></li>
+            <li class="breadcrumb-item"><a href="/control/paymethods">Способы оплат</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Добавление платежной системы</li>
+        </ol>
+    </div>
 </div>
 
-<div class="col-sm-12">
-<div class="card-box">
-<h4 class="m-t-0 header-title"><b>Добавление платежной системы</b></h4>
+<div class="card p-0">
+    <div class="card-header border-bottom">
+        <h5 class="card-title">Добавление платежной системы</h5>
+    </div>
+
+    <div class="card-body">
 
 
 <form action="#" id="servicesForm" method="post">
@@ -51,6 +56,7 @@
 </div>
 
 </div>
+
 <script>
 $('#servicesForm').ajaxForm({
    dataType: 'json',

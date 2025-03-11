@@ -1,15 +1,24 @@
-<div class="row">
-    <div class="col-sm-12">
-        <h4 class="page-title">Настройки</h4>
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Настройки почт</h1>
+    </div>
+    <div class="ms-auto pageheader-btn">
         <ol class="breadcrumb">
-            <li><a href="/control">Главная</a></li>
-            <li class="active">Настройки</li>
+            <li class="breadcrumb-item"><a href="/control">Главная</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Настройки почт</li>
         </ol>
     </div>
 </div>
-<div class="col-sm-12">
-    <div class="card-box">
-        <h4 class="m-t-0 header-title"><b>Настройки</b></h4>
+
+
+<div class="card p-0">
+    <div class="card-header border-bottom">
+        <h5 class="card-title">Настройки</h5>
+    </div>
+
+    <div class="card-body">
+
+
 
         <a href="/control/settings/mail/test" class="btn btn-warning btn-sm" style="margin-bottom: 20px;">Тестирование</a>
 
@@ -83,9 +92,9 @@
     </div>
 </div>
 
+
 <script>
     $(document).ready(function() {
-        // Функция для управления видимостью полей SMTP
         function toggleSmtpSettings() {
             if ($('select[name="mail_params[type]"]').val() === 'smtp') {
                 $('.smtp-settings').show();
@@ -94,10 +103,9 @@
             }
         }
 
-        // Вызов функции при загрузке страницы
         toggleSmtpSettings();
 
-        // Вызов функции при изменении выбранного метода отправки
+
         $('select[name="mail_params[type]"]').change(function() {
             toggleSmtpSettings();
         });

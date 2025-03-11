@@ -279,7 +279,7 @@
     <!-- CUSTOM JS -->
     <script src="/public/control/js/custom.js"></script>
 
-    <script src="/public/js/control.js"></script>
+    <script src="/public/js/main.js"></script>
 
     </body>
 </html>

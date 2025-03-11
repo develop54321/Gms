@@ -73,7 +73,7 @@
 
     <!-- CUSTOM JS -->
     <script src="/public/control/js/custom.js"></script>
-    <script src="/public/control/js/main.js"></script>
+    <script src="/public/js/main.js"></script>
     <script>
         $(document).ready(function () {
             $("#loginForm").on("submit", function (e) {

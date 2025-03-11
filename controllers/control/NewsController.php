@@ -49,9 +49,6 @@ class NewsController extends AbstractController
 
     public function add()
     {
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
         $user = new User();
         if (!$user->isAuth()) {
             header("Location: /control/index");
@@ -60,7 +57,7 @@ class NewsController extends AbstractController
         $getUserProfile = $user->getProfile();
         if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
 
-        $title = "Добавление новостя";
+        $title = "Новый пост";
 
 
         if (parent::isAjax()) {
@@ -70,11 +67,11 @@ class NewsController extends AbstractController
 
 
             $this->db->exec("INSERT INTO ga_news (title, text, date_create) 
-    VALUES('$titlePage', '$text', '" . time() . "')");
+            VALUES('$titlePage', '$text', '" . time() . "')");
 
 
             $answer['status'] = "success";
-            $answer['success'] = "Новость успешно опубликован";
+            $answer['success'] = "Пост успешно опубликован";
             exit(json_encode($answer));
 
         } else {
@@ -90,17 +87,6 @@ class NewsController extends AbstractController
 
     public function edit()
     {
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
-        $getUserProfile = $user->getProfile();
-        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 
         $title = "Изменение поста #$id";
@@ -115,12 +101,14 @@ class NewsController extends AbstractController
 
             $titlePage = $_POST['title'];
             $text = $_POST['text'];
+            $dateCreate = strtotime($_POST['date_create']);
 
 
-            $sql = "UPDATE ga_news SET title = :title, text =:text WHERE id= :id";
+            $sql = "UPDATE ga_news SET title = :title, text = :text, date_create = :date_create WHERE id= :id";
             $update = $this->db->prepare($sql);
             $update->bindParam(':title', $titlePage);
             $update->bindParam(':text', $text);
+            $update->bindParam(':date_create', $dateCreate);
             $update->bindParam(':id', $id);
             $update->execute();
 
@@ -141,13 +129,6 @@ class NewsController extends AbstractController
 
     public function remove()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserProfile = $user->getProfile();
-        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
             $sql = "DELETE FROM ga_news WHERE id =  :id";
@@ -157,6 +138,7 @@ class NewsController extends AbstractController
 
         }
 
+        parent::ShowError(400, "Bad request!");
 
     }
 

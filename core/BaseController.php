@@ -25,6 +25,11 @@ abstract class BaseController
                 header('HTTP/1.0 403 Forbidden');
 
                 break;
+
+                case "400":
+                header('HTTP/1.0 400 Bad Request');
+
+                break;
         }
 
 

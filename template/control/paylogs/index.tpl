@@ -1,17 +1,23 @@
-<div class="row">
-<div class="col-sm-12">
-<h4 class="page-title">Логи платежей</h4>
-<ol class="breadcrumb">
-<li><a href="/control">Главная</a></li>
-<li class="active">Логи платежей</li>
-</ol>
-</div>
+<div class="page-header">
+    <div>
+        <h1 class="page-title">История платежей</h1>
+    </div>
+    <div class="ms-auto pageheader-btn">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/control">Главная</a></li>
+            <li class="breadcrumb-item active" aria-current="page">История платежей</li>
+        </ol>
+    </div>
 </div>
 
 
-<div class="col-sm-12">
-<div class="card-box">
-<h4 class="m-t-0 header-title"><b>Фильтр</b> <i class="fa fa-filter"></i></h4>
+
+<div class="card p-0">
+    <div class="card-header border-bottom">
+        <h5 class="card-title">Фильтр</h5>
+    </div>
+
+    <div class="card-body">
 
 
 <form action="/control/paylogs/search" method="get">
@@ -94,18 +100,24 @@
 </form>
 </div>
 
-
-<div class="card-box">
-<h4 class="m-t-0 header-title"><b>Логи платежей</b></h4>
-<p class="text-muted m-b-30 font-12">по умолчанию сортируется по дате</p>
-
-<div class="filter">
-<h4 class="m-t-0 header-title"><b>Логи платежей</b></h4>
 </div>
 
 
+<div class="card p-0">
+    <div class="card-header border-bottom">
+        <h5 class="card-title">История платежей</h5>
+    </div>
 
-<table class="table table table-hover m-0">
+    <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">
+            Список по умолчанию сортируется по дате создания
+        </h6>
+        <hr/>
+
+
+
+
+        <table class="table table-bordered border text-nowrap text-md-nowrap">
   <thead>
     <tr>
       <th scope="col">#</th>

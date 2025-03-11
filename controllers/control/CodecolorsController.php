@@ -12,14 +12,10 @@ class CodecolorsController extends AbstractController
 
     public function index()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
         $title = "Цвета";
-        $activcolor = 1;
+        $activeColor = 1;
         $getCodeColors = $this->db->prepare('SELECT * FROM ga_code_colors WHERE activ = :activ');
-        $getCodeColors->execute(array(':activ' => $activcolor));
+        $getCodeColors->execute(array(':activ' => $activeColor));
         $getCodeColors = $getCodeColors->fetchAll();
         $content = $this->view->renderPartial("codecolors/index", ['CodeColors' => $getCodeColors]);
         $this->view->render("main", ['content' => $content, 'title' => $title]);
@@ -27,11 +23,6 @@ class CodecolorsController extends AbstractController
 
     public function add()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
         $title = "Добавление нового цвета";
         if (parent::isAjax()) {
             $activ = strip_tags($_POST['activ']);
@@ -50,12 +41,6 @@ class CodecolorsController extends AbstractController
 
     public function edit()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
-
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
         $title = "Изменение цвета";
         $getInfoCodeColors = $this->db->prepare('SELECT * FROM ga_code_colors WHERE id = :id');
@@ -85,10 +70,6 @@ class CodecolorsController extends AbstractController
 
     public function remove()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
             $sql = "DELETE FROM ga_code_colors WHERE id =  :id";

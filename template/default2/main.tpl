@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="description" content="GMS - это веб движок запрограммированный на языке PHP, для отслеживание за статусами игровых серверов"/>
-    <meta name="keywords" content="мониторинг серверов, игровой мониторинг, gms, gms v3.1, система отслеживания за статусами игровых серверов, раскрутка сервера"/>
+    <meta name="keywords" content="мониторинг серверов, игровой мониторинг, gms, gms v3.2, система отслеживания за статусами игровых серверов, раскрутка сервера"/>
     <link rel="stylesheet" href="/public/default2/css/style.css"/>
     <link rel="stylesheet" href="/public/default2/css/bootstrap.css"/>
     <link rel="stylesheet" href="/public/default2/css/roboto.css"/>

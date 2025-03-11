@@ -13,7 +13,7 @@ class PaylogsController extends AbstractController
 
     public function index()
     {
-        $title = "Логи платежей";
+        $title = "История платежей";
 
         $countServers = $this->db->query('SELECT * FROM ga_pay_logs');
         $count = $countServers->rowCount();
@@ -205,42 +205,21 @@ class PaylogsController extends AbstractController
         $getPayMethods = $getPayMethods->fetchAll();
 
 
-        $content = $this->view->renderPartial("paylogs/index", ['filter' => $filter, 'userPay' => $userPay, 'methodPay' => $methodPay, 'PayMethods' => $getPayMethods, 'statusPay' => $statusPay, 'typePay' => $typePay, 'data' => $newArr, 'ViewPagination' => $result['ViewPagination']]);
+        $pagination_html = $result['ViewPagination'];
+
+        $content = $this->view->renderPartial("paylogs/index", [
+            'filter' => $filter,
+            'userPay' => $userPay,
+            'methodPay' => $methodPay,
+            'PayMethods' => $getPayMethods,
+            'statusPay' => $statusPay,
+            'typePay' => $typePay,
+            'data' => $newArr,
+            'pagination_html' => $pagination_html
+        ]);
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
 
-
-    }
-
-
-    public function add()
-    {
-
-        $title = "Добавление нового партнера";
-
-        if (parent::isAjax()) {
-
-            $login = strip_tags($_POST['login']);
-            $key = strip_tags($_POST['key']);
-
-            $discount = (int)$_POST['discount'];
-
-            $status = (int)$_POST['status'];
-
-
-            $this->db->exec("INSERT INTO ga_partners (status, login, key_api, discount) 
-            VALUES('$status', '$login', '$key','$discount')");
-
-            $answer['status'] = "success";
-            $answer['success'] = "Партнер успешно добавлен";
-            exit(json_encode($answer));
-
-        } else {
-
-            $content = $this->view->renderPartial("partners/add", []);
-
-            $this->view->render("main", ['content' => $content, 'title' => $title]);
-        }
 
     }
 

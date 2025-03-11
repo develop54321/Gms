@@ -50,60 +50,6 @@
 
     <div class="col-md-6">
 
-        <div class="card">
-            <div class="card-status card-status-left bg-red br-bl-7 br-tl-7"></div>
-            <div class="card-header border-bottom">
-                <h3 class="card-title">Статистика</h3>
-            </div>
-            <div class="card-body">
-
-                <table class="table  border text-nowrap text-md-nowrap">
-                    <tbody>
-
-                    <?php foreach ($counts as $c): ?>
-                        <?php if ($c['type'] == 'countServers'): ?>
-                            <tr>
-                                <td>
-                                    Всего серверов: <?php echo $c['countServers']; ?>
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-
-                        <?php if ($c['type'] == 'countActiveServers'): ?>
-
-                            <tr>
-                                <td>
-                                    Всего активных серверов: <?php echo $c['countActiveServers']; ?>
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-
-                        <?php if ($c['type'] == 'countUsers'): ?>
-                            <tr>
-                                <td>
-                                    Всего зарегистрированных пользователей: <?php echo $c['countUsers']; ?>
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-
-                    <?php endforeach; ?>
-
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-<div class="row row-deck">
-    <div class="col-md-6">
-
 
         <div class="card">
             <div class="card-status card-status-left bg-red br-bl-7 br-tl-7"></div>
@@ -115,9 +61,9 @@
 
 
 
-                    <?php if (empty($notification)): ?>
-                        Новых уведомлений нету
-                    <?php else: ?>
+                <?php if (empty($notification)): ?>
+                    Новых уведомлений нету
+                <?php else: ?>
 
                     <table class="table  border text-nowrap text-md-nowrap">
                         <tbody>
@@ -141,7 +87,98 @@
 
                         </tbody>
                     </table>
-                    <?php endif; ?>
+                <?php endif; ?>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+<div class="row row-deck">
+    <div class="col-md-6">
+
+        <div class="card">
+            <div class="card-status card-status-left bg-primary br-bl-7 br-tl-7"></div>
+            <div class="card-header border-bottom">
+                <h3 class="card-title">Статистика</h3>
+            </div>
+            <div class="card-body">
+
+                <table class="table  border text-nowrap text-md-nowrap">
+                    <tbody>
+
+                    <tr>
+                        <td>
+                            Всего серверов: <?php echo $countServers; ?> <br/>
+                            Сегодня: <?php echo $countServersToday;?><br/>
+                            За последнюю неделю: <?php echo $countServersLastWeek;?><br/>
+                            За текущих месяц: <?php echo $countServersThisMonth;?><br/>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            Всего активных серверов: <?php echo $countActiveServers; ?>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            Всего зарегистрированных пользователей: <?php echo $countUsers; ?> <br/>
+                            Сегодня: <?php echo $countUsersToday;?><br/>
+                            За последнюю неделю: <?php echo $countUsersLastWeek;?><br/>
+                            За текущих месяц: <?php echo $countUsersThisMonth;?><br/>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Всего комментариев: <?php echo $countComments; ?>
+                        </td>
+                    </tr>
+
+
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="card">
+            <div class="card-status card-status-left bg-primary br-bl-7 br-tl-7"></div>
+            <div class="card-header border-bottom">
+                <h3 class="card-title">Статистика по платежам</h3>
+            </div>
+            <div class="card-body">
+
+                <table class="table  border text-nowrap text-md-nowrap">
+                    <tbody>
+
+                    <tr>
+                        <td>
+                            Доход за сегодня: <?php echo \widgets\money\Money::run($incomeToday);?><br/>
+                            За последнюю неделю: <?php echo \widgets\money\Money::run($incomeWeek);?><br/>
+                            За текущих месяц: <?php echo \widgets\money\Money::run($incomeMonth);?><br/>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
 
             </div>
         </div>

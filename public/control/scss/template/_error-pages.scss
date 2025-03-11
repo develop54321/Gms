@@ -1,0 +1,84 @@
+.authentication {
+	input {
+		border: 0;
+		padding-left: 32px !important;
+		border-radius: 0;
+	}
+	.card:hover {
+		box-shadow: 0 16px 26px 0 $black-4, 0 3px 6px 0 $black-4;
+	}
+	.card-title {
+		font-size: 1.185rem;
+	}
+	.form-control {
+		&:focus {
+			box-shadow: none;
+		}
+		margin-bottom: 1rem;
+	}
+	input::placeholder {
+		color: #76839a;
+		margin-top: 1px;
+	}
+	.flex-c-m .login100-social-item i {
+		color: $white;
+		margin-left: 0;
+	}
+	.wrap-input {
+		width: 100%;
+		margin: 0 auto;
+	}
+}
+
+.login100-social-item {
+	font-size: 20px;
+	color: $white;
+	display: inline-block;
+	justify-content: center;
+	align-items: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	margin: 5px;
+	text-align: center;
+	line-height: 2;
+	&:hover {
+		color: $white;
+	}
+}
+
+.container-login100 .box {
+	.social-icons {
+		position: relative;
+	}
+	ul {
+		margin: 0;
+		padding: 0;
+		li {
+			list-style: none;
+			float: left;
+			padding: 7px 7px;
+			a {
+				margin: 0 10px;
+				font-size: 20px;
+				transition: 0.5s;
+				text-align: center;
+			}
+		}
+	}
+}
+
+.relative {
+	position: relative !important;
+}
+
+.construction .btn.btn-icon {
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	padding: 0;
+	background: #5851ab;
+	font-size: 20px;
+	color: $white;
+	margin: 0 3px;
+}

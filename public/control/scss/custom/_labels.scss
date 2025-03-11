@@ -1,0 +1,76 @@
+.label {
+	display: inline-block;
+	margin-bottom: .5rem;
+	padding-right: .6em;
+	padding-left: .6em;
+}
+
+.label-size {
+	font-size: 3.8em;
+	margin-left: 9px;
+}
+
+.label-font-size {
+	font-size: 1.8em;
+}
+
+.label-medium-size {
+	font-size: 1.2em;
+}
+
+.labels li {
+	display: inline;
+}
+
+.label-title {
+	font-size: 1.125rem;
+}
+
+.label-font {
+	font-size: 0.8em;
+}
+
+.label-default {
+	background: #d5e0ec;
+	color: $white;
+}
+
+.label-primary {
+	background: $primary;
+	color: $white;
+}
+
+.label-secondary{
+	background: $secondary;
+	color: $white;
+}
+
+.label-light{
+	background: $gray;
+	color: $white;
+}
+
+.label-dark{
+	background: $dark;
+	color: $white;
+}
+
+.label-success {
+	background: $success;
+	color: $white;
+}
+
+.label-danger {
+	background: $danger;
+	color: $white;
+}
+
+.label-warning {
+	background: $warning;
+	color: $white;
+}
+
+.label-info {
+	background: $info;
+	color: $white;
+}

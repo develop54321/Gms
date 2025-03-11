@@ -1,0 +1,39 @@
+@media (max-width: 575.98px) {
+	.countdown-timer-wrapper {
+		.timer .timer-wrapper .time {
+			font-size: 25px;
+			font-weight: bold;
+			color: $white;
+			width: 60px;
+			height: 60px;
+			border-radius: 50px;
+			background: linear-gradient(to bottom right, $black-1, $black-1);
+			line-height: 2.3;
+			text-align: center;
+			margin: 0 auto;
+			margin-bottom: 5px;
+			position: relative;
+			overflow: hidden;
+		}
+		border-radius: 5px;
+		margin-bottom: 30px;
+		max-width: 320px;
+	}
+	.construction .display-2 {
+		font-size: 2.3rem;
+	}
+	.countdown-timer-wrapper .timer {
+		padding: 0px;
+		text-align: center;
+	}
+}
+.countdown span:first-child {
+	font-size: 30px;
+}
+.count-down.row span:first-child{
+	padding: 10px 15px;
+	border-radius: 5px;
+	background: #ebecf5;
+	box-shadow: 0 5px 10px rgba(227, 228, 237, .3);
+	margin:2px;
+}

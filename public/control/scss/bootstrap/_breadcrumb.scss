@@ -1,0 +1,221 @@
+.breadcrumb-header {
+	display: flex;
+	margin-top: 20px;
+	margin-bottom: 16px;
+	width: 100%;
+  
+	.breadcrumb {
+	  background: transparent;
+	  padding: 0;
+	  margin-bottom: 0;
+	  font-size: 13px;
+	}
+  }
+  
+  .breadcrumb-3 {
+	ol {
+	  position: relative;
+	  display: block;
+	  width: 100%;
+	  text-align: center;
+	  padding: 10px;
+	  border-radius: 7px;
+	}
+  
+	li {
+	  display: contents;
+	  text-align: center;
+	}
+  }
+  
+  .breadcrumb-4 {
+	ol {
+	  position: relative;
+	  display: block;
+	  width: 100%;
+	  text-align: right;
+	}
+  
+	li {
+	  display: contents;
+	  text-align: right;
+	}
+  }
+  
+  .breadcrumb-item + .breadcrumb-item::before {
+	content: ">";
+  }
+  
+  @media (max-width: 633px) {
+	.breadcrumb-header {
+	  display: block;
+	}
+  }
+  
+  @media (max-width: 380px) {
+	.breadcrumb-right .btn-outline-primary {
+	  display: none;
+	}
+  }
+  
+  .breadcrumb {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0.75rem 1rem;
+	margin-bottom: 0rem;
+	list-style: none;
+	border-radius: 7px;
+  }
+  
+  .breadcrumb-item {
+	a{
+	  color: $primary;
+	}
+	+ .breadcrumb-item {
+	  padding-left: 0.5rem;
+  
+	  &::before {
+		display: inline-block;
+		padding-right: 0.5rem;
+		color: #e3e6e8b0;
+		content: "/";
+	  }
+  
+	  &:hover::before {
+		text-decoration: underline;
+		text-decoration: none;
+	  }
+	}
+  
+	&.active {
+	  color: $muted;
+	}
+  }
+  
+  .breadcrumb-style1, .breadcrumb-style2, .breadcrumb-style3 {
+	  border-radius: 7px;
+  }
+  .breadcrumb-style1 .breadcrumb-item a, .breadcrumb-style2 .breadcrumb-item a, .breadcrumb-style3 .breadcrumb-item a {
+	color:#6c7b9a;
+  }
+  
+  .breadcrumb-style1 .breadcrumb-item a {
+	&:hover, &:focus {
+	  color: $primary;
+	}
+  }
+  
+  .breadcrumb-style2 .breadcrumb-item a {
+	&:hover, &:focus {
+	  color: $primary;
+	}
+  }
+  
+  .breadcrumb-style3 .breadcrumb-item a {
+	&:hover, &:focus {
+	  color: $primary;
+	}
+  }
+  
+  .breadcrumb-style1 .breadcrumb-item.active, .breadcrumb-style2 .breadcrumb-item.active, .breadcrumb-style3 .breadcrumb-item.active {
+	color: $muted;
+  }
+  
+  .breadcrumb-style1 .breadcrumb-item + .breadcrumb-item::before, .breadcrumb-style2 .breadcrumb-item + .breadcrumb-item::before, .breadcrumb-style3 .breadcrumb-item + .breadcrumb-item::before {
+	color: #cfd4e1;
+  }
+  
+  .breadcrumb-style2 .breadcrumb-item + .breadcrumb-item::before, .breadcrumb-style3 .breadcrumb-item + .breadcrumb-item::before {
+	width: 16px;
+	text-align: center;
+  }
+  
+  .breadcrumb-style2 .breadcrumb-item + .breadcrumb-item::before {
+	content: '/';
+  }
+  
+  .breadcrumb-style3 .breadcrumb-item + .breadcrumb-item::before {
+	content: '\f287';
+  }
+  
+  .main-content-breadcrumb {
+	display: flex;
+	align-items: center;
+	font-size: 10px;
+	font-weight: 500;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: $gray-500;
+	margin-bottom: 10px;
+  
+	span {
+	  position: relative;
+  
+	  + span::before {
+		content: '\f3d1';
+		font-family: 'Ionicons';
+		font-size: 12px;
+		font-weight: 300;
+		display: inline;
+		margin: 0 5px;
+		color:$gray-400;
+		line-height: 0;
+		position: relative;
+		top: 1px;
+	  }
+  
+	  &:last-child {
+		color: $gray-700;
+	  }
+	}
+  }
+  
+  .main-breadcrumbs {
+	padding: 0;
+	background-color: transparent;
+	margin-bottom: 0;
+  
+	.breadcrumb-item {
+	  font-size: 10px;
+	  text-transform: uppercase;
+	  letter-spacing: .5px;
+	  font-weight: 700;
+  
+	  a {
+		color: $default-color;
+		transition: all 0.2s ease-in-out;
+  
+		&:hover {
+		  color: $gray-500;
+		}
+	  }
+  
+	  &.active {
+		color: $primary;
+	  }
+  
+	  + .breadcrumb-item {
+		padding-left: 8px;
+  
+		&::before {
+		  color: $gray-500;
+		  padding-right: 8px;
+		  font-weight: 400;
+		}
+	  }
+	}
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+	.main-breadcrumbs .breadcrumb-item a {
+	  transition: none;
+	}
+  }
+  
+  .breadcrumb-item+.breadcrumb-item::before {
+  float:none;
+	padding-right: .5rem;
+	  color: #d6dfe7;
+	  content: var(--bs-breadcrumb-divider, "\e933");
+	  font-family: 'feather' !important;
+  }

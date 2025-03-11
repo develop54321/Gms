@@ -1,0 +1,300 @@
+/**
+ * Style-sheet for dtpicker
+ * https://github.com/mugifly/jquery-simple-datetimepicker
+ */
+
+ .datepicker {
+	display: inline-block;
+	font: 15px/1.5 "Helvetica Neue", mplus-2c, Helvetica, Arial, "Hiragino Kaku Gothic Pro", Meiryo, sans-serif;
+	font-weight: 300;
+	border: 1px solid #dfdfdf;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	box-shadow: 0.5px 0.5px 0px #c8c8c8;
+	-webkit-box-shadow: 0.5px 0.5px 3px #e1e5ef;
+	-moz-box-shadow: 0.5px 0.5px 3px #e1e5ef;
+  
+	> {
+	  .datepicker_header {
+		padding-top: 2px;
+		padding-bottom: 2px;
+		padding-left: 5px;
+		padding-right: 5px;
+		color: #4a4a69;
+		text-align: center;
+		font-size: 9pt;
+		font-weight: bold;
+		user-select: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+  
+		> {
+		  a {
+			user-select: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			cursor: pointer;
+			color: #3b7796;
+  
+			&:hover {
+			  color: #303030;
+			  background-color: #c8c8c8;
+			}
+  
+			&:active {
+			  color: #ffffff;
+			  background-color: #808080;
+			}
+		  }
+  
+		  span {
+			margin-left: 20px;
+			margin-right: 20px;
+			user-select: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+		  }
+  
+		  .icon-home {
+			position: absolute;
+			display: block;
+			float: left;
+			margin-top: 2px;
+			margin-left: 5px;
+			width: 11pt;
+			height: 11pt;
+			vertical-align: middle;
+  
+			> svg > g > path {
+			  fill: #3b7796;
+			}
+		  }
+  
+		  a:hover > svg > g > path {
+			fill: #303030;
+  
+			/* Icon button hover color */
+		  }
+		}
+	  }
+  
+	  .datepicker_inner_container {
+		margin: -2px 0px -2px 0px;
+		background-color: #d2d2d2;
+		border: 1px solid #c8c8c8;
+		border-radius: 3px;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		box-shadow: 0.5px 0px 3px #c8c8c8;
+		-webkit-box-shadow: 0.5px 0px 3px #c8c8c8;
+		-moz-box-shadow: 0.5px 0px 3px #c8c8c8;
+  
+		&:after {
+		  content: ".";
+		  display: block;
+		  height: 0;
+		  clear: both;
+		  visibility: hidden;
+		}
+  
+		> {
+		  .datepicker_calendar {
+			float: left;
+			width: auto;
+			margin-top: -0.5px;
+			margin-left: -1px;
+			margin-bottom: -2px;
+			background-color: #ffffff;
+			border: 1px solid #c8c8c8;
+			border-top: none;
+			border-top-left-radius: 3px;
+			border-bottom-left-radius: 3px;
+			-webkit-border-top-left-radius: 3px;
+			-webkit-border-bottom-left-radius: 3px;
+			-moz-border-radius-topleft: 3px;
+			-moz-border-radius-bottomleft: 3px;
+  
+			> {
+			  table {
+				padding: 10px;
+			  }
+  
+			  .datepicker_table > tbody > tr > {
+				th {
+				  color: #646464;
+				  width: 18px;
+				  font-size: small;
+				  font-weight: normal;
+				  text-align: center;
+				}
+  
+				td {
+				  color: #000000;
+				  font-size: small;
+				  text-align: center;
+				  user-select: none;
+				  -webkit-user-select: none;
+				  -moz-user-select: none;
+				  cursor: pointer;
+  
+				  &.today {
+					border-bottom: #bfbfbf solid 2px;
+					margin-bottom: -2px;
+				  }
+  
+				  &.wday_sat {
+					color: #0044aa;
+				  }
+  
+				  &.wday_sun {
+					color: #e13b00;
+				  }
+  
+				  &.day_another_month {
+					color: #cccccc;
+				  }
+  
+				  &.day_in_past, &.day_in_unallowed, &.out_of_range {
+					cursor: default;
+					color: #cccccc;
+				  }
+  
+				  &.active {
+					color: #ffffff;
+					background-color: #808080;
+				  }
+  
+				  &.hover {
+					color: #000000;
+					background-color: #c8c8c8;
+				  }
+				}
+			  }
+			}
+		  }
+  
+		  .datepicker_timelist {
+			float: left;
+			width: 4.2em;
+			height: 118px;
+			margin-top: -0.5px;
+			padding: 5px;
+			padding-left: 0px;
+			padding-right: 0px;
+			overflow: auto;
+			overflow-x: hidden;
+			background-color: #ffffff;
+			border-top-right-radius: 3px;
+			border-bottom-right-radius: 3px;
+			-webkit-border-top-right-radius: 3px;
+			-webkit-border-bottom-right-radius: 3px;
+			-moz-border-radius-topright: 3px;
+			-moz-border-radius-bottomright: 3px;
+  
+			&::-webkit-scrollbar {
+			  overflow: hidden;
+			  width: 6px;
+			  background: #fafafa;
+			  border-top-right-radius: 3px;
+			  border-bottom-right-radius: 3px;
+			  -webkit-border-top-right-radius: 3px;
+			  -webkit-border-bottom-right-radius: 3px;
+			  -moz-border-radius-topright: 3px;
+			  -moz-border-radius-bottomright: 3px;
+  
+			  &:horizontal {
+				height: 1px;
+			  }
+			}
+  
+			&::-webkit-scrollbar-button {
+			  display: none;
+			}
+  
+			&::-webkit-scrollbar-piece {
+			  background: #eee;
+  
+			  &:start {
+				background: #eee;
+			  }
+			}
+  
+			&::-webkit-scrollbar-thumb {
+			  background: #aaaaaa;
+			  border-radius: 3px;
+			  -webkit-border-radius: 3px;
+			  -moz-border-radius: 3px;
+			}
+  
+			&::-webkit-scrollbar-corner {
+			  background: #333;
+			}
+  
+			> div.timelist_item {
+			  padding-top: 1px;
+			  padding-bottom: 1px;
+			  padding-left: 7px;
+			  padding-right: 25px;
+			  margin-top: 5px;
+			  margin-bottom: 2px;
+			  font-size: small;
+			  user-select: none;
+			  -webkit-user-select: none;
+			  -moz-user-select: none;
+			  cursor: pointer;
+  
+			  &.time_in_past, &.out_of_range {
+				cursor: default;
+				color: #cccccc;
+			  }
+  
+			  &.active {
+				color: #ffffff;
+				background-color: #808080;
+			  }
+  
+			  &.hover {
+				color: #000000;
+				background-color: #c8c8c8;
+			  }
+			}
+		  }
+		}
+	  }
+	}
+  }
+  
+  /*
+   * datepicker_header
+  */
+  
+  /*
+   * datepicker_inner_container 
+  */
+  
+  /*
+   * datepicker_inner_container > datepicker_calendar
+  */
+  
+  /*
+   * datepicker_inner_container > datepicker_calendar > datepicker_table > tbody > tr > th (WDay-cell)
+  */
+  
+  /*
+   * datepicker_inner_container > datepicker_calendar > datepicker_table > tbody > tr > td (Day-cell)
+  */
+  
+  /*
+   * datepicker_inner_container > datepicker_timelist
+  */
+  
+  /*
+  .datepicker > .datepicker_inner_container > .datepicker_timelist::after {
+	  content: ".";
+	  display: block;
+	  height: 0;
+	  clear: both;
+	  visibility: hidden;
+  }
+  */

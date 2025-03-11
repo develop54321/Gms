@@ -1,0 +1,109 @@
+/*-----Badges-----*/
+
+.btn .badge {
+	position: relative;
+	top: -1px;
+	right: -3px;
+}
+.badge {
+	display: inline-block;
+	padding: 0.95em .8em;
+    font-size: 90% !important;
+	line-height: 0;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: 3px;
+	font-size: 12px;
+	font-weight: 500;
+
+	&.bg-light{
+		color: $gray-dark !important;
+		background-color: $gray-light !important;
+	}
+
+	&.badge-xs{
+		padding: 0.75em 0.3em;
+    	font-size: 75% !important;
+	}
+
+	&.badge-sm{
+		padding: 0.9em 0.7em;
+    	font-size: 75% !important;
+	}
+}
+.rounded-pill {
+	border-radius: 50px;
+}
+.badgetext {
+	float: right;
+}
+.badge.bg-white{
+  color: $black !important;
+}
+.btn-outline-primary:hover .bg-primary{
+  background-color: $white !important;
+  color: $black;
+}
+.btn-outline-success:hover .bg-success{
+  background-color: $white !important;
+  color: $black;
+}
+.btn-outline-secondary:hover .bg-secondary{
+  background-color: $white !important;
+  color: $black;
+}
+.btn-outline-info:hover .bg-info{
+  background-color: $white !important;
+  color: $black;
+}
+.btn-outline-warning:hover .bg-warning{
+	background-color: $white !important;
+	color: $black;
+}
+.btn-outline-danger:hover .bg-danger{
+	background-color: $white !important;
+	color: $black;
+}
+.btn-outline-light:hover .bg-light{
+	background-color: $white !important;
+	color: $black;
+}
+.btn-outline-dark:hover .bg-dark{
+	background-color: $white !important;
+	color: $black;
+}
+.badge{
+	&.bg-primary{
+		color: $white;
+		background-color: $primary;
+	}
+	&.bg-secondary{
+		color: $white;
+		background-color: $secondary;
+	}
+	&.bg-success{
+		color: $white;
+		background-color: $success;
+	}
+	&.bg-info{
+		color: $white;
+		background-color: $info;
+	}
+	&.bg-warning{
+		color: $white;
+		background-color: $warning;
+	}
+	&.bg-danger{
+		color: $white;
+		background-color: $danger;
+	}
+	&.bg-light{
+		color: $gray-dark !important;
+		background-color: $gray-light !important;
+	}
+	&.bg-dark{
+		color: $white;
+		background-color: $dark;
+	}
+}

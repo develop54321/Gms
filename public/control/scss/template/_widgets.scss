@@ -1,0 +1,198 @@
+@media (max-width: 1279px) {
+	.wideget-user-info .wideget-user-warap {
+		margin-top: 2rem !important;
+	}
+}
+@media (max-width: 360px) {
+	.wideget-user-desc {
+		.wideget-user-img {
+			width: 130px;
+			height: 130px;
+		}
+		.user-wrap {
+			margin-top: 0.7rem !important;
+			margin-left: 13px;
+		}
+	}
+	.wideget-user-info .wideget-user-warap .wideget-user-warap-r {
+		margin-left: 5rem !important;
+	}
+}
+.widget-info {
+	i {
+		width: 100px;
+		height: 100px;
+		padding: 27px 0;
+		text-align: center;
+		border: 2px solid $white;
+		border-radius: 50%;
+	}
+	a {
+		border-bottom: 1px solid $white;
+	}
+}
+.widgets-cards .wrp {
+	&.icon-circle {
+		width: 73px;
+		height: 73px;
+		border-radius: 50px;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-align-items: center;
+		align-items: center;
+		-webkit-justify-content: center;
+		justify-content: center;
+		padding: 0;
+		margin-right: 15px;
+		i {
+			font-size: 1.6rem;
+			color: $white;
+		}
+	}
+	p {
+		margin-bottom: 0;
+		line-height: 1;
+		margin-bottom: 10px;
+		&:first-child {
+			font-weight: 600;
+			font-size: 25px;
+		}
+	}
+}
+/**widgets*/
+
+.widgets {
+	font-size: 35px;
+	padding: 20px;
+}
+.widgetstext {
+	top: 0;
+	bottom: 0;
+	padding: 20px 40px;
+}
+.widget-line {
+	h4 {
+		font-size: 24px;
+		font-weight: 600;
+	}
+	p {
+		font-size: 16px;
+	}
+}
+.widget-line-list li {
+	display: inline-block;
+	font-size: 16px;
+	line-height: 27px;
+	padding: 5px 20px 0 15px;
+	list-style-type: none;
+}
+.wideget-user-info {
+	margin-top: 1rem;
+}
+.widget-line-list {
+	margin: 6px;
+}
+.widget-progress .progress {
+	background-color: $black-1;
+}
+.widget-card-1 i {
+	position: relative;
+	bottom: 1px;
+	right: 11px;
+	border-radius: 5px;
+	font-size: 57px;
+	color: $white;
+	opacity: 0.5;
+	&:hover {
+		color: $white;
+		font-size: 80px;
+		position: absolute;
+		bottom: -10px;
+		-webkit-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+	}
+}
+.wideget-user-desc {
+	.wideget-user-img img {
+		border-radius: 100%;
+		margin-right: 2rem;
+	}
+	.user-wrap {
+		margin-top: 1.5rem;
+	}
+}
+.wideget-user .wideget-user-icons a {
+	display: inline-block;
+	width: 2rem;
+	height: 2rem;
+	text-align: center;
+	border-radius: 100px;
+	line-height: 2rem;
+	margin-top: 0.3rem;
+	&:hover {
+		color: $white;
+	}
+}
+.wideget-user-info {
+	.wideget-user-warap {
+		display: flex;
+		h4 {
+			font-size: 1.5rem;
+			font-weight: 500;
+			margin-bottom: 0.4rem;
+		}
+		.wideget-user-warap-r {
+			margin-left: 10rem;
+		}
+	}
+	.wideget-user-rating a {
+		font-size: 18px;
+	}
+}
+.wideget-user-tab {
+	.tab-menu-heading {
+		padding: 0;
+		border: 0;
+		.nav li a {
+			color: #374254;
+			font-size: 15px;
+			font-weight: 400;
+		}
+	}
+	.tabs-menu1 ul li a {
+		padding: 14px 20px 14px 20px;
+		display: block;
+	}
+}
+.widgets-cards .widgets-cards-data {
+	margin-top: 8px;
+	.wrp p:first-child {
+		font-size: 20px;
+		font-weight: 500;
+	}
+}
+.widget-drop {
+	.dropdown-menu {
+		position: absolute;
+		transform: translate3d(-156px, 31px, 0px) !important;
+		top: 0px;
+		left: 0px;
+		will-change: transform;
+		min-width: 80px;
+	}
+	.button:focus {
+		border-color: transparant !important;
+	}
+}
+#widgetChart1, #widgetChart2, #widgetChart3 {
+	width: 110% !important;
+	height: 142px !important;
+	bottom: -15px;
+	position: relative;
+	left: -17px;
+	overflow: hidden !important;
+	border-radius: 27%;
+}
+.clip-widget {
+	position: relative;
+}

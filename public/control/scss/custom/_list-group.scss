@@ -1,0 +1,388 @@
+/*-----Lists-----*/
+
+.list-group-item.active {
+	z-index: 2;
+	background-color: #f6f4fb;
+	color: $primary;
+	border-color: #d8dde4;
+}
+
+.list-group {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	padding-left: 0;
+	margin-bottom: 0;
+}
+
+.list-group-item-action {
+	width: 100%;
+	color: #76839a;
+	text-align: inherit;
+	&:hover,
+	&:focus {
+		color: #76839a;
+		text-decoration: none;
+		background-color: #f1f1f9;
+	}
+	&:active {
+		color: #76839a;
+		background-color: #e9ecef;
+	}
+}
+
+.list-group-item {
+	position: relative;
+	display: block;
+	padding: 0.75rem 1.25rem;
+	margin-bottom: -1px;
+	background-color: $white;
+	border: 1px solid #eaedf1;
+}
+
+.listorder {
+	position: relative;
+	padding: 0.75rem 1.25rem;
+	margin-bottom: -1px;
+	background-color: $white;
+	border: 1px solid #eaedf1;
+	list-style-type: decimal;
+	list-style-position: inside;
+}
+
+.listorder1 {
+	position: relative;
+	padding: 0.75rem 1.25rem;
+	margin-bottom: -1px;
+	background-color: $white;
+	border: 1px solid #eaedf1;
+	list-style-type: upper-alpha;
+	list-style-position: inside;
+}
+
+.listunorder {
+	position: relative;
+	padding: 0.75rem 1.25rem;
+	margin-bottom: -1px;
+	background-color: $white;
+	border: 1px solid #eaedf1;
+	list-style-type: circle;
+	list-style-position: inside;
+}
+
+.listunorder1 {
+	position: relative;
+	padding: 0.75rem 1.25rem;
+	margin-bottom: -1px;
+	background-color: $white;
+	border: 1px solid #eaedf1;
+	list-style-type: square;
+	list-style-position: inside;
+}
+
+.list-group-item {
+	&:first-child {
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+	}
+	&:last-child {
+		margin-bottom: 0;
+		border-bottom-right-radius: 3px;
+		border-bottom-left-radius: 3px;
+	}
+	&:hover,
+	&:focus {
+		z-index: 1;
+		text-decoration: none;
+		border-bottom: 1px solid transparent;
+	}
+	&.disabled,
+	&:disabled {
+		color: #c6cad8;
+		background-color: $white;
+	}
+}
+
+.list-group-flush {
+	.list-group-item {
+		border-right: 0;
+		border-left: 0;
+		border-radius: 0;
+	}
+	&:first-child .list-group-item:first-child {
+		border-top: 0;
+	}
+	&:last-child .list-group-item:last-child {
+		border-bottom: 0;
+	}
+}
+
+.list-group-item-primary {
+	color: #24426c;
+	background-color: #cbdbf2;
+	&.list-group-item-action {
+		&:hover,
+		&:focus {
+			color: #24426c;
+			background-color: #b7cded;
+		}
+		&.active {
+			color: $white;
+			background-color: #24426c;
+			border-color: #24426c;
+		}
+	}
+}
+
+.list-group-item-secondary {
+	color: #464a4e;
+	background-color: #dddfe2;
+	&.list-group-item-action {
+		&:hover,
+		&:focus {
+			color: #464a4e;
+			background-color: #cfd2d6;
+		}
+		&.active {
+			color: $white;
+			background-color: #464a4e;
+			border-color: #464a4e;
+		}
+	}
+}
+
+.list-group-item-success {
+	color: #316100;
+	background-color: #d2ecb8;
+	&.list-group-item-action {
+		&:hover,
+		&:focus {
+			color: #316100;
+			background-color: #c5e7a4;
+		}
+		&.active {
+			color: $white;
+			background-color: #316100;
+			border-color: #316100;
+		}
+	}
+}
+
+.list-group-item-info {
+	color: #24587e;
+	background-color: #cbe7fb;
+	&.list-group-item-action {
+		&:hover,
+		&:focus {
+			color: #24587e;
+			background-color: #b3dcf9;
+		}
+		&.active {
+			color: $white;
+			background-color: #24587e;
+			border-color: #24587e;
+		}
+	}
+}
+
+.list-group-item-warning {
+	color: #7d6608;
+	background-color: #fbeebc;
+	&.list-group-item-action {
+		&:hover,
+		&:focus {
+			color: #7d6608;
+			background-color: #fae8a4;
+		}
+		&.active {
+			color: $white;
+			background-color: #7d6608;
+			border-color: #7d6608;
+		}
+	}
+}
+
+.list-group-item-danger {
+	color: #6b1110;
+	background-color: #f1c1c0;
+	&.list-group-item-action {
+		&:hover,
+		&:focus {
+			color: #6b1110;
+			background-color: #ecacab;
+		}
+		&.active {
+			color: $white;
+			background-color: #6b1110;
+			border-color: #6b1110;
+		}
+	}
+}
+
+.list-group-item-light {
+	color: #818182;
+	background-color: #fdfdfe;
+	&.list-group-item-action {
+		&:hover,
+		&:focus {
+			color: #818182;
+			background-color: #ececf6;
+		}
+		&.active {
+			color: $white;
+			background-color: #818182;
+			border-color: #818182;
+		}
+	}
+}
+
+.list-group-item-dark {
+	color: #1b1e21;
+	background-color: #c6c8ca;
+	&.list-group-item-action {
+		&:hover,
+		&:focus {
+			color: #1b1e21;
+			background-color: #b9bbbe;
+		}
+		&.active {
+			color: $white;
+			background-color: #1b1e21;
+			border-color: #1b1e21;
+		}
+	}
+}
+
+.list-inline-dots .list-inline-item+.list-inline-item:before {
+	content: '· ';
+	margin-left: -2px;
+	margin-right: 3px;
+}
+
+.list-separated-item {
+	padding: 1rem 0;
+	&:first-child {
+		padding-top: 0;
+	}
+}
+
+.list-group-item {
+	&.active .icon {
+		color: inherit !important;
+	}
+	.icon {
+		color: #76839a !important;
+	}
+}
+
+.list-group-transparent .list-group-item {
+	background: none;
+	border: 0;
+	padding: .5rem 1rem;
+	border-radius: 5px;
+	&.active {
+		background-color: #f5f6fb;
+		font-weight: 500;
+		color: $primary;
+		
+		svg{
+			fill: $primary
+		}
+	}
+}
+
+.list-group.lg-alt .list-group-item {
+	border: 0;
+}
+
+.list.d-flex img {
+	width: 60px;
+}
+.list-style-1 {
+    list-style: inherit;
+    padding-left: inherit;
+}
+
+.list-style-1 ul {
+    list-style: inherit;
+    padding-left: 30px;
+}
+
+.list-style-1 li {
+    line-height: 30px;
+}
+
+.list-style2 {
+    list-style: decimal;
+    padding-left: inherit;
+}
+
+.list-style2 ul {
+    list-style: decimal;
+    padding-left: 30px;
+}
+
+.list-style2 li {
+    line-height: 30px;
+}
+
+.list-style3 {
+    list-style: circle !important;
+    padding-left: inherit;
+}
+
+.list-style3 ul {
+    list-style: decimal;
+    padding-left: 30px;
+}
+
+.list-style3 li {
+    line-height: 30px;
+}
+
+.list-style4 {
+    list-style: lower-alpha;
+    padding-left: inherit;
+}
+
+.list-style4 ul {
+    list-style: decimal;
+    padding-left: 30px;
+}
+
+.list-style4 li {
+    line-height: 30px;
+}
+
+.list-style5 {
+    list-style: square;
+    padding-left: inherit;
+}
+
+.list-style5 ul {
+    list-style: decimal;
+    padding-left: 30px;
+}
+
+.list-style5 li {
+    line-height: 30px;
+}
+
+.list-style6 {
+    list-style: lower-roman;
+    padding-left: inherit;
+}
+
+.list-style6 ul {
+    list-style: decimal;
+    padding-left: 30px;
+}
+
+.list-style6 li {
+    line-height: 30px;
+}
+
+.order-list li {
+    line-height: 30px;
+}

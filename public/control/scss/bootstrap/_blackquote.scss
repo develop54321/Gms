@@ -1,0 +1,35 @@
+blockquote {
+	margin: 0 0 1rem;
+}
+.blockquote {
+	margin-bottom: 1rem;
+	font-size: 1.171875rem;
+}
+.blockquote-footer {
+	display: block;
+	font-size: 80%;
+	color: #868e96;
+	&::before {
+		content: "\2014 \00A0";
+	}
+}
+p, ul, ol {
+	margin-bottom: 1em;
+}
+blockquote {
+	margin-bottom: 1em;
+	font-style: italic;
+	color: #6e7687;
+	padding-left: 2rem;
+	border-left: 2px solid #eaedf1;
+	p {
+		margin-bottom: 1rem;
+	}
+	cite {
+		display: block;
+		text-align: right;
+		&:before {
+			content: '— ';
+		}
+	}
+}

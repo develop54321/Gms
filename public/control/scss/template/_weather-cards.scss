@@ -1,0 +1,138 @@
+.weather-card {
+	height: 492px;
+	background: $white;
+	overflow: hidden;
+	.top {
+		position: relative;
+		height: 328px;
+		width: 100%;
+		overflow: hidden;
+		background-size: cover;
+		background-position: center;
+		text-align: center;
+		.wrapper {
+			padding: 30px;
+			position: relative;
+			z-index: 1;
+			.mynav {
+				height: 20px;
+				.lnr {
+					color: $white;
+					font-size: 20px;
+				}
+				.lnr-chevron-left {
+					display: inline-block;
+					float: left;
+				}
+				.lnr-cog {
+					display: inline-block;
+					float: right;
+				}
+			}
+			.heading {
+				margin-top: 20px;
+				font-size: 35px;
+				font-weight: 400;
+				color: $white;
+			}
+			.location {
+				margin-top: 20px;
+				font-size: 21px;
+				font-weight: 400;
+				color: $white;
+			}
+			.temp {
+				margin-top: 20px;
+				a {
+					text-decoration: none;
+					color: $white;
+					.temp-type {
+						font-size: 85px;
+					}
+				}
+				.temp-value {
+					display: inline-block;
+					font-size: 85px;
+					font-weight: 600;
+					color: $white;
+				}
+				.deg {
+					display: inline-block;
+					font-size: 35px;
+					font-weight: 600;
+					color: $white;
+					vertical-align: top;
+					margin-top: 10px;
+				}
+			}
+		}
+		&:after {
+			content: "";
+			height: 100%;
+			width: 100%;
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	}
+	.bottom {
+		padding: 0 30px;
+		background: $white;
+		.wrapper .forecast {
+			overflow: hidden;
+			margin: 0;
+			font-size: 0;
+			padding: 0;
+			padding-top: 20px;
+			max-height: 155px;
+			a {
+				text-decoration: none;
+				color: $black;
+			}
+			.go-up {
+				text-align: center;
+				display: block;
+				font-size: 25px;
+				margin-bottom: 10px;
+			}
+			li {
+				display: block;
+				font-size: 25px;
+				font-weight: 400;
+				color: rgba(0, 0, 0, 0.25);
+				line-height: 1em;
+				margin-bottom: 30px;
+				.date {
+					display: inline-block;
+				}
+				.condition {
+					display: inline-block;
+					vertical-align: middle;
+					float: right;
+					font-size: 25px;
+					.temp {
+						display: inline-block;
+						vertical-align: top;
+						font-size: 20px;
+						font-weight: 400;
+						padding-top: 2px;
+						.deg {
+							display: inline-block;
+							font-size: 10px;
+							font-weight: 600;
+							margin-left: 3px;
+							vertical-align: top;
+						}
+						.temp-type {
+							font-size: 20px;
+						}
+					}
+				}
+				&.active {
+					color: $black-8;
+				}
+			}
+		}
+	}
+}

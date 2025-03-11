@@ -1,0 +1,217 @@
+/*-- rating--*/
+
+.rating-stars {
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    i{
+        padding: 5px;
+    }
+    .rating-stars-container {
+        font-size: 0px;
+        .rating-star {
+            display: inline-block;
+            font-size: 32px;
+            cursor: pointer;
+            padding: 5px 10px;
+            color: #f6f6fb;
+            &.sm {
+                display: inline-block;
+                font-size: 14px;
+                color: $border;
+                cursor: pointer;
+                padding: 5px;
+            }
+            &.is--active,
+            &.is--hover {
+                color: #f1c40f;
+            }
+            &.is--no-hover,
+            .fa-heart .is--no-hover {
+                color: #f6f6fb;
+            }
+        }
+    }
+    input {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        padding: 0.375rem 0.75rem;
+        font-size: 0.9375rem;
+        line-height: 1.6;
+        color: #495057;
+        background-color: $white;
+        background-clip: padding-box;
+        border: 1px solid $border;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+}
+
+.br-theme-bars-horizontal .br-widget {
+    a {
+        background-color: #e7e7eb;
+        &.br-active,
+        &.br-selected {
+            background-color: $primary-1;
+        }
+    }
+    .br-current-rating {
+        color: $primary-1;
+    }
+}
+
+.br-theme-bars-pill .br-widget a {
+    background-color: #e7e7eb;
+    &.br-active,
+    &.br-selected {
+        background-color: $primary-1;
+        color: white;
+    }
+    color: $primary-1;
+}
+
+.br-theme-bars-square .br-widget a {
+    &.br-active,
+    &.br-selected {
+        border: 2px solid $primary-1;
+        color: $primary-1;
+    }
+    border: 2px solid #e7e7eb;
+    background-color: $white;
+    color: #d3d3d3;
+}
+
+.br-theme-bars-movie .br-widget {
+    a {
+        &.br-active,
+        &.br-selected {
+            background-color: $primary-1;
+        }
+        background-color: #e7e7eb;
+    }
+    .br-current-rating {
+        color: $primary-1;
+    }
+}
+
+.br-theme-bars-1to10 .br-widget {
+    a {
+        background-color: #e7e7eb;
+        &.br-active,
+        &.br-selected {
+            background-color: $primary-1;
+        }
+    }
+    .br-current-rating {
+        color: $primary-1;
+    }
+}
+
+.br-theme-fontawesome-stars .br-widget a {
+    &.br-active:after,
+    &.br-selected:after {
+        color: #f1c40f;
+    }
+}
+
+.br-theme-fontawesome-stars-o .br-widget a {
+    &.br-active:after,
+    &.br-selected:after {
+        content: '\f005';
+        color: #f1c40f;
+    }
+    &.br-fractional:after {
+        content: '\f123';
+        color: #f1c40f;
+    }
+}
+
+.br-theme-fontawesome-stars .br-widget a:after {
+    content: '\f005';
+    color: #e7e7eb;
+}
+
+.br-theme-fontawesome-stars-o .br-widget a:after {
+    content: '\f006';
+    color: #dddddf;
+}
+
+.br-theme-fontawesome-stars .br-widget a {
+    font: normal normal normal 20px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    text-decoration: none;
+    margin-right: 2px;
+}
+
+.dark-mode .br-theme-fontawesome-stars .br-widget a:after {
+    color: #45455f;
+}
+
+.dark-mode .br-theme-fontawesome-stars .br-widget a.br-active:after,
+.br-theme-fontawesome-stars .br-widget a.br-selected:after {
+    color: #f1c40f;
+}
+
+.star-ratings .stars {
+    width: 120px;
+    text-align: center;
+    margin: auto;
+}
+
+.star-ratings .stars-example-fontawesome-o {
+    width: 200px;
+}
+
+.box-example-1to10 .br-wrapper {
+    width: 210px;
+    position: absolute;
+    margin: 0px 0 0 -105px;
+    left: 50%;
+}
+
+.box-example-movie .br-wrapper {
+    width: 250px;
+    position: absolute;
+    margin: 0px 0 0 -125px;
+    left: 50%;
+}
+
+.box-example-square .br-wrapper {
+    width: 190px;
+    position: absolute;
+    margin: 0px 0 0 -95px;
+    left: 50%;
+}
+
+.box-example-pill .br-wrapper {
+    width: 232px;
+    position: absolute;
+    margin: 0px 0 0 -116px;
+    left: 50%;
+}
+
+.box-example-horizontal .br-wrapper {
+    width: 120px;
+    position: absolute;
+    margin: 0px 0 0 -60px;
+    left: 50%;
+}
+
+.box select {
+    width: 120px;
+    margin: 10px auto 0 auto;
+    display: block;
+    font-size: 16px;
+}
+
+.box .box-body {
+    padding-top: 2em;
+    height: 85px;
+    position: relative;
+}
+
+.box-large .box-body {
+    padding-top: 2em;
+    height: 120px;
+}

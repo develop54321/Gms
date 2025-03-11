@@ -1,0 +1,123 @@
+.tree {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-left: 1em;
+    position: relative;
+
+    ul {
+      margin-left: 1em;
+    }
+
+    &:before {
+      content: "";
+      display: block;
+      width: 0;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -10px;
+    }
+  }
+
+  li {
+    margin: 0;
+    padding: 0.5em 1em 0.5em 1em;
+    line-height: 2em;
+    color: #495057;
+    position: relative;
+    border: 1px solid #eaedf1;
+    margin: 10px 0;
+    border-radius: 5px;
+    line-height: 30px;
+
+    i {
+      margin-right: 10px;
+      font-weight: bold;
+      font-size: 16px;
+
+      /* padding-top: 10px; */
+      line-height: 1;
+      color: #77bc21;
+    }
+  }
+
+  ul li {
+    &:before {
+      content: "";
+      display: block;
+      width: 10px;
+      height: 0;
+      margin-top: -1px;
+      position: absolute;
+      top: 22px;
+      left: -10px;
+    }
+
+    &:last-child:before {
+      background: transparent;
+      height: auto;
+      top: 22px;
+      bottom: 0;
+    }
+  }
+}
+
+.indicator {
+  margin-right: 5px;
+  color: #4b10a4;
+}
+
+.tree {
+  li {
+    a {
+      text-decoration: none;
+      color: #495057;
+      font-size: 15px;
+    }
+
+    button {
+      text-decoration: none;
+      color: #29273c;
+      border: none;
+      background: transparent;
+      margin: 0px 0px 0px 0px;
+      padding: 0px 0px 0px 0px;
+      outline: 0;
+
+      &:active,
+      &:focus {
+        text-decoration: none;
+        color: #29273c;
+        border: none;
+        background: transparent;
+        margin: 0px 0px 0px 0px;
+        padding: 0px 0px 0px 0px;
+        outline: 0;
+      }
+    }
+
+    &.branch {
+      background: #f9fbfd;
+
+      li {
+        background: #fff;
+      }
+    }
+  }
+
+  ul {
+    &:before {
+      border-left: 1px solid $border;
+    }
+
+    li:before {
+      border-top: 1px solid $border;
+    }
+  }
+}

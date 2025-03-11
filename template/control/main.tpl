@@ -15,8 +15,6 @@
         <!--- FONT-ICONS CSS -->
         <link href="/public/control/css/icons.css" rel="stylesheet" />
 
-
-        <script src="/public/control/js/modernizr.min.js"></script>
         <script src="/public/control/js/jquery.min.js"></script>
         <script src="/public/js/jquery.form.js"></script>
     </head>

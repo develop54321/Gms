@@ -119,11 +119,9 @@
     });
 
 
-    // Функция для выбора способа оплаты
     function selectPaymentMethod(method) {
-        // Отключим кнопку, пока не получим ответ
-        // Отправим запрос на сервер
-        fetch('/payment-method', {
+
+        fetch('/pay/<?php echo $serverInfo['id'];?>/get-pay-form', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -335,3 +335,72 @@ select option {
     margin-bottom: 0.5em;
     border: 1px solid #00000075;
 }
+
+.pay-select .card{
+    min-height: 80px;
+    background: #2d283e;
+    cursor: pointer;
+    border: 1px solid #000000;
+    color: #fff;
+    cursor: pointer;
+}
+
+.pay-select a{
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.pay-select .card.active {
+    background: #231e32;
+    border: 1px solid #040404;
+}
+
+
+
+.pay-select .colors .radio-tile, .pay-select .top-place .radio-tile {
+    display: none;
+}
+
+.pay-select .colors .radio-tile-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.pay-select .colors .radio-tile:checked + .radio-tile-label {
+    transform: scale(1.1);
+    border: 3px solid #000;
+}
+
+
+
+
+.pay-select .top-place .radio-tile-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    background-color: #2d283e;
+    border: 1px solid #040404;
+}
+
+.pay-select .top-place .radio-tile:checked + .radio-tile-label {
+    transform: scale(1.1);
+    border: 1px solid #000;
+}

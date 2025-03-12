@@ -1,27 +1,9 @@
-<section class="page">
+<section class="page pay-select">
     <div class="container">
         <h1 class="content-title">
             Заказ платной услуги
         </h1>
         <hr/>
-
-        <style>
-            a{
-                color: #fff;
-                text-decoration: none;
-            }
-            .card {
-                background: #2d283e;
-                cursor: pointer;
-                border: 1px solid #000000;
-                color: #fff;
-                cursor: pointer; /* Добавляем курсор в виде указателя */
-            }
-
-            .card.active {
-                opacity: 0.7;
-            }
-        </style>
 
         <?php echo \widgets\flash\Flash::run(); ?>
         <?php if (empty($services)): ?>

@@ -1,116 +1,71 @@
+<?php if ($type == 'top'): ?>
+    <hr/>
+    <p>Выберите место в топе</p>
 
-    <?php if ($type == 'befirst'): ?>
-        <?php if ($serverInfo['befirst_enabled'] == '0'): ?>
-            <div class="form-row mt-3">
-                <div class="col-md-5">
-                    <div id="contentForm"></div>
-                    <h4>Выберите место в Будь Первым</h4>
-                    <?php foreach ($databefirst as $row): ?>
+    <?php if ($serverInfo['top_enabled'] == '0'): ?>
 
-                        <?php if ($row['status'] == '0'): ?>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="place<?php echo $row['id']; ?>" name="place"
-                                       class="custom-control-input" value="<?php echo $row['id']; ?>" required="">
-                                <label class="custom-control-label" for="place<?php echo $row['id']; ?>">Место
-                                    #<?php echo $row['id']; ?> свободно</label>
-                            </div>
-                        <?php else: ?>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" disabled="">
-                                <label class="custom-control-label">Место #<?php echo $row['id']; ?> занято</label>
-                            </div>
-                        <?php endif; ?>
+        <div class="top-place">
+            <div class="d-flex gap-3">
+                <?php foreach ($datatop as $row): ?>
 
-                    <?php endforeach; ?>
-                </div>
+                    <?php if ($row['status'] == '0'): ?>
+                        <input type="radio" id="<?php echo $row['id']; ?>" name="place" class="radio-tile" value="<?php echo $row['id']; ?>">
+                        <label for="<?php echo $row['id']; ?>" class="radio-tile-label">
+                            Место №<?php echo $row['id']; ?> свободно
+                        </label>
+                    <?php else:?>
+                        <input type="radio" id="<?php echo $row['id']; ?>" name="place" class="radio-tile" value="<?php echo $row['id']; ?>">
+                        <label for="<?php echo $row['id']; ?>" class="radio-tile-label">
+                            Место №<?php echo $row['id']; ?> занято
+                        </label>
+                    <?php endif;?>
+
+
+
+                <?php endforeach; ?>
             </div>
-        <?php endif; ?>
-
-
-    <?php elseif ($type == 'top'): ?>
-        <?php if ($serverInfo['top_enabled'] == '0'): ?>
-            <div class="form-row mt-3">
-                <div class="col-md-5">
-                    <div id="contentForm"></div>
-                    <h4>Выберите место в топе</h4>
-                    <?php foreach ($datatop as $row): ?>
-
-                        <?php if ($row['status'] == '0'): ?>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="place<?php echo $row['id']; ?>" name="place"
-                                       class="custom-control-input" value="<?php echo $row['id']; ?>" required="">
-                                <label class="custom-control-label" for="place<?php echo $row['id']; ?>">Место
-                                    #<?php echo $row['id']; ?> свободно</label>
-                            </div>
-                        <?php else: ?>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" disabled="">
-                                <label class="custom-control-label">Место #<?php echo $row['id']; ?> занято</label>
-                            </div>
-                        <?php endif; ?>
-
-                    <?php endforeach; ?>
-                </div>
-            </div>
+        </div>
         <?php endif; ?>
 
 
     <?php elseif ($type == 'color'): ?>
-
-        <div class="form-row mt-3">
-            <div class="col-md-5">
-
-
-                <?php foreach ($CodeColors as $row): ?>
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="colorBlue<?php echo $row['code']; ?>" name="selectColor"
-                               class="custom-control-input" value="<?php echo $row['code']; ?>">
-                        <label class="custom-control-label" for="colorBlue<?php echo $row['code']; ?>">
-                            <div class="example-color"
-                                 style="background: <?php echo $row['code']; ?>;"></div><?php echo $row['name']; ?>
-                        </label>
-                    </div>
-                <?php endforeach; ?>
-
-
-            </div>
+    <hr/>
+    <p>Выберите цвет</p>
+    <div class="colors">
+        <div class="d-flex gap-3">
+            <?php foreach ($CodeColors as $row): ?>
+                <input type="radio" id="<?php echo $row['id']; ?>" name="color" class="radio-tile" value="<?php echo $row['code']; ?>">
+                <label for="<?php echo $row['id']; ?>" class="radio-tile-label" style="background: <?php echo $row['code']; ?>;">
+                    <?php echo $row['name']; ?>
+                </label>
+            <?php endforeach; ?>
         </div>
+    </div>
+
 
     <?php elseif ($type == 'razz'): ?>
-        <?php if ($serverInfo['ban'] == '0'): ?>
+        <?php if ($serverInfo['ban'] == "0"): ?>
             <div class="alert alert-danger">
                 Вы не можете купить эту услугу, так как сервер не находится в бане.
             </div>
+            <?php exit();?>
         <?php endif; ?>
 
     <?php endif; ?>
 
     <?php if (isset($type)): ?>
-
-
-    <hr/>
-<!--        <div class="form-row mt-3">-->
-<!--            <div class="col-md-5">-->
-<!--
-<!--                <select class="form-control" name="typePayment" required>-->
-<!--                    --><?php //foreach ($PayMethods as $pm): ?>
-<!--                        <option value="--><?php //echo $pm['id']; ?><!--">--><?php //echo $pm['name']; ?><!--</option>-->
-<!--                    --><?php //endforeach; ?>
-<!--                </select>-->
-<!--            </div>-->
-<!--        </div>-->
-
-
-        <h4>Выберите способ оплаты</h4>
+    <div class="pay-methods">
+        <hr/>
+        <p>Выберите способ оплаты</p>
         <div class="row">
             <?php foreach ($PayMethods as $pm): ?>
-                <div class="col-sm-3 mb-3">
-                    <a href="#" onclick="loadForm(<?php echo $pm['id']; ?>); toggleActive(this); return false;">
+                <div class="col-sm-2 mb-3">
+                    <a href="#" onclick="selectPaymentMethod('<?php echo $pm['id']; ?>'); return false;">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $pm['name']; ?></h5>
                                 <p class="card-text">
-                                    Описание...
+                                    <?php echo $pm['text']; ?>
                                 </p>
                             </div>
                         </div>
@@ -118,8 +73,6 @@
                 </div>
             <?php endforeach; ?>
         </div>
-
-
 
 
         <div class="form-row mt-3">
@@ -132,31 +85,78 @@
         <div class="form-row mt-3">
             <div class="col-md-5">
                 <p>Нажимая оплатить вы соглашаетесь с условиями договора</p>
-                <button type="submit" class="btn btn-primary btn-sm">Перейти к оплате</button>
+                <button id="pay-button" type="submit" class="btn btn-primary btn-sm disabled">Перейти к оплате</button>
             </div>
         </div>
+    </div>
+
+
+
+
+
     <?php endif; ?>
 
+<script>
+    $(document).ready(function () {
+        $(".pay-methods").hide();
+
+        $('.colors .radio-tile').change(function() {
+            if ($(".colors .radio-tile:checked").length > 0) {
+                $('.pay-methods').fadeIn(300);
+            } else {
+                $('.pay-methods').fadeOut(300);
+            }
+        });
+
+        $('.top-place .radio-tile').change(function() {
+            if ($(".top-place .radio-tile:checked").length > 0) {
+                $('.pay-methods').fadeIn(300);
+            } else {
+                $('.pay-methods').fadeOut(300);
+            }
+        });
+
+    });
 
 
-<!--    <section class="page">-->
-<!--        <div class="container">-->
-<!--            <h1 class="content-title">-->
-<!--                Платные услуги-->
-<!--            </h1>-->
-<!--            <hr/>-->
-<!--            --><?php
-//            $price = $infoServices['price'];
-//            $desc = "Оплата услуги  #" . $infoServices['id'] . "";
-//            if ($InfoPayment['typeCode'] == 'robokassa') {
-//                $crc = md5("" . $InfoPayment['login'] . ":" . $price . ":$payId:" . $InfoPayment['password1'] . "");
-//            } elseif ($InfoPayment['typeCode'] == 'unitpay') {
-//                $hashStr = $payId . '{up}' . $desc . '{up}' . $infoServices['price'] . '{up}' . $InfoPayment['secret_key'];
-//                $hash = hash('sha256', $hashStr);
-//            } elseif ($InfoPayment['typeCode'] == 'freekassa') {
-//                $signfk = md5($InfoPayment['fk_id'] . ":" . $price . ":" . $InfoPayment['fk_key1'] . ":" . $payId);
-//            }
-//            ?>
-<!--            --><?php //include("pay/" . $InfoPayment['typeCode'] . ".tpl"); ?>
-<!--        </div>-->
-<!--    </section>-->
+    // Функция для выбора способа оплаты
+    function selectPaymentMethod(method) {
+        // Отключим кнопку, пока не получим ответ
+        // Отправим запрос на сервер
+        fetch('/payment-method', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ payment_method: method }) // Отправляем выбранный способ
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Если успешный ответ, активируем кнопку и добавляем форму или ссылку для оплаты
+                    document.getElementById('pay-button').classList.remove('disabled');
+
+                    // Здесь можно динамически добавить форму или ссылку для оплаты
+                    // Пример:
+                    if (data.payment_url) {
+                        // Если пришла ссылка для оплаты
+                        document.getElementById('pay-button').onclick = function() {
+                            window.location.href = data.payment_url;
+                        };
+                    } else if (data.payment_form) {
+                        // Если пришла форма для оплаты
+                        document.getElementById('pay-button').onclick = function() {
+                            document.body.innerHTML += data.payment_form; // Добавляем форму на страницу
+                        };
+                    }
+                } else {
+                    // Обработка ошибки, если что-то пошло не так
+                    alert('Ошибка при получении данных для оплаты.');
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Ошибка при запросе на сервер.');
+            });
+    }
+</script>

@@ -4,6 +4,7 @@ namespace controllers;
 
 use components\Flash;
 use components\pay_method\YooKassaService;
+use components\User;
 use core\BaseController;
 use components\System;
 
@@ -86,45 +87,50 @@ class PayController extends BaseController
             if (!isset($id_services)) parent::ShowError(404, "Страница не найдена!");
 
 
-            $datatop = null;
-            $databefirst = null;
+            $top = null;
 
             if ($getInfoServices) {
-                $datatop = '';
+                $top = '';
                 if ($getInfoServices['type'] == 'top') {
-                    $datatop = [];
+                    $top = [];
                     for ($i = 1; $i <= $settings['global_settings']['count_servers_top']; $i++) {
                         $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
                         $isPlace->execute(array(':top_enabled' => $i));
                         if ($isPlace->rowCount() != '0') {
-                            $datatop[] = ['id' => $i, 'status' => 1];
+                            $top[] = ['id' => $i, 'status' => 1];
                         } else {
-                            $datatop[] = ['id' => $i, 'status' => 0];
+                            $top[] = ['id' => $i, 'status' => 0];
                         }
                     }
                 }
-
             }
+
             $status = 1;
             $getPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE status = :status');
             $getPayMethods->execute(array(':status' => $status));
             $getPayMethods = $getPayMethods->fetchAll();
 
             // new colors
-            $activcolor = 1;
+            $activColor = 1;
             $getCodeColors = $this->db->prepare('SELECT * FROM ga_code_colors WHERE activ = :activ');
-            $getCodeColors->execute(array(':activ' => $activcolor));
+            $getCodeColors->execute(array(':activ' => $activColor));
             $getCodeColors = $getCodeColors->fetchAll();
+
+            $userData = null;
+            $user = new User();
+            if ($user->isAuth()){
+                $userData = $user->getProfile();
+            }
 
             $content = $this->view->renderPartial("pay/form", [
                 'CodeColors' => $getCodeColors,
                 'serverInfo' => $getInfoServerRow,
                 'PayMethods' => $getPayMethods,
                 'type' => $getInfoServices['type'] ?? null,
-                'datatop' => $datatop,
-                'databefirst' => $databefirst,
-                'infoServices' => $getInfoServices
-            ], true);
+                'top' => $top,
+                'infoServices' => $getInfoServices,
+                'user' => $userData
+            ]);
             echo $content;
 
         } else parent::ShowError(404, "Страница не найдена!");

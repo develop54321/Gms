@@ -40,8 +40,13 @@
                 url: "/pay/form",
                 data: {'id_services': id_services, 'id_server': <?php echo $serverInfo['id']; ?>},
                 success: function (data) {
-                    $("#contentForm").html(data);
+                    $("#contentForm").fadeOut(300, function() {
+                        $(this).html(data).fadeIn(300);
+                    });
                 },
+                error: function (err) {
+                    console.log(err)
+                }
             });
         }
 

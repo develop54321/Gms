@@ -6,7 +6,7 @@
 
         <div class="top-place">
             <div class="d-flex gap-3">
-                <?php foreach ($datatop as $row): ?>
+                <?php foreach ($top as $row): ?>
 
                     <?php if ($row['status'] == '0'): ?>
                         <input type="radio" id="<?php echo $row['id']; ?>" name="place" class="radio-tile" value="<?php echo $row['id']; ?>">
@@ -72,6 +72,21 @@
                     </a>
                 </div>
             <?php endforeach; ?>
+
+            <?php if ($user):?>
+                <div class="col-sm-2 mb-3">
+                    <a href="#" onclick="selectPaymentMethod('user_balance'); return false;">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Личный счет</h5>
+                                <p class="card-text">
+                                    Баланс: <?php echo \widgets\money\Money::run($user['balance']); ?><br/>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <?php endif;?>
         </div>
 
 
@@ -90,15 +105,15 @@
         </div>
     </div>
 
-
-
-
-
     <?php endif; ?>
 
 <script>
     $(document).ready(function () {
+
+        <?php if ($type === 'top' or $type === "color"): ?>
         $(".pay-methods").hide();
+
+        <?php endif; ?>
 
         $('.colors .radio-tile').change(function() {
             if ($(".colors .radio-tile:checked").length > 0) {
@@ -118,6 +133,7 @@
 
     });
 
+    //logic pay user_balance
 
     function selectPaymentMethod(method) {
 

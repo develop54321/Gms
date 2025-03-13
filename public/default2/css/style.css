@@ -404,3 +404,27 @@ select option {
     transform: scale(1.1);
     border: 1px solid #000;
 }
+
+
+.btn-loader {
+    position: relative; /* Делаем кнопку контейнером для позиционирования */
+    display: inline-flex; /* Используем flex для выравнивания */
+    align-items: center; /* Выравниваем элементы по вертикали */
+    justify-content: center; /* Выравниваем элементы по горизонтали */
+}
+
+.btn-loader .loader {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

@@ -755,7 +755,7 @@ class UserController extends BaseController
                             break;
                     }
                     $services = new Services();
-                    $services->checkService(['inv_id' => $payId, 'price' => $getInfoServices['price'], 'pay_methods' => "bill"]);
+                    $services->processing(['inv_id' => $payId, 'price' => $getInfoServices['price'], 'pay_methods' => "bill"]);
 
                     $newBalance = $user_profile['balance'] - $getInfoServices['price'];
                     $sql = "UPDATE ga_users SET balance = :balance  WHERE id = :id";

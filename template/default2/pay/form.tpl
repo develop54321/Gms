@@ -60,7 +60,7 @@
         <div class="row">
             <?php foreach ($PayMethods as $pm): ?>
                 <div class="col-sm-2 mb-3">
-                    <a href="#" onclick="selectPaymentMethod('<?php echo $pm['id']; ?>'); return false;">
+                    <a href="#" onclick="selectPaymentMethod('<?php echo $pm['id']; ?>', this); return false;">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $pm['name']; ?></h5>
@@ -75,7 +75,7 @@
 
             <?php if ($user):?>
                 <div class="col-sm-2 mb-3">
-                    <a href="#" onclick="selectPaymentMethod('user_balance'); return false;">
+                    <a href="#" onclick="selectPaymentMethod('user_balance', this); return false;">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Личный счет</h5>
@@ -100,7 +100,7 @@
         <div class="form-row mt-3">
             <div class="col-md-5">
                 <p>Нажимая оплатить вы соглашаетесь с условиями договора</p>
-                <button id="pay-button" type="submit" class="btn btn-primary btn-sm disabled">Перейти к оплате</button>
+                <div id="pay-button"></div>
             </div>
         </div>
     </div>
@@ -133,44 +133,86 @@
 
     });
 
-    //logic pay user_balance
 
-    function selectPaymentMethod(method) {
+    function payUserBalance() {
+        toggleButtonLoader($("#pay-button"), true);
 
-        fetch('/pay/<?php echo $serverInfo['id'];?>/get-pay-form', {
+        $.ajax({
+            url: '/pay/<?php echo $serverInfo['id']; ?>/ajax',
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ payment_method: method }) // Отправляем выбранный способ
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Если успешный ответ, активируем кнопку и добавляем форму или ссылку для оплаты
-                    document.getElementById('pay-button').classList.remove('disabled');
+            dataType: 'json',
+            data: { 'id_services': <?php echo $infoServices['id']; ?> },
+            success: function(data) {
+                switch (data.status) {
+                    case "error":
+                        ShowModal(data.error, 'answer', 'error');
+                        break;
 
-                    // Здесь можно динамически добавить форму или ссылку для оплаты
-                    // Пример:
-                    if (data.payment_url) {
-                        // Если пришла ссылка для оплаты
-                        document.getElementById('pay-button').onclick = function() {
-                            window.location.href = data.payment_url;
-                        };
-                    } else if (data.payment_form) {
-                        // Если пришла форма для оплаты
-                        document.getElementById('pay-button').onclick = function() {
-                            document.body.innerHTML += data.payment_form; // Добавляем форму на страницу
-                        };
-                    }
-                } else {
-                    // Обработка ошибки, если что-то пошло не так
-                    alert('Ошибка при получении данных для оплаты.');
+                    case "success":
+                        ShowModal(data.success, 'answer', 'success');
+                        break;
                 }
-            })
-            .catch(error => {
-                console.error('Ошибка:', error);
+                toggleButtonLoader($("#pay-button"), false);
+            },
+            error: function(xhr, status, error) {
                 alert('Ошибка при запросе на сервер.');
-            });
+                toggleButtonLoader($("#pay-button"), false);
+            }
+        });
     }
+
+    function selectPaymentMethod(method, el) {
+        toggleActive(el);
+
+        if (method === "user_balance") {
+            $("#pay-button").replaceWith('<button id="pay-button" onclick="payUserBalance(); return false;" type="submit" class="btn btn-primary btn-sm">Оплатить</button>');
+        } else {
+            $("#pay-button").replaceWith('<button id="pay-button" type="submit" class="btn btn-primary btn-sm">Перейти к оплате</button>');
+
+            fetch('/pay/<?php echo $serverInfo['id'];?>/get-pay-form', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({payment_method: method})
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        if (data.payment_url) {
+                            document.getElementById('pay-button').onclick = function () {
+                                window.location.href = data.payment_url;
+                            };
+                        } else if (data.payment_form) {
+                            document.getElementById('pay-button').onclick = function () {
+                                document.body.innerHTML += data.payment_form;
+                            };
+                        }
+                    } else {
+                        alert('Ошибка при получении данных для оплаты.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    alert('Ошибка при запросе на сервер.');
+                });
+        }
+    }
+
+    function toggleActive(element) {
+        document.querySelectorAll('.card').forEach(card => {
+            card.classList.remove('active');
+        });
+
+        element.querySelector('.card').classList.add('active');
+    }
+
+    function toggleButtonLoader(button, isLoading) {
+        if (isLoading) {
+            $(button).prop('disabled', true).addClass('btn-loader').append('<span class="loader"></span>');
+        } else {
+            $(button).prop('disabled', false).removeClass('btn-loader').find('.loader').remove();
+        }
+    }
+
 </script>

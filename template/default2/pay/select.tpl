@@ -37,8 +37,8 @@
     <script>
         function loadForm(id_services) {
             $.ajax({
-                url: "/pay/form",
-                data: {'id_services': id_services, 'id_server': <?php echo $serverInfo['id']; ?>},
+                url: "/pay/<?php echo $serverInfo['id']; ?>/form",
+                data: {'id_services': id_services},
                 success: function (data) {
                     $("#contentForm").fadeOut(300, function() {
                         $(this).html(data).fadeIn(300);

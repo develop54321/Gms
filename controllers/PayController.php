@@ -4,9 +4,11 @@ namespace controllers;
 
 use components\Flash;
 use components\pay_method\YooKassaService;
+use components\Services;
 use components\User;
 use core\BaseController;
 use components\System;
+use PDO;
 
 class PayController extends BaseController
 {
@@ -42,7 +44,7 @@ class PayController extends BaseController
         $settings = json_decode($settings['content'], true);
 
 
-        $title = "Платные услуги";
+        $title = "Заказ платной услуги";
 
 
         $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
@@ -65,14 +67,14 @@ class PayController extends BaseController
     }
 
 
-    public function form()
+    public function form($id)
     {
         if (parent::isAjax()) {
             $getSettings = $this->db->query('SELECT * FROM ga_settings');
             $settings = $getSettings->fetch();
             $settings = json_decode($settings['content'], true);
 
-            if (isset($_GET['id_server'])) $id_server = (int)$_GET['id_server']; else $id_server = null;
+            $id_server = (int)$id;
 
             $getInfoServerRow = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
             $getInfoServerRow->execute(array(':id' => $id_server));
@@ -118,7 +120,7 @@ class PayController extends BaseController
 
             $userData = null;
             $user = new User();
-            if ($user->isAuth()){
+            if ($user->isAuth()) {
                 $userData = $user->getProfile();
             }
 
@@ -133,7 +135,7 @@ class PayController extends BaseController
             ]);
             echo $content;
 
-        } else parent::ShowError(404, "Страница не найдена!");
+        } //else parent::ShowError(404, "Страница не найдена!");
     }
 
 
@@ -146,9 +148,89 @@ class PayController extends BaseController
 
         //create invoice
 
+        //return link and html code x3
+
         $answer['status'] = "success";
         $answer['success'] = "test";
         exit(json_encode($answer));
+
+    }
+
+
+    /**
+     * Логика оплаты с лицевого счета
+     * @return void
+     */
+    public function ajax($id)
+    {
+
+        $user = new User();
+        $userProfile = null;
+        if ($user->isAuth()) {
+            $userProfile = $user->getProfile();
+        }
+
+
+
+        $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
+        $getInfoServer->execute(array(':id' => $id));
+        $getInfoServer = $getInfoServer->fetch();
+
+        if (empty($getInfoServer)) parent::ShowError(404, "Сервер не найден!");
+
+
+        if (parent::isAjax()) {
+
+            $idServices = (int)$_POST['id_services'];
+
+            $getInfoServices = $this->db->prepare('SELECT * FROM ga_services WHERE id = :id');
+            $getInfoServices->execute(array(':id' => $idServices));
+            $getInfoServices = $getInfoServices->fetch();
+            if (empty($getInfoServices)) {
+                $answer['status'] = "error";
+                $answer['error'] = "Услуга не найдена";
+                exit(json_encode($answer));
+            }
+
+
+            if ($userProfile['balance'] >= $getInfoServices['price']) {
+                if ($getInfoServer['ban'] == 1 and $getInfoServices['type'] != 'razz') {
+                    $answer['status'] = "error";
+                    $answer['error'] = "Сервер в бане";
+                    exit(json_encode($answer));
+                }
+
+
+                $services = new Services();
+
+                $invoiceId = $services->createInvoice(
+                    $getInfoServices,
+                    $getInfoServer,
+                    $idServices,
+                    $userProfile
+                );
+
+                $services->processing(['inv_id' => $invoiceId, 'price' => $getInfoServices['price'], 'pay_methods' => "bill"]);
+
+                $newBalance = $userProfile['balance'] - $getInfoServices['price'];
+                $sql = "UPDATE ga_users SET balance = :balance  WHERE id = :id";
+                $update = $this->db->prepare($sql);
+                $update->bindParam(':balance', $newBalance, PDO::PARAM_INT);
+                $update->bindParam(':id', $user_profile['id'], PDO::PARAM_INT);
+                $update->execute();
+
+                $answer['status'] = "success";
+                $answer['success'] = "Услуга успешно куплена";
+                exit(json_encode($answer));
+            } else {
+                $answer['status'] = "error";
+                $answer['error'] = "Недостаточно средств на счете";
+                exit(json_encode($answer));
+            }
+
+        }
+
+        parent::ShowError(404, "Page not found!");
 
     }
 

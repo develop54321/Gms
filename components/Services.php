@@ -8,7 +8,7 @@ use PDO;
 class Services extends BaseController
 {
 
-    function checkService($data)
+    public function processing($data): bool
     {
 
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
@@ -34,23 +34,6 @@ class Services extends BaseController
         $getInfoServer = $getInfoServer->fetch();
 
         switch ($getInfoPay['type']) {
-            //	Befirst
-            case "befirst":
-                if ($getInfoServer['befirst_enabled'] != '0') {
-                    $place = $getInfoServer['befirst_enabled'];
-                    $expired_time = ($getInfoServices['period'] * 86400) + $getInfoServer['befirst_expired_date'];
-                } else {
-                    $expired_time = time() + $getInfoServices['period'] * 86400;
-                    $place = $getInfoPay['place'];
-                }
-                $sql = "UPDATE ga_servers SET befirst_enabled = :befirst_enabled, befirst_expired_date = :befirst_expired_date  WHERE id = :id";
-                $update = $this->db->prepare($sql);
-                $update->bindParam(':befirst_enabled', $place, PDO::PARAM_INT);
-                $update->bindParam(':befirst_expired_date', $expired_time);
-                $update->bindParam(':id', $getInfoPay['id_server'], PDO::PARAM_INT);
-                $update->execute();
-                break;
-
             //	Top
             case "top":
                 if ($getInfoServer['top_enabled'] != '0') {
@@ -186,4 +169,164 @@ class Services extends BaseController
         return true;
     }
 
+
+    public function createInvoice(array $getInfoServices, $getInfoServer, $idServices, $userProfile)
+    {
+        $settings = $this->getSettings();
+        $type = $getInfoServices['type'];
+
+        switch ($type) {
+            case "top":
+                $payId = $this->processTopService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings);
+                break;
+            case "vip":
+                $payId = $this->processVipService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings);
+                break;
+            case "color":
+                $payId = $this->processColorService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings);
+                break;
+            case "gamemenu":
+                $payId = $this->processGamemenuService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings);
+                break;
+            case "boost":
+                $payId = $this->processBoostService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings);
+                break;
+            case "votes":
+                $payId = $this->processVotesService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings);
+                break;
+            case "razz":
+                $payId = $this->processUnbanService($getInfoServices, $getInfoServer, $idServices, $userProfile);
+                break;
+            default:
+                throw new \Exception("Service not found");
+        }
+
+        return $payId;
+    }
+
+    private function getSettings()
+    {
+        $getSettings = $this->db->query('SELECT * FROM ga_settings');
+        $settings = $getSettings->fetch();
+        return json_decode($settings['content'], true);
+    }
+
+    private function processTopService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings)
+    {
+        $place = $getInfoServer['top_enabled'] == '0' ? (int)$_POST['place'] : 0;
+
+        if ($getInfoServer['top_enabled'] == '0') {
+            $this->checkPlaceAvailability($place);
+        }
+
+        $this->checkServiceAvailability($settings['global_settings']['top_on'], "Услуга отключена");
+
+        $limitTopServers = $settings['global_settings']['count_servers_top'];
+        $countTopServers = $this->db->query("SELECT `id` FROM `ga_servers` WHERE `top_enabled` != '0'")->rowCount();
+        $checkTopServer = $this->db->query("SELECT * FROM `ga_servers` WHERE `id`='" . $getInfoServer['id'] . "' and `top_enabled` != '0' LIMIT 1")->rowCount();
+
+        if ($countTopServers >= $limitTopServers && $checkTopServer == 0) {
+            throw new \Exception("Нет свободных мест");
+        }
+
+        return $this->insertPayLog($idServices, $getInfoServices['price'], 'top', $userProfile['id'], ['place' => $place, 'id_server' => $getInfoServer['id']]);
+    }
+
+    private function processVipService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings)
+    {
+        $this->checkServiceAvailability($settings['global_settings']['vip_on'], "Услуга отключена");
+
+        $limitVipServers = $settings['global_settings']['count_servers_vip'];
+        $countVipServers = $this->db->query("SELECT `id` FROM `ga_servers` WHERE `vip_enabled`='1'")->rowCount();
+        $checkVipServer = $this->db->query("SELECT * FROM `ga_servers` WHERE `id`='" . $getInfoServer['id'] . "' and `vip_enabled` = '1' LIMIT 1")->rowCount();
+
+        if ($countVipServers >= $limitVipServers && $checkVipServer == 0) {
+            throw new \Exception("Нет свободных мест");
+        }
+
+        return $this->insertPayLog($idServices, $getInfoServices['price'], 'vip', $userProfile['id'], ['id_server' => $getInfoServer['id']]);
+    }
+
+    private function processColorService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings)
+    {
+        $this->checkServiceAvailability($settings['global_settings']['color_on'], "Услуга отключена");
+
+        $limitColorServers = $settings['global_settings']['count_servers_color'];
+        $countColorServers = $this->db->query("SELECT `id` FROM `ga_servers` WHERE `color_enabled`!= '0'")->rowCount();
+        $checkColorServer = $this->db->query("SELECT * FROM `ga_servers` WHERE `id`='" . $getInfoServer['id'] . "' and `color_enabled` != '0' LIMIT 1")->rowCount();
+
+        if ($countColorServers >= $limitColorServers && $checkColorServer == 0) {
+            throw new \Exception("Нет свободных мест");
+        }
+
+        $color = $_POST['selectColor'];
+        return $this->insertPayLog($idServices, $getInfoServices['price'], 'color', $userProfile['id'], ['color' => $color, 'id_server' => $getInfoServer['id']]);
+    }
+
+    private function processGamemenuService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings)
+    {
+        $this->checkServiceAvailability($settings['global_settings']['gamemenu_on'], "Услуга отключена");
+
+        $limitGamemenuServers = $settings['global_settings']['count_servers_gamemenu'];
+        $countGamemenuServers = $this->db->query("SELECT `id` FROM `ga_servers` WHERE `gamemenu_enabled`='1'")->rowCount();
+        $checkGamemenuServer = $this->db->query("SELECT * FROM `ga_servers` WHERE `id`='" . $getInfoServer['id'] . "' and `gamemenu_enabled` = '1' LIMIT 1")->rowCount();
+
+        if ($countGamemenuServers >= $limitGamemenuServers && $checkGamemenuServer == 0) {
+            throw new \Exception("Нет свободных мест");
+        }
+
+        return $this->insertPayLog($idServices, $getInfoServices['price'], 'gamemenu', $userProfile['id'], ['id_server' => $getInfoServer['id']]);
+    }
+
+    private function processBoostService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings)
+    {
+        $this->checkServiceAvailability($settings['global_settings']['boost_on'], "Услуга отключена");
+        return $this->insertPayLog($idServices, $getInfoServices['price'], 'boost', $userProfile['id'], ['id_server' => $getInfoServer['id']]);
+    }
+
+    private function processVotesService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings)
+    {
+        $this->checkServiceAvailability($settings['global_settings']['votes_on'], "Услуга отключена");
+        return $this->insertPayLog($idServices, $getInfoServices['price'], 'votes', $userProfile['id'], ['id_server' => $getInfoServer['id']]);
+    }
+
+    private function processUnbanService($getInfoServices, $getInfoServer, $idServices, $userProfile)
+    {
+        return $this->insertPayLog($idServices, $getInfoServices['price'], 'razz', $userProfile['id'], ['id_server' => $getInfoServer['id']]);
+    }
+
+    private function checkPlaceAvailability($place)
+    {
+        $checkPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
+        $checkPlace->execute([':top_enabled' => $place]);
+        if ($checkPlace->rowCount() != '0') {
+            throw new \Exception("Нет свободных мест");
+        }
+    }
+
+    private function checkServiceAvailability($serviceEnabled, $errorMessage)
+    {
+        if ($serviceEnabled == 0) {
+            throw new \Exception($errorMessage);
+        }
+    }
+
+    private function insertPayLog($idServices, $price, $type, $userId, $additionalData = [])
+    {
+        $content = json_encode(array_merge([
+            'id_services' => $idServices,
+            'type_pay' => "payServices",
+            'price' => $price,
+            'type' => $type
+        ], $additionalData));
+
+        $stmt = $this->db->prepare("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods) VALUES (:content, :date_create, 'expects', :id_user, 'bill')");
+        $stmt->execute([
+            ':content' => $content,
+            ':date_create' => time(),
+            ':id_user' => $userId
+        ]);
+
+        return $this->db->lastInsertId();
+    }
 }

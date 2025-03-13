@@ -48,7 +48,7 @@ class ResultController extends BaseController
                     if ($getInfoPay['type_pay'] == 'refill') {
                         $user->refill(['inv_id' => $InvId, 'amount' => $out_summ]);
                     } else {
-                        $services->checkService(['inv_id' => $InvId, 'price' => $out_summ, 'pay_methods' => $typeCode]);
+                        $services->processing(['inv_id' => $InvId, 'price' => $out_summ, 'pay_methods' => $typeCode]);
                     }
                     echo "OK$InvId\n";
 
@@ -78,7 +78,7 @@ class ResultController extends BaseController
                     if ($getInfoPay['type_pay'] == 'refill') {
                         $user->refill(['inv_id' => $InvId, 'amount' => $out_summ]);
                     } else {
-                        $services->checkService(['inv_id' => $InvId, 'price' => $out_summ, 'pay_methods' => $typeCode]);
+                        $services->processing(['inv_id' => $InvId, 'price' => $out_summ, 'pay_methods' => $typeCode]);
                     }
                     echo "OK$InvId\n";
 
@@ -135,7 +135,7 @@ class ResultController extends BaseController
                         if ($getInfoPay['type_pay'] == 'refill') {
                             $user->refill(['inv_id' => $InvId, 'amount' => $out_summ]);
                         } else {
-                            $services->checkService(['inv_id' => $InvId, 'price' => $out_summ, 'pay_methods' => $typeCode]);
+                            $services->processing(['inv_id' => $InvId, 'price' => $out_summ, 'pay_methods' => $typeCode]);
                         }
 
                         exit(json_encode(array("result" => array(
@@ -182,7 +182,7 @@ class ResultController extends BaseController
                     if ($getInfoPay['type_pay'] == 'refill') {
                         $user->refill(['inv_id' => $InvId, 'amount' => $amount]);
                     } else {
-                        $services->checkService(['inv_id' => $InvId, 'price' => $amount, 'pay_methods' => $typeCode]);
+                        $services->processing(['inv_id' => $InvId, 'price' => $amount, 'pay_methods' => $typeCode]);
                     }
 
                     exit("ok");

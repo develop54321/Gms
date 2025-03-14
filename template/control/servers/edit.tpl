@@ -1,20 +1,26 @@
-<div class="row">
-<div class="col-sm-12">
-<h4 class="page-title">Изменение сервера</h4>
-<ol class="breadcrumb">
-<li><a href="/control">Главная</a></li>
-<li><a href="/control/servers">Серверы</a></li>
-<li class="active">Изменение сервера</li>
-</ol>
-</div>
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Изменение сервера</h1>
+    </div>
+    <div class="ms-auto pageheader-btn">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/control">Главная</a></li>
+            <li class="breadcrumb-item"><a href="/control/servers">Сервера</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Изменение сервера</li>
+        </ol>
+    </div>
 </div>
 
-<div class="col-sm-12">
-<div class="card-box">
-<h4 class="m-t-0 header-title"><b>Изменение сервера</b></h4>
+<div class="card p-0">
+    <div class="card-header border-bottom">
+        <h5 class="card-title">Изменение сервера</h5>
+    </div>
 
-<div class="row">
+    <div class="card-body">
+
+
 <form action="#" id="servicesForm" method="post">
+    <div class="row">
 <div class="col-md-6">
 <div class="form-group">
 <label for="status">Статус</label>
@@ -31,8 +37,8 @@
 <option value="0" <?php if($data['moderation'] == '0'):?>selected<?php endif;?>>Отклонено</option>
 </select>
 </div>
- 
- 
+
+
 <div class="form-group">
 <label for="game">Игра</label>
 <select name="game" class="form-control" id="game">
@@ -161,17 +167,13 @@
 </div>
 
 </div>
+
 </form>
-
-
-
-
-										
-
-        				                        				
+    </div>
 </div>
 
-</div>
+
+
 <script>
 $('#servicesForm').ajaxForm({
    dataType: 'json',
@@ -180,21 +182,11 @@ $('#servicesForm').ajaxForm({
         case "error":
         ShowModal(data.error, 'answer', 'error');
         break;
-        
+
         case "success":
         ShowModal(data.success, 'answer', 'success');
         break;
      }
-   },                          
-}); 
-
-
-function services(){
-    var type = $("#servicesType").val();
-    if(type == 'color'){
-        $("#moreParams").show();
-    }else{
-        $("#moreParams").hide();
-    }
-}
+   },
+});
 </script>

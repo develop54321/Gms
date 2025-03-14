@@ -21,7 +21,7 @@
 
 
 <!--    <body class="ltr app sidebar-mini">-->
-    <body class="ltr app sidebar-mini dark-mode">
+    <body class="ltr app sidebar-mini">
 
     <div class="page">
         <div class="page-main">

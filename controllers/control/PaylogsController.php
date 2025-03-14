@@ -18,7 +18,7 @@ class PaylogsController extends AbstractController
         $count = $countServers->rowCount();
 
         $pagination = new Pagination();
-        $per_page = 15;
+        $per_page = 20;
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
         $newArr = [];
@@ -158,7 +158,7 @@ class PaylogsController extends AbstractController
 
         //echo $sql;
         $pagination = new Pagination();
-        $per_page = 5;
+        $per_page = 20;
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count, 'no_rgp' => ''));
 
 

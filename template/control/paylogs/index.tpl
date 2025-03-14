@@ -44,12 +44,8 @@
                         <label>Статус</label>
                         <select name="statusPay" class="form-control input-sm">
                             <option value="">--Не выбрана--</option>
-                            <option value="paid" <?php if ($statusPay == 'paid'): ?> selected=""<?php endif; ?>>
-                                Оплаченный
-                            </option>
-                            <option value="expects" <?php if ($statusPay == 'expects'): ?> selected=""<?php endif; ?>>
-                                Ожидает платежа
-                            </option>
+                            <option value="paid" <?php if ($statusPay == 'paid'): ?> selected=""<?php endif; ?>>Оплачен</option>
+                            <option value="expects" <?php if ($statusPay == 'expects'): ?> selected=""<?php endif; ?>>Ожидает платежа</option>
                         </select>
                     </div>
                 </div>
@@ -59,9 +55,7 @@
                         <label>Способ оплаты</label>
                         <select name="methodPay" class="form-control input-sm">
                             <option value="">--Не выбрана--</option>
-                            <option value="bill" <?php if ($methodPay == 'bill'): ?> selected=""<?php endif; ?>>
-                                Внутренней счет
-                            </option>
+                            <option value="bill" <?php if ($methodPay == 'bill'): ?> selected=""<?php endif; ?>>Внутренней счет</option>
                             <?php foreach ($PayMethods as $p): ?>
                                 <option value="<?php echo $p['typeCode']; ?>" <?php if ($methodPay == $p['typeCode']): ?> selected=""<?php endif; ?>><?php echo $p['name']; ?></option>
                             <?php endforeach; ?>
@@ -72,8 +66,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Пользователь(Email)</label>
-                        <input type="text" name="userPay" class="form-control input-sm"
-                               value="<?php echo $userPay; ?>"/>
+                        <input type="text" name="userPay" class="form-control input-sm" value="<?php echo $userPay; ?>"/>
                     </div>
                 </div>
 
@@ -84,26 +77,21 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Дата(с числа)</label>
-                        <input type="date" name="dateStart" class="form-control input-sm"
-                               value="<?php echo $filter ? $filter['dateStart'] : null; ?>"/>
+                        <input type="date" name="dateStart" class="form-control input-sm" value="<?php echo $filter ? $filter['dateStart'] : null; ?>"/>
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Дата(до числа)</label>
-                        <input type="date" name="dateEnd" class="form-control input-sm"
-                               value="<?php echo $filter ? $filter['dateEnd'] : null; ?>"/>
+                        <input type="date" name="dateEnd" class="form-control input-sm" value="<?php echo $filter ? $filter['dateEnd'] : null; ?>"/>
                     </div>
                 </div>
 
             </div>
 
-            <button type="submit" class="btn btn-primary waves-effect waves-light btn-sm">
-                Найти
-            </button>
-
-
+            <button type="submit" class="btn btn-primary waves-effect waves-light btn-sm">Найти</button>
+            <a href="/control/paylogs" class="btn btn-warning waves-effect waves-light btn-sm">Сбросить</a>
         </form>
     </div>
 
@@ -121,7 +109,6 @@
         </h6>
         <hr/>
 
-
         <table class="table table-bordered border text-nowrap text-md-nowrap">
             <thead>
             <tr>
@@ -136,7 +123,6 @@
             </thead>
             <tbody>
             <?php foreach ($data as $row): ?>
-
                 <tr>
                     <td><?php echo $row['id']; ?></td>
                     <td><?php echo $row['servicesName']; ?>|
@@ -154,8 +140,6 @@
                     <td>
                         <?php widgets\user\paylogs\status\Status::run($row['status']); ?>
                     </td>
-
-
                 </tr>
             <?php endforeach; ?>
 
@@ -169,7 +153,5 @@
                 </ul>
             </nav>
         </div>
-
-
     </div>
 </div>

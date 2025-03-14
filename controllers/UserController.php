@@ -24,8 +24,9 @@ class UserController extends BaseController
     {
         $user = new User();
         if ($user->isAuth()) {
-            unset($_SESSION['id_user']);
-            unset($_SESSION['hash']);
+            $expire_time = time() - 3600;
+            setcookie('id_user', '', $expire_time, '/');
+            setcookie('hash', '', $expire_time, '/');
             header("Location: /user/login");
         }
     }
@@ -526,8 +527,8 @@ class UserController extends BaseController
             }
 
             $hash = md5($data_user['id']);
-            $_SESSION['id_user'] = $data_user['id'];
-            $_SESSION['hash'] = $hash;
+            setcookie('hash', $hash, time() + (86400 * 30), "/");
+            setcookie('id_user', $data_user['id'], time() + (86400 * 30), "/");
 
             $sql = "UPDATE ga_users SET hash = :hash WHERE id = :id";
             $update = $this->db->prepare($sql);

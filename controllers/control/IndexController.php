@@ -171,8 +171,8 @@ class IndexController extends AbstractController
 
 
             $hash = md5(mt_rand(10, 99));
-            $_SESSION['id_user'] = $data_user['id'];
-            $_SESSION['hash'] = $hash;
+            setcookie('hash', $hash, time() + (86400 * 30), "/");
+            setcookie('id_user', $data_user['id'], time() + (86400 * 30), "/");
 
             $sql = "UPDATE ga_users SET hash = :hash WHERE id = :id";
             $update = $this->db->prepare($sql);

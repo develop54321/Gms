@@ -378,6 +378,37 @@ class UserController extends BaseController
             VALUES('$email', '$lastname', '$firstname', '$password', 'user', '$time')");
 
 
+
+            $content = "
+            <p>Здравствуйте!</p>
+            <p>Добро пожаловать на <a href=\"" . BASE_URL . "\">" . BASE_URL . "</a>! <br/> Мы рады, что вы присоединились к нам.</p>
+            <p>Ваш аккаунт успешно зарегистрирован. Теперь вы можете пользоваться всеми возможностями нашего сайта.</p>
+            <p>Если у вас возникнут вопросы или потребуется помощь, не стесняйтесь обращаться в нашу службу поддержки.</p>
+            <p>Спасибо, что выбрали нас!</p>
+            <p>С уважением,<br/>Команда " . BASE_URL . "</p>
+            ";
+
+            $stmt = $this->db->prepare("INSERT INTO ga_queue (status, attempt, max_attempt, message, date_create)
+                VALUES (:status, :attempt, :max_attempt, :message, :date_create)");
+
+            $message = json_encode([
+                "address" => $email,
+                "subject" => "Добро пожаловать",
+                "content" => $content,
+            ]);
+
+            $status = "WAIT";
+            $stmt->bindParam(':status', $status);
+            $stmt->bindValue(':attempt', 1, PDO::PARAM_INT);
+            $stmt->bindValue(':max_attempt', 3, PDO::PARAM_INT);
+            $stmt->bindValue(':message', $message);
+            $stmt->bindValue(':date_create', time());
+            $stmt->execute();
+
+
+
+            unset($_SESSION['captcha']);
+
             $answer['status'] = "success";
             $answer['success'] = "Вы успешно зарегистрировались";
             exit(json_encode($answer));
@@ -411,27 +442,40 @@ class UserController extends BaseController
             $check = $this->db->prepare('SELECT * FROM ga_users WHERE email = :email ');
             $check->bindValue(":email", $email);
             $check->execute();
-            if ($check->rowCount() == '0') {
+            $findUserByEmail = $check->fetch(PDO::FETCH_ASSOC);
+            if ($findUserByEmail === null) {
                 $answer['status'] = "error";
                 $answer['error'] = "Пользователь с указанным e-mail не найден";
                 exit(json_encode($answer));
             } else {
-                $reset_code = md5(mt_rand(1000, 10000));
+
+                // Проверяем, истекло ли время с момента создания reset_code
+                $resetCodeCreatedAt = $findUserByEmail['reset_code_created_at'];
+                $currentTime = time();
+                $timeDifference = $currentTime - $resetCodeCreatedAt;
 
 
-                $sql = "UPDATE ga_users SET reset_code = :reset_code WHERE email = :email";
+                if ($timeDifference < 300) {
+                    $answer['status'] = "error";
+                    $answer['error'] = "Вы недавно запрашивали код активации, попробуйте через " . (300 - $timeDifference) . " секунд";
+                    exit(json_encode($answer));
+                }
+
+                $resetCodeCreatedAt = time();
+                $resetCode = md5(mt_rand(1000, 10000));
+
+
+                $sql = "UPDATE ga_users SET reset_code = :reset_code, reset_code_created_at = :reset_code_created_at WHERE email = :email";
                 $update = $this->db->prepare($sql);
-                $update->bindParam(':reset_code', $reset_code);
+                $update->bindParam(':reset_code', $resetCode);
+                $update->bindParam('reset_code_created_at', $resetCodeCreatedAt);
                 $update->bindParam(':email', $email);
                 $update->execute();
 
 
 
 
-
-
-                $linkReset = $system->getUrl() . "/user/reset?code=$reset_code";
-
+                $linkReset = BASE_URL . "/user/reset?code=$resetCode";
 
                 $content = "
                 <p>Здравствуйте!</p>
@@ -481,10 +525,12 @@ class UserController extends BaseController
 
                     $hashPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
-                    $sql = "UPDATE ga_users SET password = :password, reset_code = '' WHERE reset_code = :reset_code";
+                    $null = null;
+                    $sql = "UPDATE ga_users SET password = :password, reset_code = '', reset_code_created_at = :reset_code_created_at WHERE reset_code = :reset_code";
                     $update = $this->db->prepare($sql);
                     $update->bindParam(':password', $hashPassword);
                     $update->bindParam(':reset_code', $code);
+                    $update->bindParam(':reset_code_created_at', $null);
                     $update->execute();
 
 

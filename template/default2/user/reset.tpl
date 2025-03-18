@@ -6,19 +6,25 @@
         <hr/>
 
         <?php if (isset($password)): ?>
-            <p>
-                Ваш новый пароль: <code><?php echo $password; ?></code>
-            </p>
+
+            <div class="col-md-4">
+
+                <div class="mb-3">
+                    <label for="password">Ваш новый пароль</label>
+                    <input type="text" class="form-control" value="<?php echo $password; ?>">
+                </div>
+
+            </div>
+
+
         <?php else: ?>
         <form id="resetForm" method="post">
             <div class="row">
-                <div class="col-md-5">
-
-                    <div class="mb-3">
+                <div class="col-md-4">
+                <div class="mb-3">
                         <label for="email">Электронная почта</label>
                         <input type="email" name="email" class="form-control" id="email">
                     </div>
-
                 </div>
             </div>
             <div class="mb-3">
@@ -27,7 +33,7 @@
 
         </form>
     </div>
-</section>
+
 <script>
     $(document).ready(function () {
         $('#resetForm').ajaxForm({
@@ -49,3 +55,5 @@
     });
 </script>
 <?php endif; ?>
+
+</section>

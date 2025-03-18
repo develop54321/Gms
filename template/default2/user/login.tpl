@@ -9,11 +9,12 @@
             <div class="row">
                 <div class="col-md-4">
 
-
                     <div class="mb-3">
+                        <label for="password">Электронная почта</label>
                         <input type="email" name="email" class="form-control" id="email" placeholder="Электронная почта">
                     </div>
                     <div class="mb-3">
+                        <label for="password">Пароль</label>
                         <input type="password" name="password" class="form-control" id="password" placeholder="Пароль">
                     </div>
 

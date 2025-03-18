@@ -7,3 +7,5 @@ ALTER TABLE `ga_services` ADD `text` TEXT NULL AFTER `params`;
 ALTER TABLE `ga_pay_methods` ADD `text` TEXT NULL AFTER `typeCode`;
 
 ALTER TABLE `ga_queue` ADD `date_create` INT(11) NOT NULL AFTER `message`;
+
+ALTER TABLE `ga_users` ADD `reset_code_created_at` INT(11) NULL AFTER `reset_code`;

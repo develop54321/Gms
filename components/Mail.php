@@ -7,11 +7,17 @@ use Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 class Mail extends BaseController
 {
+
     public function send($params, $message)
     {
         $mail = new PHPMailer(true);
 
         try {
+
+            $html = $this->view->renderPartial("mail/default", [
+                "message" => $message,
+            ]);
+
             if ($params['type'] === 'smtp') {
                 $mail->isSMTP();
                 $mail->Host = $params['smtp_server'] ?? '';
@@ -27,8 +33,10 @@ class Mail extends BaseController
 
             $mail->addAddress($message['address']);
 
+            $mail->isHTML(true);
             $mail->Subject = $message['subject'];
-            $mail->Body = $message['content'];
+            $mail->Body = $html;
+
             $mail->send();
 
 

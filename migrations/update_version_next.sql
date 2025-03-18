@@ -5,3 +5,5 @@ CREATE TABLE `app_db`.`ga_queue` (`id` INT(11) NOT NULL AUTO_INCREMENT , `status
 ALTER TABLE `ga_services` ADD `text` TEXT NULL AFTER `params`;
 
 ALTER TABLE `ga_pay_methods` ADD `text` TEXT NULL AFTER `typeCode`;
+
+ALTER TABLE `ga_queue` ADD `date_create` INT(11) NOT NULL AFTER `message`;

@@ -12,7 +12,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class QueueMailCommand extends Command
 {
-
     protected static $defaultName = "queue:mail";
 
     private Database $db;
@@ -23,14 +22,13 @@ class QueueMailCommand extends Command
         parent::__construct($name);
     }
 
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
         try {
             // Fetch records to process
-            $getQueueRecords = $this->db->query('SELECT message, id FROM ga_queue WHERE status = :status AND attempt < max_attempt LIMIT 50');
+            $getQueueRecords = $this->db->query("SELECT message, id, attempt FROM ga_queue WHERE status = 'WAIT' AND attempt < max_attempt LIMIT 50");
             $rows = $getQueueRecords->fetchAll();
 
             if (empty($rows)) {
@@ -41,47 +39,44 @@ class QueueMailCommand extends Command
             $mailerQueue = new MailerQueue();
             foreach ($rows as $row) {
                 try {
-                    $this->processRecord($row);
-
                     $message = json_decode($row['message'], true);
-                    //mailer
+
+                    // Mailer
                     $mailerQueue->run($output, $message);
 
+                    // Update status to COMPLETED
                     $status = "COMPLETED";
                     $sql = "UPDATE ga_queue SET status = :status WHERE id = :id";
                     $update = $this->db->prepare($sql);
                     $update->bindParam(':status', $status);
                     $update->bindParam(':id', $row['id']);
                     $update->execute();
-
-
                 } catch (Exception $e) {
                     // Increment attempt counter
-                    $stmt = $this->db->prepare("UPDATE ga_queue SET attempt = attempt + 1 WHERE id = :id");
+                    $newAttempt = $row['attempt'] + 1;
+                    if ($newAttempt >= 3) {
+                        $status = "FAILED";
+                        $sql = "UPDATE ga_queue SET status = :status, attempt = :attempt WHERE id = :id";
+                    } else {
+                        $sql = "UPDATE ga_queue SET attempt = :attempt WHERE id = :id";
+                    }
+
+                    $stmt = $this->db->prepare($sql);
+                    $stmt->bindParam(':attempt', $newAttempt);
                     $stmt->bindParam(':id', $row['id']);
+                    if (isset($status)) {
+                        $stmt->bindParam(':status', $status);
+                    }
                     $stmt->execute();
                 }
             }
 
             $io->success('GA queue processed successfully.');
             return Command::SUCCESS;
-
         } catch (Exception $e) {
             $io->error('An error occurred during processing. Check logs for details.');
             return Command::FAILURE;
         }
     }
 
-    private function processRecord(array $record): void
-    {
-        // Implement the business logic for processing a single record here
-        // For example, sending data to an external API or performing some calculations
-
-        // Simulating processing
-        sleep(1); // Simulate a delay for processing
-        if (rand(0, 1)) { // Simulate a random failure
-            throw new \RuntimeException('Simulated processing failure');
-        }
-
-    }
 }

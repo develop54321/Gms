@@ -418,45 +418,55 @@ class UserController extends BaseController
             } else {
                 $reset_code = md5(mt_rand(1000, 10000));
 
+
                 $sql = "UPDATE ga_users SET reset_code = :reset_code WHERE email = :email";
                 $update = $this->db->prepare($sql);
                 $update->bindParam(':reset_code', $reset_code);
                 $update->bindParam(':email', $email);
                 $update->execute();
 
-                $site_url = $_SERVER['SERVER_NAME'];
+
+
+
+
 
                 $linkReset = $system->getUrl() . "/user/reset?code=$reset_code";
 
-                $message = '
-       <html>
-       <head>
-       <title>' . $title . '</title>
-       </head>
-       <body>
-       <p>
-        Добрый день!<br/>
 
-Вы получили это письмо, потому что кто-то (возможно, вы) запросил на сайте ' . $site_url . ' восстановление пароля для пользователя, зарегистрированного с вашим e-mail ' . $email . '
-<br/>
-Чтобы получить новый пароль, перейдите по ссылке:<br/>
-' . $linkReset . '
-<br/>
-Если ссылка не открывается, скопируйте её и вставьте в адресную строку браузера.
-<br/>
-Если вы не запрашивали изменение пароля или вспомнили свой пароль, просто проигнорируйте это письмо и пользуйтесь своим текущим паролем.
-       </p>
-       </body>
-       </html>';
+                $content = "
+                <p>Здравствуйте!</p>
+                <p>Вы получили это письмо, потому что на сайте <a href=\"" . BASE_URL . "\">" . BASE_URL . "</a> был запрошен сброс пароля для аккаунта, зарегистрированного на ваш email: <strong>" . $email . "</strong>.</p>
+                <p>Для установки нового пароля перейдите по ссылке ниже:</p>
+                <p><a href=\"" . $linkReset . "\">Сбросить пароль</a></p>
+                <p>Если ссылка не открывается, скопируйте её и вставьте в адресную строку браузера:</p>
+                <p><code>" . $linkReset . "</code></p>
+                <p>Если вы не запрашивали сброс пароля или вспомнили свой текущий пароль, просто проигнорируйте это письмо.</p>
+                <p>С уважением,<br/>Команда " . BASE_URL . "</p>
+                ";
 
-                $mail = new Mail;
-                $mail->send($email, $title, $message);
+                $stmt = $this->db->prepare("INSERT INTO ga_queue (status, attempt, max_attempt, message, date_create)
+                VALUES (:status, :attempt, :max_attempt, :message, :date_create)");
+
+                $message = json_encode([
+                    "address" => $email,
+                    "subject" => "Сброс пароля",
+                    "content" => $content,
+                ]);
+
+                $status = "WAIT";
+                $stmt->bindParam(':status', $status);
+                $stmt->bindValue(':attempt', 1, PDO::PARAM_INT);
+                $stmt->bindValue(':max_attempt', 3, PDO::PARAM_INT);
+                $stmt->bindValue(':message', $message);
+                $stmt->bindValue(':date_create', time());
+                $stmt->execute();
+
+
+
 
                 $answer['status'] = "success";
                 $answer['success'] = "На вашу почту было отправлено письмо с кодом подтверждения, для получение нового пароля перейдите по ссылке содержащейся в письме.";
                 exit(json_encode($answer));
-
-
             }
 
 
@@ -466,10 +476,11 @@ class UserController extends BaseController
                 $checkCode = $this->db->prepare('SELECT * FROM ga_users WHERE reset_code = :reset_code');
                 $checkCode->bindValue(":reset_code", $code);
                 $checkCode->execute();
-                if ($checkCode->rowCount() == '1') {
+                if ($checkCode->rowCount() === 1) {
                     $newPassword = $system->generateCharacter(8);
-                    $hashPassword = md5($newPassword);
-                    $reset_code = '';
+
+                    $hashPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
                     $sql = "UPDATE ga_users SET password = :password, reset_code = '' WHERE reset_code = :reset_code";
                     $update = $this->db->prepare($sql);
                     $update->bindParam(':password', $hashPassword);

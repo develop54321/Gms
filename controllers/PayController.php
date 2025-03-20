@@ -3,6 +3,7 @@
 namespace controllers;
 
 use components\Flash;
+use components\pay_method\FreekassaClient;
 use components\pay_method\YooKassaService;
 use components\Services;
 use components\User;
@@ -146,12 +147,46 @@ class PayController extends BaseController
     public function getPayForm()
     {
 
+        $postData = parent::readPostJson();
+
+        $paymentMethod = (int)$postData['payment_method'];
+        if ($paymentMethod === null){
+            parent::ShowError(400, "Bad request!");
+        }
+
         //create invoice
 
-        //return link and html code x3
+
+        $getInfoPayment = $this->db->prepare('SELECT id, content FROM ga_pay_methods WHERE id = :id');
+        $getInfoPayment->execute(array(':id' => $paymentMethod));
+        $getInfoPayment = $getInfoPayment->fetch();
+        $infoPaymentSettings = json_decode($getInfoPayment['content'], true);
+
+        $amount = 100;
+        $payId = 1;
+
+
+        $htmlForm = null;
+        switch ($paymentMethod) {
+            case "freekassa":
+                $sign = md5($infoPaymentSettings['fk_id'].":".$amount.":".$infoPaymentSettings['fk_key1'].":".$payId);
+                $client = new FreekassaClient(
+                    $infoPaymentSettings['fk_id'],
+                    $amount,
+                    $payId,
+                    $sign
+                );
+
+                $htmlForm = $client->getHtmlForm();
+                break;
+        }
+
+
+
+
 
         $answer['status'] = "success";
-        $answer['success'] = "test";
+        $answer['data'] =  $htmlForm;
         exit(json_encode($answer));
 
     }

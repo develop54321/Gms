@@ -2,6 +2,8 @@
 
 namespace core;
 
+use RuntimeException;
+
 abstract class BaseController
 {
     protected View $view;
@@ -47,5 +49,23 @@ abstract class BaseController
         }
 
         return false;
+    }
+
+    public function readPostJson()
+    {
+        $postData = file_get_contents('php://input');
+
+
+        if ($postData === false) {
+            throw new RuntimeException('Не удалось прочитать данные из тела запроса.');
+        }
+
+        $decodedData = json_decode($postData, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new RuntimeException('Ошибка при декодировании JSON: ' . json_last_error_msg());
+        }
+
+        return $decodedData;
     }
 }

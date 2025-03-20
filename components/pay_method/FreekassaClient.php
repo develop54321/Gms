@@ -7,14 +7,14 @@ class FreekassaClient
     private $fkId;
     private $price;
     private $payId;
-    private $signfk;
+    private $signFk;
 
-    public function __construct($fkId, $price, $payId, $signfk)
+    public function __construct($fkId, $price, $payId, $signFk)
     {
         $this->fkId = $fkId;
         $this->price = $price;
         $this->payId = $payId;
-        $this->signfk = $signfk;
+        $this->signFk = $signFk;
     }
 
     public function getHtmlForm(): string
@@ -24,7 +24,7 @@ class FreekassaClient
         $form .= '<input type="hidden" name="oa" value="' . $this->price . '" />';
         $form .= '<input type="hidden" name="currency" value="RUB" />';
         $form .= '<input type="hidden" name="o" value="' . $this->payId . '" />';
-        $form .= '<input type="hidden" name="s" value="' . $this->signfk . '" />';
+        $form .= '<input type="hidden" name="s" value="' . $this->signFk . '" />';
         $form .= '<input type="submit" class="btn btn-success btn-sm" value="Оплатить FreeKassa"/>';
         $form .= '</form>';
 

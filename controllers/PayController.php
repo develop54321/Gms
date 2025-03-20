@@ -157,7 +157,7 @@ class PayController extends BaseController
         //create invoice
 
 
-        $getInfoPayment = $this->db->prepare('SELECT id, content FROM ga_pay_methods WHERE id = :id');
+        $getInfoPayment = $this->db->prepare('SELECT id, content, typeCode FROM ga_pay_methods WHERE id = :id');
         $getInfoPayment->execute(array(':id' => $paymentMethod));
         $getInfoPayment = $getInfoPayment->fetch();
         $infoPaymentSettings = json_decode($getInfoPayment['content'], true);
@@ -167,7 +167,7 @@ class PayController extends BaseController
 
 
         $htmlForm = null;
-        switch ($paymentMethod) {
+        switch ($getInfoPayment['typeCode']) {
             case "freekassa":
                 $sign = md5($infoPaymentSettings['fk_id'].":".$amount.":".$infoPaymentSettings['fk_key1'].":".$payId);
                 $client = new FreekassaClient(

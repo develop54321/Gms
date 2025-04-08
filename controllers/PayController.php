@@ -143,18 +143,47 @@ class PayController extends BaseController
     /**
      * Возвращает платежную форму
      * @return void
+     * @throws \Exception
      */
-    public function getPayForm()
+    public function getPayForm($id)
     {
 
         $postData = parent::readPostJson();
-
         $paymentMethod = (int)$postData['payment_method'];
-        if ($paymentMethod === null){
-            parent::ShowError(400, "Bad request!");
+        $idServices = (int)$postData['id_services'];
+
+        $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
+        $getInfoServer->execute(array(':id' => $id));
+        $getInfoServer = $getInfoServer->fetch();
+
+        if (empty($getInfoServer)) parent::ShowError(404, "Сервер не найден!");
+
+
+        $getInfoServices = $this->db->prepare('SELECT * FROM ga_services WHERE id = :id');
+        $getInfoServices->execute(array(':id' => $idServices));
+        $getInfoServices = $getInfoServices->fetch();
+        if (empty($getInfoServices)) {
+            $answer['status'] = "error";
+            $answer['error'] = "Услуга не найдена";
+            exit(json_encode($answer));
         }
 
+
+
         //create invoice
+        $user = new User();
+        $userProfile = null;
+        if ($user->isAuth()) {
+            $userProfile = $user->getProfile();
+        }
+
+        $services = new Services();
+        $invoiceId = $services->createInvoice(
+            $getInfoServices,
+            $getInfoServer,
+            $idServices,
+            $userProfile
+        );
 
 
         $getInfoPayment = $this->db->prepare('SELECT id, content, typeCode FROM ga_pay_methods WHERE id = :id');
@@ -163,19 +192,27 @@ class PayController extends BaseController
         $infoPaymentSettings = json_decode($getInfoPayment['content'], true);
 
         $amount = 100;
-        $payId = 1;
+
 
 
         $htmlForm = null;
         switch ($getInfoPayment['typeCode']) {
             case "freekassa":
-                $sign = md5($infoPaymentSettings['fk_id'].":".$amount.":".$infoPaymentSettings['fk_key1'].":".$payId);
+                $sign = md5($infoPaymentSettings['fk_id'].":".$amount.":".$infoPaymentSettings['fk_key1'].":".$invoiceId);
                 $client = new FreekassaClient(
                     $infoPaymentSettings['fk_id'],
                     $amount,
                     $payId,
                     $sign
                 );
+
+                $htmlForm = $client->getHtmlForm();
+                break;
+
+
+                case "yoomoney":
+
+
 
                 $htmlForm = $client->getHtmlForm();
                 break;
@@ -186,7 +223,7 @@ class PayController extends BaseController
 
 
         $answer['status'] = "success";
-        $answer['data'] =  $htmlForm;
+        $answer['payment_form'] =  $htmlForm;
         exit(json_encode($answer));
 
     }
@@ -195,6 +232,7 @@ class PayController extends BaseController
     /**
      * Логика оплаты с лицевого счета
      * @return void
+     * @throws \Exception
      */
     public function ajax($id)
     {

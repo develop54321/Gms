@@ -96,7 +96,7 @@
 
                         </ul>
 
-                                 <a class="btn btn-primary btn-sm mt-2" href="/pay/server?id=<?php echo $data['id'];?>"> Заказать платную услугу</a>
+                                 <a class="btn btn-primary btn-sm mt-2" href="/pay/<?php echo $data['id'];?>/select"> Заказать платную услугу</a>
                         <hr>
 
 

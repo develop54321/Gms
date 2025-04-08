@@ -178,7 +178,7 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success) {
+                    if (data.status === "success") {
                         if (data.payment_url) {
                             document.getElementById('pay-button').onclick = function () {
                                 window.location.href = data.payment_url;
@@ -186,6 +186,7 @@
                         } else if (data.payment_form) {
                             document.getElementById('pay-button').onclick = function () {
                                 document.body.innerHTML += data.payment_form;
+                                document.getElementById("paymentForm").submit();
                             };
                         }
                     } else {

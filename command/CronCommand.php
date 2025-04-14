@@ -30,7 +30,7 @@ class CronCommand extends Command
         $getServers = $this->db->query('SELECT * FROM ga_servers');
         $getServers = $getServers->fetchAll();
         $Query = new SourceQuery();
-        $Info = array();
+
         foreach ($getServers as $row) {
             if (in_array($row['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])) {
                 try {

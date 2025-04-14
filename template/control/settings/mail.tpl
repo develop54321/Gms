@@ -72,7 +72,7 @@
 
                     <div class="form-group">
                         <div class="form-check">
-                            <input type="checkbox" name="mail_params[auto_tls]" class="form-check-input" id="autoTls">
+                            <input type="checkbox" name="mail_params[auto_tls]" class="form-check-input" id="autoTls" <?php echo $settings['auto_tls'] ? "checked" : ""; ?>>
                             <label class="form-check-label" for="autoTls">Auto TLS</label>
                         </div>
 

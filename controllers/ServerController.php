@@ -193,7 +193,6 @@ class ServerController extends BaseController
         $currentSession = null;
         if ($IsAuth) $currentSession = $IsAuth['id'];
 
-        $system = new System();
         $parseAddress = Servers::parseAddress($address);
 
 
@@ -306,41 +305,33 @@ class ServerController extends BaseController
         if (parent::isAjax()) {
 
 
-            if (in_array($getInfoServer['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust'])) {
-                $Query = new SourceQuery();
-                $Info = array();
-                try {
-                    $Query->Connect($getInfoServer['ip'], $getInfoServer['port'], 2, SourceQuery::GOLDSOURCE);
-                    $Info = $Query->GetInfo();
-                    $hostname = $Info['HostName'];
-                } catch (Exception $e) {
-                    $Query->Disconnect();
-                    $answer['status'] = "error";
-                    $answer['error'] = "Сервер недоступен";
-                    exit(json_encode($answer));
+            try {
+                $GameServerQuery = new GameServerQuery($getInfoServer['ip'], $getInfoServer['port'], $getInfoServer['game'], null);
+                $GameServerQuery = $GameServerQuery->query();
+
+                $hostname = $GameServerQuery['gq_hostname'];
+
+
+                if ($GameServerQuery['gq_online'] === false){
+                    throw new \Exception("Не удалось получить информацию о сервере, <br>
+                            Возможные причины: <br>
+                            Неверные настройки firewall <br>
+                            Неверные настройки сервера <br>
+                            Неверно указаны порты");
                 }
-            } elseif ($getInfoServer['game'] == 'samp') {
-                $GameQ = new \GameQ\GameQ();
-                $GameQ->addServer([
-                    'type' => 'mta',
-                    'host' => $getInfoServer['ip'] . ":" . $getInfoServer['port'],
-                ]);
-                $results = $GameQ->process();
-                $Info = array_shift($results);
-                $hostname = utf8_decode($Info['servername']);
-            } elseif ($getInfoServer['game'] == 'mta') {
-                $GameQ = new \GameQ\GameQ();
-                $GameQ->addServer([
-                    'type' => 'mta',
-                    'host' => $getInfoServer['ip'] . ":" . $getInfoServer['port'],
-                ]);
-                $results = $GameQ->process();
-                $Info = array_shift($results);
-                $hostname = utf8_decode($Info['gq_hostname']);
+
+
+            }catch (Exception $e){
+                $answer['status'] = "error";
+                $answer['error'] = $e->getMessage();
+                exit(json_encode($answer));
             }
 
 
-            if ("verification_" . $getInfoServer['verification_rand'] == $hostname) {
+
+
+
+            if ("ServerVerification_" . $getInfoServer['verification_rand'] == $hostname) {
 
                 $sql = "UPDATE ga_servers SET id_user = :id_user WHERE id = :id";
                 $update = $this->db->prepare($sql);
@@ -361,14 +352,18 @@ class ServerController extends BaseController
 
         } else {
 
-            if ($getInfoServer['verification_rand'] == 0) {
-                $verification_rand = $system->generateRandomNumbers(5);
-                $sql = "UPDATE ga_servers SET verification_rand = :verification_rand WHERE id = :id";
+            if ($getInfoServer['verification_rand_expired_at'] < time()) {
+
+                $verificationRandExpiredAt = time() + 900;
+
+                $verificationRand = $system->generateRandomNumbers(5);
+                $sql = "UPDATE ga_servers SET verification_rand = :verification_rand, verification_rand_expired_at = :verification_rand_expired_at WHERE id = :id";
                 $update = $this->db->prepare($sql);
-                $update->bindParam(':verification_rand', $verification_rand);
+                $update->bindParam(':verification_rand', $verificationRand);
+                $update->bindParam(':verification_rand_expired_at', $verificationRandExpiredAt);
                 $update->bindParam(':id', $id);
                 $update->execute();
-                $getInfoServer['verification_rand'] = $verification_rand;
+                $getInfoServer['verification_rand'] = $verificationRand;
             }
 
 

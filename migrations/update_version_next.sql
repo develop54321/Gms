@@ -21,3 +21,5 @@ DELETE FROM `ga_pay_methods` WHERE `ga_pay_methods`.`id` = 1
 INSERT INTO `ga_pay_methods` (`id`, `status`, `name`, `content`, `typeCode`, `text`) VALUES ('6', '0', 'Lava', '{\"shop_id\":\"\",\"secret_key\":\"\"}', 'lava', NULL)
 
 DELETE FROM `ga_pay_methods` WHERE `ga_pay_methods`.`id` = 2;
+
+ALTER TABLE `ga_servers` ADD `verification_rand_expired_at` INT(11) NULL AFTER `verification_rand`;

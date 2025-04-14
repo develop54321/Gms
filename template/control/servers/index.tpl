@@ -85,7 +85,7 @@
                         <?php widgets\server\game\GameIcon::run($row['game']); ?>
                     </td>
                     <td>
-                        <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo $row['hostname']; ?></a>
+                        <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info" target="_blank"><?php echo $row['hostname']; ?></a>
                     </td>
                     <td>
 

@@ -4,7 +4,9 @@ namespace controllers;
 
 use components\Flash;
 use components\pay_method\FreekassaClient;
+use components\pay_method\YooKassaClient;
 use components\pay_method\YooKassaService;
+use components\pay_method\YooMoneyClient;
 use components\Services;
 use components\User;
 use core\BaseController;
@@ -61,7 +63,7 @@ class PayController extends BaseController
             'serverInfo' => $getInfoServer,
             'settings' => $settings,
             'services' => $getServices,
-            'step' => 1
+            'step' => 1,
         ]);
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
@@ -132,7 +134,8 @@ class PayController extends BaseController
                 'type' => $getInfoServices['type'] ?? null,
                 'top' => $top,
                 'infoServices' => $getInfoServices,
-                'user' => $userData
+                'user' => $userData,
+                'idServices' => $id_services
             ]);
             echo $content;
 
@@ -169,7 +172,6 @@ class PayController extends BaseController
         }
 
 
-
         //create invoice
         $user = new User();
         $userProfile = null;
@@ -194,15 +196,16 @@ class PayController extends BaseController
         $amount = 100;
 
 
-
+        $description = "Оплата услуги №" . $invoiceId;
         $htmlForm = null;
+        $paymentUrl = null;
         switch ($getInfoPayment['typeCode']) {
             case "freekassa":
-                $sign = md5($infoPaymentSettings['fk_id'].":".$amount.":".$infoPaymentSettings['fk_key1'].":".$invoiceId);
+                $sign = md5($infoPaymentSettings['fk_id'] . ":" . $amount . ":" . $infoPaymentSettings['fk_key1'] . ":" . $invoiceId);
                 $client = new FreekassaClient(
                     $infoPaymentSettings['fk_id'],
                     $amount,
-                    $payId,
+                    $invoiceId,
                     $sign
                 );
 
@@ -210,20 +213,51 @@ class PayController extends BaseController
                 break;
 
 
-                case "yoomoney":
-
+            case "yoomoney":
+                $client = new YooMoneyClient(
+                    $infoPaymentSettings['receiver'],
+                    $amount,
+                    $invoiceId,
+                    $description
+                );
 
 
                 $htmlForm = $client->getHtmlForm();
                 break;
+
+            case "yookassa":
+                try {
+                    $client = new YooKassaClient(
+                        $infoPaymentSettings['shop_id'],
+                        $infoPaymentSettings['secret_key']
+                    );
+
+                    /** @var array{guid: string, url: string} $resp */
+                    $resp = $client->createPayment(
+                        $amount,
+                        $description,
+                        $invoiceId
+                    );
+
+                    $paymentUrl = $resp['url'];
+                }catch (\Exception $e){
+                    $answer['status'] = "error";
+                    $answer['error'] = $e->getMessage();
+                    exit(json_encode($answer));
+
+                }
+
+
+                break;
+
+            default:
+                parent::ShowError(400, "Bad request!");
         }
 
 
-
-
-
         $answer['status'] = "success";
-        $answer['payment_form'] =  $htmlForm;
+        $answer['payment_form'] = $htmlForm;
+        $answer['payment_url'] = $paymentUrl;
         exit(json_encode($answer));
 
     }
@@ -242,7 +276,6 @@ class PayController extends BaseController
         if ($user->isAuth()) {
             $userProfile = $user->getProfile();
         }
-
 
 
         $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');

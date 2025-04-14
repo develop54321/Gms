@@ -338,9 +338,9 @@ select option {
 
 .pay-select .card{
     min-height: 80px;
-    background: #2d283e;
+    background: rgb(255 255 255 / 31%);
+    border: 1px solid #b5b5b5;
     cursor: pointer;
-    border: 1px solid #000000;
     color: #fff;
     cursor: pointer;
 }
@@ -352,8 +352,8 @@ select option {
 
 
 .pay-select .card.active {
-    background: #231e32;
-    border: 1px solid #040404;
+    background: rgb(255 255 255 / 12%);
+    border: 1px solid #b5b5b5;
 }
 
 

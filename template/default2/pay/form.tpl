@@ -174,7 +174,7 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({payment_method: method})
+                body: JSON.stringify({payment_method: method, id_services: <?php echo $idServices; ?>})
             })
                 .then(response => response.json())
                 .then(data => {

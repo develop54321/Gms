@@ -9,3 +9,10 @@ ALTER TABLE `ga_pay_methods` ADD `text` TEXT NULL AFTER `typeCode`;
 ALTER TABLE `ga_queue` ADD `date_create` INT(11) NOT NULL AFTER `message`;
 
 ALTER TABLE `ga_users` ADD `reset_code_created_at` INT(11) NULL AFTER `reset_code`;
+
+UPDATE `ga_pay_methods` SET `name` = 'ЮMoney' WHERE `ga_pay_methods`.`id` = 4
+
+UPDATE `ga_services` SET `name` = 'Буст 1 круг' WHERE `ga_services`.`id` = 10;
+
+
+DELETE FROM `ga_pay_methods` WHERE `ga_pay_methods`.`id` = 1

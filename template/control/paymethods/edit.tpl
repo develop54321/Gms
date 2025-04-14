@@ -42,27 +42,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <?php if ($data['typeCode'] === 'robokassa'): ?>
-                        <div class="form-group">
-                            <label for="status">login</label>
-                            <input type="text" class="form-control" name="login" value="<?php echo $params['login'] ?? null; ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password1">password 1</label>
-                            <input type="text" class="form-control" id="password1" name="password1" value="<?php echo ""; $params['password1'] ?? null; ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password2">password 2</label>
-                            <input type="text" class="form-control" id="password2" name="password2" value="<?php echo $params['password2'] ?? null; ?>">
-                        </div>
-
-                        <code>
-                            Обработчик: <?php echo $url; ?>/result?type=robokassa
-                        </code>
-
-                    <?php elseif ($data['typeCode'] === 'unitpay'): ?>
+                    <?php if ($data['typeCode'] === 'unitpay'): ?>
                         <div class="form-group">
                             <label for="status">PUBLIC KEY</label>
                             <input type="text" class="form-control" name="public_key" value="<?php echo $params['public_key'] ?? null; ?>">

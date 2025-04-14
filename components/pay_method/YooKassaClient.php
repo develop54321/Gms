@@ -15,7 +15,7 @@ use YooKassa\Common\Exceptions\ResponseProcessingException;
 use YooKassa\Common\Exceptions\TooManyRequestsException;
 use YooKassa\Common\Exceptions\UnauthorizedException;
 
-final class YooKassaService
+final class YooKassaClient
 {
     private $shopId;
     private $secretKey;
@@ -44,10 +44,11 @@ final class YooKassaService
      */
     public function createPayment(float $price,
                                   string $description,
-                                  string $payLogId,
-                                  string $returnUrl
+                                  string $payLogId
     ): array
     {
+        $returnUrl = BASE_URL . "/result/success";
+
         $client = new Client();
         $client->setAuth($this->shopId, $this->secretKey);
 

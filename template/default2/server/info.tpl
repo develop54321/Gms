@@ -89,8 +89,8 @@
 
                             <?php if($data['boost'] != '0'):?>
                                 <li class="list-group-item">
-                                    Boost:<br/>
-                                    Осталось кругов: <?php echo $data['boost'];?>
+                                    Буст:<br/>
+                                    осталось кругов: <?php echo $data['boost'];?>
                                 </li>
                             <?php endif;?>
 
@@ -111,7 +111,7 @@
 
                         <div class="comments">
                             <?php if(empty($comments)):?>
-                                <div class="alert alert-warning" style="margin: 3px 0;">В данный момент комментарьев отсутсвует
+                                <div class="alert alert-warning" style="margin: 3px 0;">В данный момент комментариев отсутствует
                                 </div>
                             <?php endif;?>
                             <?php foreach($comments as $c):?>

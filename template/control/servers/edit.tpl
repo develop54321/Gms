@@ -75,7 +75,7 @@
 
 <div class="form-group">
 <label for="ban_couse">Причина бана</label>
-<input type="text" name="ban_couse" class="form-control" id="ban_couse" value="<?=$data['ban_couse'];?>">
+    <textarea class="form-control" name="ban_couse" id="<?=$data['ban_couse'];?>"><?=$data['ban_couse'];?></textarea>
 </div>
 
 
@@ -147,7 +147,7 @@
 
 <div class="form-group">
 <label for="color_enabled">Выделение цветом(код цвета пример: red)</label>
-<input type="text" name="color_enabled" class="form-control" id="color_enabled" value="<?=$data['color_enabled'];?>">
+<input type="text" name="color_enabled" class="form-control" id="color_enabled" value="<?php if ($data['color_enabled'] != 0):?><?php echo $data['color_enabled'];?><?php endif;?> ">
 </div>
 
 <div class="form-group">

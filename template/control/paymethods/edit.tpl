@@ -114,6 +114,25 @@
                                    value="<?php echo $params['secret_key'] ?? null; ?>">
                         </div>
 
+
+
+                    <?php elseif ($data['typeCode'] === 'lava'): ?>
+                        <div class="form-group">
+                            <label for="status">shop id</label>
+                            <input type="text" class="form-control" name="shop_id"
+                                   value="<?php echo $params['shop_id'] ?? null; ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fk_key1">Секретный ключ</label>
+                            <input type="text" class="form-control" name="secret_key"
+                                   value="<?php echo $params['secret_key'] ?? null; ?>">
+                        </div>
+
+                        <code>
+                            Обработчик: команда консольная
+                        </code>
+
                     <?php endif; ?>
 
                 </div>
@@ -122,7 +141,7 @@
 </div>
 
 
-</div>
+
 <script>
     $('#servicesForm').ajaxForm({
         dataType: 'json',

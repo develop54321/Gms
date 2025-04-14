@@ -253,13 +253,11 @@ class ServerController extends BaseController
 
 
 
-
         if ($getInfoServer['status'] == 1) {
             $getInfoServer['status'] = 'Online';
         } else {
             $getInfoServer['status'] = 'Offline';
         }
-        $getInfoServer['show_players'] = $system->showbar($getInfoServer['players'], $getInfoServer['max_players']);
 
 
         $moderation = 1;

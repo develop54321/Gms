@@ -4,6 +4,7 @@ namespace controllers;
 
 use components\Flash;
 use components\pay_method\FreekassaClient;
+use components\pay_method\LavaClient;
 use components\pay_method\YooKassaClient;
 use components\pay_method\YooKassaService;
 use components\pay_method\YooMoneyClient;
@@ -238,6 +239,29 @@ class PayController extends BaseController
                     $resp = $client->createPayment(
                         $amount,
                         $description,
+                        $invoiceId
+                    );
+
+                    $paymentUrl = $resp['url'];
+                }catch (\Exception $e){
+                    $answer['status'] = "error";
+                    $answer['error'] = $e->getMessage();
+                    exit(json_encode($answer));
+
+                }
+                break;
+
+
+                case "lava":
+                try {
+                    $client = new LavaClient(
+                        $infoPaymentSettings['shop_id'],
+                        $infoPaymentSettings['secret_key']
+                    );
+
+                    /** @var array{guid: string, url: string} $resp */
+                    $resp = $client->createPayment(
+                        $amount,
                         $invoiceId
                     );
 

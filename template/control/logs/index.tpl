@@ -18,9 +18,10 @@
     <div class="card-body">
 
 
+        <?php if (count($data) > 1):?>
         <a href="/control/logs/clear" onclick="return confirm('Вы действительно хотите очистить логи?');"
            class="btn btn-danger mb-3"> <i class="fa fa-trash"></i> Очистить</a>
-
+        <?php endif;?>
 
         <table class="table table-bordered border text-nowrap text-md-nowrap">
             <thead>

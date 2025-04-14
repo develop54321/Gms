@@ -62,7 +62,7 @@ class System extends BaseController
         return $full_off . '%';
     }
 
-    // End
+
 
     public function generateCharacter($number): string
     {
@@ -131,8 +131,6 @@ class System extends BaseController
 
         imagegif($im);
         imagedestroy($im);
-
-
     }
 
 

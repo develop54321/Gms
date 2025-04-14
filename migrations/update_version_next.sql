@@ -16,3 +16,8 @@ UPDATE `ga_services` SET `name` = 'Буст 1 круг' WHERE `ga_services`.`id`
 
 
 DELETE FROM `ga_pay_methods` WHERE `ga_pay_methods`.`id` = 1
+
+
+INSERT INTO `ga_pay_methods` (`id`, `status`, `name`, `content`, `typeCode`, `text`) VALUES ('6', '0', 'Lava', '{\"shop_id\":\"\",\"secret_key\":\"\"}', 'lava', NULL)
+
+DELETE FROM `ga_pay_methods` WHERE `ga_pay_methods`.`id` = 2;

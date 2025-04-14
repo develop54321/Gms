@@ -165,11 +165,13 @@ class PayController extends BaseController
         $getInfoServices = $this->db->prepare('SELECT * FROM ga_services WHERE id = :id');
         $getInfoServices->execute(array(':id' => $idServices));
         $getInfoServices = $getInfoServices->fetch();
-        if (empty($getInfoServices)) {
-            $answer['status'] = "error";
-            $answer['error'] = "Услуга не найдена";
-            exit(json_encode($answer));
-        }
+        if (empty($getInfoServices))  parent::ShowError(400, "Services not found!");
+
+
+        $getInfoPayment = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE id = :id');
+        $getInfoPayment->execute(array(':id' => $paymentMethod));
+        $getInfoPayment = $getInfoPayment->fetch();
+        if (empty($getInfoPayment)) parent::ShowError(400, "PayMethod not found!");
 
 
         //create invoice

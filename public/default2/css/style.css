@@ -366,9 +366,9 @@ select option {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80px;
-    height: 80px;
-    border-radius: 5px;
+    width: 70px;
+    height: 70px;
+    border-radius: 4px;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
     color: white;

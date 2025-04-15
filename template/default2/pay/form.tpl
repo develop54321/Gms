@@ -108,6 +108,9 @@
     <?php endif; ?>
 
 <script>
+    let additionalData = {};
+
+
     $(document).ready(function () {
 
         <?php if ($type === 'top' or $type === "color"): ?>
@@ -117,16 +120,22 @@
 
         $('.colors .radio-tile').change(function() {
             if ($(".colors .radio-tile:checked").length > 0) {
+                // Сохраняем выбранный цвет
+                additionalData.color = $(".colors .radio-tile:checked").val();
                 $('.pay-methods').fadeIn(300);
             } else {
+                delete additionalData.color;
                 $('.pay-methods').fadeOut(300);
             }
         });
 
         $('.top-place .radio-tile').change(function() {
             if ($(".top-place .radio-tile:checked").length > 0) {
+                // Сохраняем выбранное место
+                additionalData.place = $(".top-place .radio-tile:checked").val();
                 $('.pay-methods').fadeIn(300);
             } else {
+                delete additionalData.place;
                 $('.pay-methods').fadeOut(300);
             }
         });
@@ -137,11 +146,17 @@
     function payUserBalance() {
         toggleButtonLoader($("#pay-button"), true);
 
+
+        const requestData = {
+            'id_services': <?php echo $infoServices['id']; ?>,
+            ...additionalData
+        };
+
         $.ajax({
             url: '/pay/<?php echo $serverInfo['id']; ?>/ajax',
             method: 'POST',
             dataType: 'json',
-            data: { 'id_services': <?php echo $infoServices['id']; ?> },
+            data: requestData,
             success: function(data) {
                 switch (data.status) {
                     case "error":
@@ -164,17 +179,27 @@
     function selectPaymentMethod(method, el) {
         toggleActive(el);
 
+
+
+
         if (method === "user_balance") {
             $("#pay-button").replaceWith('<button id="pay-button" onclick="payUserBalance(); return false;" type="submit" class="btn btn-primary btn-sm">Оплатить</button>');
         } else {
             $("#pay-button").replaceWith('<button id="pay-button" type="submit" class="btn btn-primary btn-sm">Перейти к оплате</button>');
+
+            const requestData = {
+                payment_method: method,
+                id_services: <?php echo $idServices; ?>,
+                ...additionalData
+            };
+            console.log(requestData)
 
             fetch('/pay/<?php echo $serverInfo['id'];?>/get-pay-form', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({payment_method: method, id_services: <?php echo $idServices; ?>})
+                body: JSON.stringify(requestData)
             })
                 .then(response => response.json())
                 .then(data => {

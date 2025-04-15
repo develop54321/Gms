@@ -77,16 +77,16 @@
 
                             <ul class="list-unstyled mb-0">
                                 <li>
-                                    <a href="#!" class="text-white">Услуги</a>
+                                    <a href="/pay" class="text-white">Услуги</a>
                                 </li>
                                 <li>
-                                    <a href="#!" class="text-white">Раскрутка</a>
+                                    <a href="/boost" class="text-white">Раскрутка</a>
                                 </li>
                                 <li>
-                                    <a href="#!" class="text-white">Авторизация</a>
+                                    <a href="/user/login" class="text-white">Авторизация</a>
                                 </li>
                                 <li>
-                                    <a href="#!" class="text-white">Регистрация</a>
+                                    <a href="/user/signup" class="text-white">Регистрация</a>
                                 </li>
 
                             </ul>

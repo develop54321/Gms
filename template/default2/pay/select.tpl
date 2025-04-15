@@ -7,7 +7,7 @@
 
         <?php echo \widgets\flash\Flash::run(); ?>
         <?php if (empty($services)): ?>
-            <h3 style="text-align: center;">Нету доступных услуг для заказа</h3>
+            <h3 style="text-align: center;">Нет доступных услуг для заказа</h3>
         <?php else: ?>
             <h4>Выбранный вами сервер: <?php echo $serverInfo['hostname']; ?></h4>
         <?php endif; ?>
@@ -51,12 +51,10 @@
         }
 
         function toggleActive(element) {
-            // Убираем класс active у всех карточек
             document.querySelectorAll('.card').forEach(card => {
                 card.classList.remove('active');
             });
 
-            // Добавляем класс active к текущей карточке
             element.querySelector('.card').classList.add('active');
         }
     </script>

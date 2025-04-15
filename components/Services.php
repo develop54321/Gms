@@ -13,14 +13,14 @@ class Services extends BaseController
 
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
         $settings = $getSettings->fetch();
-        $settings = json_decode($settings['content'], true);
+        $settings = Json::decode($settings['content'], true);
 
         $getInfoPay = $this->db->prepare('SELECT * FROM ga_pay_logs WHERE id = :id');
         $getInfoPay->execute(array(':id' => $data['inv_id']));
         $getInfoPay = $getInfoPay->fetch();
 
         if (empty($getInfoPay)) parent::ShowError(404, "Страница не найдена!");
-        $getInfoPay = json_decode($getInfoPay['content'], true);
+        $getInfoPay = Json::decode($getInfoPay['content'], true);
 
         if ($getInfoPay['price'] != $data['price']) parent::ShowError(404, "Страница не найдена!");
 
@@ -208,7 +208,7 @@ class Services extends BaseController
     {
         $getSettings = $this->db->query('SELECT * FROM ga_settings');
         $settings = $getSettings->fetch();
-        return json_decode($settings['content'], true);
+        return Json::decode($settings['content'], true);
     }
 
     private function processTopService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings)
@@ -229,7 +229,7 @@ class Services extends BaseController
             throw new \Exception("Нет свободных мест");
         }
 
-        return $this->insertPayLog($idServices, $getInfoServices['price'], 'top', $userProfile['id'], ['place' => $place, 'id_server' => $getInfoServer['id']]);
+        return $this->insertPayLog($idServices, $getInfoServices['price'], 'top', $userProfile ? $userProfile['id'] : null, ['place' => $place, 'id_server' => $getInfoServer['id']]);
     }
 
     private function processVipService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings)
@@ -244,7 +244,8 @@ class Services extends BaseController
             throw new \Exception("Нет свободных мест");
         }
 
-        return $this->insertPayLog($idServices, $getInfoServices['price'], 'vip', $userProfile['id'], ['id_server' => $getInfoServer['id']]);
+
+        return $this->insertPayLog($idServices, $getInfoServices['price'], 'vip', $userProfile ? $userProfile['id'] : null, ['id_server' => $getInfoServer['id']]);
     }
 
     private function processColorService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings)
@@ -259,8 +260,16 @@ class Services extends BaseController
             throw new \Exception("Нет свободных мест");
         }
 
-        $color = $_POST['selectColor'];
-        return $this->insertPayLog($idServices, $getInfoServices['price'], 'color', $userProfile['id'], ['color' => $color, 'id_server' => $getInfoServer['id']]);
+        $color = htmlspecialchars($_POST['color']);
+
+
+        $fetchCode = $this->db->prepare('SELECT * FROM ga_code_colors WHERE code = :code');
+        $fetchCode->execute(array(':code' => $color));
+        $fetchCode = $fetchCode->fetch();
+
+        if ($fetchCode === null) throw new \Exception("Code color '$color' not found");
+
+        return $this->insertPayLog($idServices, $getInfoServices['price'], 'color', $userProfile ? $userProfile['id'] : null, ['color' => $color, 'id_server' => $getInfoServer['id']]);
     }
 
     private function processGamemenuService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings)
@@ -275,24 +284,24 @@ class Services extends BaseController
             throw new \Exception("Нет свободных мест");
         }
 
-        return $this->insertPayLog($idServices, $getInfoServices['price'], 'gamemenu', $userProfile['id'], ['id_server' => $getInfoServer['id']]);
+        return $this->insertPayLog($idServices, $getInfoServices['price'], 'gamemenu', $userProfile ? $userProfile['id'] : null, ['id_server' => $getInfoServer['id']]);
     }
 
     private function processBoostService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings)
     {
         $this->checkServiceAvailability($settings['global_settings']['boost_on'], "Услуга отключена");
-        return $this->insertPayLog($idServices, $getInfoServices['price'], 'boost', $userProfile['id'], ['id_server' => $getInfoServer['id']]);
+        return $this->insertPayLog($idServices, $getInfoServices['price'], 'boost', $userProfile ? $userProfile['id'] : null, ['id_server' => $getInfoServer['id']]);
     }
 
     private function processVotesService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings)
     {
         $this->checkServiceAvailability($settings['global_settings']['votes_on'], "Услуга отключена");
-        return $this->insertPayLog($idServices, $getInfoServices['price'], 'votes', $userProfile['id'], ['id_server' => $getInfoServer['id']]);
+        return $this->insertPayLog($idServices, $getInfoServices['price'], 'votes', $userProfile ? $userProfile['id'] : null, ['id_server' => $getInfoServer['id']]);
     }
 
     private function processUnbanService($getInfoServices, $getInfoServer, $idServices, $userProfile)
     {
-        return $this->insertPayLog($idServices, $getInfoServices['price'], 'razz', $userProfile['id'], ['id_server' => $getInfoServer['id']]);
+        return $this->insertPayLog($idServices, $getInfoServices['price'], 'razz', $userProfile ? $userProfile['id'] : null, ['id_server' => $getInfoServer['id']]);
     }
 
     private function checkPlaceAvailability($place)
@@ -311,9 +320,9 @@ class Services extends BaseController
         }
     }
 
-    private function insertPayLog($idServices, $price, $type, $userId, $additionalData = [])
+    private function insertPayLog($idServices, $price, $type, $userId = null, $additionalData = [])
     {
-        $content = json_encode(array_merge([
+        $content = Json::encode(array_merge([
             'id_services' => $idServices,
             'type_pay' => "payServices",
             'price' => $price,

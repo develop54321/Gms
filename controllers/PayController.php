@@ -3,6 +3,7 @@
 namespace controllers;
 
 use components\Flash;
+use components\Json;
 use components\pay_method\FreekassaClient;
 use components\pay_method\LavaClient;
 use components\pay_method\YooKassaClient;
@@ -194,9 +195,9 @@ class PayController extends BaseController
         $getInfoPayment = $this->db->prepare('SELECT id, content, typeCode FROM ga_pay_methods WHERE id = :id');
         $getInfoPayment->execute(array(':id' => $paymentMethod));
         $getInfoPayment = $getInfoPayment->fetch();
-        $infoPaymentSettings = json_decode($getInfoPayment['content'], true);
+        $infoPaymentSettings = Json::decode($getInfoPayment['content'], true);
 
-        $amount = 100;
+        $amount = $getInfoServices['price'];
 
 
         $description = "Оплата услуги №" . $invoiceId;

@@ -1,13 +1,10 @@
 <?php if ($type == 'top'): ?>
     <hr/>
-    <p>Выберите место в топе</p>
-
-    <?php if ($serverInfo['top_enabled'] == '0'): ?>
-
+    <?php if ($serverInfo['top_enabled'] === '0'): ?>
+        <p>Выберите место в топе</p>
         <div class="top-place">
             <div class="d-flex gap-3">
                 <?php foreach ($top as $row): ?>
-
                     <?php if ($row['status'] == '0'): ?>
                         <input type="radio" id="<?php echo $row['id']; ?>" name="place" class="radio-tile" value="<?php echo $row['id']; ?>">
                         <label for="<?php echo $row['id']; ?>" class="radio-tile-label">
@@ -19,39 +16,55 @@
                             Место №<?php echo $row['id']; ?> занято
                         </label>
                     <?php endif;?>
-
-
-
                 <?php endforeach; ?>
             </div>
         </div>
-        <?php endif; ?>
+        <?php else:?>
+        Услуга будет продлена. <br/>
+        Текущий срок действия оплачен до: <?php echo date("d.m.Y [H:i]", $serverInfo['top_expired_date']); ?>
+    <?php endif; ?>
 
+    <?php elseif ($type == 'vip'): ?>
+        <?php if ($serverInfo['vip_enabled'] !== '0'): ?>
+            <hr/>
+            Услуга будет продлена. <br/>
+            Текущий срок действия оплачен до: <?php echo date("d.m.Y [H:i]", $serverInfo['vip_expired_date']); ?>
+        <?php endif;?>
 
     <?php elseif ($type == 'color'): ?>
-    <hr/>
-    <p>Выберите цвет</p>
-    <div class="colors">
-        <div class="d-flex gap-3">
-            <?php foreach ($CodeColors as $row): ?>
-                <input type="radio" id="<?php echo $row['id']; ?>" name="color" class="radio-tile" value="<?php echo $row['code']; ?>">
-                <label for="<?php echo $row['id']; ?>" class="radio-tile-label" style="background: <?php echo $row['code']; ?>;">
-                    <?php echo $row['name']; ?>
-                </label>
-            <?php endforeach; ?>
+        <hr/>
+        <?php if ($serverInfo['color_enabled'] === '0'): ?>
+        <p>Выберите цвет</p>
+        <div class="colors">
+            <div class="d-flex gap-3">
+                <?php foreach ($CodeColors as $row): ?>
+                    <input type="radio" id="<?php echo $row['id']; ?>" name="color" class="radio-tile" value="<?php echo $row['code']; ?>">
+                    <label for="<?php echo $row['id']; ?>" class="radio-tile-label" style="background: <?php echo $row['code']; ?>;">
+                        <?php echo $row['name']; ?>
+                    </label>
+                <?php endforeach; ?>
+            </div>
         </div>
-    </div>
-
+            <?php else:?>
+            Услуга будет продлена. <br/>
+            Текущий срок действия оплачен до: <?php echo date("d.m.Y [H:i]", $serverInfo['color_expired_date']); ?>
+        <?php endif;?>
 
     <?php elseif ($type == 'razz'): ?>
-        <?php if ($serverInfo['ban'] == "0"): ?>
-            <div class="alert alert-danger">
-                Вы не можете купить эту услугу, так как сервер не находится в бане.
-            </div>
-            <?php exit();?>
-        <?php endif; ?>
-
+            <?php if ($serverInfo['ban'] == "0"): ?>
+                <div class="alert alert-danger">
+                    Вы не можете купить эту услугу, так как сервер не находится в бане.
+                </div>
+                <?php exit();?>
+            <?php endif; ?>
+    <?php elseif ($type == 'votes'): ?>
+        <hr>
+        Текущее количество голосов: <?php echo $serverInfo['rating']; ?>
+    <?php elseif ($type == 'boost'): ?>
+        <hr>
+        Текущее количество кругов: <?php echo $serverInfo['boost']; ?>
     <?php endif; ?>
+
 
     <?php if (isset($type)): ?>
     <div class="pay-methods">
@@ -108,34 +121,25 @@
     <?php endif; ?>
 
 <script>
-    let additionalData = {};
-
-
     $(document).ready(function () {
 
         <?php if ($type === 'top' or $type === "color"): ?>
-        $(".pay-methods").hide();
+        // $(".pay-methods").hide();
 
         <?php endif; ?>
 
         $('.colors .radio-tile').change(function() {
             if ($(".colors .radio-tile:checked").length > 0) {
-                // Сохраняем выбранный цвет
-                additionalData.color = $(".colors .radio-tile:checked").val();
                 $('.pay-methods').fadeIn(300);
             } else {
-                delete additionalData.color;
                 $('.pay-methods').fadeOut(300);
             }
         });
 
         $('.top-place .radio-tile').change(function() {
             if ($(".top-place .radio-tile:checked").length > 0) {
-                // Сохраняем выбранное место
-                additionalData.place = $(".top-place .radio-tile:checked").val();
                 $('.pay-methods').fadeIn(300);
             } else {
-                delete additionalData.place;
                 $('.pay-methods').fadeOut(300);
             }
         });
@@ -146,17 +150,15 @@
     function payUserBalance() {
         toggleButtonLoader($("#pay-button"), true);
 
-
-        const requestData = {
-            'id_services': <?php echo $infoServices['id']; ?>,
-            ...additionalData
-        };
-
         $.ajax({
             url: '/pay/<?php echo $serverInfo['id']; ?>/ajax',
             method: 'POST',
             dataType: 'json',
-            data: requestData,
+            data:  {
+                id_services: <?php echo $idServices; ?>,
+                place: document.querySelector(".top-place .radio-tile:checked")?.value || null,
+                color: document.querySelector(".colors .radio-tile:checked")?.value || null
+            },
             success: function(data) {
                 switch (data.status) {
                     case "error":
@@ -179,27 +181,24 @@
     function selectPaymentMethod(method, el) {
         toggleActive(el);
 
-
-
-
         if (method === "user_balance") {
             $("#pay-button").replaceWith('<button id="pay-button" onclick="payUserBalance(); return false;" type="submit" class="btn btn-primary btn-sm">Оплатить</button>');
         } else {
             $("#pay-button").replaceWith('<button id="pay-button" type="submit" class="btn btn-primary btn-sm">Перейти к оплате</button>');
-
-            const requestData = {
-                payment_method: method,
-                id_services: <?php echo $idServices; ?>,
-                ...additionalData
-            };
-            console.log(requestData)
 
             fetch('/pay/<?php echo $serverInfo['id'];?>/get-pay-form', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(requestData)
+                body: JSON.stringify(
+                    {
+                        id_services: <?php echo $idServices; ?>,
+                        payment_method: method,
+                        place: document.querySelector(".top-place .radio-tile:checked")?.value || null,
+                        color: document.querySelector(".colors .radio-tile:checked")?.value || null
+                    }
+                )
             })
                 .then(response => response.json())
                 .then(data => {

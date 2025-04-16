@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="description" content="GMS - это веб движок запрограммированный на языке PHP, для отслеживание за статусами игровых серверов"/>
-    <meta name="keywords" content="мониторинг серверов, игровой мониторинг, gms, gms v3.2, система отслеживания за статусами игровых серверов, раскрутка сервера"/>
-    <link rel="stylesheet" href="/public/default2/css/style.css"/>
+    <meta name="keywords" content="мониторинг серверов, игровой мониторинг, gms, gms v3.2.1, система отслеживания за статусами игровых серверов, раскрутка сервера"/>
+    <link rel="stylesheet" href="/public/default2/css/style.css?v=1.0.6"/>
     <link rel="stylesheet" href="/public/default2/css/bootstrap.css"/>
     <link rel="stylesheet" href="/public/default2/css/roboto.css"/>
     <link rel="stylesheet" href="/public/css/font-awesome.min.css"/>
@@ -61,7 +61,7 @@
                                     <a href="#!" class="text-white">О нас</a>
                                 </li>
                                 <li>
-                                    <a href="#!" class="text-white">Банлист</a>
+                                    <a href="/banlist" class="text-white">Банлист</a>
                                 </li>
                                 <li>
                                     <a href="/news" class="text-white">Новости</a>
@@ -93,17 +93,13 @@
                         </div>
                 </section>
                 <hr class="mb-4"/>
-
             </div>
 
             <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
                 Powered by <a class="text-white" href="https://game-ms.ru" target="_blank">GMS <?php echo VERSION;?></a>
             </div>
-
         </div>
     </div>
-
-
 
 
 <script src="/public/new-style/js/bootstrap.bundle.min.js"></script>

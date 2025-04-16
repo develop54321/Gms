@@ -25,15 +25,14 @@ class ServerController extends BaseController
         if (parent::isAjax()) {
             $game = strip_tags($_POST['game']);
             $ip = strip_tags($_POST['ip']);
-            $port = strip_tags($_POST['port']);
-            //$queryPort = strip_tags($_POST['query_port']);
+            $port = strip_tags(trim($_POST['port']));
             $text = strip_tags($_POST['text']);
 
             $isGame = $this->db->prepare('SELECT * FROM ga_games WHERE code = :code and status = :status');
             $isGame->bindValue(":code", $game);
             $isGame->bindValue(":status", 1);
             $isGame->execute();
-            if ($isGame->rowCount() == '0') {
+            if ($isGame->rowCount() === 0) {
                 $answer['status'] = "error";
                 $answer['error'] = "Игра не найден";
                 exit(json_encode($answer));

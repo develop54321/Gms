@@ -48,7 +48,9 @@
                         </td>
 
                         <td>
+                            <span class="address">
                             <?php echo $row['ip']; ?>:<?php echo $row['port']; ?>
+                                </span>
                         </td>
 
                         <td>

@@ -1,17 +1,23 @@
-<div class="row">
-    <div class="col-sm-12">
-        <h4 class="page-title">Изменение услуги</h4>
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Изменение услуги</h1>
+    </div>
+    <div class="ms-auto pageheader-btn">
         <ol class="breadcrumb">
-            <li><a href="/control">Главная</a></li>
-            <li><a href="/control/services">Услуги</a></li>
-            <li class="active">Изменение услуги</li>
+            <li class="breadcrumb-item"><a href="/control">Главная</a></li>
+            <li class="breadcrumb-item"><a href="/control/services">Услуги</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Изменение услуги</li>
         </ol>
     </div>
 </div>
 
-<div class="col-sm-12">
-    <div class="card-box">
-        <h4 class="m-t-0 header-title"><b>Изменение тарифа | услуга <?php echo $data['type']; ?></b></h4>
+<div class="card p-0">
+    <div class="card-header border-bottom">
+        <h5 class="card-title">Изменение услуги - <?php echo $data['type']; ?></h5>
+    </div>
+
+    <div class="card-body">
+
 
 
         <form action="#" id="servicesForm" method="post">
@@ -54,6 +60,7 @@
     </div>
 
 </div>
+
 <script>
     $('#servicesForm').ajaxForm({
         dataType: 'json',

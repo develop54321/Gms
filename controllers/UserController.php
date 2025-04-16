@@ -207,11 +207,6 @@ class UserController extends BaseController
 
     public function servers()
     {
-
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-        $settings = json_decode($settings['content'], true);
-
         $title = "Мои сервера";
         $user = new User();
         $user_profile = $user->isAuth();
@@ -224,7 +219,7 @@ class UserController extends BaseController
 
 
         $pagination = new Pagination();
-        $per_page = 5;
+        $per_page = 10;
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
 
@@ -266,10 +261,10 @@ class UserController extends BaseController
 
         $newArr = [];
 
-        $getPaylogs = $this->db->prepare('SELECT * FROM ga_pay_logs WHERE id_user = :id_user ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
-        $getPaylogs->execute(array(':id_user' => $user_profile['id']));
+        $getPayLogs = $this->db->prepare('SELECT * FROM ga_pay_logs WHERE id_user = :id_user ORDER BY id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
+        $getPayLogs->execute(array(':id_user' => $user_profile['id']));
 
-        foreach ($getPaylogs as $row) {
+        foreach ($getPayLogs as $row) {
             $content = json_decode($row['content'], true);
             if ($content['type_pay'] == 'refill') {
                 $id = $content['id_user'];

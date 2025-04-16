@@ -28,7 +28,7 @@
 
 <?php if($userData):?>
 <div class="text-end">
-    <a href="/user" class="btn btn-outline-light me-2"><?php echo $userData['email'];?></a>
+    <a href="/user" class="btn btn-outline-light me-2">Личный кабинет</a>
     <a href="/user/logout" class="btn btn-logout">Выход</a>
 </div>
 <?php else:?>

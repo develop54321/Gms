@@ -5,7 +5,11 @@ namespace controllers;
 use components\Flash;
 use components\Mail;
 use components\Pagination;
+use components\pay_method\FreekassaClient;
+use components\pay_method\LavaClient;
+use components\pay_method\YooKassaClient;
 use components\pay_method\YooKassaService;
+use components\pay_method\YooMoneyClient;
 use components\ReCaptcha;
 use components\Services;
 use components\System;
@@ -36,7 +40,7 @@ class UserController extends BaseController
         $title = "Панель управления";
         $user = new User();
         $user_profile = $user->isAuth();
-       if ($user_profile === false) return header("Location: /user/login");
+        if ($user_profile === false) return header("Location: /user/login");
 
 
         $sumMonth = 0;
@@ -112,29 +116,36 @@ class UserController extends BaseController
         $user_profile = $user->isAuth();
         if (!$user_profile) header("Location: /user/login");
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (!isset($_POST['typePayment'])){
-                Flash::add("danger", "Выберите способ оплаты");
-                return header("Location: /user/pay");
+        if (parent::isAjax()) {
+
+            if (!isset($_POST['typePayment'])) {
+                $answer['status'] = "error";
+                $answer['error'] = "Способ оплаты не выбран";
+                exit(json_encode($answer));
             }
             $typePayment = (int)$_POST['typePayment'];
-            $amount = (int)$_POST['amout'];
+            $amount = (int)$_POST['amount'];
 
             $CheckPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE id = :id');
             $CheckPayMethods->bindValue(":id", $typePayment);
             $CheckPayMethods->execute();
             if ($CheckPayMethods->rowCount() == '0') parent::ShowError(404, "Страница не найдена!");
-            if ($amount < 0) parent::ShowError(404, "Страница не найдена!");
+            if ($amount <= 0) parent::ShowError(404, "Страница не найдена!");
+
 
             $content = json_encode(['type_pay' => "refill", 'id_user' => $user_profile['id'], 'amount' => $amount]);
 
-            $getInfoPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE id = :id');
-            $getInfoPayMethods->execute(array(':id' => $typePayment));
-            $getInfoPayMethods = $getInfoPayMethods->fetch();
+            $getInfoPayMethod = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE id = :id');
+            $getInfoPayMethod->execute(array(':id' => $typePayment));
+            $getInfoPayMethod = $getInfoPayMethod->fetch();
+            if (!$getInfoPayMethod) {
+                $answer["status"] = "error";
+                $answer["error"] = "Способ оплаты не найден";
+                exit(json_encode($answer));
+            }
 
             $InfoPayment = json_decode($getInfoPayMethods['content'], true);
             $InfoPayment = array_merge($InfoPayment, array('typeCode' => $getInfoPayMethods['typeCode']));
-
 
             $stmt = $this->db->prepare("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods)
             VALUES (:content, :date_create, :status, :id_user, :pay_methods)");
@@ -149,59 +160,105 @@ class UserController extends BaseController
 
             $payId = $this->db->lastInsertId();
 
-            if ($getInfoPayMethods['typeCode'] === "yookassa"){
-                $description = "Оплата счета " . $payId;
-                $returnUrl = BASE_URL . "/result/success";
-
-                $youKassaService = new YooKassaService(
-                    $InfoPayment['shop_id'],
-                    $InfoPayment['secret_key'],
-                );
-
-                try {
-
-                    $res = $youKassaService->createPayment(
+            $description = "Оплата услуги №" . $payId;
+            $htmlForm = null;
+            $paymentUrl = null;
+            switch ($getInfoPayMethod['typeCode']) {
+                case "freekassa":
+                    $sign = md5($infoPaymentSettings['fk_id'] . ":" . $amount . ":" . $infoPaymentSettings['fk_key1'] . ":" . $invoiceId);
+                    $client = new FreekassaClient(
+                        $infoPaymentSettings['fk_id'],
                         $amount,
-                        $description,
-                        $payId,
-                        $returnUrl
+                        $invoiceId,
+                        $sign
                     );
 
-                    $sql = "UPDATE ga_pay_logs SET bill_id = :bill_id WHERE id = :id";
-                    $update = $this->db->prepare($sql);
-                    $update->bindParam(':bill_id', $res['guid'], );
-                    $update->bindParam(':id', $payId);
-                    $update->execute();
+                    $htmlForm = $client->getHtmlForm();
+                    break;
 
 
-                    header("Location: " . $res['url']);
-                }catch (\Exception $e) {
-                    Flash::add("danger", $e->getMessage());
+                case "yoomoney":
+                    $client = new YooMoneyClient(
+                        $infoPaymentSettings['receiver'],
+                        $amount,
+                        $invoiceId,
+                        $description
+                    );
 
-                    return header("Location: /user/pay");
-                }
+
+                    $htmlForm = $client->getHtmlForm();
+                    break;
+
+                case "yookassa":
+                    try {
+                        $client = new YooKassaClient(
+                            $infoPaymentSettings['shop_id'],
+                            $infoPaymentSettings['secret_key']
+                        );
+
+                        /** @var array{guid: string, url: string} $resp */
+                        $resp = $client->createPayment(
+                            $amount,
+                            $description,
+                            $invoiceId
+                        );
+
+                        $paymentUrl = $resp['url'];
+                    } catch (\Exception $e) {
+                        $answer['status'] = "error";
+                        $answer['error'] = $e->getMessage();
+                        exit(json_encode($answer));
+
+                    }
+                    break;
+
+
+                case "lava":
+                    try {
+                        $client = new LavaClient(
+                            $infoPaymentSettings['shop_id'],
+                            $infoPaymentSettings['secret_key']
+                        );
+
+                        /** @var array{guid: string, url: string} $resp */
+                        $resp = $client->createPayment(
+                            $amount,
+                            $invoiceId
+                        );
+
+                        $paymentUrl = $resp['url'];
+                    } catch (\Exception $e) {
+                        $answer['status'] = "error";
+                        $answer['error'] = $e->getMessage();
+                        exit(json_encode($answer));
+
+                    }
+
+
+                    break;
+
+                default:
+                    parent::ShowError(400, "Bad request!");
             }
 
 
-
-            $content = $this->view->renderPartial("user/pay", [
-                'step' => "2",
-                'amount' => $amount,
-                'payId' => $payId,
-                'user_profile' => $user_profile,
-                'InfoPayment' => $InfoPayment
-            ]);
-
-        } else {
-            $status = 1;
-            $getPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE status = :status');
-            $getPayMethods->execute(array(':status' => $status));
-            $getPayMethods = $getPayMethods->fetchAll();
-
-
-            $content = $this->view->renderPartial("user/pay", ['step' => "1", 'user_profile' => $user_profile, 'PayMethods' => $getPayMethods]);
+            $answer['status'] = "success";
+            $answer['payment_form'] = $htmlForm;
+            $answer['payment_url'] = $paymentUrl;
+            exit(json_encode($answer));
 
         }
+
+
+        $status = 1;
+        $getPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE status = :status');
+        $getPayMethods->execute(array(':status' => $status));
+        $getPayMethods = $getPayMethods->fetchAll();
+
+
+        $content = $this->view->renderPartial("user/pay", ['user_profile' => $user_profile, 'pay_methods' => $getPayMethods]);
+
+
         $this->view->render("main", ['content' => $content, 'title' => $title, 'user_profile' => $user_profile]);
     }
 
@@ -315,7 +372,7 @@ class UserController extends BaseController
             $password2 = strip_tags($_POST['password2']);
             $captcha = $_POST['captcha'] ?? null;
 
-            if (!isset($_SESSION['captcha'])){
+            if (!isset($_SESSION['captcha'])) {
                 $answer['status'] = "error";
                 $answer['error'] = "Капча введена не верно!";
                 exit(json_encode($answer));
@@ -373,7 +430,6 @@ class UserController extends BaseController
             VALUES('$email', '$lastname', '$firstname', '$password', 'user', '$time')");
 
 
-
             $content = "
             <p>Здравствуйте!</p>
             <p>Добро пожаловать на <a href=\"" . BASE_URL . "\">" . BASE_URL . "</a>! <br/> Мы рады, что вы присоединились к нам.</p>
@@ -399,7 +455,6 @@ class UserController extends BaseController
             $stmt->bindValue(':message', $message);
             $stmt->bindValue(':date_create', time());
             $stmt->execute();
-
 
 
             unset($_SESSION['captcha']);
@@ -468,8 +523,6 @@ class UserController extends BaseController
                 $update->execute();
 
 
-
-
                 $linkReset = BASE_URL . "/user/reset?code=$resetCode";
 
                 $content = "
@@ -499,8 +552,6 @@ class UserController extends BaseController
                 $stmt->bindValue(':message', $message);
                 $stmt->bindValue(':date_create', time());
                 $stmt->execute();
-
-
 
 
                 $answer['status'] = "success";
@@ -915,7 +966,7 @@ class UserController extends BaseController
 
             $content = $this->view->renderPartial("user/serverpayForm", [
                 'user_profile' =>
-                $user_profile,
+                    $user_profile,
                 'CodeColors' => $getCodeColors,
                 'serverInfo' => $getInfoServerRow,
                 'PayMethods' => $getPayMethods,

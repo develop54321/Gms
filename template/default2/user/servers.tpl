@@ -44,7 +44,7 @@
                         </td>
 
                         <td>
-                            <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo $row['hostname']; ?></a>
+                            <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']); ?></a>
                         </td>
 
                         <td>
@@ -74,7 +74,7 @@
                             <?php endif; ?>
 
                             <?php if ($row['ban'] === 1): ?>
-                                <span class="badge bg-danger">Забанен</span>
+                                <span class="badge bg-danger">Бан</span>
                             <?php else: ?>
                                 <?php if ($row['status'] === 1): ?>
                                     <span class="badge bg-success">Работает</span>

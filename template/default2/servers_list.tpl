@@ -30,7 +30,7 @@
                     <?php widgets\server\game\GameIcon::run($row['game']);?>
                     <a href="?game=<?=$row['game'];?>"></a>
                 </td>
-                <td><a class="hostname" href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo $row['hostname'] ?? 'Сервер недоступен';?></a></td>
+                <td><a class="hostname" href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']);?></a></td>
                 <td>
                     <span class="address">
                         <?php echo $row['ip'];?>:<?php echo $row['port'];?>

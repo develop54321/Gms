@@ -9,7 +9,7 @@
         <?php if (empty($services)): ?>
             <h3 style="text-align: center;">Нет доступных услуг для заказа</h3>
         <?php else: ?>
-            <h4>Выбранный вами сервер: <?php echo $serverInfo['hostname']; ?></h4>
+            <h4>Выбранный вами сервер: <?php echo \widgets\server\hostname\Hostname::run($serverInfo['hostname']); ?></h4>
         <?php endif; ?>
 
         <hr/>

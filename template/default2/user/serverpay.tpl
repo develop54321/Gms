@@ -21,7 +21,7 @@
                 <?php if (empty($services)): ?>
                     <h3 style="text-align: center;">Нету достные услуг для заказа</h3>
                 <?php else: ?>
-                    <h4>Выбранный вами сервер: <?php echo $serverInfo['hostname']; ?></h4>
+                    <h4>Выбранный вами сервер: <?php echo \widgets\server\hostname\Hostname::run($serverInfo['hostname']); ?></h4>
                 <?php endif; ?>
                 <form method="POST" id="serverpay" action="/user/serverpay?id=<?php echo $serverInfo['id']; ?>&step=2">
                     <div class="form-row">

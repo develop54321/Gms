@@ -1,7 +1,7 @@
 <section class="page server-info">
     <div class="container">
         <h1 class="content-title">
-            Информация о сервере - <?php echo $data['hostname'];?>
+            Информация о сервере - <?php echo \widgets\server\hostname\Hostname::run($data['hostname']);?>
         </h1>
         <hr/>
 
@@ -17,7 +17,7 @@
 
                 <div class="col-lg-8 mb-4">
                     <div class="server-info">
-                        <p>Название сервера: <span class="name"><?php echo $data['hostname'];?></span></p>
+                        <p>Название сервера: <span class="name"><?php echo \widgets\server\hostname\Hostname::run($data['hostname']);?></span></p>
                         <p>Игра: <span class="game"> <?php echo $data['game_name'];?></span> </p>
                         <p>Адрес: <span class="address"><?php echo $data['ip'];?>:<?php echo $data['port'];?></span></p>
                         <p>Игроков: <span class="players"><?php echo $data['players'];?>/<?php echo $data['max_players'];?></span></p>

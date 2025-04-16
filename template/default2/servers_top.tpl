@@ -23,7 +23,7 @@ include_once("top_welcome_text.tpl");
                             <div class="hostname"
                                  <?php if ($row['color_enabled'] != null): ?>style="background: <?php echo $row['color_enabled']; ?>
                                          "<?php endif; ?>><a
-                                        href="<?php if ($row['id'] != null): ?>/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info<?php else: ?>/pay<?php endif; ?>"><?php echo $row['hostname']; ?></a>
+                                        href="<?php if ($row['id'] != null): ?>/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info<?php else: ?>/pay<?php endif; ?>"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']); ?></a>
                             </div>
                             <div class="image-map">
                                 <a href="<?php if ($row['id'] != null): ?>/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info<?php else: ?>/pay<?php endif; ?>">

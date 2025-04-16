@@ -95,7 +95,7 @@ use components\System;
                             <td width="3%"><?= $t['id_position'] ?></td>
                             <td width="32%" class="text-truncate" style="max-width: 260px;">
                                 <a href="/server/<?= $t['ip'] ?>:<?= $t['port'] ?>/info">
-                                    <?= htmlspecialchars($t['hostname']) ?>
+                                    <?php echo \widgets\server\hostname\Hostname::run($t['hostname']);?>
                                 </a>
                             </td>
                             <td width="20%">
@@ -133,7 +133,7 @@ use components\System;
                             <td width="3%"><?= $i ?></td>
                             <td width="32%" class="text-truncate" style="max-width: 260px;">
                                 <a href="/server/<?= $b['ip'] ?>:<?= $b['port'] ?>/info">
-                                    <?= htmlspecialchars($b['hostname']) ?>
+                                    <?php echo \widgets\server\hostname\Hostname::run($b['hostname']); ?>
                                 </a>
                             </td>
                             <td width="20%">
@@ -172,7 +172,7 @@ use components\System;
                             <td width="3%"><?= $i ?></td>
                             <td width="32%" class="text-truncate" style="max-width: 260px;">
                                 <a href="/server/<?= $v['ip'] ?>:<?= $v['port'] ?>/info">
-                                    <?= htmlspecialchars($v['hostname']) ?>
+                                    <?php echo \widgets\server\hostname\Hostname::run($v['hostname']); ?>
                                 </a>
                             </td>
                             <td width="20%">
@@ -211,7 +211,7 @@ use components\System;
                             <td width="3%"><?= $i ?></td>
                             <td width="32%" class="text-truncate" style="max-width: 260px;">
                                 <a href="/server/<?= $c['ip'] ?>:<?= $c['port'] ?>/info">
-                                    <?= htmlspecialchars($c['hostname']) ?>
+                                    <?php echo \widgets\server\hostname\Hostname::run($c['hostname']); ?>
                                 </a>
                             </td>
                             <td width="20%">
@@ -250,7 +250,7 @@ use components\System;
                             <td width="3%"><?= $i ?></td>
                             <td width="32%" class="text-truncate" style="max-width: 260px;">
                                 <a href="/server/<?= $g['ip'] ?>:<?= $g['port'] ?>/info">
-                                    <?= htmlspecialchars($g['hostname']) ?>
+                                    <?php echo \widgets\server\hostname\Hostname::run($g['hostname']); ?>
                                 </a>
                             </td>
                             <td width="20%">

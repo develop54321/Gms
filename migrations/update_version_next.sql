@@ -23,3 +23,5 @@ INSERT INTO `ga_pay_methods` (`id`, `status`, `name`, `content`, `typeCode`, `te
 DELETE FROM `ga_pay_methods` WHERE `ga_pay_methods`.`id` = 2;
 
 ALTER TABLE `ga_servers` ADD `verification_rand_expired_at` INT(11) NULL AFTER `verification_rand`;
+
+ALTER TABLE `ga_pay_methods` ADD `icon_path` VARCHAR(255) NULL AFTER `text`;

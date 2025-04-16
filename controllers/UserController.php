@@ -118,6 +118,7 @@ class UserController extends BaseController
 
         if (parent::isAjax()) {
 
+
             if (!isset($_POST['typePayment'])) {
                 $answer['status'] = "error";
                 $answer['error'] = "Способ оплаты не выбран";
@@ -144,8 +145,8 @@ class UserController extends BaseController
                 exit(json_encode($answer));
             }
 
-            $InfoPayment = json_decode($getInfoPayMethods['content'], true);
-            $InfoPayment = array_merge($InfoPayment, array('typeCode' => $getInfoPayMethods['typeCode']));
+           // $InfoPayment = json_decode($getInfoPayMethods['content'], true);
+           // $InfoPayment = array_merge($InfoPayment, array('typeCode' => $getInfoPayMethods['typeCode']));
 
             $stmt = $this->db->prepare("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods)
             VALUES (:content, :date_create, :status, :id_user, :pay_methods)");

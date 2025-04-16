@@ -1,3 +1,30 @@
+<style>
+    .card{
+        color: #000;
+    }
+    .payment-method-card {
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .payment-method-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    }
+
+    .payment-method-card.border-primary {
+        border-color: #0d6efd !important;
+    }
+
+    .bg-primary-light {
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+
+    #submit-btn:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+    }
+</style>
 <section class="page">
     <div class="container">
         <h1 class="content-title">
@@ -19,7 +46,6 @@
 
                 <div class="card shadow-sm mb-4">
                     <div class="card-body">
-                        <h3 class="card-title mb-4">Пополнение баланса</h3>
 
                         <!-- Выбор способа оплаты -->
                         <div class="mb-4">
@@ -31,11 +57,11 @@
                                              onclick="selectPaymentMethod('<?php echo $pm['id']; ?>', this);"
                                              data-payment-id="<?php echo $pm['id']; ?>">
                                             <div class="card-body text-center">
-<!--                                                <div class="mb-2">-->
-<!--                                                    <img src="--><?php //echo $pm['icon'] ?? 'https://via.placeholder.com/50'; ?><!--"-->
-<!--                                                         alt="--><?php //echo $pm['name']; ?><!--"-->
-<!--                                                         class="img-fluid" style="max-height: 50px;">-->
-<!--                                                </div>-->
+                                                <div class="mb-2">
+                                                    <img src="<?php echo $pm['icon_path'] ?? 'https://via.placeholder.com/50'; ?>"
+                                                         alt="<?php echo $pm['name']; ?>"
+                                                         class="img-fluid" style="max-height: 50px;">
+                                                </div>
                                                 <h6 class="card-title mb-1"><?php echo $pm['name']; ?></h6>
                                                 <small class="text-muted"><?php echo $pm['text']; ?></small>
                                             </div>
@@ -48,6 +74,8 @@
                         <!-- Ввод суммы -->
                         <div class="mb-4">
                             <label for="amount" class="form-label">Введите сумму</label>
+
+
                             <div class="input-group has-validation">
                                 <input type="number"
                                        name="amount"
@@ -62,6 +90,14 @@
                                     Пожалуйста, введите корректную сумму
                                 </div>
                             </div>
+
+
+                            <div class="d-flex flex-wrap gap-2 mb-3 mt-2">
+                                <button type="button" class="btn btn-outline-primary quick-amount" data-amount="100">100 ₽</button>
+                                <button type="button" class="btn btn-outline-primary quick-amount" data-amount="500">500 ₽</button>
+                                <button type="button" class="btn btn-outline-primary quick-amount" data-amount="1000">1 000 ₽</button>
+                            </div>
+
                             <div class="d-flex justify-content-between mt-2">
                                 <small class="text-muted">Минимальная сумма: 10 ₽</small>
                                 <small class="text-muted">Максимальная сумма: 50 000 ₽</small>
@@ -90,6 +126,29 @@
 
 </section>
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const amountInput = document.getElementById('amount');
+        const quickAmountButtons = document.querySelectorAll('.quick-amount');
+
+        quickAmountButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const amount = this.getAttribute('data-amount');
+                amountInput.value = amount;
+
+                // Удаляем активный класс со всех кнопок
+                quickAmountButtons.forEach(btn => btn.classList.remove('active'));
+                // Добавляем активный класс к текущей кнопке
+                this.classList.add('active');
+            });
+        });
+
+        // Обработчик для ручного ввода - снимает выделение с кнопок
+        amountInput.addEventListener('input', function() {
+            quickAmountButtons.forEach(btn => btn.classList.remove('active'));
+        });
+    });
+
+
     // Выбор способа оплаты
     function selectPaymentMethod(paymentId, element) {
         // Удаляем активный класс у всех карточек
@@ -119,36 +178,7 @@
             this.classList.remove('is-invalid');
         }
     });
-</script>
 
-<style>
-    .card{
-        color: #000;
-    }
-    .payment-method-card {
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-
-    .payment-method-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    }
-
-    .payment-method-card.border-primary {
-        border-color: #0d6efd !important;
-    }
-
-    .bg-primary-light {
-        background-color: rgba(13, 110, 253, 0.05);
-    }
-
-    #submit-btn:disabled {
-        opacity: 0.65;
-        cursor: not-allowed;
-    }
-</style>
-<script>
     function submit() {
         toggleButtonLoader($("#submit-btn"), true);
 

@@ -35,7 +35,7 @@
                 <tr id="services<?= $row['id']; ?>">
                     <td><?= $row['id']; ?></td>
                     <td><?= $row['name']; ?></td>
-                    <td><?php if ($row['status'] === 1): ?>Активно<?php else: ?>Отключена<?php endif; ?></td>
+                    <td>Активно</td>
                     <td style="text-align: right;">
                         <a href="/control/paymethods/edit?id=<?php echo $row['id']; ?>" class="text-muted"
                            title="Изменить платежную систему"><i class="fa fa-pencil"></i></a>

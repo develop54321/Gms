@@ -145,13 +145,14 @@
 
                     <img class="w-100" src="<?php echo $data['img_map'];?>" alt="<?php echo $data['map'];?>">
 
-                    <a onclick="ShowModal('<?= $data['id']; ?>', 'showPlayers');return false;" class="btn btn-success players-btn mt-2">Показать игроков</a>
+                    <a onclick="ShowModal('<?= $data['id']; ?>', 'showPlayers');return false;" class="btn btn-success players-btn mt-2 btn-sm w-100">Показать игроков</a>
                 </div>
             </div>
         </div>
 
 
             <script>
+
                 $('#addComment').ajaxForm({
                     dataType: 'json',
                     url: "/server/addcomment",
@@ -168,22 +169,6 @@
                         }
                     },
                 });
-
-
-                var id = <?php echo $data['id'];?>
-                ;
-                //setInterval(getPlayers, 5000);
-                getPlayers();
-
-                function getPlayers() {
-                    $.ajax({
-                        url: "/server/getplayers",
-                        data: {'id':id},
-                        success: function (data) {
-                            $("#contentPlayers").html(data);
-                        }
-                    });
-                }
 
             </script>
         <?php endif;?>

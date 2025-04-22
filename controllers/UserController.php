@@ -197,7 +197,7 @@ class UserController extends BaseController
                 case "yookassa":
                     try {
                         $client = new YooKassaClient(
-                            $infoPaymentSettings['shop_id'],
+                            (int)$infoPaymentSettings['shop_id'],
                             $infoPaymentSettings['secret_key']
                         );
 
@@ -281,7 +281,7 @@ class UserController extends BaseController
 
 
         $pagination = new Pagination();
-        $per_page = 10;
+        $per_page = 15;
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
 
@@ -317,7 +317,7 @@ class UserController extends BaseController
 
 
         $pagination = new Pagination();
-        $per_page = 10;
+        $per_page = 15;
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
 

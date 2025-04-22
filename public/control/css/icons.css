@@ -1,11 +1,3 @@
-/*Color variables*/
-/*Gradient variables*/
-/*Background variables*/
-/*gray variables*/
-/*white variables*/
-/*black variables*/
-/*shadow variables*/
-/*text variables*/
 @import url("../iconfonts/font-awesome/css/font-awesome.min.css");
 @import url("../iconfonts/glyphicons/glyphicon.css");
 @import url("../iconfonts/ionicons/ionicons.css");
@@ -17,4 +9,3 @@
 @import url("../iconfonts/typicons/typicons.css");
 @import url("../iconfonts/weathericons/weathericons.css");
 @import url("../iconfonts/feather/feather.css");
-@import url("../plugins/iconfonts/remixicon/remixicon.css");

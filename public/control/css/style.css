@@ -1,151 +1,5 @@
 @charset "UTF-8";
 /*------------------------------------------------------------------
-[Master Stylesheet]
-
-Project        :   Noa – Bootstrap  Admin & Dashboard Template
-Copyright      :   Spruko Technologies Private Limited 
-Author         :   Spruko
-Author URL     :   https://themeforest.net/user/spruko
-Support	       :   support@spruko.com
-License        :   Licensed under ThemeForest License
-
--------------------------------------------------------------------*/
-/*Gradient variables*/
-/*Background variables*/
-/*gray variables*/
-/*white variables*/
-/*black variables*/
-/*shadow variables*/
-/*Dark Theme Variables*/
-/*Transparent variables*/
-/*
---- accordion
---- alert
---- avatars
---- badges
---- blackquote
---- bootstrap-styles
---- breadcrumb
---- button
---- buttons
---- cards
---- carousel
---- dropdown
---- forms
---- grid
---- input-group
---- modal
---- navigation
---- opacity
---- pagination
---- panel
---- popover
---- progress
---- tables
---- tags
---- thumbnail
---- tooltip
---- components-col
---- count-down
---- custom-forms
---- custom-styles
---- font
---- gallery
---- highlight
---- labels
---- landing
---- list-group
---- media
---- navbar
---- pricing
---- rating
---- tabs-menu
---- timeline
---- dark-style
---- footer
---- header
---- horizontal-menu
---- icons-list
---- item-styles
---- loaders
---- rtl
---- datepicker
---- jvector
---- select2
---- select-group
---- selectize
---- accordion
---- amazeui.datetimepicker
---- bootstrap-datepicker
---- bootstrap-editable
---- buttons.bootstrap5
---- classic
---- dataTables.bootstrap
---- demo
---- fancy_fileupload
---- fileupload
---- flipclock
---- fullcalendar
---- gallery
---- inputtags
---- ion.rangeSlider
---- ion.rangeSlider.skinFlat
---- jquery.countdown
---- jquery.growl
---- jquery.simple-dtpicker
---- jquery.timepicker
---- jquerysctipttop
---- leaflet
---- main
---- morris
---- nano.min
---- notifIt
---- nv.d3
---- owl.carousel
---- perfect-scrollbar
---- prism
---- quill.bubble
---- quill.snow
---- responsive.bootstrap5
---- richtext
---- select2.min
---- smart_wizard
---- smart_wizard_theme_arrows
---- smart_wizard_theme_circles
---- smart_wizard_theme_dots
---- star-rating-svg
---- summernote1
---- sweetalert
---- tabs
---- timeline
---- closed-menu
---- hover-submenu
---- hover-submenu-style1
---- sidemenu
---- sidemenu-icontext
---- calender
---- chart
---- chat
---- error-pages
---- form-wizard
---- range
---- ribbon
---- weather-cards
---- widgets
---- alignments
---- background
---- border
---- display
---- float-elements
---- height
---- margin
---- padding
---- position
---- typography
---- width
-*/
-/* ######## FONT ######## */
-/*-------- Bootstrap Framework -------*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 /* ######## BOOTSTRAP ######## */
@@ -111983,3 +111837,28 @@ textarea.form-control {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+.btn-spinners .loading {
+    position: relative;
+    padding-left: 20px;
+}
+
+.btn-spinners .loading::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    margin-top: -7px;
+    border: 2px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

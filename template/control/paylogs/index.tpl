@@ -138,7 +138,9 @@
                         <?php echo $row['payMethods']; ?></td>
                     <td><?php echo \widgets\money\Money::run($row['price']); ?></td>
                     <td>
-                        <?php widgets\user\paylogs\status\Status::run($row['status']); ?>
+                        <span class="badge bg-dark my-1"><?php widgets\user\paylogs\status\Status::run($row['status']); ?></span>
+
+
                     </td>
                 </tr>
             <?php endforeach; ?>

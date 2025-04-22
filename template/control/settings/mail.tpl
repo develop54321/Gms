@@ -1,4 +1,4 @@
-<div class="page-header">
+    <div class="page-header">
     <div>
         <h1 class="page-title">Настройки почт</h1>
     </div>
@@ -84,7 +84,7 @@
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary text-uppercase waves-effect waves-light">
+                <button type="submit" class="btn btn-primary">
                     Сохранить
                 </button>
             </div>
@@ -93,7 +93,7 @@
 </div>
 
 
-<script>
+    <script>
     $(document).ready(function() {
         function toggleSmtpSettings() {
             if ($('select[name="mail_params[type]"]').val() === 'smtp') {
@@ -110,8 +110,13 @@
             toggleSmtpSettings();
         });
 
+        var $btn = $(this).find('button[type="submit"]');
         $('#settingsMailForm').ajaxForm({
             dataType: 'json',
+            beforeSubmit: function() {
+                $btn.toggleButtonLoader(true);
+
+            },
             success: function (data) {
                 switch (data.status) {
                     case "error":
@@ -122,9 +127,12 @@
                         ShowModal(data.success, 'answer', 'success');
                         break;
                 }
+
+                $btn.toggleButtonLoader(false);
             },
 
             error: function(xhr, status, error) {
+                $btn.toggleButtonLoader(false);
                 console.log(xhr.status);
                 console.log(error);
             }

@@ -3,6 +3,7 @@
 namespace controllers;
 
 use components\Flash;
+use components\Json;
 use components\Mail;
 use components\Pagination;
 use components\pay_method\FreekassaClient;
@@ -116,16 +117,20 @@ class UserController extends BaseController
         $user_profile = $user->isAuth();
         if (!$user_profile) header("Location: /user/login");
 
+
+
         if (parent::isAjax()) {
 
+            $dataPost = $this->readPostJson();
 
-            if (!isset($_POST['typePayment'])) {
+
+            if ($dataPost['typePayment'] === null) {
                 $answer['status'] = "error";
                 $answer['error'] = "Способ оплаты не выбран";
                 exit(json_encode($answer));
             }
-            $typePayment = (int)$_POST['typePayment'];
-            $amount = (int)$_POST['amount'];
+            $typePayment = (int)$dataPost['typePayment'];
+            $amount = (int)$dataPost['amount'];
 
             $CheckPayMethods = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE id = :id');
             $CheckPayMethods->bindValue(":id", $typePayment);
@@ -139,14 +144,13 @@ class UserController extends BaseController
             $getInfoPayMethod = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE id = :id');
             $getInfoPayMethod->execute(array(':id' => $typePayment));
             $getInfoPayMethod = $getInfoPayMethod->fetch();
+            $infoPaymentSettings = Json::decode($getInfoPayMethod['content'], true);
             if (!$getInfoPayMethod) {
                 $answer["status"] = "error";
                 $answer["error"] = "Способ оплаты не найден";
                 exit(json_encode($answer));
             }
 
-           // $InfoPayment = json_decode($getInfoPayMethods['content'], true);
-           // $InfoPayment = array_merge($InfoPayment, array('typeCode' => $getInfoPayMethods['typeCode']));
 
             $stmt = $this->db->prepare("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods)
             VALUES (:content, :date_create, :status, :id_user, :pay_methods)");
@@ -156,12 +160,12 @@ class UserController extends BaseController
             $stmt->bindValue(':date_create', time(), PDO::PARAM_INT);
             $stmt->bindValue(':status', 'expects');
             $stmt->bindValue(':id_user', $user_profile['id'], PDO::PARAM_INT);
-            $stmt->bindValue(':pay_methods', $getInfoPayMethods['typeCode']);
+            $stmt->bindValue(':pay_methods', $getInfoPayMethod['typeCode']);
             $stmt->execute();
 
-            $payId = $this->db->lastInsertId();
+            $invoiceId = $this->db->lastInsertId();
 
-            $description = "Оплата услуги №" . $payId;
+            $description = "Оплата услуги №" . $invoiceId;
             $htmlForm = null;
             $paymentUrl = null;
             switch ($getInfoPayMethod['typeCode']) {

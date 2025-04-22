@@ -50,23 +50,34 @@
 </div>
 
 <script>
-    $('#settingsMailTestForm').ajaxForm({
-        dataType: 'json',
-        success: function (data) {
-            switch (data.status) {
-                case "error":
-                    ShowModal(data.error, 'answer', 'error');
-                    break;
+    $(document).ready(function() {
+        var $btn = $(this).find('button[type="submit"]');
 
-                case "success":
-                    ShowModal(data.success, 'answer', 'success');
-                    break;
+        $('#settingsMailTestForm').ajaxForm({
+            dataType: 'json',
+            beforeSubmit: function () {
+                $btn.toggleButtonLoader(true);
+
+            },
+            success: function (data) {
+                switch (data.status) {
+                    case "error":
+                        ShowModal(data.error, 'answer', 'error');
+                        break;
+
+                    case "success":
+                        ShowModal(data.success, 'answer', 'success');
+                        break;
+                }
+
+                $btn.toggleButtonLoader(false);
+            },
+
+            error: function (xhr, status, error) {
+                $btn.toggleButtonLoader(false);
+                console.log(xhr.status);
+                console.log(error);
             }
-        },
-
-        error: function(xhr, status, error) {
-            console.log(xhr.status);
-            console.log(error);
-        }
-    });
+        });
+    })
 </script>

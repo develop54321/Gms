@@ -104,12 +104,16 @@
                             </div>
                         </div>
 
+                        <input type="hidden" id="paymentId">
+                        <input type="hidden" id="amount">
+
                         <!-- Кнопка оплаты -->
                         <div class="d-grid gap-2 mt-4">
                             <button type="submit" class="btn btn-primary btn-sm" id="submit-btn" onclick="submit()" disabled>
                                 <i class="bi bi-credit-card me-2"></i> Перейти к оплате
                             </button>
                         </div>
+
 
                         <!-- Соглашение -->
                         <div class="mt-3 text-center">
@@ -151,19 +155,12 @@
 
     // Выбор способа оплаты
     function selectPaymentMethod(paymentId, element) {
-        // Удаляем активный класс у всех карточек
         document.querySelectorAll('.payment-method-card').forEach(card => {
             card.classList.remove('border-primary', 'bg-primary-light');
         });
-
-        // Добавляем активный класс выбранной карточке
         element.closest('.payment-method-card').classList.add('border-primary', 'bg-primary-light');
-
-        // Активируем кнопку оплаты
         document.getElementById('submit-btn').disabled = false;
-
-        // Здесь можно добавить логику для выбранного метода оплаты
-        console.log('Выбран метод оплаты:', paymentId);
+        $("#paymentId").val(paymentId)
     }
 
     // Валидация суммы
@@ -179,21 +176,19 @@
         }
     });
 
+
     function submit() {
         toggleButtonLoader($("#submit-btn"), true);
-
-
-
-
             fetch('/user/pay', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
                 },
                 body: JSON.stringify(
                     {
-                        place: document.querySelector(".top-place .radio-tile:checked")?.value || null,
-                        color: document.querySelector(".colors .radio-tile:checked")?.value || null
+                        typePayment: $("#paymentId").val(),
+                        amount:  $("#amount").val(),
                     }
                 )
             })
@@ -201,15 +196,18 @@
                 .then(data => {
                     if (data.status === "success") {
                         if (data.payment_url) {
-                            document.getElementById('pay-button').onclick = function () {
+                            document.getElementById('submit-btn').onclick = function () {
                                 window.location.href = data.payment_url;
                             };
                         } else if (data.payment_form) {
-                            document.getElementById('pay-button').onclick = function () {
+                            document.getElementById('submit-btn').onclick = function () {
                                 document.body.innerHTML += data.payment_form;
                                 document.getElementById("paymentForm").submit();
                             };
                         }
+                    }if (data.status === "error") {
+                        ShowModal(data.error, 'answer', 'error');
+                        toggleButtonLoader($("#submit-btn"), false);
                     } else {
                         toggleButtonLoader($("#submit-btn"), false);
                         alert('Ошибка при получении данных для оплаты.');

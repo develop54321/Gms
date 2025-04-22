@@ -32,4 +32,26 @@ $(document).ready(function () {
 });
 
 
+$.fn.toggleButtonLoader = function(show) {
+    return this.each(function () {
+        var $btn = $(this);
 
+        if (show) {
+            $btn.data('original-text', $btn.html());
+            $btn.css({
+                width: $btn.outerWidth(),
+                height: $btn.outerHeight()
+            });
+            $btn.prop('disabled', true);
+
+
+            $btn.html('<span class="loading">Загрузка...</span>');
+            $btn.addClass('btn-spinners');
+        } else {
+            $btn.html($btn.data('original-text'));
+            $btn.css({ width: '', height: '' });
+            $btn.prop('disabled', false);
+            $btn.removeClass('btn-spinners');
+        }
+    });
+};

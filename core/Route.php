@@ -62,8 +62,6 @@ class Route
                 $r->addRoute('GET', '/servers', ['controllers\UserController', 'servers']);
                 $r->addRoute('GET', '/removeserver', ['controllers\UserController', 'removeServer']);
                 $r->addRoute(['GET', 'POST'], '/pay', ['controllers\UserController', 'pay']);
-                $r->addRoute(['GET', 'POST'], '/serverpay', ['controllers\UserController', 'serverPay']);
-                $r->addRoute(['GET', 'POST'], '/getform', ['controllers\UserController', 'getForm']);
                 $r->addRoute('GET', '/pay-logs', ['controllers\UserController', 'payLogs']);
                 $r->addRoute('GET', '', ['controllers\UserController', 'index']);
             });

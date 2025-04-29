@@ -58,7 +58,7 @@
                                              data-payment-id="<?php echo $pm['id']; ?>">
                                             <div class="card-body text-center">
                                                 <div class="mb-2">
-                                                    <img src="<?php echo $pm['icon_path'] ?? 'https://via.placeholder.com/50'; ?>"
+                                                    <img src="<?php echo $pm['icon_path'] ?? 'not found'; ?>"
                                                          alt="<?php echo $pm['name']; ?>"
                                                          class="img-fluid" style="max-height: 50px;">
                                                 </div>
@@ -83,7 +83,7 @@
                                        class="form-control"
                                        required
                                        placeholder="0"
-                                       min="1"
+                                       min="0"
                                        step="1">
                                 <span class="input-group-text">₽</span>
                                 <div class="invalid-feedback">
@@ -119,7 +119,7 @@
                         <div class="mt-3 text-center">
                             <small class="text-muted">
                                 Нажимая "Перейти к оплате", вы соглашаетесь с
-                                <a href="/terms" target="_blank">условиями договора</a>
+                                <a href="#" target="_blank">условиями договора</a>
                             </small>
                         </div>
                     </div>
@@ -139,14 +139,11 @@
                 const amount = this.getAttribute('data-amount');
                 amountInput.value = amount;
 
-                // Удаляем активный класс со всех кнопок
                 quickAmountButtons.forEach(btn => btn.classList.remove('active'));
-                // Добавляем активный класс к текущей кнопке
                 this.classList.add('active');
             });
         });
 
-        // Обработчик для ручного ввода - снимает выделение с кнопок
         amountInput.addEventListener('input', function() {
             quickAmountButtons.forEach(btn => btn.classList.remove('active'));
         });
@@ -171,8 +168,10 @@
 
         if (amount < minAmount || amount > maxAmount) {
             this.classList.add('is-invalid');
+            document.getElementById('submit-btn').disabled = true;
         } else {
             this.classList.remove('is-invalid');
+            document.getElementById('submit-btn').disabled = false;
         }
     });
 

@@ -31,3 +31,12 @@ DELETE FROM `ga_pay_methods` WHERE `ga_pay_methods`.`id` = 1;
 DELETE FROM `ga_pay_methods` WHERE `ga_pay_methods`.`id` = 2;
 
 UPDATE `ga_pay_methods` SET `name` = 'ЮMoney' WHERE `ga_pay_methods`.`id` = 4
+
+UPDATE `ga_settings` SET `params_mail` = '{\"type\":\"smtp\",\"from\":\"\",\"smtp_server\":\"\",\"smtp_port\":\"\",\"encrypt\":\"\",\"smtp_username\":\"\",\"smtp_password\":\"\",\"auto_tls\":false}' WHERE `ga_settings`.`id` = 1;
+
+
+
+UPDATE `ga_pay_methods` SET `icon_path` = '/public/img/pay_methods/free-kassa.png' WHERE `ga_pay_methods`.`id` = 3;
+UPDATE `ga_pay_methods` SET `icon_path` = '/public/img/pay_methods/yoomoney.png' WHERE `ga_pay_methods`.`id` = 4;
+UPDATE `ga_pay_methods` SET `icon_path` = '/public/img/pay_methods/yookassa.png' WHERE `ga_pay_methods`.`id` = 5;
+UPDATE `ga_pay_methods` SET `icon_path` = '/public/img/pay_methods/lava.png' WHERE `ga_pay_methods`.`id` = 6;

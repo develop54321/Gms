@@ -51,6 +51,11 @@ abstract class BaseController
         return false;
     }
 
+    public function isPostRequest(): bool
+    {
+        return $_SERVER['REQUEST_METHOD'] === 'POST';
+    }
+
     public function readPostJson()
     {
         $postData = file_get_contents('php://input');

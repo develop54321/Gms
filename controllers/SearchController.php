@@ -14,7 +14,7 @@ class SearchController extends BaseController
         $query = null;
         $getServers = null;
 
-        if (isset($_POST['query'])){
+        if ($this->isPostRequest() && isset($_POST['query'])){
             $query = $_POST['query'];
             $query = explode(":", $query);
             if (!isset($query[1])) $query[1] = null;

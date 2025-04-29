@@ -34,10 +34,8 @@
                         <tr>
                             <td><?php echo $row['id']; ?></td>
                             <td>
-                                <?php if ($row['type_pay'] == 'payApi'): ?>
-                                    <b>[API]</b><?php endif; ?> <?php echo $row['servicesName']; ?>
-                                (<?php if ($row['type_pay'] == 'refill'): ?>id пользователя<?php elseif ($row['type_pay'] == 'payServices' or $row['type_pay'] == 'payApi'): ?>id сервера<?php endif; ?>
-                                #<?php echo $row['id_object']; ?>)
+
+                                <?php echo $row['servicesName']; ?>
                             </td>
                             <td><?php echo date("d.m.Y [H:i]", $row['date_create']); ?></td>
                             <td>

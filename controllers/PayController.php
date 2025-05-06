@@ -20,7 +20,7 @@ class PayController extends BaseController
 
     public function index()
     {
-        $title = "Платные услуги";
+        $title = "Заказ платной услуги";
 
         if (isset($_POST['query'])) {
             $query = $_POST['query'];

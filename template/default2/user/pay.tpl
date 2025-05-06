@@ -12,17 +12,18 @@
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
     }
 
-    .payment-method-card.border-primary {
-        border-color: #0d6efd !important;
-    }
-
-    .bg-primary-light {
-        background-color: rgba(13, 110, 253, 0.05);
-    }
 
     #submit-btn:disabled {
         opacity: 0.65;
         cursor: not-allowed;
+    }
+
+    .invalid-feedback {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        z-index: 1;
     }
 </style>
 <section class="page">
@@ -91,8 +92,7 @@
                                 </div>
                             </div>
 
-
-                            <div class="d-flex flex-wrap gap-2 mb-3 mt-2">
+                            <div class="d-flex flex-wrap gap-2 mb-3 mt-4">
                                 <button type="button" class="btn btn-outline-primary quick-amount" data-amount="100">100 ₽</button>
                                 <button type="button" class="btn btn-outline-primary quick-amount" data-amount="500">500 ₽</button>
                                 <button type="button" class="btn btn-outline-primary quick-amount" data-amount="1000">1 000 ₽</button>
@@ -107,7 +107,7 @@
                         <input type="hidden" id="paymentId">
                         <input type="hidden" id="amount">
 
-                        <!-- Кнопка оплаты -->
+
                         <div class="d-grid gap-2 mt-4">
                             <button type="submit" class="btn btn-primary btn-sm" id="submit-btn" onclick="submit()" disabled>
                                 <i class="bi bi-credit-card me-2"></i> Перейти к оплате
@@ -195,16 +195,15 @@
                 .then(data => {
                     if (data.status === "success") {
                         if (data.payment_url) {
-                            document.getElementById('submit-btn').onclick = function () {
-                                window.location.href = data.payment_url;
-                            };
+                            window.location.href = data.payment_url;
                         } else if (data.payment_form) {
-                            document.getElementById('submit-btn').onclick = function () {
-                                document.body.innerHTML += data.payment_form;
-                                document.getElementById("paymentForm").submit();
-                            };
+                            document.body.innerHTML += data.payment_form;
+                            document.getElementById("paymentForm").submit();
+                            setTimeout(function () {
+                                toggleButtonLoader($("#submit-btn"), false);
+                            }, 1000)
                         }
-                    }if (data.status === "error") {
+                    }else if (data.status === "error") {
                         ShowModal(data.error, 'answer', 'error');
                         toggleButtonLoader($("#submit-btn"), false);
                     } else {

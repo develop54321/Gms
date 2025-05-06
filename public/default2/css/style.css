@@ -95,12 +95,12 @@ header .nav-link:hover{
     flex: 1 0 auto;
 }
 
-.content .content-title{
-    font-size: 2.4em;
+
+.content-title{
+    font-size: 2.2em;
     border-bottom: 1px solid #d7d7d7;
     margin-bottom: 0.7em;
 }
-
 
 
 

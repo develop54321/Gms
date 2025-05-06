@@ -4,25 +4,16 @@
         <meta charset="UTF-8">
         <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
         <title><?php echo $title;?></title>
-
-        <!-- BOOTSTRAP CSS -->
         <link id="style" href="/public/control/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-
-        <!-- STYLE CSS -->
         <link href="/public/control/css/style.css" rel="stylesheet" />
         <link href="/public/control/css/skin-modes.css" rel="stylesheet" />
-
-        <!--- FONT-ICONS CSS -->
         <link href="/public/control/css/icons.css" rel="stylesheet" />
-        <!-- JQUERY JS -->
         <script src="/public/control/js/jquery.min.js"></script>
         <script src="/public/js/jquery.form.js"></script>
 
 
     </head>
 
-
-<!--    <body class="ltr app sidebar-mini">-->
     <body class="ltr app sidebar-mini">
 
     <div class="page">
@@ -34,9 +25,7 @@
                         <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="/control"></a>
 
                         <a class="logo-horizontal " href="/control">
-                            <img src="/public/img/logo.png" class="header-brand-img desktop-logo" alt="logo">
-                            <img src="/public/img/logo.png" class="header-brand-img light-logo1"
-                                 alt="logo">
+                            GMS
                         </a>
 
                         <div class="d-flex order-lg-2 ms-auto header-right-icons">
@@ -70,9 +59,7 @@
                 <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
                 <div class="app-sidebar">
                     <div class="side-header">
-                        <a class="header-brand1" href="/control">
-                            <img src="/public/img/logo.png" class="header-brand-img" alt="logo">
-                        </a><!-- LOGO -->
+                        <a href="/control">GMS</a>
                     </div>
                     <div class="main-sidemenu">
                         <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg"
@@ -106,20 +93,15 @@
 
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="/control/users">
-<!--                                    <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M21.6,2.7c0-0.2-0.2-0.3-0.4-0.4c-3.8-1-7.9,0.3-10.4,3.3L9.5,7.1L6.8,6.4C5.7,6,4.6,6.5,4.1,7.5L2,11.2c0,0,0,0.1-0.1,0.1c-0.1,0.3,0.1,0.5,0.4,0.6l3.4,0.7c-0.3,0.9-0.6,1.8-0.7,2.7c0,0.2,0,0.3,0.1,0.4l3,2.9c0.1,0.1,0.2,0.1,0.4,0.1c0,0,0,0,0,0c0.9-0.1,1.9-0.3,2.8-0.6l0.7,3.3c0,0.2,0.3,0.4,0.5,0.4c0.1,0,0.2,0,0.2-0.1l3.7-2.1c0.9-0.5,1.3-1.6,1.1-2.6l-0.7-2.9l1.4-1.3C21.3,10.5,22.6,6.5,21.6,2.7z M3.2,11.1L4.9,8c0.3-0.6,0.9-0.8,1.5-0.6l2.3,0.6L7.7,9.2c-0.6,0.8-1.2,1.6-1.6,2.5L3.2,11.1z M16,19l-3.1,1.8l-0.6-2.9c0.9-0.4,1.7-1,2.5-1.6l1.3-1.2l0.6,2.3C16.7,18,16.5,18.7,16,19z M17.6,12.3l-3.5,3.2c-1.5,1.3-3.4,2.1-5.4,2.3l-2.6-2.6c0.3-2,1.1-3.9,2.4-5.4L10.1,8c0,0,0.1-0.1,0.1-0.1l1.4-1.6c2.2-2.6,5.8-3.8,9.1-3.1C21.4,6.6,20.3,10.1,17.6,12.3z M16.4,5.6c-1.1,0-1.9,0.9-1.9,1.9s0.9,1.9,1.9,1.9c1.1,0,1.9-0.9,1.9-1.9C18.3,6.5,17.5,5.6,16.4,5.6z M16.4,8.5c-0.5,0-0.9-0.4-0.9-0.9c0-0.5,0.4-0.9,0.9-0.9c0.5,0,0.9,0.4,0.9,0.9C17.3,8.1,16.9,8.5,16.4,8.5z"/></svg>-->
-
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16" enable-background="new 0 0 24 24" >
                                         <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
                                     </svg>
-
                                     <span class="side-menu__label">Пользователи</span>
                                 </a>
                             </li>
 
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="/control/servers">
-
-
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="side-menu__icon"  viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
                                     </svg>
@@ -134,7 +116,6 @@
                                 </a>
                             </li>
 
-
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M19,2H9C7.3438721,2.0018311,6.0018311,3.3438721,6,5v1H5C3.3438721,6.0018311,2.0018311,7.3438721,2,9v10c0.0018311,1.6561279,1.3438721,2.9981689,3,3h10c1.6561279-0.0018311,2.9981689-1.3438721,3-3v-1h1c1.6561279-0.0018311,2.9981689-1.3438721,3-3V5C21.9981689,3.3438721,20.6561279,2.0018311,19,2z M17,19c-0.0014038,1.1040039-0.8959961,1.9985962-2,2H5c-1.1040039-0.0014038-1.9985962-0.8959961-2-2v-8h14V19z M17,10H3V9c0.0014038-1.1040039,0.8959961-1.9985962,2-2h10c1.1040039,0.0014038,1.9985962,0.8959961,2,2V10z M21,15c-0.0014038,1.1040039-0.8959961,1.9985962-2,2h-1V9c-0.0008545-0.7719116-0.3010864-1.4684448-0.7803345-2H21V15z M21,6H7V5c0.0014038-1.1040039,0.8959961-1.9985962,2-2h10c1.1040039,0.0014038,1.9985962,0.8959961,2,2V6z"/></svg>
@@ -143,10 +124,8 @@
                                     <li><a href="/control/news" class="slide-item">Новости</a></li>
                                     <li><a href="/control/pages" class="slide-item">Страницы</a></li>
                                     <li><a href="/control/comments" class="slide-item">Комментарии</a></li>
-
                                 </ul>
                             </li>
-
 
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="#">
@@ -197,8 +176,6 @@
     <a href="#top" id="back-to-top"><i class="fa fa-long-arrow-up"></i></a>
 
 
-
-    <!-- BOOTSTRAP JS -->
     <script src="/public/control/plugins/bootstrap/js/popper.min.js"></script>
     <script src="/public/control/plugins/bootstrap/js/bootstrap.min.js"></script>
 

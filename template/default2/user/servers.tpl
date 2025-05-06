@@ -14,13 +14,10 @@
 
             </div>
 
-
             <div class="col-md-10">
                 <div class="alert alert-warning">
                     <b>Как добавить свой сервер?</b>
-                    <p>При добавления сервера через сайт, в авторизованном виде, Вы автоматически становитесь владельцем
-                        данного сервера.
-                    </p>
+                    <p>При добавлении сервера через сайт в авторизованном режиме вы автоматически становитесь владельцем этого сервера.</p>
                 </div>
 
                 <table class="table table-dark">
@@ -54,7 +51,7 @@
                         </td>
 
                         <td>
-                            <?php echo $row['map']; ?> / <?php echo $row['players']; ?>/<?php echo $row['max_players']; ?>
+                            <?php echo $row['map']; ?>
                         </td>
 
                         <td>
@@ -85,7 +82,9 @@
                         </td>
 
                         <td>
+                            <span class="address">
                             <label id="vote<?php echo $row['id']; ?>" class="rating-bg"><?php echo $row['rating']; ?></label>
+                            </span>
                         </td>
 
                         <td style="width: 80px;">

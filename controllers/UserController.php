@@ -149,6 +149,16 @@ class UserController extends BaseController
                 exit(json_encode($answer));
             }
 
+
+
+            if ($infoPaymentSettings === null){
+                $answer['status'] = "error";
+                $answer['error'] = "Настройка способа оплаты не завершена. Обратитесь, пожалуйста, к системному администратору.";
+                exit(json_encode($answer));
+            }
+
+
+
             $content = json_encode(['type_pay' => "refill", 'id_user' => $user_profile['id'], 'amount' => $amount]);
 
             $stmt = $this->db->prepare("INSERT INTO ga_pay_logs (content, date_create, status, id_user, pay_methods)

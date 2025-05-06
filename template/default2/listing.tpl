@@ -83,7 +83,7 @@ use components\System;
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Название сервера</th>
+                        <th>Название</th>
                         <th>Адрес</th>
                         <th>Карта</th>
                         <th>Оплачено до</th>
@@ -121,7 +121,7 @@ use components\System;
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Название сервера</th>
+                        <th>Название</th>
                         <th>Адрес</th>
                         <th>Карта</th>
                         <th>К-во кругов</th>
@@ -160,7 +160,7 @@ use components\System;
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Название сервера</th>
+                        <th>Название</th>
                         <th>Адрес</th>
                         <th>Карта</th>
                         <th>Оплачено до</th>
@@ -199,7 +199,7 @@ use components\System;
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Название сервера</th>
+                        <th>Название</th>
                         <th>Адрес</th>
                         <th>Карта</th>
                         <th>Оплачено до</th>
@@ -238,7 +238,7 @@ use components\System;
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Название сервера</th>
+                        <th>Название</th>
                         <th>Адрес</th>
                         <th>Карта</th>
                         <th>Оплачено до</th>

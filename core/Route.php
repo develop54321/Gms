@@ -136,6 +136,7 @@ class Route
 
             $r->addGroup('/api', function (RouteCollector $r) {
                 $r->addRoute(['POST'], '', ['controllers\ApiController', 'index']);
+                $r->addRoute(['GET'], '/ping', ['controllers\ApiController', 'ping']);
             });
         });
 

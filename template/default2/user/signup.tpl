@@ -43,7 +43,7 @@
 
                     <div class="mb-3">
                         <input type="text" name="captcha" class="form-control" id="captcha" required="" placeholder="Цифры с картинки"/>
-                        <small class="form-text text-muted">Если цифры не видны, то обновите картинку, кликнев на него.</small>
+                        <small class="form-text text-muted">Если цифры не видны, обновите изображение, нажав на него.</small>
                     </div>
 
                     <div class="mb-3">

@@ -3,6 +3,7 @@
 namespace controllers;
 
 use components\GameServerQuery;
+use components\Pagination;
 use components\Servers;
 use components\System;
 use components\User;
@@ -27,6 +28,20 @@ class ServerController extends BaseController
             $ip = strip_tags($_POST['ip']);
             $port = strip_tags(trim($_POST['port']));
             $text = strip_tags($_POST['text']);
+            $captcha = strip_tags($_POST['captcha']);
+
+            if (!isset($_SESSION['captcha'])){
+                $answer['status'] = "error";
+                $answer['error'] = "Капча введена не верно!";
+                exit(json_encode($answer));
+            }
+
+            if ($_SESSION['captcha'] != md5($captcha)) {
+                $answer['status'] = "error";
+                $answer['error'] = "Капча введена не верно!";
+                exit(json_encode($answer));
+            }
+
 
             $isGame = $this->db->prepare('SELECT * FROM ga_games WHERE code = :code and status = :status');
             $isGame->bindValue(":code", $game);
@@ -257,11 +272,27 @@ class ServerController extends BaseController
             $getInfoServer['status'] = 'Offline';
         }
 
-
         $moderation = 1;
-        $getComments = $this->db->prepare('SELECT c.id, c.text, u.lastname, u.firstname, c.date_create, u.img FROM ga_comments c LEFT JOIN ga_users u ON c.id_user=u.id WHERE c.id_server = :id_server and c.moderation = :moderation');
+
+        $countComments = $this->db->prepare('SELECT u.img FROM ga_comments c LEFT JOIN ga_users u ON c.id_user=u.id WHERE c.id_server = :id_server and c.moderation = :moderation');
+        $countComments->execute(array(
+            ':id_server' => $getInfoServer['id'],
+            ':moderation' => $moderation
+        ));
+        $count = $countComments->rowCount();
+
+        $pagination = new Pagination();
+        $per_page = 5;
+        $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
+
+
+        $getComments = $this->db->prepare('SELECT c.id, c.text, u.lastname, u.firstname, c.date_create, u.img FROM ga_comments c LEFT JOIN ga_users u ON c.id_user=u.id WHERE c.id_server = :id_server and c.moderation = :moderation LIMIT ' . $result['start'] . ', ' . $per_page . '');
         $getComments->execute(array(':id_server' => $getInfoServer['id'], ':moderation' => $moderation));
+
         $getComments = $getComments->fetchAll();
+
+
+        $pagination_html = $result['ViewPagination'];
 
 
         $content = $this->view->renderPartial("server/info", [
@@ -269,6 +300,7 @@ class ServerController extends BaseController
             'comments' => $getComments,
             'currentSession' => $currentSession,
             'ownerName' => $ownerName,
+            'pagination_html' => $pagination_html,
             'current_user' => $IsAuth
         ]);
 
@@ -516,20 +548,19 @@ class ServerController extends BaseController
                 $answer['error'] = "Только авторизованные пользователи могут оставлять комментарии";
                 exit(json_encode($answer));
             }
-            //	Пустой комментарий
+
             if (empty($_POST['comment'])) {
                 $answer['status'] = "error";
                 $answer['error'] = "Введите комментарий (от 10 до 300 символов)";
                 exit(json_encode($answer));
             }
-            //
-            //	Ограничение ввода символов
-            if (strlen($_POST['comment']) < 10 or strlen($_POST['comment']) > 300) {
+
+            if (strlen($_POST['comment']) < 10 or strlen($_POST['comment']) > 500) {
                 $answer['status'] = "error";
-                $answer['error'] = "Комментарий должен содержать от 10 до 300 символов";
+                $answer['error'] = "Комментарий должен содержать от 10 до 500 символов";
                 exit(json_encode($answer));
             }
-            //
+
             if ($settings['comments']['moderation'] == '1') {
                 $text_success = "Ваш комментарии успешно отправлен!";
                 $moderation = 1;

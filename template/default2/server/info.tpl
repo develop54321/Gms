@@ -89,8 +89,8 @@
 
                             <?php if($data['boost'] != '0'):?>
                                 <li class="list-group-item">
-                                    Буст:<br/>
-                                    осталось кругов: <?php echo $data['boost'];?>
+                                    Буст<br/>
+                                    Осталось кругов: <?php echo $data['boost'];?>
                                 </li>
                             <?php endif;?>
 
@@ -101,13 +101,49 @@
 
 
                         <h3>Комментарии к серверу</h3>
-                            <form id="addComment" method="post">
-                                <input type="hidden" name="id" value="<?php echo $data['id'];?>"/>
-                                <textarea class="form-control" name="comment" style="resize: none;"
-                                          placeholder="Оставьте свой комментарий..." rows="3"></textarea>
-                                <br/>
-                                <input type="submit" class="btn btn-primary btn-sm mb-2" value="Отправить"/>
-                            </form>
+                        <form id="addComment" method="post">
+                            <input type="hidden" name="id" value="<?php echo $data['id'];?>"/>
+                            <div class="form-group">
+                                <textarea class="form-control" name="comment" id="commentField" style="resize: none;" placeholder="Оставьте свой комментарий..."
+                                          rows="3" maxlength="500" oninput="updateCounter()">
+                                </textarea>
+                                <small id="charCounter" class="form-text text-muted text-right">
+                                    Осталось символов: 500
+                                </small>
+                            </div>
+                            <input type="submit" class="btn btn-primary btn-sm mt-2 mb-2" value="Отправить" id="submitBtn"/>
+                        </form>
+
+                        <script>
+                            function updateCounter() {
+                                const textarea = document.getElementById('commentField');
+                                const counter = document.getElementById('charCounter');
+                                const remaining = 500 - textarea.value.length;
+
+                                counter.textContent = `Осталось символов: ${remaining}`;
+
+                                if (remaining < 50) {
+                                    counter.style.color = remaining < 20 ? 'red' : 'orange';
+                                } else {
+                                    counter.style.color = '#6c757d'; // Bootstrap's default muted color
+                                }
+                            }
+                        </script>
+
+                        <style>
+                            .form-group {
+                                position: relative;
+                            }
+
+                            #charCounter {
+                                position: absolute;
+                                right: 5px;
+                                top: 5px;
+                                background: white;
+                                padding: 0 5px;
+                                border-radius: 3px;
+                            }
+                        </style>
 
                         <div class="comments">
                             <?php if(empty($comments)):?>
@@ -123,7 +159,7 @@
                                     <?php endif;?>
                                     <div class="text">
                                         <div class="author">
-                                            <?php echo $c['lastname'];?>
+                                            <?php echo $c['lastname'] ?? 'Анонимно';?>
                                         </div>
                                         <?php echo $c['text'];?>
 
@@ -131,9 +167,16 @@
 
                                         <div class="date"><?php echo date("d.m.Y H:i", $c['date_create']);?></div>
                                     </div>
-                                    <div class="clearfix"></div>
                                 </div>
                             <?php endforeach;?>
+
+                            <div class="pagination">
+                                <nav aria-label="Pagination">
+                                    <ul class="pagination justify-content-center">
+                                        <?= implode("\n", $pagination_html) ?>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
 
                     </div>

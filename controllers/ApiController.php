@@ -87,7 +87,7 @@ class ApiController extends BaseController
             $status = "0";
 
             $this->db->exec("INSERT INTO ga_servers (status, game, ip, port, date_add, country, moderation) 
-         VALUES('$status', '" . $data['game'] . "', '$query[0]', '$query[1]', '" . time() . "', '$country', '1')");
+            VALUES('$status', '" . $data['game'] . "', '$query[0]', '$query[1]', '" . time() . "', '$country', '1')");
             $id_server = $this->db->lastInsertId();
 
             $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
@@ -171,6 +171,15 @@ class ApiController extends BaseController
     private function response($data)
     {
         return json_encode($data);
+    }
+
+
+    public function ping()
+    {
+        $serverName = $_SERVER['SERVER_NAME'];
+
+        exit($this->response(['status' => "success", 'code' => "ping", 'server_name' => $serverName]));
+
     }
 
 }

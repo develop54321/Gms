@@ -56,6 +56,7 @@
                     </tbody>
                 </table>
 
+                <?php if (!empty($data)): ?>
                 <div class="pagination">
                     <nav aria-label="Pagination">
                         <ul class="pagination justify-content-center">
@@ -63,6 +64,7 @@
                         </ul>
                     </nav>
                 </div>
+                <?php endif; ?>
             </div>
 
 

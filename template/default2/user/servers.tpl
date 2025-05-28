@@ -102,6 +102,7 @@
                 </table>
 
 
+                <?php if (!empty($servers)): ?>
                 <div class="pagination">
                     <nav aria-label="Pagination">
                         <ul class="pagination justify-content-center">
@@ -109,6 +110,7 @@
                         </ul>
                     </nav>
                 </div>
+                <?php endif; ?>
 
             </div>
         </div>

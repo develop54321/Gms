@@ -104,9 +104,7 @@
                         <form id="addComment" method="post">
                             <input type="hidden" name="id" value="<?php echo $data['id'];?>"/>
                             <div class="form-group">
-                                <textarea class="form-control" name="comment" id="commentField" style="resize: none;" placeholder="Оставьте свой комментарий..."
-                                          rows="3" maxlength="500" oninput="updateCounter()">
-                                </textarea>
+                                <textarea class="form-control" name="comment" id="commentField" style="resize: none;" placeholder="Оставьте свой комментарий..." rows="3" maxlength="500" oninput="updateCounter()"></textarea>
                                 <small id="charCounter" class="form-text text-muted text-right">
                                     Осталось символов: 500
                                 </small>
@@ -170,6 +168,7 @@
                                 </div>
                             <?php endforeach;?>
 
+                            <?php if (!empty($comments)):?>
                             <div class="pagination">
                                 <nav aria-label="Pagination">
                                     <ul class="pagination justify-content-center">
@@ -177,6 +176,7 @@
                                     </ul>
                                 </nav>
                             </div>
+                            <?php endif;?>
                         </div>
 
                     </div>

@@ -1,32 +1,4 @@
-<style>
-    .card{
-        color: #000;
-    }
-    .payment-method-card {
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-
-    .payment-method-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    }
-
-
-    #submit-btn:disabled {
-        opacity: 0.65;
-        cursor: not-allowed;
-    }
-
-    .invalid-feedback {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        z-index: 1;
-    }
-</style>
-<section class="page">
+<section class="page user-refill">
     <div class="container">
         <h1 class="content-title">
             Пополнение счета
@@ -81,7 +53,7 @@
                                 <input type="number"
                                        name="amount"
                                        id="amount"
-                                       class="form-control"
+                                       class="form-control border-0"
                                        required
                                        placeholder="0"
                                        min="0"

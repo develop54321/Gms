@@ -428,3 +428,30 @@ select option {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.user-refill .card{
+    color: #000;
+}
+.user-refill .payment-method-card {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.user-refill .payment-method-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+
+.user-refill #submit-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.user-refill .invalid-feedback {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}

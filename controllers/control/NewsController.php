@@ -3,8 +3,6 @@
 namespace controllers\control;
 
 use components\Pagination;
-use components\User;
-use core\BaseController;
 use PDO;
 
 class NewsController extends AbstractController
@@ -13,13 +11,6 @@ class NewsController extends AbstractController
 
     public function index()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserProfile = $user->getProfile();
-        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         $title = "Новости";
 
 
@@ -49,37 +40,20 @@ class NewsController extends AbstractController
 
     public function add()
     {
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
-        $getUserProfile = $user->getProfile();
-        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
-        $title = "Добавление новостя";
-
+        $title = "Новый пост";
 
         if (parent::isAjax()) {
-
             $titlePage = $_POST['title'];
             $text = $_POST['text'];
 
-
             $this->db->exec("INSERT INTO ga_news (title, text, date_create) 
-    VALUES('$titlePage', '$text', '" . time() . "')");
-
+            VALUES('$titlePage', '$text', '" . time() . "')");
 
             $answer['status'] = "success";
-            $answer['success'] = "Новость успешно опубликован";
+            $answer['success'] = "Пост успешно опубликован";
             exit(json_encode($answer));
 
         } else {
-
-
             $content = $this->view->renderPartial("news/add", []);
 
             $this->view->render("main", ['content' => $content, 'title' => $title]);
@@ -90,17 +64,6 @@ class NewsController extends AbstractController
 
     public function edit()
     {
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
-        $getUserProfile = $user->getProfile();
-        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 
         $title = "Изменение поста #$id";
@@ -112,15 +75,15 @@ class NewsController extends AbstractController
 
 
         if (parent::isAjax()) {
-
             $titlePage = $_POST['title'];
             $text = $_POST['text'];
+            $dateCreate = strtotime($_POST['date_create']);
 
-
-            $sql = "UPDATE ga_news SET title = :title, text =:text WHERE id= :id";
+            $sql = "UPDATE ga_news SET title = :title, text = :text, date_create = :date_create WHERE id= :id";
             $update = $this->db->prepare($sql);
             $update->bindParam(':title', $titlePage);
             $update->bindParam(':text', $text);
+            $update->bindParam(':date_create', $dateCreate);
             $update->bindParam(':id', $id);
             $update->execute();
 
@@ -129,35 +92,24 @@ class NewsController extends AbstractController
             exit(json_encode($answer));
 
         } else {
-
-
             $content = $this->view->renderPartial("news/edit", ['data' => $getInfoPost]);
 
             $this->view->render("main", ['content' => $content, 'title' => $title]);
-
         }
     }
 
 
     public function remove()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-        $getUserProfile = $user->getProfile();
-        if ($getUserProfile['role'] != 'admin') parent::ShowError(404, "Страница не найдена!");
-
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
             $sql = "DELETE FROM ga_news WHERE id =  :id";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
-
         }
 
-
+        parent::ShowError(400, "Bad request!");
     }
 
 

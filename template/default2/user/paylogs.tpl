@@ -19,7 +19,7 @@
                 <table class="table table table-dark">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">id</th>
                         <th scope="col">Описание</th>
                         <th scope="col">Дата инициализации</th>
                         <th scope="col">Способ оплаты</th>
@@ -34,14 +34,15 @@
                         <tr>
                             <td><?php echo $row['id']; ?></td>
                             <td>
-                                <?php if ($row['type_pay'] == 'payApi'): ?>
-                                    <b>[API]</b><?php endif; ?> <?php echo $row['servicesName']; ?>
-                                (<?php if ($row['type_pay'] == 'refill'): ?>id пользователя<?php elseif ($row['type_pay'] == 'payServices' or $row['type_pay'] == 'payApi'): ?>id сервера<?php endif; ?>
-                                #<?php echo $row['id_object']; ?>)
+                                <span class="address">
+                                <?php echo $row['servicesName']; ?>
+                                </span>
                             </td>
-                            <td><?php echo date("d:m:Y [H:i]", $row['date_create']); ?></td>
+                            <td><?php echo date("d.m.Y [H:i]", $row['date_create']); ?></td>
                             <td>
+                                <span class="address">
                                 <?php echo \widgets\pay_method\PatMethod::run($row['pay_methods']); ?>
+                                </span>
                             </td>
                             <td><?php echo \widgets\money\Money::run($row['price']); ?></td>
                             <td>
@@ -55,6 +56,7 @@
                     </tbody>
                 </table>
 
+                <?php if (!empty($data)): ?>
                 <div class="pagination">
                     <nav aria-label="Pagination">
                         <ul class="pagination justify-content-center">
@@ -62,6 +64,7 @@
                         </ul>
                     </nav>
                 </div>
+                <?php endif; ?>
             </div>
 
 

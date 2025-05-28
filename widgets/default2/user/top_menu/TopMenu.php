@@ -12,9 +12,13 @@ use core\WidgetsInterface;
 class TopMenu implements WidgetsInterface
 {
     public static function run($params = null){
+        $userData = null;
         $user = new User();
-        $isAuth = $user->isAuth();
+        if ($user->isAuth()){
+            $userData = $user->getProfile();
+        }
+
         $view = new View("widgets");
-        $view->render('default2/user/top_menu/views/index', ['is_auth' => $isAuth]);
+        $view->render('default2/user/top_menu/views/index', ['userData' => $userData]);
     }
 }

@@ -40,6 +40,16 @@
 
                         </div>
 
+                        <div class="form-group mb-3">
+                            <a href="#" id="captchaImg" onclick="updateCaptcha(); return false;">
+                                <img src="/captcha" src="Капча"/>
+                            </a>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <input type="text" name="captcha" class="form-control" id="captcha" required="" placeholder="Цифры с картинки"/>
+                            <small class="form-text text-muted">Если цифры не видны, обновите изображение, нажав на него.</small>
+                        </div>
 
                         <div class="form-group mt-2">
                             <button class="btn btn-primary" type="submit">Отправить</button>
@@ -85,6 +95,9 @@
 </section>
 
 <script>
+    function updateCaptcha() {
+        $("#captchaImg").html('<img src="/captcha" src="Каптча"/>');
+    }
     $('#addServer').ajaxForm({
         dataType: 'json',
         success: function (data) {

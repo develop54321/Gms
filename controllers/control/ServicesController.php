@@ -2,8 +2,6 @@
 
 namespace controllers\control;
 
-use components\User;
-use core\BaseController;
 use PDO;
 
 
@@ -38,9 +36,10 @@ class ServicesController extends AbstractController
 
 
             $servicesPrice = strip_tags($_POST['servicesPrice']);
+            $text = strip_tags($_POST['text']);
 
-            $this->db->exec("INSERT INTO ga_services (name, type, period, price, params) 
-            VALUES('$servicesName', '$servicesType', '$servicesPeriod','$servicesPrice', '')");
+            $this->db->exec("INSERT INTO ga_services (name, type, period, price, params, text) 
+            VALUES('$servicesName', '$servicesType', '$servicesPeriod','$servicesPrice', '', '$text')");
 
             $answer['status'] = "success";
             $answer['success'] = "Услуга успешно добавлена";
@@ -77,12 +76,14 @@ class ServicesController extends AbstractController
 
 
             $servicesPrice = strip_tags($_POST['servicesPrice']);
+            $text = strip_tags($_POST['text']);
 
-            $sql = "UPDATE ga_services SET name = :name, period = :period, price = :price WHERE id= :id";
+            $sql = "UPDATE ga_services SET name = :name, period = :period, price = :price, text = :text WHERE id= :id";
             $update = $this->db->prepare($sql);
             $update->bindParam(':name', $servicesName);
             $update->bindParam(':period', $servicesPeriod);
             $update->bindParam(':price', $servicesPrice);
+            $update->bindParam(':text', $text);
             $update->bindParam(':id', $id);
             $update->execute();
 

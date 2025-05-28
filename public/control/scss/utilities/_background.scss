@@ -1,0 +1,2146 @@
+.bg-secondary {
+	background-color: $secondary !important;
+}
+a.bg-secondary {
+	&:hover, &:focus {
+		background-color: rgba($secondary, 0.85) !important;
+	}
+}
+button.bg-secondary {
+	&:hover, &:focus {
+		background-color: rgba($secondary, 0.85) !important;
+	}
+}
+a.bg-teritary {
+	&:hover, &:focus {
+		background-color: rgba($info, 0.85) !important;
+	}
+}
+button.bg-teritary {
+	&:hover, &:focus {
+		background-color: rgba($info, 0.85) !important;
+	}
+}
+a.bg-custom-yellow {
+	&:hover, &:focus {
+		background-color: rgba($warning, 0.85) !important;
+	}
+}
+button.bg-custom-yellow {
+	&:hover, &:focus {
+		background-color: rgba($warning, 0.85) !important;
+	}
+}
+.bg-success {
+	background-color: $success !important;
+}
+a.bg-success {
+	&:hover, &:focus {
+		background-color: rgba($success, 0.85) !important;
+	}
+}
+button.bg-success {
+	&:hover, &:focus {
+		background-color: rgba($success, 0.85) !important;
+	}
+}
+.bg-info {
+	background-color: $info !important;
+}
+a.bg-info {
+	&:hover, &:focus {
+		background-color: rgba($info, 0.85) !important;
+	}
+}
+button.bg-info {
+	&:hover, &:focus {
+		background-color: rgba($info, 0.85) !important;
+	}
+}
+.bg-warning {
+	background-color: $warning !important;
+}
+a.bg-warning {
+	&:hover, &:focus {
+		background-color: rgba($warning, 0.85) !important;
+	}
+}
+button.bg-warning {
+	&:hover, &:focus {
+		background-color: rgba($warning, 0.85) !important;
+	}
+}
+.bg-danger {
+	background-color: $danger !important;
+}
+a.bg-danger {
+	&:hover, &:focus {
+		background-color: rgba($danger, 0.85) !important;
+	}
+}
+button.bg-danger {
+	&:hover, &:focus {
+		background-color: rgba($danger, 0.85) !important;
+	}
+}
+.bg-light {
+	background-color: $gray-light !important;
+}
+.bg-light-lightest {
+	background-color: rgba($gray-light, 0.15) !important;
+}
+.bg-light-lighter {
+	background-color: rgba($gray-light, 0.65) !important;
+}
+a.bg-light {
+	&:hover, &:focus {
+		background-color: rgba($gray-light, 0.85) !important;
+	}
+}
+button.bg-light {
+	&:hover, &:focus {
+		background-color: rgba($gray-light, 0.85) !important;
+	}
+}
+.bg-dark {
+	background-color: $dark !important;
+}
+a.bg-dark {
+	&:hover, &:focus {
+		background-color: rgba($gray-dark, 0.85) !important;
+	}
+}
+button.bg-dark {
+	&:hover, &:focus {
+		background-color: rgba($gray-dark, 0.85) !important;
+	}
+}
+/*--- gradient-backgrounds --*/
+.bg-primary-gradient {
+	background: $primary-gradient !important;
+}
+a.bg-primary-gradient {
+	&:hover, &:focus {
+		background: $primary !important;
+	}
+}
+button.bg-primary-gradient {
+	&:hover, &:focus {
+		background: $primary !important;
+	}
+}
+.bg-secondary-gradient {
+	background: $secondary-gradient !important;
+}
+a.bg-secondary-gradient {
+	&:hover, &:focus {
+		background: $secondary !important;
+	}
+}
+button.bg-secondary-gradient {
+	&:hover, &:focus {
+		background: $secondary !important;
+	}
+}
+.bg-success-gradient {
+	background:$success-gradient !important;
+}
+a.bg-success-gradient {
+	&:hover, &:focus {
+		background: rgba($primary, 0.85) !important;
+	}
+}
+button.bg-success-gradient {
+	&:hover, &:focus {
+		background: rgba($primary, 0.85) !important;
+	}
+}
+.bg-info-gradient {
+	background: $info-gradient !important;
+}
+a.bg-info-gradient {
+	&:hover, &:focus {
+		background: rgba($info, 0.85) !important;
+	}
+}
+button.bg-info-gradient {
+	&:hover, &:focus {
+		background: rgba($info, 0.85) !important;
+	}
+}
+.bg-warning-gradient {
+	background: $warning-gradient !important;
+}
+a.bg-warning-gradient {
+	&:hover, &:focus {
+		background: $yellow !important;
+	}
+}
+button.bg-warning-gradient {
+	&:hover, &:focus {
+		background: $yellow !important;
+	}
+}
+.bg-danger-gradient {
+	background-image: $danger-gradient !important;
+}
+a.bg-danger-gradient {
+	&:hover, &:focus {
+		background: rgba($danger, 0.85) !important;
+	}
+}
+button.bg-danger-gradient {
+	&:hover, &:focus {
+		background: rgba($danger, 0.85) !important;
+	}
+}
+
+.bg-purple-gradient {
+	background-image: $purple-gradient !important;
+}
+a.bg-purple-gradient {
+	&:hover, &:focus {
+		background: rgba($purple, 0.85) !important;
+	}
+}
+button.bg-purple-gradient {
+	&:hover, &:focus {
+		background: rgba($purple, 0.85) !important;
+	}
+}
+
+.bg-pink-gradient {
+	background-image: $pink-gradient !important;
+}
+a.bg-pink-gradient {
+	&:hover, &:focus {
+		background: rgba($pink, 0.85) !important;
+	}
+}
+button.bg-pink-gradient {
+	&:hover, &:focus {
+		background: rgba($pink, 0.85) !important;
+	}
+}
+
+.bg-teal-gradient {
+	background-image: $teal-gradient !important;
+}
+a.bg-teal-gradient {
+	&:hover, &:focus {
+		background: rgba($teal, 0.85) !important;
+	}
+}
+button.bg-teal-gradient {
+	&:hover, &:focus {
+		background: rgba($teal, 0.85) !important;
+	}
+}
+
+.bg-light-gradient {
+	background: $light-gradient !important;
+}
+a.bg-light-gradient {
+	&:hover, &:focus {
+		background: rgba($gray-light, 0.85) !important;
+	}
+}
+button.bg-light-gradient {
+	&:hover, &:focus {
+		background: rgba($gray-light, 0.85) !important;
+	}
+}
+.bg-dark-gradient {
+	background: $dark-gradient !important;
+}
+a.bg-dark-gradient {
+	&:hover, &:focus {
+		background: rgba($gray-dark, 0.85) !important;
+	}
+}
+button.bg-dark-gradient {
+	&:hover, &:focus {
+		background: rgba($gray-dark, 0.85) !important;
+	}
+}
+.bg-facebook-gradient {
+	background: linear-gradient(to bottom right, #3b5998, #2b4170) !important;
+}
+.bg-white {
+	background-color: $white !important;
+}
+.bg-transparent {
+	background-color: transparent !important;
+}
+.bg1 {
+	background-color: linear-gradient(to right bottom, #163b7c 0%, #548beb 100%);
+}
+.bg2 {
+	background-color: linear-gradient(to bottom right, #00f2fe 0%, #1e63c3 100%) !important;
+}
+.bg3 {
+	background-color: linear-gradient(to bottom right, #f53e31, #dd4b39);
+}
+/*------ Background colors -------*/
+
+.bg-purple {
+	background-color: $purple !important;
+	color: $white !important;
+}
+a.bg-purple {
+	&:hover, &:focus {
+		background-color: rgba($purple, 0.85) !important;
+	}
+}
+button.bg-purple {
+	&:hover, &:focus {
+		background-color: rgba($purple, 0.85) !important;
+	}
+}
+.bg-purple-lightest {
+	background-color: rgba($purple, 0.55) !important;
+}
+a.bg-purple-lightest {
+	&:hover, &:focus {
+		background-color: rgba($purple, 0.35) !important;
+	}
+}
+button.bg-purple-lightest {
+	&:hover, &:focus {
+		background-color: rgba($purple, 0.35) !important;
+	}
+}
+.bg-purple-lighter {
+	background-color: rgba($purple, 0.65) !important;
+}
+a.bg-purple-lighter {
+	&:hover, &:focus {
+		background-color: rgba($purple, 0.45) !important;
+	}
+}
+button.bg-purple-lighter {
+	&:hover, &:focus {
+		background-color: rgba($purple, 0.45) !important;
+	}
+}
+.bg-purple-light {
+	background-color: rgba($purple, 0.85) !important;
+}
+a.bg-purple-light {
+	&:hover, &:focus {
+		background-color: rgba($purple, 0.55) !important;
+	}
+}
+button.bg-purple-light {
+	&:hover, &:focus {
+		background-color: rgba($purple, 0.55) !important;
+	}
+}
+.bg-purple-dark {
+	background-color: rgba($purple-dark, 0.55) !important;
+}
+a.bg-purple-dark {
+	&:hover, &:focus {
+		background-color: rgba($purple-dark, 0.35) !important;
+	}
+}
+button.bg-purple-dark {
+	&:hover, &:focus {
+		background-color: rgba($purple-dark, 0.35) !important;
+	}
+}
+.bg-purple-darker {
+	background-color: rgba($purple-dark, 0.85) !important;
+}
+a.bg-purple-darker {
+	&:hover, &:focus {
+		background-color: rgba($purple-dark, 0.55) !important;
+	}
+}
+button.bg-purple-darker {
+	&:hover, &:focus {
+		background-color: rgba($purple-dark, 0.55) !important;
+	}
+}
+.bg-purple-darkest {
+	background-color: $purple-dark !important;
+}
+a.bg-purple-darkest {
+	&:hover, &:focus {
+		background-color: rgba($purple-dark, 0.85) !important;
+	}
+}
+button.bg-purple-darkest {
+	&:hover, &:focus {
+		background-color: rgba($purple-dark, 0.85) !important;
+	}
+}
+.bg-blue{
+	background-color: $blue !important;
+}
+.bg-blue-lightest {
+	background-color: rgba($blue, 0.35) !important;
+}
+a.bg-blue-lightest {
+	&:hover, &:focus {
+		background-color: rgba($blue, 0.15) !important;
+	}
+}
+button.bg-blue-lightest {
+	&:hover, &:focus {
+		background-color: rgba($blue, 0.15) !important;
+	}
+}
+.bg-blue-lighter {
+	background-color: rgba($blue, 0.55) !important;
+}
+a.bg-blue-lighter {
+	&:hover, &:focus {
+		background-color: rgba($blue, 0.55) !important;
+	}
+}
+button.bg-blue-lighter {
+	&:hover, &:focus {
+		background-color: rgba($blue, 0.55) !important;
+	}
+}
+.bg-blue-light {
+	background-color: rgba($blue, 0.85) !important;
+}
+a.bg-blue-light {
+	&:hover, &:focus {
+		background-color: rgba($blue, 0.55) !important;
+	}
+}
+button.bg-blue-light {
+	&:hover, &:focus {
+		background-color: rgba($blue, 0.55) !important;
+	}
+}
+.bg-blue-dark {
+	background-color: $blue-dark !important;
+}
+a.bg-blue-dark {
+	&:hover, &:focus {
+		background-color: rgba($blue-dark, 0.55)!important;
+	}
+}
+button.bg-blue-dark {
+	&:hover, &:focus {
+		background-color: rgba($blue-dark, 0.35)!important;
+	}
+}
+.bg-blue-darker {
+	background-color: rgba($blue-dark, 0.85) !important;
+}
+a.bg-blue-darker {
+	&:hover, &:focus {
+		background-color: rgba($blue-dark, 0.55) !important;
+	}
+}
+button.bg-blue-darker {
+	&:hover, &:focus {
+		background-color: rgba($blue-dark, 0.55) !important;
+	}
+}
+.bg-blue-darkest {
+	background-color:  $blue-dark !important;
+}
+a.bg-blue-darkest {
+	&:hover, &:focus {
+		background-color: rgba($blue-dark, 0.85) !important;
+	}
+}
+button.bg-blue-darkest {
+	&:hover, &:focus {
+		background-color: rgba($blue-dark, 0.85) !important;
+	}
+}
+.bg-purssianblue {
+	background-color: $purssianblue;
+}
+a.bg-purssianblue-lightest {
+	&:hover, &:focus {
+		background-color: rgba($purssianblue, 0.35) !important;
+	}
+}
+button.bg-purssianblue-lightest {
+	&:hover, &:focus {
+		background-color: rgba($purssianblue, 0.35) !important;
+	}
+}
+.bg-indigo-lightest {
+	background-color: rgba($indigo, 0.55) !important;
+}
+a.bg-indigo-lightest {
+	&:hover, &:focus {
+		background-color: rgba($indigo, 0.35) !important;
+	}
+}
+button.bg-indigo-lightest {
+	&:hover, &:focus {
+		background-color: rgba($indigo, 0.35) !important;
+	}
+}
+.bg-indigo-lighter {
+	background-color: rgba($indigo, 0.85) !important;
+}
+a.bg-indigo-lighter {
+	&:hover, &:focus {
+		background-color: rgba($indigo, 0.55) !important;
+	}
+}
+button.bg-indigo-lighter {
+	&:hover, &:focus {
+		background-color: rgba($indigo, 0.55) !important;
+	}
+}
+.bg-indigo-light {
+	background-color: rgba($indigo, 0.765) !important;
+}
+a.bg-indigo-light {
+	&:hover, &:focus {
+		background-color: rgba($indigo, 0.45) !important;
+	}
+}
+button.bg-indigo-light {
+	&:hover, &:focus {
+		background-color: rgba($indigo, 0.45) !important;
+	}
+}
+.bg-indigo-dark {
+	background-color: rgba($indigo-dark, 0.55) !important;
+}
+a.bg-indigo-dark {
+	&:hover, &:focus {
+		background-color: rgba($indigo-dark, 0.35) !important;
+	}
+}
+button.bg-indigo-dark {
+	&:hover, &:focus {
+		background-color: rgba($indigo-dark, 0.35) !important;
+	}
+}
+.bg-indigo-darker {
+	background-color: rgba($indigo-dark, 0.85) !important;
+}
+a.bg-indigo-darker {
+	&:hover, &:focus {
+		background-color: rgba($indigo-dark, 0.55) !important;
+	}
+}
+button.bg-indigo-darker {
+	&:hover, &:focus {
+		background-color: rgba($indigo-dark, 0.55) !important;
+	}
+}
+.bg-indigo-darkest {
+	background-color: $indigo-dark !important;
+}
+a.bg-indigo-darkest {
+	&:hover, &:focus {
+		background-color: rgba($indigo-dark, 0.85) !important;
+	}
+}
+button.bg-indigo-darkest {
+	&:hover, &:focus {
+		background-color: rgba($indigo-dark, 0.85) !important;
+	}
+}
+.bg-pink-lightest {
+	background-color: rgba($pink, 0.35)!important;
+}
+a.bg-pink-lightest {
+	&:hover, &:focus {
+		background-color: rgba($pink, 0.15) !important;
+	}
+}
+button.bg-pink-lightest {
+	&:hover, &:focus {
+		background-color: rgba($pink, 0.15) !important;
+	}
+}
+.bg-pink-lighter {
+	background-color: rgba($pink, 0.55) !important;
+}
+a.bg-pink-lighter {
+	&:hover, &:focus {
+		background-color: rgba($pink, 0.35) !important;
+	}
+}
+button.bg-pink-lighter {
+	&:hover, &:focus {
+		background-color: rgba($pink, 0.35) !important;
+	}
+}
+.bg-pink-light {
+	background-color: rgba($pink, 0.85) !important;
+}
+a.bg-pink-light {
+	&:hover, &:focus {
+		background-color: rgba($pink, 0.55) !important;
+	}
+}
+button.bg-pink-light {
+	&:hover, &:focus {
+		background-color: rgba($pink, 0.55) !important;
+	}
+}
+.bg-pink-dark {
+	background-color: rgba($pink-dark, 0.55) !important;
+}
+a.bg-pink-dark {
+	&:hover, &:focus {
+		background-color: rgba($pink-dark, 0.35) !important;
+	}
+}
+button.bg-pink-dark {
+	&:hover, &:focus {
+		background-color: rgba($pink-dark, 0.35) !important;
+	}
+}
+.bg-pink-darker {
+	background-color: rgba($pink-dark, 0.85) !important;
+}
+a.bg-pink-darker {
+	&:hover, &:focus {
+		background-color: rgba($pink-dark, 0.35) !important;
+	}
+}
+button.bg-pink-darker {
+	&:hover, &:focus {
+		background-color: rgba($pink-dark, 0.55) !important;
+	}
+}
+.bg-pink-darkest {
+	background-color: $pink-dark !important;
+}
+a.bg-pink-darkest {
+	&:hover, &:focus {
+		background-color: rgba($pink-dark, 0.85) !important;
+	}
+}
+button.bg-pink-darkest {
+	&:hover, &:focus {
+		background-color: rgba($pink-dark, 0.85) !important;
+	}
+}
+.bg-red{
+	background-color: $red !important;
+}
+.bg-red-lightest {
+	background-color: rgba($red, 0.35) !important;
+}
+a.bg-red-lightest {
+	&:hover, &:focus {
+		background-color: rgba($red, 0.15) !important;
+	}
+}
+button.bg-red-lightest {
+	&:hover, &:focus {
+		background-color: rgba($red, 0.15) !important;
+	}
+}
+.bg-red-lighter {
+	background-color: rgba($red, 0.55) !important;
+}
+a.bg-red-lighter {
+	&:hover, &:focus {
+		background-color: rgba($red, 0.35) !important;
+	}
+}
+button.bg-red-lighter {
+	&:hover, &:focus {
+		background-color: rgba($red, 0.35) !important;
+	}
+}
+.bg-red-light {
+	background-color: rgba($red, 0.85) !important;
+}
+a.bg-red-light {
+	&:hover, &:focus {
+		background-color: rgba($red, 0.55) !important;
+	}
+}
+button.bg-red-light {
+	&:hover, &:focus {
+		background-color: rgba($red, 0.55) !important;
+	}
+}
+.bg-red-dark {
+	background-color: rgba($red-dark, 0.55) !important;
+}
+a.bg-red-dark {
+	&:hover, &:focus {
+		background-color: rgba($red-dark, 0.35) !important;
+	}
+}
+button.bg-red-dark {
+	&:hover, &:focus {
+		background-color: rgba($red-dark, 0.35) !important;
+	}
+}
+.bg-red-darker {
+	background-color: rgba($red-dark, 0.85)!important;
+}
+a.bg-red-darker {
+	&:hover, &:focus {
+		background-color: rgba($red-dark, 0.55) !important;
+	}
+}
+button.bg-red-darker {
+	&:hover, &:focus {
+		background-color: rgba($red-dark, 0.55) !important;
+	}
+}
+.bg-red-darkest {
+	background-color: $red-dark !important;
+}
+a.bg-red-darkest {
+	&:hover, &:focus {
+		background-color: rgba($red-dark, 0.85) !important;
+	}
+}
+button.bg-red-darkest {
+	&:hover, &:focus {
+		background-color: rgba($red-dark, 0.85) !important;
+	}
+}
+.bg-orange-lightest {
+	background-color: rgba($orange, 0.35) !important;
+}
+a.bg-orange-lightest {
+	&:hover, &:focus {
+		background-color: rgba($orange, 0.15) !important;
+	}
+}
+button.bg-orange-lightest {
+	&:hover, &:focus {
+		background-color: rgba($orange, 0.15) !important;
+	}
+}
+.bg-orange-lighter {
+	background-color: rgba($orange, 0.55) !important;
+}
+a.bg-orange-lighter {
+	&:hover, &:focus {
+		background-color: rgba($orange, 0.35) !important;
+	}
+}
+button.bg-orange-lighter {
+	&:hover, &:focus {
+		background-color: rgba($orange, 0.35) !important;
+	}
+}
+.bg-orange-light {
+	background-color: rgba($orange, 0.85) !important;
+}
+a.bg-orange-light {
+	&:hover, &:focus {
+		background-color: rgba($orange, 0.55) !important;
+	}
+}
+button.bg-orange-light {
+	&:hover, &:focus {
+		background-color: rgba($orange, 0.55) !important;
+	}
+}
+.bg-orange-dark {
+	background-color: rgba($orange-dark, 0.55) !important;
+}
+a.bg-orange-dark {
+	&:hover, &:focus {
+		background-color: rgba($orange-dark, 0.35) !important;
+	}
+}
+button.bg-orange-dark {
+	&:hover, &:focus {
+		background-color: rgba($orange-dark, 0.35) !important;
+	}
+}
+.bg-orange-darker {
+	background-color: rgba($orange-dark, 0.85) !important;
+}
+a.bg-orange-darker {
+	&:hover, &:focus {
+		background-color: rgba($orange-dark, 0.55) !important;
+	}
+}
+button.bg-orange-darker {
+	&:hover, &:focus {
+		background-color: rgba($orange-dark, 0.55) !important;
+	}
+}
+.bg-orange-darkest {
+	background-color: $orange-dark !important;
+}
+a.bg-orange-darkest {
+	&:hover, &:focus {
+		background-color: rgba($orange-dark, 0.85) !important;
+	}
+}
+button.bg-orange-darkest {
+	&:hover, &:focus {
+		background-color: rgba($orange-dark, 0.85) !important;
+	}
+}
+.bg-yellow-lightest {
+	background-color: rgba($yellow, 0.35) !important;
+}
+a.bg-yellow-lightest {
+	&:hover, &:focus {
+		background-color: rgba($yellow, 0.15) !important;
+	}
+}
+button.bg-yellow-lightest {
+	&:hover, &:focus {
+		background-color: rgba($yellow, 0.15) !important;
+	}
+}
+.bg-yellow-lighter {
+	background-color: rgba($yellow, 0.55) !important;
+}
+a.bg-yellow-lighter {
+	&:hover, &:focus {
+		background-color: rgba($yellow, 0.35) !important;
+	}
+}
+button.bg-yellow-lighter {
+	&:hover, &:focus {
+		background-color: rgba($yellow, 0.35) !important;
+	}
+}
+.bg-yellow-light {
+	background-color: rgba($yellow, 0.85) !important;
+}
+a.bg-yellow-light {
+	&:hover, &:focus {
+		background-color: rgba($yellow, 0.55) !important;
+	}
+}
+button.bg-yellow-light {
+	&:hover, &:focus {
+		background-color: rgba($yellow, 0.55) !important;
+	}
+}
+.bg-yellow-dark {
+	background-color: rgba($yellow-dark, 0.55) !important;
+}
+a.bg-yellow-dark {
+	&:hover, &:focus {
+		background-color: rgba($yellow-dark, 0.35) !important;
+	}
+}
+button.bg-yellow-dark {
+	&:hover, &:focus {
+		background-color: rgba($yellow-dark, 0.35) !important;
+	}
+}
+.bg-yellow-darker {
+	background-color: rgba($yellow-dark, 0.85) !important;
+}
+a.bg-yellow-darker {
+	&:hover, &:focus {
+		background-color: rgba($yellow-dark, 0.55) !important;
+	}
+}
+button.bg-yellow-darker {
+	&:hover, &:focus {
+		background-color: rgba($yellow-dark, 0.55) !important;
+	}
+}
+.bg-yellow-darkest {
+	background-color: $yellow-dark !important;
+}
+a.bg-yellow-darkest {
+	&:hover, &:focus {
+		background-color: rgba($yellow-dark, 0.85) !important;
+	}
+}
+button.bg-yellow-darkest {
+	&:hover, &:focus {
+		background-color: rgba($yellow-dark, 0.85) !important;
+	}
+}
+.bg-green-lightest {
+	background-color: rgba($green, 0.35) !important;
+}
+a.bg-green-lightest {
+	&:hover, &:focus {
+		background-color: rgba($green, 0.15) !important;
+	}
+}
+button.bg-green-lightest {
+	&:hover, &:focus {
+		background-color: rgba($green, 0.15) !important;
+	}
+}
+.bg-green-lighter {
+	background-color: rgba($green, 0.55) !important;
+}
+a.bg-green-lighter {
+	&:hover, &:focus {
+		background-color: rgba($green, 0.35) !important;
+	}
+}
+button.bg-green-lighter {
+	&:hover, &:focus {
+		background-color: rgba($green, 0.35) !important;
+	}
+}
+.bg-green-light {
+	background-color: rgba($green, 0.85) !important;
+}
+a.bg-green-light {
+	&:hover, &:focus {
+		background-color: rgba($green, 0.55) !important;
+	}
+}
+button.bg-green-light {
+	&:hover, &:focus {
+		background-color: rgba($green, 0.55) !important;
+	}
+}
+.bg-green-dark {
+	background-color: rgba($green-dark, 0.55) !important;
+}
+a.bg-green-dark {
+	&:hover, &:focus {
+		background-color: rgba($green-dark, 0.35) !important;
+	}
+}
+button.bg-green-dark {
+	&:hover, &:focus {
+		background-color: rgba($green-dark, 0.35) !important;
+	}
+}
+.bg-green-darker {
+	background-color: rgba($green-dark, 0.85) !important;
+}
+a.bg-green-darker {
+	&:hover, &:focus {
+		background-color: rgba($green-dark, 0.55) !important;
+	}
+}
+button.bg-green-darker {
+	&:hover, &:focus {
+		background-color: rgba($green-dark, 0.55) !important;
+	}
+}
+.bg-green-darkest {
+	background-color: $green-dark !important;
+}
+a.bg-green-darkest {
+	&:hover, &:focus {
+		background-color: rgba($green-dark, 0.85) !important;
+	}
+}
+button.bg-green-darkest {
+	&:hover, &:focus {
+		background-color: rgba($green-dark, 0.85) !important;
+	}
+}
+.bg-teal-lightest {
+	background-color: rgba($teal, 0.35) !important;
+}
+a.bg-teal-lightest {
+	&:hover, &:focus {
+		background-color: rgba($teal, 0.15) !important;
+	}
+}
+button.bg-teal-lightest {
+	&:hover, &:focus {
+		background-color: rgba($teal, 0.15) !important;
+	}
+}
+.bg-teal-lighter {
+	background-color: rgba($teal, 0.55) !important;
+}
+a.bg-teal-lighter {
+	&:hover, &:focus {
+		background-color: rgba($teal, 0.35) !important;
+	}
+}
+button.bg-teal-lighter {
+	&:hover, &:focus {
+		background-color: rgba($teal, 0.35) !important;
+	}
+}
+.bg-teal-light {
+	background-color: rgba($teal, 0.85) !important;
+}
+a.bg-teal-light {
+	&:hover, &:focus {
+		background-color: rgba($teal, 0.55) !important;
+	}
+}
+button.bg-teal-light {
+	&:hover, &:focus {
+		background-color: rgba($teal, 0.55) !important;
+	}
+}
+.bg-teal-dark {
+	background-color: rgba($teal-dark, 0.55) !important;
+}
+a.bg-teal-dark {
+	&:hover, &:focus {
+		background-color: rgba($teal-dark, 0.35) !important;
+	}
+}
+button.bg-teal-dark {
+	&:hover, &:focus {
+		background-color: rgba($teal-dark, 0.35) !important;
+	}
+}
+.bg-teal-darker {
+	background-color: rgba($teal-dark, 0.85) !important;
+}
+a.bg-teal-darker {
+	&:hover, &:focus {
+		background-color: rgba($teal-dark, 0.55) !important;
+	}
+}
+button.bg-teal-darker {
+	&:hover, &:focus {
+		background-color: rgba($teal-dark, 0.55) !important;
+	}
+}
+.bg-teal-darkest {
+	background-color: $teal-dark !important;
+}
+a.bg-teal-darkest {
+	&:hover, &:focus {
+		background-color: rgba($teal-dark, 0.85) !important;
+	}
+}
+button.bg-teal-darkest {
+	&:hover, &:focus {
+		background-color: rgba($teal-dark, 0.85) !important;
+	}
+}
+.bg-cyan-lightest {
+	background-color: rgba($cyan, 0.35) !important;
+}
+a.bg-cyan-lightest {
+	&:hover, &:focus {
+		background-color: rgba($cyan, 0.15) !important;
+	}
+}
+button.bg-cyan-lightest {
+	&:hover, &:focus {
+		background-color: rgba($cyan, 0.15) !important;
+	}
+}
+.bg-cyan-lighter {
+	background-color: rgba($cyan, 0.55) !important;
+}
+a.bg-cyan-lighter {
+	&:hover, &:focus {
+		background-color: rgba($cyan, 0.35) !important;
+	}
+}
+button.bg-cyan-lighter {
+	&:hover, &:focus {
+		background-color: rgba($cyan, 0.35) !important;
+	}
+}
+.bg-cyan-light {
+	background-color: rgba($cyan, 0.85) !important;
+}
+a.bg-cyan-light {
+	&:hover, &:focus {
+		background-color: rgba($cyan, 0.55) !important;
+	}
+}
+button.bg-cyan-light {
+	&:hover, &:focus {
+		background-color: rgba($cyan, 0.55) !important;
+	}
+}
+.bg-cyan-dark {
+	background-color: rgba($cyan-dark, 0.55) !important;
+}
+a.bg-cyan-dark {
+	&:hover, &:focus {
+		background-color: rgba($cyan-dark, 0.35) !important;
+	}
+}
+button.bg-cyan-dark {
+	&:hover, &:focus {
+		background-color: rgba($cyan-dark, 0.35) !important;
+	}
+}
+.bg-cyan-darker {
+	background-color: rgba($cyan-dark, 0.85) !important;
+}
+a.bg-cyan-darker {
+	&:hover, &:focus {
+		background-color: rgba($cyan-dark, 0.55) !important;
+	}
+}
+button.bg-cyan-darker {
+	&:hover, &:focus {
+		background-color: rgba($cyan-dark, 0.55) !important;
+	}
+}
+.bg-cyan-darkest {
+	background-color: $cyan-dark !important;
+}
+a.bg-cyan-darkest {
+	&:hover, &:focus {
+		background-color: rgba($cyan-dark, 0.85) !important;
+	}
+}
+button.bg-cyan-darkest {
+	&:hover, &:focus {
+		background-color: rgba($cyan-dark, 0.85) !important;
+	}
+}
+.bg-white-lightest {
+	background-color: rgba($white, 0.35) !important;
+}
+a.bg-white-lightest {
+	&:hover, &:focus {
+		background-color: rgba($white, 0.15) !important;
+	}
+}
+button.bg-white-lightest {
+	&:hover, &:focus {
+		background-color: rgba($white, 0.15) !important;
+	}
+}
+.bg-white-lighter {
+	background-color: rgba($white, 0.55) !important;
+}
+a.bg-white-lighter {
+	&:hover, &:focus {
+		background-color: rgba($white, 0.35) !important;
+	}
+}
+button.bg-white-lighter {
+	&:hover, &:focus {
+		background-color: rgba($white, 0.35) !important;
+	}
+}
+.bg-white-light {
+	background-color: rgba($white, 0.85) !important;
+}
+a.bg-white-light {
+	&:hover, &:focus {
+		background-color: rgba($white, 0.55) !important;
+	}
+}
+button.bg-white-light {
+	&:hover, &:focus {
+		background-color: rgba($white, 0.55) !important;
+	}
+}
+.bg-white-dark {
+	background-color: rgba($white-dark, 0.55) !important;
+}
+a.bg-white-dark {
+	&:hover, &:focus {
+		background-color: rgba($white-dark, 0.35) !important;
+	}
+}
+button.bg-white-dark {
+	&:hover, &:focus {
+		background-color: rgba($white-dark, 0.35) !important;
+	}
+}
+.bg-white-darker {
+	background-color: rgba($white-dark, 0.85) !important;
+}
+a.bg-white-darker {
+	&:hover, &:focus {
+		background-color: rgba($white-dark, 0.55) !important;
+	}
+}
+button.bg-white-darker {
+	&:hover, &:focus {
+		background-color: rgba($white-dark, 0.55) !important;
+	}
+}
+.bg-white-darkest {
+	background-color: $white-dark !important;
+}
+a.bg-white-darkest {
+	&:hover, &:focus {
+		background-color: rgba($white-dark, 0.85) !important;
+	}
+}
+button.bg-white-darkest {
+	&:hover, &:focus {
+		background-color: rgba($white-dark, 0.85) !important;
+	}
+}
+.bg-gray-lightest {
+	background-color: rgba($gray, 0.35) !important;
+}
+a.bg-gray-lightest {
+	&:hover, &:focus {
+		background-color: rgba($gray, 0.15) !important;
+	}
+}
+button.bg-gray-lightest {
+	&:hover, &:focus {
+		background-color: rgba($gray, 0.15) !important;
+	}
+}
+.bg-gray-lighter {
+	background-color: rgba($gray, 0.55) !important;
+}
+a.bg-gray-lighter {
+	&:hover, &:focus {
+		background-color: rgba($gray, 0.35) !important;
+	}
+}
+button.bg-gray-lighter {
+	&:hover, &:focus {
+		background-color: rgba($gray, 0.35) !important;
+	}
+}
+.bg-gray-light {
+	background-color: rgba($gray, 0.85) !important;
+}
+a.bg-gray-light {
+	&:hover, &:focus {
+		background-color: rgba($gray, 0.55) !important;
+	}
+}
+button.bg-gray-light {
+	&:hover, &:focus {
+		background-color: rgba($gray, 0.55) !important;
+	}
+}
+.bg-gray-dark {
+	background-color: rgba($gray-dark, 0.55) !important;
+	background-color: $dark !important;
+}
+a.bg-gray-dark {
+	&:hover, &:focus {
+		background-color: rgba($gray-dark, 0.35) !important;
+	}
+}
+button.bg-gray-dark {
+	&:hover, &:focus {
+		background-color: rgba($gray-dark, 0.35) !important;
+	}
+}
+.bg-gray-darker {
+	background-color: rgba($gray-dark, 0.85) !important;
+}
+a.bg-gray-darker {
+	&:hover, &:focus {
+		background-color: rgba($gray-dark, 0.55) !important;
+	}
+}
+button.bg-gray-darker {
+	&:hover, &:focus {
+		background-color: rgba($gray-dark, 0.55) !important;
+	}
+}
+.bg-gray-darkest {
+	background-color: $gray-dark !important;
+}
+a.bg-gray-darkest {
+	&:hover, &:focus {
+		background-color: rgba($gray-dark, 0.85) !important;
+	}
+}
+button.bg-gray-darkest {
+	&:hover, &:focus {
+		background-color: rgba($gray-dark, 0.85) !important;
+	}
+}
+.bg-azure-lightest {
+	background-color: rgba($azure, 0.35) !important;
+}
+a.bg-azure-lightest {
+	&:hover, &:focus {
+		background-color: rgba($azure, 0.15) !important;
+	}
+}
+button.bg-azure-lightest {
+	&:hover, &:focus {
+		background-color: rgba($azure, 0.15) !important;
+	}
+}
+.bg-azure-lighter {
+	background-color: rgba($azure, 0.55) !important;
+}
+a.bg-azure-lighter {
+	&:hover, &:focus {
+		background-color: rgba($azure, 0.35) !important;
+	}
+}
+button.bg-azure-lighter {
+	&:hover, &:focus {
+		background-color: rgba($azure, 0.35) !important;
+	}
+}
+.bg-azure-light {
+	background-color: rgba($azure, 0.85) !important;
+}
+a.bg-azure-light {
+	&:hover, &:focus {
+		background-color: rgba($azure, 0.55) !important;
+	}
+}
+button.bg-azure-light {
+	&:hover, &:focus {
+		background-color: rgba($azure, 0.55) !important;
+	}
+}
+.bg-azure-dark {
+	background-color: rgba($azure, 0.55) !important;
+}
+a.bg-azure-dark {
+	&:hover, &:focus {
+		background-color: rgba($azure, 0.35) !important;
+	}
+}
+button.bg-azure-dark {
+	&:hover, &:focus {
+		background-color: rgba($azure, 0.35) !important;
+	}
+}
+.bg-azure-darker {
+	background-color: rgba($azure, 0.85) !important;
+}
+a.bg-azure-darker {
+	&:hover, &:focus {
+		background-color: rgba($azure, 0.55) !important;
+	}
+}
+button.bg-azure-darker {
+	&:hover, &:focus {
+		background-color: rgba($azure, 0.55) !important;
+	}
+}
+.bg-azure-darkest {
+	background-color: $azure-dark !important;
+}
+a.bg-azure-darkest {
+	&:hover, &:focus {
+		background-color: rgba($azure, 0.85) !important;
+	}
+}
+button.bg-azure-darkest {
+	&:hover, &:focus {
+		background-color: rgba($azure, 0.85) !important;
+	}
+}
+.bg-lime-lightest {
+	background-color: rgba($lime, 0.35) !important;
+}
+a.bg-lime-lightest {
+	&:hover, &:focus {
+		background-color: rgba($lime, 0.15) !important;
+	}
+}
+button.bg-lime-lightest {
+	&:hover, &:focus {
+		background-color: rgba($lime, 0.15) !important;
+	}
+}
+.bg-lime-lighter {
+	background-color: rgba($lime, 0.55) !important;
+}
+a.bg-lime-lighter {
+	&:hover, &:focus {
+		background-color: rgba($lime, 0.35)!important;
+	}
+}
+button.bg-lime-lighter {
+	&:hover, &:focus {
+		background-color: rgba($lime, 0.35)!important;
+	}
+}
+.bg-lime-light {
+	background-color: rgba($lime, 0.85) !important;
+}
+a.bg-lime-light {
+	&:hover, &:focus {
+		background-color: rgba($lime, 0.55) !important;
+	}
+}
+button.bg-lime-light {
+	&:hover, &:focus {
+		background-color: rgba($lime, 0.55) !important;
+	}
+}
+.bg-lime-dark {
+	background-color: rgba($lime-dark, 0.55) !important;
+}
+a.bg-lime-dark {
+	&:hover, &:focus {
+		background-color: rgba($lime-dark, 0.35) !important;
+	}
+}
+button.bg-lime-dark {
+	&:hover, &:focus {
+		background-color: rgba($lime-dark, 0.35) !important;
+	}
+}
+.bg-lime-darker {
+	background-color: rgba($lime-dark, 0.85) !important;
+}
+a.bg-lime-darker {
+	&:hover, &:focus {
+		background-color: rgba($lime-dark, 0.55) !important;
+	}
+}
+button.bg-lime-darker {
+	&:hover, &:focus {
+		background-color: rgba($lime-dark, 0.55) !important;
+	}
+}
+.bg-lime-darkest {
+	background-color: $lime-dark !important;
+}
+a.bg-lime-darkest {
+	&:hover, &:focus {
+		background-color: rgba($lime-dark, 0.85) !important;
+	}
+}
+button.bg-lime-darkest {
+	&:hover, &:focus {
+		background-color: rgba($lime-dark, 0.85) !important;
+	}
+}
+.bg-orange{
+	background-color: $orange-1 !important;	
+}
+.bg-indigo {
+	background-color: $indigo;
+	color: $white !important;
+}
+.bg-purple-gradient {
+	background-color: linear-gradient(to bottom right, $purple 0%, rgba($purple, 0.55) 100%) !important;
+	color: $white !important;
+}
+a.bg-purple-gradient {
+	&:hover, &:focus {
+		background-color: rgba($purple, 0.35) !important;
+	}
+}
+button.bg-purple-gradient {
+	&:hover, &:focus {
+		background-color: rgba($purple, 0.35) !important;
+	}
+}
+.bg-pink {
+	background-color: $pink !important;
+	color: $white !important;
+}
+.bg-darkpink {
+	background-color: rgba($pink-dark, 0.55) !important;
+	color: $white !important;
+}
+.bg-red-gradient {
+	background-color: linear-gradient(to bottom right, $red 0%, rgba($red, 0.55) 100%);
+	color: $white !important;
+}
+a.bg-red {
+	&:hover, &:focus {
+		background-color: rgba($purple, 0.35) !important;
+	}
+}
+button.bg-red {
+	&:hover, &:focus {
+		background-color: rgba($purple, 0.35) !important;
+	}
+}
+.bg-orange {
+	background-color: $orange;
+	color: $white !important;
+}
+
+.bg-yellow-1 {
+	background-color: $yellow;
+	color: $white !important;
+}
+.bg-yellow {
+	background-color: $yellow;
+	color: $white !important;
+}
+.bg-green {
+	background-color: $green;
+	color: $white !important;
+}
+.bg-teal {
+	background-color: $teal !important;
+}
+.bg-cyan {
+	background-color: $cyan !important;
+	color: $white !important;
+}
+.bg-gray {
+	background-color: $gray !important;
+}
+.bg-gray-100{
+	background-color: $gray-100 !important;
+	color: $default-color !important;
+}
+.bg-gray-200{
+	background-color: $gray-200 !important;
+	color: $default-color !important;
+}
+.bg-gray-300{
+	background-color: $gray-300 !important;
+	color: $default-color !important;
+}
+.bg-gray-400{
+	background-color: $gray-400 !important;
+	color: $default-color !important;
+}
+.bg-gray-500{
+	background-color: $gray-500 !important;
+}
+.bg-gray-600{
+	background-color: $gray-600 !important;
+}
+.bg-gray-700{
+	background-color: $gray-700 !important;
+}
+.bg-gray-700{
+	background-color: $gray-700 !important;
+}
+.bg-gray-800{
+	background-color: $gray-800 !important;
+}
+.bg-gray-900{
+	background-color: $gray-900 !important;
+}
+.bg-azure {
+	background-color: $azure;
+}
+.bg-lime {
+	background-color: $lime;
+}
+.bg-round {
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	position: absolute;
+}
+.bg-square {
+	color: $white;
+	background-color: #868e96;
+	display: inline-block;
+	min-width: 2rem;
+	height: 2rem;
+	padding: .5rem .25rem;
+	text-align: center;
+	border-radius: 3px;
+	font-weight: 600;
+}
+.bg-google-plus {
+	background-color: #dd4b39;
+}
+.bg-pinterest {
+	background-color: linear-gradient(to right bottom, #c51629 0%, #bd081c 100%);
+}
+.bg-dribbble {
+	background-color: linear-gradient(to bottom right, #ea4c89, #c93764) !important;
+}
+.bg-google {
+	background-color: linear-gradient(to bottom right, #e64522, #c33219) !important;
+	color: $white;
+}
+
+
+/*--bg colors--*/
+
+.bg-primary{
+	background-color: $primary !important;
+}
+a.bg-primary {
+	&:hover, &:focus {
+		background-color: rgba($primary, 0.85) !important;
+	}
+}
+button.bg-primary {
+	&:hover, &:focus {
+		background-color: rgba($primary, 0.85) !important;
+	}
+}
+.bg-primary-lightest {
+	background-color: $primary-03 !important;
+}
+a.bg-primary-lightest {
+	&:hover, &:focus {
+		background-color: $primary-02 !important;
+	}
+}
+button.bg-primary-lightest {
+	&:hover, &:focus {
+		background-color: $primary-02 !important;
+	}
+}
+.bg-primary-lighter {
+	background-color: rgba($primary, 0.55) !important;
+}
+a.bg-primary-lighter {
+	&:hover, &:focus {
+		background-color: rgba($primary, 0.35)!important;
+	}
+}
+button.bg-primary-lighter {
+	&:hover, &:focus {
+		background-color: rgba($primary, 0.35)!important;
+	}
+}
+.bg-primary-light {
+	background-color: rgba($primary, 0.85) !important;
+}
+a.bg-primary-light {
+	&:hover, &:focus {
+		background-color: rgba($primary, 0.55) !important;
+	}
+}
+button.bg-primary-light {
+	&:hover, &:focus {
+		background-color: rgba($primary, 0.55) !important;
+	}
+}
+.bg-primary-dark {
+	background-color: rgba($primary, 0.55) !important;
+}
+a.bg-primary-dark {
+	&:hover, &:focus {
+		background-color: rgba($primary, 0.35) !important;
+	}
+}
+button.bg-primary-dark {
+	&:hover, &:focus {
+		background-color: rgba($primary, 0.35) !important;
+	}
+}
+.bg-primary-darker {
+	background-color: rgba($primary, 0.85) !important;
+}
+a.bg-primary-darker {
+	&:hover, &:focus {
+		background-color: rgba($primary, 0.55) !important;
+	}
+}
+button.bg-primary-darker {
+	&:hover, &:focus {
+		background-color: rgba($primary, 0.55) !important;
+	}
+}
+.bg-primary-darkest {
+	background-color: $primary !important;
+}
+a.bg-primary-darkest {
+	&:hover, &:focus {
+		background-color: rgba($primary, 0.85) !important;
+	}
+}
+button.bg-primary-darkest {
+	&:hover, &:focus {
+		background-color: rgba($primary, 0.85) !important;
+	}
+}
+
+
+.bg-secondary{
+	background-color: $secondary !important;
+}
+a.bg-secondary {
+	&:hover, &:focus {
+		background-color: rgba($secondary, 0.85) !important;
+	}
+}
+button.bg-secondary {
+	&:hover, &:focus {
+		background-color: rgba($secondary, 0.85) !important;
+	}
+}
+.bg-secondary-lightest {
+	background-color: rgba($secondary, 0.35) !important;
+}
+a.bg-secondary-lightest {
+	&:hover, &:focus {
+		background-color: rgba($secondary, 0.15) !important;
+	}
+}
+button.bg-secondary-lightest {
+	&:hover, &:focus {
+		background-color: rgba($secondary, 0.15) !important;
+	}
+}
+.bg-secondary-lighter {
+	background-color: rgba($secondary, 0.55) !important;
+}
+a.bg-secondary-lighter {
+	&:hover, &:focus {
+		background-color: rgba($secondary, 0.35)!important;
+	}
+}
+button.bg-secondary-lighter {
+	&:hover, &:focus {
+		background-color: rgba($secondary, 0.35)!important;
+	}
+}
+.bg-secondary-light {
+	background-color: rgba($secondary, 0.85) !important;
+}
+a.bg-secondary-light {
+	&:hover, &:focus {
+		background-color: rgba($secondary, 0.55) !important;
+	}
+}
+button.bg-secondary-light {
+	&:hover, &:focus {
+		background-color: rgba($secondary, 0.55) !important;
+	}
+}
+.bg-secondary-dark {
+	background-color: rgba($secondary-dark, 0.55) !important;
+}
+a.bg-secondary-dark {
+	&:hover, &:focus {
+		background-color: rgba($secondary-dark, 0.35) !important;
+	}
+}
+button.bg-secondary-dark {
+	&:hover, &:focus {
+		background-color: rgba($secondary-dark, 0.35) !important;
+	}
+}
+.bg-secondary-darker {
+	background-color: rgba($secondary-dark, 0.85) !important;
+}
+a.bg-secondary-darker {
+	&:hover, &:focus {
+		background-color: rgba($secondary-dark, 0.55) !important;
+	}
+}
+button.bg-secondary-darker {
+	&:hover, &:focus {
+		background-color: rgba($secondary-dark, 0.55) !important;
+	}
+}
+.bg-secondary-darkest {
+	background-color: $secondary-dark !important;
+}
+a.bg-secondary-darkest {
+	&:hover, &:focus {
+		background-color: rgba($secondary-dark, 0.85) !important;
+	}
+}
+button.bg-secondary-darkest {
+	&:hover, &:focus {
+		background-color: rgba($secondary-dark, 0.85) !important;
+	}
+}
+
+.bg-teritary{
+	background-color: $info !important;
+}
+a.bg-teritary {
+	&:hover, &:focus {
+		background-color: rgba($info, 0.85) !important;
+	}
+}
+button.bg-teritary {
+	&:hover, &:focus {
+		background-color: rgba($info, 0.85) !important;
+	}
+}
+.bg-teritary-lightest {
+	background-color: rgba($info, 0.35) !important;
+}
+a.bg-teritary-lightest {
+	&:hover, &:focus {
+		background-color: rgba($info, 0.15) !important;
+	}
+}
+button.bg-teritary-lightest {
+	&:hover, &:focus {
+		background-color: rgba($info, 0.15) !important;
+	}
+}
+.bg-teritary-lighter {
+	background-color: rgba($info, 0.55) !important;
+}
+a.bg-teritary-lighter {
+	&:hover, &:focus {
+		background-color: rgba($info, 0.35)!important;
+	}
+}
+button.bg-teritary-lighter {
+	&:hover, &:focus {
+		background-color: rgba($info, 0.35)!important;
+	}
+}
+.bg-teritary-light {
+	background-color: rgba($info, 0.85) !important;
+}
+a.bg-teritary-light {
+	&:hover, &:focus {
+		background-color: rgba($info, 0.55) !important;
+	}
+}
+button.bg-teritary-light {
+	&:hover, &:focus {
+		background-color: rgba($info, 0.55) !important;
+	}
+}
+.bg-teritary-dark {
+	background-color: rgba($info-dark, 0.55) !important;
+}
+a.bg-teritary-dark {
+	&:hover, &:focus {
+		background-color: rgba($info-dark, 0.35) !important;
+	}
+}
+button.bg-teritary-dark {
+	&:hover, &:focus {
+		background-color: rgba($info-dark, 0.35) !important;
+	}
+}
+.bg-teritary-darker {
+	background-color: rgba($info-dark, 0.85) !important;
+}
+a.bg-teritary-darker {
+	&:hover, &:focus {
+		background-color: rgba($info-dark, 0.55) !important;
+	}
+}
+button.bg-teritary-darker {
+	&:hover, &:focus {
+		background-color: rgba($info-dark, 0.55) !important;
+	}
+}
+.bg-teritary-darkest {
+	background-color: $info-dark !important;
+}
+a.bg-teritary-darkest {
+	&:hover, &:focus {
+		background-color: rgba($info-dark, 0.85) !important;
+	}
+}
+button.bg-teritary-darkest {
+	&:hover, &:focus {
+		background-color: rgba($info-dark, 0.85) !important;
+	}
+}
+
+
+.bg-custom-yellow{
+	background-color: $warning !important;
+}
+a.bg-custom-yellow {
+	&:hover, &:focus {
+		background-color: rgba($warning, 0.85) !important;
+	}
+}
+button.bg-custom-yellow {
+	&:hover, &:focus {
+		background-color: rgba($warning, 0.85) !important;
+	}
+}
+.bg-custom-yellow-lightest {
+	background-color: rgba($warning, 0.35) !important;
+}
+a.bg-custom-yellow-lightest {
+	&:hover, &:focus {
+		background-color: rgba($warning, 0.15) !important;
+	}
+}
+button.bg-custom-yellow-lightest {
+	&:hover, &:focus {
+		background-color: rgba($warning, 0.15) !important;
+	}
+}
+.bg-custom-yellow-lighter {
+	background-color: rgba($warning, 0.55) !important;
+}
+a.bg-custom-yellow-lighter {
+	&:hover, &:focus {
+		background-color: rgba($warning, 0.35)!important;
+	}
+}
+button.bg-custom-yellow-lighter {
+	&:hover, &:focus {
+		background-color: rgba($warning, 0.35)!important;
+	}
+}
+.bg-custom-yellow-light {
+	background-color: rgba($warning, 0.85) !important;
+}
+a.bg-custom-yellow-light {
+	&:hover, &:focus {
+		background-color: rgba($warning, 0.55) !important;
+	}
+}
+button.bg-custom-yellow-light {
+	&:hover, &:focus {
+		background-color: rgba($warning, 0.55) !important;
+	}
+}
+.bg-custom-yellow-dark {
+	background-color: rgba($warning-dark, 0.55) !important;
+}
+a.bg-custom-yellow-dark {
+	&:hover, &:focus {
+		background-color: rgba($warning-dark, 0.35) !important;
+	}
+}
+button.bg-custom-yellow-dark {
+	&:hover, &:focus {
+		background-color: rgba($warning-dark, 0.35) !important;
+	}
+}
+.bg-custom-yellow-darker {
+	background-color: rgba($warning-dark, 0.85) !important;
+}
+a.bg-custom-yellow-darker {
+	&:hover, &:focus {
+		background-color: rgba($warning-dark, 0.55) !important;
+	}
+}
+button.bg-custom-yellow-darker {
+	&:hover, &:focus {
+		background-color: rgba($warning-dark, 0.55) !important;
+	}
+}
+.bg-custom-yellow-darkest {
+	background-color: $warning-dark !important;
+}
+a.bg-custom-yellow-darkest {
+	&:hover, &:focus {
+		background-color: rgba($warning-dark, 0.85) !important;
+	}
+}
+button.bg-custom-yellow-darkest {
+	&:hover, &:focus {
+		background-color: rgba($warning-dark, 0.85) !important;
+	}
+}
+
+/*--bg-transparents--*/
+
+.bg-pink-transparent {
+	background-color: rgba($pink, 0.15) !important;
+}
+.bg-purple-transparent {
+	background-color: rgba($purple, 0.15) !important;
+}
+.bg-dark-transparent {
+	background-color: rgba($dark, 0.15) !important;
+}
+.bg-white-transparent {
+	background-color: rgba($white, 0.15) !important;
+}
+.bg-primary-transparent {
+	background-color: $primary-02 !important;
+}
+.bg-secondary-transparent {
+	background-color: rgba($secondary, 0.15) !important;
+}
+.bg-success-transparent {
+	background-color: rgba($success, 0.15) !important;
+}
+.bg-warning-transparent {
+	background-color: rgba($warning, 0.15) !important;
+}
+.bg-danger-transparent {
+	background-color: rgba($danger, 0.15) !important;
+}
+.bg-info-transparent{
+	background-color: rgba($info, 0.15) !important;
+}
+.bg-teritary-transparent{
+	background-color: rgba($info, 0.15) !important;
+}
+.bg-custom-yellow-transparent{
+	background-color: rgba($warning, 0.15) !important;
+}
+.bg-light-transparent{
+	background-color: rgba($gray, 0.15) !important;
+}
+
+/*--Box-shadow--*/
+.shadow-primary {
+	box-shadow: 0 7px 30px $primary-02 !important;
+}
+.shadow-secondary {
+	box-shadow: 0 7px 30px rgba($secondary, 0.2) !important;
+}
+.shadow-teritary {
+	box-shadow: 0 7px 30px rgba($info, 0.2) !important;
+}
+.shadow-warning {
+	box-shadow: 0 7px 30px rgba($warning, 0.2) !important;
+}
+.shadow-custom-yellow {
+	box-shadow: 0 7px 30px rgba($warning, 0.2) !important;
+}
+.shadow-info {
+	box-shadow: 0 7px 30px rgba($info, 0.2) !important;
+}
+.shadow-success {
+	box-shadow: 0 7px 30px rgba($success, 0.2) !important;
+}
+.shadow-danger {
+	box-shadow: 0 7px 30px rgba($danger, 0.2) !important;
+}
+.shadow-default{
+    box-shadow: 0 0 2px 2px rgba($default, 0.2) !important;
+}
+.box-shadow-primary {
+	box-shadow: 0 7px 30px $primary-02 !important;
+}
+.box-shadow-secondary {
+	box-shadow: 0 7px 30px rgba($secondary, 0.2) !important;
+}
+.box-shadow-teritary {
+	box-shadow: 0 7px 30px rgba($info, 0.2) !important;
+}
+.box-shadow-warning {
+	box-shadow: 0 7px 30px rgba($warning, 0.2) !important;
+}
+.box-shadow-custom-yellow {
+	box-shadow: 0 7px 30px rgba($warning, 0.2) !important;
+}
+.box-shadow-info {
+	box-shadow: 0 7px 30px rgba($info, 0.2) !important;
+}
+.box-shadow-success {
+	box-shadow: 0 7px 30px rgba($success, 0.2) !important;
+}
+.box-shadow-danger {
+	box-shadow: 0 7px 30px rgba($danger, 0.2) !important;
+}
+.box-shadow-default{
+    box-shadow: 0 3px 15px rgba($default, 0.2) !important;
+}
+.box-shadow-0{
+	box-shadow: none !important;
+}
+
+
+.primary .pricing-divider {
+	padding: 1em 0 4em;
+	position: relative;
+}
+.secondary .pricing-divider {
+	background-color:linear-gradient(to bottom right, #f1bf64 0%, #f71d36 100%) !important;
+	padding: 1em 0 4em;
+	position: relative;
+}
+.info .pricing-divider {
+	background-color: linear-gradient(to bottom right, #529efa 0%, #0774f8 100%) !important;
+	padding: 1em 0 4em;
+	position: relative;
+}
+.success .pricing-divider {
+	background-color: linear-gradient(to bottom right, #62fb62 0%, #21a544 100%) !important;
+	padding: 1em 0 4em;
+	position: relative;
+}
+
+/*--- text bold colors ---*/
+.primary b {
+	color: rgba($primary, 0.75);
+}
+.secondary b {
+	color: rgba($secondary-dark, 0.75);
+}
+.info b {
+	color: rgba($info-dark, 0.75);
+}
+.teritary b {
+	color: rgba($info-dark, 0.75);
+}
+.success b {
+	color: rgba($info-dark, 0.75);
+}
+.google-plus1 {
+	background-color: linear-gradient(to right bottom, #dd4b39 0%, #ef6a5a 100%);
+}
+.pinterest1 {
+	background-color: linear-gradient(to right bottom, #bd081c 0%, #eb4553 100%);
+}
+.bg-default{
+	background-color: $default;
+	color: $black;
+}
+
+
+.bg-white-1 {
+	background-color: $white-1;
+  }
+  
+  .bg-white-2 {
+	background-color: $white-2;
+  }
+  
+  .bg-white-3 {
+	background-color: $white-3;
+  }
+  
+  .bg-white-4 {
+	background-color: $white-4;
+  }
+  
+  .bg-white-5 {
+	background-color: $white-5;
+  }
+  
+  .bg-white-6 {
+	background-color: $white-6;
+  }
+  
+  .bg-white-7 {
+	background-color: $white-7;
+  }
+  
+  .bg-white-8 {
+	background-color: $white-8;
+  }
+  
+  .bg-white-9 {
+	background-color: $white-9;
+  }
+  
+  .bg-black-1 {
+	background-color: $black-1;
+  }
+  
+  .bg-black-2 {
+	background-color: $black-2;
+  }
+  
+  .bg-black-3 {
+	background-color: $black-3;
+  }
+  
+  .bg-black-4 {
+	background-color: $black-4;
+  }
+  
+  .bg-black-5 {
+	background-color: $black-5;
+  }
+  
+  .bg-black-6 {
+	background-color: $black-6;
+  }
+  
+  .bg-black-7 {
+	background-color: $black-7;
+  }
+  
+  .bg-black-8 {
+	background-color: $black-8;
+  }
+  
+  .bg-black-9 {
+	background: $black-9;
+  }

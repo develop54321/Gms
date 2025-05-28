@@ -1,7 +1,7 @@
 <section class="page server-info">
     <div class="container">
         <h1 class="content-title">
-            Информация о сервере - <?php echo $data['hostname'];?>
+            Информация о сервере - <?php echo \widgets\server\hostname\Hostname::run($data['hostname']);?>
         </h1>
         <hr/>
 
@@ -17,7 +17,7 @@
 
                 <div class="col-lg-8 mb-4">
                     <div class="server-info">
-                        <p>Название сервера: <span class="name"><?php echo $data['hostname'];?></span></p>
+                        <p>Название сервера: <span class="name"><?php echo \widgets\server\hostname\Hostname::run($data['hostname']);?></span></p>
                         <p>Игра: <span class="game"> <?php echo $data['game_name'];?></span> </p>
                         <p>Адрес: <span class="address"><?php echo $data['ip'];?>:<?php echo $data['port'];?></span></p>
                         <p>Игроков: <span class="players"><?php echo $data['players'];?>/<?php echo $data['max_players'];?></span></p>
@@ -89,29 +89,63 @@
 
                             <?php if($data['boost'] != '0'):?>
                                 <li class="list-group-item">
-                                    Boost:<br/>
+                                    Буст<br/>
                                     Осталось кругов: <?php echo $data['boost'];?>
                                 </li>
                             <?php endif;?>
 
                         </ul>
 
-                                 <a class="btn btn-primary btn-sm mt-2" href="/pay/server?id=<?php echo $data['id'];?>"> Заказать платную услугу</a>
+                                 <a class="btn btn-primary btn-sm mt-2" href="/pay/<?php echo $data['id'];?>/select"> Заказать платную услугу</a>
                         <hr>
 
 
                         <h3>Комментарии к серверу</h3>
-                            <form id="addComment" method="post">
-                                <input type="hidden" name="id" value="<?php echo $data['id'];?>"/>
-                                <textarea class="form-control" name="comment" style="resize: none;"
-                                          placeholder="Оставьте свой комментарий..." rows="3"></textarea>
-                                <br/>
-                                <input type="submit" class="btn btn-primary btn-sm mb-2" value="Отправить"/>
-                            </form>
+                        <form id="addComment" method="post">
+                            <input type="hidden" name="id" value="<?php echo $data['id'];?>"/>
+                            <div class="form-group">
+                                <textarea class="form-control" name="comment" id="commentField" style="resize: none;" placeholder="Оставьте свой комментарий..." rows="3" maxlength="500" oninput="updateCounter()"></textarea>
+                                <small id="charCounter" class="form-text text-muted text-right">
+                                    Осталось символов: 500
+                                </small>
+                            </div>
+                            <input type="submit" class="btn btn-primary btn-sm mt-2 mb-2" value="Отправить" id="submitBtn"/>
+                        </form>
+
+                        <script>
+                            function updateCounter() {
+                                const textarea = document.getElementById('commentField');
+                                const counter = document.getElementById('charCounter');
+                                const remaining = 500 - textarea.value.length;
+
+                                counter.textContent = `Осталось символов: ${remaining}`;
+
+                                if (remaining < 50) {
+                                    counter.style.color = remaining < 20 ? 'red' : 'orange';
+                                } else {
+                                    counter.style.color = '#6c757d'; // Bootstrap's default muted color
+                                }
+                            }
+                        </script>
+
+                        <style>
+                            .form-group {
+                                position: relative;
+                            }
+
+                            #charCounter {
+                                position: absolute;
+                                right: 5px;
+                                top: 5px;
+                                background: white;
+                                padding: 0 5px;
+                                border-radius: 3px;
+                            }
+                        </style>
 
                         <div class="comments">
                             <?php if(empty($comments)):?>
-                                <div class="alert alert-warning" style="margin: 3px 0;">В данный момент комментарьев отсутсвует
+                                <div class="alert alert-warning" style="margin: 3px 0;">В данный момент комментариев отсутствует
                                 </div>
                             <?php endif;?>
                             <?php foreach($comments as $c):?>
@@ -123,7 +157,7 @@
                                     <?php endif;?>
                                     <div class="text">
                                         <div class="author">
-                                            <?php echo $c['lastname'];?>
+                                            <?php echo $c['lastname'] ?? 'Анонимно';?>
                                         </div>
                                         <?php echo $c['text'];?>
 
@@ -131,9 +165,18 @@
 
                                         <div class="date"><?php echo date("d.m.Y H:i", $c['date_create']);?></div>
                                     </div>
-                                    <div class="clearfix"></div>
                                 </div>
                             <?php endforeach;?>
+
+                            <?php if (!empty($comments)):?>
+                            <div class="pagination">
+                                <nav aria-label="Pagination">
+                                    <ul class="pagination justify-content-center">
+                                        <?= implode("\n", $pagination_html) ?>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <?php endif;?>
                         </div>
 
                     </div>
@@ -145,13 +188,14 @@
 
                     <img class="w-100" src="<?php echo $data['img_map'];?>" alt="<?php echo $data['map'];?>">
 
-                    <a onclick="ShowModal('<?= $data['id']; ?>', 'showPlayers');return false;" class="btn btn-success players-btn mt-2">Показать игроков</a>
+                    <a onclick="ShowModal('<?= $data['id']; ?>', 'showPlayers');return false;" class="btn btn-success players-btn mt-2 btn-sm w-100">Показать игроков</a>
                 </div>
             </div>
         </div>
 
 
             <script>
+
                 $('#addComment').ajaxForm({
                     dataType: 'json',
                     url: "/server/addcomment",
@@ -168,22 +212,6 @@
                         }
                     },
                 });
-
-
-                var id = <?php echo $data['id'];?>
-                ;
-                //setInterval(getPlayers, 5000);
-                getPlayers();
-
-                function getPlayers() {
-                    $.ajax({
-                        url: "/server/getplayers",
-                        data: {'id':id},
-                        success: function (data) {
-                            $("#contentPlayers").html(data);
-                        }
-                    });
-                }
 
             </script>
         <?php endif;?>

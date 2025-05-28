@@ -1,0 +1,143 @@
+/*-----Alerts-----*/
+
+.alert {
+	position: relative;
+	font-size: 0.9375rem;
+	padding: 0.75rem 1.25rem;
+	margin-bottom: 1rem;
+	border: 1px solid transparent;
+	&:last-child, p {
+		margin-bottom: 0;
+	}
+}
+.alert-heading {
+	color: inherit;
+}
+.alert-link {
+	font-weight: 500;
+	&:hover, a:hover {
+		text-decoration: underline;
+	}
+}
+.alert-dismissible {
+	.btn-close {
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: 0.75rem 1.25rem;
+		color: inherit;
+	}
+}
+.alert-icon {
+	padding-left: 3rem;
+	>i {
+		color: inherit;
+		font-size: 1rem;
+		position: absolute;
+		top: 1rem;
+		left: 1rem;
+	}
+}
+.alert-avatar {
+	padding-left: 3.75rem;
+	.avatar {
+		position: absolute;
+		top: .5rem;
+		left: .75rem;
+	}
+}
+.alert-default{
+	background-color: $gray-light;
+	.alert-link {
+		color: $gray-dark;
+	}
+
+}
+.alert-primary {
+	color: $primary;
+	background-color: $primary-02;
+	border-color: $primary-02;
+	hr {
+		border-top-color: $primary;
+	}
+	.alert-link {
+		color: $primary;
+	}
+}
+.alert-secondary {
+	color: $secondary;
+	background-color: rgba($secondary, 0.15);
+	border-color: rgba($secondary, 0.15);
+	hr {
+		border-top-color: $secondary;
+	}
+	.alert-link {
+		color: $secondary;
+	}
+}
+.alert-success {
+	color: $success;
+	background-color: rgba($success, 0.15);
+	border-color: rgba($success, 0.15);
+	hr {
+		border-top-color: $success;
+	}
+	.alert-link {
+		color: $success;
+	}
+}
+.alert-info {
+	color: $info;
+	background-color: rgba($info, 0.15);
+	border-color: rgba($info, 0.15);
+	hr {
+		border-top-color: $info;
+	}
+	.alert-link {
+		color: $info;
+	}
+}
+.alert-warning {
+	color: $warning;
+	background-color: rgba($warning, 0.15);
+	border-color: rgba($warning, 0.15);
+	hr {
+		border-top-color: $warning;
+	}
+	.alert-link {
+		color: $warning;
+	}
+}
+.alert-danger {
+	color: $danger;
+	background-color: rgba($danger, 0.15);
+	border-color: rgba($danger, 0.15);
+	hr {
+		border-top-color: $danger;
+	}
+	.alert-link {
+		color: $danger;
+	}
+}
+.alert-dark {
+	color: $gray-900;
+	background-color: rgba($gray-dark, 0.15);
+	border-color: rgba($gray-dark, 0.15);
+	hr {
+		border-top-color: $gray-dark;
+	}
+	.alert-link {
+		color: $gray-dark;
+	}
+}
+.alert-light {
+	color: $gray-700;
+	background-color: rgba($gray-light, 0.25);
+	border-color: rgba($gray-light, 0.25);
+	hr {
+		border-top-color: $gray-light;
+	}
+	.alert-link {
+		color: $gray;
+	}
+}

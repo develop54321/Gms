@@ -30,7 +30,7 @@ class CronCommand extends Command
         $getServers = $this->db->query('SELECT * FROM ga_servers');
         $getServers = $getServers->fetchAll();
         $Query = new SourceQuery();
-        $Info = array();
+
         foreach ($getServers as $row) {
             if (in_array($row['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])) {
                 try {
@@ -71,7 +71,10 @@ class CronCommand extends Command
                         throw new Exception("server is not available");
                     }
 
-                    $hostname = iconv('WINDOWS-1251', 'UTF-8', utf8_decode($Info['servername']));
+                    $server_name = $Info['gq_hostname'];
+
+                    $server_name = iconv('utf-8//IGNORE', 'cp1252//IGNORE', $server_name);
+                    $server_name = iconv('cp1251//IGNORE', 'utf-8//IGNORE', $server_name);
 
 
                     $status = 1;
@@ -81,7 +84,7 @@ class CronCommand extends Command
                     $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players WHERE id = :id";
                     $update = $this->db->prepare($sql);
                     $update->bindParam(':status', $status);
-                    $update->bindParam(':hostname', $hostname);
+                    $update->bindParam(':hostname', $server_name);
                     $update->bindParam(':map', $mapName);
                     $update->bindParam(':players', $players);
                     $update->bindParam(':max_players', $maxPlayers);
@@ -111,7 +114,7 @@ class CronCommand extends Command
                     $Info = array_shift($results);
 
                     if (empty($Info['gq_hostname'])) {
-                        throw new \DomainException();
+                        throw new Exception("server is not available");
                     }
                     $hostname = $Info['gq_hostname'];
                     $status = 1;

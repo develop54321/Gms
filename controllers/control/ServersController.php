@@ -3,13 +3,11 @@
 namespace controllers\control;
 
 use components\Pagination;
-use components\User;
-use core\BaseController;
 use PDO;
 
 class ServersController extends AbstractController
 {
-    private const PER_PAGE = 15;
+    private const PER_PAGE = 20;
 
     public function search()
     {
@@ -65,10 +63,7 @@ class ServersController extends AbstractController
 
     public function index()
     {
-
-
-        $title = "Серверы";
-
+        $title = "Сервера";
 
         $filter = [];
 
@@ -137,11 +132,6 @@ class ServersController extends AbstractController
                 $gamemenu_expired_date = 0;
                 $gamemenu_enabled = $_POST['gamemenu_enabled'];
                 if ($gamemenu_enabled != 0) $gamemenu_expired_date = strtotime($_POST['gamemenu_expired_date']);
-
-                //  $vip_expired_date = 0;
-                //   $vip_enabled = $_POST['vip_enabled'];
-                //  if ($vip_enabled != 0) $vip_expired_date = strtotime(date('Y-m-d', strtotime($_POST['vip_expired_date'])));
-
 
 
 

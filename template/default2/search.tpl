@@ -26,7 +26,7 @@
                             <?php echo \widgets\server\game\GameIcon::run($row['game']);?>
                         </td>
                         <td>
-                            <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo $row['hostname']; ?></a>
+                            <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']); ?></a>
                         </td>
                         <td>
                               <span class="address">

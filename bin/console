@@ -12,6 +12,7 @@ $application->add(new \command\CronCommand());
 $application->add(new \command\PaymentCommand());
 $application->add(new \command\ServicesCommand());
 $application->add(new \command\YooKassaCommand());
+$application->add(new \command\QueueMailCommand());
 
 
 $application->run();

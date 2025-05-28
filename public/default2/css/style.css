@@ -95,12 +95,12 @@ header .nav-link:hover{
     flex: 1 0 auto;
 }
 
-.content .content-title{
-    font-size: 2.4em;
+
+.content-title{
+    font-size: 2.2em;
     border-bottom: 1px solid #d7d7d7;
     margin-bottom: 0.7em;
 }
-
 
 
 
@@ -334,4 +334,124 @@ select option {
     padding: 0.5em;
     margin-bottom: 0.5em;
     border: 1px solid #00000075;
+}
+
+.pay-select .card{
+    min-height: 80px;
+    background: rgb(255 255 255 / 31%);
+    border: 1px solid #b5b5b5;
+    cursor: pointer;
+    color: #fff;
+    cursor: pointer;
+}
+
+.pay-select a{
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.pay-select .card.active {
+    background: rgb(255 255 255 / 12%);
+    border: 1px solid #b5b5b5;
+}
+
+
+
+.pay-select .colors .radio-tile, .pay-select .top-place .radio-tile {
+    display: none;
+}
+
+.pay-select .colors .radio-tile-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.pay-select .colors .radio-tile:checked + .radio-tile-label {
+    transform: scale(1.1);
+    border: 3px solid #000;
+}
+
+
+
+
+.pay-select .top-place .radio-tile-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    background-color: #2d283e;
+    border: 1px solid #040404;
+}
+
+.pay-select .top-place .radio-tile:checked + .radio-tile-label {
+    transform: scale(1.1);
+    border: 1px solid #000;
+}
+
+
+.btn-loader {
+    position: relative; /* Делаем кнопку контейнером для позиционирования */
+    display: inline-flex; /* Используем flex для выравнивания */
+    align-items: center; /* Выравниваем элементы по вертикали */
+    justify-content: center; /* Выравниваем элементы по горизонтали */
+}
+
+.btn-loader .loader {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.user-refill .card{
+    color: #000;
+}
+.user-refill .payment-method-card {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.user-refill .payment-method-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+
+.user-refill #submit-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.user-refill .invalid-feedback {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1;
 }

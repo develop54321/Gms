@@ -1,0 +1,300 @@
+.panel-heading-landing-box {
+	background: $primary;
+	color: $white;
+	font-size: 16px;
+	text-align: center;
+	border-top: none;
+}
+.panel-title-landing {
+	color: $primary;
+	font-size: 35px;
+	font-weight: bold;
+}
+.panel-body-landing {
+	border: solid 2px $primary;
+	border-top: none ;
+	border-bottom: none;
+	text-align: center;
+	background: $white;
+}
+.panel-footer-landing {
+	border: solid 2px $primary;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-top: none;
+	text-align: center;
+	background: #f7f7f7;
+}
+.panel-body {
+	padding: 15px;
+	.lead {
+		strong {
+			font-size: 30px;
+			margin-bottom: 0;
+		}
+		font-size: 15px;
+		margin-bottom: 0;
+		padding: 10px 0;
+	}
+}
+.panel-footer {
+	padding: 10px 15px;
+	background-color: $white;
+	border-top: 1px solid $border;
+	border-left: 1px solid $border;
+	border-right: 1px solid $border;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+.panel.price .btn {
+	box-shadow: 0 -1px 0px rgba(50, 50, 50, 0.2) inset;
+	border: 0px;
+}
+.panel-group .panel {
+	// border-radius: 0;
+	box-shadow: none;
+	border-color: $border;
+}
+.panel-default>.panel-heading {
+	padding: 0;
+	// border-radius: 0;
+	background-color: $white;
+	// border-color: $border;
+}
+.panel-title {
+	font-size: 14px;
+	margin-bottom: 0;
+	>a {
+		display: block;
+		padding: 16px;
+		text-decoration: none;
+	}
+}
+.panel-default>.panel-heading+.panel-collapse>.panel-body {
+	border: 1px solid $border;
+	border-top: 0;
+}
+.panel1 {
+	border-width: 0 0 1px 0;
+	border-style: solid;
+	border-color: $white;
+	background: none;
+	box-shadow: none;
+	&:last-child {
+		border-bottom: none;
+	}
+}
+.panel-group1 {
+	>.panel1:first-child .panel-heading1 {
+		border-radius: 4px 4px 0 0;
+	}
+	.panel1 {
+		border-radius: 0;
+	}
+}
+.panel-body1 {
+	padding: 10px;
+	background: $white;
+}
+.panel-title1 {
+	font-size: 14px;
+	margin-bottom: 0;
+}
+.panel-group1 .panel1+.panel1 {
+	margin-top: 0;
+}
+.panel-heading1 {
+	// background-color: transparent;
+	border-radius: 5px;
+}
+.panel-group1 .panel-body {
+	border: 1px solid $border;
+	border-radius: 0px 0px 5px 5px;
+}
+.panel-title1 a {
+	display: block;
+	color: $primary !important;
+	padding: 16px;
+	position: relative;
+	font-size: 15px;
+	font-weight: 400;
+	border-radius:5px;
+}
+.panel1:last-child {
+	.panel-body1 {
+		border-radius: 0 0 4px 4px;
+	}
+	.panel-heading1 {
+		border-radius: 0 0 4px 4px;
+		transition: border-radius 0.3s linear 0.2s;
+		&.active {
+			border-radius: 0;
+			transition: border-radius linear 0s;
+		}
+	}
+}
+/* #bs-collapse icon scale option */
+
+.panel-title a.accordion-toggle {
+	&:before {
+		content: "\f068";
+		padding: 0 10px 0 0;
+		color: $white;
+		font-family: FontAwesome;
+		float: right;
+	}
+	&.collapsed:before {
+		content: "\f067";
+		padding: 0 10px 0 0;
+		color: $white;
+		font-family: FontAwesome;
+		float: right;
+	}
+}
+.panel-heading1 {
+	a {
+		&.collapsed:before {
+			content: "\e9af";
+			position: absolute;
+			font-family: 'feather' !important;
+			right: 10px;
+			top: 13px;
+			font-size: 20px;
+			transition: all 0.5s;
+			transform: scale(1);
+		}
+		&:before {
+			content: "\e994";
+			position: absolute;
+			font-family: 'feather' !important;
+			right: 10px;
+			top: 13px;
+			font-size: 20px;
+			transition: all 0.5s;
+			transform: scale(1);
+		}
+	}
+	&.active a:before {
+		content: ' ';
+		transition: all 0.5s;
+		transform: scale(0);
+	}
+}
+.demo-accordion p:last-child, .panel-group1 p:last-child {
+	margin-bottom: 0;
+}
+#bs-collapse .panel-heading1 {
+	a:after {
+		content: "\f01a";
+		font-size: 24px;
+		position: absolute;
+		font-family: 'FontAwesome';
+		right: 5px;
+		top: 10px;
+		transform: scale(0);
+		transition: all 0.5s;
+	}
+	&.active a:after {
+		content: "\f01a";
+		transform: scale(1);
+		transition: all 0.5s;
+	}
+}
+/*--------panel----------*/
+
+.expanel-default {
+	border: $border;
+}
+.expanel-secondary {
+	border: $secondary;
+}
+.expanel-success {
+	border: $green;
+}
+.expanel-danger {
+	border: $danger;
+}
+.expanel-primary>.expanel-heading {
+	color: $white;
+	background-color: $primary;
+	border-color: $primary;
+}
+.expanel-info>.expanel-heading {
+	color: $white;
+	background-color: $info;
+	border-color: $info;
+}
+.expanel-warning>.expanel-heading {
+	color: $white;
+	background-color: $warning;
+	border-color: $warning;
+}
+.expanel-dark>.expanel-heading {
+	color: $white;
+	background-color: $dark;
+	border-color: $dark;
+}
+.expanel-light>.expanel-heading {
+	color: $white;
+	background-color: $gray;
+	border-color: $gray;
+}
+.expanel-success>.expanel-heading {
+	color: $white;
+	background-color: $success;
+	border-color: $success;
+}
+.expanel-secondary>.expanel-heading {
+	color: $white;
+	background-color: $secondary;
+	border-color: $secondary;
+}
+.expanel-success>.expanel-heading {
+	color: $white;
+	background-color: $green;
+	border-color: $green;
+}
+.expanel-danger>.expanel-heading {
+	color: $white;
+	background-color: $danger;
+	border-color: $danger;
+}
+.expanel-warning>.expanel-heading {
+	color: $white;
+	background-color: $yellow;
+	border-color: $yellow;
+}
+.expanel-title {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: 16px;
+	color: inherit;
+}
+.expanel {
+	margin-bottom: 20px;
+	background-color: $white;
+	border: 1px solid $border;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.01);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.01);
+}
+.expanel-default>.expanel-heading {
+	background-color: $border;
+	border-color: $border;
+}
+.expanel-heading {
+	padding: 10px 15px;
+	border-bottom: 1px solid $border;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+.expanel-footer {
+	padding: 10px 15px;
+	background-color: $border;
+	border-top: 1px solid $border;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+.expanel-body {
+	padding: 15px !important;
+}

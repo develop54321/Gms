@@ -3,8 +3,6 @@
 namespace controllers\control;
 
 use components\Pagination;
-use components\User;
-use core\BaseController;
 use PDO;
 
 class CommentsController extends AbstractController
@@ -12,13 +10,7 @@ class CommentsController extends AbstractController
 
     public function search()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
         $title = "Поиск комментарии";
-
 
         $filter = [];
         $sql = '';
@@ -57,11 +49,6 @@ class CommentsController extends AbstractController
 
     public function index()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
         $title = "Комментарии";
         $filter = [];
 
@@ -110,11 +97,6 @@ class CommentsController extends AbstractController
 
     public function edit()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
 
         $title = "Изменение комментария #$id";
@@ -158,11 +140,6 @@ class CommentsController extends AbstractController
 
     public function moderation()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
         if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
         $moderation = 1;
         $sql = "UPDATE ga_comments SET moderation =:moderation WHERE id= :id";
@@ -178,22 +155,13 @@ class CommentsController extends AbstractController
 
     public function remove()
     {
-        $user = new User();
-        if (!$user->isAuth()) {
-            header("Location: /control/index");
-        }
-
-
         if (parent::isAjax()) {
             if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = '';
             $sql = "DELETE FROM ga_comments WHERE id =  :id";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
-
         }
-
-
     }
 
 

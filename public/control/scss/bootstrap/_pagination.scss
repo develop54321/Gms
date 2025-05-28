@@ -1,0 +1,225 @@
+.page {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-ms-flex-pack: center;
+	justify-content: center;
+	min-height: 100vh;
+}
+body.fixed-header .page {
+	padding-top: 4.5rem;
+}
+@media (min-width: 1600px) {
+	body.aside-opened .page {
+		margin-right: 22rem;
+	}
+}
+.page-main {
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
+}
+.page-content {
+	margin: .75rem 0;
+}
+@media (min-width: 768px) {
+	.page-content {
+		margin: 1.5rem 0;
+	}
+}
+.example .pagination {
+	margin-bottom: 0;
+}
+.pagination {
+	display: -ms-flexbox;
+	display: flex;
+	padding-left: 0;
+	list-style: none;
+	border-radius: 3px;
+}
+.page-link {
+	position: relative;
+	display: block;
+	padding: 0.5rem 0.75rem;
+	margin-left: -1px;
+	line-height: 1.25;
+	background-color: $white;
+	border: 1px solid $border;
+	color: $default-color;
+	&:hover {
+		z-index: 2;
+		text-decoration: none;
+		background-color: $primary;
+		color: $white;
+	}
+	&:focus {
+		z-index: 2;
+		outline: 0;
+		box-shadow: none;
+	}
+	&:not(:disabled):not(.disabled) {
+		cursor: pointer;
+	}
+}
+.page-item {
+	&:first-child .page-link {
+		margin-left: 0;
+		border-top-left-radius: 3px;
+		border-bottom-left-radius: 3px;
+	}
+	&:last-child .page-link {
+		border-top-right-radius: 3px;
+		border-bottom-right-radius: 3px;
+	}
+	&.active .page-link {
+		z-index: 1;
+		color: $white;
+	}
+	&.disabled .page-link {
+		color: #ced4da;
+		pointer-events: none;
+		cursor: auto;
+		background-color: $white;
+		border-color: $border;
+	}
+}
+.pagination-lg {
+	.page-link {
+		padding: 0.75rem 1.5rem;
+		font-size: 1.125rem;
+		line-height: 1.5;
+	}
+	.page-item {
+		&:first-child .page-link {
+			border-top-left-radius: 3px;
+			border-bottom-left-radius: 3px;
+		}
+		&:last-child .page-link {
+			border-top-right-radius: 3px;
+			border-bottom-right-radius: 3px;
+		}
+	}
+}
+.pagination-sm {
+	.page-link {
+		padding: 0.25rem 0.5rem;
+		font-size: 0.875rem;
+		line-height: 1.5;
+	}
+	.page-item {
+		&:first-child .page-link {
+			border-top-left-radius: 3px;
+			border-bottom-left-radius: 3px;
+		}
+		&:last-child .page-link {
+			border-top-right-radius: 3px;
+			border-bottom-right-radius: 3px;
+		}
+	}
+}
+.page-header {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: center;
+	align-items: center;
+	margin:  0.75rem 0rem 0.75rem;
+	-ms-flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 0;
+	/* border-radius: 7px; */
+	position: relative;
+	min-height: 50px;
+	border: 1px solid transparent;
+	border-radius: 5px;
+}
+.page-title {
+	margin: 0;
+	font-size: 20px;
+	font-weight: 500;
+	position: relative;
+	margin-bottom: 0.2rem;
+}
+.page-title-icon {
+	color: #9aa0ac;
+	font-size: 1.25rem;
+}
+.page-subtitle {
+	font-size: 0.8125rem;
+	color: #c0a0f1;
+	margin-left: 2rem;
+	position: relative;
+	a {
+		color: inherit;
+	}
+}
+.page-options {
+	margin-left: auto;
+}
+.page-header .breadcrumb {
+	font-size: 14px;
+	padding-left: 0 !important;
+}
+.page-breadcrumb {
+	-ms-flex-preferred-size: 100%;
+	flex-basis: 100%;
+	background: none;
+	padding: 0;
+	margin: 1rem 0 0;
+	font-size: 0.875rem;
+}
+.page-description {
+	margin: .25rem 0 0;
+	color: #6e7687;
+	a {
+		color: inherit;
+	}
+}
+.page-single {
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
+	display: -ms-flexbox;
+	-ms-flex-align: center;
+	align-items: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+@media (min-width: 768px) {
+	.page-breadcrumb {
+		margin: -.5rem 0 0;
+	}
+}
+.page-breadcrumb .breadcrumb-item {
+	color: #9aa0ac;
+	&.active {
+		color: #6e7687;
+	}
+}
+.pagination-simple .page-item {
+	.page-link {
+		background: none;
+		border: none;
+	}
+	&.active .page-link {
+		color: #495057;
+		font-weight: 700;
+	}
+}
+.pagination-pager {
+	.page-prev {
+		margin-right: auto;
+	}
+	.page-next {
+		margin-left: auto;
+	}
+}
+.page-total-text {
+	margin-right: 1rem;
+	-ms-flex-item-align: center;
+	align-self: center;
+	color: #6e7687;
+}
+.page-item.active .page-link {
+	color: $white;
+    background-color: $primary;
+    border-color: $primary;
+}

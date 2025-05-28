@@ -1,0 +1,231 @@
+button {
+	border-radius: 0;
+	&:focus {
+		outline: 0;
+	}
+}
+input, button, select, optgroup, textarea {
+	margin: 0;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+button, input {
+	overflow: visible;
+}
+button, select {
+	text-transform: none;
+}
+button, html [type="button"], [type="reset"], [type="submit"] {
+	-webkit-appearance: button;
+}
+button::-moz-focus-inner, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
+	padding: 0;
+	border-style: none;
+}
+.btn-compose {
+	background: none repeat scroll 0 0 #ff6c60;
+	color: $white;
+	padding: 12px 0;
+	text-align: center;
+	width: 100%;
+	&:hover {
+		background: none repeat scroll 0 0 #f5675c;
+		color: $white;
+	}
+}
+.btn-send {
+	background: none repeat scroll 0 0 #00a8b3;
+	color: $white;
+	&:hover {
+		background: none repeat scroll 0 0 #00a8b3;
+		color: $white;
+		background: none repeat scroll 0 0 #009da7;
+	}
+}
+.fileinput-button {
+	background: none repeat scroll 0 0 #eeeeee;
+	border: 1px solid #e6e6e6;
+	float: left;
+	margin-right: 4px;
+	overflow: hidden;
+	position: relative;
+	input {
+		cursor: pointer;
+		direction: ltr;
+		font-size: 23px;
+		margin: 0;
+		opacity: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		transform: translate(-300px, 0px) scale(4);
+	}
+}
+button.btn-close {
+	padding: 0;
+	background-color: transparent;
+	border: 0;
+	-webkit-appearance: none;
+	background-image: none;
+	&:focus{
+		box-shadow: none;
+	}
+}
+.btn-outline-cyan {
+	border: 1px solid $cyan !important;
+	color: $cyan !important;
+}
+.btn-outline-cyan:hover {
+	color: $white !important;
+	background-color: $cyan !important;
+}
+.btn-outline-orange {
+	border: 1px solid $orange !important;
+	color: $orange !important;
+}
+.btn-outline-orange:hover {
+	color: $white !important;
+	background-color: $orange !important;
+}
+
+// file attachments buttons
+
+.btn-group .btn-close {
+    padding: 6px;
+    border-radius: 0px 4px 4px 0px;
+    opacity: 1;
+    font-weight: 300;
+    background-image: none;
+	&.btn-pill {
+		border-radius: 0px 50px 50px 0px ;
+	}
+	&.btn-outline-secondary {
+		border: 1px solid $secondary !important;
+		color: $secondary !important;
+	}
+	&.btn-outline-secondary:hover {
+		color: $white !important;
+	}
+	&.btn-outline-primary {
+		border: 1px solid $primary !important;
+		color: $primary !important;
+	}
+	&.btn-outline-primary:hover {
+		color: $white !important;
+	}
+	&.btn-outline-info {
+		border: 1px solid $info !important;
+		color: $info !important;
+	}
+	&.btn-outline-info:hover {
+		color: $white !important;
+	}
+	&.btn-outline-warning {
+		border: 1px solid $warning !important;
+		color: $warning !important;
+	}
+	&.btn-outline-warning:hover {
+		color: $white !important;
+	}
+	&.btn-outline-danger {
+		border: 1px solid $danger !important;
+		color: $danger !important;
+	}
+	&.btn-outline-danger:hover {
+		color: $white !important;
+	}
+	&.btn-outline-success {
+		border: 1px solid $success !important;
+		color: $success !important;
+	}
+	&.btn-outline-success:hover {
+		color: $white !important;
+	}
+	&.btn-outline-cyan {
+		border: 1px solid $cyan !important;
+		color: $cyan !important;
+	}
+	&.btn-outline-cyan:hover {
+		color: $white !important;
+		background-color: $cyan !important;
+	}
+	&.btn-outline-orange {
+		border: 1px solid $orange !important;
+		color: $orange !important;
+	}
+	&.btn-outline-orange:hover {
+		color: $white !important;
+		background-color: $orange !important;
+	}
+	&.btn-primary-light {
+		border: 1px solid rgba($primary,0.3) !important;
+	}
+	&.btn-primary-light:hover {
+		color: $white !important;
+	}
+	&.btn-secondary-light {
+		border: 1px solid rgba($secondary, 0.3) !important;
+	}
+	&.btn-secondary-light:hover {
+		color: $white !important;
+	}
+	&.btn-danger-light {
+		border: 1px solid rgba($danger, 0.3) !important;
+	}
+	&.btn-danger-light:hover {
+		color: $white !important;
+	}
+	&.btn-success-light {
+		border: 1px solid rgba($success, 0.3) !important;
+	}
+	&.btn-success-light:hover {
+		color: $white !important;
+	}
+	&.btn-warning-light {
+		border: 1px solid rgba($warning, 0.3) !important;
+	}
+	&.btn-warning-light:hover {
+		color: $white !important;
+	}
+	&.btn-info-light {
+		border: 1px solid rgba($info, 0.3) !important;
+	}
+	&.btn-info-light:hover {
+		color: $white !important;
+	}
+	&.btn-orange-light {
+		border: 1px solid rgba($orange, 0.3) !important;
+	}
+	&.btn-orange-light:hover {
+		color: $white !important;
+	}
+	&.btn-cyan-light {
+		border: 1px solid rgba($cyan, 0.3) !important;
+	}
+	&.btn-cyan-light:hover {
+		color: $white !important;
+	}
+}
+.btn-group .btn-close.btn-lg {
+    padding: 11px;
+    background-image: none;
+    font-size: 31px;
+}
+.btn-group .btn-close.btn-sm {
+    padding:6px !important;
+    font-size: 1rem !important;
+    background-image: none;
+}
+.tag-attachments.btn-group .btn:last-child {
+	min-width: 20px !important;
+}
+.attachment-pill.btn-pill {
+	padding-left: 0.50rem !important;
+	padding-right: 0.50rem !important;
+}
+.tag-attachments .btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

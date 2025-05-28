@@ -68,7 +68,7 @@ class YooKassaCommand extends Command
                                 'amount' => $decodeContent['amount']
                             ]);
                         } else {
-                            $services->checkService([
+                            $services->processing([
                                 'inv_id' => $payLog['id'],
                                 'price' => $decodeContent['amount'],
                                 'pay_methods' => "yookassa"

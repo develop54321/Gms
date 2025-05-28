@@ -7,12 +7,11 @@ use PDO;
 
 class User extends BaseController
 {
-
     public function isAuth()
     {
-        if (isset($_SESSION['id_user']) && isset($_SESSION['hash'])) {
-            $id_user = $_SESSION['id_user'];
-            $hash = $_SESSION['hash'];
+        if (isset($_COOKIE['id_user']) && isset($_COOKIE['hash'])) {
+            $id_user = $_COOKIE['id_user'];
+            $hash = $_COOKIE['hash'];
             $check = $this->db->prepare('SELECT * FROM ga_users WHERE id = :id and hash = :hash');
             $check->bindValue(":id", $id_user);
             $check->bindValue(":hash", $hash);
@@ -22,17 +21,15 @@ class User extends BaseController
         } else {
             return false;
         }
-
     }
 
     public function getProfile()
     {
-        $id_user = (int)$_SESSION['id_user'];
+        $id_user = (int)$_COOKIE['id_user'];
         $check = $this->db->prepare('SELECT * FROM ga_users WHERE id = :id ');
         $check->bindValue(":id", $id_user);
         $check->execute();
         return $check->fetch();
-
     }
 
     public function getProfileBy($param, $data)
@@ -41,13 +38,10 @@ class User extends BaseController
         $check->bindValue(":$param", $data);
         $check->execute();
         return $check->fetch();
-
     }
-
 
     public function refill($data)
     {
-
         $getInfoPay = $this->db->prepare('SELECT * FROM ga_pay_logs WHERE id = :id');
         $getInfoPay->execute(array(':id' => $data['inv_id']));
         $getInfoPay = $getInfoPay->fetch();
@@ -81,6 +75,5 @@ class User extends BaseController
         $update->execute();
 
         return true;
-
     }
 }

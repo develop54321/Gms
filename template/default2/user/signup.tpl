@@ -11,35 +11,39 @@
                 <div class="col-md-5">
 
                     <div class="mb-3">
-                        <input type="text" name="firstname" id="firstname" class="form-control" id="inputFirstname" required="" placeholder="Имя">
+                        <label for="password">Имя</label>
+                        <input type="text" name="firstname" class="form-control" id="firstname" required="">
                     </div>
 
                     <div class="mb-3">
-                        <input type="text" name="lastname" class="form-control" id="lastname" required="" placeholder="Фамилия">
+                        <label for="password">Фамилия</label>
+                        <input type="text" name="lastname" class="form-control" id="lastname" required="">
                     </div>
 
                     <div class="mb-3">
                         <label for="password">Пароль</label>
-                        <input type="password" name="password" class="form-control" id="password" required="" placeholder="Пароль">
+                        <input type="password" name="password" class="form-control" id="password" required="">
                     </div>
 
                     <div class="mb-3">
-                        <input type="password" name="password2" class="form-control" id="password2" required="" placeholder="Повторите пароль">
+                        <label for="password">Повторите пароль</label>
+                        <input type="password" name="password2" class="form-control" id="password2" required="">
                     </div>
 
                     <div class="mb-3">
-                        <input type="email" name="email" class="form-control" id="email" required="" placeholder="Электронная почта">
+                        <label for="password">Электронная почта</label>
+                        <input type="email" name="email" class="form-control" id="email" required="">
                     </div>
 
                     <div class="mb-3">
                         <a href="#" id="captchaImg" onclick="updateCaptcha(); return false;">
-                            <img src="/captcha" src="Каптча"/>
+                            <img src="/captcha" src="Капча"/>
                         </a>
                     </div>
 
                     <div class="mb-3">
                         <input type="text" name="captcha" class="form-control" id="captcha" required="" placeholder="Цифры с картинки"/>
-                        <small class="form-text text-muted">Если цифры не видны, то обновите картинку, кликнев на него.</small>
+                        <small class="form-text text-muted">Если цифры не видны, обновите изображение, нажав на него.</small>
                     </div>
 
                     <div class="mb-3">
@@ -60,6 +64,9 @@
 
 
 <script>
+    function updateCaptcha() {
+        $("#captchaImg").html('<img src="/captcha" src="Каптча"/>');
+    }
             $('#signupForm').ajaxForm({
                 dataType: "json",
                 success: function (data) {

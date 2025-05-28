@@ -14,13 +14,10 @@
 
             </div>
 
-
             <div class="col-md-10">
                 <div class="alert alert-warning">
                     <b>Как добавить свой сервер?</b>
-                    <p>При добавления сервера через сайт, в авторизованном виде, Вы автоматически становитесь владельцем
-                        данного сервера.
-                    </p>
+                    <p>При добавлении сервера через сайт в авторизованном режиме вы автоматически становитесь владельцем этого сервера.</p>
                 </div>
 
                 <table class="table table-dark">
@@ -44,15 +41,17 @@
                         </td>
 
                         <td>
-                            <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo $row['hostname']; ?></a>
+                            <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']); ?></a>
                         </td>
 
                         <td>
+                            <span class="address">
                             <?php echo $row['ip']; ?>:<?php echo $row['port']; ?>
+                                </span>
                         </td>
 
                         <td>
-                            <?php echo $row['map']; ?> / <?php echo $row['players']; ?>/<?php echo $row['max_players']; ?>
+                            <?php echo $row['map']; ?>
                         </td>
 
                         <td>
@@ -72,7 +71,7 @@
                             <?php endif; ?>
 
                             <?php if ($row['ban'] === 1): ?>
-                                <span class="badge bg-danger">Забанен</span>
+                                <span class="badge bg-danger">Бан</span>
                             <?php else: ?>
                                 <?php if ($row['status'] === 1): ?>
                                     <span class="badge bg-success">Работает</span>
@@ -83,7 +82,9 @@
                         </td>
 
                         <td>
+                            <span class="address">
                             <label id="vote<?php echo $row['id']; ?>" class="rating-bg"><?php echo $row['rating']; ?></label>
+                            </span>
                         </td>
 
                         <td style="width: 80px;">
@@ -101,6 +102,7 @@
                 </table>
 
 
+                <?php if (!empty($servers)): ?>
                 <div class="pagination">
                     <nav aria-label="Pagination">
                         <ul class="pagination justify-content-center">
@@ -108,6 +110,7 @@
                         </ul>
                     </nav>
                 </div>
+                <?php endif; ?>
 
             </div>
         </div>

@@ -1,121 +1,121 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="shortcut icon" href="assets/images/favicon_1.ico">
-		<title><?=$title;?></title>
+<html lang="ru" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <title><?php echo $title;?></title>
 
-		<link href="/public/control/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="/public/control/css/core.css" rel="stylesheet" type="text/css" />
-        <link href="/public/control/css/components.css" rel="stylesheet" type="text/css" />
-        <link href="/public/control/css/icons.css" rel="stylesheet" type="text/css" />
-        <link href="/public/control/css/pages.css" rel="stylesheet" type="text/css" />
-        <link href="/public/control/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link id="style" href="/public/control/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-        <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-        <script src="/public/js/jquery.min.js"></script>
-        <script src="/public/js/jquery.form.js"></script>
-        <script src="/public/control/js/modernizr.min.js"></script>
+    <link href="/public/control/css/style.css" rel="stylesheet" />
+    <link href="/public/control/css/skin-modes.css" rel="stylesheet" />
+    <link href="/public/control/css/icons.css" rel="stylesheet" />
+    <script src="/public/control/js/jquery.min.js"></script>
+    <script src="/public/js/jquery.form.js"></script>
+</head>
 
-	</head>
-	<body>
+<body class="ltr">
 
-		<div class="account-pages"></div>
-		<div class="clearfix"></div>
-		
-		<div class="wrapper-page">
-			<div class="card-box">
-				<div class="panel-heading">
-					<h3 class="text-center">Авторизация</h3>
-				</div>
+    <div class="page">
+        <div>
+            <div class="container-login100">
+                <div class="wrap-login100 p-0">
+                    <div class="card-body">
+                        <form class="login100-form validate-form" id="loginForm" method="post">
+									<span class="login100-form-title">
+										Войдите в систему
+									</span>
+                            <div class="form-message"></div>
+                            <div class="wrap-input100 validate-input" data-bs-validate = "Valid email is required: ex@abc.xyz">
+                                <input class="input100" type="text" name="email" placeholder="Email">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+											<i class="zmdi zmdi-email" aria-hidden="true"></i>
+										</span>
+                            </div>
+                            <div class="wrap-input100 validate-input" data-bs-validate = "Password is required">
+                                <input class="input100" type="password" name="password" placeholder="Пароль">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+											<i class="zmdi zmdi-lock" aria-hidden="true"></i>
+										</span>
+                            </div>
+                            <div class="container-login100-form-btn">
+                                <button type="submit" class="login100-form-btn btn-primary">
+                                    Войти
+                                </button>
+                            </div>
+                        </form>
+                    </div>
 
-				<div class="panel-body">
-					<form class="form-horizontal m-t-20" id="authForm" method="post">
+                    <div class="card-footer">
+                        <p>
+                            Powered by <a href="https://game-ms.ru" target="_blank">GMS <?php echo VERSION;?></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-						<div class="form-group ">
-							<div class="col-xs-12">
-								<input class="form-control" type="text" name="email" required="" placeholder="E-mail">
-							</div>
-						</div>
 
-						<div class="form-group">
-							<div class="col-xs-12">
-								<input class="form-control" type="password" name="password" required="" placeholder="Пароль">
-							</div>
-						</div>
 
-						<div class="form-group ">
-							<div class="col-xs-12">
-								<div class="checkbox checkbox-primary">
-									<input id="checkbox-signup" type="checkbox">
-									<label for="checkbox-signup"> Запомнить меня </label>
-								</div>
 
-							</div>
-						</div>
+    <!-- BOOTSTRAP JS -->
+    <script src="/public/control/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="/public/control/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-						<div class="form-group text-center m-t-40">
-							<div class="col-xs-12">
-								<button class="btn btn-primary btn-block text-uppercase waves-effect waves-light" type="submit">
-									Войти
-								</button>
-							</div>
-						</div>
+    <!-- STICKY JS -->
+    <script src="/public/control/js/sticky.js"></script>
 
-					
-					</form>
+    <!-- COLOR THEME JS -->
+    <script src="/public/control/js/themeColors.js"></script>
 
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12 text-center">
-					 Powered by <a href="https://game-ms.ru" target="_blank">GMS <?php echo VERSION;?></a>
-				</div>
-			</div>
+    <!-- CUSTOM JS -->
+    <script src="/public/control/js/custom.js"></script>
+    <script src="/public/js/main.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#loginForm").on("submit", function (e) {
+                e.preventDefault();
 
-		</div>
-        
-        <script>
-$('#authForm').ajaxForm({
-   dataType: 'json',
-   success: function(data) {
-     switch(data.status){
-        case "error":
-        ShowModal(data.error, 'answer', 'error');
-        break;
-        
-        case "success":
-        ShowModal(data.success, 'answer', 'success');
-        setTimeout("location.reload('')", 1500);
-        break;
-     }
-   },                          
-}); 
+                let form = $(this);
+                let url = form.attr("action");
+                let method = form.attr("method") || "POST";
+                let formData = new FormData(this);
+
+                $.ajax({
+                    url: url,
+                    type: method,
+                    data: formData,
+                    dataType: "json",
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        switch(response.status){
+                            case "error":
+                                ShowModal(response.error, 'answer', 'error');
+                                break;
+
+                            case "success":
+                                ShowModal(response.success, 'answer', 'success');
+                                setTimeout(function(){
+                                    location.reload('/control')
+                                }, 2000);
+                                break;
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Ошибка отправки:", error);
+                        ShowModal("Ошибка при отправке формы.", 'answer', 'error');
+                    }
+                });
+            });
+        });
+
 </script>
 
-		<script>
-			var resizefunc = [];
-		</script>
-
-        <script src="/public/control/js/bootstrap.min.js"></script>
-        <script src="/public/control/js/detect.js"></script>
-        <script src="/public/control/js/fastclick.js"></script>
-        <script src="/public/control/js/jquery.slimscroll.js"></script>
-        <script src="/public/control/js/jquery.blockUI.js"></script>
-        <script src="/public/control/js/waves.js"></script>
-        <script src="/public/control/js/wow.min.js"></script>
-        <script src="/public/control/js/jquery.nicescroll.js"></script>
-        <script src="/public/control/js/jquery.scrollTo.min.js"></script>
 
 
-        <script src="/public/control/js/jquery.core.js"></script>
-        <script src="/public/control/js/jquery.app.js"></script>
-   <script src="/public/js/control.js"></script>
 	</body>
 </html>

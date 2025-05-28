@@ -1,17 +1,22 @@
-<div class="row">
-    <div class="col-sm-12">
-        <h4 class="page-title">Добавление новой услуги</h4>
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Добавление новой услуги</h1>
+    </div>
+    <div class="ms-auto pageheader-btn">
         <ol class="breadcrumb">
-            <li><a href="/control">Главная</a></li>
-            <li><a href="/control/services">Услуги</a></li>
-            <li class="active">Добавление новой услуги</li>
+            <li class="breadcrumb-item"><a href="/control">Главная</a></li>
+            <li class="breadcrumb-item"><a href="/control/services">Услуги</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Добавление новой услуги</li>
         </ol>
     </div>
 </div>
 
-<div class="col-sm-12">
-    <div class="card-box">
-        <h4 class="m-t-0 header-title"><b>Добавление новой услуги</b></h4>
+<div class="card p-0">
+    <div class="card-header border-bottom">
+        <h5 class="card-title">Добавление новой услуги</h5>
+    </div>
+
+    <div class="card-body">
 
 
         <form action="#" id="servicesForm" method="post">
@@ -40,6 +45,13 @@
             <div class="form-group">
                 <label for="servicesPrice">Цена услуги</label>
                 <input type="int" name="servicesPrice" class="form-control" id="servicesPrice">
+            </div>
+
+            <div class="form-group">
+                <label for="servicesName">Описание</label>
+                <textarea name="text" class="form-control" id="text">
+
+                </textarea>
             </div>
 
             <div class="form-group text-right m-b-0">

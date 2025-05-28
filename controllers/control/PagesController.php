@@ -3,8 +3,6 @@
 namespace controllers\control;
 
 use components\Pagination;
-use components\User;
-use core\BaseController;
 use PDO;
 
 class PagesController extends AbstractController

@@ -12,8 +12,7 @@
             <div class="alert alert-danger">
                 <b>Внимание!</b>
                 <p>
-                    Все сервера находящиеся в данном списке нарушили одно (или несколько) правил мониторинга.<br/>
-                    При попадание сервера в бан, все услуги на нем аннулируются и средства не возвращаются.
+                    Серверы в этом списке нарушили правила мониторинга. <br/>После блокировки услуги отменяются без возврата средств.
                 </p>
             </div>
             <table class="table table-dark">
@@ -23,7 +22,7 @@
                     <th scope="col">Название</th>
                     <th scope="col">Адрес</th>
                     <th scope="col">Причина</th>
-                    <th scope="col" style="text-align: center;">Дата бана</th>
+                    <th scope="col" style="text-align: center;">Дата блокировки</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,9 +30,14 @@
                     <tr>
                         <td><?php echo $row['id']; ?></td>
                         <td>
-                            <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo $row['hostname']; ?></a>
+                            <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']); ?></a>
                         </td>
-                        <td><?php echo $row['ip']; ?>:<?php echo $row['port']; ?></td>
+                        <td>
+
+                            <span class="address">
+                        <?php echo $row['ip'];?>:<?php echo $row['port'];?>
+                    </span>
+                        </td>
                         <td>
                             <?php echo $row['ban_couse']; ?>
                         </td>

@@ -3,6 +3,7 @@
 namespace controllers;
 
 use components\GameServerQuery;
+use components\Pagination;
 use components\Servers;
 use components\System;
 use components\User;
@@ -25,15 +26,28 @@ class ServerController extends BaseController
         if (parent::isAjax()) {
             $game = strip_tags($_POST['game']);
             $ip = strip_tags($_POST['ip']);
-            $port = strip_tags($_POST['port']);
-            //$queryPort = strip_tags($_POST['query_port']);
+            $port = strip_tags(trim($_POST['port']));
             $text = strip_tags($_POST['text']);
+            $captcha = strip_tags($_POST['captcha']);
+
+            if (!isset($_SESSION['captcha'])){
+                $answer['status'] = "error";
+                $answer['error'] = "Капча введена не верно!";
+                exit(json_encode($answer));
+            }
+
+            if ($_SESSION['captcha'] != md5($captcha)) {
+                $answer['status'] = "error";
+                $answer['error'] = "Капча введена не верно!";
+                exit(json_encode($answer));
+            }
+
 
             $isGame = $this->db->prepare('SELECT * FROM ga_games WHERE code = :code and status = :status');
             $isGame->bindValue(":code", $game);
             $isGame->bindValue(":status", 1);
             $isGame->execute();
-            if ($isGame->rowCount() == '0') {
+            if ($isGame->rowCount() === 0) {
                 $answer['status'] = "error";
                 $answer['error'] = "Игра не найден";
                 exit(json_encode($answer));
@@ -74,6 +88,11 @@ class ServerController extends BaseController
             try {
                 $GameServerQuery = new GameServerQuery($ip, $port, $game, null);
                 $GameServerQuery = $GameServerQuery->query();
+
+                $serverName = $GameServerQuery['gq_hostname'];
+
+                $serverName = iconv('utf-8//IGNORE', 'cp1252//IGNORE', $serverName);
+                $serverName = iconv('cp1251//IGNORE', 'utf-8//IGNORE', $serverName);
 
                 if ($GameServerQuery['gq_online'] === false){
                     throw new \Exception("Не удалось получить информацию о сервере, <br>
@@ -126,6 +145,9 @@ class ServerController extends BaseController
 
                 $stmt = $this->db->prepare($query);
 
+
+
+
                 $stmt->execute([
                     ':status' => $status,
                     ':moderation' => $moderation,
@@ -135,7 +157,7 @@ class ServerController extends BaseController
                     ':port' => $port,
                     ':date_add' => time(),
                     ':description' => $text,
-                    ':hostname' => $GameServerQuery['gq_hostname'] ?? null,
+                    ':hostname' => $serverName ?? null,
                     ':map' => $GameServerQuery['gq_mapname'] ?? null,
                     ':players' => $GameServerQuery['gq_numplayers'] ?? null,
                     ':max_players' => $GameServerQuery['gq_maxplayers'] ?? null
@@ -185,7 +207,6 @@ class ServerController extends BaseController
         $currentSession = null;
         if ($IsAuth) $currentSession = $IsAuth['id'];
 
-        $system = new System();
         $parseAddress = Servers::parseAddress($address);
 
 
@@ -245,19 +266,33 @@ class ServerController extends BaseController
 
 
 
-
         if ($getInfoServer['status'] == 1) {
             $getInfoServer['status'] = 'Online';
         } else {
             $getInfoServer['status'] = 'Offline';
         }
-        $getInfoServer['show_players'] = $system->showbar($getInfoServer['players'], $getInfoServer['max_players']);
-
 
         $moderation = 1;
-        $getComments = $this->db->prepare('SELECT c.id, c.text, u.lastname, u.firstname, c.date_create, u.img FROM ga_comments c LEFT JOIN ga_users u ON c.id_user=u.id WHERE c.id_server = :id_server and c.moderation = :moderation');
+
+        $countComments = $this->db->prepare('SELECT u.img FROM ga_comments c LEFT JOIN ga_users u ON c.id_user=u.id WHERE c.id_server = :id_server and c.moderation = :moderation');
+        $countComments->execute(array(
+            ':id_server' => $getInfoServer['id'],
+            ':moderation' => $moderation
+        ));
+        $count = $countComments->rowCount();
+
+        $pagination = new Pagination();
+        $per_page = 5;
+        $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
+
+
+        $getComments = $this->db->prepare('SELECT c.id, c.text, u.lastname, u.firstname, c.date_create, u.img FROM ga_comments c LEFT JOIN ga_users u ON c.id_user=u.id WHERE c.id_server = :id_server and c.moderation = :moderation LIMIT ' . $result['start'] . ', ' . $per_page . '');
         $getComments->execute(array(':id_server' => $getInfoServer['id'], ':moderation' => $moderation));
+
         $getComments = $getComments->fetchAll();
+
+
+        $pagination_html = $result['ViewPagination'];
 
 
         $content = $this->view->renderPartial("server/info", [
@@ -265,6 +300,7 @@ class ServerController extends BaseController
             'comments' => $getComments,
             'currentSession' => $currentSession,
             'ownerName' => $ownerName,
+            'pagination_html' => $pagination_html,
             'current_user' => $IsAuth
         ]);
 
@@ -300,41 +336,33 @@ class ServerController extends BaseController
         if (parent::isAjax()) {
 
 
-            if (in_array($getInfoServer['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust'])) {
-                $Query = new SourceQuery();
-                $Info = array();
-                try {
-                    $Query->Connect($getInfoServer['ip'], $getInfoServer['port'], 2, SourceQuery::GOLDSOURCE);
-                    $Info = $Query->GetInfo();
-                    $hostname = $Info['HostName'];
-                } catch (Exception $e) {
-                    $Query->Disconnect();
-                    $answer['status'] = "error";
-                    $answer['error'] = "Сервер недоступен";
-                    exit(json_encode($answer));
+            try {
+                $GameServerQuery = new GameServerQuery($getInfoServer['ip'], $getInfoServer['port'], $getInfoServer['game'], null);
+                $GameServerQuery = $GameServerQuery->query();
+
+                $hostname = $GameServerQuery['gq_hostname'];
+
+
+                if ($GameServerQuery['gq_online'] === false){
+                    throw new \Exception("Не удалось получить информацию о сервере, <br>
+                            Возможные причины: <br>
+                            Неверные настройки firewall <br>
+                            Неверные настройки сервера <br>
+                            Неверно указаны порты");
                 }
-            } elseif ($getInfoServer['game'] == 'samp') {
-                $GameQ = new \GameQ\GameQ();
-                $GameQ->addServer([
-                    'type' => 'mta',
-                    'host' => $getInfoServer['ip'] . ":" . $getInfoServer['port'],
-                ]);
-                $results = $GameQ->process();
-                $Info = array_shift($results);
-                $hostname = utf8_decode($Info['servername']);
-            } elseif ($getInfoServer['game'] == 'mta') {
-                $GameQ = new \GameQ\GameQ();
-                $GameQ->addServer([
-                    'type' => 'mta',
-                    'host' => $getInfoServer['ip'] . ":" . $getInfoServer['port'],
-                ]);
-                $results = $GameQ->process();
-                $Info = array_shift($results);
-                $hostname = utf8_decode($Info['gq_hostname']);
+
+
+            }catch (Exception $e){
+                $answer['status'] = "error";
+                $answer['error'] = $e->getMessage();
+                exit(json_encode($answer));
             }
 
 
-            if ("verification_" . $getInfoServer['verification_rand'] == $hostname) {
+
+
+
+            if ("ServerVerification_" . $getInfoServer['verification_rand'] == $hostname) {
 
                 $sql = "UPDATE ga_servers SET id_user = :id_user WHERE id = :id";
                 $update = $this->db->prepare($sql);
@@ -355,14 +383,18 @@ class ServerController extends BaseController
 
         } else {
 
-            if ($getInfoServer['verification_rand'] == 0) {
-                $verification_rand = $system->generateRandomNumbers(5);
-                $sql = "UPDATE ga_servers SET verification_rand = :verification_rand WHERE id = :id";
+            if ($getInfoServer['verification_rand_expired_at'] < time()) {
+
+                $verificationRandExpiredAt = time() + 900;
+
+                $verificationRand = $system->generateRandomNumbers(5);
+                $sql = "UPDATE ga_servers SET verification_rand = :verification_rand, verification_rand_expired_at = :verification_rand_expired_at WHERE id = :id";
                 $update = $this->db->prepare($sql);
-                $update->bindParam(':verification_rand', $verification_rand);
+                $update->bindParam(':verification_rand', $verificationRand);
+                $update->bindParam(':verification_rand_expired_at', $verificationRandExpiredAt);
                 $update->bindParam(':id', $id);
                 $update->execute();
-                $getInfoServer['verification_rand'] = $verification_rand;
+                $getInfoServer['verification_rand'] = $verificationRand;
             }
 
 
@@ -516,20 +548,19 @@ class ServerController extends BaseController
                 $answer['error'] = "Только авторизованные пользователи могут оставлять комментарии";
                 exit(json_encode($answer));
             }
-            //	Пустой комментарий
+
             if (empty($_POST['comment'])) {
                 $answer['status'] = "error";
                 $answer['error'] = "Введите комментарий (от 10 до 300 символов)";
                 exit(json_encode($answer));
             }
-            //
-            //	Ограничение ввода символов
-            if (strlen($_POST['comment']) < 10 or strlen($_POST['comment']) > 300) {
+
+            if (strlen($_POST['comment']) < 10 or strlen($_POST['comment']) > 500) {
                 $answer['status'] = "error";
-                $answer['error'] = "Комментарий должен содержать от 10 до 300 символов";
+                $answer['error'] = "Комментарий должен содержать от 10 до 500 символов";
                 exit(json_encode($answer));
             }
-            //
+
             if ($settings['comments']['moderation'] == '1') {
                 $text_success = "Ваш комментарии успешно отправлен!";
                 $moderation = 1;

@@ -1,19 +1,23 @@
-<div class="row">
-    <div class="col-sm-12">
-        <h4 class="page-title">Настройки</h4>
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Настройки</h1>
+    </div>
+    <div class="ms-auto pageheader-btn">
         <ol class="breadcrumb">
-            <li><a href="/control">Главная</a></li>
-            <li class="active">Настройки</li>
+            <li class="breadcrumb-item"><a href="/control">Главная</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Настройки</li>
         </ol>
     </div>
 </div>
-<div class="col-sm-12">
-    <div class="card-box">
-        <h4 class="m-t-0 header-title"><b>Настройки</b></h4>
 
+<div class="card p-0">
+    <div class="card-header border-bottom">
+        <h5 class="card-title">Настройки</h5>
+    </div>
 
+    <div class="card-body">
 
-                        <form id="settingsForm" method="post">
+        <form id="settingsForm" method="post">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -180,11 +184,11 @@
                     </div>
                     </form>
 
-                </div>
-            </div>
+    </div>
+</div>
 
 
-        <div class="clearfix"></div>
+
 
 <script>
     $('#settingsForm').ajaxForm({

@@ -1,84 +1,94 @@
-<div class="row">
-    <div class="col-sm-12">
-        <h4 class="page-title">Главная</h4>
-        <ol class="breadcrumb">
-            <li class="active">Добро пожаловать в панель управления</li>
-        </ol>
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Панель управления</h1>
     </div>
 </div>
 
-
-<div class="row">
-    <div class="col-lg-6">
-        <div class="panel panel-border panel-inverse">
-            <div class="panel-heading">
-                <h3 class="panel-title">Информация о системе</h3>
+<div class="row row-deck">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-status card-status-left bg-primary br-bl-7 br-tl-7"></div>
+            <div class="card-header border-bottom">
+                <h3 class="card-title">Информация о системе</h3>
             </div>
-            <div class="panel-body">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <span class="badge badge-primary"><?php echo phpversion(); ?></span>
-                        Версия php
-                    </li>
+            <div class="card-body">
+                <table class="table  border text-nowrap text-md-nowrap">
+                    <tbody>
+                    <tr>
+                        <td>
+                            Версия php: <?php echo phpversion(); ?>
+                        </td>
+                    </tr>
 
-                    <li class="list-group-item">
-                        <span class="badge badge-primary"><?php echo $versionMysql; ?></span>
-                        Версия mysql
-                    </li>
+                    <tr>
+                        <td>Версия mysql: <?php echo $versionMysql; ?></td>
+                    </tr>
 
-                    <li class="list-group-item">
-                        <span class="badge badge-primary"><?php echo $sizeDatabase; ?> мб.</span>
-                        Размер базы данных
-                    </li>
+                    <tr>
+                        <td>Размер базы данных: <?php echo $sizeDatabase; ?> мб.</td>
+                    </tr>
 
-                    <li class="list-group-item">
-                        <span class="badge badge-primary"><?php echo date("d:m:Y H:i"); ?></span>
-                        Время на сервере
-                    </li>
+                    <tr>
+                        <td>Время на сервере: <?php echo date("d:m:Y H:i"); ?></td>
+                    </tr>
 
-                    <li class="list-group-item">
-                        <span class="badge badge-primary"><?php echo time() - $settings['last_update_servers']; ?> сек.</span>
-                        Последняя проверка серверов
-                    </li>
+                    <tr>
+                        <td>Последняя проверка серверов: <?php echo time() - $settings['last_update_servers']; ?> сек.</td>
+                    </tr>
 
-                    <li class="list-group-item">
-                        <span class="badge badge-primary"><?php echo $version; ?></span>
-                        Текущая версия
-                    </li>
-
-                </ul>
+                    <tr>
+                        <td>
+                            Текущая версия: <?php echo $version; ?>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+
     </div>
 
+    <div class="col-md-6">
 
-    <div class="col-lg-6">
-        <div class="panel panel-border panel-danger">
-            <div class="panel-heading">
-                <h3 class="panel-title">Уведомление</h3>
+
+        <div class="card">
+            <div class="card-status card-status-left bg-red br-bl-7 br-tl-7"></div>
+            <div class="card-header border-bottom">
+                <h3 class="card-title">Уведомление</h3>
             </div>
-            <div class="panel-body">
-                <ul class="list-group">
-                    <?php if (empty($notification)): ?>
-                        Новых уведомлений нету
-                    <?php else: ?>
+            <div class="card-body">
+
+
+
+
+                <?php if (empty($notification)): ?>
+                    Новых уведомлений нету
+                <?php else: ?>
+
+                    <table class="table  border text-nowrap text-md-nowrap">
+                        <tbody>
+
                         <?php foreach ($notification as $n): ?>
-                            <?php if ($n['type'] == 'moderationServers' && $n['count'] != '0'): ?>
-                                <li class="list-group-item">
-                                    <span class="badge badge-danger"><?php echo $n['count']; ?></span>
-                                    Серверов ожидают проверку:
-                                </li>
-                            <?php elseif ($n['type'] == 'moderationComments' && $n['count'] != '0'): ?>
-                                <li class="list-group-item">
-                                    <span class="badge badge-danger"><?php echo $n['count']; ?></span>
-                                    Комментариев ожидающую проверку:
-                                </li>
+                            <?php if ($n['type'] == 'moderationServers' && $n['count'] !== 0): ?>
+                                <tr>
+                                    <td>
+                                        Серверов ожидают проверку: <?php echo $n['count']; ?>
+                                    </td>
+                                </tr>
+
+                            <?php elseif ($n['type'] == 'moderationComments' && $n['count'] !== 0): ?>
+                                <tr>
+                                    <td>
+                                        Комментариев ожидающую проверку: <?php echo $n['count']; ?>
+                                    </td>
+                                </tr>
                             <?php endif; ?>
                         <?php endforeach; ?>
-                    <?php endif; ?>
 
+                        </tbody>
+                    </table>
+                <?php endif; ?>
 
-                </ul>
             </div>
         </div>
     </div>
@@ -87,35 +97,89 @@
 </div>
 
 
-<div class="row">
-    <div class="col-lg-6">
-        <div class="panel panel-border panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">Статистика </h3>
+
+
+
+
+<div class="row row-deck">
+    <div class="col-md-6">
+
+        <div class="card">
+            <div class="card-status card-status-left bg-primary br-bl-7 br-tl-7"></div>
+            <div class="card-header border-bottom">
+                <h3 class="card-title">Статистика</h3>
             </div>
-            <div class="panel-body">
-                <ul class="list-group">
-                    <?php foreach ($counts as $c): ?>
-                        <?php if ($c['type'] == 'countServers'): ?>
-                            <li class="list-group-item"><span
-                                        class="badge badge-primary"><?php echo $c['countServers']; ?></span>Всего серверов
-                            </li>
-                        <?php endif; ?>
+            <div class="card-body">
 
-                        <?php if ($c['type'] == 'countActiveServers'): ?>
-                            <li class="list-group-item"><span
-                                        class="badge badge-primary"><?php echo $c['countActiveServers']; ?></span>Всего активных серверов
-                            </li>
-                        <?php endif; ?>
+                <table class="table  border text-nowrap text-md-nowrap">
+                    <tbody>
 
-                        <?php if ($c['type'] == 'countUsers'): ?>
-                            <li class="list-group-item"><span
-                                        class="badge badge-primary"><?php echo $c['countUsers']; ?></span>Всего зарегистрированных пользователей
-                            </li>
-                        <?php endif; ?>
+                    <tr>
+                        <td>
+                            Всего серверов: <?php echo $countServers; ?> <br/>
+                            Сегодня: <?php echo $countServersToday;?><br/>
+                            За последнюю неделю: <?php echo $countServersLastWeek;?><br/>
+                            За текущих месяц: <?php echo $countServersThisMonth;?><br/>
+                        </td>
+                    </tr>
 
-                    <?php endforeach; ?>
-                </ul>
+
+                    <tr>
+                        <td>
+                            Всего активных серверов: <?php echo $countActiveServers; ?>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            Всего зарегистрированных пользователей: <?php echo $countUsers; ?> <br/>
+                            Сегодня: <?php echo $countUsersToday;?><br/>
+                            За последнюю неделю: <?php echo $countUsersLastWeek;?><br/>
+                            За текущих месяц: <?php echo $countUsersThisMonth;?><br/>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Всего комментариев: <?php echo $countComments; ?>
+                        </td>
+                    </tr>
+
+
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="card">
+            <div class="card-status card-status-left bg-primary br-bl-7 br-tl-7"></div>
+            <div class="card-header border-bottom">
+                <h3 class="card-title">Статистика по платежам</h3>
+            </div>
+            <div class="card-body">
+
+                <table class="table  border text-nowrap text-md-nowrap">
+                    <tbody>
+
+                    <tr>
+                        <td>
+                            Доход за сегодня: <?php echo \widgets\money\Money::run($incomeToday);?><br/>
+                            За последнюю неделю: <?php echo \widgets\money\Money::run($incomeWeek);?><br/>
+                            За текущих месяц: <?php echo \widgets\money\Money::run($incomeMonth);?><br/>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>

@@ -1,24 +1,30 @@
-<div class="row">
-    <div class="col-sm-12">
-        <h4 class="page-title">Страницы</h4>
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Страницы</h1>
+    </div>
+    <div class="ms-auto pageheader-btn">
         <ol class="breadcrumb">
-            <li><a href="/control">Главная</a></li>
-            <li class="active">Страницы</li>
+            <li class="breadcrumb-item"><a href="/control">Главная</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Страницы</li>
         </ol>
     </div>
 </div>
 
 
-<div class="col-sm-12">
+<div class="card p-0">
+    <div class="card-header border-bottom">
+        <h5 class="card-title">Страницы</h5>
+    </div>
 
-    <div class="card-box">
+    <div class="card-body">
         <h4 class="m-t-0 header-title"><b>Страницы</b></h4>
-        <p class="text-muted m-b-30 font-12">Страницы по умолчанию сортируется по дате</p>
-        <a href="/control/pages/add" style="float: right;"
-           class="btn btn-inverse btn-custom btn-rounded waves-effect waves-light btn-xs">Добавить новую страницу</a>
+        <p class="text-muted m-b-30 font-12">Список по умолчанию сортируется по дате добавления</p>
 
 
-        <table class="table table table-hover m-0">
+        <a href="/control/pages/add" class="btn btn-primary mb-3">Добавить новую страницу</a>
+
+
+        <table class="table table-bordered border text-nowrap text-md-nowrap">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -43,7 +49,7 @@
                         <?php echo $row['count_visited']; ?>
                     </td>
                     <td>
-                        <?php echo date("d:m:Y [H:i]", $row['date_create']); ?>
+                        <?php echo date("d.m.Y [H:i]", $row['date_create']); ?>
                     </td>
 
 

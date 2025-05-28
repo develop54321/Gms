@@ -11,35 +11,35 @@
 
                     </li>
                     <li><?php if ($data['top_enabled'] != '0'): ?>
-                            TOP - место #<?php echo $data['top_enabled']; ?> | истекает: <?php echo date("d-m-Y H:i", $data['top_expired_date']); ?>
+                            TOP - место #<?php echo $data['top_enabled']; ?> | истекает: <?php echo date("d.m.Y [H:i]", $data['top_expired_date']); ?>
                         <?php else: ?>
-                            TOP: <a href="/user/serverpay?id=<?php echo $data['id']; ?>">Купить</a>
+                            TOP: <a href="/pay/<?php echo $data['id']; ?>/select">Купить</a>
                         <?php endif; ?>
                     </li>
                     <li>
                         <?php if ($data['boost'] != '0'): ?>
-                            Boost: осталось кругов: <?php echo $data['boost']; ?> <a
-                                    href="/user/serverpay?id=<?php echo $data['id']; ?>">Купить</a>
+                            Буст: осталось кругов: <?php echo $data['boost']; ?> <a
+                                    href="/pay/<?php echo $data['id']; ?>/select">Купить</a>
                         <?php else: ?>
-                            Boost: <a href="/user/serverpay?id=<?php echo $data['id']; ?>">Купить</a>
+                            Буст: <a href="/pay/<?php echo $data['id']; ?>/select">Купить</a>
                         <?php endif; ?>
                     </li>
                     <li><?php if ($data['vip_enabled'] != '0'): ?>
-                            VIP: истекает: <?php echo date("d-m-Y H:i", $data['vip_expired_date']); ?>
+                            VIP: истекает: <?php echo date("d.m.Y [H:i]", $data['vip_expired_date']); ?>
                         <?php else: ?>
-                            VIP: <a href="/user/serverpay?id=<?php echo $data['id']; ?>">Купить</a>
+                            VIP: <a href="/pay/<?php echo $data['id']; ?>/select">Купить</a>
                         <?php endif; ?>
                     </li>
                     <li><?php if ($data['color_enabled'] != '0'): ?>
-                            Выделение цветом: истекает: <?php echo date("d-m-Y H:i", $data['color_expired_date']); ?>
+                            Выделение цветом: истекает: <?php echo date("d.m.Y [H:i]", $data['color_expired_date']); ?>
                         <?php else: ?>
-                            Выделение цветом: <a href="/user/serverpay?id=<?php echo $data['id']; ?>">Купить</a>
+                            Выделение цветом: <a href="/pay/<?php echo $data['id']; ?>/select">Купить</a>
                         <?php endif; ?>
                     </li>
                     <li><?php if ($data['gamemenu_enabled'] != '0'): ?>
-                            GameMenu: истекает: <?php echo date("d-m-Y H:i", $data['gamemenu_expired_date']); ?>
+                            GameMenu: истекает: <?php echo date("d.m.Y [H:i]", $data['gamemenu_expired_date']); ?>
                         <?php else: ?>
-                            GameMenu: <a href="/user/serverpay?id=<?php echo $data['id']; ?>">Купить</a>
+                            GameMenu: <a href="/pay/<?php echo $data['id']; ?>/select">Купить</a>
                         <?php endif; ?>
                     </li>
 

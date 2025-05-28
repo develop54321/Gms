@@ -22,7 +22,7 @@
                                 <label for="captcha">Цифры с картинки</label>
                                 <input type="text" name="captcha" class="form-control form-control-sm" id="captcha"/>
                                 <small class="form-text text-muted">
-                                    Если цифры не видны, то обновите картинку, кликнев на него.
+                                    Если цифры не видны, обновите изображение, нажав на него.
                                 </small>
                             </div>
 

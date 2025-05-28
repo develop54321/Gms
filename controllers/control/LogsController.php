@@ -3,8 +3,6 @@
 namespace controllers\control;
 
 use components\Pagination;
-use components\User;
-use core\BaseController;
 use PDO;
 
 
@@ -15,8 +13,8 @@ class LogsController extends AbstractController
     {
         $title = "Логи системные";
 
-        $countServers = $this->db->query('SELECT * FROM ga_pay_logs');
-        $count = $countServers->rowCount();
+        $countLogs = $this->db->query('SELECT * FROM ga_system_logs');
+        $count = $countLogs->rowCount();
 
         $pagination = new Pagination();
         $per_page = 15;

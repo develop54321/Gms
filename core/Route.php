@@ -35,6 +35,11 @@ class Route
             $r->addRoute(['GET', 'POST'], '/pay', ['controllers\PayController', 'index']);
             $r->addRoute('GET', '/pay/getform', ['controllers\PayController', 'getForm']);
 
+            $r->addRoute('GET', '/pay/{id}/select', ['controllers\PayController', 'select']);
+            $r->addRoute('POST', '/pay/{id}/get-pay-form', ['controllers\PayController', 'getPayForm']);
+            $r->addRoute('GET', '/pay/{id}/form', ['controllers\PayController', 'form']);
+            $r->addRoute('POST', '/pay/{id}/ajax', ['controllers\PayController', 'ajax']);
+
             $r->addRoute(['GET', 'POST'], '/result', ['controllers\ResultController', 'index']);
             $r->addRoute('GET', '/result/success', ['controllers\ResultController', 'success']);
             $r->addRoute('GET', '/result/fail', ['controllers\ResultController', 'fail']);
@@ -57,8 +62,6 @@ class Route
                 $r->addRoute('GET', '/servers', ['controllers\UserController', 'servers']);
                 $r->addRoute('GET', '/removeserver', ['controllers\UserController', 'removeServer']);
                 $r->addRoute(['GET', 'POST'], '/pay', ['controllers\UserController', 'pay']);
-                $r->addRoute(['GET', 'POST'], '/serverpay', ['controllers\UserController', 'serverPay']);
-                $r->addRoute(['GET', 'POST'], '/getform', ['controllers\UserController', 'getForm']);
                 $r->addRoute('GET', '/pay-logs', ['controllers\UserController', 'payLogs']);
                 $r->addRoute('GET', '', ['controllers\UserController', 'index']);
             });
@@ -68,6 +71,8 @@ class Route
                 $r->addRoute(['GET', 'POST'], '/login', ['controllers\control\IndexController', 'login']);
                 $r->addRoute(['GET', 'POST'], '/reset', ['controllers\UserController', 'actionReset']);
                 $r->addRoute(['GET', 'POST'], '/settings', ['controllers\control\SettingsController', 'index']);
+                $r->addRoute(['GET', 'POST'], '/settings/mail', ['controllers\control\SettingsController', 'mail']);
+                $r->addRoute(['GET', 'POST'], '/settings/mail/test', ['controllers\control\SettingsController', 'mailTest']);
 
                 $r->addRoute('GET', '/paymethods', ['controllers\control\PaymethodsController', 'index']);
                 $r->addRoute(['GET', 'POST'], '/paymethods/add', ['controllers\control\PaymethodsController', 'add']);
@@ -131,6 +136,7 @@ class Route
 
             $r->addGroup('/api', function (RouteCollector $r) {
                 $r->addRoute(['POST'], '', ['controllers\ApiController', 'index']);
+                $r->addRoute(['GET'], '/ping', ['controllers\ApiController', 'ping']);
             });
         });
 

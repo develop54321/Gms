@@ -4,7 +4,8 @@ namespace components;
 
 class Servers
 {
-    public static function getImagePath($map_name, $game){
+    public static function getImagePath($map_name, $game): string
+    {
         $pathImgMap = 'public/img/maps/'.$game.'/'.$map_name.'.jpg';
         if(file_exists($pathImgMap)){
             $imgMap = '/'.$pathImgMap;

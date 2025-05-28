@@ -4,7 +4,6 @@ namespace controllers\control;
 
 use components\Pagination;
 use components\User;
-use core\BaseController;
 use PDO;
 
 
@@ -13,13 +12,13 @@ class PaylogsController extends AbstractController
 
     public function index()
     {
-        $title = "Логи платежей";
+        $title = "История платежей";
 
         $countServers = $this->db->query('SELECT * FROM ga_pay_logs');
         $count = $countServers->rowCount();
 
         $pagination = new Pagination();
-        $per_page = 15;
+        $per_page = 20;
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
         $newArr = [];
@@ -81,10 +80,7 @@ class PaylogsController extends AbstractController
 
     public function search()
     {
-
-
         $title = "Логи платежей";
-
 
         $filter = [];
         $sql = '';
@@ -162,7 +158,7 @@ class PaylogsController extends AbstractController
 
         //echo $sql;
         $pagination = new Pagination();
-        $per_page = 5;
+        $per_page = 20;
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count, 'no_rgp' => ''));
 
 
@@ -205,42 +201,21 @@ class PaylogsController extends AbstractController
         $getPayMethods = $getPayMethods->fetchAll();
 
 
-        $content = $this->view->renderPartial("paylogs/index", ['filter' => $filter, 'userPay' => $userPay, 'methodPay' => $methodPay, 'PayMethods' => $getPayMethods, 'statusPay' => $statusPay, 'typePay' => $typePay, 'data' => $newArr, 'ViewPagination' => $result['ViewPagination']]);
+        $pagination_html = $result['ViewPagination'];
+
+        $content = $this->view->renderPartial("paylogs/index", [
+            'filter' => $filter,
+            'userPay' => $userPay,
+            'methodPay' => $methodPay,
+            'PayMethods' => $getPayMethods,
+            'statusPay' => $statusPay,
+            'typePay' => $typePay,
+            'data' => $newArr,
+            'pagination_html' => $pagination_html
+        ]);
 
         $this->view->render("main", ['content' => $content, 'title' => $title]);
 
-
-    }
-
-
-    public function add()
-    {
-
-        $title = "Добавление нового партнера";
-
-        if (parent::isAjax()) {
-
-            $login = strip_tags($_POST['login']);
-            $key = strip_tags($_POST['key']);
-
-            $discount = (int)$_POST['discount'];
-
-            $status = (int)$_POST['status'];
-
-
-            $this->db->exec("INSERT INTO ga_partners (status, login, key_api, discount) 
-            VALUES('$status', '$login', '$key','$discount')");
-
-            $answer['status'] = "success";
-            $answer['success'] = "Партнер успешно добавлен";
-            exit(json_encode($answer));
-
-        } else {
-
-            $content = $this->view->renderPartial("partners/add", []);
-
-            $this->view->render("main", ['content' => $content, 'title' => $title]);
-        }
 
     }
 

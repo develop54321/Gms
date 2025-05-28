@@ -1,0 +1,101 @@
+.tab-content> {
+	.tab-pane {
+		display: none;
+	}
+	.active {
+		display: block;
+	}
+}
+
+.tabs-menu ul li {
+	a {
+		padding: 10px 20px;
+		display: block;
+	}
+	.active {
+		color: $primary;
+	}
+}
+
+.tabs-menu1 ul li a {
+	padding: 10px 20px;
+	display: block;
+}
+
+.tabs-menu-body {
+	border: 1px solid #eaedf1;
+	p:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.tab-menu-heading {
+	padding: 15px;
+	border: 1px solid #eaedf1;
+	border-bottom: 0;
+}
+
+.tab_wrapper .content_wrapper .tab_content.active p:last-child {
+	margin-bottom: 0;
+}
+
+.tabs-menu2 ul li {
+	a {
+		color: #636262;
+		padding: 10px 20px 11px 20px;
+	}
+	.active {
+		font-weight: 600;
+	}
+	.fade {
+		color: #eeee;
+	}
+}
+
+.nav.panel-tabs a{
+    border: 1px solid $border;
+	padding: 7px 15px;
+    border-radius: 5px;
+    transition: all ease 0.3s;
+
+    &.active{
+        border-radius: 5px;
+        border-color: $primary;
+        color: $primary !important;
+    }
+	&.vertical-tabs{
+		&.active{
+			color: $white !important;
+			background-color: $primary;
+		}
+	}
+}
+
+.tabs-menu4 .nav a{
+	padding: 10px 20px;
+	transition: all ease 0.3s;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+	border-radius: 5px;
+
+	&.active{
+		border-color: $primary;
+		color: $white !important;
+		background-color: $primary;
+	}
+	&:hover{
+		color: $primary;
+	}
+}
+
+@media (max-width:575.98px) {
+	.tabs-menu.checkout {
+		display: block;
+		li {
+			border-bottom: 1px solid $border;
+		}
+	}
+	.card-pay .tabs-menu li {
+		width: 100%;
+	}
+}

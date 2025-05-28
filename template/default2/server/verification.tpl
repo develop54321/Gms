@@ -6,14 +6,15 @@
         <hr/>
 
         <div class="alert alert-info">
-            <b>Как просиходить процесс смены владельца?</b>
+            <b>Как происходит процесс смены владельца?</b>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">1. Смените название сервера на:
-                <code>verification<?php echo $data['verification_rand']; ?></code></li>
-            <li class="list-group-item">2. После чего нажмите на кнопку "Подтвердить владение серверам"."</li>
+                <code>ServerVerification_<?php echo $data['verification_rand']; ?></code>
+                <br><small class="text-muted">Это название необходимо сохранять в течение 15 минут для успешной проверки</small>
+            </li>
+            <li class="list-group-item">2. После чего нажмите на кнопку "Подтвердить владение сервером".</li>
         </ul>
-
         <a href="#" onclick="verification(<?php echo $data['id']; ?>); return false;" class="btn btn-primary mt-2">Подтвердить владение сервером</a>
     </div>
 </section>

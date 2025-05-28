@@ -24,6 +24,10 @@
                         <div class="mb-4">
                             <h5 class="mb-3">Выберите способ оплаты</h5>
                             <div class="row g-3">
+                                <?php if (empty($pay_methods)):?>
+                                <p class="text-center">К сожалению, в данный момент нет доступных способов оплаты.</p>
+                                <hr/>
+                                <?php endif; ?>
                                 <?php foreach ($pay_methods as $pm): ?>
                                     <div class="col-sm-4 col-md-3 mb-3">
                                         <div class="payment-method-card card h-100 border-2"

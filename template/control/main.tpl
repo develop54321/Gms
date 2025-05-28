@@ -194,9 +194,9 @@
     <script src="/public/control/js/sticky.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="/public/control/js/custom.js"></script>
+    <script src="/public/control/js/custom.js?v=1.4.2"></script>
 
-    <script src="/public/js/main.js"></script>
+    <script src="/public/js/main.js?v=1.4.5"></script>
     <script src="/public/control/js/themeColors.js"></script>
     </body>
 </html>

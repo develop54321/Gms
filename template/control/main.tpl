@@ -133,7 +133,6 @@
                                     <span class="side-menu__label">Логи</span><i class="angle fa fa-angle-right"></i></a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="/control/paylogs">История платежей</a></li>
-                                    <li><a href="/control/logs" class="slide-item">Системные</a></li>
                                 </ul>
                             </li>
 

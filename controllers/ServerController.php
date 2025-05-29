@@ -91,8 +91,10 @@ class ServerController extends BaseController
 
                 $serverName = $GameServerQuery['gq_hostname'];
 
-                $serverName = iconv('utf-8//IGNORE', 'cp1252//IGNORE', $serverName);
-                $serverName = iconv('cp1251//IGNORE', 'utf-8//IGNORE', $serverName);
+                if ($game === "samp") {
+                    $serverName = iconv('utf-8//IGNORE', 'cp1252//IGNORE', $serverName);
+                    $serverName = iconv('cp1251//IGNORE', 'utf-8//IGNORE', $serverName);
+                }
 
                 if ($GameServerQuery['gq_online'] === false){
                     throw new \Exception("Не удалось получить информацию о сервере, <br>

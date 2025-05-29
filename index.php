@@ -3,7 +3,7 @@
  @name: Gms - Game Monitoring System
  @author: https://vk.com/dev_gamems
  @site: https://game-ms.ru
- @version: 3.1
+ @version: 3.1.3
 */
 
 use core\Route;

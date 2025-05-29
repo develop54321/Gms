@@ -16,8 +16,8 @@ class Route
     {
         $this->view = new View(TMPL_DIR);
 
-        set_error_handler([$this, 'handleError']);
-        set_exception_handler([$this, 'handleException']);
+        //set_error_handler([$this, 'handleError']);
+        //set_exception_handler([$this, 'handleException']);
 
         $dispatcher = \FastRoute\simpleDispatcher(function (RouteCollector $r) {
             $r->addRoute('GET', '/', ['controllers\MainController', 'index']);

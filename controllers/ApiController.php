@@ -178,7 +178,7 @@ class ApiController extends BaseController
     {
         $serverName = $_SERVER['SERVER_NAME'];
 
-        exit($this->response(['status' => "success", 'code' => "ping", 'server_name' => $serverName]));
+        exit($this->response(['status' => "success", 'code' => "ping", 'server_name' => $serverName, 'version' => VERSION]));
 
     }
 

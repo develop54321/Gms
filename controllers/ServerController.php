@@ -245,6 +245,8 @@ class ServerController extends BaseController
 
         if (empty($getInfoServer)) parent::ShowError(404, "Сервер не найден!");
 
+        if ($getInfoServer['ban'] == 1) parent::ShowError(403, "Сервер в бане");
+
 
         $title = "Информация о сервере :: " . $getInfoServer['hostname'];
 

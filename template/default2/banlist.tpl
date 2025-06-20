@@ -26,7 +26,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($BannisterServers as $row): ?>
+                <?php foreach ($servers as $row): ?>
                     <tr>
                         <td><?php echo $row['id']; ?></td>
                         <td>
@@ -49,7 +49,15 @@
 
                 </tbody>
             </table>
-
+            <?php if (!empty($servers)):?>
+                <div class="pagination">
+                    <nav aria-label="Pagination">
+                        <ul class="pagination justify-content-center">
+                            <?= implode("\n", $pagination_html) ?>
+                        </ul>
+                    </nav>
+                </div>
+            <?php endif;?>
 
         </div>
     </div>

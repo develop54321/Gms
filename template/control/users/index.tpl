@@ -68,7 +68,7 @@
                 <tr id="user<?php echo $row['id']; ?>">
                     <td><?php echo $row['id']; ?></td>
                     <td>
-                        <?php echo $row['firstname']; ?><?php echo $row['lastname']; ?>
+                        <?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?>
                     </td>
                     <td><?php echo $row['email']; ?></td>
                     <td><?php if ($row['role'] == 'admin'): ?>

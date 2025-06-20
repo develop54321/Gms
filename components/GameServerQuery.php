@@ -30,7 +30,8 @@ class GameServerQuery
         'arkse' => 'arkse',
         'csgo2' => 'csgo',
         'minecraft' => 'minecraft',
-        'gta5' => 'gta5m'
+        'gta5' => 'gta5m',
+        'mta' => 'mta'
     ];
 
 

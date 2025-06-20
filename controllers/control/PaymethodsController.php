@@ -10,7 +10,7 @@ class PaymethodsController extends AbstractController
 
     public function index()
     {
-        $title = "Способы оплаты";
+        $title = "Способы оплат";
 
         $getPayMethods = $this->db->query('SELECT * FROM ga_pay_methods WHERE status ="1"');
         $payMethods = $getPayMethods->fetchAll();

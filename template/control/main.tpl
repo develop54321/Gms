@@ -88,6 +88,7 @@
                                     <li><a href="/control/paymethods" class="slide-item">Способы оплат</a></li>
                                     <li><a href="/control/games" class="slide-item">Игры</a></li>
                                     <li><a href="/control/services" class="slide-item">Услуги</a></li>
+                                    <li><a href="/control/codecolors" class="slide-item">Цвета</a></li>
                                 </ul>
                             </li>
 

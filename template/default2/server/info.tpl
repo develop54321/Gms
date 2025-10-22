@@ -206,8 +206,8 @@
                                 break;
 
                             case "success":
+                                $("#commentField").val(null)
                                 ShowModal(data.success, 'answer', 'success');
-                                setTimeout('location.reload();', 2500);
                                 break;
                         }
                     },

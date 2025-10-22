@@ -227,7 +227,6 @@ class ServerController extends BaseController
                s.port, 
                s.date_add, 
                s.rating, 
-               s.befirst_enabled, 
                s.top_enabled, 
                s.vip_enabled, 
                s.color_enabled, 

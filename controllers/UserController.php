@@ -9,17 +9,11 @@ use components\Pagination;
 use components\pay_method\FreekassaClient;
 use components\pay_method\LavaClient;
 use components\pay_method\YooKassaClient;
-use components\pay_method\YooKassaService;
 use components\pay_method\YooMoneyClient;
-use components\ReCaptcha;
-use components\Services;
 use components\System;
 use components\User;
 use core\BaseController;
 use PDO;
-use PDOException;
-use Ramsey\Uuid\Guid\Guid;
-use Ramsey\Uuid\Uuid;
 
 class UserController extends BaseController
 {
@@ -87,7 +81,12 @@ class UserController extends BaseController
             $getInfoServer = $getInfoServer->fetch();
             if (empty($getInfoServer)) parent::ShowError(404, "Сервер не найден!");
 
-            if ($getInfoServer['ban'] != 0 or $getInfoServer['befirst_enabled'] != 0 or $getInfoServer['top_enabled'] != 0 or $getInfoServer['vip_enabled'] != 0 or $getInfoServer['color_enabled'] != 0 or $getInfoServer['gamemenu_enabled'] != 0 or $getInfoServer['boost'] != 0) {
+            if ($getInfoServer['ban'] !== null
+                or $getInfoServer['top_enabled'] !== null
+                or $getInfoServer['vip_enabled'] !== null
+                or $getInfoServer['color_enabled'] !== null
+                or $getInfoServer['gamemenu_enabled'] !== null
+                or $getInfoServer['boost'] !== null) {
                 $answer['status'] = "error";
                 $answer['error'] = "Сервер имеет платную услугу или забанен, удаление невозможно!";
                 exit(json_encode($answer));
@@ -109,6 +108,24 @@ class UserController extends BaseController
 
     }
 
+
+    public function security()
+    {
+        $title = "Безопасность";
+        $user = new User();
+        $user_profile = $user->isAuth();
+        if (!$user_profile) header("Location: /user/login");
+
+
+
+        $content = $this->view->renderPartial("user/security", [
+
+        ]);
+
+
+        $this->view->render("main", ['content' => $content, 'title' => $title, 'user_profile' => $user_profile]);
+
+    }
 
     public function pay()
     {
@@ -312,6 +329,7 @@ class UserController extends BaseController
 
     }
 
+
     public function payLogs()
     {
 
@@ -444,6 +462,7 @@ class UserController extends BaseController
             $this->db->exec("INSERT INTO ga_users (email, lastname, firstname, password, role, date_reg) 
             VALUES('$email', '$lastname', '$firstname', '$password', 'user', '$time')");
 
+            $lastIdUser = $this->db->lastInsertId();
 
             $content = "
             <p>Здравствуйте!</p>
@@ -474,8 +493,19 @@ class UserController extends BaseController
 
             unset($_SESSION['captcha']);
 
+
+            $hash = md5($lastIdUser);
+            setcookie('hash', $hash, time() + (86400 * 30), "/");
+            setcookie('id_user', $lastIdUser, time() + (86400 * 30), "/");
+
+            $sql = "UPDATE ga_users SET hash = :hash WHERE id = :id";
+            $update = $this->db->prepare($sql);
+            $update->bindParam(':hash', $hash);
+            $update->bindParam(':id', $lastIdUser, PDO::PARAM_INT);
+            $update->execute();
+
             $answer['status'] = "success";
-            $answer['success'] = "Вы успешно зарегистрировались";
+            $answer['success'] = "Регистрация прошла успешно. Сейчас вы будете автоматически авторизованы.";
             exit(json_encode($answer));
 
         } else {
@@ -508,13 +538,12 @@ class UserController extends BaseController
             $check->bindValue(":email", $email);
             $check->execute();
             $findUserByEmail = $check->fetch(PDO::FETCH_ASSOC);
-            if ($findUserByEmail === null) {
+            if ($findUserByEmail === false) {
                 $answer['status'] = "error";
                 $answer['error'] = "Пользователь с указанным e-mail не найден";
                 exit(json_encode($answer));
             } else {
 
-                // Проверяем, истекло ли время с момента создания reset_code
                 $resetCodeCreatedAt = $findUserByEmail['reset_code_created_at'];
                 $currentTime = time();
                 $timeDifference = $currentTime - $resetCodeCreatedAt;

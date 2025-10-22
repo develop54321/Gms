@@ -77,6 +77,9 @@
 
                         case "success":
                             ShowModal(data.success, 'answer', 'success');
+                            setTimeout(function(){
+                                location.reload('/user')
+                            }, 2000);
                             break;
 
 

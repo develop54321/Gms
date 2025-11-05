@@ -80,9 +80,7 @@ class ApiController extends BaseController
             $id_server = $getInfoServer['id'];
         } else {
 
-            $system = new System();
-            $country = $system->getCountry($query[0]);
-
+            $country = null;
 
             $status = "0";
 

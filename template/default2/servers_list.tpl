@@ -44,7 +44,7 @@
                     </span>
                 </td>
                 <td style="text-align: center;">
-                    <?php if($row['vip_enabled'] != '0'):?>
+                    <?php if($row['vip_enabled'] !== null):?>
                     <b>VIP</b>
                     <?php else:?>
                     <a href="#" onclick="ShowModal('<?=$row['id'];?>', 'vote', 'minus');return false;"><i class="fa fa-thumbs-down"></i></a>

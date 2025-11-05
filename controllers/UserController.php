@@ -113,19 +113,73 @@ class UserController extends BaseController
     {
         $title = "Безопасность";
         $user = new User();
-        $user_profile = $user->isAuth();
-        if (!$user_profile) header("Location: /user/login");
 
 
+        if (!$user->isAuth()) {
+            header("Location: /user/login");
+            exit;
+        }
 
-        $content = $this->view->renderPartial("user/security", [
+        $profile = $user->getProfile();
 
+        if ($this->isAjax()) {
+
+            $lastPassword = strip_tags($_POST['last_password']);
+            $newPassword = strip_tags($_POST['new_password']);
+            $repeatNewPassword = strip_tags($_POST['repeat_new_password']);
+
+
+            $answer = ['status' => 'error', 'error' => 'Неизвестная ошибка'];
+
+
+            if (empty($lastPassword) || empty($newPassword) || empty($repeatNewPassword)) {
+                $answer['error'] = "Все поля обязательны для заполнения.";
+                return exit(json_encode($answer, JSON_UNESCAPED_UNICODE));
+            }
+
+            if (!password_verify($lastPassword, $profile['password'])) {
+                $answer['error'] = "Старый пароль введён неверно.";
+                return exit(json_encode($answer, JSON_UNESCAPED_UNICODE));
+            }
+
+            if ($newPassword !== $repeatNewPassword) {
+                $answer['error'] = "Новый пароль и его повтор не совпадают.";
+                return exit(json_encode($answer, JSON_UNESCAPED_UNICODE));
+            }
+
+            if (strlen($newPassword) < 8) {
+                $answer['error'] = "Пароль должен содержать минимум 8 символов.";
+                return exit(json_encode($answer, JSON_UNESCAPED_UNICODE));
+            }
+
+            $passNew = password_hash($newPassword, PASSWORD_DEFAULT);
+
+            $sql = "UPDATE ga_users SET password = :password WHERE id = :id";
+            $update = $this->db->prepare($sql);
+            $update->bindParam(':password', $passNew);
+            $update->bindParam(':id', $profile['id'], PDO::PARAM_INT);
+
+            if ($update->execute()) {
+                $answer = [
+                    'status' => 'success',
+                    'success' => 'Пароль успешно изменён.'
+                ];
+            } else {
+                $answer['error'] = "Произошла ошибка при обновлении пароля. Попробуйте позже.";
+            }
+
+            return exit(json_encode($answer, JSON_UNESCAPED_UNICODE));
+        }
+
+        // Если это не AJAX-запрос — просто рендерим страницу
+        $content = $this->view->renderPartial("user/security");
+        $this->view->render("main", [
+            'content' => $content,
+            'title' => $title,
+            'user_profile' => $profile
         ]);
-
-
-        $this->view->render("main", ['content' => $content, 'title' => $title, 'user_profile' => $user_profile]);
-
     }
+
 
     public function pay()
     {

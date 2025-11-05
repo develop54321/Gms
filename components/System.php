@@ -4,10 +4,10 @@ namespace components;
 
 use core\BaseController;
 
-class System extends BaseController
+class System
 {
 
-    function getIp()
+    public function getIp()
     {
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -19,19 +19,8 @@ class System extends BaseController
         return $ip;
     }
 
-    function getCountry($ip)
-    {
-        $result = array('country' => '', 'city' => '');
 
-        if (filter_var($ip, FILTER_VALIDATE_IP)) $ip = $ip;
-        elseif (filter_var($ip, FILTER_VALIDATE_IP)) $ip = $ip;
-        else $ip = $ip;
-        $ip_data = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
-        if ($ip_data && $ip_data->geoplugin_countryName != null) $result = $ip_data->geoplugin_countryCode;
-        return $result;
-    }
-
-    public function getUrl()
+    public function getUrl(): string
     {
         $url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';
         return $url . $_SERVER['SERVER_NAME'];

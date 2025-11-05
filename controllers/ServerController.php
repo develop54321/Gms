@@ -472,7 +472,7 @@ class ServerController extends BaseController
         if (empty($checkServer)) parent::ShowError(404, "Страница не найдена!");
         if (parent::isAjax()) {
             $system = new System();
-            $ip = $system->getIP();
+            $ip = $system->getIp();
 
             if (!isset($_SESSION['captcha'])){
                 $answer['status'] = "error";

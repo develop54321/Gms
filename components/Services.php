@@ -36,7 +36,7 @@ class Services extends BaseController
         switch ($getInfoPay['type']) {
             //	Top
             case "top":
-                if ($getInfoServer['top_enabled'] != '0') {
+                if ($getInfoServer['top_enabled'] !== null) {
                     $place = $getInfoServer['top_enabled'];
                     $expired_time = ($getInfoServices['period'] * 86400) + $getInfoServer['top_expired_date'];
                 } else {
@@ -53,7 +53,7 @@ class Services extends BaseController
 
             //	Vip
             case "vip":
-                if ($getInfoServer['vip_enabled'] != '0') {
+                if ($getInfoServer['vip_enabled'] !== null) {
                     $expired_time = $getInfoServer['vip_expired_date'] + ($getInfoServices['period'] * 86400);
                 } else {
                     $expired_time = time() + $getInfoServices['period'] * 86400;
@@ -69,7 +69,7 @@ class Services extends BaseController
 
             //	Color
             case "color":
-                if ($getInfoServer['color_enabled'] != '0') {
+                if ($getInfoServer['color_enabled'] !== null) {
                     $expired_time = $getInfoServer['color_expired_date'] + ($getInfoServices['period'] * 86400);
                 } else {
                     $expired_time = time() + $getInfoServices['period'] * 86400;
@@ -84,7 +84,7 @@ class Services extends BaseController
 
             //	Boost
             case "boost":
-                if ($getInfoServer['boost'] != '0') {
+                if ($getInfoServer['boost'] !== null) {
                     $this->db->query("UPDATE ga_servers SET boost = boost + " . $getInfoServices['period'] . " WHERE id = '" . $getInfoPay['id_server'] . "'");
                 } else {
                     $countBoostServers = $this->db->prepare('SELECT * FROM ga_servers WHERE boost != :boost');
@@ -134,7 +134,7 @@ class Services extends BaseController
 
             //	Gamemenu
             case "gamemenu":
-                if ($getInfoServer['gamemenu_enabled'] != '0') {
+                if ($getInfoServer['gamemenu_enabled'] !== null) {
                     $expired_time = $getInfoServer['gamemenu_expired_date'] + ($getInfoServices['period'] * 86400);
                 } else {
                     $expired_time = time() + $getInfoServices['period'] * 86400;
@@ -155,7 +155,7 @@ class Services extends BaseController
 
             //	Unban
             case "razz":
-                $this->db->query("UPDATE ga_servers SET ban = '0', ban_couse = '' WHERE id = '" . $getInfoPay['id_server'] . "'");
+                $this->db->query("UPDATE ga_servers SET ban = null, ban_couse = null WHERE id = '" . $getInfoPay['id_server'] . "'");
                 break;
         }
         $status = "paid";
@@ -213,9 +213,9 @@ class Services extends BaseController
 
     private function processTopService($getInfoServices, $getInfoServer, $idServices, $userProfile, $settings)
     {
-        $place = $getInfoServer['top_enabled'] == '0' ? (int)$_POST['place'] : 0;
+        $place = $getInfoServer['top_enabled'] === null ? (int)$_POST['place'] : 0;
 
-        if ($getInfoServer['top_enabled'] == '0') {
+        if ($getInfoServer['top_enabled'] === null) {
             $this->checkPlaceAvailability($place);
         }
 
@@ -276,11 +276,11 @@ class Services extends BaseController
     {
         $this->checkServiceAvailability($settings['global_settings']['gamemenu_on'], "Услуга отключена");
 
-        $limitGamemenuServers = $settings['global_settings']['count_servers_gamemenu'];
-        $countGamemenuServers = $this->db->query("SELECT `id` FROM `ga_servers` WHERE `gamemenu_enabled`='1'")->rowCount();
-        $checkGamemenuServer = $this->db->query("SELECT * FROM `ga_servers` WHERE `id`='" . $getInfoServer['id'] . "' and `gamemenu_enabled` = '1' LIMIT 1")->rowCount();
+        $limitGameMenuServers = $settings['global_settings']['count_servers_gamemenu'];
+        $countGameMenuServers = $this->db->query("SELECT `id` FROM `ga_servers` WHERE `gamemenu_enabled`='1'")->rowCount();
+        $checkGameMenuServer = $this->db->query("SELECT * FROM `ga_servers` WHERE `id`='" . $getInfoServer['id'] . "' and `gamemenu_enabled` = '1' LIMIT 1")->rowCount();
 
-        if ($countGamemenuServers >= $limitGamemenuServers && $checkGamemenuServer == 0) {
+        if ($countGameMenuServers >= $limitGameMenuServers && $checkGameMenuServer == 0) {
             throw new \Exception("Нет свободных мест");
         }
 

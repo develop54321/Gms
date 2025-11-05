@@ -65,21 +65,21 @@
 
                         <h3>Платные услуги</h3>
                         <ul class="list-group">
-                            <?php if($data['top_enabled'] != '0'):?>
+                            <?php if($data['top_enabled'] !== null):?>
                                 <li class="list-group-item">
                                     Премиум место(Место №<?php echo $data['top_enabled'];?>)<br/>
                                     Оплачено до: <?php echo date("d.m.Y [H:i]", $data['top_expired_date']);?>
                                 </li>
                             <?php endif;?>
 
-                            <?php if($data['vip_enabled'] != '0'):?>
+                            <?php if($data['vip_enabled'] !== null):?>
                                 <li class="list-group-item">
                                     VIP статус<br/>
                                     Оплачено до: <?php echo date("d.m.Y [H:i]", $data['vip_expired_date']);?>
                                 </li>
                             <?php endif;?>
 
-                            <?php if($data['color_enabled'] != '0'):?>
+                            <?php if($data['color_enabled'] !== null):?>
                                 <li class="list-group-item">
                                     Выделение цветом<br/>
                                     Оплачено до: <?php echo date("d.m.Y [H:i]", $data['color_expired_date']);?>
@@ -87,7 +87,7 @@
                             <?php endif;?>
 
 
-                            <?php if($data['boost'] != '0'):?>
+                            <?php if($data['boost'] !== null):?>
                                 <li class="list-group-item">
                                     Буст<br/>
                                     Осталось кругов: <?php echo $data['boost'];?>

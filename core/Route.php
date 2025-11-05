@@ -103,6 +103,7 @@ class Route
                 $r->addRoute('GET', '/servers', ['controllers\control\ServersController', 'index']);
                 $r->addRoute(['GET', 'POST'], '/servers/search', ['controllers\control\ServersController', 'search']);
                 $r->addRoute(['GET', 'POST'], '/servers/edit', ['controllers\control\ServersController', 'edit']);
+                $r->addRoute(['GET', 'POST'], '/servers/edit-services', ['controllers\control\ServersController', 'editServices']);
                 $r->addRoute('GET', '/servers/remove', ['controllers\control\ServersController', 'remove']);
 
                 $r->addRoute('GET', '/comments', ['controllers\control\CommentsController', 'index']);

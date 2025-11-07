@@ -213,6 +213,8 @@
                                 document.getElementById("paymentForm").submit();
                             };
                         }
+                    }else if (data.status === "error") {
+                        ShowModal(data.error, 'answer', 'error');
                     } else {
                         alert('Ошибка при получении данных для оплаты.');
                     }

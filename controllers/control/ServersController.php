@@ -222,10 +222,9 @@ class ServersController extends AbstractController
             $enabledKey = "{$key}_enabled";
             $expiredKey = "{$key}_expired_date";
 
-            $enabled = isset($_POST[$enabledKey]) ? (int)$_POST[$enabledKey] : 0;
+            $enabled = isset($_POST[$enabledKey]) ? (int)$_POST[$enabledKey] : null;
             $expired = !empty($_POST[$expiredKey]) ? strtotime($_POST[$expiredKey]) : null;
 
-            // Если услуга выключена → дата всегда NULL
             if ($enabled === 0) {
                 $expired = null;
             }
@@ -237,6 +236,10 @@ class ServersController extends AbstractController
                 exit(json_encode($answer));
             }
 
+
+
+            if ($enabled === 0) $enabled = null;
+
             $service['enabled'] = $enabled;
             $service['expired'] = $expired;
         }
@@ -247,6 +250,7 @@ class ServersController extends AbstractController
         if ($boostPeriod) {
             $this->activationBoost($id, $boostPeriod, $server);
         }
+
 
         // Обновление данных в БД
         $sql = "

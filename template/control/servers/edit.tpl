@@ -148,7 +148,7 @@
                             <label>Активно?</label>
                             <select class="form-control" name="vip_enabled">
                                 <option value="1">Да</option>
-                                <option value="0" <?= $data['vip_enabled'] == '0' ? 'selected' : ''; ?>>Нет</option>
+                                <option value="0" <?= $data['vip_enabled'] === null ? 'selected' : ''; ?>>Нет</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -166,7 +166,7 @@
                             <label>Активно?</label>
                             <select class="form-control" name="gamemenu_enabled">
                                 <option value="1">Да</option>
-                                <option value="0" <?= $data['gamemenu_enabled'] == '0' ? 'selected' : ''; ?>>Нет</option>
+                                <option value="0" <?= $data['gamemenu_enabled'] === null ? 'selected' : ''; ?>>Нет</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -183,7 +183,7 @@
                         <div class="form-group mb-2">
                             <label>Цвет (пример: red)</label>
                             <input type="text" name="color_enabled" class="form-control"
-                                   value="<?= $data['color_enabled'] != 0 ? $data['color_enabled'] : ''; ?>">
+                                   value="<?= $data['color_enabled'] !== null ? $data['color_enabled'] : ''; ?>">
                         </div>
                         <div class="form-group">
                             <label>Истекает</label>

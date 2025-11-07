@@ -184,6 +184,8 @@ class PayController extends BaseController
         }
 
         $services = new Services();
+
+
         $invoiceId = $services->createInvoice(
             $getInfoServices,
             $getInfoServer,
@@ -192,10 +194,20 @@ class PayController extends BaseController
         );
 
 
+
+
+
         $getInfoPayment = $this->db->prepare('SELECT id, content, typeCode FROM ga_pay_methods WHERE id = :id');
         $getInfoPayment->execute(array(':id' => $paymentMethod));
         $getInfoPayment = $getInfoPayment->fetch();
         $infoPaymentSettings = Json::decode($getInfoPayment['content'], true);
+
+        if ($infoPaymentSettings === null){
+            $answer['status'] = "error";
+            $answer['error'] = "Настройка способа оплаты не завершена. Обратитесь, пожалуйста, к системному администратору.";
+            exit(json_encode($answer));
+        }
+
 
         $amount = $getInfoServices['price'];
 
@@ -246,7 +258,7 @@ class PayController extends BaseController
                     $sql = "UPDATE ga_pay_logs SET bill_id = :bill_id WHERE id = :id";
                     $update = $this->db->prepare($sql);
                     $update->bindParam(':bill_id', $resp['guid'], );
-                    $update->bindParam(':id', $payId);
+                    $update->bindParam(':id', $invoiceId);
                     $update->execute();
 
 
@@ -307,11 +319,13 @@ class PayController extends BaseController
 
         $user = new User();
         $userProfile = null;
-        if ($user->isAuth()) {
-            $userProfile = $user->getProfile();
+        if (!$user->isAuth()) {
+            $answer['status'] = "error";
+            $answer['error'] = "Требуется авторизация";
+            exit(json_encode($answer));
         }
 
-
+        $userProfile = $user->getProfile();
         $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
         $getInfoServer->execute(array(':id' => $id));
         $getInfoServer = $getInfoServer->fetch();
@@ -333,6 +347,11 @@ class PayController extends BaseController
             }
 
 
+            $services = new Services();
+
+
+
+
             if ($userProfile['balance'] >= $getInfoServices['price']) {
                 if ($getInfoServer['ban'] == 1 and $getInfoServices['type'] != 'razz') {
                     $answer['status'] = "error";
@@ -340,15 +359,27 @@ class PayController extends BaseController
                     exit(json_encode($answer));
                 }
 
+                $params = [];
 
-                $services = new Services();
+                $params['user_id'] = $userProfile['id'];
 
-                $invoiceId = $services->createInvoice(
-                    $getInfoServices,
-                    $getInfoServer,
-                    $idServices,
-                    $userProfile
-                );
+                if (isset($_POST['color'])) $params['color'] = htmlspecialchars($_POST['color']);
+                if (isset($_POST['place'])) $params['place'] = htmlspecialchars($_POST['place']);
+                // validate services
+                try {
+                    $invoiceId = $services->validate(
+                        $getInfoServices,
+                        $getInfoServer,
+                        $params
+                    );
+
+                }catch (\Exception $e){
+                    $answer['status'] = "error";
+                    $answer['error'] = $e->getMessage();
+                    exit(json_encode($answer));
+                }
+
+
 
                 $services->processing(['inv_id' => $invoiceId, 'price' => $getInfoServices['price'], 'pay_methods' => "bill"]);
 
@@ -356,7 +387,7 @@ class PayController extends BaseController
                 $sql = "UPDATE ga_users SET balance = :balance  WHERE id = :id";
                 $update = $this->db->prepare($sql);
                 $update->bindParam(':balance', $newBalance, PDO::PARAM_INT);
-                $update->bindParam(':id', $user_profile['id'], PDO::PARAM_INT);
+                $update->bindParam(':id', $userProfile['id'], PDO::PARAM_INT);
                 $update->execute();
 
                 $answer['status'] = "success";

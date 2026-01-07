@@ -9,7 +9,7 @@ class Services extends BaseController
 {
 
     private const TYPE_TOP = "top";
-    private const TYPE_VIP = "vo[";
+    private const TYPE_VIP = "vip";
     private const TYPE_COLOR = "color";
     private const TYPE_GAME_MENU = "gamemenu";
     private const TYPE_UNBAN = "razz";
@@ -33,13 +33,16 @@ class Services extends BaseController
 
                 if ($settings['global_settings']['top_on'] === null) throw new \InvalidArgumentException("Услуга отключена");
 
+
                 if ($server['top_enabled'] !== null){
-                    $place  = $server['top_enabled'];
+                    $params['place']  = $server['top_enabled'];
                 }else{
                     if ($params['place'] === null or $params['place'] === "") {
                         throw new \InvalidArgumentException("Не выбрано место");
                     }
                 }
+
+
 
 
                 $limitTopServers = $settings['global_settings']['count_servers_top'];
@@ -60,7 +63,7 @@ class Services extends BaseController
                     $infoServices['price'],
                     self::TYPE_TOP,
                     $params['user_id'] ?? null,
-                    ['place' => $place, 'id_server' => $server['id']]);
+                    ['place' => $params['place'], 'id_server' => $server['id']]);
                 break;
 
 
@@ -222,6 +225,8 @@ class Services extends BaseController
         $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
         $getInfoServer->execute(array(':id' => $getInfoPay['id_server']));
         $getInfoServer = $getInfoServer->fetch();
+
+
 
         switch ($getInfoPay['type']) {
             //	Top

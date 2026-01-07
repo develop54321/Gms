@@ -26,32 +26,6 @@ class System
         return $url . $_SERVER['SERVER_NAME'];
     }
 
-    // Add function showbar
-    public function showbar($players, $maxplayers): string
-    {
-        if ($maxplayers > 0) {
-            $full_off = round(($players / $maxplayers) * 100);
-        } else {
-            $full_off = 0;
-        }
-        switch ($full_off) {
-            case $full_off <= 40:
-                $full_off_color = 'success';
-                break;
-            case $full_off <= 80:
-                $full_off_color = 'warning';
-                break;
-            case $full_off <= 100:
-                $full_off_color = 'danger';
-                break;
-            default:
-                $full_off_color = 'success';
-                break;
-        }
-        return $full_off . '%';
-    }
-
-
 
     public function generateCharacter($number): string
     {

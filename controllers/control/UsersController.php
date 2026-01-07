@@ -91,7 +91,23 @@ class UsersController extends AbstractController
             $email = $_POST['email'];
             $password = $_POST['password'];
             $role = $_POST['role'];
-            $balance = (int)$_POST['balance'];
+            $balance   = (int)($_POST['balance'] ?? 0);
+
+            if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                exit(json_encode([
+                    'status' => 'error',
+                    'error'  => 'Ошибка: некорректный email.'
+                ]));
+            }
+
+
+            if ($balance < 0) {
+                exit(json_encode([
+                    'status' => 'error',
+                    'error'  => 'Ошибка: баланс не может быть отрицательным.'
+                ]));
+            }
+
 
             if (isset($_POST['api_login'])) $api_login = $_POST['api_login']; else $api_login = '';
 
@@ -100,6 +116,8 @@ class UsersController extends AbstractController
                 $api = $_POST['api'];
                 $params = json_encode(['key_api' => $api['key'], 'discount_api' => $api['discount']]);
             }
+
+
 
 
             $sql = "UPDATE ga_users SET firstname = :firstname, lastname = :lastname, email = :email, role = :role, balance = :balance, params = :params, api_login = :api_login WHERE id = :id";

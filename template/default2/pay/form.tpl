@@ -1,6 +1,6 @@
 <?php if ($type == 'top'): ?>
     <hr/>
-    <?php if ($serverInfo['top_enabled'] === '0'): ?>
+    <?php if ($serverInfo['top_enabled'] === null): ?>
         <p>Выберите место в топе</p>
         <div class="top-place">
             <div class="d-flex gap-3">
@@ -25,7 +25,7 @@
     <?php endif; ?>
 
     <?php elseif ($type == 'vip'): ?>
-        <?php if ($serverInfo['vip_enabled'] !== '0'): ?>
+        <?php if ($serverInfo['vip_enabled'] !== null): ?>
             <hr/>
             Услуга будет продлена. <br/>
             Текущий срок действия оплачен до: <?php echo date("d.m.Y [H:i]", $serverInfo['vip_expired_date']); ?>
@@ -33,7 +33,7 @@
 
     <?php elseif ($type == 'color'): ?>
         <hr/>
-        <?php if ($serverInfo['color_enabled'] === '0'): ?>
+        <?php if ($serverInfo['color_enabled'] === null): ?>
         <p>Выберите цвет</p>
         <div class="colors">
             <div class="d-flex gap-3">
@@ -233,6 +233,7 @@
 
         element.querySelector('.card').classList.add('active');
     }
+
 
     function toggleButtonLoader(button, isLoading) {
         if (isLoading) {

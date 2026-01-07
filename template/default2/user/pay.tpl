@@ -95,7 +95,7 @@
                         <div class="mt-3 text-center">
                             <small class="text-muted">
                                 Нажимая "Перейти к оплате", вы соглашаетесь с
-                                <a href="#" target="_blank">условиями договора</a>
+                                <a href="/page/3" target="_blank">условиями договора</a>
                             </small>
                         </div>
                     </div>

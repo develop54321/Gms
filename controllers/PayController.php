@@ -186,13 +186,25 @@ class PayController extends BaseController
         $services = new Services();
 
 
-        $invoiceId = $services->createInvoice(
-            $getInfoServices,
-            $getInfoServer,
-            $idServices,
-            $userProfile
-        );
+        $params = [];
+        $params['user_id'] = $userProfile['id'];
 
+        if (isset($postData['color'])) $params['color'] = htmlspecialchars($postData['color']);
+        if (isset($postData['place'])) $params['place'] = htmlspecialchars($postData['place']);
+
+
+        try {
+            $invoiceId = $services->validate(
+                $getInfoServices,
+                $getInfoServer,
+                $params
+            );
+
+        }catch (\Exception $e){
+            $answer['status'] = "error";
+            $answer['error'] = $e->getMessage();
+            exit(json_encode($answer));
+        }
 
 
 
@@ -201,6 +213,7 @@ class PayController extends BaseController
         $getInfoPayment->execute(array(':id' => $paymentMethod));
         $getInfoPayment = $getInfoPayment->fetch();
         $infoPaymentSettings = Json::decode($getInfoPayment['content'], true);
+
 
         if ($infoPaymentSettings === null){
             $answer['status'] = "error";
@@ -243,6 +256,12 @@ class PayController extends BaseController
 
             case "yookassa":
                 try {
+                    if ($infoPaymentSettings['shop_id'] === null or empty($infoPaymentSettings['shop_id'])){
+                        $answer['status'] = "error";
+                        $answer['error'] = "Настройка способа оплаты не завершена. Обратитесь, пожалуйста, к системному администратору.";
+                        exit(json_encode($answer));
+                    }
+
                     $client = new YooKassaClient(
                         $infoPaymentSettings['shop_id'],
                         $infoPaymentSettings['secret_key']
@@ -316,9 +335,7 @@ class PayController extends BaseController
      */
     public function ajax($id)
     {
-
         $user = new User();
-        $userProfile = null;
         if (!$user->isAuth()) {
             $answer['status'] = "error";
             $answer['error'] = "Требуется авторизация";
@@ -360,11 +377,11 @@ class PayController extends BaseController
                 }
 
                 $params = [];
-
                 $params['user_id'] = $userProfile['id'];
 
                 if (isset($_POST['color'])) $params['color'] = htmlspecialchars($_POST['color']);
                 if (isset($_POST['place'])) $params['place'] = htmlspecialchars($_POST['place']);
+
                 // validate services
                 try {
                     $invoiceId = $services->validate(

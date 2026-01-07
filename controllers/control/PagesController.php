@@ -39,8 +39,8 @@ class PagesController extends AbstractController
             $titlePage = $_POST['title'];
             $text = $_POST['text'];
 
-            $this->db->exec("INSERT INTO ga_pages (title, text, date_create) 
-            VALUES('$titlePage', '$text', '" . time() . "')");
+            $this->db->exec("INSERT INTO ga_pages (title, text, date_create, count_visited) 
+            VALUES('$titlePage', '$text', '" . time() . "', 0)");
 
 
             $answer['status'] = "success";

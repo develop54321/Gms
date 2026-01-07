@@ -171,7 +171,7 @@ class UserController extends BaseController
             return exit(json_encode($answer, JSON_UNESCAPED_UNICODE));
         }
 
-        // Если это не AJAX-запрос — просто рендерим страницу
+
         $content = $this->view->renderPartial("user/security");
         $this->view->render("main", [
             'content' => $content,

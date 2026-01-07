@@ -175,19 +175,21 @@ class PayController extends BaseController
         $getInfoPayment = $getInfoPayment->fetch();
         if (empty($getInfoPayment)) parent::ShowError(400, "PayMethod not found!");
 
+        $params = [];
 
         //create invoice
         $user = new User();
-        $userProfile = null;
         if ($user->isAuth()) {
             $userProfile = $user->getProfile();
+            $params['user_id'] = $userProfile['id'];
         }
 
         $services = new Services();
 
 
-        $params = [];
-        $params['user_id'] = $userProfile['id'];
+
+
+
 
         if (isset($postData['color'])) $params['color'] = htmlspecialchars($postData['color']);
         if (isset($postData['place'])) $params['place'] = htmlspecialchars($postData['place']);

@@ -37,7 +37,7 @@ class Services extends BaseController
                 if ($server['top_enabled'] !== null){
                     $params['place']  = $server['top_enabled'];
                 }else{
-                    if ($params['place'] === null or $params['place'] === "") {
+                    if (!isset($params['place']) or $params['place'] === null or $params['place'] === "") {
                         throw new \InvalidArgumentException("Не выбрано место");
                     }
                 }

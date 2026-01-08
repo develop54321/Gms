@@ -130,3 +130,5 @@ WHERE `id` = 5 AND (`icon_path` IS NULL OR `icon_path` != '/public/img/pay_metho
 UPDATE `ga_pay_methods`
 SET `icon_path` = '/public/img/pay_methods/lava.png'
 WHERE `id` = 6 AND (`icon_path` IS NULL OR `icon_path` != '/public/img/pay_methods/lava.png');
+
+ALTER TABLE `ga_servers` ADD `query_port` VARCHAR(255) NULL AFTER `description`;

@@ -24,20 +24,22 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <input type="text" class="form-control" name="ip" id="formGroupExampleInput"
-                                   placeholder="Адрес">
+                            <input type="text" class="form-control" name="ip" id="ip" placeholder="ИП">
                         </div>
 
 
                         <div class="form-group mb-3">
-                            <input type="text" class="form-control" name="port" id="formGroupExampleInput2"
-                                   placeholder="Порт">
+                            <input type="text" class="form-control" name="port" id="port" placeholder="Порт">
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" name="query_port" id="query_port" placeholder="query port">
                         </div>
 
 
                         <div class="form-group mb-3">
                             <textarea class="form-control" name="text" placeholder="Описание"></textarea>
-
                         </div>
 
                         <div class="form-group mb-3">

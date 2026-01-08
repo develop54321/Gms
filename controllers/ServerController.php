@@ -27,6 +27,7 @@ class ServerController extends BaseController
             $game = strip_tags($_POST['game']);
             $ip = strip_tags($_POST['ip']);
             $port = strip_tags(trim($_POST['port']));
+            $queryPort = $_POST['query_port'] ? strip_tags(trim($_POST['query_port'])) : null;
             $text = strip_tags($_POST['text']);
             $captcha = strip_tags($_POST['captcha']);
 
@@ -86,7 +87,7 @@ class ServerController extends BaseController
             }
 
             try {
-                $GameServerQuery = new GameServerQuery($ip, $port, $game, null);
+                $GameServerQuery = new GameServerQuery($ip, $port, $game, $queryPort);
                 $GameServerQuery = $GameServerQuery->query();
 
                 $serverName = $GameServerQuery['gq_hostname'];
@@ -124,6 +125,7 @@ class ServerController extends BaseController
                 game,
                 ip, 
                 port,
+                query_port,
                 date_add,
                 description,
                 hostname,
@@ -137,6 +139,7 @@ class ServerController extends BaseController
                 :game, 
                 :ip, 
                 :port, 
+                :query_port, 
                 :date_add, 
                 :description, 
                 :hostname, 
@@ -157,6 +160,7 @@ class ServerController extends BaseController
                     ':game' => $game,
                     ':ip' => $ip,
                     ':port' => $port,
+                    ':query_port' => $queryPort,
                     ':date_add' => time(),
                     ':description' => $text,
                     ':hostname' => $serverName ?? null,

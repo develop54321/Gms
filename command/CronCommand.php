@@ -27,14 +27,14 @@ class CronCommand extends Command
     {
         $startTime = microtime(true);
 
-        $getServers = $this->db->query('SELECT * FROM ga_servers');
+        $getServers = $this->db->query('SELECT id, game, ip, port, query_port FROM ga_servers');
         $getServers = $getServers->fetchAll();
         $Query = new SourceQuery();
 
         foreach ($getServers as $row) {
             if (in_array($row['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])) {
                 try {
-                    $Query->Connect($row['ip'], $row['port'], 2, SourceQuery::GOLDSOURCE);
+                    $Query->Connect($row['ip'], $row['query_port'] ?? $row['port'], 2, SourceQuery::GOLDSOURCE);
                     $Info = $Query->GetInfo();
                     $status = 1;
                     $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players WHERE id = :id";

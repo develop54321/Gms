@@ -455,3 +455,7 @@ select option {
     width: 100%;
     z-index: 1;
 }
+
+.form-control::placeholder{
+    color: #a1a1a1 !important;
+}

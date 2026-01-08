@@ -250,7 +250,13 @@ class UserController extends BaseController
             $paymentUrl = null;
             switch ($getInfoPayMethod['typeCode']) {
                 case "freekassa":
-                    $sign = md5($infoPaymentSettings['fk_id'] . ":" . $amount . ":" . $infoPaymentSettings['fk_key1'] . ":" . $invoiceId);
+
+                    $currency = 'RUB';
+                    $sign = md5($infoPaymentSettings['fk_id'].':'.$amount.':'.$infoPaymentSettings['fk_key1'].':'.$currency.':'.$invoiceId);
+
+
+
+
                     $client = new FreekassaClient(
                         $infoPaymentSettings['fk_id'],
                         $amount,

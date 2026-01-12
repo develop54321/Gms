@@ -2,13 +2,13 @@
 
 namespace command;
 
+use components\GameServerQuery;
 use core\Database;
 use Exception;
 use PDO;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use xPaw\SourceQuery\SourceQuery;
 
 class CronCommand extends Command
 {
@@ -29,25 +29,34 @@ class CronCommand extends Command
 
         $getServers = $this->db->query('SELECT id, game, ip, port, query_port FROM ga_servers');
         $getServers = $getServers->fetchAll();
-        $Query = new SourceQuery();
 
         foreach ($getServers as $row) {
             if (in_array($row['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])) {
                 try {
-                    $Query->Connect($row['ip'], $row['query_port'] ?? $row['port'], 2, SourceQuery::GOLDSOURCE);
-                    $Info = $Query->GetInfo();
+                    $GameServerQuery = new GameServerQuery($row['ip'], $row['port'], $row['game'], $row['query_port']);
+                    $GameServerQuery = $GameServerQuery->query();
+
+                    $serverName = $GameServerQuery['gq_hostname'];
+
+                    if (empty($serverName)) {
+                        throw new Exception("server is not available");
+                    }
+
+                    $mapName = $GameServerQuery['gq_mapname'];
+                    $players = $GameServerQuery['gq_numplayers'];
+                    $maxPlayers = $GameServerQuery['gq_maxplayers'];
+
                     $status = 1;
                     $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players WHERE id = :id";
                     $update = $this->db->prepare($sql);
                     $update->bindParam(':status', $status);
-                    $update->bindParam(':hostname', $Info['HostName']);
-                    $update->bindParam(':map', $Info['Map']);
-                    $update->bindParam(':players', $Info['Players']);
-                    $update->bindParam(':max_players', $Info['MaxPlayers']);
+                    $update->bindParam(':hostname', $serverName);
+                    $update->bindParam(':map', $mapName);
+                    $update->bindParam(':players', $players);
+                    $update->bindParam(':max_players', $maxPlayers);
                     $update->bindParam(':id', $row['id']);
                     $update->execute();
                 } catch (Exception $e) {
-                    $Exception = $e;
                     $status = 0;
                     $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
                     $update = $this->db->prepare($sql);
@@ -55,7 +64,6 @@ class CronCommand extends Command
                     $update->bindParam(':id', $row['id']);
                     $update->execute();
                 }
-                $Query->Disconnect();
             } elseif ($row['game'] == 'samp') {
                 try {
                     $GameQ = new \GameQ\GameQ();
@@ -91,8 +99,6 @@ class CronCommand extends Command
                     $update->bindParam(':id', $row['id']);
                     $update->execute();
                 } catch (Exception $e) {
-                 //   print_r($e->getMessage());
-                    $Exception = $e;
                     $status = 0;
                     $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
                     $update = $this->db->prepare($sql);
@@ -131,7 +137,6 @@ class CronCommand extends Command
                     $update->bindParam(':id', $row['id']);
                     $update->execute();
                 } catch (Exception $e) {
-                    $Exception = $e;
                     $status = 0;
                     $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
                     $update = $this->db->prepare($sql);
@@ -141,7 +146,6 @@ class CronCommand extends Command
                 }
             }elseif ($row['game'] == 'arma_3') {
                 try {
-
                     $GameQ = new \GameQ\GameQ();
                     $GameQ->addServer([
                         'type' => 'arma3',
@@ -154,6 +158,7 @@ class CronCommand extends Command
                     if (empty($Info['gq_hostname'])) {
                         throw new \DomainException();
                     }
+
                     $hostname = $Info['gq_hostname'];
                     $status = 1;
                     $mapName = $Info['gq_mapname'];
@@ -169,7 +174,6 @@ class CronCommand extends Command
                     $update->bindParam(':id', $row['id']);
                     $update->execute();
                 } catch (Exception $e) {
-                    $Exception = $e;
                     $status = 0;
                     $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
                     $update = $this->db->prepare($sql);

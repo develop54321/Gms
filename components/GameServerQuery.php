@@ -2,7 +2,6 @@
 
 namespace components;
 
-use xPaw\SourceQuery\SourceQuery;
 
 class GameServerQuery
 {
@@ -137,21 +136,5 @@ class GameServerQuery
         }
     }
 
-    /**
-     * @return array|bool
-     * @throws \Exception
-     */
-    public function settings(){
-        $Query = new SourceQuery();
-        try {
-            $Query->Connect($this->ip, $this->port, self::SQ_TIMEOUT, SourceQuery::SOURCE);
-            return $Query->GetRules();
-        } catch (\Exception $e) {
-            throw new \Exception("Сервер не отвечает, попробуйте ещё раз");
-        } finally {
-            $Query->Disconnect();
-        }
-
-    }
 
 }

@@ -3,6 +3,7 @@
 namespace controllers;
 
 use core\BaseController;
+use Exception;
 use xPaw\SourceQuery\SourceQuery;
 
 class ModalController extends BaseController
@@ -85,7 +86,7 @@ class ModalController extends BaseController
 
 
 
-                    return $this->view->render("modals/showPlayersModal", [
+                    echo $this->view->render("modals/showPlayersModal", [
                         'data' => $getInfoServer,
                         'players' => $Players,
                         'game' => $getInfoServer['game']

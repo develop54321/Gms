@@ -10,7 +10,7 @@ use components\User;
 use core\BaseController;
 use Exception;
 use PDO;
-use xPaw\SourceQuery\SourceQuery;
+
 
 class ServerController extends BaseController
 {
@@ -316,7 +316,6 @@ class ServerController extends BaseController
 
     }
 
-
     /**
      * @throws Exception
      */
@@ -411,55 +410,6 @@ class ServerController extends BaseController
         }
 
     }
-
-    public function getPlayers()
-    {
-        if (isset($_GET['id'])) $id = (int)$_GET['id']; else $id = null;
-
-        $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
-        $getInfoServer->execute(array(':id' => $id));
-        $getInfoServer = $getInfoServer->fetch();
-
-        if (empty($getInfoServer)) parent::ShowError(404, "Сервер не найден!");
-
-        $Query = new SourceQuery();
-        $Players = [];
-        if (in_array($getInfoServer['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])) {
-            try {
-                $Query->Connect($getInfoServer['ip'], $getInfoServer['port'], 3, SourceQuery::GOLDSOURCE);
-
-                $Players = $Query->GetPlayers();
-
-            } catch (Exception $e) {
-                $Exception = $e;
-            }
-        } else if ($getInfoServer['game'] == 'samp') {
-            $GameQ = new \GameQ\GameQ();
-            $GameQ->addServer([
-                'type' => 'samp',
-                'host' => $getInfoServer['ip'] . ":" . $getInfoServer['port'],
-            ]);
-            $results = $GameQ->process();
-            $Info = array_shift($results);
-            $Players = $Info['players'];
-
-        } else if ($getInfoServer['game'] == 'mta') {
-            $GameQ = new \GameQ\GameQ();
-            $GameQ->addServer([
-                'type' => 'mta',
-                'host' => $getInfoServer['ip'] . ":" . $getInfoServer['port'],
-            ]);
-            $results = $GameQ->process();
-            $Info = array_shift($results);
-            $Players = $Info['players'];
-
-        }
-
-
-        $content = $this->view->renderPartial("server/getPlayers", ['data' => $Players, 'game' => $getInfoServer['game']]);
-        echo $content;
-    }
-
 
     public function vote()
     {

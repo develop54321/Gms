@@ -212,10 +212,10 @@ class Services extends BaseController
         $getInfoPay->execute(array(':id' => $data['inv_id']));
         $getInfoPay = $getInfoPay->fetch();
 
-        if (empty($getInfoPay)) parent::ShowError(404, "Страница не найдена!");
+        if (empty($getInfoPay)) throw new \InvalidArgumentException("Счет не найден");
         $getInfoPay = Json::decode($getInfoPay['content'], true);
 
-        if ($getInfoPay['price'] != $data['price']) parent::ShowError(404, "Страница не найдена!");
+        if ($getInfoPay['price'] != $data['price']) throw new \InvalidArgumentException("bad request");
 
 
         $getInfoServices = $this->db->prepare('SELECT * FROM ga_services WHERE id = :id');
@@ -367,7 +367,7 @@ class Services extends BaseController
 
 
 
-    private function insertPayLog($idServices, $price, $type, $userId = null, $additionalData = [])
+    private function insertPayLog($idServices, $price, $type, $userId = null, $additionalData = []): int
     {
 
         $content = Json::encode(array_merge([
@@ -384,6 +384,6 @@ class Services extends BaseController
             ':id_user' => $userId
         ]);
 
-        return $this->db->lastInsertId();
+        return (int)$this->db->lastInsertId();
     }
 }

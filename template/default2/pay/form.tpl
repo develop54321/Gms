@@ -179,7 +179,7 @@
     }
 
     function selectPaymentMethod(method, el) {
-        toggleActive(el);
+        toggleActivePayMethod(el);
 
         if (method === "user_balance") {
             $("#pay-button").replaceWith('<button id="pay-button" onclick="payUserBalance(); return false;" type="submit" class="btn btn-primary btn-sm">Оплатить</button>');
@@ -228,6 +228,14 @@
 
     function toggleActive(element) {
         document.querySelectorAll('.card').forEach(card => {
+            card.classList.remove('active');
+        });
+
+        element.querySelector('.card').classList.add('active');
+    }
+
+    function toggleActivePayMethod(element) {
+        document.querySelectorAll('.pay-methods .card').forEach(card => {
             card.classList.remove('active');
         });
 

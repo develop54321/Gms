@@ -32,9 +32,29 @@
                         <td>Время на сервере: <?php echo date("d:m:Y H:i"); ?></td>
                     </tr>
 
+                    <?php
+                    $diff = time() - $settings['last_update_servers'];
+                    $limit = 3 * 3600;
+
+                    if ($diff > $limit) {
+                    echo '
                     <tr>
-                        <td>Последняя проверка серверов: <?php echo time() - $settings['last_update_servers']; ?> сек.</td>
+                        <td style="color:red; font-weight:bold;">
+                            ⚠ Последняя проверка серверов: ' . $diff . ' сек.<br>
+                            Сервера давно не обновлялись!<br>
+                        </td>
                     </tr>
+                    ';
+                    } else {
+                    echo '
+                    <tr>
+                        <td>
+                            Последняя проверка серверов: ' . $diff . ' сек.
+                        </td>
+                    </tr>
+                    ';
+                    }
+                    ?>
 
                     <tr>
                         <td>
@@ -59,34 +79,32 @@
             <div class="card-body">
 
 
-
-
                 <?php if (empty($notification)): ?>
-                    Новых уведомлений нету
+                Новых уведомлений нету
                 <?php else: ?>
 
-                    <table class="table  border text-nowrap text-md-nowrap">
-                        <tbody>
+                <table class="table  border text-nowrap text-md-nowrap">
+                    <tbody>
 
-                        <?php foreach ($notification as $n): ?>
-                            <?php if ($n['type'] == 'moderationServers' && $n['count'] !== 0): ?>
-                                <tr>
-                                    <td>
-                                        Серверов ожидают проверку: <?php echo $n['count']; ?>
-                                    </td>
-                                </tr>
+                    <?php foreach ($notification as $n): ?>
+                    <?php if ($n['type'] == 'moderationServers' && $n['count'] !== 0): ?>
+                    <tr>
+                        <td>
+                            Серверов ожидают проверку: <?php echo $n['count']; ?>
+                        </td>
+                    </tr>
 
-                            <?php elseif ($n['type'] == 'moderationComments' && $n['count'] !== 0): ?>
-                                <tr>
-                                    <td>
-                                        Комментариев ожидающую проверку: <?php echo $n['count']; ?>
-                                    </td>
-                                </tr>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
+                    <?php elseif ($n['type'] == 'moderationComments' && $n['count'] !== 0): ?>
+                    <tr>
+                        <td>
+                            Комментариев ожидающую проверку: <?php echo $n['count']; ?>
+                        </td>
+                    </tr>
+                    <?php endif; ?>
+                    <?php endforeach; ?>
 
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
                 <?php endif; ?>
 
             </div>
@@ -95,10 +113,6 @@
 
 
 </div>
-
-
-
-
 
 
 <div class="row row-deck">
@@ -146,7 +160,6 @@
                             Всего комментариев: <?php echo $countComments; ?>
                         </td>
                     </tr>
-
 
 
                     </tbody>

@@ -384,8 +384,17 @@ class PayController extends BaseController
                 $params = [];
                 $params['user_id'] = $userProfile['id'];
 
-                if (isset($_POST['color'])) $params['color'] = htmlspecialchars($_POST['color']);
-                if (isset($_POST['place'])) $params['place'] = htmlspecialchars($_POST['place']);
+                if (isset($_POST['color']) && !empty(trim($_POST['color']))) {
+                    $params['color'] = htmlspecialchars($_POST['color']);
+                } else {
+                    $params['color'] = null;
+                }
+
+                if (isset($_POST['place']) && !empty(trim($_POST['place']))) {
+                    $params['place'] = htmlspecialchars($_POST['place']);
+                } else {
+                    $params['place'] = null;
+                }
 
                 // validate services
                 try {
@@ -413,7 +422,7 @@ class PayController extends BaseController
                 $update->execute();
 
                 $answer['status'] = "success";
-                $answer['success'] = "Услуга успешно куплена";
+                $answer['success'] = "Услуга успешно куплена. Вы будете перенаправлены через 3 сек.";
                 exit(json_encode($answer));
             } else {
                 $answer['status'] = "error";

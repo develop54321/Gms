@@ -30,7 +30,7 @@ class PaymethodsController extends AbstractController
             $type = (int)$_POST['type'];
 
             $params = '';
-            $servicesParams = $_POST['servicesParams'];
+            $servicesParams = isset($_POST['servicesParams']) ? $_POST['servicesParams'] : [];
             if (!empty($servicesParams)) {
                 $colors = explode("\n", $servicesParams);
                 $params = json_encode($colors);

@@ -36,9 +36,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <a href="#" id="captchaImg" onclick="updateCaptcha(); return false;">
-                            <img src="/captcha" src="Капча"/>
-                        </a>
+                        <a href="#" id="captchaImg" onclick="updateCaptcha(); return false;"></a>
                     </div>
 
                     <div class="mb-3">
@@ -65,8 +63,9 @@
 
 <script>
     function updateCaptcha() {
-        $("#captchaImg").html('<img src="/captcha" src="Каптча"/>');
+        <img src="/captcha?form=signup" src="Капча"/>
     }
+    updateCaptcha()
             $('#signupForm').ajaxForm({
                 dataType: "json",
                 success: function (data) {

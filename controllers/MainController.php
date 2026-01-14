@@ -2,6 +2,7 @@
 
 namespace controllers;
 
+use components\Captcha;
 use components\Pagination;
 use components\Servers;
 use components\System;
@@ -15,8 +16,11 @@ class MainController extends BaseController
 
     public function captcha()
     {
-        $system = new System();
-        $system->generateCaptcha();
+        $formKey = $_GET['form'] ?? 'default';
+
+
+        $system = new Captcha();
+        $system->render($formKey);
     }
 
     public function index()

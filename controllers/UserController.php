@@ -2,6 +2,7 @@
 
 namespace controllers;
 
+use components\Captcha;
 use components\Flash;
 use components\Json;
 use components\Mail;
@@ -466,17 +467,11 @@ class UserController extends BaseController
 
             $password = strip_tags($_POST['password']);
             $password2 = strip_tags($_POST['password2']);
-            $captcha = $_POST['captcha'] ?? null;
 
-            if (!isset($_SESSION['captcha'])) {
-                $answer['status'] = "error";
-                $answer['error'] = "Капча введена не верно!";
-                exit(json_encode($answer));
-            }
-
-            if ($_SESSION['captcha'] != md5($captcha)) {
-                $answer['status'] = "error";
-                $answer['error'] = "Капча введена не верно!";
+            $captcha = new Captcha();
+            if (!$captcha->validate($_POST['captcha'] ?? '', "signup")) {
+                $answer['status'] = 'error';
+                $answer['error'] = 'Капча введена неверно';
                 exit(json_encode($answer));
             }
 

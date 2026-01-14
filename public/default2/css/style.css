@@ -459,3 +459,13 @@ select option {
 .form-control::placeholder{
     color: #a1a1a1 !important;
 }
+
+.modal-preloader {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2000; /* выше bootstrap modal (1055) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

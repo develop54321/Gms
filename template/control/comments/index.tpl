@@ -27,12 +27,8 @@
                         <label>Статус</label>
                         <select name="status" class="form-control input-sm">
                             <option value="">--Не выбрана--</option>
-                            <option value="1" <?php if ($filter['status'] == '1'): ?>selected<?php endif; ?>>
-                                Показывается
-                            </option>
-                            <option value="0" <?php if ($filter['status'] == '0'): ?>selected<?php endif; ?>>Ожидет
-                                проверку
-                            </option>
+                            <option value="1" <?php if ($filter['status'] == '1'): ?>selected<?php endif; ?>>Показывается</option>
+                            <option value="0" <?php if ($filter['status'] == '0'): ?>selected<?php endif; ?>>Ожидает проверку</option>
                         </select>
                     </div>
                 </div>
@@ -97,7 +93,7 @@
 
                     <td>
                         <?php if ($row['moderation'] == '0'): ?>
-                            <a href="/control/comments/moderation?id=<?= $row['id']; ?>" class="btn btn-success btn-xs"
+                            <a href="/control/comments/moderation?id=<?= $row['id']; ?>"
                                title="Одобрить"><i class="fa fa-check"></i></a>
                         <?php endif; ?>
 

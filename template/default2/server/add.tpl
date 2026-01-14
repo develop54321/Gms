@@ -98,7 +98,7 @@
 
 <script>
     function updateCaptcha() {
-        $("#captchaImg").html('<img src="/captcha" src="Каптча"/>');
+        <img src="/captcha?form=add_server" src="Капча"/>
     }
     $('#addServer').ajaxForm({
         dataType: 'json',

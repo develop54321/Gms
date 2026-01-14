@@ -7,7 +7,6 @@ use components\Json;
 use components\pay_method\FreekassaClient;
 use components\pay_method\LavaClient;
 use components\pay_method\YooKassaClient;
-use components\pay_method\YooKassaService;
 use components\pay_method\YooMoneyClient;
 use components\Services;
 use components\User;
@@ -232,8 +231,6 @@ class PayController extends BaseController
         $paymentUrl = null;
         switch ($getInfoPayment['typeCode']) {
             case "freekassa":
-                $currency = 'RUB';
-
                 $merchant_id = $infoPaymentSettings['fk_id'];
                 $secret_word = $infoPaymentSettings['fk_key1'];
                 $order_id = $invoiceId;

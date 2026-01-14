@@ -101,6 +101,11 @@
         </div>
     </div>
 
+<div id="modalPreloader" class="modal-preloader d-none">
+    <div class="spinner-border text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
 
 <script src="/public/new-style/js/bootstrap.bundle.min.js"></script>
 <script src="/public/js/main.js"></script>

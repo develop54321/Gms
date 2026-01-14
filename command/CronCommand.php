@@ -30,11 +30,15 @@ class CronCommand extends Command
         $getServers = $this->db->query('SELECT id, game, ip, port, query_port FROM ga_servers');
         $getServers = $getServers->fetchAll();
 
+        $now = time();
+
         foreach ($getServers as $row) {
             if (in_array($row['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])) {
                 try {
                     $GameServerQuery = new GameServerQuery($row['ip'], $row['port'], $row['game'], $row['query_port']);
                     $GameServerQuery = $GameServerQuery->query();
+
+                    print_r($GameServerQuery);
 
                     $serverName = $GameServerQuery['gq_hostname'];
 
@@ -47,13 +51,14 @@ class CronCommand extends Command
                     $maxPlayers = $GameServerQuery['gq_maxplayers'];
 
                     $status = 1;
-                    $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players WHERE id = :id";
+                    $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players, last_update_at = :last_update_at WHERE id = :id";
                     $update = $this->db->prepare($sql);
                     $update->bindParam(':status', $status);
                     $update->bindParam(':hostname', $serverName);
                     $update->bindParam(':map', $mapName);
                     $update->bindParam(':players', $players);
                     $update->bindParam(':max_players', $maxPlayers);
+                    $update->bindParam(':last_update_at', $now);
                     $update->bindParam(':id', $row['id']);
                     $update->execute();
                 } catch (Exception $e) {
@@ -89,13 +94,14 @@ class CronCommand extends Command
                     $mapName = $Info['mapname'];
                     $players = $Info['gq_numplayers'];
                     $maxPlayers = $Info['gq_maxplayers'];
-                    $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players WHERE id = :id";
+                    $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players, last_update_at = :last_update_at WHERE id = :id";
                     $update = $this->db->prepare($sql);
                     $update->bindParam(':status', $status);
                     $update->bindParam(':hostname', $server_name);
                     $update->bindParam(':map', $mapName);
                     $update->bindParam(':players', $players);
                     $update->bindParam(':max_players', $maxPlayers);
+                    $update->bindParam(':last_update_at', $now);
                     $update->bindParam(':id', $row['id']);
                     $update->execute();
                 } catch (Exception $e) {
@@ -127,13 +133,14 @@ class CronCommand extends Command
                     $mapName = $Info['gq_mapname'];
                     $players = $Info['num_players'];
                     $maxPlayers = $Info['max_players'];
-                    $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players WHERE id = :id";
+                    $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players, last_update_at = :last_update_at WHERE id = :id";
                     $update = $this->db->prepare($sql);
                     $update->bindParam(':status', $status);
                     $update->bindParam(':hostname', $hostname);
                     $update->bindParam(':map', $mapName);
                     $update->bindParam(':players', $players);
                     $update->bindParam(':max_players', $maxPlayers);
+                    $update->bindParam(':last_update_at', $now);
                     $update->bindParam(':id', $row['id']);
                     $update->execute();
                 } catch (Exception $e) {
@@ -164,13 +171,14 @@ class CronCommand extends Command
                     $mapName = $Info['gq_mapname'];
                     $players = $Info['num_players'];
                     $maxPlayers = $Info['max_players'];
-                    $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players WHERE id = :id";
+                    $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players, last_update_at = :last_update_at WHERE id = :id";
                     $update = $this->db->prepare($sql);
                     $update->bindParam(':status', $status);
                     $update->bindParam(':hostname', $hostname);
                     $update->bindParam(':map', $mapName);
                     $update->bindParam(':players', $players);
                     $update->bindParam(':max_players', $maxPlayers);
+                    $update->bindParam(':last_update_at', $now);
                     $update->bindParam(':id', $row['id']);
                     $update->execute();
                 } catch (Exception $e) {

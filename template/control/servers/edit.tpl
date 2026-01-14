@@ -63,6 +63,11 @@
                     </div>
 
                     <div class="form-group mb-3">
+                        <label for="port">query port</label>
+                        <input type="text" name="query_port" class="form-control" id="port" value="<?= $data['query_port']; ?>">
+                    </div>
+
+                    <div class="form-group mb-3">
                         <label for="rating">Рейтинг</label>
                         <input type="number" name="rating" class="form-control" id="rating" value="<?= $data['rating']; ?>">
                     </div>

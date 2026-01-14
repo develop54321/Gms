@@ -22,12 +22,18 @@ class PaylogsController extends AbstractController
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
         $newArr = [];
-        $getPaylogs = $this->db->query('SELECT * FROM ga_pay_logs ORDER BY date_create DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
-        $getPaylogs = $getPaylogs->fetchAll();
+        $getPayLogs = $this->db->query(
+            'SELECT pl.id, pl.content, pl.date_create, pl.pay_methods, pl.status, u.email 
+     FROM ga_pay_logs pl 
+     INNER JOIN ga_users u ON u.id = pl.id_user 
+     ORDER BY date_create DESC 
+     LIMIT ' . $result['start'] . ', ' . $per_page
+        );
+        $getPaylogs = $getPayLogs->fetchAll();
         foreach ($getPaylogs as $row) {
+            $idServer = null;
             $content = json_decode($row['content'], true);
             if ($content['type_pay'] == 'refill') {
-                $id = $content['id_user'];
                 $servicesName = "Пополнение счета";
                 $price = $content['amount'] ?? 0;
             } elseif ($content['type_pay'] == "payServices" or $content['type_pay'] == 'payApi') {
@@ -41,7 +47,7 @@ class PaylogsController extends AbstractController
                     $servicesName = 'Услуга не найдена';
 
                 }
-                $id = $content['id_server'];
+                $idServer = $content['id_server'];
                 $price = $content['price'];
             }
             if ($row['pay_methods'] == 'bill') {
@@ -50,7 +56,18 @@ class PaylogsController extends AbstractController
                 $payMethods = $row['pay_methods'];
             }
 
-            $newArr[] = ['id' => $row['id'], 'payMethods' => $payMethods, 'id_user' => $row['id_user'], 'type_pay' => $content['type_pay'], 'price' => $price, 'id_object' => $id, 'servicesName' => $servicesName, 'date_create' => $row['date_create'], 'status' => $row['status']];
+            $newArr[] = [
+                'id' => $row['id'],
+                'payMethods' => $payMethods,
+                'id_user' => $row['id_user'],
+                'type_pay' => $content['type_pay'],
+                'price' => $price,
+                'servicesName' => $servicesName,
+                'date_create' => $row['date_create'],
+                'status' => $row['status'],
+                'email' => $row['email'],
+                'id_server' => $idServer
+            ] ;
 
         }
         $status = 1;

@@ -81,7 +81,6 @@
                         </div>
 
                         <input type="hidden" id="paymentId">
-                        <input type="hidden" id="amount">
 
 
                         <div class="d-grid gap-2 mt-4">
@@ -173,8 +172,9 @@
                         if (data.payment_url) {
                             window.location.href = data.payment_url;
                         } else if (data.payment_form) {
-                            document.body.innerHTML += data.payment_form;
-                            document.getElementById("paymentForm").submit();
+                            $('#paymentForm').remove();
+                            $('body').append(data.payment_form);
+                            $('#paymentForm').submit();
                             setTimeout(function () {
                                 toggleButtonLoader($("#submit-btn"), false);
                             }, 1000)

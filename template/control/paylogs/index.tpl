@@ -125,11 +125,16 @@
             <?php foreach ($data as $row): ?>
                 <tr>
                     <td><?php echo $row['id']; ?></td>
-                    <td><?php echo $row['servicesName']; ?>|
-                        <?php if ($row['type_pay'] == 'refill'): ?>пользователь #<?php elseif ($row['type_pay'] == 'payServices'): ?>сервер #<?php endif; ?><?php echo $row['id_object']; ?>
+                    <td><?php echo $row['servicesName']; ?>
+
+                        <?php if ($row['type_pay'] == 'refill'): ?>
+                        <br/>Пользователь <?php echo $row['email']; ?>
+                        <?php elseif ($row['type_pay'] == 'payServices'): ?>
+                        <br/>Сервер №<?php echo $row['id_server']; ?>
+                        <?php endif; ?>
 
                         <?php if ($row['type_pay'] == 'payServices' && $row['id_user'] != 0): ?>
-                            | пользователь #<?php echo $row['id_user']; ?>
+                            <br/>Пользователь #<?php echo $row['email']; ?>
                         <?php endif; ?>
 
                     </td>

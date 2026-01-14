@@ -12,9 +12,7 @@
 
                     <div class="row">
                         <div class="col-md-4">
-                            <a href="#" id="captchaImg" onclick="updateCaptcha(); return false;">
-                                <img src="/captcha" src="Каптча"/>
-                            </a>
+                            <a href="#" id="captchaImg" onclick="updateCaptcha(); return false;"></a>
                         </div>
                         <div class="col-md-8">
 
@@ -44,10 +42,10 @@
     $(document).on("keydown", "form", function(event) {
         return event.key !== "Enter";
     });
-
     function updateCaptcha() {
-        $("#captchaImg").html('<img src="/captcha" src="Каптча"/>');
+        $("#captchaImg").html('<img src="/captcha?form=vote_modal" src="Капча"/>');
     }
+    updateCaptcha()
 
     function voteServer(id) {
         type = $("#type").val();
@@ -61,6 +59,7 @@
             success: function (data) {
                 switch (data.status) {
                     case "error":
+                        updateCaptcha()
                         $("#answer").html('<div class="alert alert-danger">' + data.error + '</div>');
                         break;
 

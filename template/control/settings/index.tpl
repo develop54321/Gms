@@ -124,7 +124,7 @@
         <div class="card-body p-0">
 
             <div class="setting-item">
-                <span>Top</span>
+                <span>TOP</span>
                 <input type="hidden" name="global_settings[top_on]" value="0">
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox"
@@ -134,7 +134,7 @@
             </div>
 
             <div class="setting-item">
-                <span>Boost</span>
+                <span>Буст</span>
                 <input type="hidden" name="global_settings[boost_on]" value="0">
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox"
@@ -150,6 +150,26 @@
                     <input class="form-check-input" type="checkbox"
                            name="global_settings[vip_on]"
                            value="1" <?= $settings['global_settings']['vip_on'] ? 'checked' : '' ?>>
+                </div>
+            </div>
+
+            <div class="setting-item">
+                <span>Gamemenu</span>
+                <input type="hidden" name="global_settings[gamemenu_on]" value="0">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox"
+                           name="global_settings[gamemenu_on]"
+                           value="1" <?= $settings['global_settings']['gamemenu_on'] ? 'checked' : '' ?>>
+                </div>
+            </div>
+
+            <div class="setting-item">
+                <span>Выделение цветом</span>
+                <input type="hidden" name="global_settings[color_on]" value="0">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox"
+                           name="global_settings[color_on]"
+                           value="1" <?= $settings['global_settings']['color_on'] ? 'checked' : '' ?>>
                 </div>
             </div>
 

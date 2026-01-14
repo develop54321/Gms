@@ -2,6 +2,7 @@
 
 namespace controllers;
 
+use components\Captcha;
 use components\GameServerQuery;
 use components\Pagination;
 use components\Servers;
@@ -29,20 +30,14 @@ class ServerController extends BaseController
             $port = strip_tags(trim($_POST['port']));
             $queryPort = $_POST['query_port'] ? strip_tags(trim($_POST['query_port'])) : null;
             $text = strip_tags($_POST['text']);
-            $captcha = strip_tags($_POST['captcha']);
 
-            if (!isset($_SESSION['captcha'])){
-                $answer['status'] = "error";
-                $answer['error'] = "Капча введена не верно!";
+
+            $captcha = new Captcha();
+            if (!$captcha->validate($_POST['captcha'] ?? '', "add_server")) {
+                $answer['status'] = 'error';
+                $answer['error'] = 'Капча введена неверно';
                 exit(json_encode($answer));
             }
-
-            if ($_SESSION['captcha'] != md5($captcha)) {
-                $answer['status'] = "error";
-                $answer['error'] = "Капча введена не верно!";
-                exit(json_encode($answer));
-            }
-
 
             $isGame = $this->db->prepare('SELECT * FROM ga_games WHERE code = :code and status = :status');
             $isGame->bindValue(":code", $game);
@@ -413,10 +408,9 @@ class ServerController extends BaseController
 
     public function vote()
     {
-
         $id = (int)$_POST['id'];
         $type = $_POST['type'];
-        $captcha = $_POST['captcha'];
+
 
 
         $checkServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
@@ -428,15 +422,10 @@ class ServerController extends BaseController
             $system = new System();
             $ip = $system->getIp();
 
-            if (!isset($_SESSION['captcha'])){
-                $answer['status'] = "error";
-                $answer['error'] = "Капча введена не верно!";
-                exit(json_encode($answer));
-            }
-
-            if ($_SESSION['captcha'] != md5($captcha)) {
-                $answer['status'] = "error";
-                $answer['error'] = "Капча введена не верно!";
+            $captcha = new Captcha();
+            if (!$captcha->validate($_POST['captcha'] ?? '', "vote_modal")) {
+                $answer['status'] = 'error';
+                $answer['error'] = 'Капча введена неверно';
                 exit(json_encode($answer));
             }
 
@@ -461,7 +450,10 @@ class ServerController extends BaseController
             $nameCookie = "votePlus" . $id;
             SetCookie("votePlus" . $id, "yes", time() + (3600 * 24));
 
-            $this->db->exec("INSERT INTO ga_logs_vote (ip, cookie, date_create) VALUES('$ip', '$nameCookie', '" . time() . "')");
+
+            $stmt = $this->db->prepare("INSERT INTO ga_logs_vote (ip, cookie, date_create) VALUES (:ip, :cookie, :date_create)");
+            $stmt->execute([':ip'=> $ip, ':cookie'=> $nameCookie, ':date_create'=> time()]);
+
 
             if ($type == 'plus') {
                 $rating = $checkServer['rating'] + 1;

@@ -6,26 +6,37 @@ $(document).ready(function () {
 
 
     function ShowModal(param, action, type) {
-        $.ajax({
-            url: "/modal",
-            data: { 'action': action, 'param': param, 'type': type },
-            type: 'post',
-            success: function (data) {
-                let modalId = "#" + action + "Modal";
 
-                // Закрываем модальное окно, если оно уже существует
-                if ($(modalId).exists()) {
-                    $(modalId).modal('hide');
-                    $(modalId).remove();
+        // Показываем прелоадер
+        $("#modalPreloader").removeClass("d-none");
+
+        // Небольшая задержка (например 300мс)
+        setTimeout(function () {
+
+            $.ajax({
+                url: "/modal",
+                data: { action, param, type },
+                type: "post",
+                success: function (data) {
+                    let modalId = "#" + action + "Modal";
+
+                    if ($(modalId).length) {
+                        $(modalId).modal("hide");
+                        $(modalId).remove();
+                    }
+
                     $("body").append(data);
-                    $(modalId).modal('show');
-                } else {
-                    $("body").append(data);
-                    $(modalId).modal('show');
+                    $(modalId).modal("show");
+                },
+                complete: function () {
+                    // Скрываем прелоадер
+                    $("#modalPreloader").addClass("d-none");
                 }
-            }
-        });
+            });
+
+        }, 300);
     }
+
 
 
     window.ShowModal = ShowModal

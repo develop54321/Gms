@@ -5,3 +5,5 @@ ALTER TABLE `ga_servers` CHANGE `top_enabled` `top_enabled` INT(11) NULL DEFAULT
 INSERT INTO `ga_pages` (`id`, `title`, `text`, `date_create`, `count_visited`) VALUES (NULL, 'Условия договора', 'Условия договора', '1767785921', '1')
 
 ALTER TABLE `ga_servers` ADD `query_port` VARCHAR(255) NULL AFTER `description`;
+
+ALTER TABLE `ga_servers` ADD `last_update_at` INT(11) NULL AFTER `query_port`;

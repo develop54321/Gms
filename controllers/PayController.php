@@ -233,7 +233,14 @@ class PayController extends BaseController
         switch ($getInfoPayment['typeCode']) {
             case "freekassa":
                 $currency = 'RUB';
-                $sign = md5($infoPaymentSettings['fk_id'].':'.$amount.':'.$infoPaymentSettings['fk_key1'].':'.$currency.':'.$invoiceId);
+
+                $merchant_id = $infoPaymentSettings['fk_id'];
+                $secret_word = $infoPaymentSettings['fk_key1'];
+                $order_id = $invoiceId;
+                $order_amount = $amount;
+                $currency = 'RUB';
+
+                $sign = md5($merchant_id.':'.$order_amount.':'.$secret_word.':'.$currency.':'.$order_id);
 
 
                 $client = new FreekassaClient(

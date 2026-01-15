@@ -43,9 +43,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <a href="#" id="captchaImg" onclick="updateCaptcha(); return false;">
-                                <img src="/captcha" src="Капча"/>
-                            </a>
+                            <a href="#" id="captchaImg" onclick="updateCaptcha(); return false;"></a>
                         </div>
 
                         <div class="form-group mb-3">
@@ -98,8 +96,11 @@
 
 <script>
     function updateCaptcha() {
-        <img src="/captcha?form=add_server" src="Капча"/>
+        $("#captchaImg").html('<img src="/captcha?form=add_server" src="Капча"/>');
     }
+
+    updateCaptcha()
+
     $('#addServer').ajaxForm({
         dataType: 'json',
         success: function (data) {

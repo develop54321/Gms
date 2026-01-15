@@ -34,9 +34,9 @@ class ServerController extends BaseController
 
             $captcha = new Captcha();
             if (!$captcha->validate($_POST['captcha'] ?? '', "add_server")) {
-                $answer['status'] = 'error';
-                $answer['error'] = 'Капча введена неверно';
-                exit(json_encode($answer));
+               $answer['status'] = 'error';
+               $answer['error'] = 'Капча введена неверно';
+               exit(json_encode($answer));
             }
 
             $isGame = $this->db->prepare('SELECT * FROM ga_games WHERE code = :code and status = :status');
@@ -75,24 +75,25 @@ class ServerController extends BaseController
             $CheckServer->execute();
 
             if ($CheckServer->rowCount() !== 0) {
-
                 $answer['status'] = "error";
                 $answer['error'] = "Сервер уже добавлен в систему";
                 exit(json_encode($answer));
             }
 
             try {
-                $GameServerQuery = new GameServerQuery($ip, $port, $game, $queryPort);
-                $GameServerQuery = $GameServerQuery->query();
 
-                $serverName = $GameServerQuery['gq_hostname'];
+
+                $GameServerQuery = new GameServerQuery($ip, $port, $game, null);
+                $res = $GameServerQuery->query();
+
+                $serverName = $res['hostname'];
 
                 if ($game === "samp") {
                     $serverName = iconv('utf-8//IGNORE', 'cp1252//IGNORE', $serverName);
                     $serverName = iconv('cp1251//IGNORE', 'utf-8//IGNORE', $serverName);
                 }
 
-                if ($GameServerQuery['gq_online'] === false){
+                if ($res['hostname'] === false or $res['hostname'] === null){
                     throw new \Exception("Не удалось получить информацию о сервере, <br>
                             Возможные причины: <br>
                             Неверные настройки firewall <br>
@@ -159,9 +160,9 @@ class ServerController extends BaseController
                     ':date_add' => time(),
                     ':description' => $text,
                     ':hostname' => $serverName ?? null,
-                    ':map' => $GameServerQuery['gq_mapname'] ?? null,
-                    ':players' => $GameServerQuery['gq_numplayers'] ?? null,
-                    ':max_players' => $GameServerQuery['gq_maxplayers'] ?? null
+                    ':map' => $res['map'] ?? null,
+                    ':players' => $res['players'] ?? null,
+                    ':max_players' => $res['max_players'] ?? null
                 ]);
 
 

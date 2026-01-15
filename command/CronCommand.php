@@ -35,20 +35,19 @@ class CronCommand extends Command
         foreach ($getServers as $row) {
             if (in_array($row['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])) {
                 try {
-                    $GameServerQuery = new GameServerQuery($row['ip'], $row['port'], $row['game'], $row['query_port']);
+                    $GameServerQuery = new GameServerQuery($row['ip'], (int)$row['port'], $row['game'], (int)$row['query_port']);
                     $GameServerQuery = $GameServerQuery->query();
 
-                    print_r($GameServerQuery);
 
-                    $serverName = $GameServerQuery['gq_hostname'];
+                    $serverName = $GameServerQuery['hostname'];
 
-                    if (empty($serverName)) {
+                    if (empty($serverName) or $serverName === null) {
                         throw new Exception("server is not available");
                     }
 
-                    $mapName = $GameServerQuery['gq_mapname'];
-                    $players = $GameServerQuery['gq_numplayers'];
-                    $maxPlayers = $GameServerQuery['gq_maxplayers'];
+                    $mapName = $GameServerQuery['map'];
+                    $players = $GameServerQuery['players'];
+                    $maxPlayers = $GameServerQuery['max_players'];
 
                     $status = 1;
                     $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players, last_update_at = :last_update_at WHERE id = :id";

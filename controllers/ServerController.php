@@ -36,7 +36,7 @@ class ServerController extends BaseController
             if (!$captcha->validate($_POST['captcha'] ?? '', "add_server")) {
                $answer['status'] = 'error';
                $answer['error'] = 'Капча введена неверно';
-               exit(json_encode($answer));
+             //  exit(json_encode($answer));
             }
 
             $isGame = $this->db->prepare('SELECT * FROM ga_games WHERE code = :code and status = :status');
@@ -83,7 +83,7 @@ class ServerController extends BaseController
             try {
 
 
-                $GameServerQuery = new GameServerQuery($ip, $port, $game, null);
+                $GameServerQuery = new GameServerQuery($ip, $port, $game, $queryPort);
                 $res = $GameServerQuery->query();
 
                 $serverName = $res['hostname'];

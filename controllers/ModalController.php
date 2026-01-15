@@ -55,7 +55,7 @@ class ModalController extends BaseController
                     $Players = [];
                     if (in_array($getInfoServer['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])) {
                         try {
-                            $Query->Connect($getInfoServer['ip'], $getInfoServer['port'], 3, SourceQuery::GOLDSOURCE);
+                            $Query->Connect($getInfoServer['ip'], $getInfoServer['query_port'] ?? $getInfoServer['port'], 3, SourceQuery::GOLDSOURCE);
 
                             $Players = $Query->GetPlayers();
 

@@ -109,6 +109,7 @@ class GameServerQuery
             $params['options']['query_port'] = $this->queryPort;
         }
 
+
         try {
             $GameQ->addServer($params);
             $results = $GameQ->process();

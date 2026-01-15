@@ -71,7 +71,7 @@
                         <ul class="list-group">
                             <?php if($data['top_enabled'] !== null):?>
                                 <li class="list-group-item">
-                                    Премиум место(Место №<?php echo $data['top_enabled'];?>)<br/>
+                                    Топ место(Место №<?php echo $data['top_enabled'];?>)<br/>
                                     Оплачено до: <?php echo date("d.m.Y [H:i]", $data['top_expired_date']);?>
                                 </li>
                             <?php endif;?>
@@ -90,6 +90,13 @@
                                 </li>
                             <?php endif;?>
 
+
+                            <?php if($data['gamemenu_enabled'] !== null):?>
+                            <li class="list-group-item">
+                                GameMenu<br/>
+                                Оплачено до: <?php echo date("d.m.Y [H:i]", $data['gamemenu_expired_date']);?>
+                            </li>
+                            <?php endif;?>
 
                             <?php if($data['boost'] !== null):?>
                                 <li class="list-group-item">

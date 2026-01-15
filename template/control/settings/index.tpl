@@ -117,6 +117,13 @@
                                name="global_settings[count_servers_color]"
                                value="<?= $settings['global_settings']['count_servers_color']; ?>">
                     </div>
+
+                    <div class="form-group">
+                        <label>Максимальное количество GameMenu серверов</label>
+                        <input type="number" class="form-control"
+                               name="global_settings[count_servers_gamemenu]"
+                               value="<?= $settings['global_settings']['count_servers_gamemenu']; ?>">
+                    </div>
                 </div>
 
             </div>
@@ -161,7 +168,7 @@
             </div>
 
             <div class="setting-item">
-                <span>Gamemenu</span>
+                <span>GameMenu</span>
                 <input type="hidden" name="global_settings[gamemenu_on]" value="0">
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox"

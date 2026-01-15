@@ -91,7 +91,7 @@
                     <a href="#" onclick="selectPaymentMethod('user_balance', this); return false;">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Личный счет</h5>
+                                <h5 class="card-title">Лицевой счет</h5>
                                 <p class="card-text">
                                     Баланс: <?php echo \widgets\money\Money::run($user['balance']); ?><br/>
                                 </p>
@@ -166,7 +166,14 @@
                         break;
 
                     case "success":
+
                         ShowModal(data.success, 'answer', 'success');
+
+                        if (data.redirect_href) {
+                            setTimeout(function() {
+                                window.location.href = data.redirect_href;
+                            }, 3000);
+                        }
                         break;
                 }
                 toggleButtonLoader($("#pay-button"), false);
@@ -243,12 +250,6 @@
     }
 
 
-    function toggleButtonLoader(button, isLoading) {
-        if (isLoading) {
-            $(button).prop('disabled', true).addClass('btn-loader').append('<span class="loader"></span>');
-        } else {
-            $(button).prop('disabled', false).removeClass('btn-loader').find('.loader').remove();
-        }
-    }
+
 
 </script>

@@ -25,9 +25,13 @@
 
 
                         <p>Статус:
-                        <span class="<?php if ($data['status']):?>status-online<?php else:?>status-offline<?php endif;?>">
-                            <?php echo $data['status'];?>
-                        </span>
+                            <?php if ($data['status'] == 1):?>
+                            <span class="status-online">Онлайн</span>
+                            <?php else:?>
+                                <span class="status-offline">Выключен</span>
+                            <?php endif;?>
+
+
                         </p>
 
                         <p>
@@ -188,13 +192,19 @@
 
                     <img class="w-100" src="<?php echo $data['img_map'];?>" alt="<?php echo $data['map'];?>">
 
-                    <a onclick="ShowModal('<?= $data['id']; ?>', 'showPlayers');return false;" class="btn btn-success players-btn mt-2 btn-sm w-100">Показать игроков</a>
+                    <a id="show-players-button" onclick="loadPlayers(); return false;" class="btn btn-success players-btn mt-2 btn-sm w-100">Показать игроков</a>
                 </div>
             </div>
         </div>
 
 
             <script>
+
+                function loadPlayers(){
+                    toggleButtonLoader($("#show-players-button"), true);
+                    ShowModal('<?= $data['id']; ?>', 'showPlayers')
+                    toggleButtonLoader($("#show-players-button"), false);
+                }
 
                 $('#addComment').ajaxForm({
                     dataType: 'json',

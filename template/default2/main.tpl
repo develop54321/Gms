@@ -15,6 +15,21 @@
     <script src="/public/js/jquery.form.js"></script>
 </head>
 <body>
+<div id="cookieBanner" class="position-fixed bottom-0 start-0 w-100 bg-dark text-white py-3 px-4 shadow" style="z-index: 1050; display: none;">
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+        <div class="small">
+            Мы используем файлы cookie для улучшения работы сайта и повышения удобства пользователей.
+            Продолжая пользоваться сайтом, вы соглашаетесь с их использованием.
+        </div>
+        <div class="d-flex gap-2">
+            <a href="/page/5" class="btn btn-outline-light btn-sm">Подробнее</a>
+            <button id="acceptCookies" class="btn btn-primary btn-sm">
+                Принять
+            </button>
+        </div>
+    </div>
+</div>
+
 <div class="background"></div>
 <div class="overlay"></div>
 

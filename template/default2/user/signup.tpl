@@ -63,9 +63,10 @@
 
 <script>
     function updateCaptcha() {
-        <img src="/captcha?form=signup" src="Капча"/>
+        $("#captchaImg").html('<img src="/captcha?form=signup" src="Капча"/>');
     }
     updateCaptcha()
+
             $('#signupForm').ajaxForm({
                 dataType: "json",
                 success: function (data) {

@@ -110,6 +110,13 @@
                                name="global_settings[count_servers_boost]"
                                value="<?= $settings['global_settings']['count_servers_boost']; ?>">
                     </div>
+
+                    <div class="form-group">
+                        <label>Выделение цветом</label>
+                        <input type="number" class="form-control"
+                               name="global_settings[count_servers_color]"
+                               value="<?= $settings['global_settings']['count_servers_color']; ?>">
+                    </div>
                 </div>
 
             </div>

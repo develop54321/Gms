@@ -46,6 +46,7 @@ body {
     flex: 1 0 auto;
     padding: 1em;
     background: #00000052;
+    min-height: 360px;
 }
 
 

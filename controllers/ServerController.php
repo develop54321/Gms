@@ -267,14 +267,6 @@ class ServerController extends BaseController
 
         }
 
-
-
-        if ($getInfoServer['status'] == 1) {
-            $getInfoServer['status'] = 'Online';
-        } else {
-            $getInfoServer['status'] = 'Offline';
-        }
-
         $moderation = 1;
 
         $countComments = $this->db->prepare('SELECT u.img FROM ga_comments c LEFT JOIN ga_users u ON c.id_user=u.id WHERE c.id_server = :id_server and c.moderation = :moderation');

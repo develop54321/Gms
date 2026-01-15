@@ -425,7 +425,10 @@ class PayController extends BaseController
                 $update->bindParam(':id', $userProfile['id'], PDO::PARAM_INT);
                 $update->execute();
 
+                $address = $getInfoServer['ip'] . ':' . $getInfoServer['port'];
+
                 $answer['status'] = "success";
+                $answer['redirect_href'] = "/server/${address}/info";
                 $answer['success'] = "Услуга успешно куплена. Вы будете перенаправлены через 3 сек.";
                 exit(json_encode($answer));
             } else {

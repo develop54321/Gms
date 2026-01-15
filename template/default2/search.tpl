@@ -20,7 +20,7 @@
                 </thead>
                 <tbody>
                 <?php foreach ($servers as $row): ?>
-                    <tr>
+                <tr <?php if($row['color_enabled'] != null):?>style="background: <?php echo $row['color_enabled'];?>"<?php endif;?>>
                         <td><?php echo $row['id']; ?></td>
                         <td>
                             <?php echo \widgets\server\game\GameIcon::run($row['game']);?>
@@ -41,8 +41,8 @@
 
                         </td>
                         <td style="text-align: center;">
-                            <?php if ($row['vip_enabled'] != '0'): ?>
-                                VIP
+                            <?php if ($row['vip_enabled'] !== null): ?>
+                            <b>VIP</b>
                             <?php else: ?>
 
                                 <a href="#" onclick="ShowModal('<?=$row['id'];?>', 'vote', 'minus');return false;"><i class="fa fa-thumbs-down"></i></a>

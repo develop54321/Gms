@@ -23,9 +23,7 @@
                 </thead>
                 <tbody>
                 <?php foreach($servers as $row):?>
-                <tr
-                <?php if($row['color_enabled'] != null):?>style="background: <?php echo $row['color_enabled'];?>
-                "<?php endif;?>>
+                <tr <?php if($row['color_enabled'] != null):?>style="background: <?php echo $row['color_enabled'];?>"<?php endif;?>>
                 <td>
                     <?php widgets\server\game\GameIcon::run($row['game']);?>
                     <a href="?game=<?=$row['game'];?>"></a>

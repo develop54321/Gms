@@ -43,26 +43,32 @@ $(document).ready(function () {
 });
 
 
-$.fn.toggleButtonLoader = function(show) {
-    return this.each(function () {
-        var $btn = $(this);
 
-        if (show) {
-            $btn.data('original-text', $btn.html());
-            $btn.css({
-                width: $btn.outerWidth(),
-                height: $btn.outerHeight()
-            });
-            $btn.prop('disabled', true);
+function toggleButtonLoader(button, isLoading) {
+    if (isLoading) {
+        // Показываем загрузчик сразу
+        $(button).prop('disabled', true).addClass('btn-loader').append('<span class="loader"></span>');
+    } else {
+        // Добавляем небольшую задержку перед скрытием (300ms)
+        setTimeout(() => {
+            $(button).prop('disabled', false).removeClass('btn-loader').find('.loader').remove();
+        }, 300);
+    }
+}
+
+window.toggleButtonLoader = toggleButtonLoader
 
 
-            $btn.html('<span class="loading">Загрузка...</span>');
-            $btn.addClass('btn-spinners');
-        } else {
-            $btn.html($btn.data('original-text'));
-            $btn.css({ width: '', height: '' });
-            $btn.prop('disabled', false);
-            $btn.removeClass('btn-spinners');
-        }
+document.addEventListener("DOMContentLoaded", function () {
+    const cookieBanner = document.getElementById("cookieBanner");
+    const acceptBtn = document.getElementById("acceptCookies");
+
+    if (!localStorage.getItem("cookiesAccepted")) {
+        cookieBanner.style.display = "block";
+    }
+
+    acceptBtn.addEventListener("click", function () {
+        localStorage.setItem("cookiesAccepted", "true");
+        cookieBanner.style.display = "none";
     });
-};
+});

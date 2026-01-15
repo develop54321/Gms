@@ -585,6 +585,13 @@ class UserController extends BaseController
         if (parent::isAjax()) {
             $email = strip_tags($_POST['email']);
 
+            $captcha = new Captcha();
+            if (!$captcha->validate($_POST['captcha'] ?? '', "reset")) {
+                $answer['status'] = 'error';
+                $answer['error'] = 'Капча введена неверно';
+                exit(json_encode($answer));
+            }
+
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $answer['status'] = "error";
                 $answer['error'] = "<b>E-mail</b> адрес указан верно";

@@ -1,8 +1,8 @@
 <?php if ($status == 'expects'):?>
-Ожидает платежа
+<span class="text-warning">Ожидает платежа</span>
 <?php elseif ($status == 'paid'):?>
-Оплачен
+<span class="text-success">Оплачен</span>
 <?php elseif ($status == 'expired'):?>
-Истекший
+<span class="text-danger">Истекший</span>
 <?php endif;?>
 

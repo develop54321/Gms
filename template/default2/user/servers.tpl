@@ -20,34 +20,36 @@
                     <p>При добавлении сервера через сайт в авторизованном режиме вы автоматически становитесь владельцем этого сервера.</p>
                 </div>
 
+                <div class="servers-list">
                 <table class="table table-dark">
                     <thead>
                     <tr>
                         <th>id</th>
+                        <th>Игра</th>
                         <th>Название</th>
                         <th>Адрес</th>
                         <th>Карта</th>
                         <th>игроки</th>
                         <th>Статус</th>
-                        <th>Рейтинг</th>
                         <th></th>
                     </tr>
                     </thead>
 
                     <?php foreach ($servers as $row): ?>
                     <tr>
+                        <td><?php echo $row['id']; ?></td>
+
                         <td>
-                            <?php echo $row['id']; ?>
+                            <?php widgets\server\game\GameIcon::run($row['game']);?>
+                            <a href="?game=<?=$row['game'];?>"></a>
                         </td>
 
                         <td>
-                            <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']); ?></a>
+                            <a class="hostname" href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']); ?></a>
                         </td>
 
                         <td>
-                            <span class="address">
-                            <?php echo $row['ip']; ?>:<?php echo $row['port']; ?>
-                                </span>
+                            <span class="address"><?php echo $row['ip']; ?>:<?php echo $row['port']; ?></span>
                         </td>
 
                         <td>
@@ -55,11 +57,9 @@
                         </td>
 
                         <td>
-                            <?php if ($row['players'] === null):?>
-                             ~
-                            <?php else:?>
-                                <?php echo $row['players']; ?>/<?php echo $row['max_players']; ?>
-                            <?php endif;?>
+                                  <span class="players">
+                        <?php echo $row['players'];?>/<?php echo $row['max_players'];?>
+                    </span>
 
                         </td>
 
@@ -81,11 +81,7 @@
                             <?php endif; ?>
                         </td>
 
-                        <td>
-                            <span class="address">
-                            <label id="vote<?php echo $row['id']; ?>" class="rating-bg"><?php echo $row['rating']; ?></label>
-                            </span>
-                        </td>
+
 
                         <td style="width: 80px;">
                             <a href="#" onclick="ShowModal('<?= $row['id']; ?>', 'serverServices', 'null');return false;" class="btn btn-warning btn-sm">
@@ -100,7 +96,7 @@
                     </tr>
                     <?php endforeach;?>
                 </table>
-
+                </div>
 
                 <?php if (!empty($servers)): ?>
                 <div class="pagination">

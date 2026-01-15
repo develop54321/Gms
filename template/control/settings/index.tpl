@@ -91,28 +91,28 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Top</label>
+                        <label>Максимальное количество ТОП серверов</label>
                         <input type="number" class="form-control"
                                name="global_settings[count_servers_top]"
                                value="<?= $settings['global_settings']['count_servers_top']; ?>">
                     </div>
 
                     <div class="form-group">
-                        <label>VIP</label>
+                        <label>Максимальное количество ВИП серверов</label>
                         <input type="number" class="form-control"
                                name="global_settings[count_servers_vip]"
                                value="<?= $settings['global_settings']['count_servers_vip']; ?>">
                     </div>
 
                     <div class="form-group">
-                        <label>Boost</label>
+                        <label>Максимальное количество БУСТ серверов</label>
                         <input type="number" class="form-control"
                                name="global_settings[count_servers_boost]"
                                value="<?= $settings['global_settings']['count_servers_boost']; ?>">
                     </div>
 
                     <div class="form-group">
-                        <label>Выделение цветом</label>
+                        <label>Максимальное количество окрашенных (или помеченных цветом) серверов</label>
                         <input type="number" class="form-control"
                                name="global_settings[count_servers_color]"
                                value="<?= $settings['global_settings']['count_servers_color']; ?>">

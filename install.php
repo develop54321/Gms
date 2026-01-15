@@ -44,7 +44,7 @@ const DB_USER = "$db_user";
 const DB_PASSWORD = "$db_password";
 const DB_NAME = "$db_name";
 const TMPL_DIR = "template/default2";
-const VERSION = "3.1.3";
+const VERSION = "3.1.5";
 EOD;
 
         file_put_contents('config.php', $config_content);

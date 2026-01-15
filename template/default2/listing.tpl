@@ -21,7 +21,7 @@ use components\System;
             <tbody>
             <?php if ($settings['global_settings']['top_on'] == 1): ?>
                 <tr>
-                    <td>Премиум место</td>
+                    <td>Топ сервера</td>
                     <td>Сервер находится в шапке на главной странице мониторинга</td>
                     <td class="text-center">
                         <?= $free_servers_top ?> из <?= $settings['global_settings']['count_servers_top'] ?>
@@ -78,7 +78,7 @@ use components\System;
 
         <div>
             <?php if ($settings['global_settings']['top_on'] == 1): ?>
-                <h5>Премиум место</h5>
+                <h5>Топ сервера</h5>
                 <table class="table table-dark">
                     <thead>
                     <tr>

@@ -320,9 +320,13 @@ select option {
     color: #fff;
     padding: 0.5em;
     display: inline-block;
-    background: #2d283e;
+    background: #3e3953;
     text-decoration: none;
     border: 1px solid #00000052;
+}
+
+.games-menu a.active{
+    background: #2d283e;
 }
 
 .games-menu a:hover{

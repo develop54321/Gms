@@ -83,6 +83,11 @@
                 <tr id="server<?php echo $row['id']; ?>">
                     <td style="width: 5%;"><?php echo $row['id']; ?></td>
 
+                    <td style="width: 5%;">
+                        <?php widgets\server\game\GameIcon::run($row['game']);?>
+
+                    </td>
+
                     <td style="width: 5%; text-align: center;">
                         <?php if ($row['status'] == 1): ?>
                         <span class="badge bg-success me-1" style="padding: 0.8em;">Онлайн</span>
@@ -93,7 +98,7 @@
                         </small>
                         <?php endif; ?>
                     </td>
-                    <td style="width: 5%;"><?php echo $row['id']; ?></td>
+
 
                     <td style="width: 30%;">
 

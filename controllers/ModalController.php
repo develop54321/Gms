@@ -54,13 +54,25 @@ class ModalController extends BaseController
                     $Query = new SourceQuery();
                     $Players = [];
                     if (in_array($getInfoServer['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])) {
+
+
+                        $port = $getInfoServer['port'];
+                        if ($getInfoServer['query_port'] !== null){
+                            $port = (int)$getInfoServer['query_port'];
+                        }
+
+                 
                         try {
-                            $Query->Connect($getInfoServer['ip'], $getInfoServer['query_port'] ?? $getInfoServer['port'], 3, SourceQuery::GOLDSOURCE);
+                            $Query->Connect($getInfoServer['ip'], $port, 3, SourceQuery::GOLDSOURCE);
+
 
                             $Players = $Query->GetPlayers();
 
                         } catch (Exception $e) {
+                            print_r($e);
                             $Exception = $e;
+                        }finally {
+                            $Query->Disconnect();
                         }
                     } else if ($getInfoServer['game'] == 'samp') {
                         $GameQ = new \GameQ\GameQ();
@@ -105,4 +117,3 @@ class ModalController extends BaseController
 
 
 }
-     

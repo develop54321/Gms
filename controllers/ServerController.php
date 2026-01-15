@@ -331,19 +331,20 @@ class ServerController extends BaseController
 
 
             try {
-                $GameServerQuery = new GameServerQuery($getInfoServer['ip'], $getInfoServer['port'], $getInfoServer['game'], null);
-                $GameServerQuery = $GameServerQuery->query();
+                $GameServerQuery = new GameServerQuery($getInfoServer['ip'], $getInfoServer['port'], $getInfoServer['game'], $getInfoServer['query_port']);
+                $res = $GameServerQuery->query();
 
-                $hostname = $GameServerQuery['gq_hostname'];
+                $hostname = $res['hostname'];
 
 
-                if ($GameServerQuery['gq_online'] === false){
+                if ($res['hostname'] === false or $res['hostname'] === null){
                     throw new \Exception("Не удалось получить информацию о сервере, <br>
                             Возможные причины: <br>
                             Неверные настройки firewall <br>
                             Неверные настройки сервера <br>
                             Неверно указаны порты");
                 }
+
 
 
             }catch (Exception $e){

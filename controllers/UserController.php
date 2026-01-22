@@ -376,7 +376,7 @@ class UserController extends BaseController
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
 
-        $getMyServers = $this->db->prepare('SELECT s.id, s.map, s.hostname, s.game, s.moderation, s.ip, s.port, s.players, s.max_players, s.rating, s.ban, s.status, u.email FROM ga_servers s LEFT JOIN ga_users u ON s.id_user=u.id WHERE s.id_user = :id_user ORDER BY s.id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
+        $getMyServers = $this->db->prepare('SELECT s.id, s.map, s.hostname, s.game, s.moderation, s.ip, s.host, s.port, s.players, s.max_players, s.rating, s.ban, s.status, u.email FROM ga_servers s LEFT JOIN ga_users u ON s.id_user=u.id WHERE s.id_user = :id_user ORDER BY s.id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
         $getMyServers->execute(array(':id_user' => $user_profile['id']));
         $getMyServers = $getMyServers->fetchAll();
 

@@ -18,188 +18,119 @@ class ServerController extends BaseController
 
     public function add()
     {
-
-        $getSettings = $this->db->query('SELECT * FROM ga_settings');
-        $settings = $getSettings->fetch();
-        $settings = json_decode($settings['content'], true);
+        $settings = json_decode($this->db->query('SELECT * FROM ga_settings')->fetch()['content'], true);
         $title = "Добавить сервер";
 
-        if (parent::isAjax()) {
-            $game = strip_tags($_POST['game']);
-            $ip = strip_tags($_POST['ip']);
-            $port = strip_tags(trim($_POST['port']));
-            $queryPort = $_POST['query_port'] ? strip_tags(trim($_POST['query_port'])) : null;
-            $text = strip_tags($_POST['text']);
-
-
-            $captcha = new Captcha();
-            if (!$captcha->validate($_POST['captcha'] ?? '', "add_server")) {
-               $answer['status'] = 'error';
-               $answer['error'] = 'Капча введена неверно';
-             //  exit(json_encode($answer));
-            }
-
-            $isGame = $this->db->prepare('SELECT * FROM ga_games WHERE code = :code and status = :status');
-            $isGame->bindValue(":code", $game);
-            $isGame->bindValue(":status", 1);
-            $isGame->execute();
-            if ($isGame->rowCount() === 0) {
-                $answer['status'] = "error";
-                $answer['error'] = "Игра не найден";
-                exit(json_encode($answer));
-            }
-
-
-            if (!filter_var($ip, FILTER_VALIDATE_IP)) {
-                $answer['status'] = "error";
-                $answer['error'] = "Не правильно введен ип адрес";
-                exit(json_encode($answer));
-            }
-
-            if (strlen($port) < 3) {
-                $answer['status'] = "error";
-                $answer['error'] = "Не правильно введен порт";
-                exit(json_encode($answer));
-            }
-
-            if (!is_string($text) && strlen($text) >= 300) {
-                $answer['status'] = "error";
-                $answer['error'] = "Ошибка: описание не должен превышать 300 символов";
-                exit(json_encode($answer));
-            }
-
-
-            $CheckServer = $this->db->prepare('SELECT * FROM ga_servers WHERE ip = :ip and port = :port');
-            $CheckServer->bindValue(":ip", $ip);
-            $CheckServer->bindValue(":port", $port);
-            $CheckServer->execute();
-
-            if ($CheckServer->rowCount() !== 0) {
-                $answer['status'] = "error";
-                $answer['error'] = "Сервер уже добавлен в систему";
-                exit(json_encode($answer));
-            }
-
-            try {
-
-
-                $GameServerQuery = new GameServerQuery($ip, $port, $game, $queryPort);
-                $res = $GameServerQuery->query();
-
-                $serverName = $res['hostname'];
-
-                if ($game === "samp") {
-                    $serverName = iconv('utf-8//IGNORE', 'cp1252//IGNORE', $serverName);
-                    $serverName = iconv('cp1251//IGNORE', 'utf-8//IGNORE', $serverName);
-                }
-
-                if ($res['hostname'] === false or $res['hostname'] === null){
-                    throw new \Exception("Не удалось получить информацию о сервере, <br>
-                            Возможные причины: <br>
-                            Неверные настройки firewall <br>
-                            Неверные настройки сервера <br>
-                            Неверно указаны порты");
-                }
-
-                $status = 1;
-
-                $user = new User();
-                $id_user = 0;
-                if ($user->isAuth()) {
-                    $user_profile = $user->getProfile();
-                    $id_user = $user_profile['id'];
-                }
-
-
-                $moderation = 1;
-
-
-                $query = "INSERT INTO ga_servers (
-                status, 
-                moderation, 
-                id_user, 
-                game,
-                ip, 
-                port,
-                query_port,
-                date_add,
-                description,
-                hostname,
-                map, 
-                players,
-                max_players
-            ) VALUES (
-                :status, 
-                :moderation, 
-                :id_user, 
-                :game, 
-                :ip, 
-                :port, 
-                :query_port, 
-                :date_add, 
-                :description, 
-                :hostname, 
-                :map, 
-                :players, 
-                :max_players
-            )";
-
-                $stmt = $this->db->prepare($query);
-
-
-
-
-                $stmt->execute([
-                    ':status' => $status,
-                    ':moderation' => $moderation,
-                    ':id_user' => $id_user,
-                    ':game' => $game,
-                    ':ip' => $ip,
-                    ':port' => $port,
-                    ':query_port' => $queryPort,
-                    ':date_add' => time(),
-                    ':description' => $text,
-                    ':hostname' => $serverName ?? null,
-                    ':map' => $res['map'] ?? null,
-                    ':players' => $res['players'] ?? null,
-                    ':max_players' => $res['max_players'] ?? null
-                ]);
-
-
-                if ($settings['global_settings']['auto_add_server'] == '1') {
-                    $success_text = "Ваш сервер успешно добавлен, <a href='/server/{$ip}:{$port}/info'>перейти</a>";
-                } else {
-                    $success_text = "Ваш сервер успешно добавлен, после проверки администратором она появиться в мониторинге";
-                }
-
-                $answer['status'] = "success";
-                $answer['success'] = $success_text;
-                exit(json_encode($answer));
-
-
-
-            }catch (Exception $e){
-                $answer['status'] = "error";
-                $answer['error'] = $e->getMessage();
-                exit(json_encode($answer));
-            }
-
-
-
-
-
-        } else {
-
-            $getGames = $this->db->prepare('SELECT * FROM ga_games WHERE status = :status');
-            $getGames->execute(array(':status' => 1));
-            $getGames = $getGames->fetchAll();
-
-            $content = $this->view->renderPartial("server/add", ['games' => $getGames]);
-
-
+        if (!parent::isAjax()) {
+            $games = $this->db->query('SELECT * FROM ga_games WHERE status = 1')->fetchAll();
+            $content = $this->view->renderPartial("server/add", ['games' => $games]);
             $this->view->render("main", ['content' => $content, 'title' => $title]);
+            return;
+        }
+
+        $data = [
+            'game' => strip_tags($_POST['game'] ?? ''),
+            'ip' => trim(strip_tags($_POST['ip'] ?? '')),
+            'port' => trim($_POST['port'] ?? ''),
+            'query_port' => !empty($_POST['query_port']) ? trim($_POST['query_port']) : null,
+
+            'text' => strip_tags($_POST['text'] ?? ''),
+            'captcha' => $_POST['captcha'] ?? ''
+        ];
+
+
+        if (!(new Captcha())->validate($data['captcha'], "add_server")) {
+            exit(json_encode(['status' => 'error', 'error' => 'Капча введена неверно']));
+        }
+
+
+        $stmt = $this->db->prepare('SELECT 1 FROM ga_games WHERE code = :code AND status = 1');
+        $stmt->execute([':code' => $data['game']]);
+        if ($stmt->rowCount() === 0) {
+            exit(json_encode(['status' => 'error', 'error' => 'Игра не найдена']));
+        }
+
+
+        if (!is_numeric($data['port']) || $data['port'] < 1 || $data['port'] > 65535) {
+            exit(json_encode(['status' => 'error', 'error' => 'Порт должен быть числом от 1 до 65535']));
+        }
+        if ($data['query_port'] && (!is_numeric($data['query_port']) || $data['query_port'] < 1 || $data['query_port'] > 65535)) {
+            exit(json_encode(['status' => 'error', 'error' => 'Query-порт должен быть числом от 1 до 65535']));
+        }
+
+        if (mb_strlen($data['text']) > 300) {
+            exit(json_encode(['status' => 'error', 'error' => 'Описание не должно превышать 300 символов']));
+        }
+
+
+        try {
+            $resolvedIp = Servers::getIp($data['ip']);
+        } catch (Exception $e) {
+            exit(json_encode(['status' => 'error', 'error' => $e->getMessage()]));
+        }
+
+        $stmt = $this->db->prepare('SELECT 1 FROM ga_servers WHERE ip = :ip AND port = :port');
+        $stmt->execute([':ip' => $resolvedIp, ':port' => $data['port']]);
+        if ($stmt->rowCount() > 0) {
+            exit(json_encode(['status' => 'error', 'error' => 'Сервер уже добавлен в систему']));
+        }
+
+        $hostForDb = filter_var($data['ip'], FILTER_VALIDATE_IP) ? null : $data['ip'];
+
+
+        try {
+            $query = new GameServerQuery($resolvedIp, $data['port'], $data['game'], $data['query_port']);
+            $res = $query->query();
+
+            if (empty($res['hostname'])) {
+                throw new Exception("Не удалось получить информацию о сервере. Проверьте порты и настройки сервера.");
+            }
+
+            if ($data['game'] === 'samp') {
+                $res['hostname'] = iconv('utf-8//IGNORE', 'cp1252//IGNORE', $res['hostname']);
+                $res['hostname'] = iconv('cp1251//IGNORE', 'utf-8//IGNORE', $res['hostname']);
+            }
+
+            $user = new User();
+            $id_user = $user->isAuth() ? $user->getProfile()['id'] : 0;
+            $moderation = $settings['global_settings']['auto_add_server'] == '1' ? 1 : 0;
+
+
+            $stmt = $this->db->prepare("
+            INSERT INTO ga_servers 
+            (status, moderation, id_user, game, ip, host, port, query_port, date_add, description, hostname, map, players, max_players) 
+            VALUES 
+            (:status, :moderation, :id_user, :game, :ip, :host, :port, :query_port, :date_add, :description, :hostname, :map, :players, :max_players)
+        ");
+
+            $stmt->execute([
+                ':status' => 1,
+                ':moderation' => $moderation,
+                ':id_user' => $id_user,
+                ':game' => $data['game'],
+                ':ip' => $resolvedIp,
+                ':host' => $hostForDb,
+                ':port' => $data['port'],
+                ':query_port' => $data['query_port'] ?: null,
+                ':date_add' => time(),
+                ':description' => $data['text'],
+                ':hostname' => $res['hostname'] ?? null,
+                ':map' => $res['map'] ?? null,
+                ':players' => $res['players'] ?? null,
+                ':max_players' => $res['max_players'] ?? null
+            ]);
+
+            $success = $moderation
+                ? "Ваш сервер успешно добавлен, <a href='/server/{$resolvedIp}:{$data['port']}/info'>перейти</a>"
+                : "Ваш сервер успешно добавлен, после проверки администратором она появится в мониторинге";
+
+            exit(json_encode(['status' => 'success', 'success' => $success]));
+
+        } catch (Exception $e) {
+            exit(json_encode(['status' => 'error', 'error' => $e->getMessage()]));
         }
     }
+
 
 
     public function info($address){
@@ -224,6 +155,7 @@ class ServerController extends BaseController
                s.max_players, 
                s.ban, 
                s.ip, 
+               s.host, 
                s.port, 
                s.date_add, 
                s.rating, 

@@ -1,21 +1,19 @@
-jQuery.fn.exists = function(){return this.length>0;}
+jQuery.fn.exists = function () {
+    return this.length > 0;
+}
 
 
 $(document).ready(function () {
-
-
-
     function ShowModal(param, action, type) {
 
-        // Показываем прелоадер
         $("#modalPreloader").removeClass("d-none");
 
-        // Небольшая задержка (например 300мс)
+
         setTimeout(function () {
 
             $.ajax({
                 url: "/modal",
-                data: { action, param, type },
+                data: {action, param, type},
                 type: "post",
                 success: function (data) {
                     let modalId = "#" + action + "Modal";
@@ -29,7 +27,6 @@ $(document).ready(function () {
                     $(modalId).modal("show");
                 },
                 complete: function () {
-                    // Скрываем прелоадер
                     $("#modalPreloader").addClass("d-none");
                 }
             });
@@ -38,13 +35,11 @@ $(document).ready(function () {
     }
 
 
-
     window.ShowModal = ShowModal
 });
 
 
-
-$.fn.toggleButtonLoader = function(show) {
+$.fn.toggleButtonLoader = function (show) {
     return this.each(function () {
         var $btn = $(this);
 
@@ -61,7 +56,7 @@ $.fn.toggleButtonLoader = function(show) {
             $btn.addClass('btn-spinners');
         } else {
             $btn.html($btn.data('original-text'));
-            $btn.css({ width: '', height: '' });
+            $btn.css({width: '', height: ''});
             $btn.prop('disabled', false);
             $btn.removeClass('btn-spinners');
         }
@@ -70,10 +65,8 @@ $.fn.toggleButtonLoader = function(show) {
 
 function toggleButtonLoader(button, isLoading) {
     if (isLoading) {
-        // Показываем загрузчик сразу
         $(button).prop('disabled', true).addClass('btn-loader').append('<span class="loader"></span>');
     } else {
-        // Добавляем небольшую задержку перед скрытием (300ms)
         setTimeout(() => {
             $(button).prop('disabled', false).removeClass('btn-loader').find('.loader').remove();
         }, 300);
@@ -96,3 +89,18 @@ document.addEventListener("DOMContentLoaded", function () {
         cookieBanner.style.display = "none";
     });
 });
+
+
+
+
+
+function copyToClipboard(elementId) {
+    const text = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        alert('IP адрес скопирован: ' + text);
+    }).catch(err => {
+        console.error('Ошибка копирования: ', err);
+    });
+}
+
+window.copyToClipboard = copyToClipboard

@@ -40,7 +40,6 @@ class SearchController extends BaseController
                      LIMIT 50'
                 );
 
-                // + обязательно для BOOLEAN MODE
                 $stmt->execute([':q' => $query . '*']);
                 $getServers = $stmt->fetchAll();
             }

@@ -72,6 +72,7 @@
                 success: function (data) {
                     switch (data.status) {
                         case "error":
+                            updateCaptcha()
                             ShowModal(data.error, 'answer', 'error');
                             break;
 

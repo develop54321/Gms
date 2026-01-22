@@ -236,7 +236,7 @@ header .nav-link:hover{
     border-radius: 0.25em;
 }
 
-.servers-list table .hostname{
+.hostname{
     color: #ffc107;
     font-weight: bold;
     text-decoration: none;
@@ -469,8 +469,23 @@ select option {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.4);
-    z-index: 2000; /* выше bootstrap modal (1055) */
+    z-index: 2000;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+.copy-btn {
+    margin-left: 5px;
+    padding: 2px 5px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    background: #251e3a00;
+    color: #fff;
+}
+.copy-btn:hover {
+    background: #555;
 }

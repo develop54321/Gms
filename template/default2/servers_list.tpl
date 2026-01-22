@@ -30,10 +30,12 @@
                 </td>
                 <td><a class="hostname" href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']);?></a></td>
                 <td>
-                    <span class="address">
-                        <?php echo $row['ip'];?>:<?php echo $row['port'];?>
-                    </span>
-
+    <span class="address" id="server-<?=$row['id'];?>">
+        <?php echo $row['host'] ?? $row['ip'];?>:<?php echo $row['port'];?>
+    </span>
+                    <button class="copy-btn" onclick="copyToClipboard('server-<?=$row['id'];?>')">
+                        <i class="fa fa-copy"></i>
+                    </button>
                 </td>
                 <td><?php echo $row['map'];?></td>
                 <td>

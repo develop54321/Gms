@@ -44,6 +44,7 @@ class ModalController extends BaseController
                     break;
 
                 case "showPlayers":
+                    $textError = null;
                     $id = (int)$_POST['param'];
 
                     $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
@@ -53,15 +54,15 @@ class ModalController extends BaseController
 
                     $Query = new SourceQuery();
                     $Players = [];
-                    if (in_array($getInfoServer['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])) {
+                    if (in_array($getInfoServer['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2', 'arma_3'])) {
 
 
                         $port = $getInfoServer['port'];
-                        if ($getInfoServer['query_port'] !== null){
+                        if ($getInfoServer['query_port'] !== null) {
                             $port = (int)$getInfoServer['query_port'];
                         }
 
-                 
+
                         try {
                             $Query->Connect($getInfoServer['ip'], $port, 3, SourceQuery::GOLDSOURCE);
 
@@ -69,9 +70,8 @@ class ModalController extends BaseController
                             $Players = $Query->GetPlayers();
 
                         } catch (Exception $e) {
-                            print_r($e);
-                            $Exception = $e;
-                        }finally {
+                            $textError = "Не удалось получить список игроков. Пожалуйста, попробуйте еще раз.";
+                        } finally {
                             $Query->Disconnect();
                         }
                     } else if ($getInfoServer['game'] == 'samp') {
@@ -97,11 +97,11 @@ class ModalController extends BaseController
                     }
 
 
-
-                    echo $this->view->render("modals/showPlayersModal", [
+                    $this->view->render("modals/showPlayersModal", [
                         'data' => $getInfoServer,
                         'players' => $Players,
-                        'game' => $getInfoServer['game']
+                        'game' => $getInfoServer['game'],
+                        'text_error' => $textError,
                     ]);
                     break;
 

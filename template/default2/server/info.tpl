@@ -19,7 +19,14 @@
                     <div class="server-info">
                         <p>Название сервера: <span class="name"><?php echo \widgets\server\hostname\Hostname::run($data['hostname']);?></span></p>
                         <p>Игра: <span class="game"> <?php echo $data['game_name'];?></span> </p>
-                        <p>Адрес: <span class="address"><?php echo $data['ip'];?>:<?php echo $data['port'];?></span></p>
+                        <p>Адрес:
+                            <span class="address" id="server-<?=$row['id'];?>">
+                                <?php echo $data['host'] ?? $data['ip'];?>:<?php echo $data['port'];?>
+                            </span>
+                            <button class="copy-btn" onclick="copyToClipboard('server-<?=$row['id'];?>')">
+                                <i class="fa fa-copy"></i>
+                            </button>
+                        </p>
                         <p>Игроков: <span class="players"><?php echo $data['players'];?>/<?php echo $data['max_players'];?></span></p>
                         <p>Карта: <span class="map"><?php echo $data['map'];?></span> </p>
 

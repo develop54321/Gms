@@ -45,7 +45,7 @@ class MainController extends BaseController
 
                 $topServers[] = [
                     'id' => $getInfoServer['id'],
-                    'ip' => $getInfoServer['ip'],
+                    'ip' => $getInfoServer['host'] ?? $getInfoServer['ip'],
                     'port' => $getInfoServer['port'],
                     'hostname' => $getInfoServer['hostname'],
                     'img_map' => $img_map,

@@ -12,7 +12,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CronCommand extends Command
 {
-
     protected static $defaultName = "cron";
 
     private Database $db;
@@ -26,188 +25,66 @@ class CronCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $startTime = microtime(true);
-
-        $getServers = $this->db->query('SELECT id, game, ip, port, query_port FROM ga_servers');
-        $getServers = $getServers->fetchAll();
-
         $now = time();
 
-        foreach ($getServers as $row) {
-            if (in_array($row['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])) {
-                try {
-                    $GameServerQuery = new GameServerQuery($row['ip'], (int)$row['port'], $row['game'], (int)$row['query_port']);
-                    $GameServerQuery = $GameServerQuery->query();
+        $servers = $this->db->query('SELECT id, game, ip, port, query_port FROM ga_servers')
+            ->fetchAll();
 
+        foreach ($servers as $row) {
+            try {
+                $query = new GameServerQuery(
+                    $row['ip'],
+                    (int)$row['port'],
+                    $row['game'],
+                    isset($row['query_port']) ? (int)$row['query_port'] : null
+                );
 
-                    $serverName = $GameServerQuery['hostname'];
+                $info = $query->query();
 
-                    if (empty($serverName) or $serverName === null) {
-                        throw new Exception("server is not available");
-                    }
-
-                    $mapName = $GameServerQuery['map'];
-                    $players = $GameServerQuery['players'];
-                    $maxPlayers = $GameServerQuery['max_players'];
-
-                    $status = 1;
-                    $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players, last_update_at = :last_update_at WHERE id = :id";
-                    $update = $this->db->prepare($sql);
-                    $update->bindParam(':status', $status);
-                    $update->bindParam(':hostname', $serverName);
-                    $update->bindParam(':map', $mapName);
-                    $update->bindParam(':players', $players);
-                    $update->bindParam(':max_players', $maxPlayers);
-                    $update->bindParam(':last_update_at', $now);
-                    $update->bindParam(':id', $row['id']);
-                    $update->execute();
-                } catch (Exception $e) {
-                    $status = 0;
-                    $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
-                    $update = $this->db->prepare($sql);
-                    $update->bindParam(':status', $status);
-                    $update->bindParam(':id', $row['id']);
-                    $update->execute();
-                }
-            } elseif ($row['game'] == 'samp') {
-                try {
-                    $GameQ = new \GameQ\GameQ();
-                    $GameQ->addServer([
-                        'type' => $row['game'],
-                        'host' => $row['ip'] . ":" . $row['port'],
-                    ]);
-                    $results = $GameQ->process();
-                    $Info = array_shift($results);
-
-
-                    if (!isset($Info['servername'])){
-                        throw new Exception("server is not available");
-                    }
-
-                    $server_name = $Info['gq_hostname'];
-
-                    $server_name = iconv('utf-8//IGNORE', 'cp1252//IGNORE', $server_name);
-                    $server_name = iconv('cp1251//IGNORE', 'utf-8//IGNORE', $server_name);
-
-
-                    $status = 1;
-                    $mapName = $Info['mapname'];
-                    $players = $Info['gq_numplayers'];
-                    $maxPlayers = $Info['gq_maxplayers'];
-                    $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players, last_update_at = :last_update_at WHERE id = :id";
-                    $update = $this->db->prepare($sql);
-                    $update->bindParam(':status', $status);
-                    $update->bindParam(':hostname', $server_name);
-                    $update->bindParam(':map', $mapName);
-                    $update->bindParam(':players', $players);
-                    $update->bindParam(':max_players', $maxPlayers);
-                    $update->bindParam(':last_update_at', $now);
-                    $update->bindParam(':id', $row['id']);
-                    $update->execute();
-                } catch (Exception $e) {
-                    $status = 0;
-                    $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
-                    $update = $this->db->prepare($sql);
-                    $update->bindParam(':status', $status);
-                    $update->bindParam(':id', $row['id']);
-                    $update->execute();
+                // Если сервер недоступен, бросаем исключение
+                if (empty($info['hostname'])) {
+                    throw new Exception("Server is not available");
                 }
 
-            } elseif ($row['game'] == 'mta') {
-                try {
+                $status = 1;
+                $sql = "UPDATE ga_servers 
+                        SET status = :status, hostname = :hostname, map = :map, 
+                            players = :players, max_players = :max_players, last_update_at = :last_update_at 
+                        WHERE id = :id";
+                $update = $this->db->prepare($sql);
+                $update->bindParam(':status', $status);
+                $update->bindParam(':hostname', $info['hostname']);
+                $update->bindParam(':map', $info['map']);
+                $update->bindParam(':players', $info['players']);
+                $update->bindParam(':max_players', $info['max_players']);
+                $update->bindParam(':last_update_at', $now);
+                $update->bindParam(':id', $row['id']);
+                $update->execute();
 
-                    $GameQ = new \GameQ\GameQ();
-                    $GameQ->addServer([
-                        'type' => 'mta',
-                        'host' => $row['ip'] . ":" . $row['port'],
-                    ]);
-                    $results = $GameQ->process();
-
-                    $Info = array_shift($results);
-
-                    if (empty($Info['gq_hostname'])) {
-                        throw new Exception("server is not available");
-                    }
-                    $hostname = $Info['gq_hostname'];
-                    $status = 1;
-                    $mapName = $Info['gq_mapname'];
-                    $players = $Info['num_players'];
-                    $maxPlayers = $Info['max_players'];
-                    $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players, last_update_at = :last_update_at WHERE id = :id";
-                    $update = $this->db->prepare($sql);
-                    $update->bindParam(':status', $status);
-                    $update->bindParam(':hostname', $hostname);
-                    $update->bindParam(':map', $mapName);
-                    $update->bindParam(':players', $players);
-                    $update->bindParam(':max_players', $maxPlayers);
-                    $update->bindParam(':last_update_at', $now);
-                    $update->bindParam(':id', $row['id']);
-                    $update->execute();
-                } catch (Exception $e) {
-                    $status = 0;
-                    $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
-                    $update = $this->db->prepare($sql);
-                    $update->bindParam(':status', $status);
-                    $update->bindParam(':id', $row['id']);
-                    $update->execute();
-                }
-            }elseif ($row['game'] == 'arma_3') {
-                try {
-                    $GameQ = new \GameQ\GameQ();
-                    $GameQ->addServer([
-                        'type' => 'arma3',
-                        'host' => $row['ip'] . ":" . $row['port'],
-                    ]);
-                    $results = $GameQ->process();
-
-                    $Info = array_shift($results);
-
-                    if (empty($Info['gq_hostname'])) {
-                        throw new \DomainException();
-                    }
-
-                    $hostname = $Info['gq_hostname'];
-                    $status = 1;
-                    $mapName = $Info['gq_mapname'];
-                    $players = $Info['num_players'];
-                    $maxPlayers = $Info['max_players'];
-                    $sql = "UPDATE ga_servers SET status = :status, hostname = :hostname, map = :map, players = :players, max_players = :max_players, last_update_at = :last_update_at WHERE id = :id";
-                    $update = $this->db->prepare($sql);
-                    $update->bindParam(':status', $status);
-                    $update->bindParam(':hostname', $hostname);
-                    $update->bindParam(':map', $mapName);
-                    $update->bindParam(':players', $players);
-                    $update->bindParam(':max_players', $maxPlayers);
-                    $update->bindParam(':last_update_at', $now);
-                    $update->bindParam(':id', $row['id']);
-                    $update->execute();
-                } catch (Exception $e) {
-                    $status = 0;
-                    $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
-                    $update = $this->db->prepare($sql);
-                    $update->bindParam(':status', $status);
-                    $update->bindParam(':id', $row['id']);
-                    $update->execute();
-                }
+            } catch (Exception $e) {
+                $status = 0;
+                $sql = "UPDATE ga_servers SET status = :status WHERE id = :id";
+                $update = $this->db->prepare($sql);
+                $update->bindParam(':status', $status);
+                $update->bindParam(':id', $row['id']);
+                $update->execute();
             }
         }
 
-        $time = time();
-        $sql = "UPDATE ga_settings SET last_update_servers = $time";
-        $this->db->query($sql);
+        // Обновление времени последнего обновления серверов
+        $this->db->query("UPDATE ga_settings SET last_update_servers = $now");
 
-        $endTime = microtime(true);
-        $executionTime = $endTime - $startTime;
-        $text = "Серверы успешно обновлены, процесс занял ".round($executionTime, 4)." секунд";
+        // Логирование
+        $executionTime = microtime(true) - $startTime;
+        $text = "Серверы успешно обновлены, процесс занял " . round($executionTime, 4) . " секунд";
 
         $sql = 'INSERT INTO ga_system_logs (text, date_create) VALUES (:text, :date_create)';
         $stmt = $this->db->prepare($sql);
-
         $stmt->bindValue(':text', $text, PDO::PARAM_STR);
-        $stmt->bindValue(':date_create', time(), PDO::PARAM_STR);
-
+        $stmt->bindValue(':date_create', $now, PDO::PARAM_STR);
         $stmt->execute();
 
-        echo "server information updated successfully";
+        echo "Server information updated successfully\n";
 
         return Command::SUCCESS;
     }

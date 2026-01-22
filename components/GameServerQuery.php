@@ -132,4 +132,7 @@ class GameServerQuery
             throw new \Exception('Сервер не отвечает или недоступен');
         }
     }
+
+
+
 }

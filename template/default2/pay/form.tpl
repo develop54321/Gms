@@ -61,8 +61,10 @@
         <hr>
         Текущее количество голосов: <?php echo $serverInfo['rating']; ?>
     <?php elseif ($type == 'boost'): ?>
+        <?php if ($serverInfo['boost'] !== null):?>
         <hr>
         Текущее количество кругов: <?php echo $serverInfo['boost']; ?>
+        <?php endif; ?>
     <?php endif; ?>
 
 

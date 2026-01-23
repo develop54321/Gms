@@ -123,6 +123,8 @@ class ServersController extends AbstractController
             $port = (int)$_POST['port'];
             $queryPort = $_POST['query_port'];
             $rating = $_POST['rating'];
+            $host = $_POST['host'];
+            $description = $_POST['description'];
 
 
             $banCause = null;
@@ -136,6 +138,8 @@ class ServersController extends AbstractController
                       moderation =:moderation, 
                       game = :game,
                       ip = :ip, 
+                      host = :host, 
+                      description = :description, 
                       port = :port, 
                       query_port = :query_port, 
                       rating = :rating,
@@ -149,6 +153,8 @@ class ServersController extends AbstractController
             $update->bindParam(':moderation', $moderation);
             $update->bindParam(':game', $game);
             $update->bindParam(':ip', $ip);
+            $update->bindParam(':host', $host);
+            $update->bindParam(':description', $description);
             $update->bindParam(':port', $port);
             $update->bindParam(':query_port', $queryPort);
             $update->bindParam(':rating', $rating);

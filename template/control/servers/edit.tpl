@@ -18,6 +18,18 @@
     </div>
 
     <div class="card-body">
+
+        <div class="alert alert-info mt-2" role="alert" style="font-size: 0.9rem;">
+            <strong>Справка:</strong><br>
+            <ul class="mb-0">
+                <li><strong>Доменный адрес:</strong> текстовый адрес вашего сервера, например <code>myserver.example.com</code>. Игроки могут использовать его вместо IP.</li>
+                <li><strong>IP:</strong> числовой адрес сервера, например <code>192.168.1.1</code>.</li>
+                <li><strong>Порт:</strong> порт подключения к серверу, например <code>27015</code>.</li>
+                <li><strong>Статус:</strong> включен или выключен сервер.</li>
+                <li><strong>Модерация:</strong> видимость сервера на сайте.</li>
+            </ul>
+        </div>
+
         <form action="#" id="serverMainForm" method="post">
             <div class="row">
                 <div class="col-md-6 col-lg-6">
@@ -48,6 +60,11 @@
                         </select>
                     </div>
 
+                    <div class="form-group mb-3">
+                        <label for="moderation">Описание</label>
+                        <textarea rows="5" name="description" class="form-control"><?= $data['description'];?></textarea>
+                    </div>
+
 
                 </div>
 
@@ -55,6 +72,11 @@
                     <div class="form-group mb-3">
                         <label for="ip">IP</label>
                         <input type="text" name="ip" class="form-control" id="ip" value="<?= $data['ip']; ?>">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="ip">Доменный адрес</label>
+                        <input type="text" name="host" class="form-control" id="host" value="<?= $data['host']; ?>">
                     </div>
 
                     <div class="form-group mb-3">

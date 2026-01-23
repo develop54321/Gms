@@ -24,7 +24,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <input type="text" class="form-control" name="ip" id="ip" placeholder="ИП">
+                            <input type="text" class="form-control" name="ip" id="ip" placeholder="Адрес">
                         </div>
 
 

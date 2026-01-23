@@ -5,12 +5,8 @@
         </h1>
         <hr/>
 
-
-
-            <p>
-                <?php echo $data['text']; ?>
-            </p>
-
+        <p style="white-space: pre-line;">
+            <?php echo $data['text']; ?>
+        </p>
     </div>
-
 </section>

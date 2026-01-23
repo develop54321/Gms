@@ -81,7 +81,7 @@ const DB_USER = '{$dbUser}';
 const DB_PASSWORD = '{$dbPass}';
 const DB_NAME = '{$dbName}';
 const TMPL_DIR = 'template/default2';
-const VERSION = '" . VERSION . "';
+const VERSION = '3.1.5';
 
 PHP;
 

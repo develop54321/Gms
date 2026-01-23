@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: gms-db:3306
--- Время создания: Янв 23 2026 г., 11:49
+-- Время создания: Янв 23 2026 г., 12:05
 -- Версия сервера: 5.7.44
 -- Версия PHP: 8.3.26
 
@@ -291,7 +291,7 @@ CREATE TABLE `ga_settings` (
 --
 
 INSERT INTO `ga_settings` (`id`, `status_site`, `last_update_servers`, `content`, `params_mail`) VALUES
-(1, 1, 1769084898, '{\"global_settings\":{\"count_servers_main\":25,\"count_servers_top\":6,\"count_servers_vip\":25,\"count_servers_boost\":25,\"count_servers_color\":10,\"count_servers_gamemenu\":10,\"site_name\":\"Gms - веб движок\",\"expired_time_payment\":1,\"auto_add_server\":1,\"top_on\":1,\"boost_on\":1,\"vip_on\":1,\"color_on\":1,\"gamemenu_on\":0,\"votes_on\":1},\"comments\":{\"guest_allow\":1,\"moderation\":0}}', '{\"type\":\"smtp\",\"from\":\"admin@game-ms.ru\",\"smtp_server\":\"\",\"smtp_port\":\"\",\"encrypt\":\"none\",\"smtp_username\":\"\",\"smtp_password\":\"admin123\",\"auto_tls\":false}');
+(1, 1, 1769084898, '{\"global_settings\":{\"count_servers_main\":25,\"count_servers_top\":6,\"count_servers_vip\":25,\"count_servers_boost\":25,\"count_servers_color\":10,\"count_servers_gamemenu\":10,\"site_name\":\"Gms - веб движок\",\"expired_time_payment\":1,\"auto_add_server\":1,\"top_on\":1,\"boost_on\":1,\"vip_on\":1,\"color_on\":1,\"gamemenu_on\":0,\"votes_on\":1},\"comments\":{\"guest_allow\":1,\"moderation\":0}}', '{\"type\":\"smtp\",\"from\":\"\",\"smtp_server\":\"\",\"smtp_port\":\"\",\"encrypt\":\"none\",\"smtp_username\":\"\",\"smtp_password\":\"\",\"auto_tls\":false}');
 
 -- --------------------------------------------------------
 

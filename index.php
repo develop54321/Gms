@@ -3,7 +3,7 @@
  @name: Gms - Game Monitoring System
  @author: https://vk.com/dev_gamems
  @site: https://game-ms.ru
- @version: 3.1.3
+ @version: 3.1.5
 */
 
 use core\Route;
@@ -14,7 +14,7 @@ use core\Route;
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
 //
-//ini_set('display_errors', 'On');
+ini_set('display_errors', 'On');
 
 session_start();
 

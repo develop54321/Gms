@@ -1,30 +1,37 @@
-jQuery.fn.exists = function(){return this.length>0;}
+jQuery.fn.exists = function () {
+    return this.length > 0;
+}
 
 
 $(document).ready(function () {
-
-
-
     function ShowModal(param, action, type) {
-        $.ajax({
-            url: "/modal",
-            data: { 'action': action, 'param': param, 'type': type },
-            type: 'post',
-            success: function (data) {
-                let modalId = "#" + action + "Modal";
 
-                // Закрываем модальное окно, если оно уже существует
-                if ($(modalId).exists()) {
-                    $(modalId).modal('hide');
-                    $(modalId).remove();
+        $("#modalPreloader").removeClass("d-none");
+
+
+        setTimeout(function () {
+
+            $.ajax({
+                url: "/modal",
+                data: {action, param, type},
+                type: "post",
+                success: function (data) {
+                    let modalId = "#" + action + "Modal";
+
+                    if ($(modalId).length) {
+                        $(modalId).modal("hide");
+                        $(modalId).remove();
+                    }
+
                     $("body").append(data);
-                    $(modalId).modal('show');
-                } else {
-                    $("body").append(data);
-                    $(modalId).modal('show');
+                    $(modalId).modal("show");
+                },
+                complete: function () {
+                    $("#modalPreloader").addClass("d-none");
                 }
-            }
-        });
+            });
+
+        }, 300);
     }
 
 
@@ -32,7 +39,7 @@ $(document).ready(function () {
 });
 
 
-$.fn.toggleButtonLoader = function(show) {
+$.fn.toggleButtonLoader = function (show) {
     return this.each(function () {
         var $btn = $(this);
 
@@ -49,9 +56,51 @@ $.fn.toggleButtonLoader = function(show) {
             $btn.addClass('btn-spinners');
         } else {
             $btn.html($btn.data('original-text'));
-            $btn.css({ width: '', height: '' });
+            $btn.css({width: '', height: ''});
             $btn.prop('disabled', false);
             $btn.removeClass('btn-spinners');
         }
     });
 };
+
+function toggleButtonLoader(button, isLoading) {
+    if (isLoading) {
+        $(button).prop('disabled', true).addClass('btn-loader').append('<span class="loader"></span>');
+    } else {
+        setTimeout(() => {
+            $(button).prop('disabled', false).removeClass('btn-loader').find('.loader').remove();
+        }, 300);
+    }
+}
+
+window.toggleButtonLoader = toggleButtonLoader
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const cookieBanner = document.getElementById("cookieBanner");
+    const acceptBtn = document.getElementById("acceptCookies");
+
+    if (!localStorage.getItem("cookiesAccepted")) {
+        cookieBanner.style.display = "block";
+    }
+
+    acceptBtn.addEventListener("click", function () {
+        localStorage.setItem("cookiesAccepted", "true");
+        cookieBanner.style.display = "none";
+    });
+});
+
+
+
+
+
+function copyToClipboard(elementId) {
+    const text = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        alert('IP адрес скопирован: ' + text);
+    }).catch(err => {
+        console.error('Ошибка копирования: ', err);
+    });
+}
+
+window.copyToClipboard = copyToClipboard

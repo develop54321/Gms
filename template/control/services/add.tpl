@@ -111,7 +111,7 @@
                 label.text("Количество кругов");
                 break;
             case 'gamemenu':
-                label.text("Длительность услуги Gamemenu (в днях)");
+                label.text("Длительность услуги GameMenu (в днях)");
                 break;
             case 'votes':
                 label.text("Количество голосов");

@@ -60,6 +60,7 @@ class Route
                 $r->addRoute(['GET', 'POST'], '/signup', ['controllers\UserController', 'signup']);
                 $r->addRoute('GET', '/logout', ['controllers\UserController', 'logout']);
                 $r->addRoute('GET', '/servers', ['controllers\UserController', 'servers']);
+                $r->addRoute(['GET', 'POST'], '/security', ['controllers\UserController', 'security']);
                 $r->addRoute('GET', '/removeserver', ['controllers\UserController', 'removeServer']);
                 $r->addRoute(['GET', 'POST'], '/pay', ['controllers\UserController', 'pay']);
                 $r->addRoute('GET', '/pay-logs', ['controllers\UserController', 'payLogs']);
@@ -102,6 +103,7 @@ class Route
                 $r->addRoute('GET', '/servers', ['controllers\control\ServersController', 'index']);
                 $r->addRoute(['GET', 'POST'], '/servers/search', ['controllers\control\ServersController', 'search']);
                 $r->addRoute(['GET', 'POST'], '/servers/edit', ['controllers\control\ServersController', 'edit']);
+                $r->addRoute(['GET', 'POST'], '/servers/edit-services', ['controllers\control\ServersController', 'editServices']);
                 $r->addRoute('GET', '/servers/remove', ['controllers\control\ServersController', 'remove']);
 
                 $r->addRoute('GET', '/comments', ['controllers\control\CommentsController', 'index']);

@@ -1,4 +1,4 @@
-<section class="page banlist">
+<div class="servers-list">
     <div class="container">
         <h1 class="content-title">
             Раскрутка сервера
@@ -37,11 +37,11 @@
                             <?php echo \widgets\server\game\GameIcon::run($row['game']); ?>
                         </td>
                         <td>
-                            <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']); ?></a>
+                            <a class="hostname" href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']); ?></a>
                         </td>
                         <td>
           <span class="address">
-              <?php echo $row['ip']; ?>:<?php echo $row['port']; ?>
+              <?php echo $row['host'] ?? $row['ip']; ?>:<?php echo $row['port']; ?>
           </span>
                         </td>
                         <td><?php echo $row['map']; ?></td>
@@ -64,4 +64,4 @@
 
         </div>
     </div>
-</section>
+</div>

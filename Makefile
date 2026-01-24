@@ -26,5 +26,8 @@ composer-update:
 cron:
 	docker compose -f docker-compose-dev.yml run --rm gms-php-cli bin/console cron
 
+cron-services:
+	docker compose -f docker-compose-dev.yml run --rm gms-php-cli bin/console services
+
 queue-mail:
 	docker compose -f docker-compose-dev.yml run --rm gms-php-cli bin/console queue:mail

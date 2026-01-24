@@ -81,7 +81,6 @@
                         </div>
 
                         <input type="hidden" id="paymentId">
-                        <input type="hidden" id="amount">
 
 
                         <div class="d-grid gap-2 mt-4">
@@ -95,7 +94,7 @@
                         <div class="mt-3 text-center">
                             <small class="text-muted">
                                 Нажимая "Перейти к оплате", вы соглашаетесь с
-                                <a href="#" target="_blank">условиями договора</a>
+                                <a href="/page/3" target="_blank">условиями договора</a>
                             </small>
                         </div>
                     </div>
@@ -109,6 +108,8 @@
     document.addEventListener('DOMContentLoaded', function() {
         const amountInput = document.getElementById('amount');
         const quickAmountButtons = document.querySelectorAll('.quick-amount');
+        const submitBtn = document.getElementById('submit-btn');
+        let selectedPaymentId = null;
 
         quickAmountButtons.forEach(button => {
             button.addEventListener('click', function() {
@@ -117,55 +118,59 @@
 
                 quickAmountButtons.forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
+
+                validateForm();
             });
         });
 
+
         amountInput.addEventListener('input', function() {
             quickAmountButtons.forEach(btn => btn.classList.remove('active'));
+            validateForm();
         });
-    });
 
 
-    // Выбор способа оплаты
-    function selectPaymentMethod(paymentId, element) {
-        document.querySelectorAll('.payment-method-card').forEach(card => {
-            card.classList.remove('border-primary', 'bg-primary-light');
-        });
-        element.closest('.payment-method-card').classList.add('border-primary', 'bg-primary-light');
-        document.getElementById('submit-btn').disabled = false;
-        $("#paymentId").val(paymentId)
-    }
+        window.selectPaymentMethod = function(paymentId, element) {
+            document.querySelectorAll('.payment-method-card').forEach(card => {
+                card.classList.remove('border-primary', 'bg-primary-light');
+            });
+            element.closest('.payment-method-card').classList.add('border-primary', 'bg-primary-light');
 
-    // Валидация суммы
-    document.getElementById('amount').addEventListener('input', function() {
-        const amount = parseFloat(this.value);
-        const minAmount = 10;
-        const maxAmount = 50000;
+            selectedPaymentId = paymentId;
+            $("#paymentId").val(paymentId);
 
-        if (amount < minAmount || amount > maxAmount) {
-            this.classList.add('is-invalid');
-            document.getElementById('submit-btn').disabled = true;
-        } else {
-            this.classList.remove('is-invalid');
-            document.getElementById('submit-btn').disabled = false;
+            validateForm();
         }
-    });
 
+        function validateForm() {
+            const amount = parseFloat(amountInput.value);
+            const minAmount = 10;
+            const maxAmount = 50000;
 
-    function submit() {
-        toggleButtonLoader($("#submit-btn"), true);
+            const isAmountValid = !isNaN(amount) && amount >= minAmount && amount <= maxAmount;
+            if (!isAmountValid) {
+                amountInput.classList.add('is-invalid');
+            } else {
+                amountInput.classList.remove('is-invalid');
+            }
+
+            submitBtn.disabled = !(isAmountValid && selectedPaymentId);
+        }
+
+        // Функция отправки формы
+        window.submit = function() {
+            toggleButtonLoader($("#submit-btn"), true);
+
             fetch('/user/pay', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-Requested-With': 'XMLHttpRequest'
                 },
-                body: JSON.stringify(
-                    {
-                        typePayment: $("#paymentId").val(),
-                        amount:  $("#amount").val(),
-                    }
-                )
+                body: JSON.stringify({
+                    typePayment: $("#paymentId").val(),
+                    amount:  $("#amount").val(),
+                })
             })
                 .then(response => response.json())
                 .then(data => {
@@ -173,13 +178,14 @@
                         if (data.payment_url) {
                             window.location.href = data.payment_url;
                         } else if (data.payment_form) {
-                            document.body.innerHTML += data.payment_form;
-                            document.getElementById("paymentForm").submit();
+                            $('#paymentForm').remove();
+                            $('body').append(data.payment_form);
+                            $('#paymentForm').submit();
                             setTimeout(function () {
                                 toggleButtonLoader($("#submit-btn"), false);
-                            }, 1000)
+                            }, 1000);
                         }
-                    }else if (data.status === "error") {
+                    } else if (data.status === "error") {
                         ShowModal(data.error, 'answer', 'error');
                         toggleButtonLoader($("#submit-btn"), false);
                     } else {
@@ -192,17 +198,18 @@
                     console.error('Ошибка:', error);
                     alert('Ошибка при запросе на сервер.');
                 });
-
-    }
-
-
-    function toggleButtonLoader(button, isLoading) {
-        if (isLoading) {
-            $(button).prop('disabled', true).addClass('btn-loader').append('<span class="loader"></span>');
-        } else {
-            $(button).prop('disabled', false).removeClass('btn-loader').find('.loader').remove();
         }
-    }
+
+
+        function toggleButtonLoader(button, isLoading) {
+            if (isLoading) {
+                $(button).prop('disabled', true).addClass('btn-loader').append('<span class="loader"></span>');
+            } else {
+                $(button).prop('disabled', false).removeClass('btn-loader').find('.loader').remove();
+            }
+        }
+    });
+
 
 
 </script>

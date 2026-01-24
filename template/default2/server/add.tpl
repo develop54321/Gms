@@ -24,26 +24,26 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <input type="text" class="form-control" name="ip" id="formGroupExampleInput"
-                                   placeholder="Адрес">
+                            <input type="text" class="form-control" name="ip" id="ip" placeholder="Адрес">
                         </div>
 
 
                         <div class="form-group mb-3">
-                            <input type="text" class="form-control" name="port" id="formGroupExampleInput2"
-                                   placeholder="Порт">
+                            <input type="text" class="form-control" name="port" id="port" placeholder="Порт">
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" name="query_port" id="query_port" placeholder="query port">
                         </div>
 
 
                         <div class="form-group mb-3">
                             <textarea class="form-control" name="text" placeholder="Описание"></textarea>
-
                         </div>
 
                         <div class="form-group mb-3">
-                            <a href="#" id="captchaImg" onclick="updateCaptcha(); return false;">
-                                <img src="/captcha" src="Капча"/>
-                            </a>
+                            <a href="#" id="captchaImg" onclick="updateCaptcha(); return false;"></a>
                         </div>
 
                         <div class="form-group mb-3">
@@ -96,13 +96,17 @@
 
 <script>
     function updateCaptcha() {
-        $("#captchaImg").html('<img src="/captcha" src="Каптча"/>');
+        $("#captchaImg").html('<img src="/captcha?form=add_server" src="Капча"/>');
     }
+
+    updateCaptcha()
+
     $('#addServer').ajaxForm({
         dataType: 'json',
         success: function (data) {
             switch (data.status) {
                 case "error":
+                    updateCaptcha()
                     ShowModal(data.error, 'answer', 'error');
                     break;
 

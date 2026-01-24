@@ -37,7 +37,7 @@
                 <tr id="element<?= $row['id']; ?>">
                     <td><?php echo $row['id']; ?></td>
                     <td><?php echo $row['name']; ?></td>
-                    <td><?php if ($row['type'] == 'befirst'): ?>Befirst<?php elseif ($row['type'] == 'top'): ?>TOP<?php elseif ($row['type'] == 'vip'): ?>VIP<?php elseif ($row['type'] == 'color'): ?>Выделение цветом<?php elseif ($row['type'] == 'boost'): ?>Буст<?php elseif ($row['type'] == 'gamemenu'): ?>Gamemenu<?php elseif ($row['type'] == 'votes'): ?>Голоса<?php elseif ($row['type'] == 'razz'): ?>Разбан<?php endif; ?></td>
+                    <td><?php if ($row['type'] == 'befirst'): ?>Befirst<?php elseif ($row['type'] == 'top'): ?>TOP<?php elseif ($row['type'] == 'vip'): ?>VIP<?php elseif ($row['type'] == 'color'): ?>Выделение цветом<?php elseif ($row['type'] == 'boost'): ?>Буст<?php elseif ($row['type'] == 'gamemenu'): ?>GameMenu<?php elseif ($row['type'] == 'votes'): ?>Голоса<?php elseif ($row['type'] == 'razz'): ?>Разбан<?php endif; ?></td>
                     <td><?php echo $row['period']; ?></td>
                     <td>
                         <a href="/control/services/edit?id=<?= $row['id']; ?>" class="text-muted"

@@ -1,208 +1,258 @@
-<div class="page-header">
+<div class="page-header mb-4">
     <div>
         <h1 class="page-title">Настройки</h1>
+        <small class="text-muted">Глобальная конфигурация сайта</small>
     </div>
-    <div class="ms-auto pageheader-btn">
+    <div class="ms-auto">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/control">Главная</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Настройки</li>
+            <li class="breadcrumb-item active">Настройки</li>
         </ol>
     </div>
 </div>
 
-<div class="card p-0">
-    <div class="card-header border-bottom">
-        <h5 class="card-title">Настройки</h5>
+<style>
+    .setting-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .setting-item span {
+        font-weight: 500;
+    }
+
+
+
+    .form-switch .form-check-input {
+        width: 42px;
+        height: 22px;
+        cursor: pointer;
+    }
+</style>
+
+<form id="settingsForm" method="post">
+
+    <!-- Основные настройки -->
+    <div class="card mb-4">
+        <div class="card-header border-bottom">
+            <h5 class="card-title">Основные настройки</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Название сайта</label>
+                        <input type="text" class="form-control"
+                               name="global_settings[site_name]"
+                               value="<?= $settings['global_settings']['site_name']; ?>">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Срок истечения не оплаченных счетов (часы)</label>
+                        <input type="number" class="form-control"
+                               name="global_settings[expired_time_payment]"
+                               value="<?= $settings['global_settings']['expired_time_payment']; ?>">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="card-body">
+    <!-- Серверы -->
+    <div class="card mb-4">
+        <div class="card-header border-bottom">
+            <h5 class="mb-0">Серверы и отображение</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
 
-        <form id="settingsForm" method="post">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Название сайта</label>
-                                        <input type="text" name="global_settings[site_name]" class="form-control"
-                                               value="<?= $settings['global_settings']['site_name']; ?>">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Срок истечение не оплаченных счетов(в часах)</label>
-                                        <input type="number" name="global_settings[expired_time_payment]"
-                                               class="form-control"
-                                               value="<?= $settings['global_settings']['expired_time_payment']; ?>">
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Добавление сервера</label>
-                                        <select class="form-control" name="global_settings[auto_add_server]">
-                                            <option value="1">Автоматически</option>
-                                            <option value="0"
-                                                    <?php if ($settings['global_settings']['auto_add_server'] == '0'): ?>selected=""<?php endif; ?>>
-                                                Вручную(проверяется администраторм)
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Кол-во серверов на главной странице</label>
-                                        <input type="number" name="global_settings[count_servers_main]"
-                                               class="form-control"
-                                               value="<?= $settings['global_settings']['count_servers_main']; ?>">
-                                    </div>
-
-
-                                </div>
-                            </div>
-
-
-
-                            <hr/>
-
-                        <div class="row">
-                            <div class="col-md-6">
-
-
-                                <div class="form-group">
-                                    <label>Кол-во серверов Top</label>
-                                    <input type="int" name="global_settings[count_servers_top]" class="form-control"
-                                           value="<?= $settings['global_settings']['count_servers_top']; ?>">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Кол-во серверов Vip</label>
-                                    <input type="int" name="global_settings[count_servers_vip]" class="form-control"
-                                           value="<?= $settings['global_settings']['count_servers_vip']; ?>">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Кол-во серверов Boost</label>
-                                    <input type="int" name="global_settings[count_servers_boost]" class="form-control"
-                                           value="<?= $settings['global_settings']['count_servers_boost']; ?>">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Кол-во серверов Color</label>
-                                    <input type="int" name="global_settings[count_servers_color]" class="form-control"
-                                           value="<?= $settings['global_settings']['count_servers_color']; ?>">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Кол-во серверов Gamemenu</label>
-                                    <input type="int" name="global_settings[count_servers_gamemenu]"
-                                           class="form-control"
-                                           value="<?= $settings['global_settings']['count_servers_gamemenu']; ?>">
-                                </div>
-
-                            </div>
-
-
-                            <div class="col-md-6">
-
-
-                                <div class="form-group">
-                                    <label>Вкл/Выкл Top</label>
-                                    <input type="int" name="global_settings[top_on]" class="form-control"
-                                           value="<?= $settings['global_settings']['top_on']; ?>">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Вкл/Выкл Boost</label>
-                                    <input type="int" name="global_settings[boost_on]" class="form-control"
-                                           value="<?= $settings['global_settings']['boost_on']; ?>">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Вкл/Выкл Vip</label>
-                                    <input type="int" name="global_settings[vip_on]" class="form-control"
-                                           value="<?= $settings['global_settings']['vip_on']; ?>">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Вкл/Выкл Color</label>
-                                    <input type="int" name="global_settings[color_on]" class="form-control"
-                                           value="<?= $settings['global_settings']['color_on']; ?>">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Вкл/Выкл Gamemenu</label>
-                                    <input type="int" name="global_settings[gamemenu_on]" class="form-control"
-                                           value="<?= $settings['global_settings']['gamemenu_on']; ?>">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Вкл/Выкл Покупку голосов</label>
-                                    <input type="int" name="global_settings[votes_on]" class="form-control"
-                                           value="<?= $settings['global_settings']['votes_on']; ?>">
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                            <hr/>
-                        <div class="row">
-                            <div class="col-md-6">
-
-                                <div class="form-group">
-                                    <label>Разрешить гостям оставлять комментарии</label>
-                                    <select class="form-control" name="comments[guest_allow]">
-                                        <option value="1">Да</option>
-                                        <option value="0"
-                                                <?php if ($settings['comments']['guest_allow'] == '0'): ?>selected=""<?php endif; ?>>
-                                            Нет
-                                        </option>
-                                    </select>
-                                </div>
-
-
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Добавление комментарии</label>
-                                    <select class="form-control" name="comments[moderation]">
-                                        <option value="1">Автоматически</option>
-                                        <option value="0"
-                                                <?php if ($settings['comments']['moderation'] == '0'): ?>selected=""<?php endif; ?>>
-                                            Вручную(проверяется администраторм)
-                                        </option>
-                                    </select>
-                                </div>
-
-                            </div>
-                        </div>
-
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Добавление сервера</label>
+                        <select class="form-control" name="global_settings[auto_add_server]">
+                            <option value="1">Автоматически</option>
+                            <option value="0" <?= $settings['global_settings']['auto_add_server'] == 0 ? 'selected' : '' ?>>
+                            Вручную (модерация)
+                            </option>
+                        </select>
+                    </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary text-uppercase waves-effect waves-light">
-                            Сохранить
-                        </button>
+                        <label>Серверов на главной странице</label>
+                        <input type="number" class="form-control"
+                               name="global_settings[count_servers_main]"
+                               value="<?= $settings['global_settings']['count_servers_main']; ?>">
                     </div>
-                    </form>
+                </div>
 
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Максимальное количество ТОП серверов</label>
+                        <input type="number" class="form-control"
+                               name="global_settings[count_servers_top]"
+                               value="<?= $settings['global_settings']['count_servers_top']; ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Максимальное количество ВИП серверов</label>
+                        <input type="number" class="form-control"
+                               name="global_settings[count_servers_vip]"
+                               value="<?= $settings['global_settings']['count_servers_vip']; ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Максимальное количество БУСТ серверов</label>
+                        <input type="number" class="form-control"
+                               name="global_settings[count_servers_boost]"
+                               value="<?= $settings['global_settings']['count_servers_boost']; ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Максимальное количество окрашенных (или помеченных цветом) серверов</label>
+                        <input type="number" class="form-control"
+                               name="global_settings[count_servers_color]"
+                               value="<?= $settings['global_settings']['count_servers_color']; ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Максимальное количество GameMenu серверов</label>
+                        <input type="number" class="form-control"
+                               name="global_settings[count_servers_gamemenu]"
+                               value="<?= $settings['global_settings']['count_servers_gamemenu']; ?>">
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
-</div>
 
+    <!-- Платные функции -->
+    <div class="card mb-4">
+        <div class="card-header border-bottom">
+            <h5 class="mb-0">Платные функции</h5>
+        </div>
+        <div class="card-body p-0">
 
+            <div class="setting-item">
+                <span>TOP</span>
+                <input type="hidden" name="global_settings[top_on]" value="0">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox"
+                           name="global_settings[top_on]"
+                           value="1" <?= $settings['global_settings']['top_on'] ? 'checked' : '' ?>>
+                </div>
+            </div>
 
+            <div class="setting-item">
+                <span>Буст</span>
+                <input type="hidden" name="global_settings[boost_on]" value="0">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox"
+                           name="global_settings[boost_on]"
+                           value="1" <?= $settings['global_settings']['boost_on'] ? 'checked' : '' ?>>
+                </div>
+            </div>
+
+            <div class="setting-item">
+                <span>VIP</span>
+                <input type="hidden" name="global_settings[vip_on]" value="0">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox"
+                           name="global_settings[vip_on]"
+                           value="1" <?= $settings['global_settings']['vip_on'] ? 'checked' : '' ?>>
+                </div>
+            </div>
+
+            <div class="setting-item">
+                <span>GameMenu</span>
+                <input type="hidden" name="global_settings[gamemenu_on]" value="0">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox"
+                           name="global_settings[gamemenu_on]"
+                           value="1" <?= $settings['global_settings']['gamemenu_on'] ? 'checked' : '' ?>>
+                </div>
+            </div>
+
+            <div class="setting-item">
+                <span>Выделение цветом</span>
+                <input type="hidden" name="global_settings[color_on]" value="0">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox"
+                           name="global_settings[color_on]"
+                           value="1" <?= $settings['global_settings']['color_on'] ? 'checked' : '' ?>>
+                </div>
+            </div>
+
+            <div class="setting-item border-0">
+                <span>Покупка голосов</span>
+                <input type="hidden" name="global_settings[votes_on]" value="0">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox"
+                           name="global_settings[votes_on]"
+                           value="1" <?= $settings['global_settings']['votes_on'] ? 'checked' : '' ?>>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Комментарии -->
+    <div class="card mb-4">
+        <div class="card-header border-bottom">
+            <h5 class="mb-0">Комментарии</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Гости могут писать комментарии</label>
+                        <select class="form-control" name="comments[guest_allow]">
+                            <option value="1">Да</option>
+                            <option value="0" <?= $settings['comments']['guest_allow'] == 0 ? 'selected' : '' ?>>Нет</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Модерация комментариев</label>
+                        <select class="form-control" name="comments[moderation]">
+                            <option value="1">Автоматически</option>
+                            <option value="0" <?= $settings['comments']['moderation'] == 0 ? 'selected' : '' ?>>
+                            Вручную
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка -->
+    <div class="text-end">
+        <button type="submit" class="btn btn-primary px-4 mb-3">
+            💾 Сохранить настройки
+        </button>
+    </div>
+
+</form>
 
 <script>
     $('#settingsForm').ajaxForm({
         dataType: 'json',
         success: function (data) {
-            switch (data.status) {
-                case "error":
-                    ShowModal(data.error, 'answer', 'error');
-                    break;
-
-                case "success":
-                    ShowModal(data.success, 'answer', 'success');
-                    break;
+            if (data.status === 'error') {
+                ShowModal(data.error, 'answer', 'error');
             }
-        },
+            if (data.status === 'success') {
+                ShowModal(data.success, 'answer', 'success');
+            }
+        }
     });
 </script>

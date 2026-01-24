@@ -5,5 +5,7 @@
 Партнер
 <?php elseif($role == 'admin'):?>
 Администратор
+    <?php elseif($role == 'banned'):?>
+Заблокирован
 <?php endif;?>
 </span>

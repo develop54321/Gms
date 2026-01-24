@@ -2,6 +2,7 @@
 
 namespace controllers;
 
+use components\Captcha;
 use components\Pagination;
 use components\Servers;
 use components\System;
@@ -15,8 +16,11 @@ class MainController extends BaseController
 
     public function captcha()
     {
-        $system = new System();
-        $system->generateCaptcha();
+        $formKey = $_GET['form'] ?? 'default';
+
+
+        $system = new Captcha();
+        $system->render($formKey);
     }
 
     public function index()
@@ -41,7 +45,7 @@ class MainController extends BaseController
 
                 $topServers[] = [
                     'id' => $getInfoServer['id'],
-                    'ip' => $getInfoServer['ip'],
+                    'ip' => $getInfoServer['host'] ?? $getInfoServer['ip'],
                     'port' => $getInfoServer['port'],
                     'hostname' => $getInfoServer['hostname'],
                     'img_map' => $img_map,

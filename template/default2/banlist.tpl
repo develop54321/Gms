@@ -30,7 +30,7 @@
                     <tr>
                         <td><?php echo $row['id']; ?></td>
                         <td>
-                            <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']); ?></a>
+                            <?php echo \widgets\server\hostname\Hostname::run($row['hostname']); ?>
                         </td>
                         <td>
 

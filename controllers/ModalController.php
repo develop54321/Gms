@@ -3,6 +3,7 @@
 namespace controllers;
 
 use core\BaseController;
+use Exception;
 use xPaw\SourceQuery\SourceQuery;
 
 class ModalController extends BaseController
@@ -43,6 +44,7 @@ class ModalController extends BaseController
                     break;
 
                 case "showPlayers":
+                    $textError = null;
                     $id = (int)$_POST['param'];
 
                     $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
@@ -52,14 +54,25 @@ class ModalController extends BaseController
 
                     $Query = new SourceQuery();
                     $Players = [];
-                    if (in_array($getInfoServer['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2'])) {
+                    if (in_array($getInfoServer['game'], ['cs', 'csgo', 'css', 'tf2', 'ld2', 'rust', 'csgo2', 'arma_3'])) {
+
+
+                        $port = $getInfoServer['port'];
+                        if ($getInfoServer['query_port'] !== null) {
+                            $port = (int)$getInfoServer['query_port'];
+                        }
+
+
                         try {
-                            $Query->Connect($getInfoServer['ip'], $getInfoServer['port'], 3, SourceQuery::GOLDSOURCE);
+                            $Query->Connect($getInfoServer['ip'], $port, 3, SourceQuery::GOLDSOURCE);
+
 
                             $Players = $Query->GetPlayers();
 
                         } catch (Exception $e) {
-                            $Exception = $e;
+                            $textError = "Не удалось получить список игроков. Пожалуйста, попробуйте еще раз.";
+                        } finally {
+                            $Query->Disconnect();
                         }
                     } else if ($getInfoServer['game'] == 'samp') {
                         $GameQ = new \GameQ\GameQ();
@@ -84,11 +97,11 @@ class ModalController extends BaseController
                     }
 
 
-
-                    return $this->view->render("modals/showPlayersModal", [
+                    $this->view->render("modals/showPlayersModal", [
                         'data' => $getInfoServer,
                         'players' => $Players,
-                        'game' => $getInfoServer['game']
+                        'game' => $getInfoServer['game'],
+                        'text_error' => $textError,
                     ]);
                     break;
 
@@ -104,4 +117,3 @@ class ModalController extends BaseController
 
 
 }
-     

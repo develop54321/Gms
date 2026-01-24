@@ -20,17 +20,17 @@
                 </thead>
                 <tbody>
                 <?php foreach ($servers as $row): ?>
-                    <tr>
+                <tr <?php if($row['color_enabled'] != null):?>style="background: <?php echo $row['color_enabled'];?>"<?php endif;?>>
                         <td><?php echo $row['id']; ?></td>
                         <td>
                             <?php echo \widgets\server\game\GameIcon::run($row['game']);?>
                         </td>
                         <td>
-                            <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']); ?></a>
+                            <a class="hostname" href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']); ?></a>
                         </td>
                         <td>
                               <span class="address">
-                            <?php echo $row['ip']; ?>:<?php echo $row['port']; ?>
+                            <?php echo $row['host'] ?? $row['ip']; ?>:<?php echo $row['port']; ?>
                               </span>
                         </td>
                         <td><?php echo $row['map']; ?></td>
@@ -41,8 +41,8 @@
 
                         </td>
                         <td style="text-align: center;">
-                            <?php if ($row['vip_enabled'] != '0'): ?>
-                                VIP
+                            <?php if ($row['vip_enabled'] !== null): ?>
+                            <b>VIP</b>
                             <?php else: ?>
 
                                 <a href="#" onclick="ShowModal('<?=$row['id'];?>', 'vote', 'minus');return false;"><i class="fa fa-thumbs-down"></i></a>

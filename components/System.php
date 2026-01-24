@@ -4,10 +4,10 @@ namespace components;
 
 use core\BaseController;
 
-class System extends BaseController
+class System
 {
 
-    function getIp()
+    public function getIp()
     {
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -19,49 +19,12 @@ class System extends BaseController
         return $ip;
     }
 
-    function getCountry($ip)
-    {
-        $result = array('country' => '', 'city' => '');
 
-        if (filter_var($ip, FILTER_VALIDATE_IP)) $ip = $ip;
-        elseif (filter_var($ip, FILTER_VALIDATE_IP)) $ip = $ip;
-        else $ip = $ip;
-        $ip_data = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
-        if ($ip_data && $ip_data->geoplugin_countryName != null) $result = $ip_data->geoplugin_countryCode;
-        return $result;
-    }
-
-    public function getUrl()
+    public function getUrl(): string
     {
         $url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';
         return $url . $_SERVER['SERVER_NAME'];
     }
-
-    // Add function showbar
-    public function showbar($players, $maxplayers): string
-    {
-        if ($maxplayers > 0) {
-            $full_off = round(($players / $maxplayers) * 100);
-        } else {
-            $full_off = 0;
-        }
-        switch ($full_off) {
-            case $full_off <= 40:
-                $full_off_color = 'success';
-                break;
-            case $full_off <= 80:
-                $full_off_color = 'warning';
-                break;
-            case $full_off <= 100:
-                $full_off_color = 'danger';
-                break;
-            default:
-                $full_off_color = 'success';
-                break;
-        }
-        return $full_off . '%';
-    }
-
 
 
     public function generateCharacter($number): string
@@ -99,38 +62,6 @@ class System extends BaseController
         }
 
         return $randomDigits;
-    }
-
-    public function generateCaptcha()
-    {
-        $randomnr = mt_rand(11111, 99999);
-        $_SESSION['captcha'] = md5($randomnr);
-
-
-        $im = imagecreatetruecolor(140, 38);
-
-
-        $white = imagecolorallocate($im, 255, 255, 255);
-        $grey = imagecolorallocate($im, 128, 128, 128);
-        $black = imagecolorallocate($im, 0, 0, 0);
-
-        imagefilledrectangle($im, 0, 0, 200, 35, $black);
-
-        $font =  ROOT_DIR. 'public/fonts/captcha.ttf';
-
-        imagettftext($im, 33, 0, 0, 35, $grey, $font, $randomnr);
-
-        imagettftext($im, 33, 0, 0, 35, $white, $font, $randomnr);
-
-        header("Expires: Wed, 1 Jan 1997 00:00:00 GMT");
-        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-        header("Cache-Control: no-store, no-cache, must-revalidate");
-        header("Cache-Control: post-check=0, pre-check=0", false);
-        header("Pragma: no-cache");
-
-
-        imagegif($im);
-        imagedestroy($im);
     }
 
 

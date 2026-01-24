@@ -16,52 +16,117 @@ class SettingsController extends AbstractController
         $title = "Настройки";
 
         if (parent::isAjax()) {
+
+            $errors = [];
             $content = [];
-            $global_settings = $_POST['global_settings'];
-            $content['global_settings']['site_name'] = $global_settings['site_name'];
-            $content['global_settings']['expired_time_payment'] = $global_settings['expired_time_payment'];
-            $content['global_settings']['auto_add_server'] = $global_settings['auto_add_server'];
-            $content['global_settings']['count_servers_main'] = $global_settings['count_servers_main'];
-            $content['global_settings']['count_servers_top'] = $global_settings['count_servers_top'];
-            $content['global_settings']['count_servers_vip'] = $global_settings['count_servers_vip'];
-            $content['global_settings']['count_servers_boost'] = $global_settings['count_servers_boost'];
-            $content['global_settings']['count_servers_color'] = $global_settings['count_servers_color'];
-            $content['global_settings']['count_servers_gamemenu'] = $global_settings['count_servers_gamemenu'];
-            # on/off services
-            $content['global_settings']['top_on'] = $global_settings['top_on'];        // Top
-            $content['global_settings']['boost_on'] = $global_settings['boost_on'];        // Boost
-            $content['global_settings']['vip_on'] = $global_settings['vip_on'];        // Vip
-            $content['global_settings']['color_on'] = $global_settings['color_on'];        // Color
-            $content['global_settings']['gamemenu_on'] = $global_settings['gamemenu_on'];        // Gamemenu_on
-            $content['global_settings']['votes_on'] = $global_settings['votes_on'];        // Votes_on
 
-            $comments = $_POST['comments'];
-            $content['comments']['guest_allow'] = $comments['guest_allow'];
-            $content['comments']['moderation'] = $comments['moderation'];
+            $global = $_POST['global_settings'] ?? [];
+            $comments = $_POST['comments'] ?? [];
 
+            /** --------------------
+             * ВАЛИДАЦИЯ
+             * ------------------- */
 
-            $contentJson = json_encode($content);
+            // Название сайта
+            $site_name = trim($global['site_name'] ?? '');
+            if (mb_strlen($site_name) < 3) {
+                $errors[] = 'Название сайта должно содержать минимум 3 символа';
+            }
 
-            $id = 1;
-            $sql = "UPDATE ga_settings SET content = :content WHERE id= :id";
+            // Срок оплаты
+            $expired_time_payment = (int)($global['expired_time_payment'] ?? 0);
+            if ($expired_time_payment < 1) {
+                $errors[] = 'Срок истечения оплаты должен быть больше 0';
+            }
+
+            // Авто добавление сервера
+            $auto_add_server = in_array($global['auto_add_server'] ?? null, ['0', '1'], true)
+                ? (int)$global['auto_add_server']
+                : 0;
+
+            // Числовые лимиты серверов
+            $numberFields = [
+                'count_servers_main',
+                'count_servers_top',
+                'count_servers_vip',
+                'count_servers_boost',
+                'count_servers_color',
+                'count_servers_gamemenu',
+            ];
+
+            foreach ($numberFields as $field) {
+                $value = (int)($global[$field] ?? 0);
+                if ($value < 0) {
+                    $errors[] = "Поле {$field} не может быть отрицательным";
+                }
+                $content['global_settings'][$field] = $value;
+            }
+
+            // Если есть ошибки — сразу выходим
+            if (!empty($errors)) {
+                exit(json_encode([
+                    'status' => 'error',
+                    'error'  => implode('<br>', $errors)
+                ]));
+            }
+
+            /** --------------------
+             * СОХРАНЕНИЕ
+             * ------------------- */
+
+            $content['global_settings']['site_name'] = $site_name;
+            $content['global_settings']['expired_time_payment'] = $expired_time_payment;
+            $content['global_settings']['auto_add_server'] = $auto_add_server;
+
+            // on/off сервисы
+            $switches = [
+                'top_on',
+                'boost_on',
+                'vip_on',
+                'color_on',
+                'gamemenu_on',
+                'votes_on',
+            ];
+
+            foreach ($switches as $switch) {
+                $content['global_settings'][$switch] =
+                    isset($global[$switch]) && $global[$switch] == 1 ? 1 : 0;
+            }
+
+            // Комментарии
+            $content['comments']['guest_allow'] =
+                isset($comments['guest_allow']) && $comments['guest_allow'] == 1 ? 1 : 0;
+
+            $content['comments']['moderation'] =
+                isset($comments['moderation']) && $comments['moderation'] == 1 ? 1 : 0;
+
+            // JSON
+            $contentJson = json_encode($content, JSON_UNESCAPED_UNICODE);
+
+            $sql = "UPDATE ga_settings SET content = :content WHERE id = 1";
             $update = $this->db->prepare($sql);
             $update->bindParam(':content', $contentJson);
-            $update->bindParam(':id', $id);
             $update->execute();
 
-
-            $answer['status'] = "success";
-            $answer['success'] = "Настройки успешно сохранены";
-            exit(json_encode($answer));
+            exit(json_encode([
+                'status' => 'success',
+                'success' => 'Настройки успешно сохранены'
+            ]));
 
         } else {
+
             $settings = json_decode($settings['content'], true);
-            $content = $this->view->renderPartial("settings/index", ['settings' => $settings]);
+            $content = $this->view->renderPartial("settings/index", [
+                'settings' => $settings
+            ]);
 
-            $this->view->render("main", ['content' => $content, 'title' => $title]);
-
+            $this->view->render("main", [
+                'content' => $content,
+                'title' => $title
+            ]);
         }
     }
+
 
 
     public function mail()

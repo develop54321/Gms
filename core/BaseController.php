@@ -73,4 +73,14 @@ abstract class BaseController
 
         return $decodedData;
     }
+
+    private function jsonError($message)
+    {
+        exit(json_encode(['status' => 'error', 'error' => $message], JSON_UNESCAPED_UNICODE));
+    }
+
+    private function jsonSuccess($message)
+    {
+        exit(json_encode(['status' => 'success', 'success' => $message], JSON_UNESCAPED_UNICODE));
+    }
 }

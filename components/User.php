@@ -7,8 +7,7 @@ use PDO;
 
 class User extends BaseController
 {
-    public function isAuth()
-    {
+    public function isAuth(){
         if (isset($_COOKIE['id_user']) && isset($_COOKIE['hash'])) {
             $id_user = $_COOKIE['id_user'];
             $hash = $_COOKIE['hash'];
@@ -16,8 +15,17 @@ class User extends BaseController
             $check->bindValue(":id", $id_user);
             $check->bindValue(":hash", $hash);
             $check->execute();
-            if ($check->rowCount() == '0') return false;
-            else return $check->fetch();
+
+            if ($check->rowCount() == '0') {
+                return false;
+            } else {
+                $user = $check->fetch();
+                if ($user['role'] === 'banned') {
+                    return false;
+                }
+
+                return $user;
+            }
         } else {
             return false;
         }

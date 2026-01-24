@@ -120,87 +120,47 @@ class ServersController extends AbstractController
             $moderation = (int)$_POST['moderation'];
             $game = $_POST['game'];
             $ip = $_POST['ip'];
-            $port = $_POST['port'];
+            $port = (int)$_POST['port'];
+            $queryPort = $_POST['query_port'];
             $rating = $_POST['rating'];
-            $delite_services = $_POST['delite_services'];
-            if ($delite_services == 0) {
-                $top_expired_date = 0;
-                $top_enabled = $_POST['top_enabled'];
-                if ($top_enabled != 0) $top_expired_date = strtotime($_POST['top_expired_date']);
+            $host = $_POST['host'];
+            $description = $_POST['description'];
 
 
-                $gamemenu_expired_date = 0;
-                $gamemenu_enabled = $_POST['gamemenu_enabled'];
-                if ($gamemenu_enabled != 0) $gamemenu_expired_date = strtotime($_POST['gamemenu_expired_date']);
+            $banCause = null;
+            $nowTime = time();
 
-
-
-
-                if ($_POST['vip_enabled'] == "0"){
-                    $vip_enabled = 0;
-                    $vip_expired_date = 0;
-                }else{
-
-                    $vip_enabled = $_POST['vip_enabled'];
-                    $vip_expired_date = strtotime(date('Y-m-d', strtotime($_POST['vip_expired_date'])));
-                }
-
-                if ($_POST['color_enabled'] === null or $_POST['color_enabled'] === ""){
-                    $color_enabled = 0;
-                    $color_expired_date = 0;
-                }else{
-                    $color_enabled = $_POST['color_enabled'];
-                    $color_expired_date = strtotime(date('Y-m-d', strtotime($_POST['color_expired_date'])));
-                }
-
-
-
-
-
-                if (!empty($_POST['boost'])) {
-                    $period = $_POST['boost'];
-                    $this->activationBoost($id, $period, $getInfoServerS);
-                }
-            } else {
-                $top_enabled = 0;
-                $top_expired_date = 0;
-                $period = 0;
-                $vip_enabled = 0;
-                $vip_expired_date = 0;
-                $gamemenu_enabled = 0;
-                $gamemenu_expired_date = 0;
-                $color_enabled = 0;
-                $color_expired_date = 0;
-            }
             $ban = $_POST['ban'];
-            if ($ban == 1) {
-                $ban_couse = $_POST['ban_couse'];
-                $ban_date = time();
-            } else {
-                $ban_couse = null;
-                $ban_date = null;
-            }
+            if ($ban === 1) $banCause = $_POST['ban_cause'];
 
-            $sql = "UPDATE ga_servers SET status = :status, moderation =:moderation, game = :game, ip = :ip, port = :port, rating = :rating, top_enabled = :top_enabled, top_expired_date = :top_expired_date, boost = :boost, vip_enabled = :vip_enabled, vip_expired_date = :vip_expired_date, gamemenu_enabled = :gamemenu_enabled, gamemenu_expired_date = :gamemenu_expired_date, color_enabled = :color_enabled, color_expired_date = :color_expired_date, ban = :ban, ban_couse = :ban_couse, ban_date = :ban_date WHERE id= :id";
+            $sql = "UPDATE ga_servers SET 
+                      status = :status, 
+                      moderation =:moderation, 
+                      game = :game,
+                      ip = :ip, 
+                      host = :host, 
+                      description = :description, 
+                      port = :port, 
+                      query_port = :query_port, 
+                      rating = :rating,
+                      ban = :ban, 
+                      ban_couse = :ban_couse,
+                      ban_date = :ban_date
+                  WHERE id= :id";
+
             $update = $this->db->prepare($sql);
             $update->bindParam(':status', $status);
             $update->bindParam(':moderation', $moderation);
             $update->bindParam(':game', $game);
             $update->bindParam(':ip', $ip);
+            $update->bindParam(':host', $host);
+            $update->bindParam(':description', $description);
             $update->bindParam(':port', $port);
+            $update->bindParam(':query_port', $queryPort);
             $update->bindParam(':rating', $rating);
-            $update->bindParam(':top_enabled', $top_enabled);
-            $update->bindParam(':top_expired_date', $top_expired_date);
-            $update->bindParam(':boost', $period);
-            $update->bindParam(':vip_enabled', $vip_enabled);
-            $update->bindParam(':vip_expired_date', $vip_expired_date);
-            $update->bindParam(':gamemenu_enabled', $gamemenu_enabled);
-            $update->bindParam(':gamemenu_expired_date', $gamemenu_expired_date);
-            $update->bindParam(':color_enabled', $color_enabled);
-            $update->bindParam(':color_expired_date', $color_expired_date);
             $update->bindParam(':ban', $ban);
-            $update->bindParam(':ban_couse', $ban_couse);
-            $update->bindParam(':ban_date', $ban_date);
+            $update->bindParam(':ban_couse', $banCause);
+            $update->bindParam(':ban_date', $nowTime);
             $update->bindParam(':id', $id);
             $update->execute();
 
@@ -219,9 +179,6 @@ class ServersController extends AbstractController
                 $isPlace = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
                 $isPlace->execute(array(':top_enabled' => $i));
                 if ($isPlace->rowCount() != '0') {
-                    $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE top_enabled = :top_enabled');
-                    $getInfoServer->execute(array(':top_enabled' => $i));
-                    $getInfoServer = $getInfoServer->fetch();
 
                     if ($getInfoServerS['top_enabled'] == $i) {
                         $currentServer = true;
@@ -242,6 +199,107 @@ class ServersController extends AbstractController
             $this->view->render("main", ['content' => $content, 'title' => $title]);
 
         }
+    }
+
+    public function editServices()
+    {
+
+        if (!parent::isAjax()) {
+            parent::ShowError(404, "Страница не найдена!");
+        }
+
+        $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+        $stmt = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
+        $stmt->execute([':id' => $id]);
+        $server = $stmt->fetch();
+
+        if (!$server) {
+             parent::ShowError(404, "Страница не найдена!");
+        }
+
+        $currentDate = strtotime(date('Y-m-d'));
+        $services = [
+            'top'       => ['label' => 'TOP услуги'],
+            'vip'       => ['label' => 'VIP услуги'],
+            'gamemenu'  => ['label' => 'GameMenu услуги'],
+            'color'     => ['label' => 'услуги выделения цветом'],
+        ];
+
+
+        foreach ($services as $key => &$service) {
+            $enabledKey = "{$key}_enabled";
+            $expiredKey = "{$key}_expired_date";
+
+            $enabled = isset($_POST[$enabledKey]) ? (int)$_POST[$enabledKey] : null;
+            $expired = !empty($_POST[$expiredKey]) ? strtotime($_POST[$expiredKey]) : null;
+
+            if ($enabled === 0) {
+                $expired = null;
+            }
+
+            // Если включена — проверяем корректность даты
+            if ($enabled && $expired < $currentDate) {
+                $answer['status'] = "error";
+                $answer['error'] = "Ошибка: дата окончания {$service['label']} не может быть раньше текущей.";
+                exit(json_encode($answer));
+            }
+
+
+
+            if ($enabled === 0) $enabled = null;
+
+            $service['enabled'] = $enabled;
+            $service['expired'] = $expired;
+        }
+
+
+        // Активация буста
+        $boostPeriod = !empty($_POST['boost']) ? $_POST['boost'] : null;
+        if ($boostPeriod) {
+            $this->activationBoost($id, $boostPeriod, $server);
+        }
+
+
+        // Обновление данных в БД
+        $sql = "
+        UPDATE ga_servers SET 
+            top_enabled = :top_enabled, 
+            top_expired_date = :top_expired_date, 
+            vip_enabled = :vip_enabled, 
+            vip_expired_date = :vip_expired_date, 
+            gamemenu_enabled = :gamemenu_enabled, 
+            gamemenu_expired_date = :gamemenu_expired_date, 
+            color_enabled = :color_enabled, 
+            color_expired_date = :color_expired_date, 
+            boost = :boost,
+            ban = :ban,
+            ban_couse = :ban_couse,
+            ban_date = :ban_date
+        WHERE id = :id";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            ':top_enabled'             => $services['top']['enabled'],
+            ':top_expired_date'        => $services['top']['expired'],
+            ':vip_enabled'             => $services['vip']['enabled'],
+            ':vip_expired_date'        => $services['vip']['expired'],
+            ':gamemenu_enabled'        => $services['gamemenu']['enabled'],
+            ':gamemenu_expired_date'   => $services['gamemenu']['expired'],
+            ':color_enabled'           => $services['color']['enabled'],
+            ':color_expired_date'      => $services['color']['expired'],
+            ':boost'                   => $boostPeriod,
+            ':ban'                     => $_POST['ban'] ?? 0,
+            ':ban_couse'               => $_POST['ban_couse'] ?? '',
+            ':ban_date'                => $_POST['ban_date'] ?? null,
+            ':id'                      => $id
+        ]);
+
+        $answer['status'] = "success";
+        $answer['success'] = "Услуги успешно изменены";
+        exit(json_encode($answer));
+
+
     }
 
     public function remove()

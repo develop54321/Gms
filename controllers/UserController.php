@@ -2,6 +2,7 @@
 
 namespace controllers;
 
+use components\Captcha;
 use components\Flash;
 use components\Json;
 use components\Mail;
@@ -9,17 +10,11 @@ use components\Pagination;
 use components\pay_method\FreekassaClient;
 use components\pay_method\LavaClient;
 use components\pay_method\YooKassaClient;
-use components\pay_method\YooKassaService;
 use components\pay_method\YooMoneyClient;
-use components\ReCaptcha;
-use components\Services;
 use components\System;
 use components\User;
 use core\BaseController;
 use PDO;
-use PDOException;
-use Ramsey\Uuid\Guid\Guid;
-use Ramsey\Uuid\Uuid;
 
 class UserController extends BaseController
 {
@@ -87,7 +82,12 @@ class UserController extends BaseController
             $getInfoServer = $getInfoServer->fetch();
             if (empty($getInfoServer)) parent::ShowError(404, "Сервер не найден!");
 
-            if ($getInfoServer['ban'] != 0 or $getInfoServer['befirst_enabled'] != 0 or $getInfoServer['top_enabled'] != 0 or $getInfoServer['vip_enabled'] != 0 or $getInfoServer['color_enabled'] != 0 or $getInfoServer['gamemenu_enabled'] != 0 or $getInfoServer['boost'] != 0) {
+            if ($getInfoServer['ban'] !== null
+                or $getInfoServer['top_enabled'] !== null
+                or $getInfoServer['vip_enabled'] !== null
+                or $getInfoServer['color_enabled'] !== null
+                or $getInfoServer['gamemenu_enabled'] !== null
+                or $getInfoServer['boost'] !== null) {
                 $answer['status'] = "error";
                 $answer['error'] = "Сервер имеет платную услугу или забанен, удаление невозможно!";
                 exit(json_encode($answer));
@@ -107,6 +107,78 @@ class UserController extends BaseController
         }
 
 
+    }
+
+
+    public function security()
+    {
+        $title = "Безопасность";
+        $user = new User();
+
+
+        if (!$user->isAuth()) {
+            header("Location: /user/login");
+            exit;
+        }
+
+        $profile = $user->getProfile();
+
+        if ($this->isAjax()) {
+
+            $lastPassword = strip_tags($_POST['last_password']);
+            $newPassword = strip_tags($_POST['new_password']);
+            $repeatNewPassword = strip_tags($_POST['repeat_new_password']);
+
+
+            $answer = ['status' => 'error', 'error' => 'Неизвестная ошибка'];
+
+
+            if (empty($lastPassword) || empty($newPassword) || empty($repeatNewPassword)) {
+                $answer['error'] = "Все поля обязательны для заполнения.";
+                return exit(json_encode($answer, JSON_UNESCAPED_UNICODE));
+            }
+
+            if (!password_verify($lastPassword, $profile['password'])) {
+                $answer['error'] = "Старый пароль введён неверно.";
+                return exit(json_encode($answer, JSON_UNESCAPED_UNICODE));
+            }
+
+            if ($newPassword !== $repeatNewPassword) {
+                $answer['error'] = "Новый пароль и его повтор не совпадают.";
+                return exit(json_encode($answer, JSON_UNESCAPED_UNICODE));
+            }
+
+            if (strlen($newPassword) < 8) {
+                $answer['error'] = "Пароль должен содержать минимум 8 символов.";
+                return exit(json_encode($answer, JSON_UNESCAPED_UNICODE));
+            }
+
+            $passNew = password_hash($newPassword, PASSWORD_DEFAULT);
+
+            $sql = "UPDATE ga_users SET password = :password WHERE id = :id";
+            $update = $this->db->prepare($sql);
+            $update->bindParam(':password', $passNew);
+            $update->bindParam(':id', $profile['id'], PDO::PARAM_INT);
+
+            if ($update->execute()) {
+                $answer = [
+                    'status' => 'success',
+                    'success' => 'Пароль успешно изменён.'
+                ];
+            } else {
+                $answer['error'] = "Произошла ошибка при обновлении пароля. Попробуйте позже.";
+            }
+
+            return exit(json_encode($answer, JSON_UNESCAPED_UNICODE));
+        }
+
+
+        $content = $this->view->renderPartial("user/security");
+        $this->view->render("main", [
+            'content' => $content,
+            'title' => $title,
+            'user_profile' => $profile
+        ]);
     }
 
 
@@ -179,7 +251,16 @@ class UserController extends BaseController
             $paymentUrl = null;
             switch ($getInfoPayMethod['typeCode']) {
                 case "freekassa":
-                    $sign = md5($infoPaymentSettings['fk_id'] . ":" . $amount . ":" . $infoPaymentSettings['fk_key1'] . ":" . $invoiceId);
+
+                    $merchant_id = $infoPaymentSettings['fk_id'];
+                    $secret_word = $infoPaymentSettings['fk_key1'];
+                    $order_id = $invoiceId;
+                    $order_amount = $amount;
+                    $currency = 'RUB';
+
+                    $sign = md5($merchant_id.':'.$order_amount.':'.$secret_word.':'.$currency.':'.$order_id);
+
+
                     $client = new FreekassaClient(
                         $infoPaymentSettings['fk_id'],
                         $amount,
@@ -295,7 +376,7 @@ class UserController extends BaseController
         $result = $pagination->create(array('per_page' => $per_page, 'count' => $count));
 
 
-        $getMyServers = $this->db->prepare('SELECT s.id, s.map, s.hostname, s.game, s.moderation, s.ip, s.port, s.players, s.max_players, s.rating, s.ban, s.status, u.email FROM ga_servers s LEFT JOIN ga_users u ON s.id_user=u.id WHERE s.id_user = :id_user ORDER BY s.id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
+        $getMyServers = $this->db->prepare('SELECT s.id, s.map, s.hostname, s.game, s.moderation, s.ip, s.host, s.port, s.players, s.max_players, s.rating, s.ban, s.status, u.email FROM ga_servers s LEFT JOIN ga_users u ON s.id_user=u.id WHERE s.id_user = :id_user ORDER BY s.id DESC LIMIT ' . $result['start'] . ', ' . $per_page . '');
         $getMyServers->execute(array(':id_user' => $user_profile['id']));
         $getMyServers = $getMyServers->fetchAll();
 
@@ -311,6 +392,7 @@ class UserController extends BaseController
         $this->view->render("main", ['content' => $content, 'title' => $title, 'user_profile' => $user_profile]);
 
     }
+
 
     public function payLogs()
     {
@@ -385,17 +467,11 @@ class UserController extends BaseController
 
             $password = strip_tags($_POST['password']);
             $password2 = strip_tags($_POST['password2']);
-            $captcha = $_POST['captcha'] ?? null;
 
-            if (!isset($_SESSION['captcha'])) {
-                $answer['status'] = "error";
-                $answer['error'] = "Капча введена не верно!";
-                exit(json_encode($answer));
-            }
-
-            if ($_SESSION['captcha'] != md5($captcha)) {
-                $answer['status'] = "error";
-                $answer['error'] = "Капча введена не верно!";
+            $captcha = new Captcha();
+            if (!$captcha->validate($_POST['captcha'] ?? '', "signup")) {
+                $answer['status'] = 'error';
+                $answer['error'] = 'Капча введена неверно';
                 exit(json_encode($answer));
             }
 
@@ -444,6 +520,7 @@ class UserController extends BaseController
             $this->db->exec("INSERT INTO ga_users (email, lastname, firstname, password, role, date_reg) 
             VALUES('$email', '$lastname', '$firstname', '$password', 'user', '$time')");
 
+            $lastIdUser = $this->db->lastInsertId();
 
             $content = "
             <p>Здравствуйте!</p>
@@ -474,8 +551,19 @@ class UserController extends BaseController
 
             unset($_SESSION['captcha']);
 
+
+            $hash = md5($lastIdUser);
+            setcookie('hash', $hash, time() + (86400 * 30), "/");
+            setcookie('id_user', $lastIdUser, time() + (86400 * 30), "/");
+
+            $sql = "UPDATE ga_users SET hash = :hash WHERE id = :id";
+            $update = $this->db->prepare($sql);
+            $update->bindParam(':hash', $hash);
+            $update->bindParam(':id', $lastIdUser, PDO::PARAM_INT);
+            $update->execute();
+
             $answer['status'] = "success";
-            $answer['success'] = "Вы успешно зарегистрировались";
+            $answer['success'] = "Регистрация прошла успешно. Сейчас вы будете автоматически авторизованы.";
             exit(json_encode($answer));
 
         } else {
@@ -497,6 +585,13 @@ class UserController extends BaseController
         if (parent::isAjax()) {
             $email = strip_tags($_POST['email']);
 
+            $captcha = new Captcha();
+            if (!$captcha->validate($_POST['captcha'] ?? '', "reset")) {
+                $answer['status'] = 'error';
+                $answer['error'] = 'Капча введена неверно';
+                exit(json_encode($answer));
+            }
+
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $answer['status'] = "error";
                 $answer['error'] = "<b>E-mail</b> адрес указан верно";
@@ -508,13 +603,12 @@ class UserController extends BaseController
             $check->bindValue(":email", $email);
             $check->execute();
             $findUserByEmail = $check->fetch(PDO::FETCH_ASSOC);
-            if ($findUserByEmail === null) {
+            if ($findUserByEmail === false) {
                 $answer['status'] = "error";
                 $answer['error'] = "Пользователь с указанным e-mail не найден";
                 exit(json_encode($answer));
             } else {
 
-                // Проверяем, истекло ли время с момента создания reset_code
                 $resetCodeCreatedAt = $findUserByEmail['reset_code_created_at'];
                 $currentTime = time();
                 $timeDifference = $currentTime - $resetCodeCreatedAt;

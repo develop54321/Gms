@@ -1,6 +1,6 @@
 <?php if ($type == 'top'): ?>
     <hr/>
-    <?php if ($serverInfo['top_enabled'] === '0'): ?>
+    <?php if ($serverInfo['top_enabled'] === null): ?>
         <p>Выберите место в топе</p>
         <div class="top-place">
             <div class="d-flex gap-3">
@@ -25,7 +25,7 @@
     <?php endif; ?>
 
     <?php elseif ($type == 'vip'): ?>
-        <?php if ($serverInfo['vip_enabled'] !== '0'): ?>
+        <?php if ($serverInfo['vip_enabled'] !== null): ?>
             <hr/>
             Услуга будет продлена. <br/>
             Текущий срок действия оплачен до: <?php echo date("d.m.Y [H:i]", $serverInfo['vip_expired_date']); ?>
@@ -33,7 +33,7 @@
 
     <?php elseif ($type == 'color'): ?>
         <hr/>
-        <?php if ($serverInfo['color_enabled'] === '0'): ?>
+        <?php if ($serverInfo['color_enabled'] === null): ?>
         <p>Выберите цвет</p>
         <div class="colors">
             <div class="d-flex gap-3">
@@ -61,8 +61,10 @@
         <hr>
         Текущее количество голосов: <?php echo $serverInfo['rating']; ?>
     <?php elseif ($type == 'boost'): ?>
+        <?php if ($serverInfo['boost'] !== null):?>
         <hr>
         Текущее количество кругов: <?php echo $serverInfo['boost']; ?>
+        <?php endif; ?>
     <?php endif; ?>
 
 
@@ -91,7 +93,7 @@
                     <a href="#" onclick="selectPaymentMethod('user_balance', this); return false;">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Личный счет</h5>
+                                <h5 class="card-title">Лицевой счет</h5>
                                 <p class="card-text">
                                     Баланс: <?php echo \widgets\money\Money::run($user['balance']); ?><br/>
                                 </p>
@@ -166,7 +168,14 @@
                         break;
 
                     case "success":
+
                         ShowModal(data.success, 'answer', 'success');
+
+                        if (data.redirect_href) {
+                            setTimeout(function() {
+                                window.location.href = data.redirect_href;
+                            }, 3000);
+                        }
                         break;
                 }
                 toggleButtonLoader($("#pay-button"), false);
@@ -179,7 +188,7 @@
     }
 
     function selectPaymentMethod(method, el) {
-        toggleActive(el);
+        toggleActivePayMethod(el);
 
         if (method === "user_balance") {
             $("#pay-button").replaceWith('<button id="pay-button" onclick="payUserBalance(); return false;" type="submit" class="btn btn-primary btn-sm">Оплатить</button>');
@@ -213,6 +222,8 @@
                                 document.getElementById("paymentForm").submit();
                             };
                         }
+                    }else if (data.status === "error") {
+                        ShowModal(data.error, 'answer', 'error');
                     } else {
                         alert('Ошибка при получении данных для оплаты.');
                     }
@@ -232,12 +243,15 @@
         element.querySelector('.card').classList.add('active');
     }
 
-    function toggleButtonLoader(button, isLoading) {
-        if (isLoading) {
-            $(button).prop('disabled', true).addClass('btn-loader').append('<span class="loader"></span>');
-        } else {
-            $(button).prop('disabled', false).removeClass('btn-loader').find('.loader').remove();
-        }
+    function toggleActivePayMethod(element) {
+        document.querySelectorAll('.pay-methods .card').forEach(card => {
+            card.classList.remove('active');
+        });
+
+        element.querySelector('.card').classList.add('active');
     }
+
+
+
 
 </script>

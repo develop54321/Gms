@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Документация: Покупка услуг</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; color: #333; }
+        h1, h2, h3 { color: #2c3e50; }
+        pre { background: #ecf0f1; padding: 10px; border-radius: 5px; overflow-x: auto; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { border: 1px solid #bdc3c7; padding: 8px; text-align: left; }
+        th { background: #34495e; color: #fff; }
+        .code { font-family: monospace; background: #ecf0f1; padding: 2px 4px; border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+<h1>API Документация: Покупка услуг</h1>
+
+<h2>Общее описание</h2>
+<p>API предназначено для партнеров системы и позволяет покупать услуги (в текущей реализации — <strong>boost</strong> сервера). Все ответы возвращаются в формате JSON.</p>
+
+<h2>Аутентификация</h2>
+<p>Аутентификация осуществляется с помощью:</p>
+<ul>
+    <li><span class="code">login</span> — API-логин партнера</li>
+    <li><span class="code">key</span> — API-ключ партнера</li>
+</ul>
+<p>Проверка выполняется по таблице <span class="code">ga_users</span>:</p>
+<ul>
+    <li>Пользователь должен иметь роль <span class="code">partner</span></li>
+    <li>API-ключ должен совпадать с <span class="code">params.key_api</span></li>
+</ul>
+
+<h2>Endpoint: Покупка услуги</h2>
+<p><strong>URL:</strong> <span class="code">/api</span></p>
+<p><strong>Метод:</strong> GET | POST</p>
+
+<h3>Обязательные параметры</h3>
+<table>
+    <tr><th>Параметр</th><th>Тип</th><th>Описание</th></tr>
+    <tr><td>login</td><td>string</td><td>API-логин партнера</td></tr>
+    <tr><td>key</td><td>string</td><td>API-ключ партнера</td></tr>
+    <tr><td>sv</td><td>string</td><td>Сервер в формате IP:PORT</td></tr>
+    <tr><td>services</td><td>int</td><td>ID услуги</td></tr>
+    <tr><td>game</td><td>string</td><td>Идентификатор игры</td></tr>
+</table>
+
+<h3>Логика работы</h3>
+<ol>
+    <li>Проверка наличия всех обязательных параметров</li>
+    <li>Проверка партнера и API-ключа</li>
+    <li>Проверка существования услуги</li>
+    <li>Расчет цены с учетом скидки партнера (<span class="code">discount_api</span>)</li>
+    <li>Проверка баланса партнера</li>
+    <li>Списание средств</li>
+    <li>Создание или получение сервера</li>
+    <li>Применение услуги (boost)</li>
+    <li>Логирование платежа</li>
+</ol>
+
+<h3>Применение услуги: Boost</h3>
+<ul>
+    <li>Если сервер уже имеет активный boost — значение увеличивается</li>
+    <li>Если boost отсутствует:
+        <ul>
+            <li>Проверяется лимит boost-серверов</li>
+            <li>При превышении лимита самый старый boost уменьшается/сбрасывается</li>
+            <li>Текущему серверу назначается boost и позиция</li>
+        </ul>
+    </li>
+</ul>
+
+<h3>Успешный ответ</h3>
+<pre>{
+  "status": "success",
+  "code": "purchased",
+  "message": "Server successfully added"
+}</pre>
+
+<h3>Возможные ошибки</h3>
+<table>
+    <tr><th>Code</th><th>Описание</th></tr>
+    <tr><td>no_params</td><td>Не передан обязательный параметр</td></tr>
+    <tr><td>no_partner</td><td>Пользователь не является партнером</td></tr>
+    <tr><td>no_valid_key</td><td>Неверный API-ключ</td></tr>
+    <tr><td>no_service</td><td>Услуга не найдена</td></tr>
+    <tr><td>no_money</td><td>Недостаточно средств</td></tr>
+    <tr><td>server_is_banned</td><td>Сервер заблокирован</td></tr>
+</table>
+
+<h3>Пример ошибки</h3>
+<pre>{
+  "status": "error",
+  "code": "no_money",
+  "message": "Not enough money"
+}</pre>
+
+<h2>Примечания</h2>
+<ul>
+    <li>Все операции покупки необратимы</li>
+    <li>API не использует подписи или токены — защита строится на login + key</li>
+    <li>Рекомендуется использовать HTTPS</li>
+</ul>
+
+</body>
+</html>

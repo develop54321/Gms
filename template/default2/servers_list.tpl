@@ -23,19 +23,19 @@
                 </thead>
                 <tbody>
                 <?php foreach($servers as $row):?>
-                <tr
-                <?php if($row['color_enabled'] != null):?>style="background: <?php echo $row['color_enabled'];?>
-                "<?php endif;?>>
+                <tr <?php if($row['color_enabled'] != null):?>style="background: <?php echo $row['color_enabled'];?>"<?php endif;?>>
                 <td>
                     <?php widgets\server\game\GameIcon::run($row['game']);?>
                     <a href="?game=<?=$row['game'];?>"></a>
                 </td>
                 <td><a class="hostname" href="/server/<?php echo $row['ip'];?>:<?php echo $row['port'];?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']);?></a></td>
                 <td>
-                    <span class="address">
-                        <?php echo $row['ip'];?>:<?php echo $row['port'];?>
-                    </span>
-
+    <span class="address" id="server-<?=$row['id'];?>">
+        <?php echo $row['host'] ?? $row['ip'];?>:<?php echo $row['port'];?>
+    </span>
+                    <button class="copy-btn" onclick="copyToClipboard('server-<?=$row['id'];?>')">
+                        <i class="fa fa-copy"></i>
+                    </button>
                 </td>
                 <td><?php echo $row['map'];?></td>
                 <td>
@@ -44,7 +44,7 @@
                     </span>
                 </td>
                 <td style="text-align: center;">
-                    <?php if($row['vip_enabled'] != '0'):?>
+                    <?php if($row['vip_enabled'] !== null):?>
                     <b>VIP</b>
                     <?php else:?>
                     <a href="#" onclick="ShowModal('<?=$row['id'];?>', 'vote', 'minus');return false;"><i class="fa fa-thumbs-down"></i></a>

@@ -2,8 +2,28 @@
 
 namespace components;
 
+use Exception;
+
 class Servers
 {
+
+    public static function getIp(string $host): string
+    {
+        if (filter_var($host, FILTER_VALIDATE_IP)) {
+            return $host;
+        }
+
+        if (filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
+            $ip = gethostbyname($host);
+            if ($ip === $host) {
+                throw new Exception('Не удалось определить IP-адрес домена');
+            }
+            return $ip;
+        }
+
+        throw new Exception('Неверный IP-адрес или доменное имя');
+    }
+
     public static function getImagePath($map_name, $game): string
     {
         $pathImgMap = 'public/img/maps/'.$game.'/'.$map_name.'.jpg';

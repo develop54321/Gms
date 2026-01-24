@@ -3,155 +3,136 @@
 namespace components;
 
 use xPaw\SourceQuery\SourceQuery;
+use GameQ\GameQ;
 
 class GameServerQuery
 {
-
     const SQ_TIMEOUT = 3;
 
-    private $game_type;
-    private $ip;
-    private $port;
-    private $query_port = null;
+    private string $ip;
+    private int $port;
+    private string $gameType;
+    private ?int $queryPort;
 
     private array $convertorGameType = [
-        'cs' => 'cs16',
-        'css' => 'css',
-        'csgo' => 'csgo',
-        'garrymod' => 'gmod',
-        'samp' => 'samp',
-        'arma' => 'arma',
-        'rust' => 'rust',
-        'tf2' => 'tf2',
-        'l4d2' => 'l4d2',
-        'unturned' => 'unturned',
-        'kf2' => 'killingfloor2',
-        'dayz' => 'dayz',
-        'arkse' => 'arkse',
-        'csgo2' => 'csgo',
+        'cs'        => 'cs16',
+        'css'       => 'css',
+        'csgo'      => 'csgo',
+        'csgo2'     => 'csgo',
+        'garrymod'  => 'gmod',
+        'tf2'       => 'tf2',
+        'l4d2'      => 'l4d2',
+        'samp'      => 'samp',
         'minecraft' => 'minecraft',
-        'gta5' => 'gta5m',
-        'mta' => 'mta'
+        'rust'      => 'rust',
+        'dayz'      => 'dayz',
+        'arkse'     => 'arkse',
+        'mta'       => 'mta',
+        'gta5'      => 'gta5m',
     ];
 
-
-    /**
-     * @param $value
-     * @return string
-     */
-    public function getConvertorGameType($value): ?string
+    public function __construct(string $ip, int $port, string $gameType, ?int $queryPort = null)
     {
-        if (array_key_exists($value, $this->convertorGameType)) {
-            return $this->convertorGameType[$value];
-        }
-
-        return null;
-
+        $this->ip        = $this->resolveIp($ip);
+        $this->port      = $port;
+        $this->gameType  = $gameType;
+        $this->queryPort = $queryPort;
     }
 
-
-    /**
-     * GameServerQuery constructor.
-     * @param string $ip
-     * @param string $port
-     * @param string $game_type
-     * @param null $query_port
-     */
-    public function __construct(string $ip, string $port, string $game_type, $query_port = null)
+    private function resolveIp(string $value): string
     {
-        $this->ip = $ip;
-        $this->port = $port;
-        $this->game_type = $game_type;
-        $this->query_port = $query_port;
+        return filter_var($value, FILTER_VALIDATE_IP)
+            ? $value
+            : gethostbyname($value);
     }
 
-    private function convertIp($value) {
-        if(filter_var($value, FILTER_VALIDATE_IP)) {
-            return $value;
-        } else {
-            return gethostbyname($value);
-        }
-    }
-    /**
-     * @return mixed|null
-     * @throws \Exception
-     */
-    public function query()
+    private function getGameType(): string
     {
-        $ip = $this->convertIp($this->ip);
-        $convertorGameType = $this->getConvertorGameType($this->game_type);
-        if ($convertorGameType === null){
-            return null;
+        if (!isset($this->convertorGameType[$this->gameType])) {
+            throw new \Exception('Неизвестный тип игры');
         }
-
-        $address = $ip.":".$this->port;
-        $queryParams = [
-            'type' => $convertorGameType,
-            'host' => $address
-        ];
-
-
-
-        if ($this->query_port !== null && $this->query_port != ""){
-            $queryParams['options']['query_port'] = $this->query_port;
-        }
-
-        try {
-
-            $GameQ = new \GameQ\GameQ();
-            $GameQ->addServer($queryParams);
-            $results = $GameQ->process();
-
-            return $results[$address] ?? null;
-        } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
-        }
+        return $this->convertorGameType[$this->gameType];
     }
 
     /**
-     * @return array|bool
-     * @throws \Exception
+     * Главный метод
      */
-    public function players()    {
-        $ip = $this->convertIp($this->ip);
+    public function query(): array
+    {
+        $type = $this->getGameType();
 
-        $address = $ip.":".$this->port;
-        $queryParams = [
-            'type' => $this->getConvertorGameType($this->game_type),
-            'host' => $address,
-        ];
-
-        if ($this->query_port !== null && $this->query_port != ""){
-            $queryParams['options']['query_port'] = $this->query_port;
-        }
-        try {
-
-            $GameQ = new \GameQ\GameQ();
-            $GameQ->addServer($queryParams);
-            $results = $GameQ->process();
-
-
-            return $results[$address]['players'] ?? null;
-        } catch (\Exception $e) {
-            throw new \Exception("Сервер не отвечает, попробуйте ещё раз");
-        }
+        return $type === 'cs16'
+            ? $this->queryCs16()
+            : $this->queryGameQ($type);
     }
 
     /**
-     * @return array|bool
-     * @throws \Exception
+     * CS 1.6 через SourceQuery
      */
-    public function settings(){
+    private function queryCs16(): array
+    {
         $Query = new SourceQuery();
+
         try {
-            $Query->Connect($this->ip, $this->port, self::SQ_TIMEOUT, SourceQuery::SOURCE);
-            return $Query->GetRules();
+            $Query->Connect($this->ip, $this->port, self::SQ_TIMEOUT, SourceQuery::GOLDSOURCE);
+
+            $info = $Query->GetInfo();
+
+            return [
+                'hostname'    => $info['HostName'] ?? null,
+                'map'         => $info['Map'] ?? null,
+                'players'     => (int)($info['Players'] ?? 0),
+                'max_players' => (int)($info['MaxPlayers'] ?? 0),
+                'raw'         => $info,
+            ];
+
         } catch (\Exception $e) {
-            throw new \Exception("Сервер не отвечает, попробуйте ещё раз");
+            throw new \Exception('CS 1.6 сервер не отвечает');
         } finally {
             $Query->Disconnect();
         }
-
     }
+
+    /**
+     * Все остальные игры через GameQ
+     */
+    private function queryGameQ(string $type): array
+    {
+        $GameQ = new GameQ();
+
+        $params = [
+            'type' => $type,
+            'host' => "{$this->ip}:{$this->port}",
+        ];
+
+        if ($this->queryPort) {
+            $params['options']['query_port'] = $this->queryPort;
+        }
+
+
+        try {
+            $GameQ->addServer($params);
+            $results = $GameQ->process();
+
+            $data = reset($results);
+
+            if (!$data || empty($data['gq_online'])) {
+                throw new \Exception();
+            }
+
+            return [
+                'hostname'    => $data['gq_hostname'] ?? null,
+                'map'         => $data['gq_mapname'] ?? null,
+                'players'     => (int)($data['gq_numplayers'] ?? 0),
+                'max_players' => (int)($data['gq_maxplayers'] ?? 0),
+                'raw'         => $data,
+            ];
+
+        } catch (\Exception $e) {
+            throw new \Exception('Сервер не отвечает или недоступен');
+        }
+    }
+
+
 
 }

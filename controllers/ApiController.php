@@ -80,9 +80,7 @@ class ApiController extends BaseController
             $id_server = $getInfoServer['id'];
         } else {
 
-            $system = new System();
-            $country = $system->getCountry($query[0]);
-
+            $country = null;
 
             $status = "0";
 
@@ -106,58 +104,49 @@ class ApiController extends BaseController
         switch ($getInfoServices['type']) {
 
             case "boost":
-
-                if ($getInfoServer['boost'] != '0') {
-
-                    $this->db->query("UPDATE ga_servers SET boost = boost+1 WHERE id = '" . $id_server . "'");
+                if ($getInfoServer['boost'] !== null) {
+                    $sql = "UPDATE ga_servers SET boost = boost + 1 WHERE id = :id";
+                    $update = $this->db->prepare($sql);
+                    $update->execute([':id' => $id_server]);
 
                 } else {
+                    $countBoostServers = $this->db->query("SELECT COUNT(*) FROM ga_servers WHERE boost IS NOT NULL")->fetchColumn();
+                    $getBoostServers = $this->db->query(
+                        "SELECT id, boost FROM ga_servers WHERE boost IS NOT NULL ORDER BY boost_position ASC")->fetchAll(PDO::FETCH_ASSOC);
 
-                    $countBoostServers = $this->db->prepare('SELECT * FROM ga_servers WHERE boost != :boost');
-                    $countBoostServers->execute(array(':boost' => 0));
-                    $countBoostServers = $countBoostServers->rowCount();
-
-                    $getBoostServers = $this->db->prepare('SELECT id, hostname, boost FROM ga_servers WHERE boost != :boost ORDER BY boost_position ASC');
-                    $getBoostServers->execute(array(':boost' => 0));
-                    $getBoostServers = $getBoostServers->fetchAll();
-
-                    if ($countBoostServers == $settings['global_settings']['count_servers_boost']) {
+                    // Если лимит достигнут
+                    if ($countBoostServers >= $settings['global_settings']['count_servers_boost']) {
                         foreach ($getBoostServers as $row) {
-                            if ($row['boost'] == '1') {
-                                $zero = 0;
-                                $sql = "UPDATE ga_servers SET boost = :boost, boost_position = :boost_position WHERE id = :id";
+                            if ($row['boost'] <= 1) {
+                                // Убираем boost
+                                $sql = "UPDATE ga_servers SET boost = NULL, boost_position = NULL WHERE id = :id";
                                 $update = $this->db->prepare($sql);
-                                $update->bindParam(':boost', $zero);
-                                $update->bindParam(':boost_position', $zero);
-                                $update->bindParam(':id', $row['id']);
-                                $update->execute();
+                                $update->execute([':id' => $row['id']]);
                                 break;
+
                             } else {
-                                $boost_position = time() + 1;
-                                $this->db->query("UPDATE ga_servers SET boost = boost-1, boost_position = $boost_position WHERE id = '" . $row['id'] . "'");
+                                $sql = "UPDATE ga_servers SET boost = boost - 1, boost_position = :pos WHERE id = :id";
+                                $update = $this->db->prepare($sql);
+                                $update->execute([
+                                    ':pos' => time() + 1,
+                                    ':id'  => $row['id']
+                                ]);
                             }
                         }
-
-                        $boost_position = time();
-                        $sql = "UPDATE ga_servers SET boost = :boost, boost_position = :boost_position WHERE id = :id";
-                        $update = $this->db->prepare($sql);
-                        $update->bindParam(':boost', $getInfoServices['period']);
-                        $update->bindParam(':boost_position', $boost_position);
-                        $update->bindParam(':id', $id_server);
-                        $update->execute();
-                    } else {
-
-                        $boost_position = time();
-                        $sql = "UPDATE ga_servers SET boost = :boost, boost_position = :boost_position WHERE id = :id";
-                        $update = $this->db->prepare($sql);
-                        $update->bindParam(':boost', $getInfoServices['period']);
-                        $update->bindParam(':boost_position', $boost_position);
-                        $update->bindParam(':id', $id_server);
-                        $update->execute();
                     }
+
+                    // Назначаем boost текущему серверу
+                    $sql = "UPDATE ga_servers SET boost = :boost, boost_position = :pos WHERE id = :id";
+                    $update = $this->db->prepare($sql);
+                    $update->execute([
+                        ':boost' => $getInfoServices['period'],
+                        ':pos'   => time(),
+                        ':id'    => $id_server
+                    ]);
                 }
 
                 break;
+
 
         }
 

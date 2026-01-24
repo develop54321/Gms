@@ -21,7 +21,7 @@ use components\System;
             <tbody>
             <?php if ($settings['global_settings']['top_on'] == 1): ?>
                 <tr>
-                    <td>Премиум место</td>
+                    <td>Топ сервера</td>
                     <td>Сервер находится в шапке на главной странице мониторинга</td>
                     <td class="text-center">
                         <?= $free_servers_top ?> из <?= $settings['global_settings']['count_servers_top'] ?>
@@ -78,7 +78,7 @@ use components\System;
 
         <div>
             <?php if ($settings['global_settings']['top_on'] == 1): ?>
-                <h5>Премиум место</h5>
+                <h5>Топ сервера</h5>
                 <table class="table table-dark">
                     <thead>
                     <tr>
@@ -99,7 +99,7 @@ use components\System;
                                 </a>
                             </td>
                             <td width="20%">
-                                <span class="address"><?= $t['ip'] ?>:<?= $t['port'] ?></span>
+                                <span class="address"><?= $t['host'] ?? $t['ip'] ?>:<?= $t['port'] ?></span>
                             </td>
                             <td width="18%"><?= htmlspecialchars($t['map']) ?></td>
                             <td width="15%"><?= date('d.m.Y [H:i]', $t['top_expired_date']) ?></td>
@@ -137,7 +137,7 @@ use components\System;
                                 </a>
                             </td>
                             <td width="20%">
-                                <span class="address"><?= $b['ip'] ?>:<?= $b['port'] ?></span>
+                                <span class="address"><?= $b['host'] ?? $b['ip'] ?>:<?= $b['port'] ?></span>
                             </td>
                             <td width="18%"><?= htmlspecialchars($b['map']) ?></td>
                             <td width="15%"><?= $b['boost'] ?></td>
@@ -176,7 +176,7 @@ use components\System;
                                 </a>
                             </td>
                             <td width="20%">
-                                <span class="address"><?= $v['ip'] ?>:<?= $v['port'] ?></span>
+                                <span class="address"><?= $v['host'] ?? $v['ip'] ?>:<?= $v['port'] ?></span>
                             </td>
                             <td width="18%"><?= htmlspecialchars($v['map']) ?></td>
                             <td width="15%"><?= date('d.m.Y [H:i]', $v['vip_expired_date']) ?></td>
@@ -215,7 +215,7 @@ use components\System;
                                 </a>
                             </td>
                             <td width="20%">
-                                <span class="address"><?= $c['ip'] ?>:<?= $c['port'] ?></span>
+                                <span class="address"><?= $c['host'] ?? $c['ip'] ?>:<?= $c['port'] ?></span>
                             </td>
                             <td width="18%"><?= htmlspecialchars($c['map']) ?></td>
                             <td width="15%"><?= date('d.m.Y [H:i]', $c['color_expired_date']) ?></td>
@@ -254,7 +254,7 @@ use components\System;
                                 </a>
                             </td>
                             <td width="20%">
-                                <span class="address"><?= $g['ip'] ?>:<?= $g['port'] ?></span>
+                                <span class="address"><?= $g['host'] ?? $g['ip'] ?>:<?= $g['port'] ?></span>
                             </td>
                             <td width="18%"><?= htmlspecialchars($g['map']) ?></td>
                             <td width="15%"><?= date('d.m.Y [H:i]', $g['gamemenu_expired_date']) ?></td>

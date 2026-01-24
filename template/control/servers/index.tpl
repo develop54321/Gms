@@ -71,6 +71,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Игра</th>
+                <th scope="col">Статус</th>
                 <th scope="col">Название</th>
                 <th scope="col">Адрес</th>
                 <th scope="col">Дата добавления</th>
@@ -80,14 +81,35 @@
             <tbody>
             <?php foreach ($servers as $row): ?>
                 <tr id="server<?php echo $row['id']; ?>">
-                    <td><?php echo $row['id']; ?></td>
-                    <td>
-                        <?php widgets\server\game\GameIcon::run($row['game']); ?>
+                    <td style="width: 5%;"><?php echo $row['id']; ?></td>
+
+                    <td style="width: 5%;">
+                        <?php widgets\server\game\GameIcon::run($row['game']);?>
+
                     </td>
-                    <td>
-                        <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info" target="_blank"><?php echo $row['hostname']; ?></a>
+
+                    <td style="width: 5%; text-align: center;">
+                        <?php if ($row['status'] == 1): ?>
+                        <span class="badge bg-success me-1" style="padding: 0.8em;">Онлайн</span>
+                        <?php else: ?>
+                        <span class="badge bg-danger me-1" style="padding: 0.8em;">Выключен</span><br/>
+                        <small class="text-muted">
+                            (был онлайн: <?= date('d.m.Y H:i', $row['last_update_at']); ?>)
+                        </small>
+                        <?php endif; ?>
                     </td>
-                    <td>
+
+
+                    <td style="width: 30%;">
+
+                        <a href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info" target="_blank">
+                            <?php echo htmlspecialchars($row['hostname']); ?>
+                        </a>
+
+                    </td>
+
+
+                    <td style="width: 20%;">
 
                          <span class="badge bg-dark">
                        <?php echo $row['ip']; ?>:<?php echo $row['port']; ?>
@@ -95,7 +117,8 @@
 
 
                     </td>
-                    <td>
+
+                    <td style="width: 10%;">
                         <span class="badge bg-dark my-1">
                             <?php echo date("d.m.Y [H:i]", $row['date_add']); ?>
                         </span>
@@ -103,7 +126,7 @@
                     </td>
 
 
-                    <td>
+                    <td style="width: 1%;">
                         <a href="/control/servers/edit?id=<?= $row['id']; ?>" class="text-muted"
                            title="Изменить сервер"><i class="fa fa-pencil"></i></a>
                         <a href="#" onclick="remove(<?= $row['id']; ?>); return false;" class="text-muted"

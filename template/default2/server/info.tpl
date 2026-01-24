@@ -19,15 +19,26 @@
                     <div class="server-info">
                         <p>Название сервера: <span class="name"><?php echo \widgets\server\hostname\Hostname::run($data['hostname']);?></span></p>
                         <p>Игра: <span class="game"> <?php echo $data['game_name'];?></span> </p>
-                        <p>Адрес: <span class="address"><?php echo $data['ip'];?>:<?php echo $data['port'];?></span></p>
+                        <p>Адрес:
+                            <span class="address" id="server-<?=$row['id'];?>">
+                                <?php echo $data['host'] ?? $data['ip'];?>:<?php echo $data['port'];?>
+                            </span>
+                            <button class="copy-btn" onclick="copyToClipboard('server-<?=$row['id'];?>')">
+                                <i class="fa fa-copy"></i>
+                            </button>
+                        </p>
                         <p>Игроков: <span class="players"><?php echo $data['players'];?>/<?php echo $data['max_players'];?></span></p>
                         <p>Карта: <span class="map"><?php echo $data['map'];?></span> </p>
 
 
                         <p>Статус:
-                        <span class="<?php if ($data['status']):?>status-online<?php else:?>status-offline<?php endif;?>">
-                            <?php echo $data['status'];?>
-                        </span>
+                            <?php if ($data['status'] == 1):?>
+                            <span class="status-online">Онлайн</span>
+                            <?php else:?>
+                                <span class="status-offline">Выключен</span>
+                            <?php endif;?>
+
+
                         </p>
 
                         <p>
@@ -65,21 +76,21 @@
 
                         <h3>Платные услуги</h3>
                         <ul class="list-group">
-                            <?php if($data['top_enabled'] != '0'):?>
+                            <?php if($data['top_enabled'] !== null):?>
                                 <li class="list-group-item">
-                                    Премиум место(Место №<?php echo $data['top_enabled'];?>)<br/>
+                                    Топ место(Место №<?php echo $data['top_enabled'];?>)<br/>
                                     Оплачено до: <?php echo date("d.m.Y [H:i]", $data['top_expired_date']);?>
                                 </li>
                             <?php endif;?>
 
-                            <?php if($data['vip_enabled'] != '0'):?>
+                            <?php if($data['vip_enabled'] !== null):?>
                                 <li class="list-group-item">
                                     VIP статус<br/>
                                     Оплачено до: <?php echo date("d.m.Y [H:i]", $data['vip_expired_date']);?>
                                 </li>
                             <?php endif;?>
 
-                            <?php if($data['color_enabled'] != '0'):?>
+                            <?php if($data['color_enabled'] !== null):?>
                                 <li class="list-group-item">
                                     Выделение цветом<br/>
                                     Оплачено до: <?php echo date("d.m.Y [H:i]", $data['color_expired_date']);?>
@@ -87,7 +98,14 @@
                             <?php endif;?>
 
 
-                            <?php if($data['boost'] != '0'):?>
+                            <?php if($data['gamemenu_enabled'] !== null):?>
+                            <li class="list-group-item">
+                                GameMenu<br/>
+                                Оплачено до: <?php echo date("d.m.Y [H:i]", $data['gamemenu_expired_date']);?>
+                            </li>
+                            <?php endif;?>
+
+                            <?php if($data['boost'] !== null):?>
                                 <li class="list-group-item">
                                     Буст<br/>
                                     Осталось кругов: <?php echo $data['boost'];?>
@@ -188,13 +206,19 @@
 
                     <img class="w-100" src="<?php echo $data['img_map'];?>" alt="<?php echo $data['map'];?>">
 
-                    <a onclick="ShowModal('<?= $data['id']; ?>', 'showPlayers');return false;" class="btn btn-success players-btn mt-2 btn-sm w-100">Показать игроков</a>
+                    <a id="show-players-button" onclick="loadPlayers(); return false;" class="btn btn-success players-btn mt-2 btn-sm w-100">Показать игроков</a>
                 </div>
             </div>
         </div>
 
 
             <script>
+
+                function loadPlayers(){
+                    toggleButtonLoader($("#show-players-button"), true);
+                    ShowModal('<?= $data['id']; ?>', 'showPlayers')
+                    toggleButtonLoader($("#show-players-button"), false);
+                }
 
                 $('#addComment').ajaxForm({
                     dataType: 'json',
@@ -206,8 +230,8 @@
                                 break;
 
                             case "success":
+                                $("#commentField").val(null)
                                 ShowModal(data.success, 'answer', 'success');
-                                setTimeout('location.reload();', 2500);
                                 break;
                         }
                     },

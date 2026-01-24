@@ -7,7 +7,6 @@ use components\Json;
 use components\pay_method\FreekassaClient;
 use components\pay_method\LavaClient;
 use components\pay_method\YooKassaClient;
-use components\pay_method\YooKassaService;
 use components\pay_method\YooMoneyClient;
 use components\Services;
 use components\User;
@@ -175,27 +174,54 @@ class PayController extends BaseController
         $getInfoPayment = $getInfoPayment->fetch();
         if (empty($getInfoPayment)) parent::ShowError(400, "PayMethod not found!");
 
+        $params = [];
 
         //create invoice
         $user = new User();
-        $userProfile = null;
         if ($user->isAuth()) {
             $userProfile = $user->getProfile();
+            $params['user_id'] = $userProfile['id'];
         }
 
         $services = new Services();
-        $invoiceId = $services->createInvoice(
-            $getInfoServices,
-            $getInfoServer,
-            $idServices,
-            $userProfile
-        );
+
+
+
+
+
+
+        if (isset($postData['color'])) $params['color'] = htmlspecialchars($postData['color']);
+        if (isset($postData['place'])) $params['place'] = htmlspecialchars($postData['place']);
+
+
+        try {
+            $invoiceId = $services->validate(
+                $getInfoServices,
+                $getInfoServer,
+                $params
+            );
+
+        }catch (\Exception $e){
+            $answer['status'] = "error";
+            $answer['error'] = $e->getMessage();
+            exit(json_encode($answer));
+        }
+
+
 
 
         $getInfoPayment = $this->db->prepare('SELECT id, content, typeCode FROM ga_pay_methods WHERE id = :id');
         $getInfoPayment->execute(array(':id' => $paymentMethod));
         $getInfoPayment = $getInfoPayment->fetch();
         $infoPaymentSettings = Json::decode($getInfoPayment['content'], true);
+
+
+        if ($infoPaymentSettings === null){
+            $answer['status'] = "error";
+            $answer['error'] = "Настройка способа оплаты не завершена. Обратитесь, пожалуйста, к системному администратору.";
+            exit(json_encode($answer));
+        }
+
 
         $amount = $getInfoServices['price'];
 
@@ -205,7 +231,15 @@ class PayController extends BaseController
         $paymentUrl = null;
         switch ($getInfoPayment['typeCode']) {
             case "freekassa":
-                $sign = md5($infoPaymentSettings['fk_id'] . ":" . $amount . ":" . $infoPaymentSettings['fk_key1'] . ":" . $invoiceId);
+                $merchant_id = $infoPaymentSettings['fk_id'];
+                $secret_word = $infoPaymentSettings['fk_key1'];
+                $order_id = $invoiceId;
+                $order_amount = $amount;
+                $currency = 'RUB';
+
+                $sign = md5($merchant_id.':'.$order_amount.':'.$secret_word.':'.$currency.':'.$order_id);
+
+
                 $client = new FreekassaClient(
                     $infoPaymentSettings['fk_id'],
                     $amount,
@@ -231,6 +265,12 @@ class PayController extends BaseController
 
             case "yookassa":
                 try {
+                    if ($infoPaymentSettings['shop_id'] === null or empty($infoPaymentSettings['shop_id'])){
+                        $answer['status'] = "error";
+                        $answer['error'] = "Настройка способа оплаты не завершена. Обратитесь, пожалуйста, к системному администратору.";
+                        exit(json_encode($answer));
+                    }
+
                     $client = new YooKassaClient(
                         $infoPaymentSettings['shop_id'],
                         $infoPaymentSettings['secret_key']
@@ -246,7 +286,7 @@ class PayController extends BaseController
                     $sql = "UPDATE ga_pay_logs SET bill_id = :bill_id WHERE id = :id";
                     $update = $this->db->prepare($sql);
                     $update->bindParam(':bill_id', $resp['guid'], );
-                    $update->bindParam(':id', $payId);
+                    $update->bindParam(':id', $invoiceId);
                     $update->execute();
 
 
@@ -304,14 +344,14 @@ class PayController extends BaseController
      */
     public function ajax($id)
     {
-
         $user = new User();
-        $userProfile = null;
-        if ($user->isAuth()) {
-            $userProfile = $user->getProfile();
+        if (!$user->isAuth()) {
+            $answer['status'] = "error";
+            $answer['error'] = "Требуется авторизация";
+            exit(json_encode($answer));
         }
 
-
+        $userProfile = $user->getProfile();
         $getInfoServer = $this->db->prepare('SELECT * FROM ga_servers WHERE id = :id');
         $getInfoServer->execute(array(':id' => $id));
         $getInfoServer = $getInfoServer->fetch();
@@ -333,6 +373,11 @@ class PayController extends BaseController
             }
 
 
+            $services = new Services();
+
+
+
+
             if ($userProfile['balance'] >= $getInfoServices['price']) {
                 if ($getInfoServer['ban'] == 1 and $getInfoServices['type'] != 'razz') {
                     $answer['status'] = "error";
@@ -340,15 +385,36 @@ class PayController extends BaseController
                     exit(json_encode($answer));
                 }
 
+                $params = [];
+                $params['user_id'] = $userProfile['id'];
 
-                $services = new Services();
+                if (isset($_POST['color']) && !empty(trim($_POST['color']))) {
+                    $params['color'] = htmlspecialchars($_POST['color']);
+                } else {
+                    $params['color'] = null;
+                }
 
-                $invoiceId = $services->createInvoice(
-                    $getInfoServices,
-                    $getInfoServer,
-                    $idServices,
-                    $userProfile
-                );
+                if (isset($_POST['place']) && !empty(trim($_POST['place']))) {
+                    $params['place'] = htmlspecialchars($_POST['place']);
+                } else {
+                    $params['place'] = null;
+                }
+
+                // validate services
+                try {
+                    $invoiceId = $services->validate(
+                        $getInfoServices,
+                        $getInfoServer,
+                        $params
+                    );
+
+                }catch (\Exception $e){
+                    $answer['status'] = "error";
+                    $answer['error'] = $e->getMessage();
+                    exit(json_encode($answer));
+                }
+
+
 
                 $services->processing(['inv_id' => $invoiceId, 'price' => $getInfoServices['price'], 'pay_methods' => "bill"]);
 
@@ -356,11 +422,14 @@ class PayController extends BaseController
                 $sql = "UPDATE ga_users SET balance = :balance  WHERE id = :id";
                 $update = $this->db->prepare($sql);
                 $update->bindParam(':balance', $newBalance, PDO::PARAM_INT);
-                $update->bindParam(':id', $user_profile['id'], PDO::PARAM_INT);
+                $update->bindParam(':id', $userProfile['id'], PDO::PARAM_INT);
                 $update->execute();
 
+                $address = $getInfoServer['ip'] . ':' . $getInfoServer['port'];
+
                 $answer['status'] = "success";
-                $answer['success'] = "Услуга успешно куплена";
+                $answer['redirect_href'] = "/server/${address}/info";
+                $answer['success'] = "Услуга успешно куплена. Вы будете перенаправлены через 3 сек.";
                 exit(json_encode($answer));
             } else {
                 $answer['status'] = "error";

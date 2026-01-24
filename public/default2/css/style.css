@@ -46,6 +46,8 @@ body {
     flex: 1 0 auto;
     padding: 1em;
     background: #00000052;
+    min-height: 360px;
+    border: 1px solid #0000007a;
 }
 
 
@@ -107,6 +109,7 @@ header .nav-link:hover{
 .top-servers{
     padding: 0.3em;
     background: #00000052;
+    border: 1px solid #0000007a;
 }
 
 
@@ -179,6 +182,7 @@ header .nav-link:hover{
 .top-welcome-text{
     padding: 0.3em;
     background: #00000052;
+    border: 1px solid #0000007a;
 }
 
 .top-welcome-text h1{
@@ -199,6 +203,7 @@ header .nav-link:hover{
 .servers-list{
     padding: 0.3em;
     background: #00000052;
+    border: 1px solid #0000007a;
 }
 
 .servers-list .title h3{
@@ -235,7 +240,7 @@ header .nav-link:hover{
     border-radius: 0.25em;
 }
 
-.servers-list table .hostname{
+.hostname{
     color: #ffc107;
     font-weight: bold;
     text-decoration: none;
@@ -319,9 +324,13 @@ select option {
     color: #fff;
     padding: 0.5em;
     display: inline-block;
-    background: #2d283e;
+    background: #3e3953;
     text-decoration: none;
     border: 1px solid #00000052;
+}
+
+.games-menu a.active{
+    background: #2d283e;
 }
 
 .games-menu a:hover{
@@ -454,4 +463,33 @@ select option {
     left: 0;
     width: 100%;
     z-index: 1;
+}
+
+.form-control::placeholder{
+    color: #a1a1a1 !important;
+}
+
+.modal-preloader {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.copy-btn {
+    margin-left: 5px;
+    padding: 2px 5px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    background: #251e3a00;
+    color: #fff;
+}
+.copy-btn:hover {
+    background: #555;
 }

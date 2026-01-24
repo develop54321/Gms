@@ -8,7 +8,6 @@ use core\WidgetsInterface;
 
 class Menu implements WidgetsInterface
 {
-
     public static function run($params = null){
         $db = new Database();
 
@@ -16,11 +15,17 @@ class Menu implements WidgetsInterface
         $getGames->execute([':status' => 1]);
         $getGames = $getGames->fetchAll();
 
+        $currentUrl = $_SERVER['REQUEST_URI'] ?? '';
 
+        $currentGameCode = null;
+        if (preg_match('/game\/([^\/?]+)/i', $currentUrl, $matches)) {
+            $currentGameCode = $matches[1];
+        }
 
         $view = new View("widgets");
         $view->render('common/games/menu/views/index', [
-            "games" => $getGames
+            "games" => $getGames,
+            "currentGameCode" => $currentGameCode
         ]);
     }
 }

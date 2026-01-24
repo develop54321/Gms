@@ -25,6 +25,9 @@ class FreekassaClient
         $form .= '<input type="hidden" name="currency" value="RUB" />';
         $form .= '<input type="hidden" name="o" value="' . $this->payId . '" />';
         $form .= '<input type="hidden" name="s" value="' . $this->signFk . '" />';
+        $form .= '<input type="hidden" name="i" value="1" />';
+        $form .= '<input type="hidden" name="lang" value="ru" />';
+
         $form .= '</form>';
 
         return $form;

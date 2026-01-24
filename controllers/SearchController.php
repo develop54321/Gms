@@ -6,31 +6,56 @@ use core\BaseController;
 
 class SearchController extends BaseController
 {
-
     public function index()
     {
-
         $title = "Поиск сервера";
         $query = null;
-        $getServers = null;
+        $getServers = [];
 
-        if ($this->isPostRequest() && isset($_POST['query'])){
-            $query = $_POST['query'];
-            $query = explode(":", $query);
-            if (!isset($query[1])) $query[1] = null;
+        if ($this->isPostRequest() && !empty($_POST['query'])) {
+            $query = trim($_POST['query']);
 
+            if (preg_match('/^([\d\.]+)(?::(\d+))?$/', $query, $m)) {
+                $ip   = $m[1];
+                $port = $m[2] ?? null;
 
-            $getInfoServers = $this->db->prepare('SELECT * FROM ga_servers WHERE ip = :ip and port = :port');
-            $getInfoServers->execute(array(':ip' => $query[0], ':port' => (int)$query[1]));
-            $getServers = $getInfoServers->fetchAll();
+                $sql = 'SELECT * FROM ga_servers WHERE ip = :ip';
+                $params = [':ip' => $ip];
+
+                if ($port !== null) {
+                    $sql .= ' AND port = :port';
+                    $params[':port'] = (int)$port;
+                }
+
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute($params);
+                $getServers = $stmt->fetchAll();
+            } else {
+                $stmt = $this->db->prepare(
+                    'SELECT *,
+                     MATCH(hostname, map) AGAINST (:q IN BOOLEAN MODE) AS relevance
+                     FROM ga_servers
+                     WHERE MATCH(hostname, map) AGAINST (:q IN BOOLEAN MODE)
+                     ORDER BY relevance DESC
+                     LIMIT 50'
+                );
+
+                $stmt->execute([':q' => $query . '*']);
+                $getServers = $stmt->fetchAll();
+            }
         }
 
+        $content = $this->view->renderPartial(
+            "search",
+            [
+                'servers' => $getServers,
+                'query'   => $query
+            ]
+        );
 
-
-
-        $content = $this->view->renderPartial("search", ['servers' => $getServers, 'query' => $query]);
-
-        $this->view->render("main", ['content' => $content, 'title' => $title]);
+        $this->view->render("main", [
+            'content' => $content,
+            'title'   => $title
+        ]);
     }
 }
-

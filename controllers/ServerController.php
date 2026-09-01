@@ -5,6 +5,7 @@ namespace controllers;
 use components\Captcha;
 use components\GameServerQuery;
 use components\Pagination;
+use components\ServerBanner;
 use components\Servers;
 use components\System;
 use components\User;
@@ -234,6 +235,62 @@ class ServerController extends BaseController
         $this->view->render("main", ['content' => $content, 'title' => $title]);
 
 
+    }
+
+    public function banner($address)
+    {
+        $parseAddress = Servers::parseAddress($address);
+        $variant = $_GET['size'] ?? null;
+        if (!is_string($variant) || !isset(ServerBanner::VARIANTS[$variant])) {
+            $variant = 'classic';
+        }
+
+        $getInfoServer = $this->db->prepare('SELECT hostname, game, ip, host, port, map, players, max_players, status, ban FROM ga_servers WHERE ip = :ip and port = :port');
+        $getInfoServer->execute(array(':ip' => $parseAddress['ip'], ':port' => $parseAddress['port']));
+        $getInfoServer = $getInfoServer->fetch();
+
+        if (empty($getInfoServer)) {
+            ServerBanner::renderNotFound($variant);
+        }
+
+        ServerBanner::render($getInfoServer, $variant);
+    }
+
+    public function banners($address)
+    {
+        $parseAddress = Servers::parseAddress($address);
+
+        $getInfoServer = $this->db->prepare('SELECT id, hostname, ip, host, port FROM ga_servers WHERE ip = :ip and port = :port');
+        $getInfoServer->execute(array(':ip' => $parseAddress['ip'], ':port' => $parseAddress['port']));
+        $getInfoServer = $getInfoServer->fetch();
+
+        if (empty($getInfoServer)) parent::ShowError(404, "Сервер не найден!");
+
+        $serverAddress = $getInfoServer['ip'] . ':' . $getInfoServer['port'];
+        $pageUrl = BASE_URL . '/server/' . $serverAddress . '/info';
+
+        $banners = ['horizontal' => [], 'vertical' => []];
+        foreach (ServerBanner::VARIANTS as $key => $meta) {
+            $bannerUrl = BASE_URL . '/server/' . $serverAddress . '/banner.png?size=' . $key;
+            $banners[$meta['orientation']][] = [
+                'label' => $meta['label'],
+                'width' => $meta['width'],
+                'height' => $meta['height'],
+                'url' => $bannerUrl,
+                'bbcode' => '[url=' . $pageUrl . '][img]' . $bannerUrl . '[/img][/url]',
+                'html' => '<a href="' . $pageUrl . '"><img src="' . $bannerUrl . '" alt="' . htmlspecialchars($getInfoServer['hostname'], ENT_QUOTES) . '" /></a>',
+                'recommended' => $key === 'classic',
+            ];
+        }
+
+        $title = "Баннеры сервера :: " . $getInfoServer['hostname'];
+
+        $content = $this->view->renderPartial("server/banners", [
+            'data' => $getInfoServer,
+            'banners' => $banners
+        ]);
+
+        $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
 
     /**

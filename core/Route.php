@@ -47,6 +47,8 @@ class Route
             $r->addGroup('/server', function (RouteCollector $r) {
                 $r->addRoute(['GET', 'POST'], '/add', ['controllers\ServerController', 'add']);
                 $r->addRoute(['GET', 'POST'], '/{address}/info', ['controllers\ServerController', 'info']);
+                $r->addRoute('GET', '/{address}/banners', ['controllers\ServerController', 'banners']);
+                $r->addRoute('GET', '/{address}/banner.png', ['controllers\ServerController', 'banner']);
                 $r->addRoute('POST', '/vote', ['controllers\ServerController', 'vote']);
                 $r->addRoute('GET', '/getplayers', ['controllers\ServerController', 'getPlayers']);
                 $r->addRoute('GET', '/verification', ['controllers\ServerController', 'verification']);
@@ -64,6 +66,7 @@ class Route
                 $r->addRoute('GET', '/removeserver', ['controllers\UserController', 'removeServer']);
                 $r->addRoute(['GET', 'POST'], '/pay', ['controllers\UserController', 'pay']);
                 $r->addRoute('GET', '/pay-logs', ['controllers\UserController', 'payLogs']);
+                $r->addRoute(['GET', 'POST'], '/promo', ['controllers\UserController', 'promo']);
                 $r->addRoute('GET', '', ['controllers\UserController', 'index']);
             });
 
@@ -89,6 +92,11 @@ class Route
                 $r->addRoute(['GET', 'POST'], '/codecolors/add', ['controllers\control\CodecolorsController', 'add']);
                 $r->addRoute(['GET', 'POST'], '/codecolors/edit', ['controllers\control\CodecolorsController', 'edit']);
                 $r->addRoute('GET', '/codecolors/remove', ['controllers\control\CodecolorsController', 'remove']);
+
+                $r->addRoute('GET', '/promocodes', ['controllers\control\PromocodesController', 'index']);
+                $r->addRoute(['GET', 'POST'], '/promocodes/add', ['controllers\control\PromocodesController', 'add']);
+                $r->addRoute(['GET', 'POST'], '/promocodes/edit', ['controllers\control\PromocodesController', 'edit']);
+                $r->addRoute('GET', '/promocodes/remove', ['controllers\control\PromocodesController', 'remove']);
 
                 $r->addRoute('GET', '/services', ['controllers\control\ServicesController', 'index']);
                 $r->addRoute(['GET', 'POST'], '/services/add', ['controllers\control\ServicesController', 'add']);

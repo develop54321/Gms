@@ -62,9 +62,19 @@ class ResultController extends BaseController
                     $getInfoPayment = json_decode($getInfoPayment['content'], true);
 
 
-                    $sha1 = sha1($_POST['notification_type'] . '&' . $_POST['operation_id'] . '&' . $_POST['amount'] . '&643&' . $_POST['datetime'] . '&' . $_POST['sender'] . '&' . $_POST['codepro'] . '&' . $getInfoPayment['secret_key'] . '&' . $_POST['label']);
+                    $params = $_POST;
+                    unset($params['sign']);
+                    ksort($params);
 
-                    if ($sha1 != $_POST['sha1_hash']) {
+                    $pairs = [];
+                    foreach ($params as $key => $value) {
+                        $pairs[] = $key . '=' . rawurlencode($value);
+                    }
+                    $checkString = implode('&', $pairs);
+
+                    $sign = hash_hmac('sha256', $checkString, $getInfoPayment['secret_key']);
+
+                    if (!hash_equals($sign, (string)($_POST['sign'] ?? ''))) {
                         exit("bad hash");
                     }
 

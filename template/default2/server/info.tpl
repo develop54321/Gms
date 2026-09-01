@@ -1,8 +1,13 @@
 <section class="page server-info">
     <div class="container">
-        <h1 class="content-title">
-            Информация о сервере - <?php echo \widgets\server\hostname\Hostname::run($data['hostname']);?>
-        </h1>
+        <div class="d-flex justify-content-start align-items-center flex-wrap" style="gap: 16px;">
+            <a href="/server/<?php echo $data['ip'];?>:<?php echo $data['port'];?>/banners" class="btn btn-primary btn-sm mb-2">
+                <i class="fa fa-picture-o"></i> Баннер для форума
+            </a>
+            <h1 class="content-title mb-2">
+                Информация о сервере - <?php echo \widgets\server\hostname\Hostname::run($data['hostname']);?>
+            </h1>
+        </div>
         <hr/>
 
         <?php if($data['ban'] === 1):?>
@@ -20,10 +25,10 @@
                         <p>Название сервера: <span class="name"><?php echo \widgets\server\hostname\Hostname::run($data['hostname']);?></span></p>
                         <p>Игра: <span class="game"> <?php echo $data['game_name'];?></span> </p>
                         <p>Адрес:
-                            <span class="address" id="server-<?=$row['id'];?>">
+                            <span class="address" id="server-<?=$data['id'];?>">
                                 <?php echo $data['host'] ?? $data['ip'];?>:<?php echo $data['port'];?>
                             </span>
-                            <button class="copy-btn" onclick="copyToClipboard('server-<?=$row['id'];?>')">
+                            <button class="copy-btn" onclick="copyToClipboard('server-<?=$data['id'];?>')">
                                 <i class="fa fa-copy"></i>
                             </button>
                         </p>

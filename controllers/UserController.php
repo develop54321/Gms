@@ -7,6 +7,7 @@ use components\Flash;
 use components\Json;
 use components\Mail;
 use components\Pagination;
+use components\PromoCode;
 use components\pay_method\FreekassaClient;
 use components\pay_method\LavaClient;
 use components\pay_method\YooKassaClient;
@@ -452,6 +453,34 @@ class UserController extends BaseController
 
         $this->view->render("main", ['content' => $content, 'title' => $title, 'user_profile' => $user_profile]);
 
+    }
+
+    public function promo()
+    {
+        $title = "Активация промокода";
+        $user = new User();
+        $user_profile = $user->isAuth();
+        if (!$user_profile) return header("Location: /user/login");
+
+        if (parent::isPostRequest()) {
+            $code = trim(strip_tags($_POST['code'] ?? ''));
+
+            $promoCode = new PromoCode();
+            $result = $promoCode->activate($code, $user_profile['id']);
+
+            if ($result['success']) {
+                Flash::add('success', 'Промокод активирован! Баланс пополнен на ' . number_format($result['amount'], 0, '.', ' ') . ' руб.');
+            } else {
+                Flash::add('danger', $result['message']);
+            }
+
+            header("Location: /user/promo");
+            return;
+        }
+
+        $content = $this->view->renderPartial("user/promo", []);
+
+        $this->view->render("main", ['content' => $content, 'title' => $title, 'user_profile' => $user_profile]);
     }
 
     public function signup()

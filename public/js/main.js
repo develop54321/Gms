@@ -104,3 +104,30 @@ function copyToClipboard(elementId) {
 }
 
 window.copyToClipboard = copyToClipboard
+
+function switchEmbedTab(btn, type) {
+    const row = btn.closest('.embed-row');
+    row.querySelectorAll('.embed-tab').forEach(tab => tab.classList.remove('is-active'));
+    btn.classList.add('is-active');
+    row.querySelector('.embed-input').value = row.querySelector('.embed-input').dataset[type];
+}
+
+function copyEmbedInput(btn) {
+    const input = btn.closest('.embed-field').querySelector('.embed-input');
+    input.select();
+    navigator.clipboard.writeText(input.value).then(() => {
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fa fa-check"></i>';
+        btn.classList.add('copied');
+        clearTimeout(btn._copyResetTimeout);
+        btn._copyResetTimeout = setTimeout(() => {
+            btn.innerHTML = originalHtml;
+            btn.classList.remove('copied');
+        }, 1200);
+    }).catch(err => {
+        console.error('Ошибка копирования: ', err);
+    });
+}
+
+window.switchEmbedTab = switchEmbedTab
+window.copyEmbedInput = copyEmbedInput

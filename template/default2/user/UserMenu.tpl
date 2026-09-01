@@ -24,6 +24,11 @@
         <span>Пополнение счета</span>
     </a>
 
+    <a href="/user/promo" class="list-group-item list-group-item-action d-flex align-items-center <?php if($url == 'promo'):?>active<?php endif;?>">
+        <i class="fa fa-ticket me-3"></i>
+        <span>Промокод</span>
+    </a>
+
     <a href="/user/logout" class="list-group-item list-group-item-action d-flex align-items-center text-danger">
         <i class="fa fa-sign-out me-3"></i>
         <span>Выход</span>

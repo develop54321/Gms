@@ -1,4 +1,4 @@
-<div class="list-group">
+<div class="list-group side-nav">
     <a href="/user" class="list-group-item list-group-item-action d-flex align-items-center <?php if($url == 'index'):?>active<?php endif;?>">
         <i class="fa fa-user-circle me-3"></i>
         <span>Профиль</span>

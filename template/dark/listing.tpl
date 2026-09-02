@@ -9,7 +9,8 @@ use components\System;
 
         <span class="float-right">Текущее время: <?= date('d.m.Y [H:i]') ?></span>
 
-        <table class="table table-dark">
+        <div class="table-card"><div class="table-responsive">
+<table class="table servers-table mb-0">
             <thead>
             <tr>
                 <th>Услуга</th>
@@ -75,11 +76,13 @@ use components\System;
             <?php endif; ?>
             </tbody>
         </table>
+</div></div>
 
         <div>
             <?php if ($settings['global_settings']['top_on'] == 1): ?>
                 <h5>Топ сервера</h5>
-                <table class="table table-dark">
+                <div class="table-card"><div class="table-responsive">
+<table class="table servers-table mb-0">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -113,11 +116,13 @@ use components\System;
                     <?php endif; ?>
                     </tbody>
                 </table>
+</div></div>
             <?php endif; ?>
 
             <?php if ($settings['global_settings']['boost_on'] == 1): ?>
                 <h5>Буст</h5>
-                <table class="table table-dark">
+                <div class="table-card"><div class="table-responsive">
+<table class="table servers-table mb-0">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -152,11 +157,13 @@ use components\System;
                     <?php endif; ?>
                     </tbody>
                 </table>
+</div></div>
             <?php endif; ?>
 
             <?php if ($settings['global_settings']['vip_on'] == 1): ?>
                 <h5>VIP СТАТУС</h5>
-                <table class="table table-dark">
+                <div class="table-card"><div class="table-responsive">
+<table class="table servers-table mb-0">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -191,11 +198,13 @@ use components\System;
                     <?php endif; ?>
                     </tbody>
                 </table>
+</div></div>
             <?php endif; ?>
 
             <?php if ($settings['global_settings']['color_on'] == 1): ?>
                 <h5>Выделение цветом</h5>
-                <table class="table table-dark">
+                <div class="table-card"><div class="table-responsive">
+<table class="table servers-table mb-0">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -230,11 +239,13 @@ use components\System;
                     <?php endif; ?>
                     </tbody>
                 </table>
+</div></div>
             <?php endif; ?>
 
             <?php if ($settings['global_settings']['gamemenu_on'] == 1): ?>
                 <h5>GameMenu</h5>
-                <table class="table table-dark">
+                <div class="table-card"><div class="table-responsive">
+<table class="table servers-table mb-0">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -269,6 +280,7 @@ use components\System;
                     <?php endif; ?>
                     </tbody>
                 </table>
+</div></div>
             <?php endif; ?>
         </div>
     </div>

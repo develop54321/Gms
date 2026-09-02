@@ -7,7 +7,7 @@
 
         <?php if (isset($password)): ?>
 
-            <div class="col-md-4">
+            <div class="form-card">
 
                 <div class="mb-3">
                     <label for="password">Ваш новый пароль</label>
@@ -19,8 +19,7 @@
 
         <?php else: ?>
         <form id="resetForm" method="post">
-            <div class="row">
-                <div class="col-md-4">
+            <div class="form-card">
                 <div class="mb-3">
                         <label for="email">Электронная почта</label>
                         <input type="email" name="email" class="form-control" id="email">
@@ -37,10 +36,9 @@
                     <input type="text" name="captcha" class="form-control" id="captcha" required="" placeholder="Цифры с картинки"/>
                     <small class="form-text text-muted">Если цифры не видны, обновите изображение, нажав на него.</small>
                 </div>
-                </div>
-            </div>
             <div class="mb-3">
                 <input type="submit" class="btn btn-primary" value="Отправить"/>
+            </div>
             </div>
 
 

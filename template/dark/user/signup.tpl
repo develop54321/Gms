@@ -7,50 +7,49 @@
 
         <form id="signupForm" method="post">
 
-            <div class="row">
-                <div class="col-md-5">
+            <div class="form-card wide">
+                <div class="row">
+                    <div class="col-md-6">
 
-                    <div class="mb-3">
-                        <label for="password">Имя</label>
-                        <input type="text" name="firstname" class="form-control" id="firstname" required="">
+                        <div class="mb-3">
+                            <label for="firstname">Имя</label>
+                            <input type="text" name="firstname" class="form-control" id="firstname" required="">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="lastname">Фамилия</label>
+                            <input type="text" name="lastname" class="form-control" id="lastname" required="">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email">Электронная почта</label>
+                            <input type="email" name="email" class="form-control" id="email" required="">
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="password">Фамилия</label>
-                        <input type="text" name="lastname" class="form-control" id="lastname" required="">
-                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="password">Пароль</label>
+                            <input type="password" name="password" class="form-control" id="password" required="">
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="password">Пароль</label>
-                        <input type="password" name="password" class="form-control" id="password" required="">
-                    </div>
+                        <div class="mb-3">
+                            <label for="password2">Повторите пароль</label>
+                            <input type="password" name="password2" class="form-control" id="password2" required="">
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="password">Повторите пароль</label>
-                        <input type="password" name="password2" class="form-control" id="password2" required="">
+                        <div class="mb-3">
+                            <label for="captcha">Цифры с картинки</label>
+                            <a href="#" id="captchaImg" onclick="updateCaptcha(); return false;"></a>
+                            <input type="text" name="captcha" class="form-control mt-2" id="captcha" required="" placeholder="Цифры с картинки"/>
+                            <small class="form-text text-muted">Если цифры не видны, обновите изображение, нажав на него.</small>
+                        </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="password">Электронная почта</label>
-                        <input type="email" name="email" class="form-control" id="email" required="">
-                    </div>
-
-                    <div class="mb-3">
-                        <a href="#" id="captchaImg" onclick="updateCaptcha(); return false;"></a>
-                    </div>
-
-                    <div class="mb-3">
-                        <input type="text" name="captcha" class="form-control" id="captcha" required="" placeholder="Цифры с картинки"/>
-                        <small class="form-text text-muted">Если цифры не видны, обновите изображение, нажав на него.</small>
-                    </div>
-
-                    <div class="mb-3">
-                        <input type="submit" class="btn btn-primary" value="Отправить"/>
-                    </div>
-
                 </div>
 
-
+                <div class="mb-3">
+                    <input type="submit" class="btn btn-primary" value="Отправить"/>
+                </div>
             </div>
         </form>
 

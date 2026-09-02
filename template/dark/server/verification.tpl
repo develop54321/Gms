@@ -10,27 +10,25 @@
             </p>
         </div>
 
-        <ul class="list-group list-group-flush mb-3">
-            <li class="list-group-item">
+        <div class="card p-4 mb-3" style="max-width:560px;">
                 <b>1.</b> Переименуйте сервер в:
-                <div class="d-flex align-items-center mt-2">
+                <div class="verify-code mt-2">
                     <code id="server-name" class="me-2">
                         ServerVerification_<?php echo $data['verification_rand']; ?>
                     </code>
-                    <button class="btn btn-sm btn-outline-secondary" id="copy-name">
+                    <button class="btn btn-sm btn-outline-secondary ms-auto" id="copy-name">
                         Скопировать
                     </button>
                 </div>
 
-                <small class="text-muted d-block mt-2">
+                <small class="text-muted d-block mt-3">
                     Автоматическая проверка выполняется каждые <b>10 секунд</b>
                 </small>
 
                 <small class="text-muted">
                     Статус: <span id="check-status">ожидание…</span>
                 </small>
-            </li>
-        </ul>
+        </div>
 
         <button class="btn btn-primary" id="verify-btn">
             Проверить вручную

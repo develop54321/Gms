@@ -1,18 +1,13 @@
-<section class="page">
+<section>
     <div class="container">
-        <h1 class="content-title">
-            Платеж принят!
-        </h1>
-        <hr/>
-
-        <div class="alert alert-success">
-            <b>Платеж принят!</b>
+        <div class="status-card">
+            <div class="status-icon success"><i class="fa fa-check"></i></div>
+            <h1 style="font-size:22px;">Платёж принят!</h1>
             <p>
-                Ваш счет успешно оплачен, и деньги поступят в ближайшее время. <br/>
-                Если в течение 20 минут средства не будут зачислены, свяжитесь с нашей службой поддержки.<br/>
-                <a href="/">Перейти на главную страницу</a>
-
+                Ваш счёт успешно оплачен, и деньги поступят в ближайшее время.<br/>
+                Если в течение 20 минут средства не будут зачислены, свяжитесь с нашей службой поддержки.
             </p>
+            <a href="/" class="btn btn-primary">Перейти на главную страницу</a>
         </div>
     </div>
 </section>

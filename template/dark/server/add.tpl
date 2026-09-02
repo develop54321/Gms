@@ -8,11 +8,13 @@
 
         <div class="section-add-server">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <form id="addServer" method="post">
+                        <div class="form-card">
 
                         <div class="form-group mb-3">
-                            <div class="input-group mb-3">
+                            <label>Игра</label>
+                            <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fa fa-gamepad"></i> </span>
                                 <select class="form-control" name="game" required>
                                     <option disabled>Выберите игру</option>
@@ -24,21 +26,25 @@
                         </div>
 
                         <div class="form-group mb-3">
+                            <label for="ip">Адрес</label>
                             <input type="text" class="form-control" name="ip" id="ip" placeholder="Адрес">
                         </div>
 
 
                         <div class="form-group mb-3">
+                            <label for="port">Порт</label>
                             <input type="text" class="form-control" name="port" id="port" placeholder="Порт">
                         </div>
 
 
                         <div class="form-group mb-3">
+                            <label for="query_port">Query port</label>
                             <input type="text" class="form-control" name="query_port" id="query_port" placeholder="query port">
                         </div>
 
 
                         <div class="form-group mb-3">
+                            <label>Описание</label>
                             <textarea class="form-control" name="text" placeholder="Описание"></textarea>
                         </div>
 
@@ -51,17 +57,18 @@
                             <small class="form-text text-muted">Если цифры не видны, обновите изображение, нажав на него.</small>
                         </div>
 
-                        <div class="form-group mt-2">
-                            <button class="btn btn-primary" type="submit">Отправить</button>
+                        <div class="form-group mt-2 d-flex gap-2">
+                            <button class="btn btn-primary flex-grow-1" type="submit">Отправить</button>
                             <button class="btn btn-outline-secondary" type="reset" title="Сбросить форму">
                                 <i class="fa fa-eraser"></i>
                             </button>
+                        </div>
                         </div>
 
                     </form>
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-7">
 
                     <div class="alert alert-warning">
                         <div><p><strong>Для добавления сервера в мониторинг, он должен удовлетворять следующим

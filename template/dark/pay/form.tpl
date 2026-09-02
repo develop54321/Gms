@@ -3,7 +3,7 @@
     <?php if ($serverInfo['top_enabled'] === null): ?>
         <p>Выберите место в топе</p>
         <div class="top-place">
-            <div class="d-flex gap-3">
+            <div class="d-flex gap-3 flex-wrap">
                 <?php foreach ($top as $row): ?>
                     <?php if ($row['status'] == '0'): ?>
                         <input type="radio" id="<?php echo $row['id']; ?>" name="place" class="radio-tile" value="<?php echo $row['id']; ?>">
@@ -36,7 +36,7 @@
         <?php if ($serverInfo['color_enabled'] === null): ?>
         <p>Выберите цвет</p>
         <div class="colors">
-            <div class="d-flex gap-3">
+            <div class="d-flex gap-3 flex-wrap">
                 <?php foreach ($CodeColors as $row): ?>
                     <input type="radio" id="<?php echo $row['id']; ?>" name="color" class="radio-tile" value="<?php echo $row['code']; ?>">
                     <label for="<?php echo $row['id']; ?>" class="radio-tile-label" style="background: <?php echo $row['code']; ?>;">
@@ -71,52 +71,43 @@
     <?php if (isset($type)): ?>
     <div class="pay-methods">
         <hr/>
-        <p>Выберите способ оплаты</p>
-        <div class="row">
+        <p class="text-muted mb-3">Выберите способ оплаты</p>
+        <div class="service-grid compact mb-3">
             <?php foreach ($PayMethods as $pm): ?>
-                <div class="col-sm-2 mb-3">
-                    <a href="#" onclick="selectPaymentMethod('<?php echo $pm['id']; ?>', this); return false;">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo $pm['name']; ?></h5>
-                                <p class="card-text">
-                                    <?php echo $pm['text']; ?>
-                                </p>
-                            </div>
+                <a href="#" class="service-tile" onclick="selectPaymentMethod('<?php echo $pm['id']; ?>', this); return false;">
+                    <div class="card service-card">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $pm['name']; ?></h5>
+                            <p class="card-text">
+                                <?php echo $pm['text']; ?>
+                            </p>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
             <?php endforeach; ?>
 
             <?php if ($user):?>
-                <div class="col-sm-2 mb-3">
-                    <a href="#" onclick="selectPaymentMethod('user_balance', this); return false;">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Лицевой счет</h5>
-                                <p class="card-text">
-                                    Баланс: <?php echo \widgets\money\Money::run($user['balance']); ?><br/>
-                                </p>
-                            </div>
+                <a href="#" class="service-tile" onclick="selectPaymentMethod('user_balance', this); return false;">
+                    <div class="card service-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Лицевой счет</h5>
+                            <p class="card-text">
+                                Баланс: <?php echo \widgets\money\Money::run($user['balance']); ?>
+                            </p>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
             <?php endif;?>
         </div>
 
-
-        <div class="form-row mt-3">
-            <div class="col-md-5">
-                <h4>Стоимость: <?php echo \widgets\money\Money::run($infoServices['price']); ?></h4>
-            </div>
+        <div class="price-summary">
+            <span class="label">Стоимость</span>
+            <span class="amount"><?php echo \widgets\money\Money::run($infoServices['price']); ?></span>
         </div>
 
-
-        <div class="form-row mt-3">
-            <div class="col-md-5">
-                <p>Нажимая оплатить вы соглашаетесь с условиями договора.</p>
-                <div id="pay-button"></div>
-            </div>
+        <div class="mt-3">
+            <p class="text-muted">Нажимая оплатить вы соглашаетесь с условиями договора.</p>
+            <div id="pay-button"></div>
         </div>
     </div>
 

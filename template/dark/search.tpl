@@ -6,7 +6,8 @@
         <hr/>
 
             <?php if ($servers):?>
-            <table class="table table-dark">
+            <div class="table-card"><div class="table-responsive">
+            <table class="table servers-table mb-0">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -20,10 +21,10 @@
                 </thead>
                 <tbody>
                 <?php foreach ($servers as $row): ?>
-                <tr <?php if($row['color_enabled'] != null):?>style="background: <?php echo $row['color_enabled'];?>"<?php endif;?>>
+                <tr <?php if($row['color_enabled'] != null):?>class="row-color" style="box-shadow: inset 3px 0 0 <?php echo $row['color_enabled'];?>;"<?php endif;?>>
                         <td><?php echo $row['id']; ?></td>
                         <td>
-                            <?php echo \widgets\server\game\GameIcon::run($row['game']);?>
+                            <span class="game-icon"><?php echo \widgets\server\game\GameIcon::run($row['game']);?></span>
                         </td>
                         <td>
                             <a class="hostname" href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']); ?></a>
@@ -42,15 +43,16 @@
                         </td>
                         <td style="text-align: center;">
                             <?php if ($row['vip_enabled'] !== null): ?>
-                            <b>VIP</b>
+                            <span class="badge badge-vip"><i class="fa fa-star"></i> VIP</span>
                             <?php else: ?>
-
+                                <div class="rating">
                                 <a href="#" onclick="ShowModal('<?=$row['id'];?>', 'vote', 'minus');return false;"><i class="fa fa-thumbs-down"></i></a>
 
                                 <label id="vote<?php echo $row['id']; ?>"
                                        class="rating-bg"><?php echo $row['rating']; ?></label>
 
                                 <a href="#" onclick="ShowModal('<?=$row['id'];?>', 'vote', 'plus');return false;"><i class="fa fa-thumbs-up"></i></a>
+                                </div>
                             <?php endif; ?>
 
                         </td>
@@ -59,6 +61,7 @@
 
                 </tbody>
             </table>
+            </div></div>
             <?php endif;?>
 
             <?php if (empty($servers)): ?>

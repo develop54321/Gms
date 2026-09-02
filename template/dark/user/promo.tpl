@@ -42,9 +42,9 @@
 
 <style>
     .promo-card {
-        background: #251e3a;
-        border: 1px solid #3e3953;
-        border-radius: 12px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
         padding: 36px 32px;
         max-width: 480px;
         text-align: center;
@@ -55,8 +55,8 @@
         height: 56px;
         margin: 0 auto 16px;
         border-radius: 50%;
-        background: rgba(74, 113, 253, 0.15);
-        color: #4a71fd;
+        background: var(--accent-soft);
+        color: var(--accent-strong);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -70,7 +70,7 @@
     }
 
     .promo-card p {
-        color: #a9a5bd;
+        color: var(--text-dim);
         font-size: 13px;
         margin: 0 0 24px;
     }
@@ -83,8 +83,8 @@
     .promo-input {
         flex: 1;
         min-width: 0;
-        background: #150f24;
-        border: 1px solid #3e3953;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
         border-radius: 8px;
         color: #fff;
         padding: 12px 14px;
@@ -95,30 +95,31 @@
     }
 
     .promo-input::placeholder {
-        color: #5b5670;
+        color: var(--text-faint);
         font-family: inherit;
         letter-spacing: normal;
     }
 
     .promo-input:focus {
         outline: none;
-        border-color: #4a71fd;
+        border-color: var(--accent);
     }
 
     .promo-submit {
         flex-shrink: 0;
-        background: #4a71fd;
+        background: linear-gradient(135deg,var(--accent),#7d5bff);
         border: none;
         color: #fff;
         padding: 0 20px;
         border-radius: 8px;
         font-size: 14px;
+        font-weight: 700;
         cursor: pointer;
-        transition: background .15s ease;
+        transition: filter .15s ease;
     }
 
     .promo-submit:hover {
-        background: #3a5ce0;
+        filter: brightness(1.08);
     }
 
     @media (max-width: 480px) {

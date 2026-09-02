@@ -14,46 +14,41 @@
 
             </div>
 
-            <div class="col-md-10 mx-auto">
+            <div class="col-md-10">
                 <?php echo widgets\flash\Flash::run(); ?>
 
-                <div class="card shadow-sm mb-4">
-                    <div class="card-body">
+                <div class="card p-4">
 
                         <!-- Выбор способа оплаты -->
                         <div class="mb-4">
                             <h5 class="mb-3">Выберите способ оплаты</h5>
-                            <div class="row g-3">
-                                <?php if (empty($pay_methods)):?>
-                                <p class="text-center">К сожалению, в данный момент нет доступных способов оплаты.</p>
-                                <hr/>
-                                <?php endif; ?>
+
+                            <?php if (empty($pay_methods)):?>
+                                <p class="text-center text-muted mb-0">К сожалению, в данный момент нет доступных способов оплаты.</p>
+                            <?php else: ?>
+                            <div class="service-grid compact">
                                 <?php foreach ($pay_methods as $pm): ?>
-                                    <div class="col-sm-4 col-md-3 mb-3">
-                                        <div class="payment-method-card card h-100 border-2"
-                                             onclick="selectPaymentMethod('<?php echo $pm['id']; ?>', this);"
-                                             data-payment-id="<?php echo $pm['id']; ?>">
-                                            <div class="card-body text-center">
-                                                <div class="mb-2">
-                                                    <img src="<?php echo $pm['icon_path'] ?? 'not found'; ?>"
-                                                         alt="<?php echo $pm['name']; ?>"
-                                                         class="img-fluid" style="max-height: 50px;">
-                                                </div>
-                                                <h6 class="card-title mb-1"><?php echo $pm['name']; ?></h6>
-                                                <small class="text-muted"><?php echo $pm['text']; ?></small>
-                                            </div>
+                                    <div class="card service-card payment-method-card"
+                                         onclick="selectPaymentMethod('<?php echo $pm['id']; ?>', this);"
+                                         data-payment-id="<?php echo $pm['id']; ?>">
+                                        <div class="card-body">
+                                            <img src="<?php echo $pm['icon_path'] ?? 'not found'; ?>"
+                                                 alt="<?php echo $pm['name']; ?>"
+                                                 class="img-fluid">
+                                            <h6 class="card-title"><?php echo $pm['name']; ?></h6>
+                                            <small class="text-muted"><?php echo $pm['text']; ?></small>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Ввод суммы -->
                         <div class="mb-4">
                             <label for="amount" class="form-label">Введите сумму</label>
 
-
-                            <div class="input-group has-validation">
+                            <div class="amount-box">
                                 <input type="number"
                                        name="amount"
                                        id="amount"
@@ -62,13 +57,13 @@
                                        placeholder="0"
                                        min="0"
                                        step="1">
-                                <span class="input-group-text">₽</span>
-                                <div class="invalid-feedback">
-                                    Пожалуйста, введите корректную сумму
-                                </div>
+                                <span class="currency">₽</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                Пожалуйста, введите корректную сумму
                             </div>
 
-                            <div class="d-flex flex-wrap gap-2 mb-3 mt-4">
+                            <div class="quick-amounts">
                                 <button type="button" class="btn btn-outline-primary quick-amount" data-amount="100">100 ₽</button>
                                 <button type="button" class="btn btn-outline-primary quick-amount" data-amount="500">500 ₽</button>
                                 <button type="button" class="btn btn-outline-primary quick-amount" data-amount="1000">1 000 ₽</button>
@@ -84,8 +79,8 @@
 
 
                         <div class="d-grid gap-2 mt-4">
-                            <button type="submit" class="btn btn-primary btn-sm" id="submit-btn" onclick="submit()" disabled>
-                                <i class="bi bi-credit-card me-2"></i> Перейти к оплате
+                            <button type="submit" class="btn btn-primary" id="submit-btn" onclick="submit()" disabled>
+                                <i class="fa fa-credit-card me-2"></i> Перейти к оплате
                             </button>
                         </div>
 
@@ -97,12 +92,10 @@
                                 <a href="/page/3" target="_blank">условиями договора</a>
                             </small>
                         </div>
-                    </div>
                 </div>
             </div>
-                    </div>
-            </div>
-
+        </div>
+    </div>
 </section>
 <script>
     document.addEventListener('DOMContentLoaded', function() {

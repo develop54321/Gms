@@ -6,12 +6,11 @@
         <hr/>
 
         <form id="loginForm" method="post">
-            <div class="row">
-                <div class="col-md-4">
+            <div class="form-card">
 
                     <div class="mb-3">
-                        <label for="password">Электронная почта</label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="Электронная почта">
+                        <label for="email">Электронная почта</label>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com">
                     </div>
                     <div class="mb-3">
                         <label for="password">Пароль</label>
@@ -19,10 +18,14 @@
                     </div>
 
                     <div class="mb-3">
-                        <input type="submit" class="btn btn-success" value="Войти"/>
-                        <a href="/user/signup" class="btn btn-primary">Регистрация</a>
-                        <a href="/user/reset" class="btn btn-primary">Забыли пароль?</a>
+                        <input type="submit" class="btn btn-primary" value="Войти"/>
                     </div>
+
+                    <div class="auth-links">
+                        <a href="/user/signup" class="btn btn-light btn-sm">Регистрация</a>
+                        <a href="/user/reset" class="btn btn-light btn-sm">Забыли пароль?</a>
+                    </div>
+            </div>
         </form>
     </div>
 </section>

@@ -43,7 +43,7 @@
     }
 
     .banners-subtitle {
-        color: #a9a5bd;
+        color: var(--text-dim);
         max-width: 600px;
         margin: 4px 0 0;
         font-size: 13px;
@@ -54,7 +54,7 @@
         display: inline-block;
         padding: 7px 14px;
         border-radius: 6px;
-        background: #2d283e;
+        background: var(--surface-2);
         color: #fff;
         text-decoration: none;
         font-size: 13px;
@@ -63,7 +63,7 @@
     }
 
     .btn-back:hover {
-        background: #3e3953;
+        background: var(--border);
         color: #fff;
     }
 
@@ -77,7 +77,7 @@
         gap: 8px;
         margin: 24px 0 12px;
         padding-bottom: 8px;
-        border-bottom: 1px solid #3e3953;
+        border-bottom: 1px solid var(--border);
     }
 
     .banners-group-title:first-of-type {
@@ -89,7 +89,7 @@
         font-size: 12px;
         font-weight: 400;
         letter-spacing: normal;
-        color: #79748c;
+        color: var(--text-faint);
     }
 
     .banners-grid {
@@ -101,22 +101,22 @@
 
     .banner-card {
         position: relative;
-        background: #251e3a;
-        border: 1px solid #3e3953;
+        background: var(--surface);
+        border: 1px solid var(--border);
         border-radius: 8px;
         padding: 12px;
         transition: border-color .15s ease;
     }
 
     .banner-card:hover {
-        border-color: #4a71fd;
+        border-color: var(--accent);
     }
 
     .banner-card-badge {
         position: absolute;
         top: -8px;
         right: 12px;
-        background: #4a71fd;
+        background: var(--accent);
         color: #fff;
         font-size: 10px;
         font-weight: 600;
@@ -140,7 +140,7 @@
 
     .banner-size {
         font-size: 11px;
-        color: #79748c;
+        color: var(--text-faint);
         white-space: nowrap;
     }
 
@@ -149,7 +149,7 @@
         align-items: center;
         justify-content: center;
         min-height: 70px;
-        background: #1b1729;
+        background: var(--surface-3);
         border-radius: 6px;
         padding: 10px;
         margin-bottom: 10px;
@@ -165,8 +165,8 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        background: #150f24;
-        border: 1px solid #3e3953;
+        background: var(--bg);
+        border: 1px solid var(--border);
         border-radius: 6px;
         padding: 4px;
     }
@@ -174,7 +174,7 @@
     .embed-tabs {
         display: flex;
         flex-shrink: 0;
-        background: #1b1729;
+        background: var(--surface-3);
         border-radius: 5px;
         padding: 2px;
         gap: 2px;
@@ -183,7 +183,7 @@
     .embed-tab {
         border: none;
         background: transparent;
-        color: #79748c;
+        color: var(--text-faint);
         font-size: 11px;
         padding: 4px 8px;
         border-radius: 4px;
@@ -192,11 +192,11 @@
     }
 
     .embed-tab:hover {
-        color: #d6d2e6;
+        color: var(--text);
     }
 
     .embed-tab.is-active {
-        background: #4a71fd;
+        background: var(--accent);
         color: #fff;
     }
 
@@ -213,7 +213,7 @@
         min-width: 0;
         border: none;
         background: transparent;
-        color: #d6d2e6;
+        color: var(--text);
         font-family: 'Courier New', monospace;
         font-size: 11px;
         padding: 4px 2px;
@@ -233,19 +233,19 @@
         height: 26px;
         border: none;
         border-radius: 5px;
-        background: #2d283e;
-        color: #d6d2e6;
+        background: var(--surface-2);
+        color: var(--text);
         cursor: pointer;
         transition: background .15s ease, color .15s ease;
     }
 
     .embed-copy:hover {
-        background: #4a71fd;
+        background: var(--accent);
         color: #fff;
     }
 
     .embed-copy.copied {
-        background: #2ecc71;
+        background: var(--mint);
         color: #fff;
     }
 </style>

@@ -15,8 +15,9 @@
                     Серверы в этом списке нарушили правила мониторинга. <br/>После блокировки услуги отменяются без возврата средств.
                 </p>
             </div>
-            <table class="table table-dark">
-                <thead class="thead-dark">
+            <div class="table-card"><div class="table-responsive">
+            <table class="table servers-table mb-0">
+                <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Название</th>
@@ -49,6 +50,7 @@
 
                 </tbody>
             </table>
+            </div></div>
             <?php if (!empty($servers)):?>
                 <div class="pagination">
                     <nav aria-label="Pagination">

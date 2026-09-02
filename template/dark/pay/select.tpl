@@ -13,19 +13,17 @@
         <?php endif; ?>
 
         <hr/>
-        <p>Выберите услугу</p>
-        <div class="row">
+        <p class="text-muted mb-3">Выберите услугу</p>
+        <div class="service-grid mb-3">
             <?php foreach ($services as $service): ?>
-                <div class="col-sm-3 mb-3">
-                    <a href="#" onclick="loadForm(<?php echo $service['id']; ?>); toggleActive(this); return false;">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo $service['name']; ?></h5>
-                                <p class="card-text"><?php echo $service['text']; ?></p>
-                            </div>
+                <a href="#" class="service-tile" onclick="loadForm(<?php echo $service['id']; ?>); toggleActive(this); return false;">
+                    <div class="card service-card">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $service['name']; ?></h5>
+                            <p class="card-text"><?php echo $service['text']; ?></p>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
             <?php endforeach; ?>
         </div>
 

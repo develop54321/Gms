@@ -10,24 +10,13 @@
 
             <?php if ($news): ?>
 
-                <div class="row mb-2">
+                <div class="news-grid">
 
                     <?php foreach ($news as $item): ?>
-
-
-                        <div class="col-md-6">
-                            <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                                <div class="card-body d-flex flex-column align-items-start">
-                                    <strong class="d-inline-block mb-2"><?php echo $item['title']; ?></strong>
-                                    <p class="card-text mb-auto">
-                                        <?php echo $item['text']; ?>
-                                    </p>
-
-                                    <div class="mt-2 text-muted">
-                                        <?php echo date("d.m.Y", $item['date_create']); ?>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="news-card">
+                            <h3><?php echo $item['title']; ?></h3>
+                            <p><?php echo $item['text']; ?></p>
+                            <div class="date"><?php echo date("d.m.Y", $item['date_create']); ?></div>
                         </div>
                     <?php endforeach; ?>
 

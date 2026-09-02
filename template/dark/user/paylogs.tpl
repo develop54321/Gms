@@ -16,7 +16,8 @@
 
 
             <div class="col-md-10">
-                <table class="table table table-dark">
+                <div class="table-card"><div class="table-responsive">
+                <table class="table servers-table mb-0">
                     <thead>
                     <tr>
                         <th scope="col">id</th>
@@ -55,6 +56,7 @@
 
                     </tbody>
                 </table>
+                </div></div>
 
                 <?php if (!empty($data)): ?>
                 <div class="pagination">

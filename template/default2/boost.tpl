@@ -1,4 +1,4 @@
-<section class="page">
+<div class="servers-list">
     <div class="container">
         <h1 class="content-title">
             Раскрутка сервера
@@ -17,8 +17,7 @@
                 </p>
             </div>
 
-            <div class="table-card"><div class="table-responsive">
-            <table class="table servers-table">
+            <table class="table table-dark">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -35,7 +34,7 @@
                     <tr>
                         <td><?php echo $row['id']; ?></td>
                         <td>
-                            <span class="game-icon"><?php echo \widgets\server\game\GameIcon::run($row['game']); ?></span>
+                            <?php echo \widgets\server\game\GameIcon::run($row['game']); ?>
                         </td>
                         <td>
                             <a class="hostname" href="/server/<?php echo $row['ip']; ?>:<?php echo $row['port']; ?>/info"><?php echo \widgets\server\hostname\Hostname::run($row['hostname']); ?></a>
@@ -61,8 +60,8 @@
 
                 </tbody>
             </table>
-            </div></div>
+
 
         </div>
     </div>
-</section>
+</div>

@@ -20,9 +20,8 @@
                     <p>При добавлении сервера через сайт в авторизованном режиме вы автоматически становитесь владельцем этого сервера.</p>
                 </div>
 
-                <div class="table-card">
-                <div class="table-responsive">
-                <table class="table servers-table">
+                <div class="servers-list">
+                <table class="table table-dark">
                     <thead>
                     <tr>
                         <th>id</th>
@@ -41,9 +40,7 @@
                         <td><?php echo $row['id']; ?></td>
 
                         <td>
-                            <span class="game-icon">
-                                <?php widgets\server\game\GameIcon::run($row['game']);?>
-                            </span>
+                            <?php widgets\server\game\GameIcon::run($row['game']);?>
                             <a href="?game=<?=$row['game'];?>"></a>
                         </td>
 
@@ -68,18 +65,18 @@
 
                         <td>
                             <?php if ($row['moderation'] == '1'): ?>
-                                <span class="badge badge-online">Показывается</span>
+                                <span class="badge bg-primary">Показывается</span>
                             <?php else: ?>
-                                <span class="badge badge-pending">Ожидает проверки</span>
+                                <span class="badge bg-warning">Ожидает проверки администратором</span>
                             <?php endif; ?>
 
                             <?php if ($row['ban'] === 1): ?>
-                                <span class="badge badge-off">Бан</span>
+                                <span class="badge bg-danger">Бан</span>
                             <?php else: ?>
                                 <?php if ($row['status'] === 1): ?>
-                                    <span class="badge badge-online">Работает</span>
+                                    <span class="badge bg-success">Работает</span>
                                 <?php elseif ($row['status'] === 0): ?>
-                                    <span class="badge badge-off">Недоступен</span>
+                                    <span class="badge bg-warning">Недоступен</span>
                                 <?php endif; ?>
                             <?php endif; ?>
                         </td>
@@ -87,7 +84,6 @@
 
 
                         <td style="width: 80px;">
-                            <div class="row-actions">
                             <a href="#" onclick="ShowModal('<?= $row['id']; ?>', 'serverServices', 'null');return false;" class="btn btn-warning btn-sm">
                                 <i class="fa fa-dollar"></i>
                             </a>
@@ -95,12 +91,11 @@
                             <a href="#" onclick="remove(<?= $row['id']; ?>); return false;" class="btn btn-danger btn-sm"
                                title="Удалить сервер"><i class="fa fa-trash"></i>
                             </a>
-                            </div>
+
                         </td>
                     </tr>
                     <?php endforeach;?>
                 </table>
-                </div>
                 </div>
 
                 <?php if (!empty($servers)): ?>

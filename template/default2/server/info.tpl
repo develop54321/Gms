@@ -17,38 +17,41 @@
             </div>
 
         <?php else:?>
-        <div class="content-grid">
+        <div class="container my-5">
+            <div class="row">
 
-                <div>
+                <div class="col-lg-8 mb-4">
                     <div class="server-info">
-                        <p>Название сервера <span class="name"><?php echo \widgets\server\hostname\Hostname::run($data['hostname']);?></span></p>
-                        <p>Игра <span class="game"><?php echo $data['game_name'];?></span></p>
-                        <p>Адрес
-                            <span>
-                                <span class="address" id="server-<?=$data['id'];?>"><?php echo $data['host'] ?? $data['ip'];?>:<?php echo $data['port'];?></span>
-                                <button class="copy-btn" onclick="copyToClipboard('server-<?=$data['id'];?>')">
-                                    <i class="fa fa-copy"></i>
-                                </button>
+                        <p>Название сервера: <span class="name"><?php echo \widgets\server\hostname\Hostname::run($data['hostname']);?></span></p>
+                        <p>Игра: <span class="game"> <?php echo $data['game_name'];?></span> </p>
+                        <p>Адрес:
+                            <span class="address" id="server-<?=$data['id'];?>">
+                                <?php echo $data['host'] ?? $data['ip'];?>:<?php echo $data['port'];?>
                             </span>
+                            <button class="copy-btn" onclick="copyToClipboard('server-<?=$data['id'];?>')">
+                                <i class="fa fa-copy"></i>
+                            </button>
                         </p>
-                        <p>Игроков <span class="players"><?php echo $data['players'];?>/<?php echo $data['max_players'];?></span></p>
-                        <p>Карта <span class="map"><?php echo $data['map'];?></span></p>
+                        <p>Игроков: <span class="players"><?php echo $data['players'];?>/<?php echo $data['max_players'];?></span></p>
+                        <p>Карта: <span class="map"><?php echo $data['map'];?></span> </p>
 
-                        <p>Статус
+
+                        <p>Статус:
                             <?php if ($data['status'] == 1):?>
                             <span class="status-online">Онлайн</span>
                             <?php else:?>
                                 <span class="status-offline">Выключен</span>
                             <?php endif;?>
+
+
                         </p>
 
                         <p>
-                            Добавлен в мониторинг <span class="created-at"><?php echo date("d.m.Y [H:i]", $data['date_add']);?></span>
+                            Добавлен в мониторинг: <span class="created-at"><?php echo date("d.m.Y [H:i]", $data['date_add']);?></span>
                         </p>
 
                         <p>
-                            Владелец
-                            <span>
+                            Владелец:
                             <?php if ($current_user):?>
                                 <?php if ($current_user['id'] !== $data['id_user']):?>
                                     <a href="/server/verification?id=<?php echo $data['id'];?>">(Это Вы?)</a>
@@ -58,21 +61,21 @@
                             <?php else:?>
                                 <?php echo $ownerName ?? 'Гость';?>
                             <?php endif;?>
-                            </span>
                         </p>
 
                         <p>
-                            Рейтинг
-                            <span class="rating">
-                                <a href="#" onclick="ShowModal('<?=$data['id'];?>', 'vote', 'minus');return false;"><i class="fa fa-thumbs-down"></i></a>
-                                <label id="vote<?php echo $data['id'];?>" class="rating-bg"><?php echo $data['rating'];?></label>
-                                <a href="#" onclick="ShowModal('<?=$data['id'];?>', 'vote', 'plus');return false;"><i class="fa fa-thumbs-up"></i></a>
-                            </span>
+                            Рейтинг:
+                            <a href="#" onclick="ShowModal('<?=$data['id'];?>', 'vote', 'minus');return false;"><i class="fa fa-thumbs-down"></i></a>
+                            <label id="vote<?php echo $data['id'];?>" class="rating-bg"><?php echo $data['rating'];?></label>
+                            <a href="#" onclick="ShowModal('<?=$data['id'];?>', 'vote', 'plus');return false;"><i class="fa fa-thumbs-up"></i></a>
+
                         </p>
 
                         <?php if(!empty($data['description'])):?>
-                            <p>Описание <span><?php  echo $data['description'];?></span></p>
+                            <p>Описание: <?php  echo $data['description'];?></p>
                         <?php endif;?>
+
+
 
                         <hr>
 
@@ -125,7 +128,7 @@
                             <input type="hidden" name="id" value="<?php echo $data['id'];?>"/>
                             <div class="form-group">
                                 <textarea class="form-control" name="comment" id="commentField" style="resize: none;" placeholder="Оставьте свой комментарий..." rows="3" maxlength="500" oninput="updateCounter()"></textarea>
-                                <small id="charCounter" class="char-count">
+                                <small id="charCounter" class="form-text text-muted text-right">
                                     Осталось символов: 500
                                 </small>
                             </div>
@@ -141,12 +144,27 @@
                                 counter.textContent = `Осталось символов: ${remaining}`;
 
                                 if (remaining < 50) {
-                                    counter.style.color = remaining < 20 ? 'var(--danger)' : 'var(--warn)';
+                                    counter.style.color = remaining < 20 ? 'red' : 'orange';
                                 } else {
-                                    counter.style.color = '';
+                                    counter.style.color = '#6c757d'; // Bootstrap's default muted color
                                 }
                             }
                         </script>
+
+                        <style>
+                            .form-group {
+                                position: relative;
+                            }
+
+                            #charCounter {
+                                position: absolute;
+                                right: 5px;
+                                top: 5px;
+                                background: white;
+                                padding: 0 5px;
+                                border-radius: 3px;
+                            }
+                        </style>
 
                         <div class="comments">
                             <?php if(empty($comments)):?>
@@ -188,16 +206,15 @@
                 </div>
 
 
-                <div>
-                    <div class="card map-card">
-                        <h3 class="card-title">Карта сервера</h3>
+                <div class="col-lg-4">
+                    <h2>Карта сервера</h2>
 
-                        <img class="w-100 map-shot" src="<?php echo $data['img_map'];?>" alt="<?php echo $data['map'];?>">
+                    <img class="w-100" src="<?php echo $data['img_map'];?>" alt="<?php echo $data['map'];?>">
 
-                        <a id="show-players-button" onclick="loadPlayers(); return false;" class="btn btn-success players-btn mt-2 btn-sm w-100">Показать игроков</a>
-                    </div>
+                    <a id="show-players-button" onclick="loadPlayers(); return false;" class="btn btn-success players-btn mt-2 btn-sm w-100">Показать игроков</a>
                 </div>
             </div>
+        </div>
 
 
             <script>

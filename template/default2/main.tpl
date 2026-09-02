@@ -15,12 +15,10 @@
 
     <meta name="description" content="GMS - это веб движок запрограммированный на языке PHP, для отслеживание за статусами игровых серверов"/>
     <meta name="keywords" content="мониторинг серверов, игровой мониторинг, gms, gms v3.1.5, система отслеживания за статусами игровых серверов, раскрутка сервера"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="/public/default2/css/style.css?v=1.0.9"/>
     <link rel="stylesheet" href="/public/default2/css/bootstrap.css"/>
     <link rel="stylesheet" href="/public/default2/css/roboto.css"/>
     <link rel="stylesheet" href="/public/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="/public/default2/css/theme.css?v=1.0.0"/>
     <script src="/public/js/jquery.min.js"></script>
     <script src="/public/js/jquery.form.js"></script>
 </head>
@@ -40,7 +38,8 @@
     </div>
 </div>
 
-<div class="bg-mesh"></div>
+<div class="background"></div>
+<div class="overlay"></div>
 
 <?php
    $getUrl = $_SERVER['REQUEST_URI'];
@@ -49,8 +48,8 @@
 
 <div class="main">
 
-    <header class="py-2">
-        <div class="container site-header-inner">
+    <header class="p-3">
+        <div class="container">
 
             <?php widgets\default2\user\top_menu\TopMenu::run();?>
 
@@ -73,7 +72,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
                             <h5>Информация</h5>
-                            <p class="text-white-50">
+                            <p>
                                 GMS — инструмент на PHP, разработанный для автоматизированного отслеживания статусов игровых серверов и отображения их доступности.
                             </p>
                         </div>
@@ -82,35 +81,35 @@
                             <h5>Меню</h5>
                             <ul class="list-unstyled mb-0">
                                 <li>
-                                    <a href="#!">О нас</a>
+                                    <a href="#!" class="text-white">О нас</a>
                                 </li>
                                 <li>
-                                    <a href="/banlist">Банлист</a>
+                                    <a href="/banlist" class="text-white">Банлист</a>
                                 </li>
                                 <li>
-                                    <a href="/news">Новости</a>
+                                    <a href="/news" class="text-white">Новости</a>
                                 </li>
                                 <li>
-                                    <a href="#!">Помощь</a>
+                                    <a href="#!" class="text-white">Помощь</a>
                                 </li>
                             </ul>
                         </div>
 
                         <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                            <h5>Аккаунт</h5>
+                            <h5>Меню</h5>
 
                             <ul class="list-unstyled mb-0">
                                 <li>
-                                    <a href="/pay">Услуги</a>
+                                    <a href="/pay" class="text-white">Услуги</a>
                                 </li>
                                 <li>
-                                    <a href="/boost">Раскрутка</a>
+                                    <a href="/boost" class="text-white">Раскрутка</a>
                                 </li>
                                 <li>
-                                    <a href="/user/login">Авторизация</a>
+                                    <a href="/user/login" class="text-white">Авторизация</a>
                                 </li>
                                 <li>
-                                    <a href="/user/signup">Регистрация</a>
+                                    <a href="/user/signup" class="text-white">Регистрация</a>
                                 </li>
 
                             </ul>
@@ -119,8 +118,8 @@
                 <hr class="mb-4"/>
             </div>
 
-            <div class="text-center p-3">
-                Powered by <a href="https://game-ms.ru" target="_blank">GMS <?php echo VERSION;?></a>
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+                Powered by <a class="text-white" href="https://game-ms.ru" target="_blank">GMS <?php echo VERSION;?></a>
             </div>
         </div>
     </div>

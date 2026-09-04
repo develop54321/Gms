@@ -39,12 +39,28 @@
 
             <div class="form-group" id="servicesPeriod">
                 <label for="servicesPeriod">Срок услуги(днях)</label>
-                <input type="int" name="servicesPeriod" class="form-control">
+                <input type="number" name="servicesPeriod" class="form-control">
+                <small class="form-text text-muted">Базовый срок/цена — используется, если ниже не заданы отдельные тарифы.</small>
             </div>
 
             <div class="form-group">
                 <label for="servicesPrice">Цена услуги</label>
-                <input type="int" name="servicesPrice" class="form-control" id="servicesPrice">
+                <input type="number" name="servicesPrice" class="form-control" id="servicesPrice">
+            </div>
+
+            <div class="form-group" id="periodsBlock">
+                <label>Тарифы по срокам <small class="text-muted">(необязательно — если заданы, покупатель выбирает один из них)</small></label>
+
+                <div class="mb-2">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="addPeriodRow(7, '')">+ 7 дней</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="addPeriodRow(15, '')">+ 15 дней</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="addPeriodRow(30, '')">+ 30 дней</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="addPeriodRow('', '')">+ Свой срок</button>
+                </div>
+
+                <div id="periodsList"></div>
+
+                <input type="hidden" name="periodsData" id="periodsData" value="[]">
             </div>
 
             <div class="form-group">
@@ -91,8 +107,10 @@
 
         if (type == 'razz') {
             $("#servicesPeriod").hide();
+            $("#periodsBlock").hide();
         } else {
             $("#servicesPeriod").show();
+            $("#periodsBlock").show();
         }
 
 
@@ -120,4 +138,35 @@
                 label.text("Срок услуги (в днях)");
         }
     }
+
+    function addPeriodRow(period, price) {
+        const row = $(
+            '<div class="d-flex gap-2 align-items-center mb-2 period-row">' +
+                '<input type="number" class="form-control period-input" placeholder="Срок (дней)" style="max-width:160px;">' +
+                '<input type="number" class="form-control price-input" placeholder="Цена" style="max-width:160px;">' +
+                '<button type="button" class="btn btn-outline-danger btn-sm" onclick="$(this).closest(\'.period-row\').remove(); syncPeriodsData();"><i class="fa fa-trash"></i></button>' +
+            '</div>'
+        );
+
+        row.find('.period-input').val(period);
+        row.find('.price-input').val(price);
+        row.on('input', syncPeriodsData);
+
+        $('#periodsList').append(row);
+        syncPeriodsData();
+    }
+
+    function syncPeriodsData() {
+        const data = [];
+
+        $('.period-row').each(function () {
+            const period = $(this).find('.period-input').val();
+            const price = $(this).find('.price-input').val();
+            if (period && price) data.push({period: parseInt(period, 10), price: parseInt(price, 10)});
+        });
+
+        $('#periodsData').val(JSON.stringify(data));
+    }
+
+    services();
 </script>

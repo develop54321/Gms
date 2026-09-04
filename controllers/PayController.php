@@ -35,7 +35,17 @@ class PayController extends BaseController
             $content = $this->view->renderPartial("pay", ['type' => 'search', 'servers' => $getServers]);
         } else {
 
-            $content = $this->view->renderPartial("pay", ['type' => 'searchForm']);
+            $myServers = [];
+            $user = new User();
+            $userProfile = $user->isAuth();
+
+            if ($userProfile) {
+                $getMyServers = $this->db->prepare('SELECT id, hostname, game, ip, host, port, map, players, max_players, status FROM ga_servers WHERE id_user = :id_user ORDER BY id DESC LIMIT 8');
+                $getMyServers->execute([':id_user' => $userProfile['id']]);
+                $myServers = $getMyServers->fetchAll();
+            }
+
+            $content = $this->view->renderPartial("pay", ['type' => 'searchForm', 'myServers' => $myServers]);
         }
         $this->view->render("main", ['content' => $content, 'title' => $title]);
     }
@@ -58,6 +68,18 @@ class PayController extends BaseController
 
         $getServices = $this->db->query('SELECT * FROM ga_services');
         $getServices = $getServices->fetchAll();
+
+        $getMinPeriodPrices = $this->db->query('SELECT id_service, MIN(price) AS min_price, COUNT(*) AS tiers_count FROM ga_services_periods GROUP BY id_service');
+        $minPeriodPrices = [];
+        foreach ($getMinPeriodPrices->fetchAll() as $row) {
+            $minPeriodPrices[$row['id_service']] = $row;
+        }
+
+        foreach ($getServices as &$service) {
+            $service['min_price'] = $minPeriodPrices[$service['id']]['min_price'] ?? null;
+            $service['tiers_count'] = $minPeriodPrices[$service['id']]['tiers_count'] ?? 0;
+        }
+        unset($service);
 
 
         $content = $this->view->renderPartial("pay/select", ['type' => 'selectServices',
@@ -91,6 +113,10 @@ class PayController extends BaseController
             $getInfoServices->execute(array(':id' => $id_services));
             $getInfoServices = $getInfoServices->fetch();
             if (!isset($id_services)) parent::ShowError(404, "Страница не найдена!");
+
+            $getPeriods = $this->db->prepare('SELECT id, period, price FROM ga_services_periods WHERE id_service = :id_service ORDER BY sort ASC, period ASC');
+            $getPeriods->execute(array(':id_service' => $id_services));
+            $periods = $getPeriods->fetchAll();
 
 
             $top = null;
@@ -135,6 +161,7 @@ class PayController extends BaseController
                 'type' => $getInfoServices['type'] ?? null,
                 'top' => $top,
                 'infoServices' => $getInfoServices,
+                'periods' => $periods,
                 'user' => $userData,
                 'idServices' => $id_services
             ]);
@@ -167,6 +194,10 @@ class PayController extends BaseController
         $getInfoServices->execute(array(':id' => $idServices));
         $getInfoServices = $getInfoServices->fetch();
         if (empty($getInfoServices))  parent::ShowError(400, "Services not found!");
+
+        $pricing = $this->resolveServicePricing($getInfoServices, $postData['id_period'] ?? null);
+        $getInfoServices['price'] = $pricing['price'];
+        $getInfoServices['period'] = $pricing['period'];
 
 
         $getInfoPayment = $this->db->prepare('SELECT * FROM ga_pay_methods WHERE id = :id');
@@ -372,6 +403,10 @@ class PayController extends BaseController
                 exit(json_encode($answer));
             }
 
+            $pricing = $this->resolveServicePricing($getInfoServices, $_POST['id_period'] ?? null);
+            $getInfoServices['price'] = $pricing['price'];
+            $getInfoServices['period'] = $pricing['period'];
+
 
             $services = new Services();
 
@@ -441,6 +476,26 @@ class PayController extends BaseController
 
         parent::ShowError(404, "Page not found!");
 
+    }
+
+    /**
+     * Resolves the effective price/period for a service purchase: if a valid
+     * pricing tier (belonging to that exact service) is passed, its values win;
+     * otherwise falls back to the service's own base price/period.
+     */
+    private function resolveServicePricing(array $service, $idPeriod = null): array
+    {
+        if (!empty($idPeriod)) {
+            $stmt = $this->db->prepare('SELECT period, price FROM ga_services_periods WHERE id = :id AND id_service = :id_service');
+            $stmt->execute([':id' => (int)$idPeriod, ':id_service' => $service['id']]);
+            $tier = $stmt->fetch();
+
+            if ($tier) {
+                return ['price' => (int)$tier['price'], 'period' => (int)$tier['period']];
+            }
+        }
+
+        return ['price' => (int)$service['price'], 'period' => (int)$service['period']];
     }
 
 }

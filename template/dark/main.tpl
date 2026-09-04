@@ -1,11 +1,19 @@
+<?php
+$brandFavicon = \components\Settings::global('favicon_path');
+$brandDescription = \components\Settings::global('site_description');
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="utf-8">
     <title><?=$title;?></title>
-    <link rel="icon" type="image/png" sizes="16x16" href="/public/img/favicon/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/public/img/favicon/favicon-32x32.png">
-    <link rel="shortcut icon" href="/public/img/favicon/favicon.ico">
+    <?php if ($brandFavicon): ?>
+        <link rel="icon" href="<?php echo $brandFavicon; ?>?v=<?php echo @filemtime(ROOT_DIR . ltrim($brandFavicon, '/')); ?>">
+    <?php else: ?>
+        <link rel="icon" type="image/png" sizes="16x16" href="/public/img/favicon/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/public/img/favicon/favicon-32x32.png">
+        <link rel="shortcut icon" href="/public/img/favicon/favicon.ico">
+    <?php endif; ?>
     <link rel="apple-touch-icon" sizes="180x180" href="/public/img/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/public/img/favicon/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/public/img/favicon/android-chrome-512x512.png">
@@ -13,14 +21,14 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="GMS - это веб движок запрограммированный на языке PHP, для отслеживание за статусами игровых серверов"/>
+    <meta name="description" content="<?php echo $brandDescription ?: 'GMS - это веб движок запрограммированный на языке PHP, для отслеживание за статусами игровых серверов'; ?>"/>
     <meta name="keywords" content="мониторинг серверов, игровой мониторинг, gms, gms v3.1.5, система отслеживания за статусами игровых серверов, раскрутка сервера"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="/public/dark/css/style.css?v=1.0.9"/>
     <link rel="stylesheet" href="/public/dark/css/bootstrap.css"/>
     <link rel="stylesheet" href="/public/dark/css/roboto.css"/>
     <link rel="stylesheet" href="/public/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="/public/dark/css/theme.css?v=1.0.0"/>
+    <link rel="stylesheet" href="/public/dark/css/theme.css?v=2.3.0"/>
     <script src="/public/js/jquery.min.js"></script>
     <script src="/public/js/jquery.form.js"></script>
 </head>

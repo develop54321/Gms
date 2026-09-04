@@ -63,7 +63,7 @@ class Services extends BaseController
                     $infoServices['price'],
                     self::TYPE_TOP,
                     $params['user_id'] ?? null,
-                    ['place' => $params['place'], 'id_server' => $server['id']]);
+                    ['place' => $params['place'], 'id_server' => $server['id'], 'period' => $infoServices['period']]);
                 break;
 
 
@@ -106,7 +106,7 @@ class Services extends BaseController
                     $infoServices['price'],
                     self::TYPE_COLOR,
                     $params['user_id'] ?? null,
-                    ['color' => $params['color'], 'id_server' => $server['id']]
+                    ['color' => $params['color'], 'id_server' => $server['id'], 'period' => $infoServices['period']]
                 );
                 break;
 
@@ -132,7 +132,7 @@ class Services extends BaseController
                     $infoServices['price'],
                     self::TYPE_VIP,
                     $params['user_id'] ?? null,
-                    ['id_server' => $server['id']]);
+                    ['id_server' => $server['id'], 'period' => $infoServices['period']]);
                 break;
 
             case self::TYPE_GAME_MENU:
@@ -151,7 +151,7 @@ class Services extends BaseController
                     $infoServices['price'],
                     self::TYPE_GAME_MENU,
                     $params['user_id'] ?? null,
-                    ['id_server' => $server['id']]
+                    ['id_server' => $server['id'], 'period' => $infoServices['period']]
                 );
 
 
@@ -166,7 +166,7 @@ class Services extends BaseController
                     $infoServices['price'],
                     self::TYPE_VOTES,
                     $params['user_id'] ?? null,
-                    ['id_server' => $server['id']]
+                    ['id_server' => $server['id'], 'period' => $infoServices['period']]
                 );
                 break;
 
@@ -188,7 +188,7 @@ class Services extends BaseController
                          $infoServices['price'],
                          self::TYPE_BOOST,
                          $params['user_id'] ?? null,
-                         ['id_server' => $server['id']]
+                         ['id_server' => $server['id'], 'period' => $infoServices['period']]
                      );
                      break;
             default:
@@ -226,16 +226,19 @@ class Services extends BaseController
         $getInfoServer->execute(array(':id' => $getInfoPay['id_server']));
         $getInfoServer = $getInfoServer->fetch();
 
-
+        // the period chosen at purchase time (may differ from the service's current
+        // default period if a pricing tier was picked) is snapshotted on the pay log;
+        // fall back to the service's own period for invoices created before that existed
+        $resolvedPeriod = $getInfoPay['period'] ?? $getInfoServices['period'];
 
         switch ($getInfoPay['type']) {
             //	Top
             case "top":
                 if ($getInfoServer['top_enabled'] !== null) {
                     $place = $getInfoServer['top_enabled'];
-                    $expired_time = ($getInfoServices['period'] * 86400) + $getInfoServer['top_expired_date'];
+                    $expired_time = ($resolvedPeriod * 86400) + $getInfoServer['top_expired_date'];
                 } else {
-                    $expired_time = time() + $getInfoServices['period'] * 86400;
+                    $expired_time = time() + $resolvedPeriod * 86400;
                     $place = $getInfoPay['place'];
                 }
                 $sql = "UPDATE ga_servers SET top_enabled = :top_enabled, top_expired_date = :top_expired_date  WHERE id = :id";
@@ -249,9 +252,9 @@ class Services extends BaseController
             //	Vip
             case "vip":
                 if ($getInfoServer['vip_enabled'] !== null) {
-                    $expired_time = $getInfoServer['vip_expired_date'] + ($getInfoServices['period'] * 86400);
+                    $expired_time = $getInfoServer['vip_expired_date'] + ($resolvedPeriod * 86400);
                 } else {
-                    $expired_time = time() + $getInfoServices['period'] * 86400;
+                    $expired_time = time() + $resolvedPeriod * 86400;
                 }
                 $vip = 1;
                 $sql = "UPDATE ga_servers SET vip_enabled = :vip_enabled, vip_expired_date = :vip_expired_date  WHERE id = :id";
@@ -265,9 +268,9 @@ class Services extends BaseController
             //	Color
             case "color":
                 if ($getInfoServer['color_enabled'] !== null) {
-                    $expired_time = $getInfoServer['color_expired_date'] + ($getInfoServices['period'] * 86400);
+                    $expired_time = $getInfoServer['color_expired_date'] + ($resolvedPeriod * 86400);
                 } else {
-                    $expired_time = time() + $getInfoServices['period'] * 86400;
+                    $expired_time = time() + $resolvedPeriod * 86400;
                 }
                 $sql = "UPDATE ga_servers SET color_enabled = :color_enabled, color_expired_date = :color_expired_date  WHERE id = :id";
                 $update = $this->db->prepare($sql);
@@ -283,7 +286,7 @@ class Services extends BaseController
                     $sql = "UPDATE ga_servers SET boost = boost + :period WHERE id = :id";
                     $update = $this->db->prepare($sql);
                     $update->execute([
-                        ':period' => $getInfoServices['period'],
+                        ':period' => $resolvedPeriod,
                         ':id'     => $getInfoPay['id_server']
                     ]);
 
@@ -318,7 +321,7 @@ class Services extends BaseController
                     $sql = "UPDATE ga_servers SET boost = :boost, boost_position = :pos WHERE id = :id";
                     $update = $this->db->prepare($sql);
                     $update->execute([
-                        ':boost' => $getInfoServices['period'],
+                        ':boost' => $resolvedPeriod,
                         ':pos'   => time(),
                         ':id'    => $getInfoPay['id_server']
                     ]);
@@ -330,9 +333,9 @@ class Services extends BaseController
             //	Gamemenu
             case "gamemenu":
                 if ($getInfoServer['gamemenu_enabled'] !== null) {
-                    $expired_time = $getInfoServer['gamemenu_expired_date'] + ($getInfoServices['period'] * 86400);
+                    $expired_time = $getInfoServer['gamemenu_expired_date'] + ($resolvedPeriod * 86400);
                 } else {
-                    $expired_time = time() + $getInfoServices['period'] * 86400;
+                    $expired_time = time() + $resolvedPeriod * 86400;
                 }
                 $gameMenu = 1;
                 $sql = "UPDATE ga_servers SET gamemenu_enabled = :gamemenu_enabled, gamemenu_expired_date = :gamemenu_expired_date  WHERE id = :id";
@@ -345,7 +348,8 @@ class Services extends BaseController
 
             //	Votes
             case "votes":
-                $this->db->query("UPDATE ga_servers SET rating = rating+" . $getInfoServices['period'] . " WHERE id = '" . $getInfoPay['id_server'] . "'");
+                $update = $this->db->prepare("UPDATE ga_servers SET rating = rating + :period WHERE id = :id");
+                $update->execute([':period' => $resolvedPeriod, ':id' => $getInfoPay['id_server']]);
                 break;
 
             //	Unban

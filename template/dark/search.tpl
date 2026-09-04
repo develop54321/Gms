@@ -65,7 +65,7 @@
             <?php endif;?>
 
             <?php if (empty($servers)): ?>
-                <h3>По вашему запросу ничего не найдено!</h3>
+                <div class="empty-hint"><i class="fa fa-search"></i>По вашему запросу ничего не найдено!</div>
             <?php endif; ?>
 
 

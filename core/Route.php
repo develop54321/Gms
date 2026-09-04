@@ -30,6 +30,7 @@ class Route
             $r->addRoute('GET', '/banlist', ['controllers\BanlistController', 'index']);
             $r->addRoute('GET', '/page/{id:\d+}', ['controllers\PageController', 'index']);
             $r->addRoute(['GET', 'POST'], '/search', ['controllers\SearchController', 'index']);
+            $r->addRoute('GET', '/search/live', ['controllers\SearchController', 'live']);
             $r->addRoute('GET', '/captcha', ['controllers\MainController', 'captcha']);
             $r->addRoute(['GET', 'POST'], '/pay/server', ['controllers\PayController', 'server']);
             $r->addRoute(['GET', 'POST'], '/pay', ['controllers\PayController', 'index']);

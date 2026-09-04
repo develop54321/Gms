@@ -131,3 +131,102 @@ function copyEmbedInput(btn) {
 
 window.switchEmbedTab = switchEmbedTab
 window.copyEmbedInput = copyEmbedInput
+
+
+$(document).ready(function () {
+    const $input = $('#headerSearchInput');
+    if (!$input.exists()) return;
+
+    const $results = $('#headerSearchResults');
+    let debounceTimer = null;
+    let requestToken = 0;
+    let activeIndex = -1;
+
+    function openResults() {
+        $results.addClass('is-open');
+    }
+
+    function closeResults() {
+        $results.removeClass('is-open');
+        activeIndex = -1;
+    }
+
+    function setActive(index) {
+        const $items = $results.find('.search-result-item');
+        if (!$items.length) return;
+
+        activeIndex = ((index % $items.length) + $items.length) % $items.length;
+        $items.removeClass('is-active').eq(activeIndex).addClass('is-active');
+    }
+
+    function runSearch(query) {
+        const token = ++requestToken;
+
+        $results.html('<div class="search-results-loading"><i class="fa fa-spinner fa-spin"></i> Поиск...</div>');
+        openResults();
+
+        $.ajax({
+            url: '/search/live',
+            data: {query: query},
+            dataType: 'html',
+            success: function (html) {
+                if (token !== requestToken) return;
+                activeIndex = -1;
+                $results.html(html);
+                openResults();
+            },
+            error: function () {
+                if (token !== requestToken) return;
+                closeResults();
+            }
+        });
+    }
+
+    $input.on('input', function () {
+        const query = $input.val().trim();
+
+        clearTimeout(debounceTimer);
+
+        if (query.length < 2) {
+            closeResults();
+            return;
+        }
+
+        debounceTimer = setTimeout(function () {
+            runSearch(query);
+        }, 300);
+    });
+
+    $input.on('keydown', function (e) {
+        if (!$results.hasClass('is-open')) return;
+        const $items = $results.find('.search-result-item');
+        if (!$items.length) return;
+
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            setActive(activeIndex + 1);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            setActive(activeIndex - 1);
+        } else if (e.key === 'Enter') {
+            if (activeIndex >= 0) {
+                e.preventDefault();
+                window.location.href = $items.eq(activeIndex).attr('href');
+            }
+        } else if (e.key === 'Escape') {
+            closeResults();
+        }
+    });
+
+    $input.on('focus', function () {
+        if ($input.val().trim().length >= 2 && $results.children().length) {
+            openResults();
+        }
+    });
+
+    $(document).on('click', function (e) {
+        if (!$(e.target).closest('.search-wrap').length) {
+            closeResults();
+        }
+    });
+});

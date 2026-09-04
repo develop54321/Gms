@@ -25,6 +25,7 @@ abstract class AbstractController extends BaseController
        if (!$user->isAuth()) {
            if ($uri !== "/control/login" and $uri !== "/control/modal"){
                 header("Location: /control/login");
+                exit();
            }
 
        } else {
@@ -32,6 +33,7 @@ abstract class AbstractController extends BaseController
            if ($getUserProfile['role'] != 'admin') exit("Access denied");
            if ($uri === "/control/login"){
                header("Location: /control");
+               exit();
            }
 
        }

@@ -33,7 +33,7 @@
     }
 </style>
 
-<form id="settingsForm" method="post">
+<form id="settingsForm" method="post" enctype="multipart/form-data">
 
     <!-- Основные настройки -->
     <div class="card mb-4">
@@ -56,6 +56,57 @@
                         <input type="number" class="form-control"
                                name="global_settings[expired_time_payment]"
                                value="<?= $settings['global_settings']['expired_time_payment']; ?>">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Брендинг -->
+    <div class="card mb-4">
+        <div class="card-header border-bottom">
+            <h5 class="card-title">Брендинг</h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label>Описание сайта (meta description)</label>
+                <textarea class="form-control" name="global_settings[site_description]" rows="2"><?= htmlspecialchars($settings['global_settings']['site_description'] ?? '') ?></textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Логотип</label>
+                        <?php if (!empty($settings['global_settings']['logo_path'])): ?>
+                            <div class="mb-2">
+                                <img src="<?= $settings['global_settings']['logo_path'] ?>?v=<?= time() ?>" alt="Логотип"
+                                     style="max-height:48px;max-width:220px;background:#0a0c12;border-radius:8px;padding:6px;">
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" name="global_settings[remove_logo]" value="1" id="removeLogo">
+                                <label class="form-check-label" for="removeLogo">Удалить текущий логотип</label>
+                            </div>
+                        <?php endif; ?>
+                        <input type="file" class="form-control" name="logo" accept="image/png,image/jpeg,image/gif,image/webp">
+                        <small class="form-text text-muted">PNG/JPG/GIF/WEBP, до 2 МБ. Если не загружен — в шапке показывается иконка + название сайта.</small>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Favicon</label>
+                        <?php if (!empty($settings['global_settings']['favicon_path'])): ?>
+                            <div class="mb-2">
+                                <img src="<?= $settings['global_settings']['favicon_path'] ?>?v=<?= time() ?>" alt="Favicon"
+                                     style="max-height:32px;max-width:32px;background:#0a0c12;border-radius:6px;padding:4px;">
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" name="global_settings[remove_favicon]" value="1" id="removeFavicon">
+                                <label class="form-check-label" for="removeFavicon">Удалить текущий favicon</label>
+                            </div>
+                        <?php endif; ?>
+                        <input type="file" class="form-control" name="favicon" accept="image/png,image/x-icon">
+                        <small class="form-text text-muted">PNG/ICO, до 2 МБ. Если не загружен — используется стандартный favicon.</small>
                     </div>
                 </div>
             </div>

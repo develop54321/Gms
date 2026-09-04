@@ -19,6 +19,7 @@ class SettingsController extends AbstractController
 
             $errors = [];
             $content = [];
+            $currentSettings = json_decode($settings['content'] ?? '', true) ?: [];
 
             $global = $_POST['global_settings'] ?? [];
             $comments = $_POST['comments'] ?? [];
@@ -32,6 +33,31 @@ class SettingsController extends AbstractController
             if (mb_strlen($site_name) < 3) {
                 $errors[] = 'Название сайта должно содержать минимум 3 символа';
             }
+
+            // Описание сайта (meta description)
+            $site_description = trim($global['site_description'] ?? '');
+
+            // Логотип / favicon — сохраняем текущие, если новый файл не загружен
+            $logoPath = $currentSettings['global_settings']['logo_path'] ?? null;
+            $faviconPath = $currentSettings['global_settings']['favicon_path'] ?? null;
+
+            try {
+                if (!empty($_FILES['logo']['name'])) {
+                    $logoPath = $this->handleImageUpload($_FILES['logo'], 'logo', [
+                        'image/png' => 'png', 'image/jpeg' => 'jpg', 'image/gif' => 'gif', 'image/webp' => 'webp',
+                    ]);
+                }
+                if (!empty($_FILES['favicon']['name'])) {
+                    $faviconPath = $this->handleImageUpload($_FILES['favicon'], 'favicon', [
+                        'image/png' => 'png', 'image/x-icon' => 'ico', 'image/vnd.microsoft.icon' => 'ico',
+                    ]);
+                }
+            } catch (\RuntimeException $e) {
+                $errors[] = $e->getMessage();
+            }
+
+            if (!empty($global['remove_logo'])) $logoPath = null;
+            if (!empty($global['remove_favicon'])) $faviconPath = null;
 
             // Срок оплаты
             $expired_time_payment = (int)($global['expired_time_payment'] ?? 0);
@@ -75,6 +101,9 @@ class SettingsController extends AbstractController
              * ------------------- */
 
             $content['global_settings']['site_name'] = $site_name;
+            $content['global_settings']['site_description'] = $site_description;
+            $content['global_settings']['logo_path'] = $logoPath;
+            $content['global_settings']['favicon_path'] = $faviconPath;
             $content['global_settings']['expired_time_payment'] = $expired_time_payment;
             $content['global_settings']['auto_add_server'] = $auto_add_server;
 
@@ -127,6 +156,43 @@ class SettingsController extends AbstractController
         }
     }
 
+    /**
+     * Validates an uploaded image (real MIME sniff via getimagesize + size cap) and
+     * moves it into public/img/branding/ under a fixed name — never the client's
+     * original filename — so it can't be used for path traversal or to smuggle a
+     * non-image file in. Returns the public URL to store in settings.
+     */
+    private function handleImageUpload(array $file, string $baseName, array $allowedMimes): string
+    {
+        if (!empty($file['error']) && $file['error'] !== UPLOAD_ERR_OK) {
+            throw new \RuntimeException("Ошибка загрузки файла «{$baseName}»");
+        }
+
+        if ($file['size'] > 2 * 1024 * 1024) {
+            throw new \RuntimeException("Файл «{$baseName}» больше 2 МБ");
+        }
+
+        $imageInfo = @getimagesize($file['tmp_name']);
+        if ($imageInfo === false || !isset($allowedMimes[$imageInfo['mime']])) {
+            throw new \RuntimeException("Файл «{$baseName}» должен быть изображением (" . implode(', ', array_unique($allowedMimes)) . ")");
+        }
+
+        $ext = $allowedMimes[$imageInfo['mime']];
+        $dir = ROOT_DIR . 'public/img/branding';
+        if (!is_dir($dir)) mkdir($dir, 0755, true);
+
+        // drop any stale file left over from a previous upload with a different extension
+        foreach (array_unique($allowedMimes) as $staleExt) {
+            if ($staleExt !== $ext) @unlink($dir . '/' . $baseName . '.' . $staleExt);
+        }
+
+        $destination = $dir . '/' . $baseName . '.' . $ext;
+        if (!move_uploaded_file($file['tmp_name'], $destination)) {
+            throw new \RuntimeException("Не удалось сохранить файл «{$baseName}»");
+        }
+
+        return '/public/img/branding/' . $baseName . '.' . $ext;
+    }
 
 
     public function mail()

@@ -16,14 +16,14 @@
                         <div class="news-card">
                             <h3><?php echo $item['title']; ?></h3>
                             <p><?php echo $item['text']; ?></p>
-                            <div class="date"><?php echo date("d.m.Y", $item['date_create']); ?></div>
+                            <div class="date"><i class="fa fa-clock-o"></i> <?php echo date("d.m.Y", $item['date_create']); ?></div>
                         </div>
                     <?php endforeach; ?>
 
                 </div>
 
             <?php else: ?>
-                <p>В данный момент новостей отсутствует</p>
+                <div class="empty-hint"><i class="fa fa-newspaper-o"></i>В данный момент новостей отсутствует</div>
             <?php endif; ?>
 
 

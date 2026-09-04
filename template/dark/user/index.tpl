@@ -23,7 +23,7 @@
                         <a class="btn btn-primary btn-sm" href="/user/pay">Пополнить</a>
                     </div>
 
-                    <div class="card">
+                    <div class="card profile-card">
                         <h3>Профиль</h3>
                         <ul class="list-group profile-list">
                             <li class="list-group-item"><span class="label">Имя</span> <span class="value"><?php echo $user_profile['firstname']; ?></span></li>

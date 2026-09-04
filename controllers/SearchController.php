@@ -58,4 +58,54 @@ class SearchController extends BaseController
             'title'   => $title
         ]);
     }
+
+    public function live()
+    {
+        if (!$this->isAjax()) parent::ShowError(404, "Страница не найдена!");
+
+        $query = trim($_GET['query'] ?? '');
+        $servers = [];
+
+        if (mb_strlen($query) >= 2) {
+            $fields = 'id, hostname, game, ip, host, port, map, players, max_players, status, vip_enabled, color_enabled';
+
+            if (preg_match('/^([\d\.]+)(?::(\d+))?$/', $query, $m)) {
+                $ip   = $m[1];
+                $port = $m[2] ?? null;
+
+                $sql = "SELECT {$fields} FROM ga_servers WHERE ip = :ip";
+                $params = [':ip' => $ip];
+
+                if ($port !== null) {
+                    $sql .= ' AND port = :port';
+                    $params[':port'] = (int)$port;
+                }
+
+                $sql .= ' LIMIT 6';
+
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute($params);
+                $servers = $stmt->fetchAll();
+            } else {
+                $stmt = $this->db->prepare(
+                    "SELECT {$fields},
+                     MATCH(hostname, map) AGAINST (:q IN BOOLEAN MODE) AS relevance
+                     FROM ga_servers
+                     WHERE MATCH(hostname, map) AGAINST (:q IN BOOLEAN MODE)
+                     ORDER BY relevance DESC
+                     LIMIT 6"
+                );
+
+                $stmt->execute([':q' => $query . '*']);
+                $servers = $stmt->fetchAll();
+            }
+        }
+
+        $content = $this->view->renderPartial("search/live", [
+            'servers' => $servers,
+            'query'   => $query
+        ]);
+
+        echo $content;
+    }
 }

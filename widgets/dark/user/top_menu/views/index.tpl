@@ -1,6 +1,14 @@
+<?php
+$brandLogo = \components\Settings::global('logo_path');
+$brandName = \components\Settings::global('site_name', 'GMS');
+?>
 <a href="/" class="site-logo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><circle cx="7" cy="7" r="1" fill="currentColor" stroke="none"/><circle cx="7" cy="17" r="1" fill="currentColor" stroke="none"/></svg>
-    <span>GMS</span>
+    <?php if ($brandLogo): ?>
+        <img class="site-logo-img" src="<?php echo $brandLogo; ?>?v=<?php echo @filemtime(ROOT_DIR . ltrim($brandLogo, '/')); ?>" alt="<?php echo htmlspecialchars($brandName); ?>">
+    <?php else: ?>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><circle cx="7" cy="7" r="1" fill="currentColor" stroke="none"/><circle cx="7" cy="17" r="1" fill="currentColor" stroke="none"/></svg>
+        <span><?php echo htmlspecialchars($brandName); ?></span>
+    <?php endif; ?>
 </a>
 
 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 mb-lg-0 justify-content-center">
@@ -19,10 +27,13 @@
 </ul>
 
 <form action="/search" method="post" class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-3">
-    <div class="search-pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-        <input type="search" name="query" placeholder="Поиск сервера..." aria-label="Поиск">
-        <button type="submit" class="btn btn-light btn-sm">Найти</button>
+    <div class="search-wrap">
+        <div class="search-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="search" name="query" id="headerSearchInput" placeholder="Поиск сервера..." aria-label="Поиск" autocomplete="off">
+            <button type="submit" class="btn btn-light btn-sm">Найти</button>
+        </div>
+        <div class="search-results" id="headerSearchResults"></div>
     </div>
 </form>
 

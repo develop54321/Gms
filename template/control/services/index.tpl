@@ -28,6 +28,7 @@
                 <th>Название</th>
                 <th>Тип</th>
                 <th>Период/значение</th>
+                <th>Тарифы</th>
                 <th></th>
             </tr>
             </thead>
@@ -39,6 +40,13 @@
                     <td><?php echo $row['name']; ?></td>
                     <td><?php if ($row['type'] == 'befirst'): ?>Befirst<?php elseif ($row['type'] == 'top'): ?>TOP<?php elseif ($row['type'] == 'vip'): ?>VIP<?php elseif ($row['type'] == 'color'): ?>Выделение цветом<?php elseif ($row['type'] == 'boost'): ?>Буст<?php elseif ($row['type'] == 'gamemenu'): ?>GameMenu<?php elseif ($row['type'] == 'votes'): ?>Голоса<?php elseif ($row['type'] == 'razz'): ?>Разбан<?php endif; ?></td>
                     <td><?php echo $row['period']; ?></td>
+                    <td>
+                        <?php if (!empty($row['periods_count'])): ?>
+                            <span class="badge bg-primary"><?php echo $row['periods_count']; ?> тариф(ов)</span>
+                        <?php else: ?>
+                            <span class="text-muted">—</span>
+                        <?php endif; ?>
+                    </td>
                     <td>
                         <a href="/control/services/edit?id=<?= $row['id']; ?>" class="text-muted"
                            title="Изменить услугу"><i class="fa fa-pencil"></i></a>

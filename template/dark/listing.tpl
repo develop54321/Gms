@@ -7,7 +7,9 @@ use components\System;
         <h1 class="content-title">Листинг серверов</h1>
         <hr/>
 
-        <span class="float-right">Текущее время: <?= date('d.m.Y [H:i]') ?></span>
+        <div class="listing-meta">
+            <span class="float-right"><i class="fa fa-clock-o"></i> Текущее время: <?= date('d.m.Y [H:i]') ?></span>
+        </div>
 
         <div class="table-card"><div class="table-responsive">
 <table class="table servers-table mb-0">

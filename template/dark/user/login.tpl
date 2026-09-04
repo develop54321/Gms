@@ -1,32 +1,51 @@
-<section class="page add-server">
-    <div class="container">
-        <h1 class="content-title">
-            Авторизация
-        </h1>
-        <hr/>
+<section class="auth-shell">
+    <div class="auth-aside">
+        <a href="/" class="auth-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><circle cx="7" cy="7" r="1" fill="currentColor" stroke="none"/><circle cx="7" cy="17" r="1" fill="currentColor" stroke="none"/></svg>
+            <span>GMS</span>
+        </a>
 
-        <form id="loginForm" method="post">
-            <div class="form-card">
+        <h1>С возвращением, командир</h1>
+        <p class="auth-lead">Войдите в аккаунт, чтобы управлять своими серверами, следить за статистикой и оформлять услуги.</p>
 
-                    <div class="mb-3">
-                        <label for="email">Электронная почта</label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password">Пароль</label>
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Пароль">
-                    </div>
+        <ul class="auth-points">
+            <li><i class="fa fa-server"></i> Мониторинг серверов 24/7</li>
+            <li><i class="fa fa-bolt"></i> Мгновенное обновление статусов</li>
+            <li><i class="fa fa-shield"></i> Безопасный личный кабинет</li>
+        </ul>
 
-                    <div class="mb-3">
-                        <input type="submit" class="btn btn-primary" value="Войти"/>
-                    </div>
+        <div class="auth-stats">
+            <div class="stat"><b>24/7</b><span>Мониторинг</span></div>
+            <div class="stat"><b>1000+</b><span>Серверов</span></div>
+            <div class="stat"><b>&lt;1 мин</b><span>Обновление</span></div>
+        </div>
+    </div>
 
-                    <div class="auth-links">
-                        <a href="/user/signup" class="btn btn-light btn-sm">Регистрация</a>
-                        <a href="/user/reset" class="btn btn-light btn-sm">Забыли пароль?</a>
-                    </div>
+    <div class="auth-panel">
+        <div class="auth-panel-inner">
+            <span class="eyebrow">Аккаунт</span>
+            <h2>Авторизация</h2>
+            <p class="auth-panel-sub">Введите email и пароль, чтобы продолжить</p>
+
+            <form id="loginForm" method="post" class="auth-form">
+                <div class="mb-3">
+                    <label for="email">Электронная почта</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="password">Пароль</label>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Пароль">
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Войти"/>
+            </form>
+
+            <div class="auth-switch">
+                <a href="/user/reset">Забыли пароль?</a>
+                <span>·</span>
+                <a href="/user/signup">Создать аккаунт</a>
             </div>
-        </form>
+        </div>
     </div>
 </section>
 
